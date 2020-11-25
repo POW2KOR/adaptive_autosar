@@ -9,7 +9,6 @@ build:aarch64  --cpu=aarch64
 # We need to find a better approach for specifting pthread as a default, the same way we do with the aarch64 toolchain
 build:x86_64  --cpu=k8 --linkopt=-pthread --experimental_scale_timeouts=100
 
-# Use the default Bazel C++ toolchain to build the tools used during the
-# build.
+# Use the default Bazel C++ toolchain to build the tools used during the build.
 
 build:aarch64  --host_crosstool_top=@bazel_tools//tools/cpp:toolchain
