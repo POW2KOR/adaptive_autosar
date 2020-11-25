@@ -15,7 +15,7 @@ sudo apt-get install g++
 On Daimler Ubuntu laptops, it might be installed by default.
 
 ```
-:~/proto$ bazel build @vector_sip_aa//:amsr-vector-fs-sec-cryptostack --config=x86_64
+:~/minerva_mpu_adaptive$ bazel build @vector_sip_aa//:amsr-vector-fs-sec-cryptostack --config=x86_64
 ```
 
 ### Build different targets for aarch64 target 
@@ -29,7 +29,7 @@ If you are doing this on a Daimler Ubuntu system, and not inside a container, be
 automatically uninstalled after 30 minutes and might need to be reinstalled. 
 
 ```
-:~/proto$ bazel build @vector_sip_aa//:amsr-vector-fs-sec-cryptostack --config=aarch64
+:~/minerva_mpu_adaptive$ bazel build @vector_sip_aa//:amsr-vector-fs-sec-cryptostack --config=aarch64
 ```
 
 ### Linking issues with libARA.a
