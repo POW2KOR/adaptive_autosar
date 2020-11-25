@@ -41,7 +41,7 @@ bazel build @vector_sip_aa//:amsr-vector-fs-communicationmiddleware --config=<yo
 ```
 
 ### Useful information
-For buidling debug vesion use `--compilation_mode=dbg`. Other useful parameters for debugging purposes
+For building the debug vesion use `--compilation_mode=dbg`. Other useful parameters for debugging purposes are
 `--verbose_failures` and `--sandbox_debug`.
 
 Build results are under `bazel-bin` and copy the build artifacts
