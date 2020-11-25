@@ -1,6 +1,7 @@
 # Building with Bazel
 
-The current bazel build is based on [rules_foreign_cc](https://github.com/bazelbuild/rules_foreign_cc) for building external CMake projects. The default build type is "Release".
+The current bazel build is based on [rules_foreign_cc](https://github.com/bazelbuild/rules_foreign_cc) for building
+external CMake projects. The default build type is "Release".
 
 ## Usage
 ### Build different targets for x86_64 host  
