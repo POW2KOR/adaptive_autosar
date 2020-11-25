@@ -1,4 +1,4 @@
-# Bazel CMake wrapper
+# Building with Bazel
 
 The current bazel build is bazed on the rules for building external cmake:
 https://github.com/bazelbuild/rules_foreign_cc
