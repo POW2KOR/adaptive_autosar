@@ -506,7 +506,7 @@ cmake_external(
         ":amsr-vector-fs-sec-cryptostack",
         ":amsr-vector-fs-sec-iam",
         ":amsr-vector-fs-comcommon",
-        #":mbition_app_prototype_src_gen",
+        #":mbition_app_prototype_src_gen",  # This src-gen will be uncommented once we have application sources and src-gen buildable
     ],
     visibility = ["//visibility:public"],
 )
