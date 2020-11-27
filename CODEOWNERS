@@ -1,8 +1,8 @@
 # This is the `CODEOWNERS` file for minerva_mpu_adaptive based on the documentation found
 # here https://git.swf.daimler.com/help/user/project/code_owners.md
 
-# This is imho an optional feature, to make it useful we would need to have
-# gitlab silver/premium:
+# However the code owner in the MR is still an optional reviewer. 
+# To make it useful we would need to have Gitlab silver/premium:
 # https://docs.gitlab.com/ee/user/project/protected_branches.html#protected-branches-approval-by-code-owners
 
 # Protect folders and their default reviewers
@@ -13,12 +13,10 @@
 /devops/ @mcherlo @ftrevin
 Jenkinsfile @mcherlo @ftrevin
 
-# All bazel belonging `BUILD` and workspace file shall need an approval by the
-# ECU SW integration team as well as cmake files.
-.bazelrc @adas/ecu-sw-integration
-BUILD @adas/ecu-sw-integration
-WORKSPACE @adas/ecu-sw-integration
-/build-env/ @adas/ecu-sw-integration
-*.BUILD @adas/ecu-sw-integration
-CMakeLists.txt @adas/ecu-sw-integration
-*.cmake @adas/ecu-sw-integration
+# All the bazel related files shall need an approval by the ECU SW Integration team
+/build_env/ @dabalan @jjochen @vargrob @imierlu @sshopov
+BUILD @dabalan @jjochen @vargrob @imierlu @sshopov
+WORKSPACE @dabalan @jjochen @vargrob @imierlu @sshopov
+.bazelrc @dabalan @jjochen @vargrob @imierlu @sshopov
+*.BUILD @dabalan @jjochen @vargrob @imierlu @sshopov
+*.bzl* @dabalan @jjochen @vargrob @imierlu @sshopov
