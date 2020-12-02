@@ -27,10 +27,6 @@ aarch64_configure(
     build_file = "@//build_env/toolchain/aarch64_compiler:aarch64_compiler.BUILD",
 )
 
-load("@rules_foreign_cc//:workspace_definitions.bzl", "rules_foreign_cc_dependencies")
-
-rules_foreign_cc_dependencies(register_default_tools = True)
-
 load("@bazel_tools//tools/build_defs/repo:git.bzl", "new_git_repository")
 
 new_git_repository(
