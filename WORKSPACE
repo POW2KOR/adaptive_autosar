@@ -22,16 +22,6 @@ http_archive(
     sha256 = "b6d46438523a3ec0f3cead544190ee13223a52f6a6765a29eae7b7cc24cc83a0",
 )
 
-load("@rules_python//python:repositories.bzl", "py_repositories")
-
-py_repositories()
-
-load("@rules_python//python:pip.bzl", "pip_install")
-
-pip_install(
-    requirements = "@vector_sip_aa//:config/tools/ariel/requirements.txt",
-)
-
 aarch64_configure(
     name = "aarch64_compiler",
     build_file = "@//build_env/toolchain/aarch64_compiler:aarch64_compiler.BUILD",
