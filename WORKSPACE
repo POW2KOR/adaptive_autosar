@@ -79,6 +79,14 @@ new_git_repository(
     init_submodules = True
 )
 
+# Enable the below rule if you want to avoid cloning of repo at every run
+# You need to provide the path of vector_sip_aa repo locally
+'''new_local_repository(
+    name = "vector_sip_aa",
+    path = "/lhome/sathire/repos/temp_sip/vector_sip_aa",
+    build_file = "@//bsw:vector_sip.BUILD",
+)'''
+
 http_archive(
     name = "google",
     url = "https://artifact.swf.daimler.com/adas/tools/gtest-framework/googletest.zip",
