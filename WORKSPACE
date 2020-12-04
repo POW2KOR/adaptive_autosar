@@ -14,23 +14,12 @@ load("@rules_foreign_cc//:workspace_definitions.bzl", "rules_foreign_cc_dependen
 
 rules_foreign_cc_dependencies(register_default_tools = True)
 
-all_content = """filegroup(name = "all", srcs = glob(["**"]), visibility = ["//visibility:public"])"""
 
-load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+
 http_archive(
     name = "rules_python",
     url = "https://github.com/bazelbuild/rules_python/releases/download/0.1.0/rules_python-0.1.0.tar.gz",
     sha256 = "b6d46438523a3ec0f3cead544190ee13223a52f6a6765a29eae7b7cc24cc83a0",
-)
-
-load("@rules_python//python:repositories.bzl", "py_repositories")
-
-py_repositories()
-
-load("@rules_python//python:pip.bzl", "pip_install")
-
-pip_install(
-    requirements = "@vector_sip_aa//:config/tools/ariel/requirements.txt",
 )
 
 aarch64_configure(
@@ -38,16 +27,13 @@ aarch64_configure(
     build_file = "@//build_env/toolchain/aarch64_compiler:aarch64_compiler.BUILD",
 )
 
-load("@rules_foreign_cc//:workspace_definitions.bzl", "rules_foreign_cc_dependencies")
-
-rules_foreign_cc_dependencies(register_default_tools = True)
-
 load("@bazel_tools//tools/build_defs/repo:git.bzl", "new_git_repository")
 
 new_git_repository(
     name = "vector_sip_aa", # bazel will create under its own cache folder in the external folder package with the specified name(e.g. external/vector_sip_aa)  
     commit = "c627319b2dd8fad43c7363f352d9820ae8e4a67f", # the commit ID that bazel will use to fetch the external repository
     remote = "ssh://git@git.swf.daimler.com:7999/adas/vector_sip_aa.git",
+    shallow_since = "1605535330 +0100",
     # alternative for cloning using HTTPS
     # remote = "https://git.swf.daimler.com/adas/vector_sip_aa.git",
     build_file = "@//bsw:vector_sip.BUILD",
