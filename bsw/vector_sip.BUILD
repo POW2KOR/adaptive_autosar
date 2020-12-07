@@ -1,6 +1,6 @@
 load("@rules_foreign_cc//tools/build_defs:cmake.bzl", "cmake_external")
 load("@bazel_skylib//rules:common_settings.bzl", "string_flag")
-load("@main_bazel_cmake//bsw:defs.bzl", "selecty_genrule")
+load("@minerva_mpu_adaptive//bsw:defs.bzl", "selecty_genrule")
 
 package(default_visibility = ["//visibility:public"])
 
@@ -234,7 +234,7 @@ cmake_external(
 filegroup(
     name = "amsr-vector-fs-em-executionmanager-srcs",
     srcs = glob(["BSW/amsr-vector-fs-em-executionmanager/**"],)
-                + ["@main_bazel_cmake//bsw:src_gen_rule",],
+                + ["@minerva_mpu_adaptive//bsw:src_gen_rule",],
     visibility = ["//visibility:public"],
 )
 
