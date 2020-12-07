@@ -54,6 +54,13 @@ pkg_tar(
     mode = "0755",
 )
 
+pkg_tar(
+    name = "minerva_mpu_adaptive_configs",
+    package_dir = "/etc",
+    srcs = ["//bsw:src_gen/example-machine/machine_exec_config.json"],
+    mode = "0755",
+)
+
 pkg_deb(
     name = "minerva_mpu_adaptive_deb",
     architecture = "amd64",
@@ -69,7 +76,10 @@ container_image(
     name = "minerva_mpu_adaptive_docker",
     base = "@ubuntu_18.04//image",
     stamp = True,
-    tars = [":minerva_mpu_adaptive_filesystem"],
+    tars = [
+        ":minerva_mpu_adaptive_filesystem",
+        ":minerva_mpu_adaptive_configs",
+    ],
     # The legacy_run_behavior is not disabled on container_image by default
     legacy_run_behavior = False,
     entrypoint = "/sbin/amsr_vector_fs_em_executionmanager "+
