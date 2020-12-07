@@ -489,14 +489,16 @@ cmake_external(
             "ENABLE_DOXYGEN":"OFF",
             "ENABLE_EXEC_MANAGER":"ON",
             "vac_DIR:PATH":"$EXT_BUILD_DEPS/amsr-vector-fs-libvac/lib/cmake/vac/",
-            "ara-logging_DIR:PATH":"$EXT_BUILD_DEPS/amsr-vector-fs-log-api/lib/cmake/ara-logging/",
             "vajson_DIR:PATH":"$EXT_BUILD_DEPS/amsr-vector-fs-vajson/lib/cmake/vajson/",
             "amsr-vector-fs-msr4base_DIR:PATH":"$EXT_BUILD_DEPS/amsr-vector-fs-msr4base/lib/cmake/amsr-vector-fs-msr4base/",
             "amsr-vector-fs-log-api-common_DIR:PATH":"$EXT_BUILD_DEPS/amsr-vector-fs-log-api/lib/cmake/amsr-vector-fs-log-api-common/",
             "amsr-vector-fs-log-api-ipc-common_DIR:PATH":"$EXT_BUILD_DEPS/amsr-vector-fs-log-api/lib/cmake/amsr-vector-fs-log-api-ipc-common/",
             "amsr-vector-fs-log-api-ipc_DIR:PATH":"$EXT_BUILD_DEPS/amsr-vector-fs-log-api/lib/cmake/amsr-vector-fs-log-api-ipc/",
+            "amsr-log_DIR:PATH":"$EXT_BUILD_DEPS/amsr-vector-fs-log-api/lib/cmake/amsr-log/",
+            "ara-logging_DIR:PATH":"$EXT_BUILD_DEPS/amsr-vector-fs-log-api/lib/cmake/ara-logging/",
             "osabstraction_DIR:PATH":"$EXT_BUILD_DEPS/amsr-vector-fs-libosabstraction/lib/cmake/osabstraction/",
             "amsr-vector-fs-em-executionmanagement_application-client_DIR:PATH":"$EXT_BUILD_DEPS/amsr-vector-fs-em-executionmanager/lib/cmake/amsr-vector-fs-em-executionmanagement_application-client/",
+            "amsr-vector-fs-sec-cryptostack-driver-lib_es_DIR:PATH":"$EXT_BUILD_DEPS/amsr-vector-fs-sec-cryptostack-driver-lib_es/lib/cmake/amsr-vector-fs-sec-cryptostack-driver-lib_es/"
         }
     ),
     generate_crosstool_file = GEN_CROSSTOOL_FILE,
@@ -510,6 +512,7 @@ cmake_external(
     ],
     deps = [
         ":amsr-vector-fs-em-executionmanager",
+        ":amsr-vector-fs-sec-cryptostack-driver-lib_es"
     ],
     visibility = ["//visibility:public"],
 )
