@@ -44,7 +44,7 @@ filegroup(
 )
 
 pkg_tar(
-    name = "minerva_mpu_adaptive_filesystem",
+    name = "minerva_mpu_adaptive_binaries",
     package_dir = "/",
     # If you change strip_prefix, be aware of the following:
     # - https://github.com/bazelbuild/rules_pkg/issues/82
@@ -59,6 +59,14 @@ pkg_tar(
     package_dir = "/etc",
     srcs = ["//bsw:src_gen/example-machine/machine_exec_config.json"],
     mode = "0755",
+)
+
+pkg_tar(
+    name = "minerva_mpu_adaptive_filesystem",
+    deps = [
+        ":minerva_mpu_adaptive_binaries",
+        ":minerva_mpu_adaptive_configs",
+    ],
 )
 
 pkg_deb(
@@ -78,7 +86,6 @@ container_image(
     stamp = True,
     tars = [
         ":minerva_mpu_adaptive_filesystem",
-        ":minerva_mpu_adaptive_configs",
     ],
     # The legacy_run_behavior is not disabled on container_image by default
     legacy_run_behavior = False,
