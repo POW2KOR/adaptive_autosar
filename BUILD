@@ -72,7 +72,7 @@ pkg_tar(
 pkg_deb(
     name = "minerva_mpu_adaptive_deb",
     architecture = "amd64",
-    data = ":minerva_filesystem",
+    data = ":minerva_mpu_adaptive_filesystem",
     description = "Distribution of the Minerva Adaptive AUTOSAR stack",
     homepage = "http://swf.daimler.com",
     maintainer = "Minerva Platform",
