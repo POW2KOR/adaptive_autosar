@@ -284,7 +284,6 @@ cmake_external(
     static_libraries = [
         "libara-logging.a",
         "libamsr-vector-fs-log-api-ipc.a",
-        "libamsr-vector-fs-log-api-ipc-common.a",
         "libamsr-vector-fs-log-api-common.a",
     ],
     deps = [
