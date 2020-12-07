@@ -198,6 +198,36 @@ cmake_external(
 )
 
 ######################################################################################
+# amsr-vector-fs-applicationbase
+######################################################################################
+
+filegroup(
+    name = "amsr-vector-fs-applicationbase-srcs",
+    srcs = glob(["BSW/amsr-vector-fs-applicationbase/**"]),
+    visibility = ["//visibility:public"],
+)
+
+cmake_external(
+    name = "amsr-vector-fs-applicationbase",
+    cache_entries = selecty_genrule(
+        CMAKE_TOOLCHAIN_DICT,
+        {
+            "CMAKE_SYSTEM_NAME": CMAKE_SYSTEM_NAME_LINUX,
+            "vac_DIR:PATH": "$EXT_BUILD_DEPS/amsr-vector-fs-libvac/lib/cmake/vac/",
+        },
+    ),
+    generate_crosstool_file = GEN_CROSSTOOL_FILE,
+    lib_source = ":amsr-vector-fs-applicationbase-srcs",
+    static_libraries = [
+        "libapplication_base.a",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":amsr-vector-fs-libvac",
+    ],
+)
+
+######################################################################################
 # amsr-vector-fs-libosabstraction
 ######################################################################################
 
