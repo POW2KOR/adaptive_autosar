@@ -347,7 +347,7 @@ cmake_external(
             "CMAKE_SYSTEM_NAME":CMAKE_SYSTEM_NAME_LINUX,
             "CMAKE_EXPORT_NO_PACKAGE_REGISTRY":"ON",
             "CMAKE_FIND_PACKAGE_NO_PACKAGE_REGISTRY":"ON",
-            # "ENABLE_ADDON":"ON",
+            "ENABLE_ADDON": "OFF",
             "CMAKE_VERBOSE_MAKEFILE":"ON",
             "BUILD_TESTS":"OFF",
             "ENABLE_DOXYGEN":"OFF",
