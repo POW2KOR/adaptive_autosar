@@ -534,10 +534,11 @@ cmake_external(
     lib_source = ":amsr-vector-fs-sec-libseccom-srcs",
     static_libraries = [
         "libamsr-vector-fs-sec-libseccom_libtls.a",
-        "libamsr-vector-fs-sec-libseccom_libcrypto.a",
     ],
     deps = [
-        ":amsr-vector-fs-sec-cryptostack"
+        ":amsr-vector-fs-sec-cryptostack",
+        ":amsr-vector-fs-log-api",
+
     ],
     cache_entries = selecty_genrule(
         CMAKE_TOOLCHAIN_DICT, 
@@ -545,10 +546,6 @@ cmake_external(
             "CMAKE_SYSTEM_NAME":CMAKE_SYSTEM_NAME_LINUX,
             "vac_DIR:PATH":"$EXT_BUILD_DEPS/amsr-vector-fs-libvac/lib/cmake/vac/",
             "ara-logging_DIR:PATH":"$EXT_BUILD_DEPS/amsr-vector-fs-log-api/lib/cmake/ara-logging/",
-            "vajson_DIR:PATH":"$EXT_BUILD_DEPS/amsr-vector-fs-vajson/lib/cmake/vajson/",
-            "amsr-vector-fs-log-api-common_DIR:PATH":"$EXT_BUILD_DEPS/amsr-vector-fs-log-api/lib/cmake/amsr-vector-fs-log-api-common/",
-            "amsr-vector-fs-log-api-ipc-common_DIR:PATH":"$EXT_BUILD_DEPS/amsr-vector-fs-log-api/lib/cmake/amsr-vector-fs-log-api-ipc-common/",
-            "amsr-vector-fs-log-api-ipc_DIR:PATH":"$EXT_BUILD_DEPS/amsr-vector-fs-log-api/lib/cmake/amsr-vector-fs-log-api-ipc/",
             "osabstraction_DIR:PATH":"$EXT_BUILD_DEPS/amsr-vector-fs-libosabstraction/lib/cmake/osabstraction/",
             "amsr-vector-fs-sec-cryptostack_libclient_DIR:PATH":"$EXT_BUILD_DEPS/amsr-vector-fs-sec-cryptostack/lib/cmake/amsr-vector-fs-sec-cryptostack_libclient/",
             "amsr-vector-fs-sec-cryptostack_libcommon_DIR:PATH":"$EXT_BUILD_DEPS/amsr-vector-fs-sec-cryptostack/lib/cmake/amsr-vector-fs-sec-cryptostack_libcommon/",
