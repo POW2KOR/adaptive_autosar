@@ -98,6 +98,40 @@ cmake_external(
 )
 
 ######################################################################################
+# amsr-vector-fs-libiostream
+######################################################################################
+
+filegroup(
+    name = "amsr-vector-fs-libiostream-srcs",
+    srcs = glob(["BSW/amsr-vector-fs-libiostream/**"]),
+    visibility = ["//visibility:public"],
+)
+
+cmake_external(
+    name = "amsr-vector-fs-libiostream",
+    cache_entries = selecty_genrule(
+        CMAKE_TOOLCHAIN_DICT,
+        {
+            "CMAKE_SYSTEM_NAME": CMAKE_SYSTEM_NAME_LINUX,
+            "ENABLE_WRAPPER": "OFF",
+            "vac_DIR:PATH": "$EXT_BUILD_DEPS/amsr-vector-fs-libvac/lib/cmake/vac/",
+        },
+    ),
+    generate_crosstool_file = GEN_CROSSTOOL_FILE,
+    lib_source = ":amsr-vector-fs-libiostream-srcs",
+    out_bin_dir = "sbin",
+    static_libraries = [
+        "libamsr-vector-fs-libiostream_libcharconv_common.a",
+        "libamsr-vector-fs-libiostream_libcharconv_vector_stl.a",
+        "libamsr-vector-fs-libiostream_libstream_vector_stl.a",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":amsr-vector-fs-libvac",
+    ],
+)
+
+######################################################################################
 # amsr-vector-fs-vajson
 ######################################################################################
 
