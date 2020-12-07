@@ -6,8 +6,6 @@ package(default_visibility = ["//visibility:public"])
 
 CMAKE_SYSTEM_NAME_LINUX = "Linux"
 
-exports_files(["DaVinciConfigurator/Core/amsrgen.sh"])
-
 string_flag(name = "build-target", build_setting_default = "minerva-host")
 
 config_setting(
