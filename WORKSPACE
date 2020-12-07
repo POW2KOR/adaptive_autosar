@@ -1,7 +1,8 @@
 workspace(name = "main_bazel_cmake")
 
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
-load("//build_env/toolchain/aarch64_compiler:aarch64_configure.bzl", "aarch64_configure")
+load("//build_env/toolchain/aarch64_linux_ubuntu_compiler:aarch64_linux_ubuntu_configure.bzl", "aarch64_linux_ubuntu_configure")
+load("//build_env/toolchain/aarch64_linux_linaro_compiler:aarch64_linux_linaro_configure.bzl", "aarch64_linux_linaro_configure")
 
 # Rule repository
 http_archive(
@@ -14,17 +15,20 @@ load("@rules_foreign_cc//:workspace_definitions.bzl", "rules_foreign_cc_dependen
 
 rules_foreign_cc_dependencies(register_default_tools = True)
 
-
-
 http_archive(
     name = "rules_python",
     url = "https://github.com/bazelbuild/rules_python/releases/download/0.1.0/rules_python-0.1.0.tar.gz",
     sha256 = "b6d46438523a3ec0f3cead544190ee13223a52f6a6765a29eae7b7cc24cc83a0",
 )
 
-aarch64_configure(
-    name = "aarch64_compiler",
-    build_file = "@//build_env/toolchain/aarch64_compiler:aarch64_compiler.BUILD",
+aarch64_linux_ubuntu_configure(
+    name = "aarch64_linux_ubuntu_compiler",
+    build_file = "@//build_env/toolchain/aarch64_linux_ubuntu_compiler:aarch64_linux_ubuntu_compiler.BUILD",
+)
+
+aarch64_linux_linaro_configure(
+    name = "aarch64_linux_linaro_compiler",
+    build_file = "@//build_env/toolchain/aarch64_linux_linaro_compiler:aarch64_linux_linaro_compiler.BUILD",
 )
 
 load("@bazel_tools//tools/build_defs/repo:git.bzl", "new_git_repository")

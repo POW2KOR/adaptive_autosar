@@ -1,14 +1,14 @@
 # Use our custom-configured c++ toolchain.
-
-build:aarch64 --crosstool_top=//build_env/toolchain/aarch64_compiler:toolchain --experimental_scale_timeouts=100 --@vector_sip_aa//:build-target="minerva-target" --//:build-target="minerva-target"
+build:aarch64_linux_ubuntu --crosstool_top=//build_env/toolchain/aarch64_linux_ubuntu_compiler:toolchain --experimental_scale_timeouts=100 --@vector_sip_aa//:build-target="minerva-target" --//:build-target="minerva-target"
+build:aarch64_linux_linaro --crosstool_top=//build_env/toolchain/aarch64_linux_linaro_compiler:toolchain --experimental_scale_timeouts=100 --@vector_sip_aa//:build-target="minerva-target" --//:build-target="minerva-target"
 
 # Use --cpu as a differentiator.
-
-build:aarch64  --cpu=aarch64
-
-# We need to find a better approach for specifting pthread as a default, the same way we do with the aarch64 toolchain
-build:x86_64  --cpu=k8 --linkopt=-pthread --experimental_scale_timeouts=100
+build:aarch64_linux_ubuntu  --cpu=aarch64
+build:aarch64_linux_linaro  --cpu=aarch64
 
 # Use the default Bazel C++ toolchain to build the tools used during the build.
+build:aarch64_linux_ubuntu  --host_crosstool_top=@bazel_tools//tools/cpp:toolchain
+build:aarch64_linux_linaro  --host_crosstool_top=@bazel_tools//tools/cpp:toolchain
 
-build:aarch64  --host_crosstool_top=@bazel_tools//tools/cpp:toolchain
+# We need to find a better approach for specifting pthread as a default, the same way we do with the aarch64 toolchain
+build:x86_64_linux          --cpu=k8 --linkopt=-pthread --experimental_scale_timeouts=100

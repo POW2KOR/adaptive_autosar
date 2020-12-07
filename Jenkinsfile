@@ -36,7 +36,7 @@ node('pulse_ec2')
                     sshagent(['adas-jenkins-ssh']) {
                         sh '''
                            bazel --version
-                           bazel build @vector_sip_aa//:amsr-vector-fs-sec-cryptostack --config=x86_64
+                           bazel build @vector_sip_aa//:amsr-vector-fs-sec-cryptostack --config=x86_64_linux
                         '''
                     }
                 }

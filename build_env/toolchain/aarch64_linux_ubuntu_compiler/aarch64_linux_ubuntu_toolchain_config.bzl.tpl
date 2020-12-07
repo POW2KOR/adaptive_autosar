@@ -14,7 +14,7 @@ load("@bazel_tools//tools/build_defs/cc:action_names.bzl", "ACTION_NAMES")
 # doesn't provide configuration for the aarch64 gcc.
 # This file is used for setup of the compiler, linker,
 # archiver flags and all gcc tools. This template
-# is used by aarch64_configure.bzl.
+# is used by aarch64_linux_ubuntu_configure.bzl.
 
 all_build_actions = [
     ACTION_NAMES.c_compile,
@@ -262,10 +262,10 @@ def _impl(ctx):
         ],
         toolchain_identifier = "aarch64-linux-gnu",
         host_system_name = "",
-        target_system_name = "",
+        target_system_name = "linux",
         target_cpu = "aarch64",
         target_libc = "",
-        compiler = "aarch64",
+        compiler = "aarch64_linux_ubuntu",
         abi_version = "",
         abi_libc_version = "",
         tool_paths = tool_paths,
