@@ -1,6 +1,6 @@
 load("@rules_foreign_cc//tools/build_defs:cmake.bzl", "cmake_external")
 load("@bazel_skylib//rules:common_settings.bzl", "string_flag")
-load("//:config/defs.bzl", "selecty_genrule")
+load("@main_bazel_cmake//bsw:defs.bzl", "selecty_genrule")
 
 package(default_visibility = ["//visibility:public"])
 
