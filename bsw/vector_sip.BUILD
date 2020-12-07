@@ -276,6 +276,7 @@ cmake_external(
             "vac_DIR:PATH":"$EXT_BUILD_DEPS/amsr-vector-fs-libvac/lib/cmake/vac/",
             "osabstraction_DIR:PATH":"$EXT_BUILD_DEPS/amsr-vector-fs-libosabstraction/lib/cmake/osabstraction/",
             "vajson_DIR:PATH":"$EXT_BUILD_DEPS/amsr-vector-fs-vajson/lib/cmake/vajson/",
+            "vathread_DIR:PATH":"$EXT_BUILD_DEPS/amsr-vector-fs-thread/lib/cmake/vathread/",
         }
     ),
     generate_crosstool_file = GEN_CROSSTOOL_FILE,
@@ -288,6 +289,7 @@ cmake_external(
     ],
     deps = [
         ":amsr-vector-fs-libvac",
+        ":amsr-vector-fs-thread",
         ":amsr-vector-fs-vajson",
         ":amsr-vector-fs-libosabstraction"
     ],
