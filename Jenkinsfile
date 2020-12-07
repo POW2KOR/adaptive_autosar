@@ -31,14 +31,17 @@ node('pulse_ec2')
             // @Todo:space to add the code analyzer
         }
         stage('build vector_sip_aa') {
+            String userId = sh (script: 'id -u', returnStdout: true).trim()
+            String groupId = sh (script: 'id -g', returnStdout: true).trim()
             docker.withRegistry(registryUrl, registryCredentials) {
-                docker.image("${imgNameVer}").inside("--entrypoint=''") {
+                docker.image("${imgNameVer}").inside("-u 0:0 --entrypoint=''") {
                     sshagent(['adas-jenkins-ssh']) {
                         sh '''
                            bazel --version
                            bazel build @vector_sip_aa//:amsr-vector-fs-sec-cryptostack --config=x86_64_linux
                         '''
                     }
+                    sh "chown -R ${userId}:${groupId} ."
                 }
             }
         }
