@@ -180,7 +180,10 @@ cmake_external(
         {
             "CMAKE_SYSTEM_NAME":CMAKE_SYSTEM_NAME_LINUX,
             "vac_DIR:PATH":"$EXT_BUILD_DEPS/amsr-vector-fs-libvac/lib/cmake/vac/",
-        }
+            "amsr-vector-fs-libiostream_libstream_vector_stl_DIR:PATH": "$EXT_BUILD_DEPS/amsr-vector-fs-libiostream/lib/cmake/amsr-vector-fs-libiostream_libstream_vector_stl/",
+            "amsr-vector-fs-libiostream_libcharconv_vector_stl_DIR:PATH": "$EXT_BUILD_DEPS/amsr-vector-fs-libiostream/lib/cmake/amsr-vector-fs-libiostream_libcharconv_vector_stl/",
+            "amsr-vector-fs-libiostream_libcharconv_common_DIR:PATH": "$EXT_BUILD_DEPS/amsr-vector-fs-libiostream/lib/cmake/amsr-vector-fs-libiostream_libcharconv_common/",
+        },
     ),
     generate_crosstool_file = GEN_CROSSTOOL_FILE,
     lib_source = ":amsr-vector-fs-vajson-srcs",
@@ -188,6 +191,7 @@ cmake_external(
         "libvajson.a",
     ],
     deps = [
+        ":amsr-vector-fs-libiostream",
         ":amsr-vector-fs-libvac",
     ],
     visibility = ["//visibility:public"],
