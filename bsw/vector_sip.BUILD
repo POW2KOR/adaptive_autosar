@@ -233,7 +233,8 @@ cmake_external(
 
 filegroup(
     name = "amsr-vector-fs-em-executionmanager-srcs",
-    srcs = glob(["BSW/amsr-vector-fs-em-executionmanager/**"],),
+    srcs = glob(["BSW/amsr-vector-fs-em-executionmanager/**"],)
+                + ["@main_bazel_cmake//bsw:src_gen_rule",],
     visibility = ["//visibility:public"],
 )
 
@@ -274,7 +275,7 @@ cmake_external(
         ":amsr-vector-fs-vajson",
         ":amsr-vector-fs-log-api",
         ":amsr-vector-fs-msr4base",
-        ":amsr-vector-fs-sec-cryptostack-driver-lib_es"
+        ":amsr-vector-fs-sec-cryptostack-driver-lib_es",
     ],
     visibility = ["//visibility:public"],
 )
@@ -564,5 +565,32 @@ cmake_external(
     visibility = ["//visibility:public"],
 )
 
-# src-gen targets are removed as they were dependent on mbition-prototype-app. This app is removed now.
-# Once we have new application, the code-gen or src-gen will be enabled. 
+# Generators
+
+filegroup(
+    name = "amsrgen_sh",
+    srcs = [
+        "DaVinciConfigurator/Core/amsrgen.sh",
+    ],
+    visibility = ["//visibility:public"],
+)
+
+filegroup(
+    name = "setup_jre_link_sh",
+    srcs = [
+        "DaVinciConfigurator/Core/setupJreLinks.sh",
+    ],
+    visibility = ["//visibility:public"],
+)
+
+filegroup(
+    name = "generator_tools",
+    srcs = [
+        "DaVinciConfigurator/Core/DVACfgCmd",
+        "Generators/amsr_em_machine_config",
+        "DaVinciConfigurator/Core/jre/bin/ControlPanel",
+        "DaVinciConfigurator/Core/jre/lib/amd64/server/libjsig.so",
+        "DaVinciConfigurator/Core/plugins",
+    ],
+    visibility = ["//visibility:public"],
+)
