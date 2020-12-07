@@ -70,7 +70,7 @@ load("@bazel_tools//tools/build_defs/repo:git.bzl", "new_git_repository")
 
 new_git_repository(
     name = "vector_sip_aa", # bazel will create under its own cache folder in the external folder package with the specified name(e.g. external/vector_sip_aa)  
-    commit = "c627319b2dd8fad43c7363f352d9820ae8e4a67f", # the commit ID that bazel will use to fetch the external repository
+    commit = "2dd1b86ee87e7ba28e2cf7f3b69938e9bd3c8f61", # the commit ID that bazel will use to fetch the external repository
     remote = "ssh://git@git.swf.daimler.com:7999/adas/vector_sip_aa.git",
     shallow_since = "1605535330 +0100",
     # alternative for cloning using HTTPS
