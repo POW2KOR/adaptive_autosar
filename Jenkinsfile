@@ -41,7 +41,7 @@ node('pulse_ec2')
                            bazel build @vector_sip_aa//:amsr-vector-fs-sec-cryptostack --config=x86_64_linux
                         '''
                     }
-                sh "chown -R ${userId}:${groupId} ."
+                    sh "chown -R ${userId}:${groupId} ."
                 }
             }
         }
