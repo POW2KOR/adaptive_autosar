@@ -72,6 +72,8 @@ new_git_repository(
     name = "vector_sip_aa", # bazel will create under its own cache folder in the external folder package with the specified name(e.g. external/vector_sip_aa)  
     commit = "2dd1b86ee87e7ba28e2cf7f3b69938e9bd3c8f61", # the commit ID that bazel will use to fetch the external repository
     remote = "ssh://git@git.swf.daimler.com:7999/adas/vector_sip_aa.git",
+    patches = ['@//bsw:remove-controlpanel-symlink-in-vector-sip.patch'],
+    patch_args = ["-p1"],
     shallow_since = "1605535330 +0100",
     # alternative for cloning using HTTPS
     # remote = "https://git.swf.daimler.com/adas/vector_sip_aa.git",

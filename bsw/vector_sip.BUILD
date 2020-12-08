@@ -588,7 +588,6 @@ filegroup(
     srcs = [
         "DaVinciConfigurator/Core/DVACfgCmd",
         "Generators/amsr_em_machine_config",
-        "DaVinciConfigurator/Core/jre/bin/ControlPanel",
         "DaVinciConfigurator/Core/jre/lib/amd64/server/libjsig.so",
         "DaVinciConfigurator/Core/plugins",
     ],
