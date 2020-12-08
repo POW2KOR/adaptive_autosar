@@ -2,6 +2,7 @@ load("@rules_cc//cc:defs.bzl", "cc_binary", "cc_library")
 load("@bazel_skylib//rules:common_settings.bzl", "string_flag")
 load("@rules_pkg//:pkg.bzl", "pkg_tar", "pkg_deb")
 load("@io_bazel_rules_docker//container:container.bzl", "container_image")
+load("@com_github_bazelbuild_buildtools//buildifier:def.bzl", "buildifier")
 
 package(default_visibility = ["//visibility:public"])
 
@@ -91,4 +92,9 @@ container_image(
     legacy_run_behavior = False,
     entrypoint = "/sbin/amsr_vector_fs_em_executionmanager "+
         "-a /opt -m /etc/machine_exec_config.json"
+)
+
+# Buildifier
+buildifier(
+    name = "buildifier",
 )
