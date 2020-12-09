@@ -713,6 +713,16 @@ filegroup(
     visibility = ["//visibility:public"],
 )
 
+filegroup(
+    name = "amsr_vector_fs_log_daemon_configs",
+    srcs = [
+        "BSW/amsr-vector-fs-log-daemon/etc/exec_config.json",
+        "BSW/amsr-vector-fs-log-daemon/etc/logd_config.json",
+        "BSW/amsr-vector-fs-log-daemon/etc/logging_config.json",
+    ],
+    visibility = ["//visibility:public"],
+)
+
 cmake_external(
     name = "amsr_vector_fs_log_daemon",
     binaries = [

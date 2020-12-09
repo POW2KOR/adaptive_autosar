@@ -78,6 +78,7 @@ pkg_tar(
     name = "minerva_mpu_adaptive_configs",
     srcs = [
         "//bsw:src_gen/example-machine/machine_exec_config.json",
+        "@vector_sip_aa//:amsr_vector_fs_log_daemon_configs",
     ],
     mode = "0755",
     package_dir = "/etc",
