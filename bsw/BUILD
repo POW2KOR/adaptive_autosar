@@ -12,13 +12,13 @@ filegroup(
 ##
 genrule(
     name = "src_gen_rule",
-    outs = [
-        "src_gen/example-machine/machine_exec_config.json",
-    ],
     srcs = [
         ":machine_arxml",
         "@vector_sip_aa//:amsrgen_sh",
         "@vector_sip_aa//:setup_jre_link_sh",
+    ],
+    outs = [
+        "src_gen/example-machine/machine_exec_config.json",
     ],
     cmd = """
     mkdir -p $(RULEDIR)/src_gen
