@@ -702,3 +702,51 @@ filegroup(
     ],
     visibility = ["//visibility:public"],
 )
+
+######################################################################################
+# Log daemon executable
+######################################################################################
+
+filegroup(
+    name = "amsr_vector_fs_log_daemon_srcs",
+    srcs = glob(["BSW/amsr-vector-fs-log-daemon/**"]),
+    visibility = ["//visibility:public"],
+)
+
+cmake_external(
+    name = "amsr_vector_fs_log_daemon",
+    binaries = [
+        "amsr_vector_fs_log_daemon",
+    ],
+    cache_entries = selecty_genrule(
+        CMAKE_TOOLCHAIN_DICT,
+        {
+            "CMAKE_SYSTEM_NAME": CMAKE_SYSTEM_NAME_LINUX,
+            "CMAKE_EXPORT_NO_PACKAGE_REGISTRY": "ON",
+            "CMAKE_FIND_PACKAGE_NO_PACKAGE_REGISTRY": "ON",
+            "ENABLE_ADDON": "OFF",
+            "CMAKE_VERBOSE_MAKEFILE": "ON",
+            "BUILD_TESTS": "OFF",
+            "ENABLE_CCACHE" :"ON",
+            "ENABLE_DOXYGEN": "OFF",
+            "ENABLE_EXEC_MANAGER" : "ON",
+            "vac_DIR:PATH": "$EXT_BUILD_DEPS/amsr-vector-fs-libvac/lib/cmake/vac/",
+            "ara-logging_DIR:PATH": "$EXT_BUILD_DEPS/amsr-vector-fs-log-api/lib/cmake/ara-logging/",
+            "osabstraction_DIR:PATH": "$EXT_BUILD_DEPS/amsr-vector-fs-libosabstraction/lib/cmake/osabstraction/",
+            "amsr-vector-fs-em-executionmanagement_application-client_DIR:PATH": "$EXT_BUILD_DEPS/amsr-vector-fs-em-executionmanager/lib/cmake/amsr-vector-fs-em-executionmanagement_application-client/",
+        },
+    ),
+    generate_crosstool_file = GEN_CROSSTOOL_FILE,
+    lib_source = ":amsr_vector_fs_log_daemon_srcs",
+    static_libraries = [
+        "libamsr-vector-fs-log-daemon-service.a",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":amsr-vector-fs-libvac",
+        ":amsr-vector-fs-libosabstraction",
+        ":amsr-vector-fs-vajson",
+        ":amsr-vector-fs-log-api",
+        ":amsr-vector-fs-em-executionmanager",
+    ],
+)
