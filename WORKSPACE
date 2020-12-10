@@ -79,7 +79,10 @@ new_git_repository(
     commit = "2dd1b86ee87e7ba28e2cf7f3b69938e9bd3c8f61",  # the commit ID that bazel will use to fetch the external repository
     init_submodules = True,
     patch_args = ["-p1"],
-    patches = ["@//bsw:remove-controlpanel-symlink-in-vector-sip.patch"],
+    patches = [
+        "@//bsw:remove-controlpanel-symlink-in-vector-sip.patch",
+        "@//bsw:add-console-log-option-in-vector-sip-log-daemon.patch",
+    ],
     remote = "ssh://git@git.swf.daimler.com:7999/adas/vector_sip_aa.git",
     shallow_since = "1605535330 +0100",
 )

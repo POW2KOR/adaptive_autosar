@@ -46,8 +46,14 @@ filegroup(
     output_group = "amsr_vector_fs_em_executionmanager",
 )
 
+filegroup(
+    name = "adaptive_autosar_log_daemon_binary",
+    srcs = ["@vector_sip_aa//:amsr_vector_fs_log_daemon"],
+    output_group = "amsr_vector_fs_log_daemon",
+)
+
 pkg_tar(
-    name = "minerva_mpu_adaptive_binaries",
+    name = "minerva_mpu_adaptive_sbin",
     srcs = [":adaptive_autosar_executionmanager_binary"],
     mode = "0755",
     package_dir = "/",
@@ -58,8 +64,22 @@ pkg_tar(
 )
 
 pkg_tar(
+    name = "minerva_mpu_adaptive_bsw_opts",
+    srcs = [":adaptive_autosar_log_daemon_binary"],
+    # If you change strip_prefix, be aware of the following:
+    # - https://github.com/bazelbuild/rules_pkg/issues/82
+    strip_prefix =
+        "./external/vector_sip_aa/amsr_vector_fs_log_daemon/bin/",
+    mode = "0755",
+    package_dir = "/opt",
+)
+
+pkg_tar(
     name = "minerva_mpu_adaptive_configs",
-    srcs = ["//bsw:src_gen/example-machine/machine_exec_config.json"],
+    srcs = [
+        "//bsw:src_gen/example-machine/machine_exec_config.json",
+        "@vector_sip_aa//:amsr_vector_fs_log_daemon_configs",
+    ],
     mode = "0755",
     package_dir = "/etc",
 )
@@ -67,8 +87,9 @@ pkg_tar(
 pkg_tar(
     name = "minerva_mpu_adaptive_filesystem",
     deps = [
-        ":minerva_mpu_adaptive_binaries",
+        ":minerva_mpu_adaptive_sbin",
         ":minerva_mpu_adaptive_configs",
+        ":minerva_mpu_adaptive_bsw_opts",
     ],
 )
 

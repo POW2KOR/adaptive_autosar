@@ -1,0 +1,18 @@
+diff --git a/BSW/amsr-vector-fs-log-daemon/etc/logging_config.json b/BSW/amsr-vector-fs-log-daemon/etc/logging_config.json
+index 658f372c..edd23774 100644
+--- a/BSW/amsr-vector-fs-log-daemon/etc/logging_config.json
++++ b/BSW/amsr-vector-fs-log-daemon/etc/logging_config.json
+@@ -2,10 +2,10 @@
+   "name": "amsr-vector-fs-log-daemon",
+   "description": "Vector Log Daemon",
+   "dlt_id": "LOGD",
+-  "log_mode": ["kNone"],
+-  "log_level": "kOff",
++  "log_mode": ["kConsole", "kRemote"],
++  "log_level": "kVerbose",
+   "log_dir_path": "tmp",
+   "ipc_port": 33,
+   "reconnection_retry_offset": 0,
+-  "msg_buf_size": 10
++  "msg_buf_size": 100
+ }
