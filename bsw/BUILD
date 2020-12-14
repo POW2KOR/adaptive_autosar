@@ -14,8 +14,8 @@ genrule(
     name = "src_gen_rule",
     srcs = [
         ":machine_arxml",
-        "@vector_sip_aa//:amsrgen_sh",
-        "@vector_sip_aa//:setup_jre_link_sh",
+        "@starter_kit_adaptive_xavier//:amsrgen_sh",
+        "@starter_kit_adaptive_xavier//:setup_jre_link_sh",
     ],
     outs = [
         "src_gen/example-machine/machine_exec_config.json",
@@ -25,11 +25,11 @@ genrule(
     mkdir $(RULEDIR)/arxml_folder    
     cp $(locations :machine_arxml) $(RULEDIR)/arxml_folder
 
-    $(location @vector_sip_aa//:amsrgen_sh) -v \
-    -g external/vector_sip_aa/Generators/amsr_em_machine_config \
+    $(location @starter_kit_adaptive_xavier//:amsrgen_sh) -v \
+    -g external/starter_kit_adaptive_xavier/mb_base_layer_adaptive_xavier/amsr_xavier/Generators/amsr_em_machine_config \
     -x $(RULEDIR)/arxml_folder -o $(RULEDIR)/src_gen --saveProject > /dev/null
     """,
     tools = [
-        "@vector_sip_aa//:generator_tools",
+        "@starter_kit_adaptive_xavier//:generator_tools",
     ],
 )
