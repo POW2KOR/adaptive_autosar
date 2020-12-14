@@ -56,7 +56,7 @@ GEN_CROSSTOOL_FILE = select({
 
 filegroup(
     name = "amsr-vector-fs-libvac-srcs",
-    srcs = glob(["BSW/amsr-vector-fs-libvac/**"]),
+    srcs = glob(["mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-libvac/**"]),
     visibility = ["//visibility:public"],
 )
 
@@ -82,7 +82,7 @@ cmake_external(
 
 filegroup(
     name = "amsr-vector-fs-msr4base-srcs",
-    srcs = glob(["BSW/amsr-vector-fs-msr4base/**"]),
+    srcs = glob(["mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-msr4base/**"]),
     visibility = ["//visibility:public"],
 )
 
@@ -106,7 +106,7 @@ cmake_external(
 
 filegroup(
     name = "amsr-vector-fs-libiostream-srcs",
-    srcs = glob(["BSW/amsr-vector-fs-libiostream/**"]),
+    srcs = glob(["mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-libiostream/**"]),
     visibility = ["//visibility:public"],
 )
 
@@ -140,7 +140,7 @@ cmake_external(
 
 filegroup(
     name = "amsr-vector-fs-thread-srcs",
-    srcs = glob(["BSW/amsr-vector-fs-thread/**"]),
+    srcs = glob(["mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-thread/**"]),
     visibility = ["//visibility:public"],
 )
 
@@ -172,7 +172,7 @@ cmake_external(
 
 filegroup(
     name = "amsr-vector-fs-vajson-srcs",
-    srcs = glob(["BSW/amsr-vector-fs-vajson/**"]),
+    srcs = glob(["mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-vajson/**"]),
     visibility = ["//visibility:public"],
 )
 
@@ -206,7 +206,7 @@ cmake_external(
 
 filegroup(
     name = "amsr-vector-fs-applicationbase-srcs",
-    srcs = glob(["BSW/amsr-vector-fs-applicationbase/**"]),
+    srcs = glob(["mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-applicationbase/**"]),
     visibility = ["//visibility:public"],
 )
 
@@ -236,7 +236,7 @@ cmake_external(
 
 filegroup(
     name = "amsr-vector-fs-libosabstraction-srcs",
-    srcs = glob(["BSW/amsr-vector-fs-libosabstraction/**"]),
+    srcs = glob(["mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-libosabstraction/**"]),
     visibility = ["//visibility:public"],
 )
 
@@ -266,7 +266,7 @@ cmake_external(
 
 filegroup(
     name = "amsr-vector-fs-log-api-srcs",
-    srcs = glob(["BSW/amsr-vector-fs-log-api/**"]),
+    srcs = glob(["mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-log-api/**"]),
     visibility = ["//visibility:public"],
 )
 
@@ -304,7 +304,7 @@ cmake_external(
 
 filegroup(
     name = "amsr-vector-fs-sec-cryptostack-driver-lib_es-srcs",
-    srcs = glob(["BSW/amsr-vector-fs-sec-cryptostack-driver-lib_es/**"]),
+    srcs = glob(["mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-sec-cryptostack-driver-lib_es/**"]),
     visibility = ["//visibility:public"],
 )
 
@@ -336,7 +336,7 @@ cmake_external(
 
 filegroup(
     name = "amsr-vector-fs-em-executionmanager-srcs",
-    srcs = glob(["BSW/amsr-vector-fs-em-executionmanager/**"]) + [
+    srcs = glob(["mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-em-executionmanager/**"]) + [
         "@minerva_mpu_adaptive//bsw:src_gen_rule",
     ],
     visibility = ["//visibility:public"],
@@ -397,7 +397,7 @@ cmake_external(
 
 filegroup(
     name = "amsr-vector-fs-sec-iam-srcs",
-    srcs = glob(["BSW/amsr-vector-fs-sec-iam/**"]),
+    srcs = glob(["mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-sec-iam/**"]),
     visibility = ["//visibility:public"],
 )
 
@@ -436,7 +436,7 @@ cmake_external(
 
 filegroup(
     name = "amsr-vector-fs-comcommon-srcs",
-    srcs = glob(["BSW/amsr-vector-fs-comcommon/**"]),
+    srcs = glob(["mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-comcommon/**"]),
     visibility = ["//visibility:public"],
 )
 
@@ -475,7 +475,7 @@ cmake_external(
 
 filegroup(
     name = "amsr-vector-fs-sec-cryptostack-srcs",
-    srcs = glob(["BSW/amsr-vector-fs-sec-cryptostack/**"]),
+    srcs = glob(["mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-sec-cryptostack/**"]),
     visibility = ["//visibility:public"],
 )
 
@@ -525,7 +525,7 @@ cmake_external(
 
 filegroup(
     name = "amsr-vector-fs-sec-libseccom-srcs",
-    srcs = glob(["BSW/amsr-vector-fs-sec-libseccom/**"]),
+    srcs = glob(["mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-sec-libseccom/**"]),
     visibility = ["//visibility:public"],
 )
 
@@ -563,7 +563,7 @@ cmake_external(
 
 filegroup(
     name = "amsr-vector-fs-communicationmiddleware-srcs",
-    srcs = glob(["BSW/amsr-vector-fs-communicationmiddleware/**"]),
+    srcs = glob(["mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-communicationmiddleware/**"]),
     visibility = ["//visibility:public"],
 )
 
@@ -679,7 +679,7 @@ cmake_external(
 filegroup(
     name = "amsrgen_sh",
     srcs = [
-        "DaVinciConfigurator/Core/amsrgen.sh",
+        "mb_base_layer_adaptive_xavier/amsr_xavier/DaVinciConfigurator/Core/amsrgen.sh",
     ],
     visibility = ["//visibility:public"],
 )
@@ -687,7 +687,7 @@ filegroup(
 filegroup(
     name = "setup_jre_link_sh",
     srcs = [
-        "DaVinciConfigurator/Core/setupJreLinks.sh",
+        "mb_base_layer_adaptive_xavier/amsr_xavier/DaVinciConfigurator/Core/setupJreLinks.sh",
     ],
     visibility = ["//visibility:public"],
 )
@@ -695,10 +695,10 @@ filegroup(
 filegroup(
     name = "generator_tools",
     srcs = [
-        "DaVinciConfigurator/Core/DVACfgCmd",
-        "DaVinciConfigurator/Core/jre/lib/amd64/server/libjsig.so",
-        "DaVinciConfigurator/Core/plugins",
-        "Generators/amsr_em_machine_config",
+        "mb_base_layer_adaptive_xavier/amsr_xavier/DaVinciConfigurator/Core/DVACfgCmd",
+        "mb_base_layer_adaptive_xavier/amsr_xavier/DaVinciConfigurator/Core/jre/lib/amd64/server/libjsig.so",
+        "mb_base_layer_adaptive_xavier/amsr_xavier/DaVinciConfigurator/Core/plugins",
+        "mb_base_layer_adaptive_xavier/amsr_xavier/Generators/amsr_em_machine_config",
     ],
     visibility = ["//visibility:public"],
 )
@@ -709,16 +709,16 @@ filegroup(
 
 filegroup(
     name = "amsr_vector_fs_log_daemon_srcs",
-    srcs = glob(["BSW/amsr-vector-fs-log-daemon/**"]),
+    srcs = glob(["mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-log-daemon/**"]),
     visibility = ["//visibility:public"],
 )
 
 filegroup(
     name = "amsr_vector_fs_log_daemon_configs",
     srcs = [
-        "BSW/amsr-vector-fs-log-daemon/etc/exec_config.json",
-        "BSW/amsr-vector-fs-log-daemon/etc/logd_config.json",
-        "BSW/amsr-vector-fs-log-daemon/etc/logging_config.json",
+        "mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-log-daemon/etc/exec_config.json",
+        "mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-log-daemon/etc/logd_config.json",
+        "mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-log-daemon/etc/logging_config.json",
     ],
     visibility = ["//visibility:public"],
 )
@@ -737,9 +737,9 @@ cmake_external(
             "ENABLE_ADDON": "OFF",
             "CMAKE_VERBOSE_MAKEFILE": "ON",
             "BUILD_TESTS": "OFF",
-            "ENABLE_CCACHE" :"ON",
+            "ENABLE_CCACHE": "ON",
             "ENABLE_DOXYGEN": "OFF",
-            "ENABLE_EXEC_MANAGER" : "ON",
+            "ENABLE_EXEC_MANAGER": "ON",
             "vac_DIR:PATH": "$EXT_BUILD_DEPS/amsr-vector-fs-libvac/lib/cmake/vac/",
             "ara-logging_DIR:PATH": "$EXT_BUILD_DEPS/amsr-vector-fs-log-api/lib/cmake/ara-logging/",
             "osabstraction_DIR:PATH": "$EXT_BUILD_DEPS/amsr-vector-fs-libosabstraction/lib/cmake/osabstraction/",
@@ -753,10 +753,10 @@ cmake_external(
     ],
     visibility = ["//visibility:public"],
     deps = [
-        ":amsr-vector-fs-libvac",
-        ":amsr-vector-fs-libosabstraction",
-        ":amsr-vector-fs-vajson",
-        ":amsr-vector-fs-log-api",
         ":amsr-vector-fs-em-executionmanager",
+        ":amsr-vector-fs-libosabstraction",
+        ":amsr-vector-fs-libvac",
+        ":amsr-vector-fs-log-api",
+        ":amsr-vector-fs-vajson",
     ],
 )

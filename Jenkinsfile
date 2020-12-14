@@ -3,7 +3,7 @@ node('pulse_ec2')
 { 
     String registryUrl = "https://artifact.${env.SWF_DOMAIN}"
     String registryCredentials = 'adas-artifactory'
-    def imgNameVer = "artifact.swf.daimler.com/adas-docker/minerva_mpu_docker/tmp/feature/update-nvidia-5-2-0-0/minerva_mpu:20201201144342"
+    def imgNameVer = "artifact.swf.daimler.com/adas-docker/minerva_mpu_docker/minerva_mpu:20201214084936"
     try{
         stage('checkout') {
             checkout scm
@@ -30,7 +30,7 @@ node('pulse_ec2')
         stage('static code analysis') {
             // @Todo:space to add the code analyzer
         }
-        stage('build vector_sip_aa') {
+        stage('build host') {
             String userId = sh (script: 'id -u', returnStdout: true).trim()
             String groupId = sh (script: 'id -g', returnStdout: true).trim()
             docker.withRegistry(registryUrl, registryCredentials) {
@@ -38,7 +38,7 @@ node('pulse_ec2')
                     sshagent(['adas-jenkins-ssh']) {
                         sh '''
                            bazel --version
-                           bazel build @vector_sip_aa//:amsr-vector-fs-em-executionmanager --config=x86_64_linux
+                           bazel build @starter_kit_adaptive_xavier//:amsr-vector-fs-em-executionmanager --config=x86_64_linux
                         '''
                     }
                     sh "chown -R ${userId}:${groupId} ."
