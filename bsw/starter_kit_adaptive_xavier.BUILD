@@ -760,3 +760,35 @@ cmake_external(
         ":amsr-vector-fs-vajson",
     ],
 )
+
+######################################################################################
+# amsr-vector-fs-someipprotocol
+######################################################################################
+
+filegroup(
+    name = "amsr_vector_fs_someipprotocol_srcs",
+    srcs = glob(["mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-someipprotocol/**"]),
+    visibility = ["//visibility:public"],
+)
+
+cmake_external(
+    name = "amsr_vector_fs_someipprotocol",
+    cache_entries = selecty_genrule(
+        CMAKE_TOOLCHAIN_DICT,
+        {
+            "CMAKE_SYSTEM_NAME": CMAKE_SYSTEM_NAME_LINUX,
+            "vac_DIR:PATH": "$EXT_BUILD_DEPS/amsr-vector-fs-libvac/lib/cmake/vac/",
+            "ComCommon_DIR:PATH": "$EXT_BUILD_DEPS/amsr-vector-fs-comcommon/lib/cmake/ComCommon/",
+        },
+    ),
+    generate_crosstool_file = GEN_CROSSTOOL_FILE,
+    lib_source = ":amsr_vector_fs_someipprotocol_srcs",
+    static_libraries = [
+        "libSomeIpProtocol.a",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":amsr-vector-fs-libvac",
+        ":amsr-vector-fs-comcommon",
+    ],
+)
