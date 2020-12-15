@@ -792,3 +792,41 @@ cmake_external(
         ":amsr-vector-fs-comcommon",
     ],
 )
+
+######################################################################################
+# amsr-vector-fs-someipdaemonclient
+######################################################################################
+
+filegroup(
+    name = "amsr_vector_fs_someipdaemonclient_srcs",
+    srcs = glob(["mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-someipdaemonclient/**"]),
+    visibility = ["//visibility:public"],
+)
+
+cmake_external(
+    name = "amsr_vector_fs_someipdaemonclient",
+    cache_entries = selecty_genrule(
+        CMAKE_TOOLCHAIN_DICT,
+        {
+            "CMAKE_SYSTEM_NAME": CMAKE_SYSTEM_NAME_LINUX,
+            "vac_DIR:PATH": "$EXT_BUILD_DEPS/amsr-vector-fs-libvac/lib/cmake/vac/",
+            "ara-logging_DIR:PATH": "$EXT_BUILD_DEPS/amsr-vector-fs-log-api/lib/cmake/ara-logging/",
+            "ComCommon_DIR:PATH": "$EXT_BUILD_DEPS/amsr-vector-fs-comcommon/lib/cmake/ComCommon/",
+            "osabstraction_DIR:PATH": "$EXT_BUILD_DEPS/amsr-vector-fs-libosabstraction/lib/cmake/osabstraction/",
+            "SomeIpProtocol_DIR:PATH": "$EXT_BUILD_DEPS/amsr_vector_fs_someipprotocol/lib/cmake/SomeIpProtocol/",
+        },
+    ),
+    generate_crosstool_file = GEN_CROSSTOOL_FILE,
+    lib_source = ":amsr_vector_fs_someipdaemonclient_srcs",
+    static_libraries = [
+        "libSomeIpDaemonClient.a",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":amsr-vector-fs-libvac",
+        ":amsr-vector-fs-log-api",
+        ":amsr-vector-fs-comcommon",
+        ":amsr-vector-fs-libosabstraction",
+        ":amsr_vector_fs_someipprotocol"
+    ],
+)
