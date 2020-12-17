@@ -847,6 +847,7 @@ filegroup(
     srcs = [
         "mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-someipdaemon/etc/exec_config.json",
         "mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-someipdaemon/etc/logging_config.json",
+        "@minerva_mpu_adaptive//application/configs:someip_posix_json"
     ],
     visibility = ["//visibility:public"],
 )
