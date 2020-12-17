@@ -54,7 +54,7 @@ filegroup(
 
 filegroup(
     name = "adaptive_autosar_someipdaemon_binary",
-    srcs = ["@starter_kit_adaptive_xavier//:amsr_vector_fs_someipdaemon"],
+    srcs = ["@starter_kit_adaptive_xavier//:someipd_posix"],
     output_group = "someipd_posix",
 )
 
@@ -103,9 +103,19 @@ pkg_tar(
 )
 
 pkg_tar(
+    name = "adaptive_autosar_someipdaemon_configs",
+    srcs = [
+        "@starter_kit_adaptive_xavier//:amsr_vector_fs_someipdaemon_configs",
+    ],
+    mode = "0755",
+    package_dir = "/someipd_posix/etc/",
+)
+
+pkg_tar(
     name = "minerva_mpu_adaptive_configs",
     deps = [
         ":adaptive_autosar_log_daemon_configs",
+        ":adaptive_autosar_someipdaemon_configs",
     ],
     mode = "0755",
     package_dir = "/opt",

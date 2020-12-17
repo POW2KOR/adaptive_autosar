@@ -842,18 +842,17 @@ filegroup(
     visibility = ["//visibility:public"],
 )
 
-'''filegroup(
-    name = "amsr_vector_fs_log_daemon_configs",
+filegroup(
+    name = "amsr_vector_fs_someipdaemon_configs",
     srcs = [
-        "mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-log-daemon/etc/exec_config.json",
-        "mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-log-daemon/etc/logd_config.json",
-        "mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-log-daemon/etc/logging_config.json",
+        "mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-someipdaemon/etc/exec_config.json",
+        "mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-someipdaemon/etc/logging_config.json",
     ],
     visibility = ["//visibility:public"],
-)'''
+)
 
 cmake_external(
-    name = "amsr_vector_fs_someipdaemon",
+    name = "someipd_posix",
     binaries = [
         "someipd_posix",
     ],
