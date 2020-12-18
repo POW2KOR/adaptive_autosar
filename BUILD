@@ -52,6 +52,12 @@ filegroup(
     output_group = "amsr_vector_fs_log_daemon",
 )
 
+filegroup(
+    name = "adaptive_autosar_someipdaemon_binary",
+    srcs = ["@starter_kit_adaptive_xavier//:someipd_posix"],
+    output_group = "someipd_posix",
+)
+
 pkg_tar(
     name = "minerva_mpu_adaptive_sbin",
     srcs = [":adaptive_autosar_executionmanager_binary"],
@@ -65,17 +71,20 @@ pkg_tar(
 
 pkg_tar(
     name = "minerva_mpu_adaptive_bsw_opts",
-    srcs = [":adaptive_autosar_log_daemon_binary"],
-    mode = "0755",
+    srcs = [
+        ":adaptive_autosar_log_daemon_binary",
+        ":adaptive_autosar_someipdaemon_binary",
+    ],
     package_dir = "/opt",
+    mode = "0755",
     # If you change strip_prefix, be aware of the following:
     # - https://github.com/bazelbuild/rules_pkg/issues/82
     strip_prefix =
-        "./external/starter_kit_adaptive_xavier/amsr_vector_fs_log_daemon/bin/",
+        "./external/starter_kit_adaptive_xavier/",
 )
 
 pkg_tar(
-    name = "minerva_mpu_adaptive_configs",
+    name = "minerva_mpu_adaptive_etc",
     srcs = [
         "//bsw:src_gen/example-machine/machine_exec_config.json",
         "@starter_kit_adaptive_xavier//:amsr_vector_fs_log_daemon_configs",
@@ -85,9 +94,38 @@ pkg_tar(
 )
 
 pkg_tar(
+    name = "adaptive_autosar_log_daemon_configs",
+    srcs = [
+        "@starter_kit_adaptive_xavier//:amsr_vector_fs_log_daemon_configs",
+    ],
+    mode = "0755",
+    package_dir = "/amsr_vector_fs_log_daemon/etc/",
+)
+
+pkg_tar(
+    name = "adaptive_autosar_someipdaemon_configs",
+    srcs = [
+        "@starter_kit_adaptive_xavier//:amsr_vector_fs_someipdaemon_configs",
+    ],
+    mode = "0755",
+    package_dir = "/someipd_posix/etc/",
+)
+
+pkg_tar(
+    name = "minerva_mpu_adaptive_configs",
+    deps = [
+        ":adaptive_autosar_log_daemon_configs",
+        ":adaptive_autosar_someipdaemon_configs",
+    ],
+    mode = "0755",
+    package_dir = "/opt",
+)
+
+pkg_tar(
     name = "minerva_mpu_adaptive_filesystem",
     deps = [
         ":minerva_mpu_adaptive_bsw_opts",
+        ":minerva_mpu_adaptive_etc",
         ":minerva_mpu_adaptive_configs",
         ":minerva_mpu_adaptive_sbin",
     ],

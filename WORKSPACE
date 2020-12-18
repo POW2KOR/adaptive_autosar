@@ -247,7 +247,7 @@ new_git_repository(
 '''new_local_repository(
     name = "starter_kit_adaptive_xavier",
     path = "<local_path_to_reposittory>",
-    build_file = "@//bsw:starter_kit_adaptive_xavier",
+    build_file = "@//bsw:starter_kit_adaptive_xavier.BUILD",
 )'''
 
 # Buildifier
