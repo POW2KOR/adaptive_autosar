@@ -30,7 +30,7 @@ genrule(
     -x $(RULEDIR)/arxml_folder -o $(RULEDIR)/src_gen --saveProject > /dev/null
     """,
     tools = [
-        "@starter_kit_adaptive_xavier//:generator_tools",
+        "@starter_kit_adaptive_xavier//:generator_tools_amsr_em_machine_config",
     ],
 )
 
@@ -102,6 +102,6 @@ genrule(
 
     """,
     tools = [
-        "@starter_kit_adaptive_xavier//:generator_tools",
+        "@starter_kit_adaptive_xavier//:generator_tools_amsr_modelleddatatypes_api",
     ],
 )
