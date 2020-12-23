@@ -706,7 +706,6 @@ filegroup(
         "mb_base_layer_adaptive_xavier/amsr_xavier/DaVinciConfigurator/Core/jre/lib/amd64/server/libjsig.so",
         "mb_base_layer_adaptive_xavier/amsr_xavier/DaVinciConfigurator/Core/plugins",
         "mb_base_layer_adaptive_xavier/amsr_xavier/Generators/amsr_em_machine_config",
-        "mb_base_layer_adaptive_xavier/amsr_xavier/Generators/amsr_em_exec_config",
         "mb_base_layer_adaptive_xavier/amsr_xavier/Generators/amsr_modelleddatatypes_api",
     ],
     visibility = ["//visibility:public"],
