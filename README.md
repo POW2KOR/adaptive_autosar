@@ -5,12 +5,15 @@ This is the MPU Adaptive AUTOSAR repository for the Minerva project.
 tbd
 
 # Build Instructions
-The current Bazel build is based on [rules_foreign_cc](https://github.com/bazelbuild/rules_foreign_cc) for building external CMake projects. The default build type is "Release".
-To have fixed version of the bazel internal dependencies all packages are integrated into the docker image. To have a path that is
-common for the docker and for the host the packages are at: /usr/tools/bazel/and the workspace file is updated with that path.
-For building in the docker see: https://git.swf.daimler.com/adas/minerva_mpu_docker/-/blob/master/Readme.md
-For building without docker use the script from here: https://git.swf.daimler.com/adas/minerva_mpu_docker/-/blob/master/collect_deps.py to collect all dependency.
-Since the script will download everything to /usr/tools/bazel/ needs to be called with sudo privileges:
+The current Bazel build is based on [rules_foreign_cc](https://github.com/bazelbuild/rules_foreign_cc) for building
+external CMake projects. The default build type is "Release".
+
+To avoid downloading dependencies from external sources all the time, all packages are integrated into the docker
+image. These dependencies are kept at `/usr/tools/bazel` inside the docker container. Read
+[here](https://git.swf.daimler.com/adas/minerva_mpu_docker/-/blob/master/Readme.md) for more info on building inside
+the docker container. To install these bazel dependencies outside the docker container, you can use
+[this](https://git.swf.daimler.com/adas/minerva_mpu_docker/-/blob/master/collect_deps.py) script. Since the script will
+download everything to `/usr/tools/bazel/`, it needs be called with sudo privileges:
 ```
 sudo python3 collect_deps.py
 ```
@@ -47,7 +50,8 @@ sudo apt-get install g++-aarch64-linux-gnu
 ```
 
 If you are doing this on a Daimler Ubuntu system, and not inside a container, bear in mind that your toolchain may get
-automatically uninstalled after 30 minutes and might need to be reinstalled. (This problem seems not be present on Daimler laptops).
+automatically uninstalled after 30 minutes and might need to be reinstalled. (This problem seems not be present on
+Daimler laptops).
 
 ```
 :~/minerva_mpu_adaptive$ bazel build @starter_kit_adaptive_xavier//:amsr-vector-fs-sec-cryptostack --config=aarch64_linux_ubuntu
