@@ -98,7 +98,7 @@ genrule(
 
     $(location @starter_kit_adaptive_xavier//:amsrgen_sh) -v \
     -g external/starter_kit_adaptive_xavier/mb_base_layer_adaptive_xavier/amsr_xavier/Generators/amsr_modelleddatatypes_api/ \
-    -x $(RULEDIR)/arxml_folder -o $(RULEDIR)/src_gen --saveProject
+    -x $(RULEDIR)/arxml_folder -o $(RULEDIR)/src_gen --saveProject > /dev/null
 
     """,
     tools = [
