@@ -104,6 +104,34 @@ genrule(
     """,
     tools = [
         "@starter_kit_adaptive_xavier//:generator_common_tools",
-        "@starter_kit_adaptive_xavier//:generator_amsr_modelleddatatypes_api",
+        "@starter_kit_adaptive_xavier//:generator_tools_amsr_modelleddatatypes_api",
+    ],
+)
+
+
+genrule(
+    name = "src_gen_amsr_em_exec_config",
+    srcs = [
+        "@starter_kit_adaptive_xavier//:application_arxml",
+        "@starter_kit_adaptive_xavier//:amsrgen_sh",
+        "@starter_kit_adaptive_xavier//:setup_jre_link_sh",
+    ],
+    outs = [
+        "src_gen/IDC_M_P_SoftwareClusterDesign_Base_SwComponentType_Executable/configuration/exec_config.json",
+        "src_gen/IDC_M_P_SoftwareClusterDesign_Base_TEST_SwComponentType_Executable/configuration/exec_config.json",
+    ],
+    cmd = """
+    mkdir -p $(RULEDIR)/src_gen
+    mkdir -p $(RULEDIR)/arxml_folder
+    cp $(locations @starter_kit_adaptive_xavier//:application_arxml) $(RULEDIR)/arxml_folder
+
+    $(location @starter_kit_adaptive_xavier//:amsrgen_sh) -v \
+    -g $(locations @starter_kit_adaptive_xavier//:generator_tools_amsr_em_exec_config) \
+    -x $(RULEDIR)/arxml_folder -o $(RULEDIR)/src_gen --saveProject > /dev/null
+
+    """,
+    tools = [
+        "@starter_kit_adaptive_xavier//:generator_common_tools",
+        "@starter_kit_adaptive_xavier//:generator_tools_amsr_em_exec_config",
     ],
 )
