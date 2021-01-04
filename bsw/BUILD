@@ -2,7 +2,7 @@ package(default_visibility = ["//visibility:public"])
 
 filegroup(
     name = "machine_arxml",
-    srcs = glob(["arxmls/machine.arxml"]),
+    srcs = ["arxmls/machine.arxml"],
 )
 
 ##
