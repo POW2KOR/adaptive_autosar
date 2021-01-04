@@ -119,7 +119,6 @@ genrule(
     outs = [
         "src_gen/IDC_M_P_SoftwareClusterDesign_Base_SwComponentType_Executable/configuration/exec_config.json",
         "src_gen/IDC_M_P_SoftwareClusterDesign_Base_TEST_SwComponentType_Executable/configuration/exec_config.json",
-        #"src_gen/amsr_vector_fs_em_executionmanager_demo_application/configuration/exec_config.json",
     ],
     cmd = """
     mkdir -p $(RULEDIR)/src_gen
