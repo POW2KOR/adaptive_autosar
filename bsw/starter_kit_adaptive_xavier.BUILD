@@ -699,6 +699,7 @@ filegroup(
     visibility = ["//visibility:public"],
 )
 
+# Tools for generating json configs for proxy application
 filegroup(
     name = "generator_tools_amsr_em_machine_config",
     srcs = [
@@ -710,6 +711,7 @@ filegroup(
     visibility = ["//visibility:public"],
 )
 
+# Tools for generating source code for proxy application
 filegroup(
     name = "generator_tools_amsr_modelleddatatypes_api",
     srcs = [
