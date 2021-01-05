@@ -104,7 +104,7 @@ genrule(
     """,
     tools = [
         "@starter_kit_adaptive_xavier//:generator_common_tools",
-        "@starter_kit_adaptive_xavier//:generator_tools_amsr_modelleddatatypes_api",
+        "@starter_kit_adaptive_xavier//:generator_amsr_modelleddatatypes_api",
     ],
 )
 
