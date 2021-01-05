@@ -239,7 +239,7 @@ new_git_repository(
         "@//bsw:add-console-log-option-in-vector-sip-log-daemon.patch",
     ],
     remote = "ssh://git@git.swf.daimler.com:7999/adas/starter_kit_adaptive_xavier.git",
-    shallow_since = "1605535330 +0100",
+    shallow_since = "1607616957 +0100"
 )
 
 # Enable the below rule if you want to avoid cloning of repo at every run
@@ -257,6 +257,7 @@ new_git_repository(
 http_archive(
     name = "com_google_protobuf",
     strip_prefix = "protobuf-master",
+    sha256 = "ea241d86c913e27f8c805a0abeb511e721edb4448fa71aae8e3cab4c1ab9a3df",
     urls = ["https://github.com/protocolbuffers/protobuf/archive/master.zip"],
 )
 
