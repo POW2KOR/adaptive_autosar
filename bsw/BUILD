@@ -126,12 +126,12 @@ genrule(
     cp $(locations @starter_kit_adaptive_xavier//:application_arxml) $(RULEDIR)/arxml_folder
 
     $(location @starter_kit_adaptive_xavier//:amsrgen_sh) -v \
-    -g $(locations @starter_kit_adaptive_xavier//:generators_amsr_em_exec_config) \
+    -g $(locations @starter_kit_adaptive_xavier//:generator_amsr_em_exec_config) \
     -x $(RULEDIR)/arxml_folder -o $(RULEDIR)/src_gen --saveProject > /dev/null
 
     """,
     tools = [
         "@starter_kit_adaptive_xavier//:generator_common_tools",
-        "@starter_kit_adaptive_xavier//:generators_amsr_em_exec_config",
+        "@starter_kit_adaptive_xavier//:generator_amsr_em_exec_config",
     ],
 )

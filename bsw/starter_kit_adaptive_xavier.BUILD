@@ -730,7 +730,7 @@ filegroup(
 
 
 filegroup(
-    name = "generators_amsr_em_exec_config",
+    name = "generator_amsr_em_exec_config",
     srcs = [
         "mb_base_layer_adaptive_xavier/amsr_xavier/Generators/amsr_em_exec_config",
     ],
