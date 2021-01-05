@@ -14,8 +14,6 @@ genrule(
     name = "src_gen_rule",
     srcs = [
         ":machine_arxml",
-        "@starter_kit_adaptive_xavier//:amsrgen_sh",
-        "@starter_kit_adaptive_xavier//:setup_jre_link_sh",
     ],
     outs = [
         "src_gen/example-machine/machine_exec_config.json",
@@ -30,6 +28,8 @@ genrule(
     -x $(RULEDIR)/arxml_folder -o $(RULEDIR)/src_gen --saveProject > /dev/null
     """,
     tools = [
+        "@starter_kit_adaptive_xavier//:amsrgen_sh",
+        "@starter_kit_adaptive_xavier//:setup_jre_link_sh",
         "@starter_kit_adaptive_xavier//:generator_common_tools",
         "@starter_kit_adaptive_xavier//:generator_amsr_em_machine_config",
     ],
@@ -39,8 +39,6 @@ genrule(
     name = "src_gen_amsr_modelleddatatypes_api",
     srcs = [
         "@starter_kit_adaptive_xavier//:application_arxml",
-        "@starter_kit_adaptive_xavier//:amsrgen_sh",
-        "@starter_kit_adaptive_xavier//:setup_jre_link_sh",
     ],
     outs = [
         "src_gen/IDC_M_P_SoftwareClusterDesign_Base_SwComponentType_Executable/includes/daimler/cppDataTypes/common/DummyServiceRecordDataType_4tuekbbgqsijk4yv29iawd34y/impl_type_dummyservicerecorddatatype_4tuekbbgqsijk4yv29iawd34y.h",
@@ -103,6 +101,8 @@ genrule(
 
     """,
     tools = [
+        "@starter_kit_adaptive_xavier//:amsrgen_sh",
+        "@starter_kit_adaptive_xavier//:setup_jre_link_sh",
         "@starter_kit_adaptive_xavier//:generator_common_tools",
         "@starter_kit_adaptive_xavier//:generator_amsr_modelleddatatypes_api",
     ],
@@ -113,8 +113,6 @@ genrule(
     name = "src_gen_amsr_em_exec_config",
     srcs = [
         "@starter_kit_adaptive_xavier//:application_arxml",
-        "@starter_kit_adaptive_xavier//:amsrgen_sh",
-        "@starter_kit_adaptive_xavier//:setup_jre_link_sh",
     ],
     outs = [
         "src_gen/IDC_M_P_SoftwareClusterDesign_Base_SwComponentType_Executable/configuration/exec_config.json",
@@ -131,6 +129,8 @@ genrule(
 
     """,
     tools = [
+        "@starter_kit_adaptive_xavier//:amsrgen_sh",
+        "@starter_kit_adaptive_xavier//:setup_jre_link_sh",
         "@starter_kit_adaptive_xavier//:generator_common_tools",
         "@starter_kit_adaptive_xavier//:generator_amsr_em_exec_config",
     ],
