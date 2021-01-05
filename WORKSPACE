@@ -4,11 +4,11 @@ load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive", "http_file"
 load("//build_env/toolchain/aarch64_linux_ubuntu_compiler:aarch64_linux_ubuntu_configure.bzl", "aarch64_linux_ubuntu_configure")
 load("//build_env/toolchain/aarch64_linux_linaro_compiler:aarch64_linux_linaro_configure.bzl", "aarch64_linux_linaro_configure")
 
-# To have control over the version of the used bazel packages,
-# they are made part from the docker and loaded directly from the docker
+# To avoid downloading dependencies from external sources all the time, they
+# were made part of the docker image and are loaded directly from there.
 
-#The packages that follow are standard bazel packages needed for buidling
-# the C/C++ applications and the unit tests
+# The packages that follow are standard bazel packages needed for buidling
+# the C/C++ applications and the unit tests.
 http_archive(
     name = "rules_cc",
     sha256 = "1d4dbbd1e1e9b57d40bb0ade51c9e882da7658d5bfbf22bbd15b68e7879d761f",
