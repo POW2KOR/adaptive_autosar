@@ -1,4 +1,3 @@
-load("@rules_cc//cc:defs.bzl", "cc_binary", "cc_library")
 load("@bazel_skylib//rules:common_settings.bzl", "string_flag")
 load("@rules_pkg//:pkg.bzl", "pkg_deb", "pkg_tar")
 load("@io_bazel_rules_docker//container:container.bzl", "container_image")
