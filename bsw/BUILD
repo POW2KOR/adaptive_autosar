@@ -132,6 +132,6 @@ genrule(
     """,
     tools = [
         "@starter_kit_adaptive_xavier//:generator_common_tools",
-        "@starter_kit_adaptive_xavier//:generator_tools_amsr_em_exec_config",
+        "@starter_kit_adaptive_xavier//:generators_amsr_em_exec_config",
     ],
 )
