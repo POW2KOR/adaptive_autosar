@@ -694,12 +694,33 @@ filegroup(
 )
 
 filegroup(
-    name = "generator_tools",
+    name = "application_arxml",
+    srcs = ["examples/proxy-skeleton-demo-idc6/arxml/NcdProxySkeletonDemo.ARXML"],
+    visibility = ["//visibility:public"],
+)
+
+filegroup(
+    name = "generator_common_tools",
     srcs = [
         "mb_base_layer_adaptive_xavier/amsr_xavier/DaVinciConfigurator/Core/DVACfgCmd",
         "mb_base_layer_adaptive_xavier/amsr_xavier/DaVinciConfigurator/Core/jre/lib/amd64/server/libjsig.so",
         "mb_base_layer_adaptive_xavier/amsr_xavier/DaVinciConfigurator/Core/plugins",
+    ],
+    visibility = ["//visibility:public"],
+)
+
+filegroup(
+    name = "generator_amsr_em_machine_config",
+    srcs = [
         "mb_base_layer_adaptive_xavier/amsr_xavier/Generators/amsr_em_machine_config",
+    ],
+    visibility = ["//visibility:public"],
+)
+
+filegroup(
+    name = "generator_amsr_modelleddatatypes_api",
+    srcs = [
+        "mb_base_layer_adaptive_xavier/amsr_xavier/Generators/amsr_modelleddatatypes_api",
     ],
     visibility = ["//visibility:public"],
 )
