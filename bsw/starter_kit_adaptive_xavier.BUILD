@@ -723,6 +723,14 @@ filegroup(
     visibility = ["//visibility:public"],
 )
 
+filegroup(
+    name = "generator_amsr_modelleddatatypes_api",
+    srcs = [
+        "mb_base_layer_adaptive_xavier/amsr_xavier/Generators/amsr_modelleddatatypes_api",
+    ],
+    visibility = ["//visibility:public"],
+)
+
 ######################################################################################
 # Log daemon executable
 ######################################################################################
