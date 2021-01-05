@@ -699,26 +699,20 @@ filegroup(
     visibility = ["//visibility:public"],
 )
 
-# Tools for generating json configs for proxy application
 filegroup(
-    name = "generator_tools_amsr_em_machine_config",
+    name = "generator_common_tools",
     srcs = [
         "mb_base_layer_adaptive_xavier/amsr_xavier/DaVinciConfigurator/Core/DVACfgCmd",
         "mb_base_layer_adaptive_xavier/amsr_xavier/DaVinciConfigurator/Core/jre/lib/amd64/server/libjsig.so",
         "mb_base_layer_adaptive_xavier/amsr_xavier/DaVinciConfigurator/Core/plugins",
-        "mb_base_layer_adaptive_xavier/amsr_xavier/Generators/amsr_em_machine_config",
     ],
     visibility = ["//visibility:public"],
 )
 
-# Tools for generating source code for proxy application
 filegroup(
-    name = "generator_tools_amsr_modelleddatatypes_api",
+    name = "generator_amsr_em_machine_config",
     srcs = [
-        "mb_base_layer_adaptive_xavier/amsr_xavier/DaVinciConfigurator/Core/DVACfgCmd",
-        "mb_base_layer_adaptive_xavier/amsr_xavier/DaVinciConfigurator/Core/jre/lib/amd64/server/libjsig.so",
-        "mb_base_layer_adaptive_xavier/amsr_xavier/DaVinciConfigurator/Core/plugins",
-        "mb_base_layer_adaptive_xavier/amsr_xavier/Generators/amsr_modelleddatatypes_api",
+        "mb_base_layer_adaptive_xavier/amsr_xavier/Generators/amsr_em_machine_config",
     ],
     visibility = ["//visibility:public"],
 )
