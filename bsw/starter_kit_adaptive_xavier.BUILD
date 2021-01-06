@@ -1,6 +1,6 @@
 load("@rules_foreign_cc//tools/build_defs:cmake.bzl", "cmake_external")
 load("@bazel_skylib//rules:common_settings.bzl", "string_flag")
-load("@minerva_mpu_adaptive//bsw:defs.bzl", "selecty_genrule")
+load("@minerva_mpu_adaptive//bsw:defs.bzl", "selecty_genrule", "minerva_aa_codegen_declare")
 
 package(default_visibility = ["//visibility:public"])
 
@@ -702,50 +702,6 @@ filegroup(
     visibility = ["//visibility:public"],
 )
 
-filegroup(
-    name = "generator_common_tools",
-    srcs = [
-        "mb_base_layer_adaptive_xavier/amsr_xavier/DaVinciConfigurator/Core/DVACfgCmd",
-        "mb_base_layer_adaptive_xavier/amsr_xavier/DaVinciConfigurator/Core/jre/lib/amd64/server/libjsig.so",
-        "mb_base_layer_adaptive_xavier/amsr_xavier/DaVinciConfigurator/Core/plugins",
-    ],
-    visibility = ["//visibility:public"],
-)
-
-filegroup(
-    name = "generator_amsr_em_machine_config",
-    srcs = [
-        "mb_base_layer_adaptive_xavier/amsr_xavier/Generators/amsr_em_machine_config",
-    ],
-    visibility = ["//visibility:public"],
-)
-
-filegroup(
-    name = "generator_amsr_modelleddatatypes_api",
-    srcs = [
-        "mb_base_layer_adaptive_xavier/amsr_xavier/Generators/amsr_modelleddatatypes_api",
-    ],
-    visibility = ["//visibility:public"],
-)
-
-
-filegroup(
-    name = "generator_amsr_em_exec_config",
-    srcs = [
-        "mb_base_layer_adaptive_xavier/amsr_xavier/Generators/amsr_em_exec_config",
-    ],
-    visibility = ["//visibility:public"],
-)
-
-filegroup(
-    name = "generator_amsr_someipbinding",
-    srcs = [
-        "mb_base_layer_adaptive_xavier/amsr_xavier/Generators/amsr_someipbinding",
-    ],
-    visibility = ["//visibility:public"],
-)
-
-
 ######################################################################################
 # Log daemon executable
 ######################################################################################
@@ -941,4 +897,25 @@ cmake_external(
         ":amsr_vector_fs_someipprotocol",
         ":amsr_vector_fs_someipdaemonclient",
     ],
+)
+
+filegroup(
+    name = "generator_common_tools",
+    srcs = [
+        "mb_base_layer_adaptive_xavier/amsr_xavier/DaVinciConfigurator/Core/DVACfgCmd",
+        "mb_base_layer_adaptive_xavier/amsr_xavier/DaVinciConfigurator/Core/jre/lib/amd64/server/libjsig.so",
+        "mb_base_layer_adaptive_xavier/amsr_xavier/DaVinciConfigurator/Core/plugins",
+    ],
+    visibility = ["//visibility:public"],
+)
+
+minerva_aa_codegen_declare(
+    name = "generator",
+    path_to_generators = "mb_base_layer_adaptive_xavier/amsr_xavier/Generators",
+    generators = [
+        "amsr_em_machine_config",
+        "amsr_em_exec_config",
+        "amsr_modelleddatatypes_api",
+        "amsr_someipbinding"
+    ]
 )

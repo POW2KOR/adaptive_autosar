@@ -10,9 +10,37 @@ def selecty_genrule(select_cmd, cmake_deps):
     return select(select_cmd)
 
 
+def minerva_aa_codegen_declare(name, path_to_generators, generators):
+    """
+    A wrapper around native filegroup for Adaptive AUTOSAR code generators.
+
+    This macro is a wrapper around the native filegroup rule with the
+    appropriate configuration so that it can be used in genrule tools field
+    later on.
+
+    Args:
+        name: This name is used as a prefix for the tool targets.
+
+        path_to_generators: Filesystem path to the generators folder.
+
+        generators: List of generators to build tool targets for.
+    """
+    for generator in generators:
+        # Unfortunately since rule macros only run the analysis phase, we can't
+        # do extra filesystem checks to see if the requested generators exist
+        # on the filesystem or other nice things like this.
+        native.filegroup(
+            name = "{}_{}".format(name, generator),
+            srcs = [
+                "{}/{}".format(path_to_generators, generator),
+            ],
+            visibility = ["//visibility:public"],
+        )
+
+
 def minerva_aa_codegen_rule(name, arxml_srcs, outs, generators):
     """
-    A wrapper around the native genrule for Adaptive AUTOSAR code generation
+    A wrapper around the native genrule for Adaptive AUTOSAR code generation.
 
     This macro is a wrapper around the native genrule with the appropriate
     configuration and script to generate code using the Vector Adaptive AUTOSAR
