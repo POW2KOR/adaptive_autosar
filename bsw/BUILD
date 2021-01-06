@@ -1,3 +1,6 @@
+
+load("@minerva_mpu_adaptive//bsw:defs.bzl", "minerva_aa_codegen_rule")
+
 package(default_visibility = ["//visibility:public"])
 
 filegroup(
@@ -10,34 +13,17 @@ filegroup(
 ## Then that model_gen will be used to generate the source code in src_gen
 ## src_gen will be available in the bazel-out directory
 ##
-genrule(
-    name = "src_gen_rule",
-    srcs = [
-        ":machine_arxml",
-    ],
-    outs = [
-        "src_gen/example-machine/machine_exec_config.json",
-    ],
-    cmd = """
-    mkdir -p $(RULEDIR)/src_gen
-    mkdir -p $(RULEDIR)/arxml_folder
-    cp $(locations :machine_arxml) $(RULEDIR)/arxml_folder
 
-    $(location @starter_kit_adaptive_xavier//:amsrgen_sh) -v \
-    -g $(locations @starter_kit_adaptive_xavier//:generator_amsr_em_machine_config) \
-    -x $(RULEDIR)/arxml_folder -o $(RULEDIR)/src_gen --saveProject > /dev/null
-    """,
-    tools = [
-        "@starter_kit_adaptive_xavier//:amsrgen_sh",
-        "@starter_kit_adaptive_xavier//:setup_jre_link_sh",
-        "@starter_kit_adaptive_xavier//:generator_common_tools",
-        "@starter_kit_adaptive_xavier//:generator_amsr_em_machine_config",
-    ],
+minerva_aa_codegen_rule(
+    name="src_gen_rule",
+    arxml_srcs = [":machine_arxml"],
+    outs = ["src_gen/example-machine/machine_exec_config.json"],
+    generators = ["@starter_kit_adaptive_xavier//:generator_amsr_em_machine_config"]
 )
 
-genrule(
+minerva_aa_codegen_rule(
     name = "src_gen_amsr_modelleddatatypes_api",
-    srcs = [
+    arxml_srcs = [
         "@starter_kit_adaptive_xavier//:application_arxml",
     ],
     outs = [
@@ -90,48 +76,22 @@ genrule(
         "src_gen/IDC_M_P_SoftwareClusterDesign_Base_TEST_SwComponentType_Executable/includes/daimler/cppDataTypes/common/REC_LRR_Segments_Nest_Pr6_ST3_71njeubj9ico1p8v4pmslfcno/impl_type_rec_lrr_segments_nest_pr6_st3_71njeubj9ico1p8v4pmslfcno.h",
         "src_gen/IDC_M_P_SoftwareClusterDesign_Base_TEST_SwComponentType_Executable/includes/daimler/cppDataTypes/common/REC_RemPark_DeviceListNames_Rs_ST3/impl_type_rec_rempark_devicelistnames_rs_st3.h",
     ],
-    cmd = """
-    mkdir -p $(RULEDIR)/src_gen
-    mkdir -p $(RULEDIR)/arxml_folder
-    cp $(locations @starter_kit_adaptive_xavier//:application_arxml) $(RULEDIR)/arxml_folder
-
-    $(location @starter_kit_adaptive_xavier//:amsrgen_sh) -v \
-    -g $(locations @starter_kit_adaptive_xavier//:generator_amsr_modelleddatatypes_api) \
-    -x $(RULEDIR)/arxml_folder -o $(RULEDIR)/src_gen --saveProject > /dev/null
-
-    """,
-    tools = [
-        "@starter_kit_adaptive_xavier//:amsrgen_sh",
-        "@starter_kit_adaptive_xavier//:setup_jre_link_sh",
-        "@starter_kit_adaptive_xavier//:generator_common_tools",
-        "@starter_kit_adaptive_xavier//:generator_amsr_modelleddatatypes_api",
-    ],
+    generators = [
+        "@starter_kit_adaptive_xavier//:generator_amsr_modelleddatatypes_api"
+    ]
 )
 
 
-genrule(
+minerva_aa_codegen_rule(
     name = "src_gen_amsr_em_exec_config",
-    srcs = [
+    arxml_srcs = [
         "@starter_kit_adaptive_xavier//:application_arxml",
     ],
     outs = [
         "src_gen/IDC_M_P_SoftwareClusterDesign_Base_SwComponentType_Executable/configuration/exec_config.json",
         "src_gen/IDC_M_P_SoftwareClusterDesign_Base_TEST_SwComponentType_Executable/configuration/exec_config.json",
     ],
-    cmd = """
-    mkdir -p $(RULEDIR)/src_gen
-    mkdir -p $(RULEDIR)/arxml_folder
-    cp $(locations @starter_kit_adaptive_xavier//:application_arxml) $(RULEDIR)/arxml_folder
-
-    $(location @starter_kit_adaptive_xavier//:amsrgen_sh) -v \
-    -g $(locations @starter_kit_adaptive_xavier//:generator_amsr_em_exec_config) \
-    -x $(RULEDIR)/arxml_folder -o $(RULEDIR)/src_gen --saveProject > /dev/null
-
-    """,
-    tools = [
-        "@starter_kit_adaptive_xavier//:amsrgen_sh",
-        "@starter_kit_adaptive_xavier//:setup_jre_link_sh",
-        "@starter_kit_adaptive_xavier//:generator_common_tools",
+    generators = [
         "@starter_kit_adaptive_xavier//:generator_amsr_em_exec_config",
     ],
 )
