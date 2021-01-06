@@ -64,7 +64,8 @@ def minerva_aa_codegen_rule(name, arxml_srcs, outs_list_dict, generators):
     code generators. It is designed to split the generated code into multiple
     sub-targets each containing its own files in a dedicated subfolders. This
     helps, for example, if you want to have a folder of headers which doesn't
-    contain other files.
+    contain other files. An error is thrown if the generator generates files
+    which are not found in the outs list.
 
     Args:
         name: A unique name for this target.
@@ -127,16 +128,42 @@ def minerva_aa_codegen_rule(name, arxml_srcs, outs_list_dict, generators):
         cmd = """
         rm -rf $(RULEDIR)/{output_folder}
         rm -rf $(RULEDIR)/{arxml_srcs_folder}
+        mkdir -p /tmp/{tmp_folder}
         mkdir -p $(RULEDIR)/{output_folder}
         mkdir -p $(RULEDIR)/{arxml_srcs_folder}
         cp {arxml_srcs} $(RULEDIR)/{arxml_srcs_folder}
 
         $(location @starter_kit_adaptive_xavier//:amsrgen_sh) -v \
-        {generators_arg} \
-        -x $(RULEDIR)/{arxml_srcs_folder} -o $(RULEDIR)/{output_folder} --saveProject > /dev/null
+            {generators_arg} -x $(RULEDIR)/{arxml_srcs_folder} \
+            -o $(RULEDIR)/{output_folder} --saveProject > /dev/null
+
+        echo $(OUTS) | tr " " "\n" | sort > /tmp/{tmp_folder}/outs.txt
+        find $(RULEDIR)/{output_folder} -type f | sort > /tmp/{tmp_folder}/generated.txt
+
+        # Compare the list of files generated to the list of files in the outs
+        # list.
+        comm -23 /tmp/{tmp_folder}/generated.txt /tmp/{tmp_folder}/outs.txt > \
+            /tmp/{tmp_folder}/comparison.txt
+
+        # Ignore the GeneratorReport.html and GeneratorReport.xml files for the
+        # purpose of this error message.
+        sed -ri '/GeneratorReport.(html|xml)/d' /tmp/{tmp_folder}/comparison.txt
+       
+        if [[ $$(wc -l /tmp/{tmp_folder}/comparison.txt | \
+            awk '{{print $$1}}') > 0 ]]; then
+            
+            echo "\nError: some generated files weren't found in the \
+                outs_list_dict list:";
+
+            cat /tmp/{tmp_folder}/comparison.txt
+            echo ""
+
+            exit 1
+        fi
         """.format(
             arxml_srcs_folder = "{}/arxml_srcs".format(gen_rule_name),
             output_folder = gen_rule_output_folder,
+            tmp_folder = gen_rule_name,
             generators_arg = " ".join(generators_arg_list),
             arxml_srcs = " ".join(arxml_srcs_arg_list)
         ),
