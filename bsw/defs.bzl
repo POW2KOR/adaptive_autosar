@@ -155,7 +155,12 @@ def minerva_aa_codegen_rule(name, arxml_srcs, outs_list_dict, generators):
             echo "\nError: some generated files weren't found in the \
                 outs_list_dict list:";
 
-            cat /tmp/{tmp_folder}/comparison.txt
+            # Escaping path so it can be used in sed
+            escaped_ruledir=`echo $(RULEDIR) | sed 's/\//\\\\\\\\\//g'`
+
+            # We are replacing $(RULEDIR) before printing on the screen to make
+            # it easier for developers to copy paste into the Bazel file after.
+            cat /tmp/{tmp_folder}/comparison.txt | sed "s/$$escaped_ruledir\///g"
             echo ""
 
             exit 1
