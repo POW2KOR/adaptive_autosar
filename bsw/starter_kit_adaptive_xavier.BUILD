@@ -1,6 +1,6 @@
 load("@rules_foreign_cc//tools/build_defs:cmake.bzl", "cmake_external")
 load("@bazel_skylib//rules:common_settings.bzl", "string_flag")
-load("@minerva_mpu_adaptive//bsw:defs.bzl", "selecty_genrule", "minerva_aa_codegen_declare")
+load("@minerva_mpu_adaptive//bsw:defs.bzl", "extend_and_select", "minerva_aa_codegen_declare")
 
 package(default_visibility = ["//visibility:public"])
 
@@ -62,7 +62,7 @@ filegroup(
 
 cmake_external(
     name = "amsr-vector-fs-libvac",
-    cache_entries = selecty_genrule(
+    cache_entries = extend_and_select(
         CMAKE_TOOLCHAIN_DICT,
         {
             "CMAKE_SYSTEM_NAME": CMAKE_SYSTEM_NAME_LINUX,
@@ -88,7 +88,7 @@ filegroup(
 
 cmake_external(
     name = "amsr-vector-fs-msr4base",
-    cache_entries = selecty_genrule(
+    cache_entries = extend_and_select(
         CMAKE_TOOLCHAIN_DICT,
         {
             "CMAKE_SYSTEM_NAME": CMAKE_SYSTEM_NAME_LINUX,
@@ -112,7 +112,7 @@ filegroup(
 
 cmake_external(
     name = "amsr-vector-fs-libiostream",
-    cache_entries = selecty_genrule(
+    cache_entries = extend_and_select(
         CMAKE_TOOLCHAIN_DICT,
         {
             "CMAKE_SYSTEM_NAME": CMAKE_SYSTEM_NAME_LINUX,
@@ -146,7 +146,7 @@ filegroup(
 
 cmake_external(
     name = "amsr-vector-fs-thread",
-    cache_entries = selecty_genrule(
+    cache_entries = extend_and_select(
         CMAKE_TOOLCHAIN_DICT,
         {
             "CMAKE_SYSTEM_NAME": CMAKE_SYSTEM_NAME_LINUX,
@@ -178,7 +178,7 @@ filegroup(
 
 cmake_external(
     name = "amsr-vector-fs-vajson",
-    cache_entries = selecty_genrule(
+    cache_entries = extend_and_select(
         CMAKE_TOOLCHAIN_DICT,
         {
             "CMAKE_SYSTEM_NAME": CMAKE_SYSTEM_NAME_LINUX,
@@ -212,7 +212,7 @@ filegroup(
 
 cmake_external(
     name = "amsr-vector-fs-applicationbase",
-    cache_entries = selecty_genrule(
+    cache_entries = extend_and_select(
         CMAKE_TOOLCHAIN_DICT,
         {
             "CMAKE_SYSTEM_NAME": CMAKE_SYSTEM_NAME_LINUX,
@@ -242,7 +242,7 @@ filegroup(
 
 cmake_external(
     name = "amsr-vector-fs-libosabstraction",
-    cache_entries = selecty_genrule(
+    cache_entries = extend_and_select(
         CMAKE_TOOLCHAIN_DICT,
         {
             "CMAKE_SYSTEM_NAME": CMAKE_SYSTEM_NAME_LINUX,
@@ -272,7 +272,7 @@ filegroup(
 
 cmake_external(
     name = "amsr-vector-fs-log-api",
-    cache_entries = selecty_genrule(
+    cache_entries = extend_and_select(
         CMAKE_TOOLCHAIN_DICT,
         {
             "CMAKE_SYSTEM_NAME": CMAKE_SYSTEM_NAME_LINUX,
@@ -310,7 +310,7 @@ filegroup(
 
 cmake_external(
     name = "amsr-vector-fs-sec-cryptostack-driver-lib_es",
-    cache_entries = selecty_genrule(
+    cache_entries = extend_and_select(
         CMAKE_TOOLCHAIN_DICT,
         {
             "CMAKE_SYSTEM_NAME": CMAKE_SYSTEM_NAME_LINUX,
@@ -347,7 +347,7 @@ cmake_external(
     binaries = [
         "amsr_vector_fs_em_executionmanager",
     ],
-    cache_entries = selecty_genrule(
+    cache_entries = extend_and_select(
         CMAKE_TOOLCHAIN_DICT,
         {
             "CMAKE_SYSTEM_NAME": CMAKE_SYSTEM_NAME_LINUX,
@@ -403,7 +403,7 @@ filegroup(
 
 cmake_external(
     name = "amsr-vector-fs-sec-iam",
-    cache_entries = selecty_genrule(
+    cache_entries = extend_and_select(
         CMAKE_TOOLCHAIN_DICT,
         {
             "CMAKE_SYSTEM_NAME": CMAKE_SYSTEM_NAME_LINUX,
@@ -443,7 +443,7 @@ filegroup(
 
 cmake_external(
     name = "amsr-vector-fs-comcommon",
-    cache_entries = selecty_genrule(
+    cache_entries = extend_and_select(
         CMAKE_TOOLCHAIN_DICT,
         {
             "CMAKE_SYSTEM_NAME": CMAKE_SYSTEM_NAME_LINUX,
@@ -482,7 +482,7 @@ filegroup(
 
 cmake_external(
     name = "amsr-vector-fs-sec-cryptostack",
-    cache_entries = selecty_genrule(
+    cache_entries = extend_and_select(
         CMAKE_TOOLCHAIN_DICT,
         {
             "CMAKE_SYSTEM_NAME": CMAKE_SYSTEM_NAME_LINUX,
@@ -532,7 +532,7 @@ filegroup(
 
 cmake_external(
     name = "amsr-vector-fs-sec-libseccom",
-    cache_entries = selecty_genrule(
+    cache_entries = extend_and_select(
         CMAKE_TOOLCHAIN_DICT,
         {
             "CMAKE_SYSTEM_NAME": CMAKE_SYSTEM_NAME_LINUX,
@@ -570,7 +570,7 @@ filegroup(
 
 cmake_external(
     name = "amsr-vector-fs-communicationmiddleware",
-    cache_entries = selecty_genrule(
+    cache_entries = extend_and_select(
         CMAKE_TOOLCHAIN_DICT,
         {
             "CMAKE_SYSTEM_NAME": CMAKE_SYSTEM_NAME_LINUX,
@@ -631,7 +631,7 @@ cmake_external(
 
 cmake_external(
     name = "amsr-vector-fs-communicationmiddleware-headers",
-    cache_entries = selecty_genrule(
+    cache_entries = extend_and_select(
         CMAKE_TOOLCHAIN_DICT,
         {
             "CMAKE_SYSTEM_NAME": CMAKE_SYSTEM_NAME_LINUX,
@@ -727,7 +727,7 @@ cmake_external(
     binaries = [
         "amsr_vector_fs_log_daemon",
     ],
-    cache_entries = selecty_genrule(
+    cache_entries = extend_and_select(
         CMAKE_TOOLCHAIN_DICT,
         {
             "CMAKE_SYSTEM_NAME": CMAKE_SYSTEM_NAME_LINUX,
@@ -772,7 +772,7 @@ filegroup(
 
 cmake_external(
     name = "amsr_vector_fs_someipprotocol",
-    cache_entries = selecty_genrule(
+    cache_entries = extend_and_select(
         CMAKE_TOOLCHAIN_DICT,
         {
             "CMAKE_SYSTEM_NAME": CMAKE_SYSTEM_NAME_LINUX,
@@ -804,7 +804,7 @@ filegroup(
 
 cmake_external(
     name = "amsr_vector_fs_someipdaemonclient",
-    cache_entries = selecty_genrule(
+    cache_entries = extend_and_select(
         CMAKE_TOOLCHAIN_DICT,
         {
             "CMAKE_SYSTEM_NAME": CMAKE_SYSTEM_NAME_LINUX,
@@ -855,7 +855,7 @@ cmake_external(
     binaries = [
         "someipd_posix",
     ],
-    cache_entries = selecty_genrule(
+    cache_entries = extend_and_select(
         CMAKE_TOOLCHAIN_DICT,
         {
             "CMAKE_SYSTEM_NAME": CMAKE_SYSTEM_NAME_LINUX,
