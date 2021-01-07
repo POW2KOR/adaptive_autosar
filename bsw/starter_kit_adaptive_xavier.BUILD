@@ -336,9 +336,7 @@ cmake_external(
 
 filegroup(
     name = "amsr-vector-fs-em-executionmanager-srcs",
-    srcs = glob(["mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-em-executionmanager/**"]) + [
-        "@minerva_mpu_adaptive//bsw:src_gen_rule",
-    ],
+    srcs = glob(["mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-em-executionmanager/**"]),
     visibility = ["//visibility:public"],
 )
 
