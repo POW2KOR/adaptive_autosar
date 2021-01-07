@@ -85,7 +85,7 @@ pkg_tar(
 pkg_tar(
     name = "minerva_mpu_adaptive_etc",
     srcs = [
-        "//bsw:src_gen/example-machine/machine_exec_config.json",
+        "//bsw:minerva_machine_exec_config",
         "@starter_kit_adaptive_xavier//:amsr_vector_fs_log_daemon_configs",
     ],
     mode = "0755",
