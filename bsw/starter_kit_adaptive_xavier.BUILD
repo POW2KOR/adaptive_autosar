@@ -737,6 +737,15 @@ filegroup(
     visibility = ["//visibility:public"],
 )
 
+filegroup(
+    name = "generator_amsr_someipbinding",
+    srcs = [
+        "mb_base_layer_adaptive_xavier/amsr_xavier/Generators/amsr_someipbinding",
+    ],
+    visibility = ["//visibility:public"],
+)
+
+
 ######################################################################################
 # Log daemon executable
 ######################################################################################
