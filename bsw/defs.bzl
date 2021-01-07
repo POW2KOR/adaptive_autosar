@@ -1,14 +1,26 @@
-# This custom function takes in the CMAKE_TOOLCHAIN_FILE path dictionary
-# for various targets and adds the cache_entries to each key's value
-# and returns bazel select type object. This slect type output is
-# assigned to cache_entries of cmake_external bazel rule
+"""
+This file contains several utility functions and macros used within or with the
+Adaptive AUTOSAR BSW Bazel files.
+"""
 
-def selecty_genrule(select_cmd, cmake_deps):
-    for _, value in select_cmd.items():
-        value.update(cmake_deps)
+def extend_and_select(select_dict, extension):
+    """
+    Take a select dict, extend each option with another value and then select
 
-    return select(select_cmd)
+    This function takes in a dictionary in the format required for the select
+    Bazel function. It then extends each of the options of the dictionary with
+    a given extension value. Finally, it does a select and returns it as the
+    final output.
 
+    Args:
+        select_dict: The dictionary in format.
+
+        extension: The value to use to extend each of the select options.
+    """
+    for _, value in select_dict.items():
+        value.update(extension)
+
+    return select(select_dict)
 
 def minerva_aa_codegen_declare(name, path_to_generators, generators):
     """
