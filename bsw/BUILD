@@ -8,12 +8,6 @@ filegroup(
     srcs = ["arxmls/machine.arxml"],
 )
 
-##
-## This will generate the model_gen folder that will contain all the arxml
-## Then that model_gen will be used to generate the source code in src_gen
-## src_gen will be available in the bazel-out directory
-##
-
 minerva_aa_codegen_rule(
     name="src_gen_rule",
     arxml_srcs = [":machine_arxml"],
