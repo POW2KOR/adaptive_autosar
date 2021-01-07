@@ -916,6 +916,11 @@ minerva_aa_codegen_declare(
         "amsr_em_machine_config",
         "amsr_em_exec_config",
         "amsr_modelleddatatypes_api",
-        "amsr_someipbinding"
+        "amsr_someipbinding",
+        "amsr_updatemanager_swcluster_meta",
+        "amsr_updatemanager_daemon",
+        "amsr_applicationbase_init_deinit",
+        "amsr_someipprotocol",
+        "amsr_socal",
     ]
 )
