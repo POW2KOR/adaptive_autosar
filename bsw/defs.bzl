@@ -64,7 +64,8 @@ def minerva_aa_codegen_rule(name, arxml_srcs, outs_list_dict, generators):
     code generators. It is designed to split the generated code into multiple
     sub-targets each containing its own files in a dedicated subfolders. This
     helps, for example, if you want to have a folder of headers which doesn't
-    contain other files.
+    contain other files. An error is thrown if the generator generates files
+    which are not found in the outs list.
 
     Args:
         name: A unique name for this target.
@@ -125,18 +126,53 @@ def minerva_aa_codegen_rule(name, arxml_srcs, outs_list_dict, generators):
         srcs = arxml_srcs,
         outs = concatenated_outs,
         cmd = """
-        rm -rf $(RULEDIR)/{output_folder}
-        rm -rf $(RULEDIR)/{arxml_srcs_folder}
-        mkdir -p $(RULEDIR)/{output_folder}
-        mkdir -p $(RULEDIR)/{arxml_srcs_folder}
-        cp {arxml_srcs} $(RULEDIR)/{arxml_srcs_folder}
+        tmp_folder="/tmp/{tmp_folder}"
+        output_folder="$(RULEDIR)/{output_folder}"
+        arxml_srcs_folder="$(RULEDIR)/{arxml_srcs_folder}"
+
+        rm -rf $$output_folder
+        rm -rf $$arxml_srcs_folder
+        mkdir -p $$tmp_folder
+        mkdir -p $$output_folder
+        mkdir -p $$arxml_srcs_folder
+        cp {arxml_srcs} $$arxml_srcs_folder
 
         $(location @starter_kit_adaptive_xavier//:amsrgen_sh) -v \
-        {generators_arg} \
-        -x $(RULEDIR)/{arxml_srcs_folder} -o $(RULEDIR)/{output_folder} --saveProject > /dev/null
+            {generators_arg} -x $$arxml_srcs_folder -o $$output_folder \
+            --saveProject > /dev/null
+
+        echo $(OUTS) | tr " " "\n" | sort > $$tmp_folder/outs.txt
+        find $$output_folder -type f | sort > $$tmp_folder/generated.txt
+
+        # Compare the list of files generated to the list of files in the outs
+        # list.
+        comm -23 $$tmp_folder/generated.txt $$tmp_folder/outs.txt > \
+            $$tmp_folder/comparison.txt
+
+        # Ignore the GeneratorReport.html and GeneratorReport.xml files for the
+        # purpose of this error message.
+        sed -ri '/GeneratorReport.(html|xml)/d' $$tmp_folder/comparison.txt
+       
+        if [[ $$(wc -l $$tmp_folder/comparison.txt | \
+            awk '{{print $$1}}') > 0 ]]; then
+            
+            echo "\nError: some generated files weren't found in the \
+                outs_list_dict list:";
+
+            # Escaping path so it can be used in sed
+            escaped_ruledir=`echo $(RULEDIR) | sed 's/\//\\\\\\\\\//g'`
+
+            # We are replacing $(RULEDIR) before printing on the screen to make
+            # it easier for developers to copy paste into the Bazel file after.
+            cat $$tmp_folder/comparison.txt | sed "s/$$escaped_ruledir\///g"
+            echo ""
+
+            exit 1
+        fi
         """.format(
             arxml_srcs_folder = "{}/arxml_srcs".format(gen_rule_name),
             output_folder = gen_rule_output_folder,
+            tmp_folder = gen_rule_name,
             generators_arg = " ".join(generators_arg_list),
             arxml_srcs = " ".join(arxml_srcs_arg_list)
         ),
