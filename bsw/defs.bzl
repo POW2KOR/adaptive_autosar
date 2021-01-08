@@ -126,30 +126,34 @@ def minerva_aa_codegen_rule(name, arxml_srcs, outs_list_dict, generators):
         srcs = arxml_srcs,
         outs = concatenated_outs,
         cmd = """
-        rm -rf $(RULEDIR)/{output_folder}
-        rm -rf $(RULEDIR)/{arxml_srcs_folder}
-        mkdir -p /tmp/{tmp_folder}
-        mkdir -p $(RULEDIR)/{output_folder}
-        mkdir -p $(RULEDIR)/{arxml_srcs_folder}
-        cp {arxml_srcs} $(RULEDIR)/{arxml_srcs_folder}
+        tmp_folder="/tmp/{tmp_folder}"
+        output_folder="$(RULEDIR)/{output_folder}"
+        arxml_srcs_folder="$(RULEDIR)/{arxml_srcs_folder}"
+
+        rm -rf $$output_folder
+        rm -rf $$arxml_srcs_folder
+        mkdir -p $$tmp_folder
+        mkdir -p $$output_folder
+        mkdir -p $$arxml_srcs_folder
+        cp {arxml_srcs} $$arxml_srcs_folder
 
         $(location @starter_kit_adaptive_xavier//:amsrgen_sh) -v \
-            {generators_arg} -x $(RULEDIR)/{arxml_srcs_folder} \
-            -o $(RULEDIR)/{output_folder} --saveProject > /dev/null
+            {generators_arg} -x $$arxml_srcs_folder -o $$output_folder \
+            --saveProject > /dev/null
 
-        echo $(OUTS) | tr " " "\n" | sort > /tmp/{tmp_folder}/outs.txt
-        find $(RULEDIR)/{output_folder} -type f | sort > /tmp/{tmp_folder}/generated.txt
+        echo $(OUTS) | tr " " "\n" | sort > $$tmp_folder/outs.txt
+        find $$output_folder -type f | sort > $$tmp_folder/generated.txt
 
         # Compare the list of files generated to the list of files in the outs
         # list.
-        comm -23 /tmp/{tmp_folder}/generated.txt /tmp/{tmp_folder}/outs.txt > \
-            /tmp/{tmp_folder}/comparison.txt
+        comm -23 $$tmp_folder/generated.txt $$tmp_folder/outs.txt > \
+            $$tmp_folder/comparison.txt
 
         # Ignore the GeneratorReport.html and GeneratorReport.xml files for the
         # purpose of this error message.
-        sed -ri '/GeneratorReport.(html|xml)/d' /tmp/{tmp_folder}/comparison.txt
+        sed -ri '/GeneratorReport.(html|xml)/d' $$tmp_folder/comparison.txt
        
-        if [[ $$(wc -l /tmp/{tmp_folder}/comparison.txt | \
+        if [[ $$(wc -l $$tmp_folder/comparison.txt | \
             awk '{{print $$1}}') > 0 ]]; then
             
             echo "\nError: some generated files weren't found in the \
@@ -160,7 +164,7 @@ def minerva_aa_codegen_rule(name, arxml_srcs, outs_list_dict, generators):
 
             # We are replacing $(RULEDIR) before printing on the screen to make
             # it easier for developers to copy paste into the Bazel file after.
-            cat /tmp/{tmp_folder}/comparison.txt | sed "s/$$escaped_ruledir\///g"
+            cat $$tmp_folder/comparison.txt | sed "s/$$escaped_ruledir\///g"
             echo ""
 
             exit 1
