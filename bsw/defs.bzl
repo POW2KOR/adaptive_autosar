@@ -29,6 +29,11 @@ def minerva_aa_codegen_declare(name, path_to_generators, generators):
     This macro is a wrapper around the native filegroup rule with the
     appropriate configuration so that it can be used in genrule tools field
     later on.
+    
+    This macro creates filegroup targets with the following name
+    format: <name>_<generator>. Therefore, with a name value of "generator"
+    and a generator value of "amsr_em_machine_config", the final name of the
+    target would be "generator_amsr_em_machine_config".
 
     Args:
         name: This name is used as a prefix for the tool targets.
