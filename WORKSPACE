@@ -256,9 +256,9 @@ new_git_repository(
 # See https://github.com/bazelbuild/rules_go for the up to date setup instructions.
 http_archive(
     name = "com_google_protobuf",
-    strip_prefix = "protobuf-master",
-    sha256 = "ea241d86c913e27f8c805a0abeb511e721edb4448fa71aae8e3cab4c1ab9a3df",
-    urls = ["https://github.com/protocolbuffers/protobuf/archive/master.zip"],
+    strip_prefix = "protobuf-3.14.0",
+    sha256 = "bf0e5070b4b99240183b29df78155eee335885e53a8af8683964579c214ad301",
+    urls = ["https://github.com/protocolbuffers/protobuf/archive/v3.14.0.zip"],
 )
 
 load("@com_google_protobuf//:protobuf_deps.bzl", "protobuf_deps")
@@ -267,6 +267,7 @@ protobuf_deps()
 
 http_archive(
     name = "com_github_bazelbuild_buildtools",
-    strip_prefix = "buildtools-master",
-    url = "https://github.com/bazelbuild/buildtools/archive/master.zip",
+    strip_prefix = "buildtools-3.5.0",
+    sha256 = "bf0e5070b4b99240183b29df78155eee335885e53a8af8683964579c214ad301",
+    url = "https://github.com/bazelbuild/buildtools/archive/3.5.0.zip",
 )
