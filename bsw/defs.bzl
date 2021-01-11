@@ -181,7 +181,7 @@ def minerva_aa_codegen_rule(name, arxml_srcs, outs_list_dict, generators):
 
     for outs_list_name, outs_list in outs_list_dict.items():
         out_rule_name = outs_list_name
-        out_rule_outs_folder = "{}/arxml_srcs".format(out_rule_name)
+        out_rule_outs_folder = "{}/output".format(out_rule_name)
         out_rule_srcs_label = ":{}".format(gen_rule_name)
 
         full_path_outs_list = []
