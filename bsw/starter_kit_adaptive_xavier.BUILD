@@ -388,11 +388,12 @@ cmake_external(
     visibility = ["//visibility:public"],
     deps = [
         ":amsr-vector-fs-vajson",
+        ":amsr-vector-fs-libvac",
         ":amsr-vector-fs-log-api",
-        ":amsr-vector-fs-msr4base",
-        # Needed for when ENBLE_ADDON is on ":amsr-vector-fs-sec-cryptostack-driver-lib_es",
         ":amsr-vector-fs-applicationbase",
         ":amsr-vector-fs-libiostream",
+        ":amsr-vector-fs-libosabstraction",
+
     ],
 )
 
