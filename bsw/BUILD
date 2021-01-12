@@ -8,6 +8,64 @@ filegroup(
     srcs = ["arxmls/machine.arxml"],
 )
 
+filegroup(
+    name = "example_em_app_arxml",
+    srcs = ["arxmls/example_em_app.arxml"],
+)
+
+minerva_aa_codegen_rule(
+    name = "starter_kit_executionmanager_addon_configs_gen_rule",
+    arxml_srcs = [":example_em_app_arxml"],
+    outs_list_dict = {
+        "starter_kit_executionmanager_addon_updatemanager_swcluser_meta": [
+            "amsr_vector_fs_em_executionmanager_demo_application/etc/swcl_db.json"
+        ],
+        "starter_kit_executionmanager_addon_updatemanager_daemon": [
+            "amsr_vector_fs_em_executionmanager_demo_application/swcl_package_metadata.json"
+        ],
+        "starter_kit_executionmanager_addon_exec_config": [
+            "amsr_vector_fs_em_executionmanager_demo_application/configuration/exec_config.json"
+        ]
+    },
+    generators = [
+        "@starter_kit_adaptive_xavier//:generator_amsr_updatemanager_swcluster_meta",
+        "@starter_kit_adaptive_xavier//:generator_amsr_updatemanager_daemon",
+        "@starter_kit_adaptive_xavier//:generator_amsr_em_exec_config",
+    ]
+)
+
+minerva_aa_codegen_rule(
+    name = "starter_kit_executionmanager_addon_applicationbase_init_deinit_gen_rule",
+    arxml_srcs = [":example_em_app_arxml"],
+    outs_list_dict = {
+        "starter_kit_executionmanager_addon_applicationbase_init_deinit_srcs": [
+            "amsr_vector_fs_em_executionmanager_demo_application/src/ara/core/initialization.cpp"
+        ]
+    },
+    generators = [
+        "@starter_kit_adaptive_xavier//:generator_amsr_applicationbase_init_deinit",
+    ]
+)
+
+cc_binary(
+    name = "starter_kit_executionmanager_addon_binary",
+    deps = [
+        "@starter_kit_adaptive_xavier//:amsr-vector-fs-applicationbase",
+        "@starter_kit_adaptive_xavier//:amsr-vector-fs-log-api",
+        "@starter_kit_adaptive_xavier//:amsr-vector-fs-em-executionmanager",
+        "@starter_kit_adaptive_xavier//:amsr-vector-fs-libiostream"
+    ],
+    srcs = [
+        "@starter_kit_adaptive_xavier//:amsr_vector_fs_em_executionmanager_addon_demo_application_srcs",
+        ":starter_kit_executionmanager_addon_applicationbase_init_deinit_srcs",
+    ],
+    copts = [
+        "-std=c++14",
+    ],
+    linkstatic = 1,
+)
+
+
 minerva_aa_codegen_rule(
     name = "minerva_machine_exec_config_gen_rule",
     arxml_srcs = [":machine_arxml"],

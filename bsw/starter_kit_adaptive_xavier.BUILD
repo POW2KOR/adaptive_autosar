@@ -124,9 +124,9 @@ cmake_external(
     lib_source = ":amsr-vector-fs-libiostream-srcs",
     out_bin_dir = "sbin",
     static_libraries = [
-        "libamsr-vector-fs-libiostream_libcharconv_common.a",
         "libamsr-vector-fs-libiostream_libcharconv_vector_stl.a",
         "libamsr-vector-fs-libiostream_libstream_vector_stl.a",
+        "libamsr-vector-fs-libiostream_libcharconv_common.a",
     ],
     visibility = ["//visibility:public"],
     deps = [
@@ -285,6 +285,7 @@ cmake_external(
     generate_crosstool_file = GEN_CROSSTOOL_FILE,
     lib_source = ":amsr-vector-fs-log-api-srcs",
     static_libraries = [
+        "libamsr-log.a",
         "libara-logging.a",
         "libamsr-vector-fs-log-api-ipc.a",
         "libamsr-vector-fs-log-api-common.a",
@@ -335,6 +336,12 @@ cmake_external(
 ######################################################################################
 
 filegroup(
+    name = "amsr_vector_fs_em_executionmanager_addon_demo_application_srcs",
+    srcs = glob(["mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-em-executionmanager/addon/amsr-vector-fs-em-executionmanager-demo-application/**"]),
+    visibility = ["//visibility:public"],
+)
+
+filegroup(
     name = "amsr-vector-fs-em-executionmanager-srcs",
     srcs = glob(["mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-em-executionmanager/**"]),
     visibility = ["//visibility:public"],
@@ -381,11 +388,12 @@ cmake_external(
     visibility = ["//visibility:public"],
     deps = [
         ":amsr-vector-fs-vajson",
+        ":amsr-vector-fs-libvac",
         ":amsr-vector-fs-log-api",
-        ":amsr-vector-fs-msr4base",
-        # Needed for when ENBLE_ADDON is on ":amsr-vector-fs-sec-cryptostack-driver-lib_es",
         ":amsr-vector-fs-applicationbase",
         ":amsr-vector-fs-libiostream",
+        ":amsr-vector-fs-libosabstraction",
+
     ],
 )
 
