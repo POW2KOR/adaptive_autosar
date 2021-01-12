@@ -124,9 +124,9 @@ cmake_external(
     lib_source = ":amsr-vector-fs-libiostream-srcs",
     out_bin_dir = "sbin",
     static_libraries = [
-        "libamsr-vector-fs-libiostream_libcharconv_common.a",
         "libamsr-vector-fs-libiostream_libcharconv_vector_stl.a",
         "libamsr-vector-fs-libiostream_libstream_vector_stl.a",
+        "libamsr-vector-fs-libiostream_libcharconv_common.a",
     ],
     visibility = ["//visibility:public"],
     deps = [
@@ -285,6 +285,7 @@ cmake_external(
     generate_crosstool_file = GEN_CROSSTOOL_FILE,
     lib_source = ":amsr-vector-fs-log-api-srcs",
     static_libraries = [
+        "libamsr-log.a",
         "libara-logging.a",
         "libamsr-vector-fs-log-api-ipc.a",
         "libamsr-vector-fs-log-api-common.a",
