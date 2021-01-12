@@ -157,7 +157,7 @@ def minerva_aa_codegen_rule(name, arxml_srcs, outs_list_dict, generators):
             awk '{{print $$1}}') > 0 ]]; then
             
             echo "\nError: some generated files weren't found in the \
-                outs_list_dict list:";
+outs_list_dict list:";
 
             # Escaping path so it can be used in sed
             escaped_ruledir=`echo $(RULEDIR) | sed 's/\//\\\\\\\\\//g'`
