@@ -58,28 +58,16 @@ filegroup(
 )
 
 pkg_tar(
-    name = "minerva_mpu_adaptive_sbin",
-    srcs = [":adaptive_autosar_executionmanager_binary"],
-    mode = "0755",
-    package_dir = "/",
-    # If you change strip_prefix, be aware of the following:
-    # - https://github.com/bazelbuild/rules_pkg/issues/82
-    strip_prefix =
-        "./external/starter_kit_adaptive_xavier/amsr-vector-fs-em-executionmanager/",
-)
+    name = "minerva_mpu_adaptive_binaries",
+    files = {
+        ":adaptive_autosar_someipdaemon_binary": "opt/someipd_posix/bin/someipd_posix",
+        ":adaptive_autosar_log_daemon_binary": "opt/amsr_vector_fs_log_daemon/bin/amsr_vector_fs_log_daemon",
+        ":adaptive_autosar_executionmanager_binary": "sbin/amsr_vector_fs_em_executionmanager",
+        "//bsw:starter_kit_executionmanager_addon_binary": "opt/amsr_vector_fs_em_executionmanager_demo_application/bin/amsr_vector_fs_em_executionmanager_demo_application"
+    },
 
-pkg_tar(
-    name = "minerva_mpu_adaptive_bsw_opts",
-    srcs = [
-        ":adaptive_autosar_log_daemon_binary",
-        ":adaptive_autosar_someipdaemon_binary",
-    ],
-    package_dir = "/opt",
+    package_dir = "/",
     mode = "0755",
-    # If you change strip_prefix, be aware of the following:
-    # - https://github.com/bazelbuild/rules_pkg/issues/82
-    strip_prefix =
-        "./external/starter_kit_adaptive_xavier/",
 )
 
 pkg_tar(
@@ -123,10 +111,9 @@ pkg_tar(
 pkg_tar(
     name = "minerva_mpu_adaptive_filesystem",
     deps = [
-        ":minerva_mpu_adaptive_bsw_opts",
+        ":minerva_mpu_adaptive_binaries",
         ":minerva_mpu_adaptive_etc",
         ":minerva_mpu_adaptive_configs",
-        ":minerva_mpu_adaptive_sbin",
     ],
 )
 
