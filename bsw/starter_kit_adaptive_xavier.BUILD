@@ -335,6 +335,12 @@ cmake_external(
 ######################################################################################
 
 filegroup(
+    name = "amsr_vector_fs_em_executionmanager_addon_demo_application_srcs",
+    srcs = glob(["mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-em-executionmanager/addon/amsr-vector-fs-em-executionmanager-demo-application/**"]),
+    visibility = ["//visibility:public"],
+)
+
+filegroup(
     name = "amsr-vector-fs-em-executionmanager-srcs",
     srcs = glob(["mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-em-executionmanager/**"]),
     visibility = ["//visibility:public"],
