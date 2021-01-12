@@ -160,7 +160,7 @@ def minerva_aa_codegen_rule(name, arxml_srcs, outs_list_dict, generators):
 outs_list_dict list:";
 
             # Escaping path so it can be used in sed
-            escaped_ruledir=`echo $(RULEDIR) | sed 's/\//\\\\\\\\\//g'`
+            escaped_ruledir=`echo $$output_folder | sed 's/\//\\\\\\\\\//g'`
 
             # We are replacing $(RULEDIR) before printing on the screen to make
             # it easier for developers to copy paste into the Bazel file after.
