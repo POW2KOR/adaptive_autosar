@@ -85,7 +85,7 @@ pkg_tar(
         "@starter_kit_adaptive_xavier//:amsr_vector_fs_log_daemon_configs",
     ],
     mode = "0755",
-    package_dir = "/amsr_vector_fs_log_daemon/etc/",
+    package_dir = "/opt/amsr_vector_fs_log_daemon/etc/",
 )
 
 pkg_tar(
@@ -94,7 +94,18 @@ pkg_tar(
         "@starter_kit_adaptive_xavier//:amsr_vector_fs_someipdaemon_configs",
     ],
     mode = "0755",
-    package_dir = "/someipd_posix/etc/",
+    package_dir = "/opt/someipd_posix/etc/",
+)
+
+
+pkg_tar(
+    name = "adaptive_autosar_executionmanager_addon_configs",
+    files = {
+        "//bsw:starter_kit_executionmanager_addon_exec_config": "opt/amsr_vector_fs_em_executionmanager_demo_application/etc/exec_config.json",
+        "//bsw:starter_kit_executionmanager_addon_updatemanager_swcluser_meta": "opt/amsr_vector_fs_em_executionmanager_demo_application/etc/swcl_db.json",
+        "//bsw:starter_kit_executionmanager_addon_updatemanager_daemon": "opt/amsr_vector_fs_em_executionmanager_demo_application/etc/swcl_package_metadata.json",
+    },
+    mode = "0755",
 )
 
 pkg_tar(
@@ -102,9 +113,10 @@ pkg_tar(
     deps = [
         ":adaptive_autosar_log_daemon_configs",
         ":adaptive_autosar_someipdaemon_configs",
+        ":adaptive_autosar_executionmanager_addon_configs"
     ],
     mode = "0755",
-    package_dir = "/opt",
+    package_dir = "",
 )
 
 pkg_tar(
