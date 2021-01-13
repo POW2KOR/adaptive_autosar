@@ -624,19 +624,88 @@ cmake_external(
         ":amsr-vector-fs-sec-cryptostack",
         ":amsr-vector-fs-sec-iam",
         ":amsr-vector-fs-comcommon",
-        #":mbition_app_prototype_src_gen",  # This src-gen will be uncommented once we have application sources and src-gen buildable
     ],
 )
 
 ######################################################################################
-# amsr-vector-fs-communicationmiddleware-headers
+# amsr-vector-fs-crc
 ######################################################################################
 
-# We need the header library to avoid cyclic depenencies between
-# ':code-gen' and ':amsr-vector-fs-communicationmiddleware'
+filegroup(
+    name = "amsr_vector_fs_crc_srcs",
+    srcs = glob(["mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-crc/**"]),
+    visibility = ["//visibility:public"],
+)
 
 cmake_external(
-    name = "amsr-vector-fs-communicationmiddleware-headers",
+    name = "amsr_vector_fs_crc",
+    cache_entries = extend_and_select(
+        CMAKE_TOOLCHAIN_DICT,
+        {
+            "CMAKE_SYSTEM_NAME": CMAKE_SYSTEM_NAME_LINUX,
+            "amsr-vector-fs-msr4base_DIR:PATH": "$EXT_BUILD_DEPS/amsr-vector-fs-msr4base/lib/cmake/amsr-vector-fs-msr4base/",
+        },
+    ),
+    generate_crosstool_file = GEN_CROSSTOOL_FILE,
+    lib_source = ":amsr_vector_fs_crc_srcs",
+    static_libraries = [
+        "libamsr-vector-fs-crc_libinternal.a",
+        "libamsr-vector-fs-crc_libcrc.a",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":amsr-vector-fs-msr4base",
+        ":amsr-vector-fs-libvac",
+    ],
+)
+
+######################################################################################
+# amsr-vector-fs-e2e
+######################################################################################
+
+filegroup(
+    name = "amsr_vector_fs_e2e_srcs",
+    srcs = glob(["mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-e2e/**"]),
+    visibility = ["//visibility:public"],
+)
+
+cmake_external(
+    name = "amsr_vector_fs_e2e",
+    cache_entries = extend_and_select(
+        CMAKE_TOOLCHAIN_DICT,
+        {
+            "CMAKE_SYSTEM_NAME": CMAKE_SYSTEM_NAME_LINUX,
+            "amsr-vector-fs-crc_libinternal_DIR:PATH": "$EXT_BUILD_DEPS/amsr_vector_fs_crc/lib/cmake/amsr-vector-fs-crc_libinternal/",
+            "amsr-vector-fs-msr4base_DIR:PATH": "$EXT_BUILD_DEPS/amsr-vector-fs-msr4base/lib/cmake/amsr-vector-fs-msr4base/",
+        },
+    ),
+    generate_crosstool_file = GEN_CROSSTOOL_FILE,
+    lib_source = ":amsr_vector_fs_e2e_srcs",
+    static_libraries = [
+        "libamsr-vector-fs-e2e_libe2e.a",
+        "libamsr-vector-fs-e2e_libinternal.a",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":amsr-vector-fs-msr4base",
+        ":amsr-vector-fs-libvac",
+        ":amsr_vector_fs_crc",
+        ":amsr-vector-fs-applicationbase",
+    ],
+)
+
+######################################################################################
+# amsr-vector-fs-socal
+######################################################################################
+
+filegroup(
+    name = "amsr_vector_fs_socal_srcs",
+    srcs = glob(["mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-socal/**"]),
+    visibility = ["//visibility:public"],
+)
+
+cmake_external(
+    name = "amsr_vector_fs_socal",
     cache_entries = extend_and_select(
         CMAKE_TOOLCHAIN_DICT,
         {
@@ -654,34 +723,71 @@ cmake_external(
             "amsr-vector-fs-log-api-ipc_DIR:PATH": "$EXT_BUILD_DEPS/amsr-vector-fs-log-api/lib/cmake/amsr-vector-fs-log-api-ipc/",
             "osabstraction_DIR:PATH": "$EXT_BUILD_DEPS/amsr-vector-fs-libosabstraction/lib/cmake/osabstraction/",
             "ComCommon_DIR:PATH": "$EXT_BUILD_DEPS/amsr-vector-fs-comcommon/lib/cmake/ComCommon/",
-            "amsr-vector-fs-sec-iam_libclient_DIR:PATH": "$EXT_BUILD_DEPS/amsr-vector-fs-sec-iam/lib/cmake/amsr-vector-fs-sec-iam_libclient/",
-            "amsr-vector-fs-sec-iam_libcommon_DIR:PATH": "$EXT_BUILD_DEPS/amsr-vector-fs-sec-iam/lib/cmake/amsr-vector-fs-sec-iam_libcommon/",
-            "amsr-vector-fs-sec-iam_libara_DIR:PATH": "$EXT_BUILD_DEPS/amsr-vector-fs-sec-iam/lib/cmake/amsr-vector-fs-sec-iam_libara/",
-            "amsr-vector-fs-sec-libseccom_libcrypto_DIR:PATH": "$EXT_BUILD_DEPS/amsr-vector-fs-sec-libseccom/lib/cmake/amsr-vector-fs-sec-libseccom_libcrypto/",
-            "amsr-vector-fs-sec-cryptostack_libclient_DIR:PATH": "$EXT_BUILD_DEPS/amsr-vector-fs-sec-cryptostack/lib/cmake/amsr-vector-fs-sec-cryptostack_libclient/",
-            "amsr-vector-fs-sec-cryptostack_libcommon_DIR:PATH": "$EXT_BUILD_DEPS/amsr-vector-fs-sec-cryptostack/lib/cmake/amsr-vector-fs-sec-cryptostack_libcommon/",
-            "amsr-vector-fs-sec-cryptostack_libara_DIR:PATH": "$EXT_BUILD_DEPS/amsr-vector-fs-sec-cryptostack/lib/cmake/amsr-vector-fs-sec-cryptostack_libara/",
-            "amsr-vector-fs-sec-cryptostack_libdriverfactory_DIR:PATH": "$EXT_BUILD_DEPS/amsr-vector-fs-sec-cryptostack/lib/cmake/amsr-vector-fs-sec-cryptostack_libdriverfactory/",
-            "amsr-vector-fs-sec-cryptostack_libsoftwareprovider_DIR:PATH": "$EXT_BUILD_DEPS/amsr-vector-fs-sec-cryptostack/lib/cmake/amsr-vector-fs-sec-cryptostack_libsoftwareprovider/",
-            "amsr-vector-fs-sec-libseccom_libtls_DIR:PATH": "$EXT_BUILD_DEPS/amsr-vector-fs-sec-libseccom/lib/cmake/amsr-vector-fs-sec-libseccom_libtls/",
-            "amsr-vector-fs-em-executionmanagement_application-client_DIR:PATH": "$EXT_BUILD_DEPS/amsr-vector-fs-em-executionmanager/lib/cmake/amsr-vector-fs-em-executionmanagement_application-client/",
+            "amsr-vector-fs-crc_libinternal_DIR:PATH": "$EXT_BUILD_DEPS/amsr_vector_fs_crc/lib/cmake/amsr-vector-fs-crc_libinternal/",
+            "amsr-vector-fs-e2e_libe2e_DIR:PATH": "$EXT_BUILD_DEPS/amsr_vector_fs_e2e/lib/cmake/amsr-vector-fs-e2e_libe2e/",
+            "amsr-vector-fs-e2e_libinternal_DIR:PATH": "$EXT_BUILD_DEPS/amsr_vector_fs_e2e/lib/cmake/amsr-vector-fs-e2e_libinternal/",
         },
     ),
     generate_crosstool_file = GEN_CROSSTOOL_FILE,
-    headers_only = True,
-    lib_source = ":amsr-vector-fs-communicationmiddleware-srcs",
+    lib_source = ":amsr_vector_fs_socal_srcs",
+    static_libraries = [
+        "libSocal.a",
+    ],
     visibility = ["//visibility:public"],
     deps = [
-        ":amsr-vector-fs-comcommon",
+        # "@minerva_mpu_adaptive//bsw:starter_kit_proxy_socal_srcs_lib",
+        ":amsr_vector_fs_crc",
+        ":amsr_vector_fs_e2e",
         ":amsr-vector-fs-libosabstraction",
         ":amsr-vector-fs-log-api",
-        ":amsr-vector-fs-sec-cryptostack",
-        ":amsr-vector-fs-sec-iam",
-        ":amsr-vector-fs-sec-libseccom",
+        ":amsr-vector-fs-comcommon",
     ],
 )
 
+######################################################################################
+# amsr-vector-fs-socal-headers
+######################################################################################
+
+cmake_external(
+    name = "amsr_vector_fs_socal_headers",
+    cache_entries = extend_and_select(
+        CMAKE_TOOLCHAIN_DICT,
+        {
+            "CMAKE_SYSTEM_NAME": CMAKE_SYSTEM_NAME_LINUX,
+            "CMAKE_EXPORT_NO_PACKAGE_REGISTRY": "ON",
+            "CMAKE_FIND_PACKAGE_NO_PACKAGE_REGISTRY": "ON",
+            "CMAKE_VERBOSE_MAKEFILE": "ON",
+            "BUILD_TESTS": "OFF",
+            "ENABLE_EXEC_MANAGER": "ON",
+            "vac_DIR:PATH": "$EXT_BUILD_DEPS/amsr-vector-fs-libvac/lib/cmake/vac/",
+            "ara-logging_DIR:PATH": "$EXT_BUILD_DEPS/amsr-vector-fs-log-api/lib/cmake/ara-logging/",
+            "vajson_DIR:PATH": "$EXT_BUILD_DEPS/amsr-vector-fs-vajson/lib/cmake/vajson/",
+            "amsr-vector-fs-log-api-common_DIR:PATH": "$EXT_BUILD_DEPS/amsr-vector-fs-log-api/lib/cmake/amsr-vector-fs-log-api-common/",
+            "amsr-vector-fs-log-api-ipc-common_DIR:PATH": "$EXT_BUILD_DEPS/amsr-vector-fs-log-api/lib/cmake/amsr-vector-fs-log-api-ipc-common/",
+            "amsr-vector-fs-log-api-ipc_DIR:PATH": "$EXT_BUILD_DEPS/amsr-vector-fs-log-api/lib/cmake/amsr-vector-fs-log-api-ipc/",
+            "osabstraction_DIR:PATH": "$EXT_BUILD_DEPS/amsr-vector-fs-libosabstraction/lib/cmake/osabstraction/",
+            "ComCommon_DIR:PATH": "$EXT_BUILD_DEPS/amsr-vector-fs-comcommon/lib/cmake/ComCommon/",
+            "amsr-vector-fs-crc_libinternal_DIR:PATH": "$EXT_BUILD_DEPS/amsr_vector_fs_crc/lib/cmake/amsr-vector-fs-crc_libinternal/",
+            "amsr-vector-fs-e2e_libe2e_DIR:PATH": "$EXT_BUILD_DEPS/amsr_vector_fs_e2e/lib/cmake/amsr-vector-fs-e2e_libe2e/",
+            "amsr-vector-fs-e2e_libinternal_DIR:PATH": "$EXT_BUILD_DEPS/amsr_vector_fs_e2e/lib/cmake/amsr-vector-fs-e2e_libinternal/",
+        },
+    ),
+    generate_crosstool_file = GEN_CROSSTOOL_FILE,
+    lib_source = ":amsr_vector_fs_socal_srcs",
+    headers_only = True,
+    visibility = ["//visibility:public"],
+    deps = [
+        ":amsr_vector_fs_crc",
+        ":amsr_vector_fs_e2e",
+        ":amsr-vector-fs-libosabstraction",
+        ":amsr-vector-fs-log-api",
+        ":amsr-vector-fs-comcommon",
+    ],
+)
+
+######################################################################################
 # Generators
+######################################################################################
 
 filegroup(
     name = "amsrgen_sh",
@@ -795,6 +901,82 @@ cmake_external(
     deps = [
         ":amsr-vector-fs-libvac",
         ":amsr-vector-fs-comcommon",
+    ],
+)
+
+######################################################################################
+# amsr-vector-fs-someipbinding
+######################################################################################
+
+filegroup(
+    name = "amsr_vector_fs_someipbinding_srcs",
+    srcs = glob(["mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-someipbinding/**"]),
+    visibility = ["//visibility:public"],
+)
+
+cmake_external(
+    name = "amsr_vector_fs_someipbinding",
+    cache_entries = extend_and_select(
+        CMAKE_TOOLCHAIN_DICT,
+        {
+            "CMAKE_SYSTEM_NAME": CMAKE_SYSTEM_NAME_LINUX,
+            "vathread_DIR:PATH": "$EXT_BUILD_DEPS/amsr-vector-fs-thread/lib/cmake/vathread/",
+            "osabstraction_DIR:PATH": "$EXT_BUILD_DEPS/amsr-vector-fs-libosabstraction/lib/cmake/osabstraction/",
+            "vac_DIR:PATH": "$EXT_BUILD_DEPS/amsr-vector-fs-libvac/lib/cmake/vac/",
+            "vajson_DIR:PATH": "$EXT_BUILD_DEPS/amsr-vector-fs-vajson/lib/cmake/vajson/",
+            "ara-logging_DIR:PATH": "$EXT_BUILD_DEPS/amsr-vector-fs-log-api/lib/cmake/ara-logging/",
+            "ComCommon_DIR:PATH": "$EXT_BUILD_DEPS/amsr-vector-fs-comcommon/lib/cmake/ComCommon/",
+            "SomeIpProtocol_DIR:PATH": "$EXT_BUILD_DEPS/amsr_vector_fs_someipprotocol/lib/cmake/SomeIpProtocol/",
+            "SomeIpDaemonClient_DIR:PATH": "$EXT_BUILD_DEPS/amsr_vector_fs_someipdaemonclient/lib/cmake/SomeIpDaemonClient/",
+            "Socal_DIR:PATH": "$EXT_BUILD_DEPS/amsr-vector-fs-socal/lib/cmake/Socal/",
+        },
+    ),
+    generate_crosstool_file = GEN_CROSSTOOL_FILE,
+    lib_source = ":amsr_vector_fs_someipbinding_srcs",
+    static_libraries = [
+        "libSomeIpBindingInternal.a",
+        "libSomeIpBinding.a",
+        "libSomeIpBindingTransformationLayer.a",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":amsr-vector-fs-thread",
+        ":amsr-vector-fs-libvac",
+        ":amsr-vector-fs-log-api",
+        ":amsr-vector-fs-comcommon",
+        ":amsr_vector_fs_someipprotocol",
+        ":amsr_vector_fs_someipdaemonclient",
+        ":amsr-vector-fs-socal",
+    ],
+)
+
+######################################################################################
+# amsr-vector-fs-someipbinding-headers
+######################################################################################
+
+cmake_external(
+    name = "amsr_vector_fs_someipbinding_headers",
+    cache_entries = extend_and_select(
+        CMAKE_TOOLCHAIN_DICT,
+        {
+            "CMAKE_SYSTEM_NAME": CMAKE_SYSTEM_NAME_LINUX,
+            "vathread_DIR:PATH": "$EXT_BUILD_DEPS/amsr-vector-fs-thread/lib/cmake/vathread/",
+            "ComCommon_DIR:PATH": "$EXT_BUILD_DEPS/amsr-vector-fs-comcommon/lib/cmake/ComCommon/",
+            "SomeIpProtocol_DIR:PATH": "$EXT_BUILD_DEPS/amsr_vector_fs_someipprotocol/lib/cmake/SomeIpProtocol/",
+            "SomeIpDaemonClient_DIR:PATH": "$EXT_BUILD_DEPS/amsr_vector_fs_someipdaemonclient/lib/cmake/SomeIpDaemonClient/",
+            "Socal_DIR:PATH": "$EXT_BUILD_DEPS/amsr-vector-fs-socal/lib/cmake/Socal/",
+        },
+    ),
+    headers_only = True,
+    generate_crosstool_file = GEN_CROSSTOOL_FILE,
+    lib_source = ":amsr_vector_fs_someipbinding_srcs",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":amsr-vector-fs-thread",
+        ":amsr-vector-fs-comcommon",
+        ":amsr_vector_fs_someipprotocol",
+        ":amsr_vector_fs_someipdaemonclient",
+        ":amsr-vector-fs-socal",
     ],
 )
 
