@@ -756,3 +756,90 @@ minerva_aa_codegen_rule(
         "@starter_kit_adaptive_xavier//:generator_amsr_socal",
     ],
 )
+
+cc_library(
+    name = "starter_kit_proxy_socal_hdrs_lib",
+    hdrs = [
+        ":starter_kit_proxy_socal_hdrs"
+    ],
+    strip_include_prefix = "starter_kit_proxy_socal_hdrs/output/IDC_M_P_SoftwareClusterDesign_Base_TEST_SwComponentType_Executable/includes",
+)
+
+cc_library(
+    name = "starter_kit_proxy_modeldatatypes_hdrs_lib",
+    hdrs = [
+        ":starter_kit_proxy_modeldatatypes_hdrs"
+    ],
+    strip_include_prefix = "starter_kit_proxy_modeldatatypes_hdrs/output/IDC_M_P_SoftwareClusterDesign_Base_TEST_SwComponentType_Executable/includes",
+)
+
+cc_library(
+    name = "starter_kit_proxy_someipbinding_hdrs_lib",
+    hdrs = [
+        ":starter_kit_proxy_someipbinding_hdrs",
+    ],
+    strip_include_prefix = "starter_kit_proxy_someipbinding_hdrs/output/IDC_M_P_SoftwareClusterDesign_Base_TEST_SwComponentType_Executable/includes",
+)
+
+cc_library(
+    name = "starter_kit_proxy_someipprotocol_hdrs_lib",
+    hdrs = [
+        ":starter_kit_proxy_someipprotocol_hdrs"
+    ],
+    strip_include_prefix = "starter_kit_proxy_someipprotocol_hdrs/output/IDC_M_P_SoftwareClusterDesign_Base_TEST_SwComponentType_Executable/includes",
+)
+
+cc_library(
+    name = "starter_kit_proxy_socal_srcs_lib",
+    srcs = [
+        ":starter_kit_proxy_socal_srcs",
+        ":starter_kit_proxy_someipprotocol_srcs",
+        ":starter_kit_proxy_someipbinding_srcs",
+    ],
+    deps = [
+        ":starter_kit_proxy_modeldatatypes_hdrs_lib",
+        ":starter_kit_proxy_socal_hdrs_lib",
+        ":starter_kit_proxy_someipbinding_hdrs_lib",
+        ":starter_kit_proxy_someipprotocol_hdrs_lib",
+        "@starter_kit_adaptive_xavier//:amsr-vector-fs-comcommon",
+        "@starter_kit_adaptive_xavier//:amsr_vector_fs_socal_headers",
+        "@starter_kit_adaptive_xavier//:amsr-vector-fs-vajson",
+        "@starter_kit_adaptive_xavier//:amsr_vector_fs_someipbinding_headers",
+    ],
+    copts = [
+        "-std=c++14",
+    ],
+    linkstatic = 1,
+)
+
+cc_binary(
+    name = "proxy_demo_idc6",
+    deps = [
+        ":starter_kit_proxy_modeldatatypes_hdrs_lib",
+        ":starter_kit_proxy_socal_hdrs_lib",
+        "@starter_kit_adaptive_xavier//:amsr-vector-fs-vajson",
+        "@starter_kit_adaptive_xavier//:amsr-vector-fs-em-executionmanager",
+        "@starter_kit_adaptive_xavier//:amsr-vector-fs-libvac",
+        "@starter_kit_adaptive_xavier//:amsr-vector-fs-log-api",
+        "@starter_kit_adaptive_xavier//:amsr_vector_fs_socal",
+        "@starter_kit_adaptive_xavier//:amsr_vector_fs_someipbinding",
+    ],
+    srcs = [
+        "@starter_kit_adaptive_xavier//:proxy_demo_idc6_srcs",
+
+        # This a workaround to resolve cyclic dependency. This is the reason why the target proxy_demo_idc6
+        # build in 2 steps. 
+        # The code generators depend on libSocal.a, contained in the @minerva_mpu_adaptive//:socal_lib below.
+        # That is why we put it in sources. It is important that this `:socal_lib` is positioned earlier in
+        # the list than the generated sources in `:starter_kit_proxy_socal_srcs_lib` and 
+        # `:starter_kit_proxy_applicationbase_init_deinit_srcs` 
+        "@minerva_mpu_adaptive//:socal_lib",
+
+        ":starter_kit_proxy_socal_srcs_lib",
+        ":starter_kit_proxy_applicationbase_init_deinit_srcs",
+    ],
+    copts = [
+        "-std=c++14",
+    ],
+    linkstatic = 1,
+)

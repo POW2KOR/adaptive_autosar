@@ -737,7 +737,7 @@ cmake_external(
     ],
     visibility = ["//visibility:public"],
     deps = [
-        # "@minerva_mpu_adaptive//bsw:starter_kit_proxy_socal_srcs_lib",
+        "@minerva_mpu_adaptive//bsw:starter_kit_proxy_socal_srcs_lib",
         ":amsr_vector_fs_crc",
         ":amsr_vector_fs_e2e",
         ":amsr-vector-fs-libosabstraction",
@@ -929,7 +929,7 @@ cmake_external(
             "ComCommon_DIR:PATH": "$EXT_BUILD_DEPS/amsr-vector-fs-comcommon/lib/cmake/ComCommon/",
             "SomeIpProtocol_DIR:PATH": "$EXT_BUILD_DEPS/amsr_vector_fs_someipprotocol/lib/cmake/SomeIpProtocol/",
             "SomeIpDaemonClient_DIR:PATH": "$EXT_BUILD_DEPS/amsr_vector_fs_someipdaemonclient/lib/cmake/SomeIpDaemonClient/",
-            "Socal_DIR:PATH": "$EXT_BUILD_DEPS/amsr-vector-fs-socal/lib/cmake/Socal/",
+            "Socal_DIR:PATH": "$EXT_BUILD_DEPS/amsr_vector_fs_socal/lib/cmake/Socal/",
         },
     ),
     generate_crosstool_file = GEN_CROSSTOOL_FILE,
@@ -947,7 +947,7 @@ cmake_external(
         ":amsr-vector-fs-comcommon",
         ":amsr_vector_fs_someipprotocol",
         ":amsr_vector_fs_someipdaemonclient",
-        ":amsr-vector-fs-socal",
+        ":amsr_vector_fs_socal",
     ],
 )
 
@@ -965,7 +965,7 @@ cmake_external(
             "ComCommon_DIR:PATH": "$EXT_BUILD_DEPS/amsr-vector-fs-comcommon/lib/cmake/ComCommon/",
             "SomeIpProtocol_DIR:PATH": "$EXT_BUILD_DEPS/amsr_vector_fs_someipprotocol/lib/cmake/SomeIpProtocol/",
             "SomeIpDaemonClient_DIR:PATH": "$EXT_BUILD_DEPS/amsr_vector_fs_someipdaemonclient/lib/cmake/SomeIpDaemonClient/",
-            "Socal_DIR:PATH": "$EXT_BUILD_DEPS/amsr-vector-fs-socal/lib/cmake/Socal/",
+            "Socal_DIR:PATH": "$EXT_BUILD_DEPS/amsr_vector_fs_socal_headers/lib/cmake/Socal/",
         },
     ),
     headers_only = True,
@@ -977,7 +977,7 @@ cmake_external(
         ":amsr-vector-fs-comcommon",
         ":amsr_vector_fs_someipprotocol",
         ":amsr_vector_fs_someipdaemonclient",
-        ":amsr-vector-fs-socal",
+        ":amsr_vector_fs_socal_headers",
     ],
 )
 
@@ -1111,4 +1111,22 @@ minerva_aa_codegen_declare(
         "amsr_someipprotocol",
         "amsr_socal",
     ]
+)
+
+filegroup(
+    name = "proxy_demo_idc6_srcs",
+    srcs = [
+        "examples/proxy-skeleton-demo-idc6/applications/proxy-demo-idc6/etc/com_application.json",
+        "examples/proxy-skeleton-demo-idc6/applications/proxy-demo-idc6/etc/logging_config.json",
+        "examples/proxy-skeleton-demo-idc6/applications/proxy-demo-idc6/src/proxy_demo_error_domain.cpp",
+        "examples/proxy-skeleton-demo-idc6/applications/proxy-demo-idc6/src/activation_manager.cpp",
+        "examples/proxy-skeleton-demo-idc6/applications/proxy-demo-idc6/src/proxy_demo_error_domain.h",
+        "examples/proxy-skeleton-demo-idc6/applications/proxy-demo-idc6/src/application.h",
+        "examples/proxy-skeleton-demo-idc6/applications/proxy-demo-idc6/src/remote_parking.h",
+        "examples/proxy-skeleton-demo-idc6/applications/proxy-demo-idc6/src/application.cpp",
+        "examples/proxy-skeleton-demo-idc6/applications/proxy-demo-idc6/src/main.cpp",
+        "examples/proxy-skeleton-demo-idc6/applications/proxy-demo-idc6/src/activation_manager.h",
+        "examples/proxy-skeleton-demo-idc6/applications/proxy-demo-idc6/src/remote_parking.cpp",
+    ],
+    visibility = ["//visibility:public"],
 )
