@@ -63,7 +63,7 @@ pkg_tar(
         ":adaptive_autosar_someipdaemon_binary": "opt/someipd_posix/bin/someipd_posix",
         ":adaptive_autosar_log_daemon_binary": "opt/amsr_vector_fs_log_daemon/bin/amsr_vector_fs_log_daemon",
         ":adaptive_autosar_executionmanager_binary": "sbin/amsr_vector_fs_em_executionmanager",
-        "//bsw:executionmanager_state_client_binary": "opt/executionmanager_demo_application/bin/amsr_vector_fs_em_executionmanager_demo_application"
+        "//bsw:executionmanager_state_client_binary": "opt/executionmanager_state_client_app/bin/executionmanager_state_client_app"
     },
 
     package_dir = "/",
