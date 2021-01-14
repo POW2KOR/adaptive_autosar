@@ -99,11 +99,11 @@ pkg_tar(
 
 
 pkg_tar(
-    name = "adaptive_autosar_executionmanager_addon_configs",
+    name = "adaptive_autosar_executionmanager_state_client_configs",
     files = {
-        "//bsw:starter_kit_executionmanager_addon_exec_config": "opt/amsr_vector_fs_em_executionmanager_demo_application/etc/exec_config.json",
-        "//bsw:starter_kit_executionmanager_addon_updatemanager_swcluser_meta": "opt/amsr_vector_fs_em_executionmanager_demo_application/etc/swcl_db.json",
-        "//bsw:starter_kit_executionmanager_addon_updatemanager_daemon": "opt/amsr_vector_fs_em_executionmanager_demo_application/etc/swcl_package_metadata.json",
+        "//bsw:executionmanager_state_client_exec_config": "opt/amsr_vector_fs_em_executionmanager_demo_application/etc/exec_config.json",
+        "//bsw:executionmanager_state_client_updatemanager_daemon_db": "opt/amsr_vector_fs_em_executionmanager_demo_application/etc/swcl_db.json",
+        "//bsw:executionmanager_state_client_updatemanager_swcluser_meta": "opt/amsr_vector_fs_em_executionmanager_demo_application/etc/swcl_package_metadata.json",
     },
     mode = "0755",
 )
@@ -113,7 +113,7 @@ pkg_tar(
     deps = [
         ":adaptive_autosar_log_daemon_configs",
         ":adaptive_autosar_someipdaemon_configs",
-        ":adaptive_autosar_executionmanager_addon_configs"
+        ":adaptive_autosar_executionmanager_state_client_configs"
     ],
     mode = "0755",
     package_dir = "",

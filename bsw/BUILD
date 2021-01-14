@@ -22,35 +22,26 @@ filegroup(
 )
 
 minerva_aa_codegen_rule(
-    name = "starter_kit_executionmanager_addon_configs_gen_rule",
+    name = "executionmanager_state_client_app_gen_rule",
     arxml_srcs = [":executionmanager_state_client_app_arxml"],
     outs_list_dict = {
-        "starter_kit_executionmanager_addon_updatemanager_swcluser_meta": [
-            "amsr_vector_fs_em_executionmanager_demo_application/etc/swcl_db.json"
+        "executionmanager_state_client_updatemanager_daemon_db": [
+            "executionmanager_state_client_app/etc/swcl_db.json"
         ],
-        "starter_kit_executionmanager_addon_updatemanager_daemon": [
-            "amsr_vector_fs_em_executionmanager_demo_application/swcl_package_metadata.json"
+        "executionmanager_state_client_updatemanager_swcluser_meta": [
+            "executionmanager_state_client_app/swcl_package_metadata.json"
         ],
-        "starter_kit_executionmanager_addon_exec_config": [
-            "amsr_vector_fs_em_executionmanager_demo_application/configuration/exec_config.json"
+        "executionmanager_state_client_exec_config": [
+            "executionmanager_state_client_app/configuration/exec_config.json"
+        ],
+        "executionmanager_state_client_applicationbase_init_deinit_srcs": [
+            "executionmanager_state_client_app/src/ara/core/initialization.cpp"
         ]
     },
     generators = [
         "@starter_kit_adaptive_xavier//:generator_amsr_updatemanager_swcluster_meta",
         "@starter_kit_adaptive_xavier//:generator_amsr_updatemanager_daemon",
         "@starter_kit_adaptive_xavier//:generator_amsr_em_exec_config",
-    ]
-)
-
-minerva_aa_codegen_rule(
-    name = "starter_kit_executionmanager_addon_applicationbase_init_deinit_gen_rule",
-    arxml_srcs = [":executionmanager_state_client_app_arxml"],
-    outs_list_dict = {
-        "executionmanager_state_client_applicationbase_init_deinit_srcs": [
-            "executionmanager_state_client_app/src/ara/core/initialization.cpp"
-        ]
-    },
-    generators = [
         "@starter_kit_adaptive_xavier//:generator_amsr_applicationbase_init_deinit",
     ]
 )
