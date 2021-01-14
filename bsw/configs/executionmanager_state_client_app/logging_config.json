@@ -1,0 +1,11 @@
+{
+  "name" : "Execution Manager State Client",
+  "description" : "MB app to control the state of the Execution Manager",
+  "dlt_id": "EXSC",
+  "log_mode" : ["kConsole"],
+  "log_level" : "kInfo",
+  "log_dir_path": "./log",
+  "ipc_port": 33,
+  "reconnection_retry_offset": 0,
+  "msg_buf_size": 1000
+}

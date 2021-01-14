@@ -63,7 +63,7 @@ pkg_tar(
         ":adaptive_autosar_someipdaemon_binary": "opt/someipd_posix/bin/someipd_posix",
         ":adaptive_autosar_log_daemon_binary": "opt/amsr_vector_fs_log_daemon/bin/amsr_vector_fs_log_daemon",
         ":adaptive_autosar_executionmanager_binary": "sbin/amsr_vector_fs_em_executionmanager",
-        "//bsw:executionmanager_state_client_binary": "opt/executionmanager_demo_application/bin/amsr_vector_fs_em_executionmanager_demo_application"
+        "//bsw:executionmanager_state_client_binary": "opt/executionmanager_state_client_app/bin/executionmanager_state_client_app"
     },
 
     package_dir = "/",
@@ -72,8 +72,11 @@ pkg_tar(
 
 pkg_tar(
     name = "minerva_mpu_adaptive_etc",
+    files = {
+        "//bsw:em_logging_config": "logging_config.json"
+    },
     srcs = [
-        "//bsw:minerva_machine_exec_config",
+        "//bsw:machine_exec_config",
     ],
     mode = "0755",
     package_dir = "/etc",
@@ -81,18 +84,23 @@ pkg_tar(
 
 pkg_tar(
     name = "adaptive_autosar_log_daemon_configs",
-    srcs = [
-        "@starter_kit_adaptive_xavier//:amsr_vector_fs_log_daemon_configs",
-    ],
+    files = {
+        "//bsw:amsr_vector_fs_log_daemon_logging_config": "logging_config.json",
+        "//bsw:amsr_vector_fs_log_daemon_logd_config": "logd_config.json",
+        "//bsw:amsr_vector_fs_log_daemon_exec_config": "exec_config.json"
+
+    },
     mode = "0755",
     package_dir = "/opt/amsr_vector_fs_log_daemon/etc/",
 )
 
 pkg_tar(
     name = "adaptive_autosar_someipdaemon_configs",
-    srcs = [
-        "@starter_kit_adaptive_xavier//:amsr_vector_fs_someipdaemon_configs",
-    ],
+    srcs = {
+        "//bsw:someipd_posix_logging_config": "logging_config.json",
+        "//bsw:someipd_posix_exec_config": "exec_config.json",
+        "//bsw:someipd_posix_someip_config": "someipd-posix.json"
+    },
     mode = "0755",
     package_dir = "/opt/someipd_posix/etc/",
 )
@@ -101,9 +109,10 @@ pkg_tar(
 pkg_tar(
     name = "adaptive_autosar_executionmanager_state_client_configs",
     files = {
-        "//bsw:executionmanager_state_client_exec_config": "opt/amsr_vector_fs_em_executionmanager_demo_application/etc/exec_config.json",
-        "//bsw:executionmanager_state_client_updatemanager_daemon_db": "opt/amsr_vector_fs_em_executionmanager_demo_application/etc/swcl_db.json",
-        "//bsw:executionmanager_state_client_updatemanager_swcluser_meta": "opt/amsr_vector_fs_em_executionmanager_demo_application/etc/swcl_package_metadata.json",
+        "//bsw:executionmanager_state_client_updatemanager_daemon_db": "opt/executionmanager_state_client_app/etc/swcl_db.json",
+        "//bsw:executionmanager_state_client_updatemanager_swcluser_meta": "opt/executionmanager_state_client_app/etc/swcl_package_metadata.json",
+        "//bsw:executionmanager_state_client_app_logging_config": "opt/executionmanager_state_client_app/etc/logging_config.json",
+        "//bsw:executionmanager_state_client_app_exec_config": "opt/executionmanager_state_client_app/etc/exec_config.json",
     },
     mode = "0755",
 )
