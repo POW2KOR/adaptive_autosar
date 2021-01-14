@@ -157,3 +157,13 @@ container_image(
 buildifier(
     name = "buildifier",
 )
+
+# We need it as a temporary workaround to resolve cyclic dependency between code generator and 
+# socal library. The issue reported and confirmed by Vector.
+# Desision to put it here is due to the bazel nature of the relative pates. So we left it in
+# the root. The file is used in bsw/BUILD file later. 
+filegroup(
+    name = "socal_lib",
+    srcs = ["bazel-out/k8-fastbuild/bin/external/starter_kit_adaptive_xavier/amsr_vector_fs_socal/lib/libSocal.a"],
+    visibility = ["//visibility:public"],
+)

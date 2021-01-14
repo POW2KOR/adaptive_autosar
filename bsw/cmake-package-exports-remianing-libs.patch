@@ -1,0 +1,39 @@
+diff --git a/BSW/amsr-vector-fs-someipbinding/lib/someip_binding_internal/CMakeLists.txt b/BSW/amsr-vector-fs-someipbinding/lib/someip_binding_internal/CMakeLists.txt
+index c94cf69..7522f99 100644
+--- a/BSW/amsr-vector-fs-someipbinding/lib/someip_binding_internal/CMakeLists.txt
++++ b/BSW/amsr-vector-fs-someipbinding/lib/someip_binding_internal/CMakeLists.txt
+@@ -38,7 +38,7 @@ set(LIBRARY_NAME SomeIpBindingInternal)
+ set(PACKAGE_NAME ${LIBRARY_NAME})
+ set(INSTALL_LIB_DIR ${CMAKE_INSTALL_LIBDIR})
+ set(INSTALL_CMAKE_DIR ${CMAKE_INSTALL_LIBDIR}/cmake/${LIBRARY_NAME})
+-set(INSTALL_INCLUDE_DIR ${CMAKE_INSTALL_INCLUDEDIR}/${LIBRARY_NAME})
++set(INSTALL_INCLUDE_DIR ${CMAKE_INSTALL_INCLUDEDIR}/)
+ 
+ find_package(vac REQUIRED)
+ find_package(ara-logging REQUIRED)
+diff --git a/BSW/amsr-vector-fs-someipdaemonclient/lib/someip_daemon_client/CMakeLists.txt b/BSW/amsr-vector-fs-someipdaemonclient/lib/someip_daemon_client/CMakeLists.txt
+index 55a90be..3b80d14 100644
+--- a/BSW/amsr-vector-fs-someipdaemonclient/lib/someip_daemon_client/CMakeLists.txt
++++ b/BSW/amsr-vector-fs-someipdaemonclient/lib/someip_daemon_client/CMakeLists.txt
+@@ -38,7 +38,7 @@ set(LIBRARY_NAME SomeIpDaemonClient)
+ set(PACKAGE_NAME ${LIBRARY_NAME})
+ set(INSTALL_LIB_DIR ${CMAKE_INSTALL_LIBDIR})
+ set(INSTALL_CMAKE_DIR ${CMAKE_INSTALL_LIBDIR}/cmake/${LIBRARY_NAME})
+-set(INSTALL_INCLUDE_DIR ${CMAKE_INSTALL_INCLUDEDIR}/${LIBRARY_NAME})
++set(INSTALL_INCLUDE_DIR ${CMAKE_INSTALL_INCLUDEDIR}/)
+ 
+ find_package(vac REQUIRED)
+ find_package(ara-logging REQUIRED)
+diff --git a/BSW/amsr-vector-fs-someipprotocol/lib/someip-protocol/CMakeLists.txt b/BSW/amsr-vector-fs-someipprotocol/lib/someip-protocol/CMakeLists.txt
+index b84013b..c528beb 100644
+--- a/BSW/amsr-vector-fs-someipprotocol/lib/someip-protocol/CMakeLists.txt
++++ b/BSW/amsr-vector-fs-someipprotocol/lib/someip-protocol/CMakeLists.txt
+@@ -37,7 +37,7 @@ set(PACKAGE_VERSION 0.0.1)
+ set(LIBRARY_NAME SomeIpProtocol)
+ set(INSTALL_CMAKE_DIR ${CMAKE_INSTALL_LIBDIR}/cmake/${LIBRARY_NAME})
+ set(INSTALL_LIB_DIR ${CMAKE_INSTALL_LIBDIR})
+-set(INSTALL_INCLUDE_DIR ${CMAKE_INSTALL_INCLUDEDIR}/${LIBRARY_NAME})
++set(INSTALL_INCLUDE_DIR ${CMAKE_INSTALL_INCLUDEDIR}/)
+ file(RELATIVE_PATH REL_INSTALL_DIR /${INSTALL_CMAKE_DIR} /)
+ 
+ file(GLOB_RECURSE SOMEIP_PROTOCOL_SRCS ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp)
