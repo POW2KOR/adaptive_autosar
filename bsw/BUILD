@@ -13,6 +13,14 @@ filegroup(
     srcs = ["arxmls/executionmanager_state_client_app.arxml"],
 )
 
+filegroup(
+    name = "complete_arxml",
+    srcs = [
+        "@starter_kit_adaptive_xavier//:ncd_arxml",
+        "@starter_kit_adaptive_xavier//:mex_arxml",
+    ]
+)
+
 minerva_aa_codegen_rule(
     name = "starter_kit_executionmanager_addon_configs_gen_rule",
     arxml_srcs = [":executionmanager_state_client_app_arxml"],
@@ -79,7 +87,7 @@ minerva_aa_codegen_rule(
 
 minerva_aa_codegen_rule(
     name = "starter_kit_application_modeldatatypes_api_gen_rule",
-    arxml_srcs = ["@starter_kit_adaptive_xavier//:application_arxml"],
+    arxml_srcs = [":complete_arxml"],
     outs_list_dict = {
         "starter_kit_skeleton_modeldatatypes_hdrs": [
             "IDC_M_P_SoftwareClusterDesign_Base_SwComponentType_Executable/includes/daimler/cppDataTypes/common/DummyServiceRecordDataType_4tuekbbgqsijk4yv29iawd34y/impl_type_dummyservicerecorddatatype_4tuekbbgqsijk4yv29iawd34y.h",
@@ -143,7 +151,7 @@ minerva_aa_codegen_rule(
 
 minerva_aa_codegen_rule(
     name = "starter_kit_application_exec_config_gen_rule",
-    arxml_srcs = ["@starter_kit_adaptive_xavier//:application_arxml"],
+    arxml_srcs = [":complete_arxml"],
     outs_list_dict = {
         "starter_kit_skeleton_exec_config": [
             "IDC_M_P_SoftwareClusterDesign_Base_SwComponentType_Executable/configuration/exec_config.json",
@@ -159,7 +167,7 @@ minerva_aa_codegen_rule(
 
 minerva_aa_codegen_rule(
     name = "starter_kit_application_someipbinding_gen_rule",
-    arxml_srcs = ["@starter_kit_adaptive_xavier//:application_arxml"],
+    arxml_srcs = [":complete_arxml"],
     outs_list_dict = {
         "starter_kit_skeleton_someip_config": [
             "IDC_M_P_SoftwareClusterDesign_Base_SwComponentType_Executable/configuration/someip_config.json",
@@ -273,7 +281,7 @@ minerva_aa_codegen_rule(
 
 minerva_aa_codegen_rule(
     name = "starter_kit_application_updatemanager_swcluster_meta_gen_rule",
-    arxml_srcs = ["@starter_kit_adaptive_xavier//:application_arxml"],
+    arxml_srcs = [":complete_arxml"],
     outs_list_dict = {
         "starter_kit_skeleton_updatemanager_swcluster_meta": [
             "IDC_M_P_SoftwareClusterDesign_Base_SwComponentType_Executable/swcl_package_metadata.json",
@@ -289,7 +297,7 @@ minerva_aa_codegen_rule(
 
 minerva_aa_codegen_rule(
     name = "starter_kit_application_updatemanager_daemon_gen_rule",
-    arxml_srcs = ["@starter_kit_adaptive_xavier//:application_arxml"],
+    arxml_srcs = [":complete_arxml"],
     outs_list_dict = {
         "starter_kit_skeleton_updatemanager_daemon": [
             "IDC_M_P_SoftwareClusterDesign_Base_SwComponentType_Executable/etc/updatemanager.json",
@@ -307,7 +315,7 @@ minerva_aa_codegen_rule(
 
 minerva_aa_codegen_rule(
     name = "starter_kit_application_applicationbase_init_deinit_gen_rule",
-    arxml_srcs = ["@starter_kit_adaptive_xavier//:application_arxml"],
+    arxml_srcs = [":complete_arxml"],
     outs_list_dict = {
         "starter_kit_skeleton_applicationbase_init_deinit_srcs": [
             "IDC_M_P_SoftwareClusterDesign_Base_SwComponentType_Executable/src/ara/core/initialization.cpp",
@@ -323,7 +331,7 @@ minerva_aa_codegen_rule(
 
 minerva_aa_codegen_rule(
     name = "starter_kit_application_someipprotocol_gen_rule",
-    arxml_srcs = ["@starter_kit_adaptive_xavier//:application_arxml"],
+    arxml_srcs = [":complete_arxml"],
     outs_list_dict = {
         "starter_kit_skeleton_someipprotocol_srcs": [
             "IDC_M_P_SoftwareClusterDesign_Base_SwComponentType_Executable/src/amsr/someip_protocol/internal/dataprototype_deserialization/daimler_services_common_srvifc_2_z_dummy_service_10/methods/deserializer_aDummyMethodSWC_Dummy_Argument.cpp",
@@ -610,7 +618,7 @@ minerva_aa_codegen_rule(
 
 minerva_aa_codegen_rule(
     name = "starter_kit_application_socal_gen_rule",
-    arxml_srcs = ["@starter_kit_adaptive_xavier//:application_arxml"],
+    arxml_srcs = [":complete_arxml"],
     outs_list_dict = {
         "starter_kit_skeleton_socal_srcs": [
             "IDC_M_P_SoftwareClusterDesign_Base_SwComponentType_Executable/src/daimler/services/common/srvifc_18069_prk_homeparking_ui_service_st3_10/srvifc_18069_prk_homeparking_ui_service_st3_10_resource_manager.cpp",
