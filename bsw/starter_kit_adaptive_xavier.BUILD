@@ -817,6 +817,7 @@ filegroup(
     name = "mex_arxml",
     srcs = [
         "mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-em-executionmanager/mex/MexDefs.arxml",
+        "mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-applicationbase/mex/BswExecutableModelExtension.arxml",
     ],
     visibility = ["//visibility:public"],
 )
