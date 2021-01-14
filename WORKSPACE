@@ -236,7 +236,7 @@ new_git_repository(
     ],
     patches = [
         "@//bsw:patches/add-console-log-option-in-vector-sip-log-daemon.patch",
-        "@//bsw:patches/cmake-package-exports-remianing-libs.patch"
+        "@//bsw:patches/cmake-package-exports-remaining-libs.patch",
         "@//bsw:patches/fix-cmake-package-exports.patch",
         "@//bsw:patches/remove-controlpanel-symlink-in-vector-sip.patch",
         "@//bsw:patches/socal-target-include-directory-for-someipbinding.patch",
