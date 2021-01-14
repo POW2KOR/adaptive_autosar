@@ -239,7 +239,6 @@ new_git_repository(
         "@//bsw:patches/cmake-package-exports-remaining-libs.patch",
         "@//bsw:patches/fix-cmake-package-exports.patch",
         "@//bsw:patches/remove-controlpanel-symlink-in-vector-sip.patch",
-        "@//bsw:patches/socal-target-include-directory-for-someipbinding.patch",
     ],
     remote = "ssh://git@git.swf.daimler.com:7999/adas/starter_kit_adaptive_xavier.git",
     shallow_since = "1607616957 +0100"
