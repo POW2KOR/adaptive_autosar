@@ -707,7 +707,7 @@ filegroup(
 )
 
 cmake_external(
-    name = "amsr_vector_fs_socal",
+    name = "amsr_vector_fs_socal_for_proxy",
     cache_entries = extend_and_select(
         CMAKE_TOOLCHAIN_DICT,
         {
