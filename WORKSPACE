@@ -235,8 +235,8 @@ new_git_repository(
         "-p1",
     ],
     patches = [
-        "@//bsw:remove-controlpanel-symlink-in-vector-sip.patch",
-        "@//bsw:add-console-log-option-in-vector-sip-log-daemon.patch",
+        "@//bsw:patches/remove-controlpanel-symlink-in-vector-sip.patch",
+        "@//bsw:patches/add-console-log-option-in-vector-sip-log-daemon.patch",
     ],
     remote = "ssh://git@git.swf.daimler.com:7999/adas/starter_kit_adaptive_xavier.git",
     shallow_since = "1607616957 +0100"
