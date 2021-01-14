@@ -21,6 +21,78 @@ filegroup(
     ]
 )
 
+filegroup(
+    name = "amsr_vector_fs_log_daemon_exec_config",
+    srcs = [
+        "configs/amsr_vector_fs_log_daemon/exec_config.json"
+    ]
+)
+
+filegroup(
+    name = "amsr_vector_fs_log_daemon_logd_config",
+    srcs = [
+        "configs/amsr_vector_fs_log_daemon/logd_config.json"
+    ]
+)
+
+filegroup(
+    name = "someipd_posix_logging_config",
+    srcs = [
+        "configs/someipd_posix/logging_config.json"
+    ]
+)
+
+filegroup(
+    name = "someipd_posix_exec_config",
+    srcs = [
+        "configs/someipd_posix/exec_config.json"
+    ]
+)
+
+filegroup(
+    name = "someipd_posix_someip_config",
+    srcs = [
+        "configs/someipd_posix/someipd-posix.json"
+    ]
+)
+
+filegroup(
+    name = "amsr_vector_fs_log_daemon_logging_config",
+    srcs = [
+        "configs/amsr_vector_fs_log_daemon/logging_config.json"
+    ]
+)
+
+filegroup(
+    name = "executionmanager_state_client_app_logging_config",
+    srcs = [
+        "configs/executionmanager_state_client_app/logging_config.json"
+    ]
+)
+
+filegroup(
+    name = "executionmanager_state_client_app_exec_config",
+    srcs = [
+        "configs/executionmanager_state_client_app/exec_config.json"
+    ]
+)
+
+
+filegroup(
+    name = "em_logging_config",
+    srcs = [
+        "configs/etc/logging_config.json"
+    ]
+)
+
+
+filegroup(
+    name = "machine_exec_config",
+    srcs = [
+        "configs/etc/machine_exec_config.json"
+    ]
+)
+
 minerva_aa_codegen_rule(
     name = "executionmanager_state_client_app_gen_rule",
     arxml_srcs = [":executionmanager_state_client_app_arxml"],
@@ -31,6 +103,10 @@ minerva_aa_codegen_rule(
         "executionmanager_state_client_updatemanager_swcluser_meta": [
             "executionmanager_state_client_app/swcl_package_metadata.json"
         ],
+        # We're not using this exec_config because the code generator isn't
+        # able to generate a proper config file when category PLATFORM_LEVEL
+        # is selected. So instead,
+        # :executionmanager_state_client_app_exec_config gets used. 
         "executionmanager_state_client_exec_config": [
             "executionmanager_state_client_app/configuration/exec_config.json"
         ],

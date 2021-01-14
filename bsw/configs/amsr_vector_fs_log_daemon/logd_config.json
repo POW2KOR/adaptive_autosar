@@ -1,0 +1,49 @@
+{
+  "version": "1.00.00",
+  "general": {
+    "ecu_id": "ECU1"
+  },
+  "ipc": {
+    "log_port": 33
+  },
+  "channels": {
+    "tcp0": {
+      "buffer": {
+        "max_num": 1000,
+        "strategy": "drop_new"
+      },
+      "connections": {
+        "tcp0": {
+          "type": "dlt",
+          "tcp": {
+            "local": [
+              "::1",
+              49361
+            ],
+            "keep_alive": true,
+            "no_delay": false,
+            "num_connections": 1
+          }
+        }
+      }
+    },
+    "udp0": {
+      "buffer": {
+        "max_num": 100,
+        "strategy": "drop_new"
+      },
+      "connections": {
+        "udp0": {
+          "type": "dlt",
+          "udp": {
+            "remote": [
+              "::1",
+              49362
+            ],
+            "segment_size": 508
+          }
+        }
+      }
+    }
+  }
+}
