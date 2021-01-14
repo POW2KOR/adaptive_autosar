@@ -808,10 +808,18 @@ filegroup(
 )
 
 filegroup(
-    name = "application_arxml",
+    name = "ncd_arxml",
     srcs = [
         "examples/proxy-skeleton-demo-idc6/arxml/NcdProxySkeletonDemo.ARXML",
+    ],
+    visibility = ["//visibility:public"],
+)
+
+filegroup(
+    name = "mex_arxml",
+    srcs = [
         "mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-em-executionmanager/mex/MexDefs.arxml",
+        "mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-applicationbase/mex/BswExecutableModelExtension.arxml",
     ],
     visibility = ["//visibility:public"],
 )
