@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ProjectAssistant DpaSchemaVersion="00.03" InitiallyCreatedWithToolVersion="2.4.38.98725" MsrPlatform="adaptive" uuid="6b72fcbf-25c5-4fe2-8650-575d95ebe22d">
+    <General>
+        <Name>SwucNvAdapter_test_machine</Name>
+        <Version>1.0</Version>
+        <Author>twilmer</Author>
+    </General>
+    <CompatibilityVersion>
+        <Current>1.0.0</Current>
+        <AsrMdfRevision>R047</AsrMdfRevision>
+    </CompatibilityVersion>
+    <Environment>
+        <SipId>Adaptive-SIP</SipId>
+    </Environment>
+    <Folders>
+        <GenData>../src-gen</GenData>
+        <Logs>./log</Logs>
+        <ARXML>../arxml</ARXML>
+    </Folders>
+    <Properties>
+        <ProjectType>MachineIntegration</ProjectType>
+    </Properties>
+    <ProjectReferences>
+        <Ref>
+            <lastKnownName>Swuc_interface</lastKnownName>
+            <UUID>f591ca16-15f8-4953-bfed-107383c20a45</UUID>
+            <lastKnownPath>./../../../git/minerva_mpu_adaptive/application/SWUpdateClientNVAdapter/Swuc_interface</lastKnownPath>
+        </Ref>
+        <Ref>
+            <lastKnownName>SwucNvAdapter_app</lastKnownName>
+            <UUID>3293f680-9f35-4bdb-a96a-e24d1967bd2c</UUID>
+            <lastKnownPath>./../../../git/minerva_mpu_adaptive/application/SWUpdateClientNVAdapter/SwucNvAdapter_app</lastKnownPath>
+        </Ref>
+        <Ref>
+            <lastKnownName>SwucNvAdapter_app_test</lastKnownName>
+            <UUID>ac9834dd-b4e8-41a8-bfda-a131e9b4cb1b</UUID>
+            <lastKnownPath>./../../SwucNvAdapter_app_test</lastKnownPath>
+        </Ref>
+    </ProjectReferences>
+    <ToolSettings>
+        <Misc>
+            <Settings Name="com.vector.cfg.automation.scripting.SearchLocations">
+                <Settings Name="e1081b015d9ef24c2626174b6fd332b8">
+                    <Setting Value="$(DpaProjectFolder)/../scripts" Name="LocationPath"/>
+                </Settings>
+            </Settings>
+        </Misc>
+    </ToolSettings>
+</ProjectAssistant>

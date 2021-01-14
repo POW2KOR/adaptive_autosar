@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<AUTOSAR xmlns="http://autosar.org/schema/r4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_00047.xsd">
+  <AR-PACKAGES>
+    <AR-PACKAGE>
+      <SHORT-NAME>MICROSAR</SHORT-NAME>
+      <AR-PACKAGES>
+        <AR-PACKAGE>
+          <SHORT-NAME>ADAPTIVE</SHORT-NAME>
+          <ELEMENTS>
+            <SDG-DEF>
+              <SHORT-NAME>StartupModelExtension</SHORT-NAME>
+              <SDG-CLASSES>
+                <SDG-CLASS UUID="2ac35c65-982d-45e8-8b29-5ff78a43fd2b">
+                  <SHORT-NAME>UserGroups</SHORT-NAME>
+                  <GID>DvMex:UserGroups</GID>
+                  <EXTENDS-META-CLASS>StartupConfig</EXTENDS-META-CLASS>
+                  <ATTRIBUTES>
+                    <SDG-PRIMITIVE-ATTRIBUTE UUID="f6130f14-61ce-4937-9f8d-bb0b3617ed48">
+                      <SHORT-NAME>userId</SHORT-NAME>
+                      <CATEGORY>INTEGER</CATEGORY>
+                      <LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+                      <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                      <GID>DvMex:userId</GID>
+                      <MAX>2147483647</MAX>
+                      <MIN>0</MIN>
+                    </SDG-PRIMITIVE-ATTRIBUTE>
+                    <SDG-PRIMITIVE-ATTRIBUTE UUID="b1098993-32e7-45bd-833a-759019556422">
+                      <SHORT-NAME>primaryGroupId</SHORT-NAME>
+                      <CATEGORY>INTEGER</CATEGORY>
+                      <LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+                      <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                      <GID>DvMex:primaryGroupId</GID>
+                      <MAX>2147483647</MAX>
+                      <MIN>0</MIN>
+                    </SDG-PRIMITIVE-ATTRIBUTE>
+                    <SDG-PRIMITIVE-ATTRIBUTE UUID="e2cb173a-ffce-4691-b346-0ab356d9c5a8">
+                      <SHORT-NAME>secondaryGroupIds</SHORT-NAME>
+                      <CATEGORY>INTEGER</CATEGORY>
+                      <LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+                      <UPPER-MULTIPLICITY-INFINITE>true</UPPER-MULTIPLICITY-INFINITE>
+                      <GID>DvMex:secondaryGroupIds</GID>
+                      <MAX>2147483647</MAX>
+                      <MIN>0</MIN>
+                    </SDG-PRIMITIVE-ATTRIBUTE>
+                  </ATTRIBUTES>
+                </SDG-CLASS>
+              </SDG-CLASSES>
+            </SDG-DEF>
+            <SDG-DEF UUID="4d01106a-b404-4a85-ad52-632aa8a2d52f">
+              <SHORT-NAME>ExecResourceGroupModelExtension</SHORT-NAME>
+              <SDG-CLASSES>
+                <SDG-CLASS UUID="f2de1b5f-398c-4515-b544-a66d69cb2655">
+                  <SHORT-NAME>CGroup</SHORT-NAME>
+                  <GID>DvMex:CGroup</GID>
+                  <EXTENDS-META-CLASS>ResourceGroup</EXTENDS-META-CLASS>
+                  <ATTRIBUTES>
+                    <SDG-PRIMITIVE-ATTRIBUTE UUID="19167355-1dd7-44a0-a0ef-4e90d2fcbc45">
+                      <SHORT-NAME>cgroupPath</SHORT-NAME>
+                      <CATEGORY>STRING</CATEGORY>
+                      <LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+                      <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                      <GID>DvMex:cgroupPath</GID>
+                    </SDG-PRIMITIVE-ATTRIBUTE>
+                  </ATTRIBUTES>
+                </SDG-CLASS>
+              </SDG-CLASSES>
+            </SDG-DEF>
+          </ELEMENTS>
+        </AR-PACKAGE>
+      </AR-PACKAGES>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>

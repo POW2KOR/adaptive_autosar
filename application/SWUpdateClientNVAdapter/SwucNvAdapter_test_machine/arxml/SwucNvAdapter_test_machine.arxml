@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<AUTOSAR xmlns="http://autosar.org/schema/r4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_00047.xsd">
+  <AR-PACKAGES>
+    <AR-PACKAGE UUID="66e08b55-fb81-4654-8fb0-7cfc26728af8">
+      <SHORT-NAME>mb</SHORT-NAME>
+      <ELEMENTS>
+        <MACHINE UUID="30da56c8-ca23-4e38-b3e7-8cfb2c68fd35">
+          <SHORT-NAME>SwucNvAdapterTestMachine</SHORT-NAME>
+          <FUNCTION-GROUPS>
+            <MODE-DECLARATION-GROUP-PROTOTYPE UUID="72fbd7fd-f4dc-4065-aa3f-899982756e18">
+              <SHORT-NAME>MachineState</SHORT-NAME>
+              <TYPE-TREF DEST="MODE-DECLARATION-GROUP">/mb/SwucNvAdapterTestMachineMachineState</TYPE-TREF>
+            </MODE-DECLARATION-GROUP-PROTOTYPE>
+            <MODE-DECLARATION-GROUP-PROTOTYPE UUID="b62f1fba-d0aa-4a80-b9d8-38bfcfb7080e">
+              <SHORT-NAME>FunctionGroup</SHORT-NAME>
+              <TYPE-TREF DEST="MODE-DECLARATION-GROUP">/mb/FunctionGroup</TYPE-TREF>
+            </MODE-DECLARATION-GROUP-PROTOTYPE>
+          </FUNCTION-GROUPS>
+          <MACHINE-DESIGN-REF DEST="MACHINE-DESIGN">/mb/SwucNvAdapter_test_MachineDesign</MACHINE-DESIGN-REF>
+          <MODULE-INSTANTIATIONS>
+            <OS-MODULE-INSTANTIATION UUID="3cc2c326-6003-4560-993a-f8bc1dd6a5e6">
+              <SHORT-NAME>Os</SHORT-NAME>
+              <RESOURCE-GROUPS>
+                <RESOURCE-GROUP UUID="68a089b3-7660-4d36-8d47-b838f02842c2">
+                  <SHORT-NAME>ControlGroup</SHORT-NAME>
+                  <CPU-USAGE>50</CPU-USAGE>
+                  <MEM-USAGE>1024</MEM-USAGE>
+                </RESOURCE-GROUP>
+              </RESOURCE-GROUPS>
+            </OS-MODULE-INSTANTIATION>
+          </MODULE-INSTANTIATIONS>
+          <PROCESSORS>
+            <PROCESSOR UUID="1cc935fd-3c9a-440c-9e9c-469b237cd561">
+              <SHORT-NAME>Processor</SHORT-NAME>
+              <CORES>
+                <PROCESSOR-CORE UUID="1c52d51d-4ed2-46e4-9ec2-838acd62f09b">
+                  <SHORT-NAME>ProcessorCore</SHORT-NAME>
+                </PROCESSOR-CORE>
+              </CORES>
+            </PROCESSOR>
+          </PROCESSORS>
+        </MACHINE>
+        <PROCESS-TO-MACHINE-MAPPING-SET UUID="510298b9-0dde-468d-a6c8-d7ba58e8f5ce">
+          <SHORT-NAME>MachineProcessMappingSet</SHORT-NAME>
+          <CATEGORY/>
+          <PROCESS-TO-MACHINE-MAPPINGS>
+            <PROCESS-TO-MACHINE-MAPPING UUID="74d73c49-c527-484e-9ad6-63a170956473">
+              <SHORT-NAME>MachineToSwucTestProcessMapping</SHORT-NAME>
+              <MACHINE-REF DEST="MACHINE">/mb/SwucNvAdapterTestMachine</MACHINE-REF>
+              <PROCESS-REF DEST="PROCESS">/mb/SwucNvAdapter_app_Process</PROCESS-REF>
+              <SHALL-RUN-ON-REFS>
+                <SHALL-RUN-ON-REF DEST="PROCESSOR-CORE">/mb/SwucNvAdapterTestMachine/Processor/ProcessorCore</SHALL-RUN-ON-REF>
+              </SHALL-RUN-ON-REFS>
+            </PROCESS-TO-MACHINE-MAPPING>
+          </PROCESS-TO-MACHINE-MAPPINGS>
+        </PROCESS-TO-MACHINE-MAPPING-SET>
+        <ETHERNET-CLUSTER UUID="f112dd0f-dfa8-4bfe-b7e6-d22b6171b2ff">
+          <SHORT-NAME>EthernetChannel</SHORT-NAME>
+          <ETHERNET-CLUSTER-VARIANTS>
+            <ETHERNET-CLUSTER-CONDITIONAL>
+              <PHYSICAL-CHANNELS>
+                <ETHERNET-PHYSICAL-CHANNEL UUID="017d0b4a-f949-484a-afec-0a402a920280">
+                  <SHORT-NAME>EthernetChannelChnl</SHORT-NAME>
+                  <NETWORK-ENDPOINTS>
+                    <NETWORK-ENDPOINT UUID="1de836a8-aa89-460a-92c0-27a2299bb32a">
+                      <SHORT-NAME>EthernetDefault</SHORT-NAME>
+                      <FULLY-QUALIFIED-DOMAIN-NAME/>
+                      <NETWORK-ENDPOINT-ADDRESSES>
+                        <IPV-4-CONFIGURATION>
+                          <IPV-4-ADDRESS>172.0.0.22</IPV-4-ADDRESS>
+                        </IPV-4-CONFIGURATION>
+                      </NETWORK-ENDPOINT-ADDRESSES>
+                    </NETWORK-ENDPOINT>
+                  </NETWORK-ENDPOINTS>
+                </ETHERNET-PHYSICAL-CHANNEL>
+              </PHYSICAL-CHANNELS>
+            </ETHERNET-CLUSTER-CONDITIONAL>
+          </ETHERNET-CLUSTER-VARIANTS>
+        </ETHERNET-CLUSTER>
+        <MACHINE-DESIGN UUID="ecc72698-b38d-4a65-84de-6847bacdd1f8">
+          <SHORT-NAME>SwucNvAdapter_test_MachineDesign</SHORT-NAME>
+          <COMMUNICATION-CONNECTORS>
+            <ETHERNET-COMMUNICATION-CONNECTOR UUID="bd56da4c-f891-4d84-9eba-e38490f0442b">
+              <SHORT-NAME>EthernetDefault</SHORT-NAME>
+              <UNICAST-NETWORK-ENDPOINT-REF DEST="NETWORK-ENDPOINT">/mb/EthernetChannel/EthernetChannelChnl/EthernetDefault</UNICAST-NETWORK-ENDPOINT-REF>
+            </ETHERNET-COMMUNICATION-CONNECTOR>
+          </COMMUNICATION-CONNECTORS>
+          <SERVICE-DISCOVER-CONFIGS>
+            <SOMEIP-SERVICE-DISCOVERY>
+              <MULTICAST-SD-IP-ADDRESS-REF DEST="NETWORK-ENDPOINT">/mb/EthernetChannel/EthernetChannelChnl/EthernetDefault</MULTICAST-SD-IP-ADDRESS-REF>
+              <SOMEIP-SERVICE-DISCOVERY-PORT>30490</SOMEIP-SERVICE-DISCOVERY-PORT>
+            </SOMEIP-SERVICE-DISCOVERY>
+          </SERVICE-DISCOVER-CONFIGS>
+        </MACHINE-DESIGN>
+        <MODE-DECLARATION-GROUP UUID="37681415-c08d-4fe0-b2f4-804a9758a12a">
+          <SHORT-NAME>SwucNvAdapterTestMachineMachineState</SHORT-NAME>
+          <INITIAL-MODE-REF DEST="MODE-DECLARATION">/mb/SwucNvAdapterTestMachineMachineState/Off</INITIAL-MODE-REF>
+          <MODE-DECLARATIONS>
+            <MODE-DECLARATION UUID="4c29e1f8-50b5-4138-ad57-6b4b30b0e508">
+              <SHORT-NAME>Off</SHORT-NAME>
+              <VALUE>0</VALUE>
+            </MODE-DECLARATION>
+            <MODE-DECLARATION UUID="28007899-6584-43b0-8fa0-fc1c91895835">
+              <SHORT-NAME>Startup</SHORT-NAME>
+              <VALUE>1</VALUE>
+            </MODE-DECLARATION>
+            <MODE-DECLARATION UUID="1464855c-0182-4a39-8708-4fc9f3d3db78">
+              <SHORT-NAME>Shutdown</SHORT-NAME>
+              <VALUE>2</VALUE>
+            </MODE-DECLARATION>
+            <MODE-DECLARATION UUID="15ea110a-0ac2-4b13-99c9-5dc6d138034f">
+              <SHORT-NAME>Restart</SHORT-NAME>
+              <VALUE>3</VALUE>
+            </MODE-DECLARATION>
+          </MODE-DECLARATIONS>
+        </MODE-DECLARATION-GROUP>
+        <MODE-DECLARATION-GROUP UUID="e0a9a4de-a9fe-4415-b7fd-28a04b0f2ffb">
+          <SHORT-NAME>FunctionGroup</SHORT-NAME>
+          <INITIAL-MODE-REF DEST="MODE-DECLARATION">/mb/FunctionGroup/Off</INITIAL-MODE-REF>
+          <MODE-DECLARATIONS>
+            <MODE-DECLARATION UUID="bbe5b8a4-7315-4e6f-8849-b1358e2a1b8e">
+              <SHORT-NAME>Off</SHORT-NAME>
+              <VALUE>0</VALUE>
+            </MODE-DECLARATION>
+          </MODE-DECLARATIONS>
+        </MODE-DECLARATION-GROUP>
+      </ELEMENTS>
+    </AR-PACKAGE>
+    <AR-PACKAGE>
+      <SHORT-NAME>AUTOSAR</SHORT-NAME>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>
