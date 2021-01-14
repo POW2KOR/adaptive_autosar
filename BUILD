@@ -150,6 +150,7 @@ container_image(
     tars = [
         ":minerva_mpu_adaptive_filesystem",
     ],
+    docker_run_flags = "-it --cap-add SYS_NICE --cap-add NET_ADMIN"
 )
 
 # Buildifier
