@@ -9,13 +9,13 @@ filegroup(
 )
 
 filegroup(
-    name = "example_em_app_arxml",
-    srcs = ["arxmls/example_em_app.arxml"],
+    name = "executionmanager_state_client_app_arxml",
+    srcs = ["arxmls/executionmanager_state_client_app.arxml"],
 )
 
 minerva_aa_codegen_rule(
     name = "starter_kit_executionmanager_addon_configs_gen_rule",
-    arxml_srcs = [":example_em_app_arxml"],
+    arxml_srcs = [":executionmanager_state_client_app_arxml"],
     outs_list_dict = {
         "starter_kit_executionmanager_addon_updatemanager_swcluser_meta": [
             "amsr_vector_fs_em_executionmanager_demo_application/etc/swcl_db.json"
@@ -36,10 +36,10 @@ minerva_aa_codegen_rule(
 
 minerva_aa_codegen_rule(
     name = "starter_kit_executionmanager_addon_applicationbase_init_deinit_gen_rule",
-    arxml_srcs = [":example_em_app_arxml"],
+    arxml_srcs = [":executionmanager_state_client_app_arxml"],
     outs_list_dict = {
-        "starter_kit_executionmanager_addon_applicationbase_init_deinit_srcs": [
-            "amsr_vector_fs_em_executionmanager_demo_application/src/ara/core/initialization.cpp"
+        "executionmanager_state_client_applicationbase_init_deinit_srcs": [
+            "executionmanager_state_client_app/src/ara/core/initialization.cpp"
         ]
     },
     generators = [
@@ -48,7 +48,7 @@ minerva_aa_codegen_rule(
 )
 
 cc_binary(
-    name = "starter_kit_executionmanager_addon_binary",
+    name = "executionmanager_state_client_binary",
     deps = [
         "@starter_kit_adaptive_xavier//:amsr-vector-fs-applicationbase",
         "@starter_kit_adaptive_xavier//:amsr-vector-fs-log-api",
@@ -57,7 +57,7 @@ cc_binary(
     ],
     srcs = [
         "@starter_kit_adaptive_xavier//:amsr_vector_fs_em_executionmanager_addon_demo_application_srcs",
-        ":starter_kit_executionmanager_addon_applicationbase_init_deinit_srcs",
+        ":executionmanager_state_client_applicationbase_init_deinit_srcs",
     ],
     copts = [
         "-std=c++14",
