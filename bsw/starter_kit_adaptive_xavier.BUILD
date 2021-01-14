@@ -276,6 +276,8 @@ cmake_external(
         CMAKE_TOOLCHAIN_DICT,
         {
             "CMAKE_SYSTEM_NAME": CMAKE_SYSTEM_NAME_LINUX,
+            "ENABLE_DAEMON": "ON",
+            "ENABLE_SYS_LOG": "ON",
             "vac_DIR:PATH": "$EXT_BUILD_DEPS/amsr-vector-fs-libvac/lib/cmake/vac/",
             "osabstraction_DIR:PATH": "$EXT_BUILD_DEPS/amsr-vector-fs-libosabstraction/lib/cmake/osabstraction/",
             "vajson_DIR:PATH": "$EXT_BUILD_DEPS/amsr-vector-fs-vajson/lib/cmake/vajson/",
