@@ -116,6 +116,19 @@
           </NAMESPACES>
           <SERVICE-KIND>VENDOR-SPECIFIC</SERVICE-KIND>
           <FIELDS>
+            <FIELD UUID="c7562843-e82d-4405-80d9-ac3d945ad2e5">
+              <SHORT-NAME>progress</SHORT-NAME>
+              <CATEGORY/>
+              <ANNOTATIONS>
+                <ANNOTATION>
+                  <ANNOTATION-ORIGIN>Progress in 0 to 100%, see OFR Spec .- this would not allow a over all status of there is more than one package flashed </ANNOTATION-ORIGIN>
+                </ANNOTATION>
+              </ANNOTATIONS>
+              <TYPE-TREF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/AUTOSAR/StdTypes/uint8_t</TYPE-TREF>
+              <HAS-GETTER>true</HAS-GETTER>
+              <HAS-NOTIFIER>true</HAS-NOTIFIER>
+              <HAS-SETTER>false</HAS-SETTER>
+            </FIELD>
             <FIELD UUID="a82a8619-336f-4dde-92ec-847858f1ce5d">
               <SHORT-NAME>status</SHORT-NAME>
               <CATEGORY/>
@@ -131,6 +144,11 @@
               <ARGUMENTS>
                 <ARGUMENT-DATA-PROTOTYPE UUID="d5c837d9-8ba0-4ccb-95a3-54ff705ad396">
                   <SHORT-NAME>seq_counter</SHORT-NAME>
+                  <ANNOTATIONS>
+                    <ANNOTATION>
+                      <ANNOTATION-ORIGIN>Sequence counter starts from 0 after start Session</ANNOTATION-ORIGIN>
+                    </ANNOTATION>
+                  </ANNOTATIONS>
                   <TYPE-TREF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/mb/UcmTransferdataSeqCounter</TYPE-TREF>
                   <DIRECTION>IN</DIRECTION>
                 </ARGUMENT-DATA-PROTOTYPE>
@@ -148,6 +166,18 @@
             </CLIENT-SERVER-OPERATION>
             <CLIENT-SERVER-OPERATION UUID="48e435b6-cdd4-4879-a910-10bf7a689da0">
               <SHORT-NAME>StartSession</SHORT-NAME>
+              <ARGUMENTS>
+                <ARGUMENT-DATA-PROTOTYPE UUID="3c60b141-8e0e-4272-aaa7-6c5a4b8348f1">
+                  <SHORT-NAME>resumeOffset</SHORT-NAME>
+                  <ANNOTATIONS>
+                    <ANNOTATION>
+                      <ANNOTATION-ORIGIN>0 or the byte position which was given in GetResumePosition</ANNOTATION-ORIGIN>
+                    </ANNOTATION>
+                  </ANNOTATIONS>
+                  <TYPE-TREF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/AUTOSAR/StdTypes/uint64_t</TYPE-TREF>
+                  <DIRECTION>IN</DIRECTION>
+                </ARGUMENT-DATA-PROTOTYPE>
+              </ARGUMENTS>
               <FIRE-AND-FORGET>true</FIRE-AND-FORGET>
             </CLIENT-SERVER-OPERATION>
             <CLIENT-SERVER-OPERATION UUID="58ce9755-d157-461f-bae7-c0663cceade0">
@@ -166,6 +196,41 @@
                 <ARGUMENT-DATA-PROTOTYPE UUID="876d04bb-12d7-4e71-85d1-bce2544dfc5e">
                   <SHORT-NAME>switch_ok</SHORT-NAME>
                   <TYPE-TREF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/AUTOSAR/StdTypes/bool</TYPE-TREF>
+                  <DIRECTION>OUT</DIRECTION>
+                </ARGUMENT-DATA-PROTOTYPE>
+              </ARGUMENTS>
+            </CLIENT-SERVER-OPERATION>
+            <CLIENT-SERVER-OPERATION UUID="61ff0089-95a7-4a89-9fcb-9ebe40c62044">
+              <SHORT-NAME>GetResumePosition</SHORT-NAME>
+              <ARGUMENTS>
+                <ARGUMENT-DATA-PROTOTYPE UUID="bc84ebed-e8d0-4469-8c8e-ef2991b46727">
+                  <SHORT-NAME>position</SHORT-NAME>
+                  <ANNOTATIONS>
+                    <ANNOTATION>
+                      <ANNOTATION-ORIGIN>The Byte position at which the next byte has to be written</ANNOTATION-ORIGIN>
+                    </ANNOTATION>
+                  </ANNOTATIONS>
+                  <TYPE-TREF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/AUTOSAR/StdTypes/uint64_t</TYPE-TREF>
+                  <DIRECTION>OUT</DIRECTION>
+                </ARGUMENT-DATA-PROTOTYPE>
+                <ARGUMENT-DATA-PROTOTYPE UUID="8da9a32a-ebbc-4813-8482-13b943e28f72">
+                  <SHORT-NAME>version</SHORT-NAME>
+                  <ANNOTATIONS>
+                    <ANNOTATION>
+                      <ANNOTATION-ORIGIN>The Version number of the package beeing downloaded - may be changed to min.minor.patch struct?</ANNOTATION-ORIGIN>
+                    </ANNOTATION>
+                  </ANNOTATIONS>
+                  <TYPE-TREF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/AUTOSAR/StdTypes/uint64_t</TYPE-TREF>
+                  <DIRECTION>OUT</DIRECTION>
+                </ARGUMENT-DATA-PROTOTYPE>
+                <ARGUMENT-DATA-PROTOTYPE UUID="8d09beec-90ca-4bf5-aec7-e5e8a53e7b5e">
+                  <SHORT-NAME>id</SHORT-NAME>
+                  <ANNOTATIONS>
+                    <ANNOTATION>
+                      <ANNOTATION-ORIGIN>The ID of the Package beeing downloaded</ANNOTATION-ORIGIN>
+                    </ANNOTATION>
+                  </ANNOTATIONS>
+                  <TYPE-TREF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/AUTOSAR/StdTypes/uint64_t</TYPE-TREF>
                   <DIRECTION>OUT</DIRECTION>
                 </ARGUMENT-DATA-PROTOTYPE>
               </ARGUMENTS>
