@@ -896,7 +896,7 @@ cc_binary(
         "@starter_kit_adaptive_xavier//:amsr-vector-fs-em-executionmanager",
         "@starter_kit_adaptive_xavier//:amsr-vector-fs-libvac",
         "@starter_kit_adaptive_xavier//:amsr-vector-fs-log-api",
-        "@starter_kit_adaptive_xavier//:amsr_vector_fs_socal",
+        "@starter_kit_adaptive_xavier//:amsr_vector_fs_socal_for_proxy",
         "@starter_kit_adaptive_xavier//:amsr_vector_fs_someipbinding",
     ],
     srcs = [
@@ -915,6 +915,90 @@ cc_binary(
     ],
     copts = [
         "-std=c++14",
+    ],
+    linkstatic = 1,
+)
+
+cc_library(
+    name = "starter_kit_skeleton_socal_hdrs_lib",
+    hdrs = [
+        ":starter_kit_skeleton_socal_hdrs"
+    ],
+    strip_include_prefix = "starter_kit_skeleton_socal_hdrs/output/IDC_M_P_SoftwareClusterDesign_Base_SwComponentType_Executable/includes",
+)
+
+cc_library(
+    name = "starter_kit_skeleton_modeldatatypes_hdrs_lib",
+    hdrs = [
+        ":starter_kit_skeleton_modeldatatypes_hdrs"
+    ],
+    strip_include_prefix = "starter_kit_skeleton_modeldatatypes_hdrs/output/IDC_M_P_SoftwareClusterDesign_Base_SwComponentType_Executable/includes",
+)
+
+cc_library(
+    name = "starter_kit_skeleton_someipbinding_hdrs_lib",
+    hdrs = [
+        ":starter_kit_skeleton_someipbinding_hdrs",
+    ],
+    strip_include_prefix = "starter_kit_skeleton_someipbinding_hdrs/output/IDC_M_P_SoftwareClusterDesign_Base_SwComponentType_Executable/includes",
+)
+
+cc_library(
+    name = "starter_kit_skeleton_someipprotocol_hdrs_lib",
+    hdrs = [
+        ":starter_kit_skeleton_someipprotocol_hdrs"
+    ],
+    strip_include_prefix = "starter_kit_skeleton_someipprotocol_hdrs/output/IDC_M_P_SoftwareClusterDesign_Base_SwComponentType_Executable/includes",
+)
+
+cc_library(
+    name = "starter_kit_skeleton_socal_srcs_lib",
+    srcs = [
+        ":starter_kit_skeleton_socal_srcs",
+        ":starter_kit_skeleton_someipprotocol_srcs",
+        ":starter_kit_skeleton_someipbinding_srcs",
+    ],
+    deps = [
+        ":starter_kit_skeleton_modeldatatypes_hdrs_lib",
+        ":starter_kit_skeleton_socal_hdrs_lib",
+        ":starter_kit_skeleton_someipbinding_hdrs_lib",
+        ":starter_kit_skeleton_someipprotocol_hdrs_lib",
+        "@starter_kit_adaptive_xavier//:amsr-vector-fs-comcommon",
+        "@starter_kit_adaptive_xavier//:amsr_vector_fs_socal_headers",
+        "@starter_kit_adaptive_xavier//:amsr-vector-fs-vajson",
+        "@starter_kit_adaptive_xavier//:amsr_vector_fs_someipbinding_headers",
+    ],
+    copts = [
+        "-std=c++14",
+    ],
+    linkstatic = 1,
+)
+
+cc_binary(
+    name = "skeleton_demo_idc6",
+    deps = [
+        ":starter_kit_skeleton_modeldatatypes_hdrs_lib",
+        ":starter_kit_skeleton_socal_hdrs_lib",
+        "@starter_kit_adaptive_xavier//:amsr-vector-fs-vajson",
+        "@starter_kit_adaptive_xavier//:amsr-vector-fs-em-executionmanager",
+        "@starter_kit_adaptive_xavier//:amsr-vector-fs-libvac",
+        "@starter_kit_adaptive_xavier//:amsr-vector-fs-log-api",
+        "@starter_kit_adaptive_xavier//:amsr_vector_fs_socal_for_skeleton",
+        "@starter_kit_adaptive_xavier//:amsr_vector_fs_someipbinding",
+    ],
+    srcs = [
+        "@starter_kit_adaptive_xavier//:skeleton_demo_idc6_srcs",
+
+        "@minerva_mpu_adaptive//:socal_lib",
+
+        ":starter_kit_skeleton_socal_srcs_lib",
+        ":starter_kit_skeleton_applicationbase_init_deinit_srcs",
+    ],
+    copts = [
+        "-std=c++14",
+    ],
+    linkopts = [
+        "-lpthread",
     ],
     linkstatic = 1,
 )
