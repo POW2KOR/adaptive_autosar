@@ -981,7 +981,7 @@ cmake_external(
             "ComCommon_DIR:PATH": "$EXT_BUILD_DEPS/amsr-vector-fs-comcommon/lib/cmake/ComCommon/",
             "SomeIpProtocol_DIR:PATH": "$EXT_BUILD_DEPS/amsr_vector_fs_someipprotocol/lib/cmake/SomeIpProtocol/",
             "SomeIpDaemonClient_DIR:PATH": "$EXT_BUILD_DEPS/amsr_vector_fs_someipdaemonclient/lib/cmake/SomeIpDaemonClient/",
-            "Socal_DIR:PATH": "$EXT_BUILD_DEPS/amsr_vector_fs_socal/lib/cmake/Socal/",
+            "Socal_DIR:PATH": "$EXT_BUILD_DEPS/amsr_vector_fs_socal_headers/lib/cmake/Socal/",
         },
     ),
     generate_crosstool_file = GEN_CROSSTOOL_FILE,
@@ -999,7 +999,7 @@ cmake_external(
         ":amsr-vector-fs-comcommon",
         ":amsr_vector_fs_someipprotocol",
         ":amsr_vector_fs_someipdaemonclient",
-        ":amsr_vector_fs_socal",
+        ":amsr_vector_fs_socal_headers",
     ],
 )
 
