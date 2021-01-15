@@ -93,7 +93,7 @@
           <ADMIN-DATA/>
           <ANNOTATIONS>
             <ANNOTATION>
-              <ANNOTATION-ORIGIN>Used by SWDL Clilent</ANNOTATION-ORIGIN>
+              <ANNOTATION-ORIGIN>Used by SWDL Clilent	</ANNOTATION-ORIGIN>
             </ANNOTATION>
           </ANNOTATIONS>
           <NAMESPACES>
@@ -154,6 +154,11 @@
                 </ARGUMENT-DATA-PROTOTYPE>
                 <ARGUMENT-DATA-PROTOTYPE UUID="a242e3e0-b3f9-4938-a4b7-dc2c60264328">
                   <SHORT-NAME>data</SHORT-NAME>
+                  <ANNOTATIONS>
+                    <ANNOTATION>
+                      <ANNOTATION-ORIGIN>The Data sent has to be already signature checked as it may be used by an interpreter (further containng manifest). If a sub signature is not OK the Tester has to be asked to resume at that position/all clients have to be asked for resume position</ANNOTATION-ORIGIN>
+                    </ANNOTATION>
+                  </ANNOTATIONS>
                   <TYPE-TREF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/mb/ByteVector</TYPE-TREF>
                   <DIRECTION>IN</DIRECTION>
                 </ARGUMENT-DATA-PROTOTYPE>
@@ -171,7 +176,7 @@
                   <SHORT-NAME>resumeOffset</SHORT-NAME>
                   <ANNOTATIONS>
                     <ANNOTATION>
-                      <ANNOTATION-ORIGIN>0 or the byte position which was given in GetResumePosition</ANNOTATION-ORIGIN>
+                      <ANNOTATION-ORIGIN>0 or up to the byte position which was given in GetResumePosition</ANNOTATION-ORIGIN>
                     </ANNOTATION>
                   </ANNOTATIONS>
                   <TYPE-TREF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/AUTOSAR/StdTypes/uint64_t</TYPE-TREF>

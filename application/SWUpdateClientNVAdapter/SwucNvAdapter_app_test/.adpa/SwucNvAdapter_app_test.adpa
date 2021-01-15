@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<ProjectAssistant DpaSchemaVersion="00.03" InitiallyCreatedWithToolVersion="2.4.38.98725" MsrPlatform="adaptive" uuid="fad9a05e-8915-4d84-98c2-13ae7ac467fa">
+<ProjectAssistant DpaSchemaVersion="00.03" InitiallyCreatedWithToolVersion="2.4.38.98725" MsrPlatform="adaptive" uuid="ac9834dd-b4e8-41a8-bfda-a131e9b4cb1b">
     <General>
         <Name>SwucNvAdapter_app_test</Name>
         <Version>1.0</Version>
