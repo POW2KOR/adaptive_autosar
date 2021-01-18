@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ProjectAssistant DpaSchemaVersion="00.03" InitiallyCreatedWithToolVersion="2.4.38.98725" MsrPlatform="adaptive" uuid="f591ca16-15f8-4953-bfed-107383c20a45">
+    <General>
+        <Name>sw_update_client_minerva_adapter_interface</Name>
+        <Version>1.0</Version>
+        <Author>twilmer</Author>
+    </General>
+    <CompatibilityVersion>
+        <Current>1.0.0</Current>
+        <AsrMdfRevision>R047</AsrMdfRevision>
+    </CompatibilityVersion>
+    <Environment>
+        <SipId>Adaptive-SIP</SipId>
+    </Environment>
+    <Folders>
+        <GenData>../src-gen</GenData>
+        <Logs>./log</Logs>
+        <ARXML>../arxml</ARXML>
+    </Folders>
+    <Properties>
+        <ProjectType>ModelLibrary</ProjectType>
+    </Properties>
+    <ProjectReferences/>
+    <ToolSettings>
+        <Misc>
+            <Settings Name="com.vector.cfg.automation.scripting.SearchLocations">
+                <Settings Name="e1081b015d9ef24c2626174b6fd332b8">
+                    <Setting Value="$(DpaProjectFolder)/../scripts" Name="LocationPath"/>
+                </Settings>
+            </Settings>
+        </Misc>
+    </ToolSettings>
+</ProjectAssistant>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<AUTOSAR xmlns="http://autosar.org/schema/r4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_00047.xsd">
+  <AR-PACKAGES>
+    <AR-PACKAGE UUID="66e08b55-fb81-4654-8fb0-7cfc26728af8">
+      <SHORT-NAME>mb</SHORT-NAME>
+      <ELEMENTS>
+        <ADAPTIVE-APPLICATION-SW-COMPONENT-TYPE UUID="018cee32-3354-4908-920c-ec351fcbfa7b">
+          <SHORT-NAME>AdaptiveApplicationSwComponentType</SHORT-NAME>
+          <PORTS>
+            <P-PORT-PROTOTYPE UUID="732716d8-7809-4b9f-832c-5e2c6b84d4c2">
+              <SHORT-NAME>ProvideSwdlPluginPort</SHORT-NAME>
+              <CATEGORY/>
+              <PROVIDED-INTERFACE-TREF DEST="SERVICE-INTERFACE">/mb/SwdlPlugin</PROVIDED-INTERFACE-TREF>
+            </P-PORT-PROTOTYPE>
+          </PORTS>
+        </ADAPTIVE-APPLICATION-SW-COMPONENT-TYPE>
+        <EXECUTABLE UUID="72a3bd36-d7ca-405b-862c-017f845640b1">
+          <SHORT-NAME>sw_update_client_minerva_adapter_executable</SHORT-NAME>
+          <ROOT-SW-COMPONENT-PROTOTYPE UUID="d91b698c-819a-4a38-ba18-814492e4a785">
+            <SHORT-NAME>RootSwComponentPrototype</SHORT-NAME>
+            <APPLICATION-TYPE-TREF DEST="ADAPTIVE-APPLICATION-SW-COMPONENT-TYPE">/mb/AdaptiveApplicationSwComponentType</APPLICATION-TYPE-TREF>
+          </ROOT-SW-COMPONENT-PROTOTYPE>
+        </EXECUTABLE>
+        <PROCESS UUID="1eece474-fbf1-499b-b1e2-e775113c9356">
+          <SHORT-NAME>sw_update_client_minerva_adapter_app_Process</SHORT-NAME>
+          <EXECUTABLE-REF DEST="EXECUTABLE">/mb/sw_update_client_minerva_adapter_executable</EXECUTABLE-REF>
+        </PROCESS>
+      </ELEMENTS>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>
