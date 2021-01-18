@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<AUTOSAR xmlns="http://autosar.org/schema/r4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_00047.xsd">
+  <AR-PACKAGES>
+    <AR-PACKAGE UUID="66e08b55-fb81-4654-8fb0-7cfc26728af8">
+      <SHORT-NAME>mb</SHORT-NAME>
+      <ELEMENTS>
+        <STD-CPP-IMPLEMENTATION-DATA-TYPE UUID="e6f56103-fb27-465b-93b2-a5cbf2401100">
+          <SHORT-NAME>ByteVector</SHORT-NAME>
+          <CATEGORY>VECTOR</CATEGORY>
+          <NAMESPACES>
+            <SYMBOL-PROPS>
+              <SHORT-NAME>ns0</SHORT-NAME>
+              <SYMBOL>mb</SYMBOL>
+            </SYMBOL-PROPS>
+            <SYMBOL-PROPS>
+              <SHORT-NAME>ns0_001</SHORT-NAME>
+              <SYMBOL>swuc</SYMBOL>
+            </SYMBOL-PROPS>
+            <SYMBOL-PROPS>
+              <SHORT-NAME>ns1</SHORT-NAME>
+              <SYMBOL>types</SYMBOL>
+            </SYMBOL-PROPS>
+          </NAMESPACES>
+          <TEMPLATE-ARGUMENTS>
+            <CPP-TEMPLATE-ARGUMENT>
+              <TEMPLATE-TYPE-REF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/AUTOSAR/StdTypes/uint8_t</TEMPLATE-TYPE-REF>
+            </CPP-TEMPLATE-ARGUMENT>
+          </TEMPLATE-ARGUMENTS>
+          <TYPE-EMITTER>TYPE_EMITTER_ARA</TYPE-EMITTER>
+        </STD-CPP-IMPLEMENTATION-DATA-TYPE>
+        <STD-CPP-IMPLEMENTATION-DATA-TYPE UUID="8fc77273-3b31-407f-91ec-fd5e1ac321b7">
+          <SHORT-NAME>PluginStatus</SHORT-NAME>
+          <CATEGORY>TYPE_REFERENCE</CATEGORY>
+          <SW-DATA-DEF-PROPS>
+            <SW-DATA-DEF-PROPS-VARIANTS>
+              <SW-DATA-DEF-PROPS-CONDITIONAL>
+                <COMPU-METHOD-REF DEST="COMPU-METHOD">/mb/PluginStatus_CompuMethod</COMPU-METHOD-REF>
+              </SW-DATA-DEF-PROPS-CONDITIONAL>
+            </SW-DATA-DEF-PROPS-VARIANTS>
+          </SW-DATA-DEF-PROPS>
+          <NAMESPACES>
+            <SYMBOL-PROPS>
+              <SHORT-NAME>ns0</SHORT-NAME>
+              <SYMBOL>mb</SYMBOL>
+            </SYMBOL-PROPS>
+            <SYMBOL-PROPS>
+              <SHORT-NAME>ns1</SHORT-NAME>
+              <SYMBOL>swuc</SYMBOL>
+            </SYMBOL-PROPS>
+            <SYMBOL-PROPS>
+              <SHORT-NAME>ns2</SHORT-NAME>
+              <SYMBOL>types</SYMBOL>
+            </SYMBOL-PROPS>
+          </NAMESPACES>
+          <TYPE-EMITTER>TYPE_EMITTER_ARA</TYPE-EMITTER>
+          <TYPE-REFERENCE-REF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/AUTOSAR/StdTypes/uint8_t</TYPE-REFERENCE-REF>
+        </STD-CPP-IMPLEMENTATION-DATA-TYPE>
+        <COMPU-METHOD UUID="fffd0da4-7b6e-4d02-9f4c-be47168f2d95">
+          <SHORT-NAME>PluginStatus_CompuMethod</SHORT-NAME>
+          <CATEGORY>TEXTTABLE</CATEGORY>
+          <COMPU-INTERNAL-TO-PHYS>
+            <COMPU-SCALES>
+              <COMPU-SCALE>
+                <SYMBOL>kIdle</SYMBOL>
+                <LOWER-LIMIT>0x00</LOWER-LIMIT>
+                <UPPER-LIMIT>0x00</UPPER-LIMIT>
+              </COMPU-SCALE>
+              <COMPU-SCALE>
+                <SYMBOL>kWorking</SYMBOL>
+                <LOWER-LIMIT>0x01</LOWER-LIMIT>
+                <UPPER-LIMIT>0x01</UPPER-LIMIT>
+              </COMPU-SCALE>
+              <COMPU-SCALE>
+                <SYMBOL>kDone</SYMBOL>
+                <LOWER-LIMIT>0x02</LOWER-LIMIT>
+                <UPPER-LIMIT>0x02</UPPER-LIMIT>
+              </COMPU-SCALE>
+              <COMPU-SCALE>
+                <SYMBOL>kError</SYMBOL>
+                <LOWER-LIMIT>0x03</LOWER-LIMIT>
+                <UPPER-LIMIT>0x03</UPPER-LIMIT>
+              </COMPU-SCALE>
+            </COMPU-SCALES>
+          </COMPU-INTERNAL-TO-PHYS>
+        </COMPU-METHOD>
+        <STD-CPP-IMPLEMENTATION-DATA-TYPE UUID="86fe4dbd-3789-4547-a739-3954c14d432d">
+          <SHORT-NAME>UcmTransferdataSeqCounter</SHORT-NAME>
+          <CATEGORY>VALUE</CATEGORY>
+          <TYPE-REFERENCE-REF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/AUTOSAR/StdTypes/uint8_t</TYPE-REFERENCE-REF>
+        </STD-CPP-IMPLEMENTATION-DATA-TYPE>
+        <SERVICE-INTERFACE UUID="fa90b68d-4ba5-4f00-8e7d-2fc16b0b64a9">
+          <SHORT-NAME>SwdlPlugin</SHORT-NAME>
+          <ADMIN-DATA/>
+          <ANNOTATIONS>
+            <ANNOTATION>
+              <ANNOTATION-ORIGIN>Used by SWDL Clilent	</ANNOTATION-ORIGIN>
+            </ANNOTATION>
+          </ANNOTATIONS>
+          <NAMESPACES>
+            <SYMBOL-PROPS>
+              <SHORT-NAME>ns0</SHORT-NAME>
+              <SYMBOL>mb</SYMBOL>
+            </SYMBOL-PROPS>
+            <SYMBOL-PROPS>
+              <SHORT-NAME>ns1</SHORT-NAME>
+              <SYMBOL>swuc</SYMBOL>
+            </SYMBOL-PROPS>
+            <SYMBOL-PROPS>
+              <SHORT-NAME>ns2</SHORT-NAME>
+              <SYMBOL>service_interfaces</SYMBOL>
+            </SYMBOL-PROPS>
+            <SYMBOL-PROPS>
+              <SHORT-NAME>ns3</SHORT-NAME>
+              <SYMBOL>plugin</SYMBOL>
+            </SYMBOL-PROPS>
+          </NAMESPACES>
+          <SERVICE-KIND>VENDOR-SPECIFIC</SERVICE-KIND>
+          <FIELDS>
+            <FIELD UUID="c7562843-e82d-4405-80d9-ac3d945ad2e5">
+              <SHORT-NAME>progress</SHORT-NAME>
+              <CATEGORY/>
+              <ANNOTATIONS>
+                <ANNOTATION>
+                  <ANNOTATION-ORIGIN>Progress in 0 to 100%, see OFR Spec .- this would not allow a over all status of there is more than one package flashed </ANNOTATION-ORIGIN>
+                </ANNOTATION>
+              </ANNOTATIONS>
+              <TYPE-TREF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/AUTOSAR/StdTypes/uint8_t</TYPE-TREF>
+              <HAS-GETTER>true</HAS-GETTER>
+              <HAS-NOTIFIER>true</HAS-NOTIFIER>
+              <HAS-SETTER>false</HAS-SETTER>
+            </FIELD>
+            <FIELD UUID="a82a8619-336f-4dde-92ec-847858f1ce5d">
+              <SHORT-NAME>status</SHORT-NAME>
+              <CATEGORY/>
+              <TYPE-TREF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/mb/PluginStatus</TYPE-TREF>
+              <HAS-GETTER>true</HAS-GETTER>
+              <HAS-NOTIFIER>true</HAS-NOTIFIER>
+              <HAS-SETTER>false</HAS-SETTER>
+            </FIELD>
+          </FIELDS>
+          <METHODS>
+            <CLIENT-SERVER-OPERATION UUID="a84bac2b-253d-4e4d-9016-01a36b8094ba">
+              <SHORT-NAME>WriteData</SHORT-NAME>
+              <ARGUMENTS>
+                <ARGUMENT-DATA-PROTOTYPE UUID="d5c837d9-8ba0-4ccb-95a3-54ff705ad396">
+                  <SHORT-NAME>seq_counter</SHORT-NAME>
+                  <ANNOTATIONS>
+                    <ANNOTATION>
+                      <ANNOTATION-ORIGIN>Sequence counter starts from 0 after start Session</ANNOTATION-ORIGIN>
+                    </ANNOTATION>
+                  </ANNOTATIONS>
+                  <TYPE-TREF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/mb/UcmTransferdataSeqCounter</TYPE-TREF>
+                  <DIRECTION>IN</DIRECTION>
+                </ARGUMENT-DATA-PROTOTYPE>
+                <ARGUMENT-DATA-PROTOTYPE UUID="a242e3e0-b3f9-4938-a4b7-dc2c60264328">
+                  <SHORT-NAME>data</SHORT-NAME>
+                  <ANNOTATIONS>
+                    <ANNOTATION>
+                      <ANNOTATION-ORIGIN>The Data sent has to be already signature checked as it may be used by an interpreter (further containng manifest). If a sub signature is not OK the Tester has to be asked to resume at that position/all clients have to be asked for resume position</ANNOTATION-ORIGIN>
+                    </ANNOTATION>
+                  </ANNOTATIONS>
+                  <TYPE-TREF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/mb/ByteVector</TYPE-TREF>
+                  <DIRECTION>IN</DIRECTION>
+                </ARGUMENT-DATA-PROTOTYPE>
+              </ARGUMENTS>
+              <FIRE-AND-FORGET>true</FIRE-AND-FORGET>
+            </CLIENT-SERVER-OPERATION>
+            <CLIENT-SERVER-OPERATION UUID="7b4dbb3e-7d97-4673-898e-f5216ecef378">
+              <SHORT-NAME>CancelSession</SHORT-NAME>
+              <FIRE-AND-FORGET>true</FIRE-AND-FORGET>
+            </CLIENT-SERVER-OPERATION>
+            <CLIENT-SERVER-OPERATION UUID="48e435b6-cdd4-4879-a910-10bf7a689da0">
+              <SHORT-NAME>StartSession</SHORT-NAME>
+              <ARGUMENTS>
+                <ARGUMENT-DATA-PROTOTYPE UUID="3c60b141-8e0e-4272-aaa7-6c5a4b8348f1">
+                  <SHORT-NAME>resumeOffset</SHORT-NAME>
+                  <ANNOTATIONS>
+                    <ANNOTATION>
+                      <ANNOTATION-ORIGIN>0 or up to the byte position which was given in GetResumePosition</ANNOTATION-ORIGIN>
+                    </ANNOTATION>
+                  </ANNOTATIONS>
+                  <TYPE-TREF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/AUTOSAR/StdTypes/uint64_t</TYPE-TREF>
+                  <DIRECTION>IN</DIRECTION>
+                </ARGUMENT-DATA-PROTOTYPE>
+              </ARGUMENTS>
+              <FIRE-AND-FORGET>true</FIRE-AND-FORGET>
+            </CLIENT-SERVER-OPERATION>
+            <CLIENT-SERVER-OPERATION UUID="58ce9755-d157-461f-bae7-c0663cceade0">
+              <SHORT-NAME>CheckMemory</SHORT-NAME>
+              <ARGUMENTS>
+                <ARGUMENT-DATA-PROTOTYPE UUID="39855178-03b0-4551-9c53-a0587985d07c">
+                  <SHORT-NAME>memory_ok</SHORT-NAME>
+                  <TYPE-TREF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/AUTOSAR/StdTypes/bool</TYPE-TREF>
+                  <DIRECTION>OUT</DIRECTION>
+                </ARGUMENT-DATA-PROTOTYPE>
+              </ARGUMENTS>
+            </CLIENT-SERVER-OPERATION>
+            <CLIENT-SERVER-OPERATION UUID="5308afe9-323b-4067-aaec-85e955f01933">
+              <SHORT-NAME>SwitchNewVersion</SHORT-NAME>
+              <ARGUMENTS>
+                <ARGUMENT-DATA-PROTOTYPE UUID="876d04bb-12d7-4e71-85d1-bce2544dfc5e">
+                  <SHORT-NAME>switch_ok</SHORT-NAME>
+                  <TYPE-TREF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/AUTOSAR/StdTypes/bool</TYPE-TREF>
+                  <DIRECTION>OUT</DIRECTION>
+                </ARGUMENT-DATA-PROTOTYPE>
+              </ARGUMENTS>
+            </CLIENT-SERVER-OPERATION>
+            <CLIENT-SERVER-OPERATION UUID="61ff0089-95a7-4a89-9fcb-9ebe40c62044">
+              <SHORT-NAME>GetResumePosition</SHORT-NAME>
+              <ARGUMENTS>
+                <ARGUMENT-DATA-PROTOTYPE UUID="bc84ebed-e8d0-4469-8c8e-ef2991b46727">
+                  <SHORT-NAME>position</SHORT-NAME>
+                  <ANNOTATIONS>
+                    <ANNOTATION>
+                      <ANNOTATION-ORIGIN>The Byte position at which the next byte has to be written</ANNOTATION-ORIGIN>
+                    </ANNOTATION>
+                  </ANNOTATIONS>
+                  <TYPE-TREF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/AUTOSAR/StdTypes/uint64_t</TYPE-TREF>
+                  <DIRECTION>OUT</DIRECTION>
+                </ARGUMENT-DATA-PROTOTYPE>
+                <ARGUMENT-DATA-PROTOTYPE UUID="8da9a32a-ebbc-4813-8482-13b943e28f72">
+                  <SHORT-NAME>version</SHORT-NAME>
+                  <ANNOTATIONS>
+                    <ANNOTATION>
+                      <ANNOTATION-ORIGIN>The Version number of the package beeing downloaded - may be changed to min.minor.patch struct?</ANNOTATION-ORIGIN>
+                    </ANNOTATION>
+                  </ANNOTATIONS>
+                  <TYPE-TREF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/AUTOSAR/StdTypes/uint64_t</TYPE-TREF>
+                  <DIRECTION>OUT</DIRECTION>
+                </ARGUMENT-DATA-PROTOTYPE>
+                <ARGUMENT-DATA-PROTOTYPE UUID="8d09beec-90ca-4bf5-aec7-e5e8a53e7b5e">
+                  <SHORT-NAME>id</SHORT-NAME>
+                  <ANNOTATIONS>
+                    <ANNOTATION>
+                      <ANNOTATION-ORIGIN>The ID of the Package beeing downloaded</ANNOTATION-ORIGIN>
+                    </ANNOTATION>
+                  </ANNOTATIONS>
+                  <TYPE-TREF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/AUTOSAR/StdTypes/uint64_t</TYPE-TREF>
+                  <DIRECTION>OUT</DIRECTION>
+                </ARGUMENT-DATA-PROTOTYPE>
+              </ARGUMENTS>
+            </CLIENT-SERVER-OPERATION>
+          </METHODS>
+        </SERVICE-INTERFACE>
+      </ELEMENTS>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>

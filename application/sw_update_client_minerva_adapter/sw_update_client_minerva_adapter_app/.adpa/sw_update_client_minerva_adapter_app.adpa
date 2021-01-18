@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ProjectAssistant DpaSchemaVersion="00.03" InitiallyCreatedWithToolVersion="2.4.38.98725" MsrPlatform="adaptive" uuid="3293f680-9f35-4bdb-a96a-e24d1967bd2c">
+    <General>
+        <Name>sw_update_client_minerva_adapter_app</Name>
+        <Version>1.0</Version>
+        <Author>twilmer</Author>
+    </General>
+    <CompatibilityVersion>
+        <Current>1.0.0</Current>
+        <AsrMdfRevision>R047</AsrMdfRevision>
+    </CompatibilityVersion>
+    <Environment>
+        <SipId>Adaptive-SIP</SipId>
+    </Environment>
+    <Folders>
+        <GenData>../src-gen</GenData>
+        <Logs>./log</Logs>
+        <ARXML>../arxml</ARXML>
+    </Folders>
+    <Properties>
+        <ProjectType>UserApplication</ProjectType>
+    </Properties>
+    <ProjectReferences>
+        <Ref>
+            <lastKnownName>swdl_diag_interface</lastKnownName>
+            <UUID>f591ca16-15f8-4953-bfed-107383c20a45</UUID>
+        </Ref>
+    </ProjectReferences>
+</ProjectAssistant>
