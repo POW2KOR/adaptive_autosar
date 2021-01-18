@@ -1,6 +1,7 @@
 load("@bazel_skylib//rules:common_settings.bzl", "string_flag")
 load("@rules_pkg//:pkg.bzl", "pkg_deb", "pkg_tar")
 load("@io_bazel_rules_docker//container:container.bzl", "container_image")
+load("@io_bazel_rules_docker//docker/util:run.bzl", "container_run_and_commit")
 load("@com_github_bazelbuild_buildtools//buildifier:def.bzl", "buildifier")
 
 package(default_visibility = ["//visibility:public"])
@@ -175,9 +176,15 @@ pkg_deb(
     version = "0.0.0",
 )
 
+container_run_and_commit(
+    name = "minerva_mpu_adaptive_docker_image",
+    commands = ["apt update", "apt-get install -y iproute2 strace"],
+    image = "@ubuntu_18.04//image"
+)
+
 container_image(
     name = "minerva_mpu_adaptive_docker",
-    base = "@ubuntu_18.04//image",
+    base = ":minerva_mpu_adaptive_docker_image",
     entrypoint = "/sbin/amsr_vector_fs_em_executionmanager " +
                  "-a /opt -m /etc/machine_exec_config.json",
     # The legacy_run_behavior is not disabled on container_image by default
