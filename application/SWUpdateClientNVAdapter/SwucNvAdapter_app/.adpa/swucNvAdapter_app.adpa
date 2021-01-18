@@ -24,7 +24,6 @@
         <Ref>
             <lastKnownName>swdl_diag_interface</lastKnownName>
             <UUID>f591ca16-15f8-4953-bfed-107383c20a45</UUID>
-            <lastKnownPath>./../../swdl_diag_interface</lastKnownPath>
         </Ref>
     </ProjectReferences>
 </ProjectAssistant>

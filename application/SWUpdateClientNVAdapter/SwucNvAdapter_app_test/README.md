@@ -1,0 +1,1 @@
+This is the Test application to mock a SW Update Client to test the SwucNVAdapter - this may also be done with other means e.g. python. Up to the developers. 

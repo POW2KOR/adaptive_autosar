@@ -24,7 +24,11 @@
         <Ref>
             <lastKnownName>Swuc_interface</lastKnownName>
             <UUID>f591ca16-15f8-4953-bfed-107383c20a45</UUID>
-            <lastKnownPath>./../../../git/minerva_mpu_adaptive/application/SWUpdateClientNVAdapter/Swuc_interface</lastKnownPath>
+        </Ref>
+        <Ref>
+            <lastKnownName>SwucNvAdapter_app</lastKnownName>
+            <UUID>3293f680-9f35-4bdb-a96a-e24d1967bd2c</UUID>
+            <lastKnownPath>./../../SwucNvAdapter_app</lastKnownPath>
         </Ref>
     </ProjectReferences>
     <ToolSettings>
