@@ -185,7 +185,7 @@ container_run_and_commit(
 container_image(
     name = "minerva_mpu_adaptive_docker",
     base = ":minerva_mpu_adaptive_docker_image",
-    entrypoint = "/sbin/amsr_vector_fs_em_executionmanager " +
+    entrypoint = "ip link set lo multicast on && ip route add ff01::0/16 dev lo && /sbin/amsr_vector_fs_em_executionmanager " +
                  "-a /opt -m /etc/machine_exec_config.json",
     # The legacy_run_behavior is not disabled on container_image by default
     legacy_run_behavior = False,
@@ -193,7 +193,7 @@ container_image(
     tars = [
         ":minerva_mpu_adaptive_filesystem",
     ],
-    docker_run_flags = "-it --cap-add SYS_NICE --cap-add NET_ADMIN"
+    docker_run_flags = "-it --cap-add SYS_NICE --cap-add NET_ADMIN --ip 10.21.17.98 --sysctl net.ipv6.conf.all.disable_ipv6=0"
 )
 
 # Buildifier
