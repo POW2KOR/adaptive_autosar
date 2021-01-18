@@ -85,15 +85,12 @@ pkg_tar(
 pkg_tar(
     name = "minerva_mpu_adaptive_etc",
     srcs = [
-        "//minerva_machine:minerva_machine_exec_config",
+        "//bsw:minerva_machine_exec_config",
         "@starter_kit_adaptive_xavier//:amsr_vector_fs_log_daemon_configs",
     ],
     mode = "0755",
     package_dir = "/etc",
 )
-
-
-
 
 pkg_tar(
     name = "adaptive_autosar_log_daemon_configs",

@@ -1,2 +1,5 @@
 bazel-*
 .vscode
+application/SWUpdateClientNVAdapter/SwucNvAdapter_app/.adpa/log/
+*.dcusr
+
