@@ -193,7 +193,7 @@ container_image(
     tars = [
         ":minerva_mpu_adaptive_filesystem",
     ],
-    docker_run_flags = "-it --cap-add SYS_NICE --cap-add NET_ADMIN --ip 10.21.17.98 --sysctl net.ipv6.conf.all.disable_ipv6=0"
+    docker_run_flags = "-it --cap-add SYS_NICE --cap-add NET_ADMIN --ip 10.21.17.98 --sysctl net.ipv6.conf.all.disable_ipv6=0 --net mnv0"
 )
 
 # Buildifier
