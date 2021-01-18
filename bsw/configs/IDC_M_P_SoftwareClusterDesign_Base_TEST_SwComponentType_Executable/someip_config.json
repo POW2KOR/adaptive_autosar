@@ -1,0 +1,384 @@
+
+{
+  "services" : [
+    {
+      "name" : "SomeIpSrvDpl_18068_Prk_RemoteParking_UI_Service_ST3_10",
+      "service_id" : 18068,
+      "major_version" : 1,
+      "minor_version" : 0,
+      "methods" : [
+        {
+          "name" : "requestDeleteDevice",
+          "id" : 5,
+          "proto" : "udp"
+        },
+        {
+          "name" : "requestDeleteAllDevices",
+          "id" : 4,
+          "proto" : "udp"
+        },
+        {
+          "name" : "getQrCodeData",
+          "id" : 3,
+          "proto" : "udp"
+        },
+        {
+          "name" : "requestExternalAuth",
+          "id" : 6,
+          "proto" : "udp"
+        },
+        {
+          "name" : "getDeviceListNames",
+          "id" : 1,
+          "proto" : "udp"
+        },
+        {
+          "name" : "requestIdentifierExchange",
+          "id" : 8,
+          "proto" : "udp"
+        },
+        {
+          "name" : "getDeviceListSize",
+          "id" : 2,
+          "proto" : "udp"
+        }
+      ],
+      "events" : [
+        {
+          "name" : "Device_Authorized_Status_ST3",
+          "id" : 32769,
+          "field" : false,
+          "proto" : "udp"
+        }
+      ],
+      "eventgroups" : [
+        {
+          "id" : 1,
+          "events" : [
+            32769
+          ]
+        }
+      ]
+    },
+    {
+      "name" : "SomeIpSrvDpl_2_Z_Dummy_Service_10",
+      "service_id" : 2,
+      "major_version" : 0,
+      "minor_version" : 0,
+      "methods" : [
+        {
+          "name" : "aDummyMethod",
+          "id" : 1,
+          "proto" : "udp"
+        }
+      ],
+      "events" : [
+        {
+          "name" : "Dummy_Event_SWC_Data_Element",
+          "id" : 32769,
+          "field" : false,
+          "proto" : "udp"
+        }
+      ],
+      "eventgroups" : [
+        {
+          "id" : 1,
+          "events" : [
+            32769
+          ]
+        }
+      ]
+    },
+    {
+      "name" : "SomeIpSrvDpl_9617_DAP_Sens_LR_Radar_CrowdData_Service_ST3_10",
+      "service_id" : 9617,
+      "major_version" : 1,
+      "minor_version" : 0,
+      "methods" : [
+      ],
+      "events" : [
+        {
+          "name" : "LRR_TrgrCrowdData_ST3",
+          "id" : 32769,
+          "field" : false,
+          "proto" : "udp"
+        },
+        {
+          "name" : "LRR_CrowdData_Upload_ST3",
+          "id" : 32770,
+          "field" : false,
+          "proto" : "udp"
+        }
+      ],
+      "eventgroups" : [
+        {
+          "id" : 1,
+          "events" : [
+            32769
+          ]
+        },
+        {
+          "id" : 2,
+          "events" : [
+            32770
+          ]
+        }
+      ]
+    },
+    {
+      "name" : "SomeIpSrvDpl_9618_DAP_Sens_LR_Radar_Service_ST3_10",
+      "service_id" : 9618,
+      "major_version" : 1,
+      "minor_version" : 0,
+      "methods" : [
+      ],
+      "events" : [
+        {
+          "name" : "LRR_Sens_Stat_Pr6_ST3",
+          "id" : 32768,
+          "field" : false,
+          "proto" : "udp"
+        },
+        {
+          "name" : "LRR_Object_Stat_Pr6_ST3",
+          "id" : 32770,
+          "field" : false,
+          "proto" : "udp"
+        },
+        {
+          "name" : "LRR_LanePoly_Pr6_ST3",
+          "id" : 32769,
+          "field" : false,
+          "proto" : "udp"
+        },
+        {
+          "name" : "LRR_Segments_Pr6_ST3",
+          "id" : 32772,
+          "field" : false,
+          "proto" : "udp"
+        }
+      ],
+      "eventgroups" : [
+        {
+          "id" : 0,
+          "events" : [
+            32768,
+            32772,
+            32770,
+            32769
+          ]
+        }
+      ]
+    },
+    {
+      "name" : "SomeIpSrvDpl_9619_DAP_Sens_LR_Radar_Obj_Service_ST3_10",
+      "service_id" : 9619,
+      "major_version" : 1,
+      "minor_version" : 0,
+      "methods" : [
+      ],
+      "events" : [
+        {
+          "name" : "LRR_Objects_Pr7_ST3",
+          "id" : 32768,
+          "field" : false,
+          "proto" : "udp"
+        }
+      ],
+      "eventgroups" : [
+        {
+          "id" : 0,
+          "events" : [
+            32768
+          ]
+        }
+      ]
+    }
+  ],
+  "required_service_instances" : [
+    {
+      "service_id" : 18068,
+      "instance_id" : 10,
+      "major_version" : 1,
+      "minor_version" : 0,
+      "service_discovery" : {
+        "initial_delay_min_ns" : 125000000,
+        "initial_delay_max_ns" : 125000000,
+        "initial_repetitions_base_delay_ns" : 40000000,
+        "initial_repetitions_max" : 9,
+        "ttl" : 16777215,
+        "eventgroups" : [
+          {
+            "id" : 1,
+            "ttl" : 16777215,
+            "request_response_delay_min_ns" : 0,
+            "request_response_delay_max_ns" : 20000000
+          }
+        ]
+      },
+      "port_mapping" : {
+        "name" : "SomeIpSIMachineMapping_RX_SA_IDC_M_P_UDP_fixed_10_21_17_98_40000",
+        "address" : "10.21.17.98",
+        "udp_port" : 40000
+      }
+    },
+    {
+      "service_id" : 2,
+      "instance_id" : 10,
+      "major_version" : 0,
+      "minor_version" : 0,
+      "service_discovery" : {
+        "initial_delay_min_ns" : 125000000,
+        "initial_delay_max_ns" : 125000000,
+        "initial_repetitions_base_delay_ns" : 40000000,
+        "initial_repetitions_max" : 9,
+        "ttl" : 16777215,
+        "eventgroups" : [
+          {
+            "id" : 1,
+            "ttl" : 16777215,
+            "request_response_delay_min_ns" : 0,
+            "request_response_delay_max_ns" : 20000000
+          }
+        ]
+      },
+      "port_mapping" : {
+        "name" : "SomeIpSIMachineMapping_RX_SA_IDC_M_P_UDP_fixed_10_21_17_98_40000",
+        "address" : "10.21.17.98",
+        "udp_port" : 40000
+      }
+    }
+  ],
+  "provided_service_instances" : [
+    {
+      "service_id" : 9617,
+      "instance_id" : 10,
+      "major_version" : 1,
+      "minor_version" : 0,
+      "service_discovery" : {
+        "initial_delay_min_ns" : 125000000,
+        "initial_delay_max_ns" : 125000000,
+        "initial_repetitions_base_delay_ns" : 300000000,
+        "initial_repetitions_max" : 2,
+        "cyclic_offer_delay_ns" : 15000000000,
+        "request_response_delay_min_ns" : 0,
+        "request_response_delay_max_ns" : 0,
+        "ttl" : 16777215,
+        "eventgroups" : [
+          {
+            "id" : 1,
+            "event_multicast_threshold" : 5,
+            "request_response_delay_min_ns" : 0,
+            "request_response_delay_max_ns" : 0
+          },
+          {
+            "id" : 2,
+            "event_multicast_threshold" : 5,
+            "request_response_delay_min_ns" : 0,
+            "request_response_delay_max_ns" : 0
+          }
+        ]
+      },
+      "port_mappings" : [
+        {
+          "name" : "SomeIpSIMachineMapping_TX_SA_IDC_M_P_UDP_fixed_10_21_17_98_40000",
+          "address" : "10.21.17.98",
+          "udp_port" : 40000,
+          "event_multicast_address" : "239.20.0.3",
+          "event_multicast_port" : 40000
+        }
+      ]
+    },
+    {
+      "service_id" : 9618,
+      "instance_id" : 10,
+      "major_version" : 1,
+      "minor_version" : 0,
+      "service_discovery" : {
+        "initial_delay_min_ns" : 125000000,
+        "initial_delay_max_ns" : 125000000,
+        "initial_repetitions_base_delay_ns" : 300000000,
+        "initial_repetitions_max" : 2,
+        "cyclic_offer_delay_ns" : 15000000000,
+        "request_response_delay_min_ns" : 0,
+        "request_response_delay_max_ns" : 0,
+        "ttl" : 16777215,
+        "eventgroups" : [
+          {
+            "id" : 0,
+            "event_multicast_threshold" : 5,
+            "request_response_delay_min_ns" : 0,
+            "request_response_delay_max_ns" : 0
+          }
+        ]
+      },
+      "port_mappings" : [
+        {
+          "name" : "SomeIpSIMachineMapping_TX_SA_IDC_M_P_UDP_fixed_10_21_17_98_40000",
+          "address" : "10.21.17.98",
+          "udp_port" : 40000,
+          "event_multicast_address" : "239.20.0.3",
+          "event_multicast_port" : 40000
+        }
+      ]
+    },
+    {
+      "service_id" : 9619,
+      "instance_id" : 10,
+      "major_version" : 1,
+      "minor_version" : 0,
+      "service_discovery" : {
+        "initial_delay_min_ns" : 125000000,
+        "initial_delay_max_ns" : 125000000,
+        "initial_repetitions_base_delay_ns" : 300000000,
+        "initial_repetitions_max" : 2,
+        "cyclic_offer_delay_ns" : 15000000000,
+        "request_response_delay_min_ns" : 0,
+        "request_response_delay_max_ns" : 0,
+        "ttl" : 16777215,
+        "eventgroups" : [
+          {
+            "id" : 0,
+            "event_multicast_threshold" : 5,
+            "request_response_delay_min_ns" : 0,
+            "request_response_delay_max_ns" : 0
+          }
+        ]
+      },
+      "port_mappings" : [
+        {
+          "name" : "SomeIpSIMachineMapping_TX_SA_IDC_M_P_UDP_fixed_10_21_17_98_50000",
+          "address" : "10.21.17.98",
+          "udp_port" : 50000,
+          "event_multicast_address" : "239.20.0.3",
+          "event_multicast_port" : 50000
+        }
+      ]
+    }
+  ],
+  "network_endpoints" : [
+    {
+      "name" : "NE_fixed_10_21_17_98",
+      "address" : "10.21.17.98",
+      "mtu" : 1500,
+      "service_discovery" : {
+        "multicast_address" : "239.20.0.2",
+        "port" : 30490
+      },
+      "ports" : [
+        {
+          "proto" : "udp",
+          "port" : 40000
+        },
+        {
+          "proto" : "udp",
+          "port" : 50000
+        }
+      ]
+    }
+  ],
+  "generatorVersion" : {
+    "name" : "amsr_someipbinding",
+    "commitId" : "0c33b95bd1f4000c91120d67924bd05b02e9f23c"
+  }
+}

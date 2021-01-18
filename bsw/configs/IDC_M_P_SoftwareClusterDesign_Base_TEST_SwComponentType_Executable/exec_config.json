@@ -1,0 +1,36 @@
+
+{
+  "category" : "APPLICATION_LEVEL",
+  "name" : "IDC_M_P_SoftwareClusterDesign_Base_TEST_SwComponentType_Executable",
+  "isAdaptiveApplication" : 1,
+  "processes" : [
+    {
+      "name" : "IDC_M_P_SoftwareClusterDesign_Base_TEST_SwComponentType_Executable_Process",
+      "shortNamePath" : "/Processes/IDC_M_P_SoftwareClusterDesign_Base_TEST_SwComponentType_Executable_Process",
+      "startupConfigs" : [
+        {
+          "schedulingPolicy" : "SCHEDULING-POLICY-FIFO",
+          "schedulingPriority" : 32,
+          "options" : [
+            "-c",
+            "./etc/application.json"
+          ],
+          "executionDependency" : {
+          },
+          "functionGroups" : [
+            {
+              "name" : "MachineState",
+              "states" : [
+                "Running"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "generatorVersion" : {
+    "name" : "amsr_em_exec_config",
+    "commitId" : "0c33b95bd1f4000c91120d67924bd05b02e9f23c"
+  }
+}
