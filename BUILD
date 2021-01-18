@@ -58,35 +58,26 @@ filegroup(
 )
 
 pkg_tar(
-    name = "minerva_mpu_adaptive_sbin",
-    srcs = [":adaptive_autosar_executionmanager_binary"],
-    mode = "0755",
-    package_dir = "/",
-    # If you change strip_prefix, be aware of the following:
-    # - https://github.com/bazelbuild/rules_pkg/issues/82
-    strip_prefix =
-        "./external/starter_kit_adaptive_xavier/amsr-vector-fs-em-executionmanager/",
-)
+    name = "minerva_mpu_adaptive_binaries",
+    files = {
+        ":adaptive_autosar_someipdaemon_binary": "opt/someipd_posix/bin/someipd_posix",
+        ":adaptive_autosar_log_daemon_binary": "opt/amsr_vector_fs_log_daemon/bin/amsr_vector_fs_log_daemon",
+        ":adaptive_autosar_executionmanager_binary": "sbin/amsr_vector_fs_em_executionmanager",
+        "//bsw:executionmanager_state_client_binary": "opt/executionmanager_state_client_app/bin/executionmanager_state_client_app",
+        "//bsw:skeleton_demo_idc6": "opt/IDC_M_P_SoftwareClusterDesign_Base_SwComponentType_Executable/bin/IDC_M_P_SoftwareClusterDesign_Base_SwComponentType_Executable",
+    },
 
-pkg_tar(
-    name = "minerva_mpu_adaptive_bsw_opts",
-    srcs = [
-        ":adaptive_autosar_log_daemon_binary",
-        ":adaptive_autosar_someipdaemon_binary",
-    ],
-    package_dir = "/opt",
+    package_dir = "/",
     mode = "0755",
-    # If you change strip_prefix, be aware of the following:
-    # - https://github.com/bazelbuild/rules_pkg/issues/82
-    strip_prefix =
-        "./external/starter_kit_adaptive_xavier/",
 )
 
 pkg_tar(
     name = "minerva_mpu_adaptive_etc",
+    files = {
+        "//bsw:em_logging_config": "logging_config.json"
+    },
     srcs = [
-        "//bsw:minerva_machine_exec_config",
-        "@starter_kit_adaptive_xavier//:amsr_vector_fs_log_daemon_configs",
+        "//bsw:machine_exec_config",
     ],
     mode = "0755",
     package_dir = "/etc",
@@ -94,20 +85,48 @@ pkg_tar(
 
 pkg_tar(
     name = "adaptive_autosar_log_daemon_configs",
-    srcs = [
-        "@starter_kit_adaptive_xavier//:amsr_vector_fs_log_daemon_configs",
-    ],
+    files = {
+        "//bsw:amsr_vector_fs_log_daemon_logging_config": "logging_config.json",
+        "//bsw:amsr_vector_fs_log_daemon_logd_config": "logd_config.json",
+        "//bsw:amsr_vector_fs_log_daemon_exec_config": "exec_config.json"
+
+    },
     mode = "0755",
-    package_dir = "/amsr_vector_fs_log_daemon/etc/",
+    package_dir = "/opt/amsr_vector_fs_log_daemon/etc/",
 )
 
 pkg_tar(
     name = "adaptive_autosar_someipdaemon_configs",
-    srcs = [
-        "@starter_kit_adaptive_xavier//:amsr_vector_fs_someipdaemon_configs",
-    ],
+    srcs = {
+        "//bsw:someipd_posix_logging_config": "logging_config.json",
+        "//bsw:someipd_posix_exec_config": "exec_config.json",
+        "//bsw:someipd_posix_someip_config": "someipd-posix.json"
+    },
     mode = "0755",
-    package_dir = "/someipd_posix/etc/",
+    package_dir = "/opt/someipd_posix/etc/",
+)
+
+pkg_tar(
+    name = "adaptive_autosar_skeleton_configs",
+    srcs = {
+        "//bsw:skeleton_com_application_config": "com_application.json",
+        "//bsw:skeleton_exec_config": "exec_config.json",
+        "//bsw:skeleton_logging_config": "logging_config.json",
+        "//bsw:skeleton_someip_config": "someip_config.json",
+    },
+    mode = "0755",
+    package_dir = "/opt/IDC_M_P_SoftwareClusterDesign_Base_SwComponentType_Executable/etc/",
+)
+
+pkg_tar(
+    name = "adaptive_autosar_executionmanager_state_client_configs",
+    files = {
+        "//bsw:executionmanager_state_client_updatemanager_daemon_db": "opt/executionmanager_state_client_app/etc/swcl_db.json",
+        "//bsw:executionmanager_state_client_updatemanager_swcluser_meta": "opt/executionmanager_state_client_app/etc/swcl_package_metadata.json",
+        "//bsw:executionmanager_state_client_app_logging_config": "opt/executionmanager_state_client_app/etc/logging_config.json",
+        "//bsw:executionmanager_state_client_app_exec_config": "opt/executionmanager_state_client_app/etc/exec_config.json",
+    },
+    mode = "0755",
 )
 
 pkg_tar(
@@ -115,18 +134,19 @@ pkg_tar(
     deps = [
         ":adaptive_autosar_log_daemon_configs",
         ":adaptive_autosar_someipdaemon_configs",
+        ":adaptive_autosar_skeleton_configs",
+        ":adaptive_autosar_executionmanager_state_client_configs"
     ],
     mode = "0755",
-    package_dir = "/opt",
+    package_dir = "",
 )
 
 pkg_tar(
     name = "minerva_mpu_adaptive_filesystem",
     deps = [
-        ":minerva_mpu_adaptive_bsw_opts",
+        ":minerva_mpu_adaptive_binaries",
         ":minerva_mpu_adaptive_etc",
         ":minerva_mpu_adaptive_configs",
-        ":minerva_mpu_adaptive_sbin",
     ],
 )
 
@@ -152,9 +172,26 @@ container_image(
     tars = [
         ":minerva_mpu_adaptive_filesystem",
     ],
+    docker_run_flags = "-it --cap-add SYS_NICE --cap-add NET_ADMIN"
 )
 
 # Buildifier
 buildifier(
     name = "buildifier",
+)
+
+# We need it as a temporary workaround to resolve cyclic dependency between code generator and 
+# socal library. The issue reported and confirmed by Vector.
+# Desision to put it here is due to the bazel nature of the relative pates. So we left it in
+# the root. The file is used in bsw/BUILD file later. 
+filegroup(
+    name = "socal_lib_for_proxy",
+    srcs = ["bazel-out/k8-fastbuild/bin/external/starter_kit_adaptive_xavier/amsr_vector_fs_socal_for_proxy/lib/libSocal.a"],
+    visibility = ["//visibility:public"],
+)
+
+filegroup(
+    name = "socal_lib_for_skeleton",
+    srcs = ["bazel-out/k8-fastbuild/bin/external/starter_kit_adaptive_xavier/amsr_vector_fs_socal_for_skeleton/lib/libSocal.a"],
+    visibility = ["//visibility:public"],
 )

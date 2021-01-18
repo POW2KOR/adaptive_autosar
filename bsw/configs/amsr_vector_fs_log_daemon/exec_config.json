@@ -1,0 +1,33 @@
+{
+  "category" : "PLATFORM_LEVEL",
+  "name" : "amsr_vector_fs_log_daemon",
+  "isAdaptiveApplication" : 1,
+  "processes" : [
+    {
+      "name" : "LogDaemonDefaultProcess",
+      "startupConfigs" : [
+        {
+          "schedulingPolicy" : "SCHEDULING-POLICY-FIFO",
+          "schedulingPriority" : 80,
+          "options" : [
+            "-l" ,
+            "./etc/logging_config.json"
+          ],
+          "executionDependency" : {
+          },
+          "functionGroups": [
+            {
+              "name": "MachineState",
+              "states": [
+                "Startup",
+                "Shutdown",
+                "Restart",
+                "Running"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

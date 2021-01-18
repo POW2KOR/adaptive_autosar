@@ -157,10 +157,10 @@ def minerva_aa_codegen_rule(name, arxml_srcs, outs_list_dict, generators):
             awk '{{print $$1}}') > 0 ]]; then
             
             echo "\nError: some generated files weren't found in the \
-                outs_list_dict list:";
+outs_list_dict list:";
 
             # Escaping path so it can be used in sed
-            escaped_ruledir=`echo $(RULEDIR) | sed 's/\//\\\\\\\\\//g'`
+            escaped_ruledir=`echo $$output_folder | sed 's/\//\\\\\\\\\//g'`
 
             # We are replacing $(RULEDIR) before printing on the screen to make
             # it easier for developers to copy paste into the Bazel file after.
@@ -181,7 +181,7 @@ def minerva_aa_codegen_rule(name, arxml_srcs, outs_list_dict, generators):
 
     for outs_list_name, outs_list in outs_list_dict.items():
         out_rule_name = outs_list_name
-        out_rule_outs_folder = "{}/arxml_srcs".format(out_rule_name)
+        out_rule_outs_folder = "{}/output".format(out_rule_name)
         out_rule_srcs_label = ":{}".format(gen_rule_name)
 
         full_path_outs_list = []
