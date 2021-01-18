@@ -1,6 +1,7 @@
 # Software Update Client NVUpdate Adapter 
 
-@startuml
+```plantuml
+
 skinparam componentStyle uml2
 skinparam ComponentBackgroundColor #828788
 skinparam ComponentBorderColor #000000
@@ -20,4 +21,4 @@ swuc-> swldplugin  : <<use>>
 [Software Update Client NVUpdate Adapter]  -> nv : <<library calls>>
 
 
-@enduml
+```
