@@ -1,6 +1,6 @@
 load("@rules_foreign_cc//tools/build_defs:cmake.bzl", "cmake_external")
 load("@bazel_skylib//rules:common_settings.bzl", "string_flag")
-load("@minerva_mpu_adaptive//bsw:defs.bzl", "extend_and_select", "minerva_aa_codegen_declare")
+load("@minerva_mpu_adaptive//:bazel/defs.bzl", "extend_and_select", "minerva_aa_codegen_declare")
 
 package(default_visibility = ["//visibility:public"])
 
