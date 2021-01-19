@@ -26,24 +26,6 @@
           }
         }
       }
-    },
-    "udp0": {
-      "buffer": {
-        "max_num": 100,
-        "strategy": "drop_new"
-      },
-      "connections": {
-        "udp0": {
-          "type": "dlt",
-          "udp": {
-            "remote": [
-              "10.21.17.98",
-              49362
-            ],
-            "segment_size": 508
-          }
-        }
-      }
     }
   }
 }
