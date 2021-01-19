@@ -76,3 +76,11 @@ For building the debug version use `--compilation_mode=dbg`. Other useful parame
 `--verbose_failures` and `--sandbox_debug`.
 
 Build results are under `bazel-bin`.
+
+
+### Creating docker network before bazel run
+The proxy and skelton applications require network to communicate. So, we need to create a docker network before doing bazel run.
+Docker network can be created using below command:
+```
+docker network create --subnet 10.21.17.0/24 mnv0
+```

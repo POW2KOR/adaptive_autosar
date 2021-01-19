@@ -36,6 +36,41 @@ filegroup(
 )
 
 filegroup(
+    name = "amsr_vector_fs_log_daemon_logging_config",
+    srcs = [
+        "configs/amsr_vector_fs_log_daemon/logging_config.json"
+    ]
+)
+
+filegroup(
+    name = "proxy_com_application_config",
+    srcs = [
+        "configs/IDC_M_P_SoftwareClusterDesign_Base_TEST_SwComponentType_Executable/com_application.json"
+    ]
+)
+
+filegroup(
+    name = "proxy_logging_config",
+    srcs = [
+        "configs/IDC_M_P_SoftwareClusterDesign_Base_TEST_SwComponentType_Executable/logging_config.json"
+    ]
+)
+
+filegroup(
+    name = "skeleton_com_application_config",
+    srcs = [
+        "configs/IDC_M_P_SoftwareClusterDesign_Base_SwComponentType_Executable/com_application.json"
+    ]
+)
+
+filegroup(
+    name = "skeleton_logging_config",
+    srcs = [
+        "configs/IDC_M_P_SoftwareClusterDesign_Base_SwComponentType_Executable/logging_config.json"
+    ]
+)
+
+filegroup(
     name = "someipd_posix_logging_config",
     srcs = [
         "configs/someipd_posix/logging_config.json"
@@ -53,13 +88,6 @@ filegroup(
     name = "someipd_posix_someip_config",
     srcs = [
         "configs/someipd_posix/someipd-posix.json"
-    ]
-)
-
-filegroup(
-    name = "amsr_vector_fs_log_daemon_logging_config",
-    srcs = [
-        "configs/amsr_vector_fs_log_daemon/logging_config.json"
     ]
 )
 

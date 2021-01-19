@@ -1,4 +1,6 @@
 {
     "applications": [
+        "/opt/IDC_M_P_SoftwareClusterDesign_Base_SwComponentType_Executable/etc/someip_config.json",
+	"/opt/IDC_M_P_SoftwareClusterDesign_Base_TEST_SwComponentType_Executable/etc/someip_config.json"
     ]
 }

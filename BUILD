@@ -1,6 +1,7 @@
 load("@bazel_skylib//rules:common_settings.bzl", "string_flag")
 load("@rules_pkg//:pkg.bzl", "pkg_deb", "pkg_tar")
 load("@io_bazel_rules_docker//container:container.bzl", "container_image")
+load("@io_bazel_rules_docker//docker/util:run.bzl", "container_run_and_commit")
 load("@com_github_bazelbuild_buildtools//buildifier:def.bzl", "buildifier")
 
 package(default_visibility = ["//visibility:public"])
@@ -65,6 +66,7 @@ pkg_tar(
         ":adaptive_autosar_executionmanager_binary": "sbin/amsr_vector_fs_em_executionmanager",
         "//bsw:executionmanager_state_client_binary": "opt/executionmanager_state_client_app/bin/executionmanager_state_client_app",
         "//bsw:skeleton_demo_idc6": "opt/IDC_M_P_SoftwareClusterDesign_Base_SwComponentType_Executable/bin/IDC_M_P_SoftwareClusterDesign_Base_SwComponentType_Executable",
+        "//bsw:proxy_demo_idc6": "opt/IDC_M_P_SoftwareClusterDesign_Base_TEST_SwComponentType_Executable/bin/IDC_M_P_SoftwareClusterDesign_Base_TEST_SwComponentType_Executable"
     },
 
     package_dir = "/",
@@ -107,12 +109,24 @@ pkg_tar(
 )
 
 pkg_tar(
+    name = "adaptive_autosar_proxy_configs",
+    srcs = {
+        "//bsw:proxy_com_application_config": "com_application.json",
+        "//bsw:starter_kit_proxy_exec_config": "exec_config.json",
+        "//bsw:proxy_logging_config": "logging_config.json",
+        "//bsw:starter_kit_proxy_someip_config": "someip_config.json",
+    },
+    mode = "0755",
+    package_dir = "/opt/IDC_M_P_SoftwareClusterDesign_Base_TEST_SwComponentType_Executable/etc/",
+)
+
+pkg_tar(
     name = "adaptive_autosar_skeleton_configs",
     srcs = {
         "//bsw:skeleton_com_application_config": "com_application.json",
-        "//bsw:skeleton_exec_config": "exec_config.json",
+        "//bsw:starter_kit_skeleton_exec_config": "exec_config.json",
         "//bsw:skeleton_logging_config": "logging_config.json",
-        "//bsw:skeleton_someip_config": "someip_config.json",
+        "//bsw:starter_kit_skeleton_someip_config": "someip_config.json",
     },
     mode = "0755",
     package_dir = "/opt/IDC_M_P_SoftwareClusterDesign_Base_SwComponentType_Executable/etc/",
@@ -134,6 +148,7 @@ pkg_tar(
     deps = [
         ":adaptive_autosar_log_daemon_configs",
         ":adaptive_autosar_someipdaemon_configs",
+        ":adaptive_autosar_proxy_configs",
         ":adaptive_autosar_skeleton_configs",
         ":adaptive_autosar_executionmanager_state_client_configs"
     ],
@@ -161,10 +176,16 @@ pkg_deb(
     version = "0.0.0",
 )
 
+container_run_and_commit(
+    name = "minerva_mpu_adaptive_docker_image",
+    commands = ["apt update", "apt-get install -y iproute2 strace"],
+    image = "@ubuntu_18.04//image"
+)
+
 container_image(
     name = "minerva_mpu_adaptive_docker",
-    base = "@ubuntu_18.04//image",
-    entrypoint = "/sbin/amsr_vector_fs_em_executionmanager " +
+    base = ":minerva_mpu_adaptive_docker_image",
+    entrypoint = "ip link set lo multicast on && ip route add ff01::0/16 dev lo && /sbin/amsr_vector_fs_em_executionmanager " +
                  "-a /opt -m /etc/machine_exec_config.json",
     # The legacy_run_behavior is not disabled on container_image by default
     legacy_run_behavior = False,
@@ -172,7 +193,15 @@ container_image(
     tars = [
         ":minerva_mpu_adaptive_filesystem",
     ],
-    docker_run_flags = "-it --cap-add SYS_NICE --cap-add NET_ADMIN"
+    docker_run_flags = " ".join([    
+        "-it",
+        "--cap-add SYS_NICE",
+        "--cap-add NET_ADMIN",
+        "--ip 10.21.17.98",
+        "--sysctl net.ipv6.conf.all.disable_ipv6=0",
+        "--net mnv0",
+    ])
+
 )
 
 # Buildifier
