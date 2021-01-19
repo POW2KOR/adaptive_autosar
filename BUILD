@@ -112,9 +112,9 @@ pkg_tar(
     name = "adaptive_autosar_proxy_configs",
     srcs = {
         "//bsw:proxy_com_application_config": "com_application.json",
-        "//bsw:proxy_exec_config": "exec_config.json",
+        "//bsw:starter_kit_proxy_exec_config": "exec_config.json",
         "//bsw:proxy_logging_config": "logging_config.json",
-        "//bsw:proxy_someip_config": "someip_config.json",
+        "//bsw:starter_kit_proxy_someip_config": "someip_config.json",
     },
     mode = "0755",
     package_dir = "/opt/IDC_M_P_SoftwareClusterDesign_Base_TEST_SwComponentType_Executable/etc/",
@@ -124,9 +124,9 @@ pkg_tar(
     name = "adaptive_autosar_skeleton_configs",
     srcs = {
         "//bsw:skeleton_com_application_config": "com_application.json",
-        "//bsw:skeleton_exec_config": "exec_config.json",
+        "//bsw:starter_kit_skeleton_exec_config": "exec_config.json",
         "//bsw:skeleton_logging_config": "logging_config.json",
-        "//bsw:skeleton_someip_config": "someip_config.json",
+        "//bsw:starter_kit_skeleton_someip_config": "someip_config.json",
     },
     mode = "0755",
     package_dir = "/opt/IDC_M_P_SoftwareClusterDesign_Base_SwComponentType_Executable/etc/",

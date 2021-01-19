@@ -50,26 +50,11 @@ filegroup(
 )
 
 filegroup(
-    name = "proxy_exec_config",
-    srcs = [
-        "configs/IDC_M_P_SoftwareClusterDesign_Base_TEST_SwComponentType_Executable/exec_config.json"
-    ]
-)
-
-filegroup(
     name = "proxy_logging_config",
     srcs = [
         "configs/IDC_M_P_SoftwareClusterDesign_Base_TEST_SwComponentType_Executable/logging_config.json"
     ]
 )
-
-filegroup(
-    name = "proxy_someip_config",
-    srcs = [
-        "configs/IDC_M_P_SoftwareClusterDesign_Base_TEST_SwComponentType_Executable/someip_config.json"
-    ]
-)
-
 
 filegroup(
     name = "skeleton_com_application_config",
@@ -79,23 +64,9 @@ filegroup(
 )
 
 filegroup(
-    name = "skeleton_exec_config",
-    srcs = [
-        "configs/IDC_M_P_SoftwareClusterDesign_Base_SwComponentType_Executable/exec_config.json"
-    ]
-)
-
-filegroup(
     name = "skeleton_logging_config",
     srcs = [
         "configs/IDC_M_P_SoftwareClusterDesign_Base_SwComponentType_Executable/logging_config.json"
-    ]
-)
-
-filegroup(
-    name = "skeleton_someip_config",
-    srcs = [
-        "configs/IDC_M_P_SoftwareClusterDesign_Base_SwComponentType_Executable/someip_config.json"
     ]
 )
 
