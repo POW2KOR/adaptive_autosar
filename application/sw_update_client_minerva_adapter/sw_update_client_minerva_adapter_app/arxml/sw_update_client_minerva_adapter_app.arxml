@@ -9,22 +9,80 @@
           <PORTS>
             <P-PORT-PROTOTYPE UUID="732716d8-7809-4b9f-832c-5e2c6b84d4c2">
               <SHORT-NAME>ProvideSwdlPluginPort</SHORT-NAME>
-              <CATEGORY/>
+              <CATEGORY />
               <PROVIDED-INTERFACE-TREF DEST="SERVICE-INTERFACE">/mb/SwdlPlugin</PROVIDED-INTERFACE-TREF>
             </P-PORT-PROTOTYPE>
           </PORTS>
         </ADAPTIVE-APPLICATION-SW-COMPONENT-TYPE>
         <EXECUTABLE UUID="72a3bd36-d7ca-405b-862c-017f845640b1">
-          <SHORT-NAME>sw_update_client_minerva_adapter_executable</SHORT-NAME>
+          <SHORT-NAME>sw_update_client_minerva_adapter_app</SHORT-NAME>
+          <CATEGORY>APPLICATION_LEVEL</CATEGORY>
           <ROOT-SW-COMPONENT-PROTOTYPE UUID="d91b698c-819a-4a38-ba18-814492e4a785">
             <SHORT-NAME>RootSwComponentPrototype</SHORT-NAME>
             <APPLICATION-TYPE-TREF DEST="ADAPTIVE-APPLICATION-SW-COMPONENT-TYPE">/mb/AdaptiveApplicationSwComponentType</APPLICATION-TYPE-TREF>
           </ROOT-SW-COMPONENT-PROTOTYPE>
         </EXECUTABLE>
         <PROCESS UUID="1eece474-fbf1-499b-b1e2-e775113c9356">
-          <SHORT-NAME>sw_update_client_minerva_adapter_app_Process</SHORT-NAME>
-          <EXECUTABLE-REF DEST="EXECUTABLE">/mb/sw_update_client_minerva_adapter_executable</EXECUTABLE-REF>
+          <SHORT-NAME>sw_update_client_minerva_adapter_app_process</SHORT-NAME>
+          <EXECUTABLE-REF DEST="EXECUTABLE">/mb/sw_update_client_minerva_adapter_app</EXECUTABLE-REF>
+          <PROCESS-STATE-MACHINE>
+            <SHORT-NAME>PROCESS_STATE_MACHINE</SHORT-NAME>
+            <TYPE-TREF DEST="MODE-DECLARATION-GROUP">/ModeDeclarationGroups/MachineStates</TYPE-TREF>
+          </PROCESS-STATE-MACHINE>
+          <STATE-DEPENDENT-STARTUP-CONFIGS>
+            <STATE-DEPENDENT-STARTUP-CONFIG>
+              <FUNCTION-GROUP-STATE-IREFS>
+                <FUNCTION-GROUP-STATE-IREF>
+                  <CONTEXT-MODE-DECLARATION-GROUP-PROTOTYPE-REF DEST="MODE-DECLARATION-GROUP-PROTOTYPE">/Machines/IDC_M_P/MachineState</CONTEXT-MODE-DECLARATION-GROUP-PROTOTYPE-REF>
+                  <TARGET-MODE-DECLARATION-REF DEST="MODE-DECLARATION">/ModeDeclarationGroups/MachineStates/Running</TARGET-MODE-DECLARATION-REF>
+                </FUNCTION-GROUP-STATE-IREF>
+              </FUNCTION-GROUP-STATE-IREFS>
+              <STARTUP-CONFIG-REF DEST="STARTUP-CONFIG">/mb/startup_config_set/sw_update_client_minerva_adapter_app_startup_config</STARTUP-CONFIG-REF>
+            </STATE-DEPENDENT-STARTUP-CONFIG>
+          </STATE-DEPENDENT-STARTUP-CONFIGS>
         </PROCESS>
+        <STARTUP-CONFIG-SET>
+          <SHORT-NAME>startup_config_set</SHORT-NAME>
+          <STARTUP-CONFIGS>
+            <STARTUP-CONFIG>
+              <SHORT-NAME>sw_update_client_minerva_adapter_app_startup_config</SHORT-NAME>
+              <SCHEDULING-POLICY>SCHEDULING-POLICY-FIFO</SCHEDULING-POLICY>
+              <SCHEDULING-PRIORITY>32</SCHEDULING-PRIORITY>
+              <STARTUP-OPTIONS>
+                <STARTUP-OPTION>
+                  <OPTION-ARGUMENT>./etc/logging_config.json</OPTION-ARGUMENT>
+                  <OPTION-KIND>COMMAND-LINE-SHORT-FORM</OPTION-KIND>
+                  <OPTION-NAME>l</OPTION-NAME>
+                </STARTUP-OPTION>
+              </STARTUP-OPTIONS>
+            </STARTUP-CONFIG>
+          </STARTUP-CONFIGS>
+        </STARTUP-CONFIG-SET>
+        <PROCESS-TO-MACHINE-MAPPING-SET>
+          <SHORT-NAME>adaptive_process_to_machine_mapping_set</SHORT-NAME>
+          <PROCESS-TO-MACHINE-MAPPINGS>
+            <PROCESS-TO-MACHINE-MAPPING>
+              <SHORT-NAME>sw_update_client_minerva_adapter_process_to_machine_mapping</SHORT-NAME>
+              <DESIGN-REF DEST="PROCESS-DESIGN-TO-MACHINE-DESIGN-MAPPING">/mb/adaptive_process_design_to_machine_mapping_set/sw_update_client_minerva_adapter_app_process_design_to_machine_design_mapping</DESIGN-REF>
+              <MACHINE-REF DEST="MACHINE">/Machines/IDC_M_P</MACHINE-REF>
+              <PROCESS-REF DEST="PROCESS">/mb/sw_update_client_minerva_adapter_app_process</PROCESS-REF>
+            </PROCESS-TO-MACHINE-MAPPING>
+          </PROCESS-TO-MACHINE-MAPPINGS>
+        </PROCESS-TO-MACHINE-MAPPING-SET>
+        <PROCESS-DESIGN-TO-MACHINE-DESIGN-MAPPING-SET>
+          <SHORT-NAME>adaptive_process_design_to_machine_mapping_set</SHORT-NAME>
+          <PROCESS-DESIGN-TO-MACHINE-DESIGN-MAPPINGS>
+            <PROCESS-DESIGN-TO-MACHINE-DESIGN-MAPPING>
+              <SHORT-NAME>sw_update_client_minerva_adapter_app_process_design_to_machine_design_mapping</SHORT-NAME>
+              <MACHINE-DESIGN-REF DEST="MACHINE-DESIGN">/MachineDesigns/IDC_M_PDesign</MACHINE-DESIGN-REF>
+              <PROCESS-DESIGN-REF DEST="PROCESS-DESIGN">/mb/sw_update_client_minerva_adapter_app_process_design</PROCESS-DESIGN-REF>
+            </PROCESS-DESIGN-TO-MACHINE-DESIGN-MAPPING>
+          </PROCESS-DESIGN-TO-MACHINE-DESIGN-MAPPINGS>
+        </PROCESS-DESIGN-TO-MACHINE-DESIGN-MAPPING-SET>
+        <PROCESS-DESIGN>
+          <SHORT-NAME>sw_update_client_minerva_adapter_app_process_design</SHORT-NAME>
+          <EXECUTABLE-REF DEST="EXECUTABLE">/mb/sw_update_client_minerva_adapter_app</EXECUTABLE-REF>
+        </PROCESS-DESIGN>
       </ELEMENTS>
     </AR-PACKAGE>
   </AR-PACKAGES>
