@@ -860,6 +860,14 @@ filegroup(
 )
 
 filegroup(
+    name = "standard_types_arxml",
+    srcs = [
+        "examples/proxy-skeleton-demo-idc6/arxml/AUTOSAR_MOD_StandardTypes.arxml",
+    ],
+    visibility = ["//visibility:public"],
+)
+
+filegroup(
     name = "mex_arxml",
     srcs = [
         "mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-em-executionmanager/mex/MexDefs.arxml",
