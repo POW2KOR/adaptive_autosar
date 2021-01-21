@@ -40,7 +40,7 @@ sudo apt-get install g++
 On Daimler Ubuntu laptops, it might be installed by default.
 
 ```
-:~/minerva_mpu_adaptive$ bazel build @starter_kit_adaptive_xavier//:amsr-vector-fs-sec-cryptostack --config=x86_64_linux
+:~/minerva_mpu_adaptive$ bazel build @starter_kit_adaptive_xavier//:amsr_vector_fs_sec_cryptostack --config=x86_64_linux
 ```
 
 ### Build different targets for aarch64 target 
@@ -54,7 +54,7 @@ automatically uninstalled after 30 minutes and might need to be reinstalled. (Th
 Daimler laptops).
 
 ```
-:~/minerva_mpu_adaptive$ bazel build @starter_kit_adaptive_xavier//:amsr-vector-fs-sec-cryptostack --config=aarch64_linux_ubuntu
+:~/minerva_mpu_adaptive$ bazel build @starter_kit_adaptive_xavier//:amsr_vector_fs_sec_cryptostack --config=aarch64_linux_ubuntu
 ```
 
 You can use the linaro toolchain provided by Nvidia with the `minerva_mpu_docker` image:
@@ -64,11 +64,11 @@ You can use the linaro toolchain provided by Nvidia with the `minerva_mpu_docker
 ```
 
 ### Linking issues with libARA.a
-Currently, there is a circular linking dependency between amsr-vector-fs-communication-middleware and code-gen. If you
+Currently, there is a circular linking dependency between amsr_vector_fs_communication_miunderscoresddleware and code_gen. If you
 do see linking issues related to libARA.a when you try to build, you might have to build the communication middleware
 target first:
 ```
-bazel build @starter_kit_adaptive_xavier//:amsr-vector-fs-communicationmiddleware --config=<your target config>
+bazel build @starter_kit_adaptive_xavier//:amsr_vector_fs_communicationmiddleware --config=<your target config>
 ```
 
 ### Useful information
