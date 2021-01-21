@@ -102,7 +102,7 @@ pkg_tar(
     srcs = {
         "//bsw:someipd_posix_logging_config": "logging_config.json",
         "//bsw:someipd_posix_exec_config": "exec_config.json",
-        "//bsw:someipd_posix_someip_config": "someipd_posix.json"
+        "//bsw:someipd_posix_someip_config": "someipd-posix.json"
     },
     mode = "0755",
     package_dir = "/opt/someipd_posix/etc/",
