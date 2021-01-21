@@ -1,6 +1,6 @@
 # Use our custom-configured c++ toolchain.
-build:aarch64_linux_ubuntu --crosstool_top=//build_env/toolchain/aarch64_linux_ubuntu_compiler:toolchain --experimental_scale_timeouts=100 --@starter_kit_adaptive_xavier//:build-target="minerva_target" --//:build-target="minerva_target"
-build:aarch64_linux_linaro --crosstool_top=//build_env/toolchain/aarch64_linux_linaro_compiler:toolchain --experimental_scale_timeouts=100 --@starter_kit_adaptive_xavier//:build-target="minerva_target" --//:build-target="minerva_target"
+build:aarch64_linux_ubuntu --crosstool_top=//build_env/toolchain/aarch64_linux_ubuntu_compiler:toolchain --experimental_scale_timeouts=100 --@starter_kit_adaptive_xavier//:build_target="minerva_target" --//:build_target="minerva_target"
+build:aarch64_linux_linaro --crosstool_top=//build_env/toolchain/aarch64_linux_linaro_compiler:toolchain --experimental_scale_timeouts=100 --@starter_kit_adaptive_xavier//:build_target="minerva_target" --//:build_target="minerva_target"
 
 # Use --cpu as a differentiator.
 build:aarch64_linux_ubuntu  --cpu=aarch64
