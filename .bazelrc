@@ -11,4 +11,4 @@ build:aarch64_linux_ubuntu  --host_crosstool_top=@bazel_tools//tools/cpp:toolcha
 build:aarch64_linux_linaro  --host_crosstool_top=@bazel_tools//tools/cpp:toolchain
 
 # We need to find a better approach for specifting pthread as a default, the same way we do with the aarch64 toolchain
-build:x86_64_linux          --cpu=k8 --linkopt=-pthread --experimental_scale_timeouts=1000
+build:x86_64_linux          --cpu=k8 --linkopt=-pthread --experimental_scale_timeouts=100
