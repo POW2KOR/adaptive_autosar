@@ -15,16 +15,198 @@
           </PORTS>
         </ADAPTIVE-APPLICATION-SW-COMPONENT-TYPE>
         <EXECUTABLE UUID="72a3bd36-d7ca-405b-862c-017f845640b1">
-          <SHORT-NAME>sw_update_client_minerva_adapter_executable</SHORT-NAME>
+          <SHORT-NAME>sw_update_client_minerva_adapter_app</SHORT-NAME>
+          <CATEGORY>APPLICATION_LEVEL</CATEGORY>
           <ROOT-SW-COMPONENT-PROTOTYPE UUID="d91b698c-819a-4a38-ba18-814492e4a785">
             <SHORT-NAME>RootSwComponentPrototype</SHORT-NAME>
             <APPLICATION-TYPE-TREF DEST="ADAPTIVE-APPLICATION-SW-COMPONENT-TYPE">/mb/AdaptiveApplicationSwComponentType</APPLICATION-TYPE-TREF>
           </ROOT-SW-COMPONENT-PROTOTYPE>
         </EXECUTABLE>
         <PROCESS UUID="1eece474-fbf1-499b-b1e2-e775113c9356">
-          <SHORT-NAME>sw_update_client_minerva_adapter_app_Process</SHORT-NAME>
-          <EXECUTABLE-REF DEST="EXECUTABLE">/mb/sw_update_client_minerva_adapter_executable</EXECUTABLE-REF>
+          <SHORT-NAME>sw_update_client_minerva_adapter_app_process</SHORT-NAME>
+          <EXECUTABLE-REF DEST="EXECUTABLE">/mb/sw_update_client_minerva_adapter_app</EXECUTABLE-REF>
+          <PROCESS-STATE-MACHINE>
+            <SHORT-NAME>PROCESS_STATE_MACHINE</SHORT-NAME>
+            <TYPE-TREF DEST="MODE-DECLARATION-GROUP">/ModeDeclarationGroups/MachineStates</TYPE-TREF>
+          </PROCESS-STATE-MACHINE>
+          <STATE-DEPENDENT-STARTUP-CONFIGS>
+            <STATE-DEPENDENT-STARTUP-CONFIG>
+              <FUNCTION-GROUP-STATE-IREFS>
+                <FUNCTION-GROUP-STATE-IREF>
+                  <CONTEXT-MODE-DECLARATION-GROUP-PROTOTYPE-REF DEST="MODE-DECLARATION-GROUP-PROTOTYPE">/Machines/IDC_M_P/MachineState</CONTEXT-MODE-DECLARATION-GROUP-PROTOTYPE-REF>
+                  <TARGET-MODE-DECLARATION-REF DEST="MODE-DECLARATION">/ModeDeclarationGroups/MachineStates/Running</TARGET-MODE-DECLARATION-REF>
+                </FUNCTION-GROUP-STATE-IREF>
+              </FUNCTION-GROUP-STATE-IREFS>
+              <STARTUP-CONFIG-REF DEST="STARTUP-CONFIG">/mb/startup_config_set/sw_update_client_minerva_adapter_app_startup_config</STARTUP-CONFIG-REF>
+            </STATE-DEPENDENT-STARTUP-CONFIG>
+          </STATE-DEPENDENT-STARTUP-CONFIGS>
         </PROCESS>
+        <STARTUP-CONFIG-SET>
+          <SHORT-NAME>startup_config_set</SHORT-NAME>
+          <STARTUP-CONFIGS>
+            <STARTUP-CONFIG>
+              <SHORT-NAME>sw_update_client_minerva_adapter_app_startup_config</SHORT-NAME>
+              <SCHEDULING-POLICY>SCHEDULING-POLICY-FIFO</SCHEDULING-POLICY>
+              <SCHEDULING-PRIORITY>32</SCHEDULING-PRIORITY>
+              <STARTUP-OPTIONS>
+                <STARTUP-OPTION>
+                  <OPTION-ARGUMENT>./etc/logging_config.json</OPTION-ARGUMENT>
+                  <OPTION-KIND>COMMAND-LINE-SHORT-FORM</OPTION-KIND>
+                  <OPTION-NAME>l</OPTION-NAME>
+                </STARTUP-OPTION>
+              </STARTUP-OPTIONS>
+            </STARTUP-CONFIG>
+          </STARTUP-CONFIGS>
+        </STARTUP-CONFIG-SET>
+        <PROCESS-TO-MACHINE-MAPPING-SET>
+          <SHORT-NAME>adaptive_process_to_machine_mapping_set</SHORT-NAME>
+          <PROCESS-TO-MACHINE-MAPPINGS>
+            <PROCESS-TO-MACHINE-MAPPING>
+              <SHORT-NAME>sw_update_client_minerva_adapter_process_to_machine_mapping</SHORT-NAME>
+              <DESIGN-REF DEST="PROCESS-DESIGN-TO-MACHINE-DESIGN-MAPPING">/mb/adaptive_process_design_to_machine_mapping_set/sw_update_client_minerva_adapter_app_process_design_to_machine_design_mapping</DESIGN-REF>
+              <MACHINE-REF DEST="MACHINE">/Machines/IDC_M_P</MACHINE-REF>
+              <PROCESS-REF DEST="PROCESS">/mb/sw_update_client_minerva_adapter_app_process</PROCESS-REF>
+            </PROCESS-TO-MACHINE-MAPPING>
+          </PROCESS-TO-MACHINE-MAPPINGS>
+        </PROCESS-TO-MACHINE-MAPPING-SET>
+        <PROCESS-DESIGN-TO-MACHINE-DESIGN-MAPPING-SET>
+          <SHORT-NAME>adaptive_process_design_to_machine_mapping_set</SHORT-NAME>
+          <PROCESS-DESIGN-TO-MACHINE-DESIGN-MAPPINGS>
+            <PROCESS-DESIGN-TO-MACHINE-DESIGN-MAPPING>
+              <SHORT-NAME>sw_update_client_minerva_adapter_app_process_design_to_machine_design_mapping</SHORT-NAME>
+              <MACHINE-DESIGN-REF DEST="MACHINE-DESIGN">/MachineDesigns/IDC_M_PDesign</MACHINE-DESIGN-REF>
+              <PROCESS-DESIGN-REF DEST="PROCESS-DESIGN">/mb/sw_update_client_minerva_adapter_app_process_design</PROCESS-DESIGN-REF>
+            </PROCESS-DESIGN-TO-MACHINE-DESIGN-MAPPING>
+          </PROCESS-DESIGN-TO-MACHINE-DESIGN-MAPPINGS>
+        </PROCESS-DESIGN-TO-MACHINE-DESIGN-MAPPING-SET>
+        <PROCESS-DESIGN>
+          <SHORT-NAME>sw_update_client_minerva_adapter_app_process_design</SHORT-NAME>
+          <EXECUTABLE-REF DEST="EXECUTABLE">/mb/sw_update_client_minerva_adapter_app</EXECUTABLE-REF>
+        </PROCESS-DESIGN>
+        <SOMEIP-SERVICE-INTERFACE-DEPLOYMENT UUID="06f37bea-1fd2-4127-b502-f34bb76e8e5a">
+          <SHORT-NAME>sw_update_client_minderva_adapter</SHORT-NAME>
+          <FIELD-DEPLOYMENTS>
+            <SOMEIP-FIELD-DEPLOYMENT UUID="63aad14e-bf8e-49f1-b6eb-dd0dd2f2430b">
+              <SHORT-NAME>progress</SHORT-NAME>
+              <FIELD-REF DEST="FIELD">/mb/SwdlPlugin/progress</FIELD-REF>
+              <GET UUID="f1ed35e6-21ec-43c0-be34-78b11ce6c7a4">
+                <SHORT-NAME>getProgress</SHORT-NAME>
+                <METHOD-ID>1</METHOD-ID>
+                <TRANSPORT-PROTOCOL>UDP</TRANSPORT-PROTOCOL>
+              </GET>
+              <NOTIFIER UUID="9e47b1dc-1409-4ccb-b8e4-2f62ef401942">
+                <SHORT-NAME>onProgress</SHORT-NAME>
+                <EVENT-ID>2</EVENT-ID>
+                <TRANSPORT-PROTOCOL>UDP</TRANSPORT-PROTOCOL>
+              </NOTIFIER>
+            </SOMEIP-FIELD-DEPLOYMENT>
+            <SOMEIP-FIELD-DEPLOYMENT UUID="cd32d78b-d47d-49d1-b14c-b96f47329560">
+              <SHORT-NAME>status</SHORT-NAME>
+              <FIELD-REF DEST="FIELD">/mb/SwdlPlugin/status</FIELD-REF>
+              <GET UUID="bc9b3aa4-064d-458d-8881-7e94bf08644d">
+                <SHORT-NAME>getStatus</SHORT-NAME>
+                <METHOD-ID>3</METHOD-ID>
+                <TRANSPORT-PROTOCOL>UDP</TRANSPORT-PROTOCOL>
+              </GET>
+              <NOTIFIER UUID="85de3241-deb6-4de2-b70c-c23cc2cc86b4">
+                <SHORT-NAME>onStatus</SHORT-NAME>
+                <EVENT-ID>4</EVENT-ID>
+                <TRANSPORT-PROTOCOL>UDP</TRANSPORT-PROTOCOL>
+              </NOTIFIER>
+            </SOMEIP-FIELD-DEPLOYMENT>
+          </FIELD-DEPLOYMENTS>
+          <METHOD-DEPLOYMENTS>
+            <SOMEIP-METHOD-DEPLOYMENT UUID="62c80f67-4da9-4bc3-a0de-4c524e6eb421">
+              <SHORT-NAME>WriteData</SHORT-NAME>
+              <METHOD-REF DEST="CLIENT-SERVER-OPERATION">/mb/SwdlPlugin/WriteData</METHOD-REF>
+              <METHOD-ID>5</METHOD-ID>
+              <TRANSPORT-PROTOCOL>UDP</TRANSPORT-PROTOCOL>
+            </SOMEIP-METHOD-DEPLOYMENT>
+            <SOMEIP-METHOD-DEPLOYMENT UUID="d9d7cb53-9798-4b50-9099-90335cae8f57">
+              <SHORT-NAME>CancelSession</SHORT-NAME>
+              <METHOD-REF DEST="CLIENT-SERVER-OPERATION">/mb/SwdlPlugin/CancelSession</METHOD-REF>
+              <METHOD-ID>6</METHOD-ID>
+              <TRANSPORT-PROTOCOL>UDP</TRANSPORT-PROTOCOL>
+            </SOMEIP-METHOD-DEPLOYMENT>
+            <SOMEIP-METHOD-DEPLOYMENT UUID="e6cf1766-65a7-4480-a828-e0699caafc59">
+              <SHORT-NAME>StartSession</SHORT-NAME>
+              <METHOD-REF DEST="CLIENT-SERVER-OPERATION">/mb/SwdlPlugin/StartSession</METHOD-REF>
+              <METHOD-ID>7</METHOD-ID>
+              <TRANSPORT-PROTOCOL>UDP</TRANSPORT-PROTOCOL>
+            </SOMEIP-METHOD-DEPLOYMENT>
+            <SOMEIP-METHOD-DEPLOYMENT UUID="e84af525-d876-4f95-a9c8-4541bc5f62ae">
+              <SHORT-NAME>CheckMemory</SHORT-NAME>
+              <METHOD-REF DEST="CLIENT-SERVER-OPERATION">/mb/SwdlPlugin/CheckMemory</METHOD-REF>
+              <METHOD-ID>8</METHOD-ID>
+              <TRANSPORT-PROTOCOL>UDP</TRANSPORT-PROTOCOL>
+            </SOMEIP-METHOD-DEPLOYMENT>
+            <SOMEIP-METHOD-DEPLOYMENT UUID="6b906b23-26cd-4d56-811a-c5dbea0a4210">
+              <SHORT-NAME>SwitchNewVersion</SHORT-NAME>
+              <METHOD-REF DEST="CLIENT-SERVER-OPERATION">/mb/SwdlPlugin/SwitchNewVersion</METHOD-REF>
+              <METHOD-ID>9</METHOD-ID>
+              <TRANSPORT-PROTOCOL>UDP</TRANSPORT-PROTOCOL>
+            </SOMEIP-METHOD-DEPLOYMENT>
+            <SOMEIP-METHOD-DEPLOYMENT UUID="26faa34f-4714-4f1e-8525-e0599f12f0ea">
+              <SHORT-NAME>GetResumePosition</SHORT-NAME>
+              <METHOD-REF DEST="CLIENT-SERVER-OPERATION">/mb/SwdlPlugin/GetResumePosition</METHOD-REF>
+              <METHOD-ID>10</METHOD-ID>
+              <TRANSPORT-PROTOCOL>UDP</TRANSPORT-PROTOCOL>
+            </SOMEIP-METHOD-DEPLOYMENT>
+          </METHOD-DEPLOYMENTS>
+          <SERVICE-INTERFACE-REF DEST="SERVICE-INTERFACE">/mb/SwdlPlugin</SERVICE-INTERFACE-REF>
+          <EVENT-GROUPS>
+            <SOMEIP-EVENT-GROUP UUID="9c4cbcbb-e144-47ea-b5bc-627ae26ff7b2">
+              <SHORT-NAME>SomeipEventGroup</SHORT-NAME>
+              <EVENT-GROUP-ID>1</EVENT-GROUP-ID>
+              <EVENT-REFS>
+                <EVENT-REF DEST="SOMEIP-EVENT-DEPLOYMENT">/mb/sw_update_client_minderva_adapter/progress/onProgress</EVENT-REF>
+                <EVENT-REF DEST="SOMEIP-EVENT-DEPLOYMENT">/mb/sw_update_client_minderva_adapter/status/onStatus</EVENT-REF>
+              </EVENT-REFS>
+            </SOMEIP-EVENT-GROUP>
+          </EVENT-GROUPS>
+          <SERVICE-INTERFACE-ID>0</SERVICE-INTERFACE-ID>
+          <SERVICE-INTERFACE-VERSION>
+            <MAJOR-VERSION>1</MAJOR-VERSION>
+            <MINOR-VERSION>0</MINOR-VERSION>
+          </SERVICE-INTERFACE-VERSION>
+        </SOMEIP-SERVICE-INTERFACE-DEPLOYMENT>
+        <PROVIDED-SOMEIP-SERVICE-INSTANCE UUID="6e7eace4-9bb6-45e8-bd64-b61350eb780e">
+          <SHORT-NAME>sw_update_client_minderva_adapter_001</SHORT-NAME>
+          <SERVICE-INTERFACE-REF DEST="SOMEIP-SERVICE-INTERFACE-DEPLOYMENT">/mb/sw_update_client_minderva_adapter</SERVICE-INTERFACE-REF>
+          <PROVIDED-EVENT-GROUPS>
+            <SOMEIP-PROVIDED-EVENT-GROUP UUID="0584ca36-912a-49ea-8fc9-ea1df8f82618">
+              <SHORT-NAME>SomeipEventGroup</SHORT-NAME>
+              <EVENT-GROUP-REF DEST="SOMEIP-EVENT-GROUP">/mb/sw_update_client_minderva_adapter/SomeipEventGroup</EVENT-GROUP-REF>
+              <MULTICAST-THRESHOLD>0</MULTICAST-THRESHOLD>
+            </SOMEIP-PROVIDED-EVENT-GROUP>
+          </PROVIDED-EVENT-GROUPS>
+          <SD-SERVER-CONFIG-REF DEST="SOMEIP-SD-SERVER-SERVICE-INSTANCE-CONFIG">/mb/sw_update_client_minderva_adapter_003</SD-SERVER-CONFIG-REF>
+          <SERVICE-INSTANCE-ID>1</SERVICE-INSTANCE-ID>
+        </PROVIDED-SOMEIP-SERVICE-INSTANCE>
+        <SERVICE-INSTANCE-TO-PORT-PROTOTYPE-MAPPING UUID="9530184d-1a92-4445-8ab1-7a0192374ecd">
+          <SHORT-NAME>sw_update_client_minderva_adapter_002</SHORT-NAME>
+          <PORT-PROTOTYPE-IREF>
+            <CONTEXT-ROOT-SW-COMPONENT-PROTOTYPE-REF DEST="ROOT-SW-COMPONENT-PROTOTYPE">/mb/sw_update_client_minerva_adapter_app/RootSwComponentPrototype</CONTEXT-ROOT-SW-COMPONENT-PROTOTYPE-REF>
+            <TARGET-PORT-PROTOTYPE-REF DEST="P-PORT-PROTOTYPE">/mb/AdaptiveApplicationSwComponentType/ProvideSwdlPluginPort</TARGET-PORT-PROTOTYPE-REF>
+          </PORT-PROTOTYPE-IREF>
+          <PROCESS-REF DEST="PROCESS">/mb/sw_update_client_minerva_adapter_app_process</PROCESS-REF>
+          <SERVICE-INSTANCE-REF DEST="PROVIDED-SOMEIP-SERVICE-INSTANCE">/mb/sw_update_client_minderva_adapter_001</SERVICE-INSTANCE-REF>
+        </SERVICE-INSTANCE-TO-PORT-PROTOTYPE-MAPPING>
+        <SOMEIP-SD-SERVER-SERVICE-INSTANCE-CONFIG UUID="6e963c3c-3307-48fe-b0c2-984c09644902">
+          <SHORT-NAME>sw_update_client_minderva_adapter_003</SHORT-NAME>
+          <INITIAL-OFFER-BEHAVIOR>
+            <INITIAL-DELAY-MAX-VALUE>0.1</INITIAL-DELAY-MAX-VALUE>
+            <INITIAL-DELAY-MIN-VALUE>0.01</INITIAL-DELAY-MIN-VALUE>
+            <INITIAL-REPETITIONS-BASE-DELAY>0.2</INITIAL-REPETITIONS-BASE-DELAY>
+            <INITIAL-REPETITIONS-MAX>3</INITIAL-REPETITIONS-MAX>
+          </INITIAL-OFFER-BEHAVIOR>
+          <OFFER-CYCLIC-DELAY>2</OFFER-CYCLIC-DELAY>
+          <REQUEST-RESPONSE-DELAY>
+            <MAX-VALUE>1.5</MAX-VALUE>
+            <MIN-VALUE>1.5</MIN-VALUE>
+          </REQUEST-RESPONSE-DELAY>
+          <SERVICE-OFFER-TIME-TO-LIVE>10</SERVICE-OFFER-TIME-TO-LIVE>
+        </SOMEIP-SD-SERVER-SERVICE-INSTANCE-CONFIG>
       </ELEMENTS>
     </AR-PACKAGE>
   </AR-PACKAGES>

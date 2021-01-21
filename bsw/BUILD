@@ -18,6 +18,7 @@ filegroup(
     srcs = [
         "@starter_kit_adaptive_xavier//:ncd_arxml",
         "@starter_kit_adaptive_xavier//:mex_arxml",
+        "@starter_kit_adaptive_xavier//:standard_types_arxml",
     ]
 )
 
