@@ -154,10 +154,10 @@ minerva_aa_codegen_rule(
 cc_binary(
     name = "executionmanager_state_client_binary",
     deps = [
-        "@starter_kit_adaptive_xavier//:amsr-vector-fs-applicationbase",
-        "@starter_kit_adaptive_xavier//:amsr-vector-fs-log-api",
-        "@starter_kit_adaptive_xavier//:amsr-vector-fs-em-executionmanager",
-        "@starter_kit_adaptive_xavier//:amsr-vector-fs-libiostream"
+        "@starter_kit_adaptive_xavier//:amsr_vector_fs_applicationbase",
+        "@starter_kit_adaptive_xavier//:amsr_vector_fs_log_api",
+        "@starter_kit_adaptive_xavier//:amsr_vector_fs_em_executionmanager",
+        "@starter_kit_adaptive_xavier//:amsr_vector_fs_libiostream"
     ],
     srcs = [
         "@starter_kit_adaptive_xavier//:amsr_vector_fs_em_executionmanager_addon_demo_application_srcs",
@@ -905,9 +905,9 @@ cc_library(
         ":starter_kit_proxy_socal_hdrs_lib",
         ":starter_kit_proxy_someipbinding_hdrs_lib",
         ":starter_kit_proxy_someipprotocol_hdrs_lib",
-        "@starter_kit_adaptive_xavier//:amsr-vector-fs-comcommon",
+        "@starter_kit_adaptive_xavier//:amsr_vector_fs_comcommon",
         "@starter_kit_adaptive_xavier//:amsr_vector_fs_socal_headers",
-        "@starter_kit_adaptive_xavier//:amsr-vector-fs-vajson",
+        "@starter_kit_adaptive_xavier//:amsr_vector_fs_vajson",
         "@starter_kit_adaptive_xavier//:amsr_vector_fs_someipbinding_headers",
     ],
     copts = [
@@ -921,10 +921,10 @@ cc_binary(
     deps = [
         ":starter_kit_proxy_modeldatatypes_hdrs_lib",
         ":starter_kit_proxy_socal_hdrs_lib",
-        "@starter_kit_adaptive_xavier//:amsr-vector-fs-vajson",
-        "@starter_kit_adaptive_xavier//:amsr-vector-fs-em-executionmanager",
-        "@starter_kit_adaptive_xavier//:amsr-vector-fs-libvac",
-        "@starter_kit_adaptive_xavier//:amsr-vector-fs-log-api",
+        "@starter_kit_adaptive_xavier//:amsr_vector_fs_vajson",
+        "@starter_kit_adaptive_xavier//:amsr_vector_fs_em_executionmanager",
+        "@starter_kit_adaptive_xavier//:amsr_vector_fs_libvac",
+        "@starter_kit_adaptive_xavier//:amsr_vector_fs_log_api",
         "@starter_kit_adaptive_xavier//:amsr_vector_fs_socal_for_proxy",
         "@starter_kit_adaptive_xavier//:amsr_vector_fs_someipbinding",
     ],
@@ -992,9 +992,9 @@ cc_library(
         ":starter_kit_skeleton_socal_hdrs_lib",
         ":starter_kit_skeleton_someipbinding_hdrs_lib",
         ":starter_kit_skeleton_someipprotocol_hdrs_lib",
-        "@starter_kit_adaptive_xavier//:amsr-vector-fs-comcommon",
+        "@starter_kit_adaptive_xavier//:amsr_vector_fs_comcommon",
         "@starter_kit_adaptive_xavier//:amsr_vector_fs_socal_headers",
-        "@starter_kit_adaptive_xavier//:amsr-vector-fs-vajson",
+        "@starter_kit_adaptive_xavier//:amsr_vector_fs_vajson",
         "@starter_kit_adaptive_xavier//:amsr_vector_fs_someipbinding_headers",
     ],
     copts = [
@@ -1008,10 +1008,10 @@ cc_binary(
     deps = [
         ":starter_kit_skeleton_modeldatatypes_hdrs_lib",
         ":starter_kit_skeleton_socal_hdrs_lib",
-        "@starter_kit_adaptive_xavier//:amsr-vector-fs-vajson",
-        "@starter_kit_adaptive_xavier//:amsr-vector-fs-em-executionmanager",
-        "@starter_kit_adaptive_xavier//:amsr-vector-fs-libvac",
-        "@starter_kit_adaptive_xavier//:amsr-vector-fs-log-api",
+        "@starter_kit_adaptive_xavier//:amsr_vector_fs_vajson",
+        "@starter_kit_adaptive_xavier//:amsr_vector_fs_em_executionmanager",
+        "@starter_kit_adaptive_xavier//:amsr_vector_fs_libvac",
+        "@starter_kit_adaptive_xavier//:amsr_vector_fs_log_api",
         "@starter_kit_adaptive_xavier//:amsr_vector_fs_socal_for_skeleton",
         "@starter_kit_adaptive_xavier//:amsr_vector_fs_someipbinding",
     ],

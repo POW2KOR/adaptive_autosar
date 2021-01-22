@@ -38,7 +38,7 @@ node('pulse_ec2')
                     sshagent(['adas-jenkins-ssh']) {
                         sh '''
                            bazel --version
-                           bazel build @starter_kit_adaptive_xavier//:amsr-vector-fs-em-executionmanager --config=x86_64_linux
+                           bazel build @starter_kit_adaptive_xavier//:amsr_vector_fs_em_executionmanager --config=x86_64_linux
                         '''
                     }
                     sh "chown -R ${userId}:${groupId} ."

@@ -7,28 +7,28 @@ load("@com_github_bazelbuild_buildtools//buildifier:def.bzl", "buildifier")
 package(default_visibility = ["//visibility:public"])
 
 string_flag(
-    name = "build-target",
-    build_setting_default = "minerva-host",
+    name = "build_target",
+    build_setting_default = "minerva_host",
 )
 
 config_setting(
-    name = "minerva-host",
+    name = "minerva_host",
     flag_values = {
-        ":build-target": "minerva-host",
+        ":build_target": "minerva_host",
     },
 )
 
 config_setting(
-    name = "minerva-drive-sdk",
+    name = "minerva_drive_sdk",
     flag_values = {
-        ":build-target": "minerva-drive-sdk",
+        ":build_target": "minerva_drive_sdk",
     },
 )
 
 config_setting(
-    name = "minerva-target",
+    name = "minerva_target",
     flag_values = {
-        ":build-target": "minerva-target",
+        ":build_target": "minerva_target",
     },
 )
 
@@ -42,7 +42,7 @@ config_setting(
 # - https://github.com/bazelbuild/rules_foreign_cc/blob/d54c78ab86b40770ee19f0949db9d74a831ab9f0/tools/build_defs/framework.bzl#L400
 filegroup(
     name = "adaptive_autosar_executionmanager_binary",
-    srcs = ["@starter_kit_adaptive_xavier//:amsr-vector-fs-em-executionmanager"],
+    srcs = ["@starter_kit_adaptive_xavier//:amsr_vector_fs_em_executionmanager"],
     output_group = "amsr_vector_fs_em_executionmanager",
 )
 
