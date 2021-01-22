@@ -63,6 +63,56 @@ You can use the linaro toolchain provided by Nvidia with the `minerva_mpu_docker
 :~/minerva_mpu_adaptive$ bazel build @starter_kit_adaptive_xavier//:amsr-vector-fs-sec-cryptostack --config=aarch64_linux_linaro
 ```
 
+### Deploying Execution manager on AGX
+
+Install aarch64 GCC cross-compiler using below command:
+```
+sudo apt-get install g++-aarch64-linux-gnu
+```
+
+Build the filesystem like so:
+```
+bazel build @starter_kit_adaptive_xavier//:amsr_vector_fs_socal_for_proxy --config=aarch64_linux_ubuntu
+bazel build @starter_kit_adaptive_xavier//:amsr_vector_fs_socal_for_skeleton --config=aarch64_linux_ubuntu
+bazel build //:minerva_mpu_adaptive_filesystem --config=aarch64_linux_ubuntu
+```
+
+Make sure the below content is present in `~/.ssh/config`
+    ```
+    Host xavier-a
+    HostName x41.rd.corpintra.net
+    Port 4004
+    User username
+
+    Host xavier-b
+    HostName x41.rd.corpintra.net
+    Port 4005
+    User username
+    ```
+
+You will find the build product of the `minerva_mpu_adaptive_filesystem` target at:
+`bazel-out/aarch64-fastbuild/bin/minerva_mpu_adaptive_filesystem.tar`. We need to copy this to the AGX (we are copying
+to `xavier-a`), like so:
+```
+scp bazel-out/aarch64-fastbuild/bin/minerva_mpu_adaptive_filesystem.tar $USER@xavier-a:
+```
+
+Once the Copy is successful untar the .tar file in xavier-a using below command:
+    ```
+    tar -xvf minerva_mpu_adaptive_filesystem.tar
+    ```
+
+Then copy the contents of etc, opt and sbin folders(extracted from the .tar) to /etc/, /opt/, and /sbin/.
+
+Change the IP address in the opt/IDC_M_P_SoftwareClusterDesign_Base_TEST_SwComponentType_Executable/etc/someip_config.json & opt/IDC_M_P_SoftwareClusterDesign_Base_SwComponentType_Executable/etc/someip_config.json to match with the IP Address of the AGX.
+
+IP address of AGX can be found using command ip addr(right now : 10.20.1.97)
+
+After this run the below command to run execution manager
+    ```
+    sudo sbin/amsr_vector_fs_em_executionmanager -a opt -m etc/machine_exec_config.json
+    ```
+
 ### Linking issues with libARA.a
 Currently, there is a circular linking dependency between amsr_vector_fs_communication_miunderscoresddleware and code_gen. If you
 do see linking issues related to libARA.a when you try to build, you might have to build the communication middleware

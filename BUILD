@@ -165,7 +165,7 @@ pkg_tar(
 
 pkg_deb(
     name = "minerva_mpu_adaptive_deb",
-    architecture = "amd64",
+    architecture = "all",
     data = ":minerva_mpu_adaptive_filesystem",
     description = "Distribution of the Minerva Adaptive AUTOSAR stack",
     homepage = "http://swf.daimler.com",
@@ -208,14 +208,33 @@ container_image(
 # socal library. The issue reported and confirmed by Vector.
 # Desision to put it here is due to the bazel nature of the relative pates. So we left it in
 # the root. The file is used in bsw/BUILD file later.
+
+target_build_dir_for_socal_proxy = select({
+    ":minerva-host" : [
+        "bazel-out/k8-fastbuild/bin/external/starter_kit_adaptive_xavier/amsr_vector_fs_socal_for_proxy/lib/libSocal.a",
+    ],
+    ":minerva-target" : [
+        "bazel-out/aarch64-fastbuild/bin/external/starter_kit_adaptive_xavier/amsr_vector_fs_socal_for_proxy/lib/libSocal.a",
+    ],
+})
+
+target_build_dir_for_socal_skeleton = select({
+    ":minerva-host" : [
+        "bazel-out/k8-fastbuild/bin/external/starter_kit_adaptive_xavier/amsr_vector_fs_socal_for_skeleton/lib/libSocal.a",
+    ],
+    ":minerva-target" : [
+        "bazel-out/aarch64-fastbuild/bin/external/starter_kit_adaptive_xavier/amsr_vector_fs_socal_for_skeleton/lib/libSocal.a",
+    ],
+})
+
 filegroup(
     name = "socal_lib_for_proxy",
-    srcs = ["bazel-out/k8-fastbuild/bin/external/starter_kit_adaptive_xavier/amsr_vector_fs_socal_for_proxy/lib/libSocal.a"],
+    srcs = target_build_dir_for_socal_proxy,
     visibility = ["//visibility:public"],
 )
 
 filegroup(
     name = "socal_lib_for_skeleton",
-    srcs = ["bazel-out/k8-fastbuild/bin/external/starter_kit_adaptive_xavier/amsr_vector_fs_socal_for_skeleton/lib/libSocal.a"],
+    srcs = target_build_dir_for_socal_skeleton,
     visibility = ["//visibility:public"],
 )
