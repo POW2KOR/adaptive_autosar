@@ -180,14 +180,14 @@ http_file(
     name = "go_puller_darwin",
     executable = True,
     sha256 = "62b405511624528ba5b2716b1b93b5591c41edeca57195efc62da14001441c44",
-    urls = [("file:///usr/tools/bazel/puller-darwin-amd64")],
+    urls = ["file:///usr/tools/bazel/puller-darwin-amd64"],
 )
 
 http_file(
     name = "go_puller_linux",
     executable = True,
     sha256 = "1bcbbf86972cde8448dfab770a686801c46a1739f68f1d7a5373a4f0c3954846",
-    urls = [("file:///usr/tools/bazel/puller-linux-amd64")],
+    urls = ["file:///usr/tools/bazel/puller-linux-amd64"],
 )
 
 http_archive(
@@ -240,7 +240,7 @@ new_git_repository(
         "@//bsw:patches/remove-controlpanel-symlink-in-vector-sip.patch",
     ],
     remote = "ssh://git@git.swf.daimler.com:7999/adas/starter_kit_adaptive_xavier.git",
-    shallow_since = "1607616957 +0100"
+    shallow_since = "1607616957 +0100",
 )
 
 # Enable the below rule if you want to avoid cloning of repo at every run

@@ -14,16 +14,26 @@ filegroup(
 minerva_aa_codegen_rule(
     name = "sw_update_client_minerva_adapter_app_gen_rule",
     arxml_srcs = [":app_arxml"],
+    generators = [
+        "@starter_kit_adaptive_xavier//:generator_amsr_updatemanager_swcluster_meta",
+        "@starter_kit_adaptive_xavier//:generator_amsr_updatemanager_daemon",
+        "@starter_kit_adaptive_xavier//:generator_amsr_em_exec_config",
+        "@starter_kit_adaptive_xavier//:generator_amsr_applicationbase_init_deinit",
+        "@starter_kit_adaptive_xavier//:generator_amsr_someipbinding",
+        "@starter_kit_adaptive_xavier//:generator_amsr_someipprotocol",
+        "@starter_kit_adaptive_xavier//:generator_amsr_socal",
+        "@starter_kit_adaptive_xavier//:generator_amsr_modelleddatatypes_api",
+    ],
     outs_list_dict = {
         "sw_update_client_minerva_adapter_app_updatemanager_daemon_db": [
             "sw_update_client_minerva_adapter_app/etc/swcl_db.json",
-            "sw_update_client_minerva_adapter_app/etc/updatemanager.json"
+            "sw_update_client_minerva_adapter_app/etc/updatemanager.json",
         ],
         "sw_update_client_minerva_adapter_app_updatemanager_swcluser_meta": [
-            "sw_update_client_minerva_adapter_app/swcl_package_metadata.json"
+            "sw_update_client_minerva_adapter_app/swcl_package_metadata.json",
         ],
         "sw_update_client_minerva_adapter_app_exec_config": [
-            "sw_update_client_minerva_adapter_app/configuration/exec_config.json"
+            "sw_update_client_minerva_adapter_app/configuration/exec_config.json",
         ],
         "sw_update_client_minerva_adapter_app_applicationbase_init_deinit_srcs": [
             "sw_update_client_minerva_adapter_app/src/ara/core/initialization.cpp",
@@ -103,7 +113,7 @@ minerva_aa_codegen_rule(
         ],
         "sw_update_client_minerva_adapter_app_modeldatatypes_hdrs": [
             "sw_update_client_minerva_adapter_app/includes/mb/swuc/types/impl_type_bytevector.h",
-            "sw_update_client_minerva_adapter_app/includes/mb/swuc/types/impl_type_pluginstatus.h",    
+            "sw_update_client_minerva_adapter_app/includes/mb/swuc/types/impl_type_pluginstatus.h",
         ],
         "ignore": [
             # Ideally the NCD would not contain any applications, but it does so we get the following files generated
@@ -657,16 +667,6 @@ minerva_aa_codegen_rule(
             "IDC_M_P_SoftwareClusterDesign_Base_TEST_SwComponentType_Executable/src/daimler/services/common/srvifc_9619_dap_sens_lr_radar_obj_service_st3_10/srvifc_9619_dap_sens_lr_radar_obj_service_st3_10_resource_manager.cpp",
             "IDC_M_P_SoftwareClusterDesign_Base_TEST_SwComponentType_Executable/src/daimler/services/common/srvifc_9619_dap_sens_lr_radar_obj_service_st3_10/srvifc_9619_dap_sens_lr_radar_obj_service_st3_10_skeleton.cpp",
             "IDC_M_P_SoftwareClusterDesign_Base_TEST_SwComponentType_Executable/src/daimler/services/common/srvifc_9619_dap_sens_lr_radar_obj_service_st3_10/srvifc_9619_dap_sens_lr_radar_obj_service_st3_10_skeleton_resource_manager.cpp",
-        ]
+        ],
     },
-    generators = [
-        "@starter_kit_adaptive_xavier//:generator_amsr_updatemanager_swcluster_meta",
-        "@starter_kit_adaptive_xavier//:generator_amsr_updatemanager_daemon",
-        "@starter_kit_adaptive_xavier//:generator_amsr_em_exec_config",
-        "@starter_kit_adaptive_xavier//:generator_amsr_applicationbase_init_deinit",
-        "@starter_kit_adaptive_xavier//:generator_amsr_someipbinding",
-        "@starter_kit_adaptive_xavier//:generator_amsr_someipprotocol",
-        "@starter_kit_adaptive_xavier//:generator_amsr_socal",
-        "@starter_kit_adaptive_xavier//:generator_amsr_modelleddatatypes_api"
-    ]
 )

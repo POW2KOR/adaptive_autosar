@@ -66,21 +66,20 @@ pkg_tar(
         ":adaptive_autosar_executionmanager_binary": "sbin/amsr_vector_fs_em_executionmanager",
         "//bsw:executionmanager_state_client_binary": "opt/executionmanager_state_client_app/bin/executionmanager_state_client_app",
         "//bsw:skeleton_demo_idc6": "opt/IDC_M_P_SoftwareClusterDesign_Base_SwComponentType_Executable/bin/IDC_M_P_SoftwareClusterDesign_Base_SwComponentType_Executable",
-        "//bsw:proxy_demo_idc6": "opt/IDC_M_P_SoftwareClusterDesign_Base_TEST_SwComponentType_Executable/bin/IDC_M_P_SoftwareClusterDesign_Base_TEST_SwComponentType_Executable"
+        "//bsw:proxy_demo_idc6": "opt/IDC_M_P_SoftwareClusterDesign_Base_TEST_SwComponentType_Executable/bin/IDC_M_P_SoftwareClusterDesign_Base_TEST_SwComponentType_Executable",
     },
-
-    package_dir = "/",
     mode = "0755",
+    package_dir = "/",
 )
 
 pkg_tar(
     name = "minerva_mpu_adaptive_etc",
-    files = {
-        "//bsw:em_logging_config": "logging_config.json"
-    },
     srcs = [
         "//bsw:machine_exec_config",
     ],
+    files = {
+        "//bsw:em_logging_config": "logging_config.json",
+    },
     mode = "0755",
     package_dir = "/etc",
 )
@@ -90,8 +89,7 @@ pkg_tar(
     files = {
         "//bsw:amsr_vector_fs_log_daemon_logging_config": "logging_config.json",
         "//bsw:amsr_vector_fs_log_daemon_logd_config": "logd_config.json",
-        "//bsw:amsr_vector_fs_log_daemon_exec_config": "exec_config.json"
-
+        "//bsw:amsr_vector_fs_log_daemon_exec_config": "exec_config.json",
     },
     mode = "0755",
     package_dir = "/opt/amsr_vector_fs_log_daemon/etc/",
@@ -102,7 +100,7 @@ pkg_tar(
     srcs = {
         "//bsw:someipd_posix_logging_config": "logging_config.json",
         "//bsw:someipd_posix_exec_config": "exec_config.json",
-        "//bsw:someipd_posix_someip_config": "someipd-posix.json"
+        "//bsw:someipd_posix_someip_config": "someipd-posix.json",
     },
     mode = "0755",
     package_dir = "/opt/someipd_posix/etc/",
@@ -145,23 +143,23 @@ pkg_tar(
 
 pkg_tar(
     name = "minerva_mpu_adaptive_configs",
-    deps = [
-        ":adaptive_autosar_log_daemon_configs",
-        ":adaptive_autosar_someipdaemon_configs",
-        ":adaptive_autosar_proxy_configs",
-        ":adaptive_autosar_skeleton_configs",
-        ":adaptive_autosar_executionmanager_state_client_configs"
-    ],
     mode = "0755",
     package_dir = "",
+    deps = [
+        ":adaptive_autosar_executionmanager_state_client_configs",
+        ":adaptive_autosar_log_daemon_configs",
+        ":adaptive_autosar_proxy_configs",
+        ":adaptive_autosar_skeleton_configs",
+        ":adaptive_autosar_someipdaemon_configs",
+    ],
 )
 
 pkg_tar(
     name = "minerva_mpu_adaptive_filesystem",
     deps = [
         ":minerva_mpu_adaptive_binaries",
-        ":minerva_mpu_adaptive_etc",
         ":minerva_mpu_adaptive_configs",
+        ":minerva_mpu_adaptive_etc",
     ],
 )
 
@@ -178,13 +176,24 @@ pkg_deb(
 
 container_run_and_commit(
     name = "minerva_mpu_adaptive_docker_image",
-    commands = ["apt update", "apt-get install -y iproute2 strace"],
-    image = "@ubuntu_18.04//image"
+    commands = [
+        "apt update",
+        "apt-get install -y iproute2 strace",
+    ],
+    image = "@ubuntu_18.04//image",
 )
 
 container_image(
     name = "minerva_mpu_adaptive_docker",
     base = ":minerva_mpu_adaptive_docker_image",
+    docker_run_flags = " ".join([
+        "-it",
+        "--cap-add SYS_NICE",
+        "--cap-add NET_ADMIN",
+        "--ip 10.21.17.98",
+        "--sysctl net.ipv6.conf.all.disable_ipv6=0",
+        "--net mnv0",
+    ]),
     entrypoint = "ip link set lo multicast on && ip route add ff01::0/16 dev lo && /sbin/amsr_vector_fs_em_executionmanager " +
                  "-a /opt -m /etc/machine_exec_config.json",
     # The legacy_run_behavior is not disabled on container_image by default
@@ -193,21 +202,12 @@ container_image(
     tars = [
         ":minerva_mpu_adaptive_filesystem",
     ],
-    docker_run_flags = " ".join([    
-        "-it",
-        "--cap-add SYS_NICE",
-        "--cap-add NET_ADMIN",
-        "--ip 10.21.17.98",
-        "--sysctl net.ipv6.conf.all.disable_ipv6=0",
-        "--net mnv0",
-    ])
-
 )
 
-# We need it as a temporary workaround to resolve cyclic dependency between code generator and 
+# We need it as a temporary workaround to resolve cyclic dependency between code generator and
 # socal library. The issue reported and confirmed by Vector.
 # Desision to put it here is due to the bazel nature of the relative pates. So we left it in
-# the root. The file is used in bsw/BUILD file later. 
+# the root. The file is used in bsw/BUILD file later.
 filegroup(
     name = "socal_lib_for_proxy",
     srcs = ["bazel-out/k8-fastbuild/bin/external/starter_kit_adaptive_xavier/amsr_vector_fs_socal_for_proxy/lib/libSocal.a"],
