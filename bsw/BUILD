@@ -1,4 +1,3 @@
-
 load("@minerva_mpu_adaptive//:bazel/defs.bzl", "minerva_aa_codegen_rule")
 
 package(default_visibility = ["//visibility:public"])
@@ -16,174 +15,174 @@ filegroup(
 filegroup(
     name = "complete_arxml",
     srcs = [
-        "@starter_kit_adaptive_xavier//:ncd_arxml",
         "@starter_kit_adaptive_xavier//:mex_arxml",
+        "@starter_kit_adaptive_xavier//:ncd_arxml",
         "@starter_kit_adaptive_xavier//:standard_types_arxml",
-    ]
+    ],
 )
 
 filegroup(
     name = "amsr_vector_fs_log_daemon_exec_config",
     srcs = [
-        "configs/amsr_vector_fs_log_daemon/exec_config.json"
-    ]
+        "configs/amsr_vector_fs_log_daemon/exec_config.json",
+    ],
 )
 
 filegroup(
     name = "amsr_vector_fs_log_daemon_logd_config",
     srcs = [
-        "configs/amsr_vector_fs_log_daemon/logd_config.json"
-    ]
+        "configs/amsr_vector_fs_log_daemon/logd_config.json",
+    ],
 )
 
 filegroup(
     name = "amsr_vector_fs_log_daemon_logging_config",
     srcs = [
-        "configs/amsr_vector_fs_log_daemon/logging_config.json"
-    ]
+        "configs/amsr_vector_fs_log_daemon/logging_config.json",
+    ],
 )
 
 filegroup(
     name = "proxy_com_application_config",
     srcs = [
-        "configs/IDC_M_P_SoftwareClusterDesign_Base_TEST_SwComponentType_Executable/com_application.json"
-    ]
+        "configs/IDC_M_P_SoftwareClusterDesign_Base_TEST_SwComponentType_Executable/com_application.json",
+    ],
 )
 
 filegroup(
     name = "proxy_logging_config",
     srcs = [
-        "configs/IDC_M_P_SoftwareClusterDesign_Base_TEST_SwComponentType_Executable/logging_config.json"
-    ]
+        "configs/IDC_M_P_SoftwareClusterDesign_Base_TEST_SwComponentType_Executable/logging_config.json",
+    ],
 )
 
 filegroup(
     name = "skeleton_com_application_config",
     srcs = [
-        "configs/IDC_M_P_SoftwareClusterDesign_Base_SwComponentType_Executable/com_application.json"
-    ]
+        "configs/IDC_M_P_SoftwareClusterDesign_Base_SwComponentType_Executable/com_application.json",
+    ],
 )
 
 filegroup(
     name = "skeleton_logging_config",
     srcs = [
-        "configs/IDC_M_P_SoftwareClusterDesign_Base_SwComponentType_Executable/logging_config.json"
-    ]
+        "configs/IDC_M_P_SoftwareClusterDesign_Base_SwComponentType_Executable/logging_config.json",
+    ],
 )
 
 filegroup(
     name = "someipd_posix_logging_config",
     srcs = [
-        "configs/someipd_posix/logging_config.json"
-    ]
+        "configs/someipd_posix/logging_config.json",
+    ],
 )
 
 filegroup(
     name = "someipd_posix_exec_config",
     srcs = [
-        "configs/someipd_posix/exec_config.json"
-    ]
+        "configs/someipd_posix/exec_config.json",
+    ],
 )
 
 filegroup(
     name = "someipd_posix_someip_config",
     srcs = [
-        "configs/someipd_posix/someipd-posix.json"
-    ]
+        "configs/someipd_posix/someipd-posix.json",
+    ],
 )
 
 filegroup(
     name = "executionmanager_state_client_app_logging_config",
     srcs = [
-        "configs/executionmanager_state_client_app/logging_config.json"
-    ]
+        "configs/executionmanager_state_client_app/logging_config.json",
+    ],
 )
 
 filegroup(
     name = "executionmanager_state_client_app_exec_config",
     srcs = [
-        "configs/executionmanager_state_client_app/exec_config.json"
-    ]
+        "configs/executionmanager_state_client_app/exec_config.json",
+    ],
 )
-
 
 filegroup(
     name = "em_logging_config",
     srcs = [
-        "configs/etc/logging_config.json"
-    ]
+        "configs/etc/logging_config.json",
+    ],
 )
-
 
 filegroup(
     name = "machine_exec_config",
     srcs = [
-        "configs/etc/machine_exec_config.json"
-    ]
+        "configs/etc/machine_exec_config.json",
+    ],
 )
 
 minerva_aa_codegen_rule(
     name = "executionmanager_state_client_app_gen_rule",
     arxml_srcs = [":executionmanager_state_client_app_arxml"],
-    outs_list_dict = {
-        "executionmanager_state_client_updatemanager_daemon_db": [
-            "executionmanager_state_client_app/etc/swcl_db.json"
-        ],
-        "executionmanager_state_client_updatemanager_swcluser_meta": [
-            "executionmanager_state_client_app/swcl_package_metadata.json"
-        ],
-        # We're not using this exec_config because the code generator isn't
-        # able to generate a proper config file when category PLATFORM_LEVEL
-        # is selected. So instead,
-        # :executionmanager_state_client_app_exec_config gets used. 
-        "executionmanager_state_client_exec_config": [
-            "executionmanager_state_client_app/configuration/exec_config.json"
-        ],
-        "executionmanager_state_client_applicationbase_init_deinit_srcs": [
-            "executionmanager_state_client_app/src/ara/core/initialization.cpp"
-        ]
-    },
     generators = [
         "@starter_kit_adaptive_xavier//:generator_amsr_updatemanager_swcluster_meta",
         "@starter_kit_adaptive_xavier//:generator_amsr_updatemanager_daemon",
         "@starter_kit_adaptive_xavier//:generator_amsr_em_exec_config",
         "@starter_kit_adaptive_xavier//:generator_amsr_applicationbase_init_deinit",
-    ]
+    ],
+    outs_list_dict = {
+        "executionmanager_state_client_updatemanager_daemon_db": [
+            "executionmanager_state_client_app/etc/swcl_db.json",
+        ],
+        "executionmanager_state_client_updatemanager_swcluser_meta": [
+            "executionmanager_state_client_app/swcl_package_metadata.json",
+        ],
+        # We're not using this exec_config because the code generator isn't
+        # able to generate a proper config file when category PLATFORM_LEVEL
+        # is selected. So instead,
+        # :executionmanager_state_client_app_exec_config gets used.
+        "executionmanager_state_client_exec_config": [
+            "executionmanager_state_client_app/configuration/exec_config.json",
+        ],
+        "executionmanager_state_client_applicationbase_init_deinit_srcs": [
+            "executionmanager_state_client_app/src/ara/core/initialization.cpp",
+        ],
+    },
 )
 
 cc_binary(
     name = "executionmanager_state_client_binary",
-    deps = [
-        "@starter_kit_adaptive_xavier//:amsr_vector_fs_applicationbase",
-        "@starter_kit_adaptive_xavier//:amsr_vector_fs_log_api",
-        "@starter_kit_adaptive_xavier//:amsr_vector_fs_em_executionmanager",
-        "@starter_kit_adaptive_xavier//:amsr_vector_fs_libiostream"
-    ],
     srcs = [
-        "@starter_kit_adaptive_xavier//:amsr_vector_fs_em_executionmanager_addon_demo_application_srcs",
         ":executionmanager_state_client_applicationbase_init_deinit_srcs",
+        "@starter_kit_adaptive_xavier//:amsr_vector_fs_em_executionmanager_addon_demo_application_srcs",
     ],
     copts = [
         "-std=c++14",
     ],
     linkstatic = 1,
+    deps = [
+        "@starter_kit_adaptive_xavier//:amsr_vector_fs_applicationbase",
+        "@starter_kit_adaptive_xavier//:amsr_vector_fs_em_executionmanager",
+        "@starter_kit_adaptive_xavier//:amsr_vector_fs_libiostream",
+        "@starter_kit_adaptive_xavier//:amsr_vector_fs_log_api",
+    ],
 )
-
 
 minerva_aa_codegen_rule(
     name = "minerva_machine_exec_config_gen_rule",
     arxml_srcs = [":complete_arxml"],
+    generators = [
+        "@starter_kit_adaptive_xavier//:generator_amsr_em_machine_config",
+    ],
     outs_list_dict = {
         "minerva_machine_exec_config": ["IDC_M_P/machine_exec_config.json"],
     },
-    generators = [
-        "@starter_kit_adaptive_xavier//:generator_amsr_em_machine_config"
-    ]
 )
 
 minerva_aa_codegen_rule(
     name = "starter_kit_application_modeldatatypes_api_gen_rule",
     arxml_srcs = [":complete_arxml"],
+    generators = [
+        "@starter_kit_adaptive_xavier//:generator_amsr_modelleddatatypes_api",
+    ],
     outs_list_dict = {
         "starter_kit_skeleton_modeldatatypes_hdrs": [
             "IDC_M_P_SoftwareClusterDesign_Base_SwComponentType_Executable/includes/daimler/cppDataTypes/common/DummyServiceRecordDataType_4tuekbbgqsijk4yv29iawd34y/impl_type_dummyservicerecorddatatype_4tuekbbgqsijk4yv29iawd34y.h",
@@ -212,7 +211,6 @@ minerva_aa_codegen_rule(
             "IDC_M_P_SoftwareClusterDesign_Base_SwComponentType_Executable/includes/daimler/cppDataTypes/common/ARR_08_UInt_noSNA_30/impl_type_arr_08_uint_nosna_30.h",
             "IDC_M_P_SoftwareClusterDesign_Base_SwComponentType_Executable/includes/daimler/cppDataTypes/common/REC_LRR_Segments_Nest_Pr6_ST3_71njeubj9ico1p8v4pmslfcno/impl_type_rec_lrr_segments_nest_pr6_st3_71njeubj9ico1p8v4pmslfcno.h",
             "IDC_M_P_SoftwareClusterDesign_Base_SwComponentType_Executable/includes/daimler/cppDataTypes/common/REC_RemPark_DeviceListNames_Rs_ST3/impl_type_rec_rempark_devicelistnames_rs_st3.h",
-
         ],
         "starter_kit_proxy_modeldatatypes_hdrs": [
             "IDC_M_P_SoftwareClusterDesign_Base_TEST_SwComponentType_Executable/includes/daimler/cppDataTypes/common/DummyServiceRecordDataType_4tuekbbgqsijk4yv29iawd34y/impl_type_dummyservicerecorddatatype_4tuekbbgqsijk4yv29iawd34y.h",
@@ -237,33 +235,32 @@ minerva_aa_codegen_rule(
             "IDC_M_P_SoftwareClusterDesign_Base_TEST_SwComponentType_Executable/includes/daimler/cppDataTypes/common/ARR_08_UInt_noSNA_30/impl_type_arr_08_uint_nosna_30.h",
             "IDC_M_P_SoftwareClusterDesign_Base_TEST_SwComponentType_Executable/includes/daimler/cppDataTypes/common/REC_LRR_Segments_Nest_Pr6_ST3_71njeubj9ico1p8v4pmslfcno/impl_type_rec_lrr_segments_nest_pr6_st3_71njeubj9ico1p8v4pmslfcno.h",
             "IDC_M_P_SoftwareClusterDesign_Base_TEST_SwComponentType_Executable/includes/daimler/cppDataTypes/common/REC_RemPark_DeviceListNames_Rs_ST3/impl_type_rec_rempark_devicelistnames_rs_st3.h",
-        ]
+        ],
     },
-    generators = [
-        "@starter_kit_adaptive_xavier//:generator_amsr_modelleddatatypes_api"
-    ]
 )
-
 
 minerva_aa_codegen_rule(
     name = "starter_kit_application_exec_config_gen_rule",
     arxml_srcs = [":complete_arxml"],
+    generators = [
+        "@starter_kit_adaptive_xavier//:generator_amsr_em_exec_config",
+    ],
     outs_list_dict = {
         "starter_kit_skeleton_exec_config": [
             "IDC_M_P_SoftwareClusterDesign_Base_SwComponentType_Executable/configuration/exec_config.json",
         ],
         "starter_kit_proxy_exec_config": [
             "IDC_M_P_SoftwareClusterDesign_Base_TEST_SwComponentType_Executable/configuration/exec_config.json",
-        ]
+        ],
     },
-    generators = [
-        "@starter_kit_adaptive_xavier//:generator_amsr_em_exec_config",
-    ],
 )
 
 minerva_aa_codegen_rule(
     name = "starter_kit_application_someipbinding_gen_rule",
     arxml_srcs = [":complete_arxml"],
+    generators = [
+        "@starter_kit_adaptive_xavier//:generator_amsr_someipbinding",
+    ],
     outs_list_dict = {
         "starter_kit_skeleton_someip_config": [
             "IDC_M_P_SoftwareClusterDesign_Base_SwComponentType_Executable/configuration/someip_config.json",
@@ -368,32 +365,32 @@ minerva_aa_codegen_rule(
             "IDC_M_P_SoftwareClusterDesign_Base_TEST_SwComponentType_Executable/includes/amsr/someip_binding_transformation_layer/internal/daimler/services/common/srvifc_9618_dap_sens_lr_radar_service_st3_10/SrvIfc_9618_DAP_Sens_LR_Radar_Service_ST3_10_skeleton_someip_binding.h",
             "IDC_M_P_SoftwareClusterDesign_Base_TEST_SwComponentType_Executable/includes/amsr/someip_binding_transformation_layer/internal/daimler/services/common/srvifc_9618_dap_sens_lr_radar_service_st3_10/SrvIfc_9618_DAP_Sens_LR_Radar_Service_ST3_10_skeleton_someip_event_manager.h",
             "IDC_M_P_SoftwareClusterDesign_Base_TEST_SwComponentType_Executable/includes/amsr/someip_binding_transformation_layer/internal/daimler/services/common/srvifc_9618_dap_sens_lr_radar_service_st3_10/SrvIfc_9618_DAP_Sens_LR_Radar_Service_ST3_10_someip_skeleton_factory.h",
-        ]
+        ],
     },
-    generators = [
-        "@starter_kit_adaptive_xavier//:generator_amsr_someipbinding",
-    ],
 )
 
 minerva_aa_codegen_rule(
     name = "starter_kit_application_updatemanager_swcluster_meta_gen_rule",
     arxml_srcs = [":complete_arxml"],
+    generators = [
+        "@starter_kit_adaptive_xavier//:generator_amsr_updatemanager_swcluster_meta",
+    ],
     outs_list_dict = {
         "starter_kit_skeleton_updatemanager_swcluster_meta": [
             "IDC_M_P_SoftwareClusterDesign_Base_SwComponentType_Executable/swcl_package_metadata.json",
         ],
         "starter_kit_proxy_updatemanager_swcluster_meta": [
             "IDC_M_P_SoftwareClusterDesign_Base_TEST_SwComponentType_Executable/swcl_package_metadata.json",
-        ]
+        ],
     },
-    generators = [
-        "@starter_kit_adaptive_xavier//:generator_amsr_updatemanager_swcluster_meta",
-    ],
 )
 
 minerva_aa_codegen_rule(
     name = "starter_kit_application_updatemanager_daemon_gen_rule",
     arxml_srcs = [":complete_arxml"],
+    generators = [
+        "@starter_kit_adaptive_xavier//:generator_amsr_updatemanager_daemon",
+    ],
     outs_list_dict = {
         "starter_kit_skeleton_updatemanager_daemon": [
             "IDC_M_P_SoftwareClusterDesign_Base_SwComponentType_Executable/etc/updatemanager.json",
@@ -402,32 +399,32 @@ minerva_aa_codegen_rule(
         "starter_kit_proxy_updatemanager_daemon": [
             "IDC_M_P_SoftwareClusterDesign_Base_TEST_SwComponentType_Executable/etc/updatemanager.json",
             "IDC_M_P_SoftwareClusterDesign_Base_TEST_SwComponentType_Executable/etc/swcl_db.json",
-        ]
+        ],
     },
-    generators = [
-        "@starter_kit_adaptive_xavier//:generator_amsr_updatemanager_daemon",
-    ],
 )
 
 minerva_aa_codegen_rule(
     name = "starter_kit_application_applicationbase_init_deinit_gen_rule",
     arxml_srcs = [":complete_arxml"],
+    generators = [
+        "@starter_kit_adaptive_xavier//:generator_amsr_applicationbase_init_deinit",
+    ],
     outs_list_dict = {
         "starter_kit_skeleton_applicationbase_init_deinit_srcs": [
             "IDC_M_P_SoftwareClusterDesign_Base_SwComponentType_Executable/src/ara/core/initialization.cpp",
         ],
         "starter_kit_proxy_applicationbase_init_deinit_srcs": [
             "IDC_M_P_SoftwareClusterDesign_Base_TEST_SwComponentType_Executable/src/ara/core/initialization.cpp",
-        ]
+        ],
     },
-    generators = [
-        "@starter_kit_adaptive_xavier//:generator_amsr_applicationbase_init_deinit",
-    ],
 )
 
 minerva_aa_codegen_rule(
     name = "starter_kit_application_someipprotocol_gen_rule",
     arxml_srcs = [":complete_arxml"],
+    generators = [
+        "@starter_kit_adaptive_xavier//:generator_amsr_someipprotocol",
+    ],
     outs_list_dict = {
         "starter_kit_skeleton_someipprotocol_srcs": [
             "IDC_M_P_SoftwareClusterDesign_Base_SwComponentType_Executable/src/amsr/someip_protocol/internal/dataprototype_deserialization/daimler_services_common_srvifc_2_z_dummy_service_10/methods/deserializer_aDummyMethodSWC_Dummy_Argument.cpp",
@@ -705,16 +702,16 @@ minerva_aa_codegen_rule(
             "IDC_M_P_SoftwareClusterDesign_Base_TEST_SwComponentType_Executable/includes/amsr/someip_protocol/internal/method_deserialization/daimler_services_common_srvifc_18068_prk_remoteparking_ui_service_st3_10/methods/deserializer_Response_getDeviceListNames.h",
             "IDC_M_P_SoftwareClusterDesign_Base_TEST_SwComponentType_Executable/includes/amsr/someip_protocol/internal/method_deserialization/daimler_services_common_srvifc_18068_prk_remoteparking_ui_service_st3_10/methods/deserializer_Response_getDeviceListSize.h",
             "IDC_M_P_SoftwareClusterDesign_Base_TEST_SwComponentType_Executable/includes/amsr/someip_protocol/internal/method_deserialization/daimler_services_common_srvifc_18068_prk_remoteparking_ui_service_st3_10/methods/deserializer_Response_getQrCodeData.h",
-        ]
+        ],
     },
-    generators = [
-        "@starter_kit_adaptive_xavier//:generator_amsr_someipprotocol",
-    ],
 )
 
 minerva_aa_codegen_rule(
     name = "starter_kit_application_socal_gen_rule",
     arxml_srcs = [":complete_arxml"],
+    generators = [
+        "@starter_kit_adaptive_xavier//:generator_amsr_socal",
+    ],
     outs_list_dict = {
         "starter_kit_skeleton_socal_srcs": [
             "IDC_M_P_SoftwareClusterDesign_Base_SwComponentType_Executable/src/daimler/services/common/srvifc_18069_prk_homeparking_ui_service_st3_10/srvifc_18069_prk_homeparking_ui_service_st3_10_resource_manager.cpp",
@@ -856,15 +853,12 @@ minerva_aa_codegen_rule(
             "IDC_M_P_SoftwareClusterDesign_Base_TEST_SwComponentType_Executable/includes/ara/com/resource_manager.h",
         ],
     },
-    generators = [
-        "@starter_kit_adaptive_xavier//:generator_amsr_socal",
-    ],
 )
 
 cc_library(
     name = "starter_kit_proxy_socal_hdrs_lib",
     hdrs = [
-        ":starter_kit_proxy_socal_hdrs"
+        ":starter_kit_proxy_socal_hdrs",
     ],
     strip_include_prefix = "starter_kit_proxy_socal_hdrs/output/IDC_M_P_SoftwareClusterDesign_Base_TEST_SwComponentType_Executable/includes",
 )
@@ -872,7 +866,7 @@ cc_library(
 cc_library(
     name = "starter_kit_proxy_modeldatatypes_hdrs_lib",
     hdrs = [
-        ":starter_kit_proxy_modeldatatypes_hdrs"
+        ":starter_kit_proxy_modeldatatypes_hdrs",
     ],
     strip_include_prefix = "starter_kit_proxy_modeldatatypes_hdrs/output/IDC_M_P_SoftwareClusterDesign_Base_TEST_SwComponentType_Executable/includes",
 )
@@ -888,7 +882,7 @@ cc_library(
 cc_library(
     name = "starter_kit_proxy_someipprotocol_hdrs_lib",
     hdrs = [
-        ":starter_kit_proxy_someipprotocol_hdrs"
+        ":starter_kit_proxy_someipprotocol_hdrs",
     ],
     strip_include_prefix = "starter_kit_proxy_someipprotocol_hdrs/output/IDC_M_P_SoftwareClusterDesign_Base_TEST_SwComponentType_Executable/includes",
 )
@@ -897,9 +891,13 @@ cc_library(
     name = "starter_kit_proxy_socal_srcs_lib",
     srcs = [
         ":starter_kit_proxy_socal_srcs",
-        ":starter_kit_proxy_someipprotocol_srcs",
         ":starter_kit_proxy_someipbinding_srcs",
+        ":starter_kit_proxy_someipprotocol_srcs",
     ],
+    copts = [
+        "-std=c++14",
+    ],
+    linkstatic = 1,
     deps = [
         ":starter_kit_proxy_modeldatatypes_hdrs_lib",
         ":starter_kit_proxy_socal_hdrs_lib",
@@ -907,38 +905,23 @@ cc_library(
         ":starter_kit_proxy_someipprotocol_hdrs_lib",
         "@starter_kit_adaptive_xavier//:amsr_vector_fs_comcommon",
         "@starter_kit_adaptive_xavier//:amsr_vector_fs_socal_headers",
-        "@starter_kit_adaptive_xavier//:amsr_vector_fs_vajson",
         "@starter_kit_adaptive_xavier//:amsr_vector_fs_someipbinding_headers",
+        "@starter_kit_adaptive_xavier//:amsr_vector_fs_vajson",
     ],
-    copts = [
-        "-std=c++14",
-    ],
-    linkstatic = 1,
 )
 
 cc_binary(
     name = "proxy_demo_idc6",
-    deps = [
-        ":starter_kit_proxy_modeldatatypes_hdrs_lib",
-        ":starter_kit_proxy_socal_hdrs_lib",
-        "@starter_kit_adaptive_xavier//:amsr_vector_fs_vajson",
-        "@starter_kit_adaptive_xavier//:amsr_vector_fs_em_executionmanager",
-        "@starter_kit_adaptive_xavier//:amsr_vector_fs_libvac",
-        "@starter_kit_adaptive_xavier//:amsr_vector_fs_log_api",
-        "@starter_kit_adaptive_xavier//:amsr_vector_fs_socal_for_proxy",
-        "@starter_kit_adaptive_xavier//:amsr_vector_fs_someipbinding",
-    ],
     srcs = [
         "@starter_kit_adaptive_xavier//:proxy_demo_idc6_srcs",
 
         # This a workaround to resolve cyclic dependency. This is the reason why the target proxy_demo_idc6
-        # build in 2 steps. 
+        # build in 2 steps.
         # The code generators depend on libSocal.a, contained in the @minerva_mpu_adaptive//:socal_lib_for_proxy below.
         # That is why we put it in sources. It is important that this `:socal_lib_for_proxy` is positioned earlier in
-        # the list than the generated sources in `:starter_kit_proxy_socal_srcs_lib` and 
-        # `:starter_kit_proxy_applicationbase_init_deinit_srcs` 
+        # the list than the generated sources in `:starter_kit_proxy_socal_srcs_lib` and
+        # `:starter_kit_proxy_applicationbase_init_deinit_srcs`
         "@minerva_mpu_adaptive//:socal_lib_for_proxy",
-
         ":starter_kit_proxy_socal_srcs_lib",
         ":starter_kit_proxy_applicationbase_init_deinit_srcs",
     ],
@@ -946,12 +929,22 @@ cc_binary(
         "-std=c++14",
     ],
     linkstatic = 1,
+    deps = [
+        ":starter_kit_proxy_modeldatatypes_hdrs_lib",
+        ":starter_kit_proxy_socal_hdrs_lib",
+        "@starter_kit_adaptive_xavier//:amsr_vector_fs_em_executionmanager",
+        "@starter_kit_adaptive_xavier//:amsr_vector_fs_libvac",
+        "@starter_kit_adaptive_xavier//:amsr_vector_fs_log_api",
+        "@starter_kit_adaptive_xavier//:amsr_vector_fs_socal_for_proxy",
+        "@starter_kit_adaptive_xavier//:amsr_vector_fs_someipbinding",
+        "@starter_kit_adaptive_xavier//:amsr_vector_fs_vajson",
+    ],
 )
 
 cc_library(
     name = "starter_kit_skeleton_socal_hdrs_lib",
     hdrs = [
-        ":starter_kit_skeleton_socal_hdrs"
+        ":starter_kit_skeleton_socal_hdrs",
     ],
     strip_include_prefix = "starter_kit_skeleton_socal_hdrs/output/IDC_M_P_SoftwareClusterDesign_Base_SwComponentType_Executable/includes",
 )
@@ -959,7 +952,7 @@ cc_library(
 cc_library(
     name = "starter_kit_skeleton_modeldatatypes_hdrs_lib",
     hdrs = [
-        ":starter_kit_skeleton_modeldatatypes_hdrs"
+        ":starter_kit_skeleton_modeldatatypes_hdrs",
     ],
     strip_include_prefix = "starter_kit_skeleton_modeldatatypes_hdrs/output/IDC_M_P_SoftwareClusterDesign_Base_SwComponentType_Executable/includes",
 )
@@ -975,7 +968,7 @@ cc_library(
 cc_library(
     name = "starter_kit_skeleton_someipprotocol_hdrs_lib",
     hdrs = [
-        ":starter_kit_skeleton_someipprotocol_hdrs"
+        ":starter_kit_skeleton_someipprotocol_hdrs",
     ],
     strip_include_prefix = "starter_kit_skeleton_someipprotocol_hdrs/output/IDC_M_P_SoftwareClusterDesign_Base_SwComponentType_Executable/includes",
 )
@@ -984,9 +977,13 @@ cc_library(
     name = "starter_kit_skeleton_socal_srcs_lib",
     srcs = [
         ":starter_kit_skeleton_socal_srcs",
-        ":starter_kit_skeleton_someipprotocol_srcs",
         ":starter_kit_skeleton_someipbinding_srcs",
+        ":starter_kit_skeleton_someipprotocol_srcs",
     ],
+    copts = [
+        "-std=c++14",
+    ],
+    linkstatic = 1,
     deps = [
         ":starter_kit_skeleton_modeldatatypes_hdrs_lib",
         ":starter_kit_skeleton_socal_hdrs_lib",
@@ -994,38 +991,23 @@ cc_library(
         ":starter_kit_skeleton_someipprotocol_hdrs_lib",
         "@starter_kit_adaptive_xavier//:amsr_vector_fs_comcommon",
         "@starter_kit_adaptive_xavier//:amsr_vector_fs_socal_headers",
-        "@starter_kit_adaptive_xavier//:amsr_vector_fs_vajson",
         "@starter_kit_adaptive_xavier//:amsr_vector_fs_someipbinding_headers",
+        "@starter_kit_adaptive_xavier//:amsr_vector_fs_vajson",
     ],
-    copts = [
-        "-std=c++14",
-    ],
-    linkstatic = 1,
 )
 
 cc_binary(
     name = "skeleton_demo_idc6",
-    deps = [
-        ":starter_kit_skeleton_modeldatatypes_hdrs_lib",
-        ":starter_kit_skeleton_socal_hdrs_lib",
-        "@starter_kit_adaptive_xavier//:amsr_vector_fs_vajson",
-        "@starter_kit_adaptive_xavier//:amsr_vector_fs_em_executionmanager",
-        "@starter_kit_adaptive_xavier//:amsr_vector_fs_libvac",
-        "@starter_kit_adaptive_xavier//:amsr_vector_fs_log_api",
-        "@starter_kit_adaptive_xavier//:amsr_vector_fs_socal_for_skeleton",
-        "@starter_kit_adaptive_xavier//:amsr_vector_fs_someipbinding",
-    ],
     srcs = [
         "@starter_kit_adaptive_xavier//:skeleton_demo_idc6_srcs",
 
         # This a workaround to resolve cyclic dependency. This is the reason why the target skeleton_demo_idc6
-        # build in 2 steps. 
+        # build in 2 steps.
         # The code generators depend on libSocal.a, contained in the @minerva_mpu_adaptive//:socal_lib_for_skeleton below.
         # That is why we put it in sources. It is important that this `:socal_lib_for_skeleton` is positioned earlier in
-        # the list than the generated sources in `:starter_kit_skeleton_socal_srcs_lib` and 
+        # the list than the generated sources in `:starter_kit_skeleton_socal_srcs_lib` and
         # `:starter_kit_skeleton_applicationbase_init_deinit_srcs`
         "@minerva_mpu_adaptive//:socal_lib_for_skeleton",
-
         ":starter_kit_skeleton_socal_srcs_lib",
         ":starter_kit_skeleton_applicationbase_init_deinit_srcs",
     ],
@@ -1036,4 +1018,14 @@ cc_binary(
         "-lpthread",
     ],
     linkstatic = 1,
+    deps = [
+        ":starter_kit_skeleton_modeldatatypes_hdrs_lib",
+        ":starter_kit_skeleton_socal_hdrs_lib",
+        "@starter_kit_adaptive_xavier//:amsr_vector_fs_em_executionmanager",
+        "@starter_kit_adaptive_xavier//:amsr_vector_fs_libvac",
+        "@starter_kit_adaptive_xavier//:amsr_vector_fs_log_api",
+        "@starter_kit_adaptive_xavier//:amsr_vector_fs_socal_for_skeleton",
+        "@starter_kit_adaptive_xavier//:amsr_vector_fs_someipbinding",
+        "@starter_kit_adaptive_xavier//:amsr_vector_fs_vajson",
+    ],
 )

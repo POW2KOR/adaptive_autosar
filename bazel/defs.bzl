@@ -29,7 +29,7 @@ def minerva_aa_codegen_declare(name, path_to_generators, generators):
     This macro is a wrapper around the native filegroup rule with the
     appropriate configuration so that it can be used in genrule tools field
     later on.
-    
+
     This macro creates filegroup targets with the following name
     format: <name>_<generator>. Therefore, with a name value of "generator"
     and a generator value of "amsr_em_machine_config", the final name of the
@@ -53,7 +53,6 @@ def minerva_aa_codegen_declare(name, path_to_generators, generators):
             ],
             visibility = ["//visibility:public"],
         )
-
 
 def minerva_aa_codegen_rule(name, arxml_srcs, outs_list_dict, generators):
     """
@@ -113,7 +112,7 @@ def minerva_aa_codegen_rule(name, arxml_srcs, outs_list_dict, generators):
         for out in outs_list:
             full_out_path = "{output_folder}/{file_name}".format(
                 output_folder = gen_rule_output_folder,
-                file_name = out
+                file_name = out,
             )
 
             if full_out_path in concatenated_outs:
@@ -137,34 +136,29 @@ def minerva_aa_codegen_rule(name, arxml_srcs, outs_list_dict, generators):
         mkdir -p $$arxml_srcs_folder
         cp {arxml_srcs} $$arxml_srcs_folder
 
-        $(location @starter_kit_adaptive_xavier//:amsrgen_sh) -v \
-            {generators_arg} -x $$arxml_srcs_folder -o $$output_folder \
-            --saveProject > /dev/null
+        $(location @starter_kit_adaptive_xavier//:amsrgen_sh) -v {generators_arg} -x $$arxml_srcs_folder -o $$output_folder --saveProject > /dev/null
 
-        echo $(OUTS) | tr " " "\n" | sort > $$tmp_folder/outs.txt
+        echo $(OUTS) | tr " " "\\\\n" | sort > $$tmp_folder/outs.txt
         find $$output_folder -type f | sort > $$tmp_folder/generated.txt
 
         # Compare the list of files generated to the list of files in the outs
         # list.
-        comm -23 $$tmp_folder/generated.txt $$tmp_folder/outs.txt > \
-            $$tmp_folder/comparison.txt
+        comm -23 $$tmp_folder/generated.txt $$tmp_folder/outs.txt > $$tmp_folder/comparison.txt
 
         # Ignore the GeneratorReport.html and GeneratorReport.xml files for the
         # purpose of this error message.
         sed -ri '/GeneratorReport.(html|xml)/d' $$tmp_folder/comparison.txt
        
-        if [[ $$(wc -l $$tmp_folder/comparison.txt | \
-            awk '{{print $$1}}') > 0 ]]; then
-            
-            echo "\nError: some generated files weren't found in the \
-outs_list_dict list:";
+        if [[ $$(wc -l $$tmp_folder/comparison.txt | awk '{{print $$1}}') > 0 ]]; then
+            echo ""
+            echo "Error: some generated files weren't found in the outs_list_dict list:"
 
             # Escaping path so it can be used in sed
-            escaped_ruledir=`echo $$output_folder | sed 's/\//\\\\\\\\\//g'`
+            escaped_ruledir=`echo $$output_folder | sed 's/\\//\\\\\\\\\\//g'`
 
             # We are replacing $(RULEDIR) before printing on the screen to make
             # it easier for developers to copy paste into the Bazel file after.
-            cat $$tmp_folder/comparison.txt | sed "s/$$escaped_ruledir\///g"
+            cat $$tmp_folder/comparison.txt | sed "s/$$escaped_ruledir\\///g"
             echo ""
 
             exit 1
@@ -174,9 +168,9 @@ outs_list_dict list:";
             output_folder = gen_rule_output_folder,
             tmp_folder = gen_rule_name,
             generators_arg = " ".join(generators_arg_list),
-            arxml_srcs = " ".join(arxml_srcs_arg_list)
+            arxml_srcs = " ".join(arxml_srcs_arg_list),
         ),
-        tools = tools_list
+        tools = tools_list,
     )
 
     for outs_list_name, outs_list in outs_list_dict.items():
@@ -190,8 +184,8 @@ outs_list_dict list:";
             full_path_outs_list.append(
                 "{output_folder}/{file_name}".format(
                     output_folder = out_rule_outs_folder,
-                    file_name = out
-                )
+                    file_name = out,
+                ),
             )
 
         native.genrule(
@@ -209,7 +203,7 @@ outs_list_dict list:";
             """.format(
                 srcs_folder = gen_rule_output_folder,
                 output_folder = out_rule_outs_folder,
-                out_rule_srcs_label = out_rule_srcs_label
+                out_rule_srcs_label = out_rule_srcs_label,
             ),
-            outs = full_path_outs_list
+            outs = full_path_outs_list,
         )
