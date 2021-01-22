@@ -235,7 +235,6 @@ new_git_repository(
         "-p1",
     ],
     patches = [
-        "@//bsw:patches/add-console-log-option-in-vector-sip-log-daemon.patch",
         "@//bsw:patches/fix-cmake-package-exports.patch",
         "@//bsw:patches/remove-controlpanel-symlink-in-vector-sip.patch",
     ],
