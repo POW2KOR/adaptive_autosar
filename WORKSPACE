@@ -250,25 +250,3 @@ new_git_repository(
     path = "<local_path_to_reposittory>",
     build_file = "@//bsw:starter_kit_adaptive_xavier.BUILD",
 )'''
-
-# Buildifier
-
-# buildifier is written in Go and hence needs rules_go to be built.
-# See https://github.com/bazelbuild/rules_go for the up to date setup instructions.
-http_archive(
-    name = "com_google_protobuf",
-    strip_prefix = "protobuf-3.14.0",
-    sha256 = "bf0e5070b4b99240183b29df78155eee335885e53a8af8683964579c214ad301",
-    urls = ["https://github.com/protocolbuffers/protobuf/archive/v3.14.0.zip"],
-)
-
-load("@com_google_protobuf//:protobuf_deps.bzl", "protobuf_deps")
-
-protobuf_deps()
-
-http_archive(
-    name = "com_github_bazelbuild_buildtools",
-    strip_prefix = "buildtools-3.5.0",
-    sha256 = "bf0e5070b4b99240183b29df78155eee335885e53a8af8683964579c214ad301",
-    url = "https://github.com/bazelbuild/buildtools/archive/3.5.0.zip",
-)
