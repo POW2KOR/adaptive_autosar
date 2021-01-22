@@ -24,6 +24,9 @@ node('pulse_ec2')
                         gitlint --config .gitlint
                         '''
                     }
+                    stage('Buildifier check'){
+                        sh '/bin/buildifier -r --mode=check .'
+                    }
                 } // docker
             } 
         }
