@@ -1012,36 +1012,6 @@ cmake_external(
 )
 
 ######################################################################################
-# amsr_vector_fs_someipbinding_headers
-######################################################################################
-
-cmake_external(
-    name = "amsr_vector_fs_someipbinding_headers",
-    cache_entries = extend_and_select(
-        CMAKE_TOOLCHAIN_DICT,
-        {
-            "CMAKE_SYSTEM_NAME": CMAKE_SYSTEM_NAME_LINUX,
-            "vathread_DIR:PATH": "$EXT_BUILD_DEPS/amsr_vector_fs_thread/lib/cmake/vathread/",
-            "ComCommon_DIR:PATH": "$EXT_BUILD_DEPS/amsr_vector_fs_comcommon/lib/cmake/ComCommon/",
-            "SomeIpProtocol_DIR:PATH": "$EXT_BUILD_DEPS/amsr_vector_fs_someipprotocol/lib/cmake/SomeIpProtocol/",
-            "SomeIpDaemonClient_DIR:PATH": "$EXT_BUILD_DEPS/amsr_vector_fs_someipdaemonclient/lib/cmake/SomeIpDaemonClient/",
-            "Socal_DIR:PATH": "$EXT_BUILD_DEPS/amsr_vector_fs_socal_headers/lib/cmake/Socal/",
-        },
-    ),
-    headers_only = True,
-    generate_crosstool_file = GEN_CROSSTOOL_FILE,
-    lib_source = ":amsr_vector_fs_someipbinding_srcs",
-    visibility = ["//visibility:public"],
-    deps = [
-        ":amsr_vector_fs_thread",
-        ":amsr_vector_fs_comcommon",
-        ":amsr_vector_fs_someipprotocol",
-        ":amsr_vector_fs_someipdaemonclient",
-        ":amsr_vector_fs_socal_headers",
-    ],
-)
-
-######################################################################################
 # amsr_vector_fs_someipdaemonclient
 ######################################################################################
 

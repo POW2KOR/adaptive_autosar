@@ -905,7 +905,7 @@ cc_library(
         ":starter_kit_proxy_someipprotocol_hdrs_lib",
         "@starter_kit_adaptive_xavier//:amsr_vector_fs_comcommon",
         "@starter_kit_adaptive_xavier//:amsr_vector_fs_socal_headers",
-        "@starter_kit_adaptive_xavier//:amsr_vector_fs_someipbinding_headers",
+        "@starter_kit_adaptive_xavier//:amsr_vector_fs_someipbinding",
         "@starter_kit_adaptive_xavier//:amsr_vector_fs_vajson",
     ],
 )
@@ -991,7 +991,7 @@ cc_library(
         ":starter_kit_skeleton_someipprotocol_hdrs_lib",
         "@starter_kit_adaptive_xavier//:amsr_vector_fs_comcommon",
         "@starter_kit_adaptive_xavier//:amsr_vector_fs_socal_headers",
-        "@starter_kit_adaptive_xavier//:amsr_vector_fs_someipbinding_headers",
+        "@starter_kit_adaptive_xavier//:amsr_vector_fs_someipbinding",
         "@starter_kit_adaptive_xavier//:amsr_vector_fs_vajson",
     ],
 )
