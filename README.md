@@ -97,21 +97,24 @@ to `xavier-a`), like so:
 scp bazel-out/aarch64-fastbuild/bin/minerva_mpu_adaptive_filesystem.tar $USER@xavier-a:
 ```
 
-Once the Copy is successful untar the .tar file in xavier-a using below command:
-    ```
-    tar -xvf minerva_mpu_adaptive_filesystem.tar
-    ```
+Once the copy is successful untar the .tar file in xavier-a using below command:
+```
+tar -xvf minerva_mpu_adaptive_filesystem.tar
+```
 
 Then copy the contents of etc, opt and sbin folders(extracted from the .tar) to /etc/, /opt/, and /sbin/.
 
-Change the IP address in the opt/IDC_M_P_SoftwareClusterDesign_Base_TEST_SwComponentType_Executable/etc/someip_config.json & opt/IDC_M_P_SoftwareClusterDesign_Base_SwComponentType_Executable/etc/someip_config.json to match with the IP Address of the AGX.
+Change the IP addresses in the following files:
+- `opt/IDC_M_P_SoftwareClusterDesign_Base_TEST_SwComponentType_Executable/etc/someip_config.json`
+- `opt/IDC_M_P_SoftwareClusterDesign_Base_SwComponentType_Executable/etc/someip_config.json`
 
-IP address of AGX can be found using command ip addr(right now : 10.20.1.97)
+The IP Address of the AGX (`10.20.1.97`, can be found via `ip addr`). This is because currently the AGX is using the IP
+address in the old NCD.
 
-After this run the below command to run execution manager
-    ```
-    sudo sbin/amsr_vector_fs_em_executionmanager -a opt -m etc/machine_exec_config.json
-    ```
+After this run the below command to run execution manager:
+```
+sudo ./sbin/amsr_vector_fs_em_executionmanager -a ./opt -m ./etc/machine_exec_config.json
+```
 
 ### Linking issues with libARA.a
 Currently, there is a circular linking dependency between amsr_vector_fs_communication_miunderscoresddleware and code_gen. If you
