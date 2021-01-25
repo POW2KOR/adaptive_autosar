@@ -101,8 +101,7 @@ Once the copy is successful untar the .tar file in xavier-a using below command:
 ```
 tar -xvf minerva_mpu_adaptive_filesystem.tar
 ```
-
-Then copy the contents of etc, opt and sbin folders(extracted from the .tar) to /etc/, /opt/, and /sbin/.
+Then Change paths ./opt/someipd_posix/etc/someipd-posix.json to use relative paths.
 
 Change the IP addresses in the following files:
 - `opt/IDC_M_P_SoftwareClusterDesign_Base_TEST_SwComponentType_Executable/etc/someip_config.json`
