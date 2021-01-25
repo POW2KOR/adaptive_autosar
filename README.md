@@ -84,3 +84,22 @@ Docker network can be created using below command:
 ```
 docker network create --subnet 10.21.17.0/24 mnv0
 ```
+
+### Formatting bazel files with buildifier
+#### Installing
+```
+curl -fL "https://github.com/bazelbuild/buildtools/releases/download/3.5.0/buildifier" -o buildifier
+chmod +x buildifier
+sudo mv buildifier /bin/buildifier
+```
+
+#### Running
+In the root of the `minerva_mpu_adaptive` repo, run:
+```
+buildifier -r .
+```
+and check for changed files with
+```
+git status
+```
+If there are no files formatted, the output of above command will be empty. Else, it will show the list of files formatted.
