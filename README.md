@@ -63,7 +63,7 @@ You can use the linaro toolchain provided by Nvidia with the `minerva_mpu_docker
 :~/minerva_mpu_adaptive$ bazel build @starter_kit_adaptive_xavier//:amsr-vector-fs-sec-cryptostack --config=aarch64_linux_linaro
 ```
 
-### Deploying Execution manager on AGX
+### Deploying the stack to AGX
 
 Install aarch64 GCC cross-compiler using below command:
 ```
@@ -101,7 +101,8 @@ Once the copy is successful untar the .tar file in xavier-a using below command:
 ```
 tar -xvf minerva_mpu_adaptive_filesystem.tar
 ```
-Then Change paths ./opt/someipd_posix/etc/someipd-posix.json to use relative paths.
+
+Then, in `./opt/someipd_posix/etc/someipd-posix.json` change the paths to be relative.
 
 Change the IP addresses in the following files:
 - `opt/IDC_M_P_SoftwareClusterDesign_Base_TEST_SwComponentType_Executable/etc/someip_config.json`

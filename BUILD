@@ -165,6 +165,8 @@ pkg_tar(
 
 pkg_deb(
     name = "minerva_mpu_adaptive_deb",
+    # We are using architecture = "all" since it seems `select` doesn't work well with this parameter and we weren't
+    # able to find a quick fix.
     architecture = "all",
     data = ":minerva_mpu_adaptive_filesystem",
     description = "Distribution of the Minerva Adaptive AUTOSAR stack",
@@ -210,19 +212,19 @@ container_image(
 # the root. The file is used in bsw/BUILD file later.
 
 target_build_dir_for_socal_proxy = select({
-    ":minerva-host" : [
+    ":minerva-host": [
         "bazel-out/k8-fastbuild/bin/external/starter_kit_adaptive_xavier/amsr_vector_fs_socal_for_proxy/lib/libSocal.a",
     ],
-    ":minerva-target" : [
+    ":minerva-target": [
         "bazel-out/aarch64-fastbuild/bin/external/starter_kit_adaptive_xavier/amsr_vector_fs_socal_for_proxy/lib/libSocal.a",
     ],
 })
 
 target_build_dir_for_socal_skeleton = select({
-    ":minerva-host" : [
+    ":minerva-host": [
         "bazel-out/k8-fastbuild/bin/external/starter_kit_adaptive_xavier/amsr_vector_fs_socal_for_skeleton/lib/libSocal.a",
     ],
-    ":minerva-target" : [
+    ":minerva-target": [
         "bazel-out/aarch64-fastbuild/bin/external/starter_kit_adaptive_xavier/amsr_vector_fs_socal_for_skeleton/lib/libSocal.a",
     ],
 })
