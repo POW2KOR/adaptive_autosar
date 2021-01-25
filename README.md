@@ -158,6 +158,48 @@ All of the applications apart from the `log-daemon` are configured to output rem
 
 ## Miscellaneous
 
+### Build collectd and its plugins through bazel
+
+collectd can be built and install binaries using:
+```
+bazel build //tools:build_collectd
+```
+The binaries are generated in `bazel-bin/tools` directory.
+
+## Contributing
+
+We support a usual merge request-based contribution flow. For now, you don't have to push the your proposal as a branch
+in a personal gitlab fork. You can just push it in the main repo. However, this might change. The branch naming
+conventions are covered [here](https://wiki.swf.daimler.com/display/GREEN/Naming+Conventions+for+the+branches). Please
+try as much as possible to link your MRs to Jira tickets.
+
+Before you open a merge request (MR), please check the contributor checklist below.
+
+Unless otherwise agreed, the MR threads need to be marked as resolved by the person who opened the discussion, not by
+the MR author.
+
+If the MR is not meant to be reviewed yet, or you wish to prevent it from being merged, use the "WIP:" prefix in the
+title.
+
+The preferred case for file paths, names, targets, etc. is `underscore_case`. This is mainly due to Python and bazel.
+
+Consider the following content for your `.vscode/settings.json`:
+
+```json
+{
+    "[git-commit]": {
+        "editor.rulers": [
+            50,
+            72
+        ]
+    },
+    "[markdown]": {
+        "editor.rulers": [120]
+    }
+}
+```
+
+> approvals, branch strat, squash
 ### Pre-commit checks
 
 We use a took called `pre-commit` for various static checks before creating a commit. To enable `pre-commit`,
@@ -171,10 +213,29 @@ pre-commit install
 Once enabled, pre-commit will run before every local commit in order to suggest fixes for the checks defined in
 [.pre-commit-config.yaml](./pre-commit-config.yaml). These checks are performed automatically in the CI pipeline.
 
-### Build collectd and its plugins through bazel
+## Contributor checklist
 
-collectd can be built and install binaries using:
-```
-bazel build //tools:build_collectd
-```
-The binaries are generated in `bazel-bin/tools` directory.
+The following checklist is derived from a list of common mistakes.
+
+I, the author of a merge request, have:
+
+* checked for typos
+* updated any relevant documentation files and UML diagrams
+* made sure markdown paragraphs wrap at 120 characters (not automated yet)
+* made sure the automated pre-commit checks pass
+
+If I want to preserve git history, I have:
+
+* made sure [50](https://chris.beams.io/posts/git-commit/#limit-50)/
+[72](https://chris.beams.io/posts/git-commit/#wrap-72) rule for git messages is respected (not automated yet)
+* made sure git messages are [descriptive and well formed](https://chris.beams.io/posts/git-commit/)
+* made sure the automated pre-commit checks pass
+* made sure that if I use the apply suggestion feature in gitlab, I cleaned-up the commit log and squashed/fixed up the
+modifications
+
+Otherwise, if I want to squash the git history through gitlab, I have:
+
+* made sure [50](https://chris.beams.io/posts/git-commit/#limit-50)/
+[72](https://chris.beams.io/posts/git-commit/#wrap-72) rule for the gitlab MR title and description is respected (not
+automated yet)
+* made sure the MR title and description is [descriptive and well formed](https://chris.beams.io/posts/git-commit/)
