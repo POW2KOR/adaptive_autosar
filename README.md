@@ -82,12 +82,10 @@ Make sure the below content is present in `~/.ssh/config`
     Host xavier-a
     HostName x41.rd.corpintra.net
     Port 4004
-    User username
 
     Host xavier-b
     HostName x41.rd.corpintra.net
     Port 4005
-    User username
     ```
 
 You will find the build product of the `minerva_mpu_adaptive_filesystem` target at:

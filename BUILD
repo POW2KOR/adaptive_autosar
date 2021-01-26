@@ -212,19 +212,19 @@ container_image(
 # the root. The file is used in bsw/BUILD file later.
 
 target_build_dir_for_socal_proxy = select({
-    ":minerva-host": [
+    ":minerva_host": [
         "bazel-out/k8-fastbuild/bin/external/starter_kit_adaptive_xavier/amsr_vector_fs_socal_for_proxy/lib/libSocal.a",
     ],
-    ":minerva-target": [
+    ":minerva_target": [
         "bazel-out/aarch64-fastbuild/bin/external/starter_kit_adaptive_xavier/amsr_vector_fs_socal_for_proxy/lib/libSocal.a",
     ],
 })
 
 target_build_dir_for_socal_skeleton = select({
-    ":minerva-host": [
+    ":minerva_host": [
         "bazel-out/k8-fastbuild/bin/external/starter_kit_adaptive_xavier/amsr_vector_fs_socal_for_skeleton/lib/libSocal.a",
     ],
-    ":minerva-target": [
+    ":minerva_target": [
         "bazel-out/aarch64-fastbuild/bin/external/starter_kit_adaptive_xavier/amsr_vector_fs_socal_for_skeleton/lib/libSocal.a",
     ],
 })
