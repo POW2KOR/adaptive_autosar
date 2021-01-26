@@ -1,23 +1,25 @@
 import groovy.io.FileType
-node('pulse_ec2')
-{ 
+node('pulse_ec2') { 
     String registryUrl = "https://artifact.${env.SWF_DOMAIN}"
     String registryCredentials = 'adas-artifactory'
+    String userId = sh (script: 'id -u', returnStdout: true).trim()
+    String groupId = sh (script: 'id -g', returnStdout: true).trim()
     def imgNameVer = "artifact.swf.daimler.com/adas-docker/minerva_mpu_docker/minerva_mpu:20201214084936"
+
     try{
-        stage('checkout') {
+        stage('Checkout') {
             checkout scm
         }
-        stage('code formatter') {
+        stage('Code formatting') {
             docker.withRegistry(registryUrl, registryCredentials) {
                 docker.image("${imgNameVer}").inside("--entrypoint=''") {
-                    stage('C++ code formatter - clang') {
+                    stage('C++ formatting check') {
                         sh './devops/scripts/clang-format-apply.sh True'
                     }
-                    stage('python code formatter - yapf'){
+                    stage('Python formatting check'){
                         sh './devops/scripts/yapf-format-apply.sh True'
                     }
-                    stage('Git message check - gitlint'){
+                    stage('Git message check'){
                         sh '''
                         export LC_ALL=C.UTF-8
                         export LANG=C.UTF-8
@@ -30,46 +32,52 @@ node('pulse_ec2')
                 } // docker
             } 
         }
-        stage('static code analysis') {
+        stage('Static code analysis') {
             // @Todo:space to add the code analyzer
         }
-        stage('build host') {
-            String userId = sh (script: 'id -u', returnStdout: true).trim()
-            String groupId = sh (script: 'id -g', returnStdout: true).trim()
+        stage('x86_64') {
             docker.withRegistry(registryUrl, registryCredentials) {
                 docker.image("${imgNameVer}").inside("-u 0:0 --entrypoint=''") {
-                    sshagent(['adas-jenkins-ssh']) {
-                        sh '''
-                           bazel --version
-                           bazel build @starter_kit_adaptive_xavier//:amsr_vector_fs_em_executionmanager --config=x86_64_linux
-                        '''
+                    stage('Build'){
+                        sshagent(['adas-jenkins-ssh']) {
+                            sh '''
+                                # Workaround for circular dependency
+                                bazel build @starter_kit_adaptive_xavier//:amsr_vector_fs_socal_for_proxy --config=x86_64_linux
+                                bazel build @starter_kit_adaptive_xavier//:amsr_vector_fs_socal_for_skeleton --config=x86_64_linux
+
+                                # Actual build
+                                bazel build //:minerva_mpu_adaptive_filesystem --config=x86_64_linux
+                            '''
+                        }
+                    }
+                    stage('Test'){
+                        // bazel command to run tests execution for x86_64
                     }
                     sh "chown -R ${userId}:${groupId} ."
                 }
             }
         }
-        stage('x86_64'){
-            docker.image("${imgNameVer}").inside("--entrypoint=''") {
-                stage('setup env'){
-                   // Add code to setup environment for x86_64               
-                }
-                stage('build stack'){
-                   // bazel command to build x86_64
-                }
-                stage('test stack'){
-                    // bazel command to run tests execution for x86_64
-                }
-            } // docker
-        }
         stage('aarch64'){
-             docker.image("${imgNameVer}").inside("--entrypoint=''") {
-                 stage('setup env'){
-                   // Add code to setup environment for aarch64
-                 }
-                 stage('build stack'){
-                    // bazel command to build aarch64
-                 }
-            } // docker
+            docker.withRegistry(registryUrl, registryCredentials) {
+                docker.image("${imgNameVer}").inside("-u 0:0 --entrypoint=''") {
+                    stage('Build'){
+                        sshagent(['adas-jenkins-ssh']) {
+                            sh '''
+                                # Workaround for circular dependency
+                                bazel build @starter_kit_adaptive_xavier//:amsr_vector_fs_socal_for_proxy --config=aarch64_linux_ubuntu
+                                bazel build @starter_kit_adaptive_xavier//:amsr_vector_fs_socal_for_skeleton --config=aarch64_linux_ubuntu
+
+                                # Actual build
+                                bazel build //:minerva_mpu_adaptive_filesystem --config=aarch64_linux_ubuntu
+                            '''
+                        }
+                    }
+                    stage('Test'){
+                        // bazel command to run tests execution for aarch64
+                    }
+                    sh "chown -R ${userId}:${groupId} ."
+                } // docker
+            }
         }
         stage('deploy') {
             // Add the code to push docker image to artifactoy.
