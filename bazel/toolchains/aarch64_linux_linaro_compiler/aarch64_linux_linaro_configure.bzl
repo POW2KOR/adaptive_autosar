@@ -9,7 +9,7 @@ def _tpl(repository_ctx, tpl, substitutions = {}, out = None):
         out = tpl
     repository_ctx.template(
         out,
-        Label("//build_env/toolchain/aarch64_linux_linaro_compiler:%s.tpl" % tpl),
+        Label("//bazel/toolchains/aarch64_linux_linaro_compiler:%s.tpl" % tpl),
         substitutions,
     )
 
