@@ -38,7 +38,7 @@ docker pull artifact.swf.daimler.com/adasdai-docker/minerva_mpu_docker/minerva_m
 where `<YYYYMMDDHHMMSS>` is the image version. We are currently targeting version `20210104191029`.
 
 
-## Setup to build on host
+## Setup to build without docker
 In order to build on your host machine, you will need the following tools:
 - compiler toolchains for the target platform of choice
 - Bazel
@@ -120,7 +120,7 @@ Please find detailed descriptions in corresponding sections.
    please refer to [this](#circular-dependency-workaround) section.
 
 
-## Build for x86_64
+## Build without docker
 The current Bazel build is based on [rules_foreign_cc](https://github.com/bazelbuild/rules_foreign_cc) for building
 external CMake projects. In particular, they are used to build the Vector BSW libraries and. Default build type for the 
 BSW modules is "Release".
