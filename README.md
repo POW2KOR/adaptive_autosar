@@ -76,65 +76,14 @@ Bazel is our currently used build system. Please refer to the
 At the moment we use version 3.7.0.
 
 **NOTE** For now, if Bazel version 4.0.0 is used, there is an issue with custom rules formatting. To avoid this, please
-add `--incompatible_restrict_string_escapes=false --incompatible_require_linker_input_cc_api=false` to 
+add `--incompatible_restrict_string_escapes=false --incompatible_require_linker_input_cc_api=false` to
 each used Bazel command.
 
-
-# Build
-During the build stage it is important to use the proper configuration, even if you build on your host machine. 
-Please find detailed descriptions in corresponding sections.
-
-## Build from inside the docker container
-* Set up the docker network (this is a temporary workaround and probably won't be needed in future):
-   ```
-   docker network create --subnet 10.21.17.0/24 mnv0
-   ```
-
-* Run the docker container:
-   ```
-   docker run -it \
-   --name=minerva_mpu_dev \
-   --rm \
-   --privileged \
-   --network=host \
-   -e HTTP_PROXY=$http_proxy \
-   -e HTTPS_PROXY=$https_proxy \
-   -e no_proxy=hksmirror.rd.corpintra.net,ubunturepo.rd.corpintra.net \
-   -e SSH_AUTH_SOCK=/ssh-agent \
-   -v /lib/modules/$(uname -r):/lib/modules/$(uname -r) \
-   -v /dev/bus/usb:/dev/bus/usb \
-   -v <REPOSITORY>:/root/workspace/minerva_mpu_adaptive \
-   -v /var/run/docker.sock:/var/run/docker.sock \
-   -v $SSH_AUTH_SOCK:/ssh-agent \
-   --workdir /root/workspace \
-   artifact.swf.daimler.com/adasdai-docker/minerva_mpu_docker/minerva_mpu:<YYYYMMDDHHMMSS> 
-   ```
-   where: `<REPOSITORY>` is your local path to the cloned repo, e.g. 
-   `/lhome/$USER/workspace/minerva/minerva_mpu_adaptive/`, and `<YYYYMMDDHHMMSS>` is container's version (it is 
-   supposed to be the same version you've pulled during setup).
-
-*  Build proxy and skeleton apps using the following commands from inside the docker container:
-   ```
-   bazel build @starter_kit_adaptive_xavier//:amsr_vector_fs_socal_for_proxy --config=<your target config>
-   bazel build @starter_kit_adaptive_xavier//:amsr_vector_fs_socal_for_skeleton --config=<your target config>
-   bazel build //:minerva_mpu_adaptive_filesystem --config=<CONFIGURATION>
-   ```
-   where `<CONFIGURATION>` is your configuration type, e.g. `x86_64_linux`. 
-
-   **NOTE** The first two commands are needed to handle the circular dependency issue. For more information 
-   please refer to [this](#circular-dependency-workaround) section.
-
-
-## Build without docker
-The current Bazel build is based on [rules_foreign_cc](https://github.com/bazelbuild/rules_foreign_cc) for building
-external CMake projects. In particular, they are used to build the Vector BSW libraries and. Default build type for the 
-BSW modules is "Release".
-
-To avoid downloading dependencies from external sources all the time, all packages are integrated into the docker image.
-These dependencies are kept at `/usr/tools/bazel` inside the docker container. If you don't want to use the docker
-container, to install these Bazel dependencies outside the docker container, you can use
-[this](https://git.swf.daimler.com/adasdai/minerva_mpu_docker/-/blob/master/collect_deps.py) script. Since the script will
-download everything to `/usr/tools/bazel/`, it needs be called with sudo privileges:
+To avoid downloading Bazel dependencies from external sources all the time, we do a one-time download and installation
+to a known path. These dependencies are kept at `/usr/tools/bazel`. Bazel is configured to look for them at that path.
+The docker container `build_env` already has these dependencies embedded into it. To install these Bazel dependencies,
+use [this](https://git.swf.daimler.com/adasdai/minerva_mpu_docker/-/blob/master/scripts/collect_deps.py) script. Since
+the script will download everything to `/usr/tools/bazel/`, it needs to be called with sudo privileges:
 ```
 sudo python3 collect_deps.py
 ```
@@ -151,14 +100,56 @@ but in such a case the WORKSPACE file needs to be changed appropriately:
 sudo python3 collect_deps.py -d --auth_mode=prompt --path=<your_path>
 ```
 
-To proceed with your build on host, change to your project repo directory and execute the following commands:
+# Build
+
+The actual build instructions are the same, regardless if you use the `build_env` to build or not. However, if you use
+the `build_env` you have to go through the extra step of entering it.
+
+## Entering the docker `build_env`
+
+Currently, the command to enter the `build_env` is a bit messy, but in the future this will be covered by tools and
+the it will be much more simpler to use. 
+
+To enter the `build_env` docker container, run the following command:
+```
+docker run -it \
+   --name=minerva_mpu_dev \
+   --rm \
+   --privileged \
+   --network=host \
+   -e HTTP_PROXY=$http_proxy \
+   -e HTTPS_PROXY=$https_proxy \
+   -e no_proxy=hksmirror.rd.corpintra.net,ubunturepo.rd.corpintra.net \
+   -e SSH_AUTH_SOCK=/ssh-agent \
+   -v /lib/modules/$(uname -r):/lib/modules/$(uname -r) \
+   -v /dev/bus/usb:/dev/bus/usb \
+   -v <REPOSITORY>:/root/workspace/minerva_mpu_adaptive \
+   -v /var/run/docker.sock:/var/run/docker.sock \
+   -v $SSH_AUTH_SOCK:/ssh-agent \
+   --workdir /root/workspace \
+   artifact.swf.daimler.com/adasdai-docker/minerva_mpu_docker/minerva_mpu:<YYYYMMDDHHMMSS> 
+```
+where: `<REPOSITORY>` is your local path to the cloned repo, e.g.
+`/lhome/$USER/workspace/minerva/minerva_mpu_adaptive/`, and `<YYYYMMDDHHMMSS>` is container's version (it is supposed
+to be the same version you've pulled during the setup from earlier).
+
+## The actual build steps
+The current Bazel build is based on [rules_foreign_cc](https://github.com/bazelbuild/rules_foreign_cc) for building
+external CMake projects. In particular, they are used to build the Vector BSW libraries and. Default build type for the 
+BSW modules is "Release".
+
+To proceed with your build on host, change to your repository root directory and execute the following commands:
+
 ```
 bazel build @starter_kit_adaptive_xavier//:amsr_vector_fs_socal_for_proxy --config=<your target config>
 bazel build @starter_kit_adaptive_xavier//:amsr_vector_fs_socal_for_skeleton --config=<your target config>
 bazel build //:minerva_mpu_adaptive_filesystem --config=<CONFIGURATION>
 ```
-where `<CONFIGURATION>` is your configuration type, e.g. `x86_64_linux`.
-These commands invoke Bazel to build proxy and skeleton applications with their dependencies.
+
+where `<CONFIGURATION>` is the target toolchain configuration, e.g. (`x86_64_linux`, `aarch64_linux_ubuntu` or
+`aarch64_linux_linaro`).
+
+These commands invoke Bazel to build the full Minerva MPU Adaptive filesystem, with BSW and applications as well as their dependencies.
 
 **NOTE** The first two commands are needed to handle the circular dependency issue. For more information 
 please refer to [this](#circular-dependency-workaround) section.
