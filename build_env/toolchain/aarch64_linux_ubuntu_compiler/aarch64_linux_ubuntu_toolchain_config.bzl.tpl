@@ -107,7 +107,6 @@ def _impl(ctx):
                                 "-Wl,-z,relro,-z,now",
                                 "-pass-exit-codes",
                                 "-Wl,--gc-sections",
-                                "-lpthread",
                             ],
                         ),
                     ]),
