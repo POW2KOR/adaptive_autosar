@@ -169,9 +169,10 @@ the build system, but right now has to be explicit.
 
 **NOTE** The first two commands are needed to handle the circular dependency issue. For more information 
 please refer to [this](#circular-dependency-workaround) section.
+# Running
 
+## Running on host with the run_env docker
 
-# Running with docker
 The following command will allow you to run the Minerva MPU Adaptive stack inside a docker container on your
 development machine. The run command uses the Bazel build graph and will detect if it is necessary to build/rebuild
 anything before running the stack. So you don't need to have a call a build step separately.
@@ -185,33 +186,8 @@ This command invokes the rest of dependencies and launches demo application in a
 **NOTE** There might be an issue with firewall settings which blocks pulling the Ubuntu image from Dockerhub. 
 For now, this might be solved by temporary disabling your firewall.
 
+## Running on the AGX without docker
 
-# Miscellaneous
-
-## Build different targets for aarch64 target 
-The aarch64 GCC cross-compiler needs to be installed on your system:
-```
-sudo apt-get install g++-aarch64-linux-gnu
-```
-
-If you are doing this on a Daimler Ubuntu system, and not inside a container, bear in mind that your toolchain may get
-automatically uninstalled after 30 minutes and might need to be reinstalled. (This problem seems not be present on
-Daimler laptops).
-
-```
-:~/minerva_mpu_adaptive$ bazel build @starter_kit_adaptive_xavier//:amsr_vector_fs_sec_cryptostack \
---config=aarch64_linux_ubuntu
-```
-
-You can use the Linaro toolchain provided by Nvidia with the `minerva_mpu_docker` image:
-
-```
-:~/minerva_mpu_adaptive$ bazel build @starter_kit_adaptive_xavier//:amsr-vector-fs-sec-cryptostack \
---config=aarch64_linux_linaro
-```
-
-
-## Deploying the stack to AGX
 
 Install aarch64 GCC cross-compiler using below command:
 ```
@@ -262,6 +238,7 @@ After this run the below command to run execution manager:
 sudo ./sbin/amsr_vector_fs_em_executionmanager -a ./opt -m ./etc/machine_exec_config.json
 ```
 
+# Miscellaneous
 
 ## Circular dependency workaround
 Currently, there is a circular linking dependency between `amsr_vector_fs_socal` and the generated source code for
