@@ -9,11 +9,19 @@ considered to be our main one. Both of them are covered in this manual.
 Please note that even if you build on host, you still need docker to run applications.
 
 
-## Docker setup
-Currently we use docker both to build and to run our applications. This step is required whenever you want to build on
-host or from inside a container.
+## The use of docker in this repository
 
-A guide on setting up docker on Daimler Linux machines can be found
+Currently we use docker both to build and to run our applications. Both cases are optional, but they make certain
+things easier and they enable a few extra use-cases. For example, for building, it allows us to deliver all the
+dependencies and tools under one package (NVIDIA Drive SDK, toolchains, Bazel dependencies) and have little
+interference from Daimler IT. Believe it or not, Daimler IT uninstalls your `g++-aarch64-linux-gnu` deb package after
+30 minutes. For running, this allows us to make use of docker virtual networks with custom subnets and IP address
+configurations without actually affecting the developer machine configuration.
+
+We call the docker container where we build things the `build_env` and the docker container where we run things the
+`run_env`.
+
+Yoy can find a guide on setting up docker on Daimler Ubuntu laptops
 [here](https://wiki.swf.daimler.com/display/ADASDAI/Setup+docker)
 
 
