@@ -32,7 +32,7 @@ filegroup(
 )
 
 filegroup(
-    name = "archieve",
+    name = "archive",
     srcs = [
         "@aarch64_linux_ubuntu_compiler//:ar",
     ],
