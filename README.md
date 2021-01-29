@@ -23,7 +23,7 @@ The image includes all the dependencies needed, including Bazel, Bazel plugins a
 aarch64).
 
 Docker images are pushed to Artifactory from a CI/CD pipeline. Please check
-[SWF Artifactory](https://artifact.swf.daimler.com/list/adas-docker/minerva_mpu_docker/minerva_mpu/) to find a
+[SWF Artifactory](https://artifact.swf.daimler.com/list/adasdai-docker/minerva_mpu_docker/minerva_mpu/) to find a
 full list.
 
 To obtain an image, first you should log in to SWF Artifactory with your credentials:
@@ -33,7 +33,7 @@ docker login artifact.swf.daimler.com
 ```
 Then pull your image:
 ```
-docker pull artifact.swf.daimler.com/adas-docker/minerva_mpu_docker/minerva_mpu:<YYYYMMDDHHMMSS>
+docker pull artifact.swf.daimler.com/adasdai-docker/minerva_mpu_docker/minerva_mpu:<YYYYMMDDHHMMSS>
 ```
 where `<YYYYMMDDHHMMSS>` is the image version. We are currently targeting version `20210104191029`.
 
@@ -48,6 +48,7 @@ Information on how to set these up is below.
 
 ### Compiler
 GCC compiler needs to be installed on your system.
+
 
 **IMPORTANT NOTE:** It might happen that your local installation of compiler is removed by automated Daimler IT policy
 every 30 minutes, so you need to reinstall it, or contact your system administrator and ask for policy change.
@@ -101,7 +102,7 @@ Please find detailed descriptions in corresponding sections.
    -v /var/run/docker.sock:/var/run/docker.sock \
    -v $SSH_AUTH_SOCK:/ssh-agent \
    --workdir /root/workspace \
-   artifact.swf.daimler.com/adas-docker/minerva_mpu_docker/minerva_mpu:<YYYYMMDDHHMMSS> 
+   artifact.swf.daimler.com/adasdai-docker/minerva_mpu_docker/minerva_mpu:<YYYYMMDDHHMMSS> 
    ```
    where: `<REPOSITORY>` is your local path to the cloned repo, e.g. 
    `/lhome/$USER/workspace/minerva/minerva_mpu_adaptive/`, and `<YYYYMMDDHHMMSS>` is container's version (it is 
@@ -127,7 +128,7 @@ BSW modules is "Release".
 To avoid downloading dependencies from external sources all the time, all packages are integrated into the docker image.
 These dependencies are kept at `/usr/tools/bazel` inside the docker container. If you don't want to use the docker
 container, to install these Bazel dependencies outside the docker container, you can use
-[this](https://git.swf.daimler.com/adas/minerva_mpu_docker/-/blob/master/collect_deps.py) script. Since the script will
+[this](https://git.swf.daimler.com/adasdai/minerva_mpu_docker/-/blob/master/collect_deps.py) script. Since the script will
 download everything to `/usr/tools/bazel/`, it needs be called with sudo privileges:
 ```
 sudo python3 collect_deps.py

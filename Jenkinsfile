@@ -1,10 +1,10 @@
 import groovy.io.FileType
 node('pulse_ec2') { 
     String registryUrl = "https://artifact.${env.SWF_DOMAIN}"
-    String registryCredentials = 'adas-artifactory'
+    String registryCredentials = 'adasdai-artifactory'
     String userId = sh (script: 'id -u', returnStdout: true).trim()
     String groupId = sh (script: 'id -g', returnStdout: true).trim()
-    def imgNameVer = "artifact.swf.daimler.com/adas-docker/minerva_mpu_docker/minerva_mpu:20201214084936"
+    def imgNameVer = "artifact.swf.daimler.com/adasdai-docker/minerva_mpu_docker/minerva_mpu:20201214084936"
 
     try{
         stage('Checkout') {
@@ -39,7 +39,7 @@ node('pulse_ec2') {
             docker.withRegistry(registryUrl, registryCredentials) {
                 docker.image("${imgNameVer}").inside("-u 0:0 --entrypoint=''") {
                     stage('Build'){
-                        sshagent(['adas-jenkins-ssh']) {
+                        sshagent(['adasdai-jenkins-ssh']) {
                             sh '''
                                 # Workaround for circular dependency
                                 bazel build @starter_kit_adaptive_xavier//:amsr_vector_fs_socal_for_proxy --config=x86_64_linux
@@ -61,7 +61,7 @@ node('pulse_ec2') {
             docker.withRegistry(registryUrl, registryCredentials) {
                 docker.image("${imgNameVer}").inside("-u 0:0 --entrypoint=''") {
                     stage('Build'){
-                        sshagent(['adas-jenkins-ssh']) {
+                        sshagent(['adasdai-jenkins-ssh']) {
                             sh '''
                                 # Workaround for circular dependency
                                 bazel build @starter_kit_adaptive_xavier//:amsr_vector_fs_socal_for_proxy --config=aarch64_linux_ubuntu
