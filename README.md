@@ -182,7 +182,33 @@ This command invokes the rest of dependencies and launches demo application in a
 **NOTE** There might be an issue with firewall settings which blocks pulling the Ubuntu image from Dockerhub. 
 For now, this might be solved by temporary disabling your firewall.
 
-## Running on the AGX without docker
+There are two modes to run, the first mode is `--//:docker_entrypoint="shell"`, which drops to a shell inside the
+container, where you can run any command. The other mode is `--//:docker_entrypoint="execution_manager"`, which is also
+the implicit default, configures the IP stack for the Vector BSW and then starts the execution manager.
+
+# Miscellaneous
+
+## Build different targets for aarch64 target 
+The aarch64 GCC cross-compiler needs to be installed on your system:
+```
+sudo apt-get install g++-aarch64-linux-gnu
+```
+
+If you are doing this on a Daimler Ubuntu system, and not inside a container, bear in mind that your toolchain may get
+automatically uninstalled after 30 minutes and might need to be reinstalled. (This problem seems not be present on
+Daimler laptops).
+
+```
+:~/minerva_mpu_adaptive$ bazel build @starter_kit_adaptive_xavier//:amsr_vector_fs_sec_cryptostack \
+--config=aarch64_linux_ubuntu
+```
+
+You can use the Linaro toolchain provided by Nvidia with the `minerva_mpu_docker` image:
+
+```
+:~/minerva_mpu_adaptive$ bazel build @starter_kit_adaptive_xavier//:amsr-vector-fs-sec-cryptostack \
+--config=aarch64_linux_linaro
+```
 
 
 Install aarch64 GCC cross-compiler using below command:

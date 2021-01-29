@@ -31,6 +31,25 @@ config_setting(
     },
 )
 
+string_flag(
+    name = "docker_entrypoint",
+    build_setting_default = "execution_manager",
+)
+
+config_setting(
+    name = "docker_entrypoint_shell",
+    flag_values = {
+        ":docker_entrypoint": "shell",
+    },
+)
+
+config_setting(
+    name = "docker_entrypoint_execution_manager",
+    flag_values = {
+        ":docker_entrypoint": "execution_manager",
+    },
+)
+
 # This filegroup is necessary so that we isolate the output group corresponding
 # to the binary of the cmake_external. Otherwise, it adds a lot of noise and
 # annoying stuff. Maybe we can find a better way in the future.
@@ -195,8 +214,16 @@ container_image(
         "--sysctl net.ipv6.conf.all.disable_ipv6=0",
         "--net mnv0",
     ]),
-    entrypoint = "ip link set lo multicast on && ip route add ff01::0/16 dev lo && /sbin/amsr_vector_fs_em_executionmanager " +
-                 "-a /opt -m /etc/machine_exec_config.json",
+    entrypoint = select({
+        ":docker_entrypoint_execution_manager": [
+            "/bin/sh",
+            "-c",
+            "ip link set lo multicast on && ip route add ff01::0/16 dev lo && /sbin/amsr_vector_fs_em_executionmanager -a /opt -m /etc/machine_exec_config.json",
+        ],
+        ":docker_entrypoint_shell": [
+            "/bin/sh",
+        ],
+    }),
     # The legacy_run_behavior is not disabled on container_image by default
     legacy_run_behavior = False,
     stamp = True,

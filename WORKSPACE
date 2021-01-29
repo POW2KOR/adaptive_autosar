@@ -91,6 +91,10 @@ rules_foreign_cc_dependencies(register_default_tools = True)
 
 http_archive(
     name = "io_bazel_rules_docker",
+    patch_args = ["-p1"],
+    patches = [
+        "@//:bazel/patch_to_enable_selects_in_rules_docker_entrypoints.patch",
+    ],
     sha256 = "1698624e878b0607052ae6131aa216d45ebb63871ec497f26c67455b34119c80",
     strip_prefix = "rules_docker-0.15.0",
     url = "file:///usr/tools/bazel/rules_docker-v0.15.0.tar.gz",
