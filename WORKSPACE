@@ -226,7 +226,7 @@ load("@bazel_tools//tools/build_defs/repo:git.bzl", "new_git_repository")
 new_git_repository(
     name = "starter_kit_adaptive_xavier",  # bazel will create under its own cache folder in the external folder package with the specified name(e.g. external/starter_kit_adaptive_xavier)
     # alternative for cloning using HTTPS
-    # remote = "https://git.swf.daimler.com/adas/starter_kit_adaptive_xavier.git",
+    # remote = "https://git.swf.daimler.com/adasdai/starter_kit_adaptive_xavier.git",
     build_file = "@//bsw:starter_kit_adaptive_xavier.BUILD",
     commit = "379d1f0ece2724e78ea23fa9f863d8120c0457b5",  # the commit ID that bazel will use to fetch the external repository
     init_submodules = True,
@@ -238,7 +238,7 @@ new_git_repository(
         "@//bsw:patches/fix-cmake-package-exports.patch",
         "@//bsw:patches/remove-controlpanel-symlink-in-vector-sip.patch",
     ],
-    remote = "ssh://git@git.swf.daimler.com:7999/adas/starter_kit_adaptive_xavier.git",
+    remote = "ssh://git@git.swf.daimler.com:7999/adasdai/starter_kit_adaptive_xavier.git",
     shallow_since = "1607616957 +0100",
 )
 
