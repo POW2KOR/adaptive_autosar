@@ -157,6 +157,9 @@ cc_binary(
     copts = [
         "-std=c++14",
     ],
+    linkopts = [
+        "-lpthread",
+    ],
     linkstatic = 1,
     deps = [
         "@starter_kit_adaptive_xavier//:amsr_vector_fs_applicationbase",
@@ -927,6 +930,9 @@ cc_binary(
     ],
     copts = [
         "-std=c++14",
+    ],
+    linkopts = [
+        "-lpthread",
     ],
     linkstatic = 1,
     deps = [

@@ -163,10 +163,6 @@ bazel build //:minerva_mpu_adaptive_filesystem --config=<CONFIGURATION>
 where `<CONFIGURATION>` is your configuration type, e.g. `x86_64_linux`.
 These commands invoke Bazel to build proxy and skeleton applications with their dependencies.
 
-For now, the `--config=x86_64_linux` part is important and cannot be skipped if you are building on a `x86_64`
-machine. Skipping this will cause some linking errors related to `pthread`. This may be fixed in a future version of
-the build system, but right now has to be explicit.
-
 **NOTE** The first two commands are needed to handle the circular dependency issue. For more information 
 please refer to [this](#circular-dependency-workaround) section.
 # Running

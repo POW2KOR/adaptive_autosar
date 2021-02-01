@@ -32,15 +32,25 @@ config_setting(
     },
 )
 
+# CMAKE_TRY_COMPILE_TARGET_TYPE set to STATIC_LIBRARY is needed to make aarch64
+# builds work, I do not know exactly why using this option affects the linking
+# of pthread, but it seems it does, so we're linking pthread manually where
+# it's needed. Furthermore, we make the approach uniform across all the targets
+# so that we don't have any mismatches that might be harder to debug in the
+# future.
 CMAKE_TOOLCHAIN_DICT = {
-    ":minerva_host": {},
+    ":minerva_host": {
+        "CMAKE_TRY_COMPILE_TARGET_TYPE": "STATIC_LIBRARY",
+    },
     ":minerva_drive_sdk": {
         "CMAKE_TRY_COMPILE_TARGET_TYPE": "STATIC_LIBRARY",
     },
     ":minerva_target": {
         "CMAKE_TRY_COMPILE_TARGET_TYPE": "STATIC_LIBRARY",
     },
-    "//conditions:default": {},
+    "//conditions:default": {
+        "CMAKE_TRY_COMPILE_TARGET_TYPE": "STATIC_LIBRARY",
+    },
 }
 
 GEN_CROSSTOOL_FILE = select({
@@ -364,6 +374,7 @@ cmake_external(
             "CMAKE_VERBOSE_MAKEFILE": "ON",
             "BUILD_TESTS": "OFF",
             "ENABLE_DOXYGEN": "OFF",
+            "CMAKE_EXE_LINKER_FLAGS": "-lpthread",
             "vac_DIR:PATH": "$EXT_BUILD_DEPS/amsr_vector_fs_libvac/lib/cmake/vac/",
             "osabstraction_DIR:PATH": "$EXT_BUILD_DEPS/amsr_vector_fs_libosabstraction/lib/cmake/osabstraction/",
             "vajson_DIR:PATH": "$EXT_BUILD_DEPS/amsr_vector_fs_vajson/lib/cmake/vajson/",
@@ -915,6 +926,7 @@ cmake_external(
             "vac_DIR:PATH": "$EXT_BUILD_DEPS/amsr_vector_fs_libvac/lib/cmake/vac/",
             "ara-logging_DIR:PATH": "$EXT_BUILD_DEPS/amsr_vector_fs_log_api/lib/cmake/ara-logging/",
             "osabstraction_DIR:PATH": "$EXT_BUILD_DEPS/amsr_vector_fs_libosabstraction/lib/cmake/osabstraction/",
+            "CMAKE_EXE_LINKER_FLAGS": "-lpthread",
             "amsr-vector-fs-em-executionmanagement_application-client_DIR:PATH": "$EXT_BUILD_DEPS/amsr_vector_fs_em_executionmanager/lib/cmake/amsr-vector-fs-em-executionmanagement_application-client/",
         },
     ),
