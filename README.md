@@ -1,14 +1,11 @@
 # Minerva MPU repository
+
 This is the MPU Adaptive AUTOSAR repository for the Minerva project.
 
-
 # Setting up
-There are 2 ways to build the project: build from inside the docker container or on your host. The first option is 
-considered to be our main one. Both of them are covered in this manual.
 
-Please note that even if you build on host, you still need docker to run applications.
-
-
+This guide describes how to build and run both from within the docker container and outside of it. The first method is
+preferred, but both are supported. See next section for more info.
 ## The use of docker in this repository
 
 Currently we use docker both to build and to run our applications. Both cases are optional, but they make certain
