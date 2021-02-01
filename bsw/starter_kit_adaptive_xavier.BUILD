@@ -53,13 +53,6 @@ CMAKE_TOOLCHAIN_DICT = {
     },
 }
 
-GEN_CROSSTOOL_FILE = select({
-    ":minerva_host": False,
-    ":minerva_drive_sdk": False,
-    ":minerva_target": True,
-    "//conditions:default": False,
-})
-
 ######################################################################################
 # amsr_vector_fs_libvac
 ######################################################################################
@@ -78,7 +71,7 @@ cmake_external(
             "CMAKE_SYSTEM_NAME": CMAKE_SYSTEM_NAME_LINUX,
         },
     ),
-    generate_crosstool_file = GEN_CROSSTOOL_FILE,
+    generate_crosstool_file = True,
     lib_source = ":amsr_vector_fs_libvac_srcs",
     static_libraries = [
         "libvac.a",
@@ -104,7 +97,7 @@ cmake_external(
             "CMAKE_SYSTEM_NAME": CMAKE_SYSTEM_NAME_LINUX,
         },
     ),
-    generate_crosstool_file = GEN_CROSSTOOL_FILE,
+    generate_crosstool_file = True,
     headers_only = True,
     lib_source = ":amsr_vector_fs_msr4base_srcs",
     visibility = ["//visibility:public"],
@@ -130,7 +123,7 @@ cmake_external(
             "vac_DIR:PATH": "$EXT_BUILD_DEPS/amsr_vector_fs_libvac/lib/cmake/vac/",
         },
     ),
-    generate_crosstool_file = GEN_CROSSTOOL_FILE,
+    generate_crosstool_file = True,
     lib_source = ":amsr_vector_fs_libiostream_srcs",
     out_bin_dir = "sbin",
     static_libraries = [
@@ -164,7 +157,7 @@ cmake_external(
             "vac_DIR:PATH": "$EXT_BUILD_DEPS/amsr_vector_fs_libvac/lib/cmake/vac/",
         },
     ),
-    generate_crosstool_file = GEN_CROSSTOOL_FILE,
+    generate_crosstool_file = True,
     lib_source = ":amsr_vector_fs_thread_srcs",
     out_bin_dir = "sbin",
     static_libraries = [
@@ -198,7 +191,7 @@ cmake_external(
             "amsr-vector-fs-libiostream_libcharconv_common_DIR:PATH": "$EXT_BUILD_DEPS/amsr_vector_fs_libiostream/lib/cmake/amsr-vector-fs-libiostream_libcharconv_common/",
         },
     ),
-    generate_crosstool_file = GEN_CROSSTOOL_FILE,
+    generate_crosstool_file = True,
     lib_source = ":amsr_vector_fs_vajson_srcs",
     static_libraries = [
         "libvajson.a",
@@ -229,7 +222,7 @@ cmake_external(
             "vac_DIR:PATH": "$EXT_BUILD_DEPS/amsr_vector_fs_libvac/lib/cmake/vac/",
         },
     ),
-    generate_crosstool_file = GEN_CROSSTOOL_FILE,
+    generate_crosstool_file = True,
     lib_source = ":amsr_vector_fs_applicationbase_srcs",
     static_libraries = [
         "libapplication_base.a",
@@ -259,7 +252,7 @@ cmake_external(
             "vac_DIR:PATH": "$EXT_BUILD_DEPS/amsr_vector_fs_libvac/lib/cmake/vac/",
         },
     ),
-    generate_crosstool_file = GEN_CROSSTOOL_FILE,
+    generate_crosstool_file = True,
     lib_source = ":amsr_vector_fs_libosabstraction_srcs",
     static_libraries = [
         "libosabstraction.a",
@@ -294,7 +287,7 @@ cmake_external(
             "vathread_DIR:PATH": "$EXT_BUILD_DEPS/amsr_vector_fs_thread/lib/cmake/vathread/",
         },
     ),
-    generate_crosstool_file = GEN_CROSSTOOL_FILE,
+    generate_crosstool_file = True,
     lib_source = ":amsr_vector_fs_log_api_srcs",
     static_libraries = [
         "libamsr-log.a",
@@ -331,7 +324,7 @@ cmake_external(
             "amsr-vector-fs-msr4base_DIR:PATH": "$EXT_BUILD_DEPS/amsr_vector_fs_msr4base/lib/cmake/amsr-vector-fs-msr4base/",
         },
     ),
-    generate_crosstool_file = GEN_CROSSTOOL_FILE,
+    generate_crosstool_file = True,
     lib_source = ":amsr_vector_fs_sec_cryptostack_driver_lib_es_srcs",
     static_libraries = [
         "libamsr-vector-fs-sec-cryptostack-driver-lib_es.a",
@@ -389,7 +382,7 @@ cmake_external(
             "application_base_DIR:PATH": "$EXT_BUILD_DEPS/amsr_vector_fs_applicationbase/lib/cmake/application_base/",
         },
     ),
-    generate_crosstool_file = GEN_CROSSTOOL_FILE,
+    generate_crosstool_file = True,
     lib_source = ":amsr_vector_fs_em_executionmanager_srcs",
     out_bin_dir = "sbin",
     static_libraries = [
@@ -436,7 +429,7 @@ cmake_external(
             "amsr-vector-fs-log-api-ipc_DIR:PATH": "$EXT_BUILD_DEPS/amsr_vector_fs_log_api/lib/cmake/amsr-vector-fs-log-api-ipc/",
         },
     ),
-    generate_crosstool_file = GEN_CROSSTOOL_FILE,
+    generate_crosstool_file = True,
     lib_source = ":amsr_vector_fs_sec_iam_srcs",
     static_libraries = [
         "libamsr-vector-fs-sec-iam_libserver.a",
@@ -476,7 +469,7 @@ cmake_external(
             "ara-logging_DIR:PATH": "$EXT_BUILD_DEPS/amsr_vector_fs_log_api/lib/cmake/ara-logging/",
         },
     ),
-    generate_crosstool_file = GEN_CROSSTOOL_FILE,
+    generate_crosstool_file = True,
     lib_source = ":amsr_vector_fs_comcommon_srcs",
     static_libraries = [
         "libComCommon.a",
@@ -523,7 +516,7 @@ cmake_external(
             "amsr-vector-fs-sec-cryptostack-driver-lib_es_DIR:PATH": "$EXT_BUILD_DEPS/amsr_vector_fs_sec_cryptostack_driver_lib_es/lib/cmake/amsr-vector-fs-sec-cryptostack-driver-lib_es/",
         },
     ),
-    generate_crosstool_file = GEN_CROSSTOOL_FILE,
+    generate_crosstool_file = True,
     lib_source = ":amsr_vector_fs_sec_cryptostack_srcs",
     static_libraries = [
         "libamsr-vector-fs-sec-cryptostack_libclient.a",
@@ -565,7 +558,7 @@ cmake_external(
             "amsr-vector-fs-sec-cryptostack_libsoftwareprovider_DIR:PATH": "$EXT_BUILD_DEPS/amsr_vector_fs_sec_cryptostack/lib/cmake/amsr-vector-fs-sec-cryptostack_libsoftwareprovider/",
         },
     ),
-    generate_crosstool_file = GEN_CROSSTOOL_FILE,
+    generate_crosstool_file = True,
     lib_source = ":amsr_vector_fs_sec_libseccom_srcs",
     static_libraries = [
         "libamsr-vector-fs-sec-libseccom_libtls.a",
@@ -619,7 +612,7 @@ cmake_external(
             "amsr-vector-fs-em-executionmanagement_application-client_DIR:PATH": "$EXT_BUILD_DEPS/amsr_vector_fs_em_executionmanager/lib/cmake/amsr-vector-fs-em-executionmanagement_application-client/",
         },
     ),
-    generate_crosstool_file = GEN_CROSSTOOL_FILE,
+    generate_crosstool_file = True,
     lib_source = ":amsr_vector_fs_communicationmiddleware_srcs",
     static_libraries = [
         "libARA-IpcBinding-posix.a",
@@ -659,7 +652,7 @@ cmake_external(
             "amsr-vector-fs-msr4base_DIR:PATH": "$EXT_BUILD_DEPS/amsr_vector_fs_msr4base/lib/cmake/amsr-vector-fs-msr4base/",
         },
     ),
-    generate_crosstool_file = GEN_CROSSTOOL_FILE,
+    generate_crosstool_file = True,
     lib_source = ":amsr_vector_fs_crc_srcs",
     static_libraries = [
         "libamsr-vector-fs-crc_libinternal.a",
@@ -692,7 +685,7 @@ cmake_external(
             "amsr-vector-fs-msr4base_DIR:PATH": "$EXT_BUILD_DEPS/amsr_vector_fs_msr4base/lib/cmake/amsr-vector-fs-msr4base/",
         },
     ),
-    generate_crosstool_file = GEN_CROSSTOOL_FILE,
+    generate_crosstool_file = True,
     lib_source = ":amsr_vector_fs_e2e_srcs",
     static_libraries = [
         "libamsr-vector-fs-e2e_libe2e.a",
@@ -741,7 +734,7 @@ cmake_external(
             "amsr-vector-fs-e2e_libinternal_DIR:PATH": "$EXT_BUILD_DEPS/amsr_vector_fs_e2e/lib/cmake/amsr-vector-fs-e2e_libinternal/",
         },
     ),
-    generate_crosstool_file = GEN_CROSSTOOL_FILE,
+    generate_crosstool_file = True,
     lib_source = ":amsr_vector_fs_socal_srcs",
     static_libraries = [
         "libSocal.a",
@@ -785,7 +778,7 @@ cmake_external(
             "amsr-vector-fs-e2e_libinternal_DIR:PATH": "$EXT_BUILD_DEPS/amsr_vector_fs_e2e/lib/cmake/amsr-vector-fs-e2e_libinternal/",
         },
     ),
-    generate_crosstool_file = GEN_CROSSTOOL_FILE,
+    generate_crosstool_file = True,
     lib_source = ":amsr_vector_fs_socal_srcs",
     static_libraries = [
         "libSocal.a",
@@ -829,7 +822,7 @@ cmake_external(
             "amsr-vector-fs-e2e_libinternal_DIR:PATH": "$EXT_BUILD_DEPS/amsr_vector_fs_e2e/lib/cmake/amsr-vector-fs-e2e_libinternal/",
         },
     ),
-    generate_crosstool_file = GEN_CROSSTOOL_FILE,
+    generate_crosstool_file = True,
     lib_source = ":amsr_vector_fs_socal_srcs",
     headers_only = True,
     visibility = ["//visibility:public"],
@@ -930,7 +923,7 @@ cmake_external(
             "amsr-vector-fs-em-executionmanagement_application-client_DIR:PATH": "$EXT_BUILD_DEPS/amsr_vector_fs_em_executionmanager/lib/cmake/amsr-vector-fs-em-executionmanagement_application-client/",
         },
     ),
-    generate_crosstool_file = GEN_CROSSTOOL_FILE,
+    generate_crosstool_file = True,
     lib_source = ":amsr_vector_fs_log_daemon_srcs",
     static_libraries = [
         "libamsr-vector-fs-log-daemon-service.a",
@@ -965,7 +958,7 @@ cmake_external(
             "ComCommon_DIR:PATH": "$EXT_BUILD_DEPS/amsr_vector_fs_comcommon/lib/cmake/ComCommon/",
         },
     ),
-    generate_crosstool_file = GEN_CROSSTOOL_FILE,
+    generate_crosstool_file = True,
     lib_source = ":amsr_vector_fs_someipprotocol_srcs",
     static_libraries = [
         "libSomeIpProtocol.a",
@@ -1004,7 +997,7 @@ cmake_external(
             "Socal_DIR:PATH": "$EXT_BUILD_DEPS/amsr_vector_fs_socal_headers/lib/cmake/Socal/",
         },
     ),
-    generate_crosstool_file = GEN_CROSSTOOL_FILE,
+    generate_crosstool_file = True,
     lib_source = ":amsr_vector_fs_someipbinding_srcs",
     static_libraries = [
         "libSomeIpBindingInternal.a",
@@ -1046,7 +1039,7 @@ cmake_external(
             "SomeIpProtocol_DIR:PATH": "$EXT_BUILD_DEPS/amsr_vector_fs_someipprotocol/lib/cmake/SomeIpProtocol/",
         },
     ),
-    generate_crosstool_file = GEN_CROSSTOOL_FILE,
+    generate_crosstool_file = True,
     lib_source = ":amsr_vector_fs_someipdaemonclient_srcs",
     static_libraries = [
         "libSomeIpDaemonClient.a",
@@ -1111,7 +1104,7 @@ cmake_external(
             "amsr-vector-fs-em-executionmanagement_application-client_DIR:PATH": "$EXT_BUILD_DEPS/amsr_vector_fs_em_executionmanager/lib/cmake/amsr-vector-fs-em-executionmanagement_application-client/",
         },
     ),
-    generate_crosstool_file = GEN_CROSSTOOL_FILE,
+    generate_crosstool_file = True,
     lib_source = ":amsr_vector_fs_someipdaemon_srcs",
     visibility = ["//visibility:public"],
     deps = [
