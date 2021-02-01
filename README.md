@@ -147,9 +147,11 @@ bazel build //:minerva_mpu_adaptive_filesystem --config=<CONFIGURATION>
 ```
 
 where `<CONFIGURATION>` is the target toolchain configuration, e.g. (`x86_64_linux`, `aarch64_linux_ubuntu` or
-`aarch64_linux_linaro`).
+`aarch64_linux_linaro`). The `--config=x86_64_linux` may be skipped if you are building on an `x86_64` host for an
+`x86_64` target.
 
-These commands invoke Bazel to build the full Minerva MPU Adaptive filesystem, with BSW and applications as well as their dependencies.
+These commands invoke Bazel to build the full Minerva MPU Adaptive filesystem, with BSW and applications as well as
+their dependencies.
 
 **NOTE** The first two commands are needed to handle the circular dependency issue. For more information 
 please refer to [this](#circular-dependency-workaround) section.
