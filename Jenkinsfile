@@ -5,7 +5,10 @@ node('pulse_ec2') {
     String userId = sh (script: 'id -u', returnStdout: true).trim()
     String groupId = sh (script: 'id -g', returnStdout: true).trim()
     def imgNameVer = "artifact.swf.daimler.com/adasdai-docker/minerva_mpu_docker/minerva_mpu:20201214084936"
-
+    def diskCache = "-v /home/efs_cache/mpu:/home/jenkins_agent/efs_cache/mpu"
+    boolean isMaster = (env.BRANCH_NAME == 'master')
+    def remoteUpload = "-e isMaster=${isMaster}"
+    
     try{
         stage('Checkout') {
             checkout scm
@@ -37,7 +40,7 @@ node('pulse_ec2') {
         }
         stage('x86_64_linux_ubuntu') {
             docker.withRegistry(registryUrl, registryCredentials) {
-                docker.image("${imgNameVer}").inside("-u 0:0 --entrypoint=''") {
+                docker.image("${imgNameVer}").inside("-u 0:0 --entrypoint='' ${diskCache} ${remoteUpload}") {
                     stage('Build'){
                         sshagent(['adasdai-jenkins-ssh']) {
                             sh '''
@@ -47,7 +50,7 @@ node('pulse_ec2') {
                                 bazel build @starter_kit_adaptive_xavier//:amsr_vector_fs_socal_for_software_update --config=x86_64_linux
 
                                 # Actual build
-                                bazel build //:minerva_mpu_adaptive_filesystem --config=x86_64_linux
+                                bazel build //:minerva_mpu_adaptive_filesystem --config=x86_64_linux --config=disk_cache --remote_upload_local_results=${isMaster}
                             '''
                         }
                     }
@@ -60,7 +63,7 @@ node('pulse_ec2') {
         }
         stage('aarch64_linux_ubuntu'){
             docker.withRegistry(registryUrl, registryCredentials) {
-                docker.image("${imgNameVer}").inside("-u 0:0 --entrypoint=''") {
+                docker.image("${imgNameVer}").inside("-u 0:0 --entrypoint='' ${diskCache} ${remoteUpload}") {
                     stage('Build'){
                         sshagent(['adasdai-jenkins-ssh']) {
                             sh '''
@@ -70,7 +73,7 @@ node('pulse_ec2') {
                                 bazel build @starter_kit_adaptive_xavier//:amsr_vector_fs_socal_for_software_update --config=aarch64_linux_ubuntu
 
                                 # Actual build
-                                bazel build //:minerva_mpu_adaptive_filesystem --config=aarch64_linux_ubuntu
+                                bazel build //:minerva_mpu_adaptive_filesystem --config=aarch64_linux_ubuntu --config=disk_cache --remote_upload_local_results=${isMaster}
                             '''
                         }
                     }

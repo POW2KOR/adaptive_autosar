@@ -12,3 +12,6 @@ build:aarch64_linux_linaro  --host_crosstool_top=@bazel_tools//tools/cpp:toolcha
 
 # We need to find a better approach for specifting pthread as a default, the same way we do with the aarch64 toolchain
 build:x86_64_linux          --cpu=k8 --experimental_scale_timeouts=100
+
+# --config=disk_cache enables fetch of remote bazel cache
+build:disk_cache            --disk_cache="/home/jenkins_agent/efs_cache/mpu"
