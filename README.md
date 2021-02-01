@@ -186,6 +186,28 @@ There are two modes to run, the first mode is `--//:docker_entrypoint="shell"`, 
 container, where you can run any command. The other mode is `--//:docker_entrypoint="execution_manager"`, which is also
 the implicit default, configures the IP stack for the Vector BSW and then starts the execution manager.
 
+Currently, if you enter into shell mode, you will have to setup the network stack yourself before running the
+application. This is something that will be addressed in the future, but has to be done manually at the moment. For
+more information, look into `minerva_mpu_adaptive/BUILD` in the `entrypoint` parameter of the target with
+`name = "minerva_mpu_adaptive_docker"`. This mode is useful if you want to do quick changes/iteration without losing
+your current state.
+
+No matter what mode you are running, you can open extra terminals into the container by using the following method:
+
+- Get the id of the container using the command below. If nothing is printed, it means your container is not running.
+
+```
+docker ps -qf "ancestor=bazel:minerva_mpu_adaptive_docker"
+```
+
+- Enter the contaienr with `docker exec` like below. Replace `<container id>` with the id returned by the previous
+step. You can also run other commands than `/bin/bash`, provided that this command has been already added to the
+container.
+
+```
+docker exec -it <container id> /bin/bash
+```
+
 # Miscellaneous
 
 ## Build different targets for aarch64 target 
