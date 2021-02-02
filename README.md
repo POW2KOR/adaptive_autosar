@@ -324,3 +324,18 @@ and check for changed files with
 git status
 ```
 If there are no files formatted, the output of above command will be empty. Else, it will show the list of files formatted.
+
+
+## Proxy handling in Docker
+In order to allow Internet access from inside our docker containers, we need to pass to them proper
+environment variables. For now, we should take care on the following settings:
+
+- proxy settings in `~/.docker/config.json`: needed to set up access from ubuntu_18.04 image
+  when it is started on host
+- proxy settings which are passed with `docker run` command: needed to set up access from 
+  minerva_mpu_docker
+- proxy settings in `BUILD` file: needed to set up access from ubuntu_18.04 image when it is started
+  from inside minerva_mpu_docker container
+
+In case of proxy settings change, please change corresponding parameters according to your build and 
+launch strategy.
