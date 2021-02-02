@@ -1,8 +1,8 @@
 workspace(name = "minerva_mpu_adaptive")
 
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive", "http_file")
-load("//build_env/toolchain/aarch64_linux_ubuntu_compiler:aarch64_linux_ubuntu_configure.bzl", "aarch64_linux_ubuntu_configure")
-load("//build_env/toolchain/aarch64_linux_linaro_compiler:aarch64_linux_linaro_configure.bzl", "aarch64_linux_linaro_configure")
+load("//bazel/toolchains/aarch64_linux_ubuntu_compiler:aarch64_linux_ubuntu_configure.bzl", "aarch64_linux_ubuntu_configure")
+load("//bazel/toolchains/aarch64_linux_linaro_compiler:aarch64_linux_linaro_configure.bzl", "aarch64_linux_linaro_configure")
 
 # To avoid downloading dependencies from external sources all the time, they
 # were made part of the docker image and are loaded directly from there.
@@ -56,12 +56,12 @@ http_archive(
 
 aarch64_linux_ubuntu_configure(
     name = "aarch64_linux_ubuntu_compiler",
-    build_file = "@//build_env/toolchain/aarch64_linux_ubuntu_compiler:aarch64_linux_ubuntu_compiler.BUILD",
+    build_file = "@//bazel/toolchains/aarch64_linux_ubuntu_compiler:aarch64_linux_ubuntu_compiler.BUILD",
 )
 
 aarch64_linux_linaro_configure(
     name = "aarch64_linux_linaro_compiler",
-    build_file = "@//build_env/toolchain/aarch64_linux_linaro_compiler:aarch64_linux_linaro_compiler.BUILD",
+    build_file = "@//bazel/toolchains/aarch64_linux_linaro_compiler:aarch64_linux_linaro_compiler.BUILD",
 )
 
 http_archive(
