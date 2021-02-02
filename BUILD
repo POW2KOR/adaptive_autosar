@@ -200,6 +200,10 @@ container_run_and_commit(
         "apt update",
         "apt-get install -y iproute2 strace",
     ],
+    docker_run_flags = [
+        "--env http_proxy=http://172.17.0.1:3128",
+        "--env https_proxy=http://172.17.0.1:3128",
+    ],
     image = "@ubuntu_18.04//image",
 )
 
