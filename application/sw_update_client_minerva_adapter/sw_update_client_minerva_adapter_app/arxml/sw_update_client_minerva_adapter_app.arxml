@@ -84,7 +84,7 @@
           <EXECUTABLE-REF DEST="EXECUTABLE">/mb/sw_update_client_minerva_adapter_app</EXECUTABLE-REF>
         </PROCESS-DESIGN>
         <SOMEIP-SERVICE-INTERFACE-DEPLOYMENT UUID="06f37bea-1fd2-4127-b502-f34bb76e8e5a">
-          <SHORT-NAME>sw_update_client_minderva_adapter</SHORT-NAME>
+          <SHORT-NAME>sw_update_client_minerva_adapter</SHORT-NAME>
           <FIELD-DEPLOYMENTS>
             <SOMEIP-FIELD-DEPLOYMENT UUID="63aad14e-bf8e-49f1-b6eb-dd0dd2f2430b">
               <SHORT-NAME>progress</SHORT-NAME>
@@ -117,32 +117,32 @@
           </FIELD-DEPLOYMENTS>
           <METHOD-DEPLOYMENTS>
             <SOMEIP-METHOD-DEPLOYMENT UUID="62c80f67-4da9-4bc3-a0de-4c524e6eb421">
-              <SHORT-NAME>WriteData</SHORT-NAME>
-              <METHOD-REF DEST="CLIENT-SERVER-OPERATION">/mb/SwdlPlugin/WriteData</METHOD-REF>
+              <SHORT-NAME>Activate</SHORT-NAME>
+              <METHOD-REF DEST="CLIENT-SERVER-OPERATION">/mb/SwdlPlugin/Activate</METHOD-REF>
               <METHOD-ID>5</METHOD-ID>
               <TRANSPORT-PROTOCOL>UDP</TRANSPORT-PROTOCOL>
             </SOMEIP-METHOD-DEPLOYMENT>
             <SOMEIP-METHOD-DEPLOYMENT UUID="d9d7cb53-9798-4b50-9099-90335cae8f57">
-              <SHORT-NAME>CancelSession</SHORT-NAME>
-              <METHOD-REF DEST="CLIENT-SERVER-OPERATION">/mb/SwdlPlugin/CancelSession</METHOD-REF>
+              <SHORT-NAME>CleanUp</SHORT-NAME>
+              <METHOD-REF DEST="CLIENT-SERVER-OPERATION">/mb/SwdlPlugin/CleanUp</METHOD-REF>
               <METHOD-ID>6</METHOD-ID>
               <TRANSPORT-PROTOCOL>UDP</TRANSPORT-PROTOCOL>
             </SOMEIP-METHOD-DEPLOYMENT>
             <SOMEIP-METHOD-DEPLOYMENT UUID="e6cf1766-65a7-4480-a828-e0699caafc59">
               <SHORT-NAME>StartSession</SHORT-NAME>
-              <METHOD-REF DEST="CLIENT-SERVER-OPERATION">/mb/SwdlPlugin/StartSession</METHOD-REF>
+              <METHOD-REF DEST="CLIENT-SERVER-OPERATION">/mb/SwdlPlugin/Process</METHOD-REF>
               <METHOD-ID>7</METHOD-ID>
               <TRANSPORT-PROTOCOL>UDP</TRANSPORT-PROTOCOL>
             </SOMEIP-METHOD-DEPLOYMENT>
             <SOMEIP-METHOD-DEPLOYMENT UUID="e84af525-d876-4f95-a9c8-4541bc5f62ae">
-              <SHORT-NAME>CheckMemory</SHORT-NAME>
-              <METHOD-REF DEST="CLIENT-SERVER-OPERATION">/mb/SwdlPlugin/CheckMemory</METHOD-REF>
+              <SHORT-NAME>Revert</SHORT-NAME>
+              <METHOD-REF DEST="CLIENT-SERVER-OPERATION">/mb/SwdlPlugin/Revert</METHOD-REF>
               <METHOD-ID>8</METHOD-ID>
               <TRANSPORT-PROTOCOL>UDP</TRANSPORT-PROTOCOL>
             </SOMEIP-METHOD-DEPLOYMENT>
             <SOMEIP-METHOD-DEPLOYMENT UUID="6b906b23-26cd-4d56-811a-c5dbea0a4210">
-              <SHORT-NAME>SwitchNewVersion</SHORT-NAME>
-              <METHOD-REF DEST="CLIENT-SERVER-OPERATION">/mb/SwdlPlugin/SwitchNewVersion</METHOD-REF>
+              <SHORT-NAME>Rollback</SHORT-NAME>
+              <METHOD-REF DEST="CLIENT-SERVER-OPERATION">/mb/SwdlPlugin/Rollback</METHOD-REF>
               <METHOD-ID>9</METHOD-ID>
               <TRANSPORT-PROTOCOL>UDP</TRANSPORT-PROTOCOL>
             </SOMEIP-METHOD-DEPLOYMENT>
@@ -152,6 +152,12 @@
               <METHOD-ID>10</METHOD-ID>
               <TRANSPORT-PROTOCOL>UDP</TRANSPORT-PROTOCOL>
             </SOMEIP-METHOD-DEPLOYMENT>
+            <SOMEIP-METHOD-DEPLOYMENT UUID="eaa4e3d3-3cbd-4cac-8dda-9a937aba61c2">
+              <SHORT-NAME>Verify</SHORT-NAME>
+              <METHOD-REF DEST="CLIENT-SERVER-OPERATION">/mb/SwdlPlugin/Verify</METHOD-REF>
+              <METHOD-ID>11</METHOD-ID>
+              <TRANSPORT-PROTOCOL>UDP</TRANSPORT-PROTOCOL>
+            </SOMEIP-METHOD-DEPLOYMENT>
           </METHOD-DEPLOYMENTS>
           <SERVICE-INTERFACE-REF DEST="SERVICE-INTERFACE">/mb/SwdlPlugin</SERVICE-INTERFACE-REF>
           <EVENT-GROUPS>
@@ -159,8 +165,8 @@
               <SHORT-NAME>SomeipEventGroup</SHORT-NAME>
               <EVENT-GROUP-ID>1</EVENT-GROUP-ID>
               <EVENT-REFS>
-                <EVENT-REF DEST="SOMEIP-EVENT-DEPLOYMENT">/mb/sw_update_client_minderva_adapter/progress/onProgress</EVENT-REF>
-                <EVENT-REF DEST="SOMEIP-EVENT-DEPLOYMENT">/mb/sw_update_client_minderva_adapter/status/onStatus</EVENT-REF>
+                <EVENT-REF DEST="SOMEIP-EVENT-DEPLOYMENT">/mb/sw_update_client_minerva_adapter/progress/onProgress</EVENT-REF>
+                <EVENT-REF DEST="SOMEIP-EVENT-DEPLOYMENT">/mb/sw_update_client_minerva_adapter/status/onStatus</EVENT-REF>
               </EVENT-REFS>
             </SOMEIP-EVENT-GROUP>
           </EVENT-GROUPS>
@@ -171,12 +177,12 @@
           </SERVICE-INTERFACE-VERSION>
         </SOMEIP-SERVICE-INTERFACE-DEPLOYMENT>
         <PROVIDED-SOMEIP-SERVICE-INSTANCE UUID="6e7eace4-9bb6-45e8-bd64-b61350eb780e">
-          <SHORT-NAME>sw_update_client_minderva_adapter_001</SHORT-NAME>
-          <SERVICE-INTERFACE-REF DEST="SOMEIP-SERVICE-INTERFACE-DEPLOYMENT">/mb/sw_update_client_minderva_adapter</SERVICE-INTERFACE-REF>
+          <SHORT-NAME>sw_update_client_minderva_adapter</SHORT-NAME>
+          <SERVICE-INTERFACE-REF DEST="SOMEIP-SERVICE-INTERFACE-DEPLOYMENT">/mb/sw_update_client_minerva_adapter</SERVICE-INTERFACE-REF>
           <PROVIDED-EVENT-GROUPS>
             <SOMEIP-PROVIDED-EVENT-GROUP UUID="0584ca36-912a-49ea-8fc9-ea1df8f82618">
               <SHORT-NAME>SomeipEventGroup</SHORT-NAME>
-              <EVENT-GROUP-REF DEST="SOMEIP-EVENT-GROUP">/mb/sw_update_client_minderva_adapter/SomeipEventGroup</EVENT-GROUP-REF>
+              <EVENT-GROUP-REF DEST="SOMEIP-EVENT-GROUP">/mb/sw_update_client_minerva_adapter/SomeipEventGroup</EVENT-GROUP-REF>
               <MULTICAST-THRESHOLD>0</MULTICAST-THRESHOLD>
             </SOMEIP-PROVIDED-EVENT-GROUP>
           </PROVIDED-EVENT-GROUPS>
@@ -190,7 +196,7 @@
             <TARGET-PORT-PROTOTYPE-REF DEST="P-PORT-PROTOTYPE">/mb/AdaptiveApplicationSwComponentType/ProvideSwdlPluginPort</TARGET-PORT-PROTOTYPE-REF>
           </PORT-PROTOTYPE-IREF>
           <PROCESS-REF DEST="PROCESS">/mb/sw_update_client_minerva_adapter_app_process</PROCESS-REF>
-          <SERVICE-INSTANCE-REF DEST="PROVIDED-SOMEIP-SERVICE-INSTANCE">/mb/sw_update_client_minderva_adapter_001</SERVICE-INSTANCE-REF>
+          <SERVICE-INSTANCE-REF DEST="PROVIDED-SOMEIP-SERVICE-INSTANCE">/mb/sw_update_client_minderva_adapter</SERVICE-INSTANCE-REF>
         </SERVICE-INSTANCE-TO-PORT-PROTOTYPE-MAPPING>
         <SOMEIP-SD-SERVER-SERVICE-INSTANCE-CONFIG UUID="6e963c3c-3307-48fe-b0c2-984c09644902">
           <SHORT-NAME>sw_update_client_minderva_adapter_003</SHORT-NAME>
