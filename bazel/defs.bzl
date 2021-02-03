@@ -61,10 +61,24 @@ def minerva_aa_codegen_rule(name, arxml_srcs, outs_list_dict, generators, ignore
     This macro is a wrapper around the native genrule with the appropriate
     configuration and script to generate code using the Vector Adaptive AUTOSAR
     code generators. It is designed to split the generated code into multiple
-    sub-targets each containing its own files in a dedicated subfolders. This
-    helps, for example, if you want to have a folder of headers which doesn't
-    contain other files. An error is thrown if the generator generates files
-    which are not found in the outs list.
+    sub-targets (configured by the outs_list_dict parameter) each containing
+    its own files in a dedicated subfolders. This helps, for example, if you
+    want to have a folder of headers which doesn't contain other files. An
+    error is thrown if the generator generates files which are not found in the
+    outs list.
+
+    For the rest of this document, <name> should be understood as the value
+    given to the name parameter of this macro.
+
+    Apart from the targets specified in outs_list_dict, there is a special
+    target defined by this macro. It is called just <name> and it is a
+    catch-all which contains all the files in the outs_list_dict, as well as the
+    generator reports and generator logs.
+
+    Note that the <name>_* subtargets are only run on-demand (or when depended
+    upon). But the <name> target is always an implicit dependency of all of
+    these subtargets. Therefore, the sub-targets have to be explicitly
+    asked-for to generate anything meaningful.
 
     Args:
         name: A unique name for this target.
@@ -125,6 +139,18 @@ def minerva_aa_codegen_rule(name, arxml_srcs, outs_list_dict, generators, ignore
 
             concatenated_outs.append(full_out_path)
 
+    for generator_report_file in [
+        "GeneratorReport.html",
+        "GeneratorReport.xml",
+        "generator_log.txt",
+    ]:
+        full_out_path = "{output_folder}/{file_name}".format(
+            output_folder = gen_rule_output_folder,
+            file_name = generator_report_file,
+        )
+
+        concatenated_outs.append(full_out_path)
+
     native.genrule(
         name = gen_rule_name,
         srcs = arxml_srcs,
@@ -133,6 +159,7 @@ def minerva_aa_codegen_rule(name, arxml_srcs, outs_list_dict, generators, ignore
         tmp_folder="/tmp/{tmp_folder}"
         output_folder="$(RULEDIR)/{output_folder}"
         arxml_srcs_folder="$(RULEDIR)/{arxml_srcs_folder}"
+        generator_log="$$output_folder/generator_log.txt"
 
         rm -rf $$output_folder
         rm -rf $$arxml_srcs_folder
@@ -141,7 +168,7 @@ def minerva_aa_codegen_rule(name, arxml_srcs, outs_list_dict, generators, ignore
         mkdir -p $$arxml_srcs_folder
         cp {arxml_srcs} $$arxml_srcs_folder
 
-        $(location @starter_kit_adaptive_xavier//:amsrgen_sh) -v {generators_arg} -x $$arxml_srcs_folder -o $$output_folder --saveProject > /dev/null
+        $(location @starter_kit_adaptive_xavier//:amsrgen_sh) -v {generators_arg} -x $$arxml_srcs_folder -o $$output_folder --saveProject 2>1 > $$generator_log
 
         echo $(OUTS) | tr " " "\\\\n" | sort > $$tmp_folder/outs.txt
         find $$output_folder -type f | sort > $$tmp_folder/generated.txt
@@ -155,7 +182,7 @@ def minerva_aa_codegen_rule(name, arxml_srcs, outs_list_dict, generators, ignore
         # 
         # Also ignore any other files which match ignore_matches
 
-        for IGNORE_MATCHES in 'GeneratorReport.(html|xml)' {ignore_matches}
+        for IGNORE_MATCHES in generator_log.txt 'GeneratorReport.(html|xml)' {ignore_matches}
         do
             sed -ri "/$$IGNORE_MATCHES/d" $$tmp_folder/comparison.txt
         done
