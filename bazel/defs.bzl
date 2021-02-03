@@ -168,7 +168,24 @@ def minerva_aa_codegen_rule(name, arxml_srcs, outs_list_dict, generators, ignore
         mkdir -p $$arxml_srcs_folder
         cp {arxml_srcs} $$arxml_srcs_folder
 
-        $(location @starter_kit_adaptive_xavier//:amsrgen_sh) -v {generators_arg} -x $$arxml_srcs_folder -o $$output_folder --saveProject 2>1 > $$generator_log
+        # Propagate the failure past the pipe
+        set -o pipefail
+
+        # Don't stop immediately on error, so we can handle it gracefully
+        set +e
+        $(location @starter_kit_adaptive_xavier//:amsrgen_sh) -v {generators_arg} -x $$arxml_srcs_folder -o $$output_folder --saveProject 1>$$generator_log 2>&1 
+
+        if [ $$? -ne 0 ]; then
+            echo ""
+            echo "The generator has failed executing. Please check the log for more details:"
+            echo $$generator_log
+            echo ""
+            
+            exit 1
+        fi
+
+        # From now you can stop on error
+        set -e
 
         echo $(OUTS) | tr " " "\\\\n" | sort > $$tmp_folder/outs.txt
         find $$output_folder -type f | sort > $$tmp_folder/generated.txt
