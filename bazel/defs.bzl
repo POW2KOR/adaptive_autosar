@@ -199,9 +199,9 @@ def minerva_aa_codegen_rule(name, arxml_srcs, outs_list_dict, generators, ignore
         # 
         # Also ignore any other files which match ignore_matches
 
-        for IGNORE_MATCHES in generator_log.txt 'GeneratorReport.(html|xml)' {ignore_matches}
+        for IGNORE_MATCH in generator_log.txt 'GeneratorReport.(html|xml)' {ignore_matches}
         do
-            sed -ri "/$$IGNORE_MATCHES/d" $$tmp_folder/comparison.txt
+            sed -ri "/$$IGNORE_MATCH/d" $$tmp_folder/comparison.txt
         done
        
         if [[ $$(wc -l $$tmp_folder/comparison.txt | awk '{{print $$1}}') > 0 ]]; then
