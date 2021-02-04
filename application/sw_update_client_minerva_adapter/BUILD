@@ -182,8 +182,8 @@ cc_library(
 )
 
 cc_binary(
-    name="sw_update_client_minerva_adapter_app",
-    srcs=[
+    name = "sw_update_client_minerva_adapter_app",
+    srcs = [
         "main.cpp",
 
         # This a workaround to resolve cyclic dependency. This is the reason why the target sw_update_client_minerva_adapter_app
@@ -203,7 +203,7 @@ cc_binary(
         "-lpthread",
     ],
     linkstatic = 1,
-    deps=[
+    deps = [
         ":sw_update_client_minerva_adapter_app_modeldatatypes_hdrs_lib",
         ":sw_update_client_minerva_adapter_app_socal_hdrs_lib",
         "@starter_kit_adaptive_xavier//:amsr_vector_fs_em_executionmanager",
