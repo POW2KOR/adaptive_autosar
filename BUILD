@@ -259,6 +259,15 @@ target_build_dir_for_socal_skeleton = select({
     ],
 })
 
+target_build_dir_for_socal_sw_update = select({
+    ":minerva_host": [
+        "bazel-out/k8-fastbuild/bin/external/starter_kit_adaptive_xavier/amsr_vector_fs_socal_for_software_update/lib/libSocal.a",
+    ],
+    ":minerva_target": [
+        "bazel-out/aarch64-fastbuild/bin/external/starter_kit_adaptive_xavier/amsr_vector_fs_socal_for_software_update/lib/libSocal.a",
+    ],
+})
+
 filegroup(
     name = "socal_lib_for_proxy",
     srcs = target_build_dir_for_socal_proxy,
@@ -268,5 +277,11 @@ filegroup(
 filegroup(
     name = "socal_lib_for_skeleton",
     srcs = target_build_dir_for_socal_skeleton,
+    visibility = ["//visibility:public"],
+)
+
+filegroup(
+    name = "socal_lib_for_sw_update",
+    srcs = target_build_dir_for_socal_sw_update,
     visibility = ["//visibility:public"],
 )

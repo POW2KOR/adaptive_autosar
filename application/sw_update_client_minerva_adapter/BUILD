@@ -1,5 +1,7 @@
 load("@minerva_mpu_adaptive//:bazel/defs.bzl", "minerva_aa_codegen_rule")
 
+package(default_visibility = ["//visibility:public"])
+
 filegroup(
     name = "app_arxml",
     srcs = [
@@ -174,6 +176,40 @@ cc_library(
         ":sw_update_client_minerva_adapter_app_someipprotocol_hdrs_lib",
         "@starter_kit_adaptive_xavier//:amsr_vector_fs_comcommon",
         "@starter_kit_adaptive_xavier//:amsr_vector_fs_socal_headers",
+        "@starter_kit_adaptive_xavier//:amsr_vector_fs_someipbinding",
+        "@starter_kit_adaptive_xavier//:amsr_vector_fs_vajson",
+    ],
+)
+
+cc_binary(
+    name="sw_update_client_minerva_adapter_app",
+    srcs=[
+        "main.cpp",
+
+        # This a workaround to resolve cyclic dependency. This is the reason why the target sw_update_client_minerva_adapter_app
+        # build in 2 steps.
+        # The code generators depend on libSocal.a, contained in the @minerva_mpu_adaptive//:socal_lib_for_sw_update below.
+        # That is why we put it in sources. It is important that this `:socal_lib_for_sw_update` is positioned earlier in
+        # the list than the generated sources in `:sw_update_client_minerva_adapter_app_socal_srcs_lib` and
+        # `:sw_update_client_minerva_adapter_app_applicationbase_init_deinit_srcs`
+        "@minerva_mpu_adaptive//:socal_lib_for_sw_update",
+        ":sw_update_client_minerva_adapter_app_socal_srcs_lib",
+        ":sw_update_client_minerva_adapter_app_applicationbase_init_deinit_srcs",
+    ],
+    copts = [
+        "-std=c++14",
+    ],
+    linkopts = [
+        "-lpthread",
+    ],
+    linkstatic = 1,
+    deps=[
+        ":sw_update_client_minerva_adapter_app_modeldatatypes_hdrs_lib",
+        ":sw_update_client_minerva_adapter_app_socal_hdrs_lib",
+        "@starter_kit_adaptive_xavier//:amsr_vector_fs_em_executionmanager",
+        "@starter_kit_adaptive_xavier//:amsr_vector_fs_libvac",
+        "@starter_kit_adaptive_xavier//:amsr_vector_fs_log_api",
+        "@starter_kit_adaptive_xavier//:amsr_vector_fs_socal_for_proxy",
         "@starter_kit_adaptive_xavier//:amsr_vector_fs_someipbinding",
         "@starter_kit_adaptive_xavier//:amsr_vector_fs_vajson",
     ],
