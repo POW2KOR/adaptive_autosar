@@ -1,11 +1,10 @@
-#include <csignal>
-#include <thread>
-
 #include "ara/core/abort.h"
 #include "ara/core/initialization.h"
 #include "ara/exec/application_client.h"
 #include "ara/log/logging.h"
 
+#include <csignal>
+#include <thread>
 
 /**
  * \brief Flag to identify whether the application was requested to terminate, i.e., has received a
@@ -18,15 +17,13 @@ std::atomic_bool exit_requested_(false);
  */
 std::vector<std::thread> threads_;
 
-
 /**
  * \brief Signal handler function for SIGTERM
  */
 void SignalHandler(void)
 {
-    ara::log::Logger& logger{ara::log::CreateLogger(
-        "sw_update",
-        "Context for prototype method invocation")};
+    ara::log::Logger& logger{
+        ara::log::CreateLogger("sw_update", "Context for prototype method invocation")};
     sigset_t signal_set;
     int sig = -1;
     sigemptyset(&signal_set); /* Empty the set of signals */
@@ -56,49 +53,41 @@ void Initialize_Signalhandler(void)
 /**
  * \brief Report to execution manager the status of the application
  */
-void ReportApplicationState(ara::exec::ApplicationClient& application_client, 
-                            ara::log::Logger& logger, 
-                            ara::exec::ApplicationState application_state)
+void ReportApplicationState(
+    ara::exec::ApplicationClient& application_client,
+    ara::log::Logger& logger,
+    ara::exec::ApplicationState application_state)
 {
     std::string application_state_string = "NotDefined";
     bool error_occurred = false;
 
-    if (application_state == ara::exec::ApplicationState::kRunning) 
-    {
+    if (application_state == ara::exec::ApplicationState::kRunning) {
         application_state_string = "kRunning";
-    } else if (application_state == ara::exec::ApplicationState::kTerminating) 
-    {
+    } else if (application_state == ara::exec::ApplicationState::kTerminating) {
         application_state_string = "kTerminating";
-    } else 
-    {
+    } else {
         error_occurred = true;
-        logger.LogError() << "ReportApplicationState called with an invalid application state: " 
+        logger.LogError() << "ReportApplicationState called with an invalid application state: "
                           << application_state_string.c_str();
     }
 
     /* #20 check if invalid application state was detected. */
-    if (!error_occurred) 
-    {
-        logger.LogDebug() << "sw_update app is reporting Application state " 
+    if (!error_occurred) {
+        logger.LogDebug() << "sw_update app is reporting Application state "
                           << application_state_string.c_str();
 
         /* #30 send application state */
-        if (application_client.ReportApplicationState(application_state) ==
-                ara::exec::ApplicationReturnType::kSuccess) 
-        {
-            logger.LogDebug() << "sw_update app reported Application state " 
-                              << application_state_string.c_str() 
-                              << " successfully";
-        } 
-        else 
-        {
+        if (application_client.ReportApplicationState(application_state)
+            == ara::exec::ApplicationReturnType::kSuccess) {
+            logger.LogDebug() << "sw_update app reported Application state "
+                              << application_state_string.c_str() << " successfully";
+        } else {
             /* #35 application state could not be set. */
-            logger.LogError() << "sw_update app could not report the Application state " 
+            logger.LogError() << "sw_update app could not report the Application state "
                               << application_state_string.c_str();
         }
     }
 }
-
 
 int main()
 {
@@ -109,38 +98,33 @@ int main()
     ara::exec::ApplicationClient application_client;
     ara::log::Logger& log{ara::log::CreateLogger("sw_update", "sw_update app")};
 
-    if (!init_result.HasValue()) 
-    {
+    if (!init_result.HasValue()) {
         char const* msg{"ara::core::Initialize() failed."};
-        std::cerr << msg << "\nResult contains: " << init_result.Error().Message() << ", " 
+        std::cerr << msg << "\nResult contains: " << init_result.Error().Message() << ", "
                   << init_result.Error().UserMessage() << "\n";
-    
+
         ara::core::Abort(msg);
-    }
-    else 
-    {
+    } else {
         /* Create the application object and run it */
         ReportApplicationState(application_client, log, ara::exec::ApplicationState::kRunning);
 
-        while (!exit_requested_)
-        {
+        while (!exit_requested_) {
             /* Do nothing for now */
             std::this_thread::sleep_for(std::chrono::milliseconds(100));
         }
-        
+
         ReportApplicationState(application_client, log, ara::exec::ApplicationState::kTerminating);
 
         /* Deinitialize ara::core */
         ara::core::Result<void> deinit_result{ara::core::Deinitialize()};
 
-        if (!deinit_result.HasValue()) 
-        {
+        if (!deinit_result.HasValue()) {
             char const* msg{"ara::core::Deinitialize() failed."};
-            std::cerr << msg << "\nResult contains: " << deinit_result.Error().Message() 
-                    << ", " << deinit_result.Error().UserMessage() << "\n";
+            std::cerr << msg << "\nResult contains: " << deinit_result.Error().Message() << ", "
+                      << deinit_result.Error().UserMessage() << "\n";
             ara::core::Abort(msg);
         }
     }
-    
+
     return 0;
 }
