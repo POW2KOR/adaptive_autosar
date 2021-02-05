@@ -35,7 +35,7 @@ node('pulse_ec2') {
         stage('Static code analysis') {
             // @Todo:space to add the code analyzer
         }
-        stage('x86_64') {
+        stage('x86_64_linux_ubuntu') {
             docker.withRegistry(registryUrl, registryCredentials) {
                 docker.image("${imgNameVer}").inside("-u 0:0 --entrypoint=''") {
                     stage('Build'){
@@ -51,13 +51,13 @@ node('pulse_ec2') {
                         }
                     }
                     stage('Test'){
-                        // bazel command to run tests execution for x86_64
+                        // bazel command to run tests execution for x86_64_linux_ubuntu
                     }
                     sh "chown -R ${userId}:${groupId} ."
                 }
             }
         }
-        stage('aarch64'){
+        stage('aarch64_linux_ubuntu'){
             docker.withRegistry(registryUrl, registryCredentials) {
                 docker.image("${imgNameVer}").inside("-u 0:0 --entrypoint=''") {
                     stage('Build'){
@@ -73,7 +73,29 @@ node('pulse_ec2') {
                         }
                     }
                     stage('Test'){
-                        // bazel command to run tests execution for aarch64
+                        // bazel command to run tests execution for aarch64_linux_ubuntu
+                    }
+                    sh "chown -R ${userId}:${groupId} ."
+                } // docker
+            }
+        }
+        stage('aarch64_linux_linaro'){
+            docker.withRegistry(registryUrl, registryCredentials) {
+                docker.image("${imgNameVer}").inside("-u 0:0 --entrypoint=''") {
+                    stage('Build'){
+                        sshagent(['adasdai-jenkins-ssh']) {
+                            sh '''
+                                # Workaround for circular dependency
+                                bazel build @starter_kit_adaptive_xavier//:amsr_vector_fs_socal_for_proxy --config=aarch64_linux_linaro
+                                bazel build @starter_kit_adaptive_xavier//:amsr_vector_fs_socal_for_skeleton --config=aarch64_linux_linaro
+
+                                # Actual build
+                                bazel build //:minerva_mpu_adaptive_filesystem --config=aarch64_linux_linaro
+                            '''
+                        }
+                    }
+                    stage('Test'){
+                        // bazel command to run tests execution for aarch64_linux_linaro
                     }
                     sh "chown -R ${userId}:${groupId} ."
                 } // docker
