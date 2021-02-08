@@ -161,7 +161,7 @@ pkg_tar(
 )
 
 pkg_tar(
-    name = "adaptive_sw_update_client_mierva_adapter_configs",
+    name = "adaptive_sw_update_client_minerva_adapter_configs",
     files = {
         "//application/sw_update_client_minerva_adapter:sw_update_client_minerva_adapter_app_updatemanager_daemon_db": "opt/sw_update_client_minerva_adapter_app/etc/swcl_db.json",
         "//application/sw_update_client_minerva_adapter:sw_update_client_minerva_adapter_app_updatemanager_config": "opt/sw_update_client_minerva_adapter_app/etc/updatemanager.json",
@@ -182,7 +182,7 @@ pkg_tar(
         ":adaptive_autosar_proxy_configs",
         ":adaptive_autosar_skeleton_configs",
         ":adaptive_autosar_someipdaemon_configs",
-        ":adaptive_sw_update_client_mierva_adapter_configs",
+        ":adaptive_sw_update_client_minerva_adapter_configs",
     ],
 )
 
