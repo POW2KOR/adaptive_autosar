@@ -33,6 +33,8 @@ minerva_aa_codegen_rule(
     outs_list_dict = {
         "sw_update_client_minerva_adapter_app_updatemanager_daemon_db": [
             "sw_update_client_minerva_adapter_app/etc/swcl_db.json",
+        ],
+        "sw_update_client_minerva_adapter_app_updatemanager_config": [
             "sw_update_client_minerva_adapter_app/etc/updatemanager.json",
         ],
         "sw_update_client_minerva_adapter_app_updatemanager_swcluser_meta": [
