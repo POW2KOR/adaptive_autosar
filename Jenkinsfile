@@ -44,9 +44,11 @@ node('pulse_ec2') {
                                 # Workaround for circular dependency
                                 bazel build @starter_kit_adaptive_xavier//:amsr_vector_fs_socal_for_proxy --config=x86_64_linux
                                 bazel build @starter_kit_adaptive_xavier//:amsr_vector_fs_socal_for_skeleton --config=x86_64_linux
+                                bazel build @starter_kit_adaptive_xavier//:amsr_vector_fs_socal_for_software_update --config=x86_64_linux
 
                                 # Actual build
                                 bazel build //:minerva_mpu_adaptive_filesystem --config=x86_64_linux
+                                bazel build //application/sw_update_client_minerva_adapter:sw_update_client_minerva_adapter_app --config=x86_64_linux
                             '''
                         }
                     }
@@ -66,9 +68,11 @@ node('pulse_ec2') {
                                 # Workaround for circular dependency
                                 bazel build @starter_kit_adaptive_xavier//:amsr_vector_fs_socal_for_proxy --config=aarch64_linux_ubuntu
                                 bazel build @starter_kit_adaptive_xavier//:amsr_vector_fs_socal_for_skeleton --config=aarch64_linux_ubuntu
+                                bazel build @starter_kit_adaptive_xavier//:amsr_vector_fs_socal_for_software_update --config=aarch64_linux_ubuntu
 
                                 # Actual build
                                 bazel build //:minerva_mpu_adaptive_filesystem --config=aarch64_linux_ubuntu
+                                bazel build //application/sw_update_client_minerva_adapter:sw_update_client_minerva_adapter_app --config=aarch64_linux_ubuntu
                             '''
                         }
                     }
@@ -88,9 +92,11 @@ node('pulse_ec2') {
                                 # Workaround for circular dependency
                                 bazel build @starter_kit_adaptive_xavier//:amsr_vector_fs_socal_for_proxy --config=aarch64_linux_linaro
                                 bazel build @starter_kit_adaptive_xavier//:amsr_vector_fs_socal_for_skeleton --config=aarch64_linux_linaro
+                                bazel build @starter_kit_adaptive_xavier//:amsr_vector_fs_socal_for_software_update --config=aarch64_linux_linaro
 
                                 # Actual build
                                 bazel build //:minerva_mpu_adaptive_filesystem --config=aarch64_linux_linaro
+                                bazel build //application/sw_update_client_minerva_adapter:sw_update_client_minerva_adapter_app --config=aarch64_linux_linaro
                             '''
                         }
                     }
