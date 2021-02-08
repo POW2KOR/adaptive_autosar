@@ -6,6 +6,7 @@
 #include <csignal>
 #include <thread>
 
+namespace {
 /**
  * \brief Flag to identify whether the application was requested to terminate, i.e., has received a
  * SIGTERM
@@ -88,6 +89,7 @@ void ReportApplicationState(
         }
     }
 }
+} // namespace
 
 int main()
 {
