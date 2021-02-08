@@ -62,11 +62,13 @@ void ReportApplicationState(
     std::string application_state_string = "NotDefined";
     bool error_occurred = false;
 
+    /* #10 verify which state should be reported  */
     if (application_state == ara::exec::ApplicationState::kRunning) {
         application_state_string = "kRunning";
     } else if (application_state == ara::exec::ApplicationState::kTerminating) {
         application_state_string = "kTerminating";
     } else {
+        /* #15 invalid application state detected */
         error_occurred = true;
         logger.LogError() << "ReportApplicationState called with an invalid application state: "
                           << application_state_string.c_str();
