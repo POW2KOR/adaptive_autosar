@@ -5,13 +5,17 @@ node('pulse_ec2') {
     String userId = sh (script: 'id -u', returnStdout: true).trim()
     String groupId = sh (script: 'id -g', returnStdout: true).trim()
     def imgNameVer = "artifact.swf.daimler.com/adasdai-docker/minerva_mpu_docker/minerva_mpu:20201214084936"
-    def diskCache = "-v /home/efs_cache/mpu:/home/jenkins_agent/efs_cache/mpu"
     boolean isMaster = (env.BRANCH_NAME == 'master')
-    def remoteUpload = "-e isMaster=${isMaster}"
+    String remoteUpload = "-e isMaster=${isMaster}"
     
     try{
         stage('Checkout') {
             checkout scm
+        }
+        stage('Prepare') {
+            String bazelrc  = "${env.WORKSPACE}/.bazelrc"
+            DISK_CACHE = sh ( script: """sed -n 's/.*--disk_cache="\\(.*\\)"/\\1/p' ${bazelrc}""", returnStdout: true).trim()
+            env.diskCache = "-v /home/efs_cache/mpu:${DISK_CACHE}"
         }
         stage('Code formatting') {
             docker.withRegistry(registryUrl, registryCredentials) {
@@ -40,7 +44,7 @@ node('pulse_ec2') {
         }
         stage('x86_64_linux_ubuntu') {
             docker.withRegistry(registryUrl, registryCredentials) {
-                docker.image("${imgNameVer}").inside("-u 0:0 --entrypoint='' ${diskCache} ${remoteUpload}") {
+                docker.image("${imgNameVer}").inside("-u 0:0 --entrypoint='' ${env.diskCache} ${remoteUpload}") {
                     stage('Build'){
                         sshagent(['adasdai-jenkins-ssh']) {
                             sh '''
@@ -63,7 +67,7 @@ node('pulse_ec2') {
         }
         stage('aarch64_linux_ubuntu'){
             docker.withRegistry(registryUrl, registryCredentials) {
-                docker.image("${imgNameVer}").inside("-u 0:0 --entrypoint='' ${diskCache} ${remoteUpload}") {
+                docker.image("${imgNameVer}").inside("-u 0:0 --entrypoint='' ${env.diskCache} ${remoteUpload}") {
                     stage('Build'){
                         sshagent(['adasdai-jenkins-ssh']) {
                             sh '''
