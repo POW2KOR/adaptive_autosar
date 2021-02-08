@@ -90,7 +90,7 @@ node('pulse_ec2') {
         }
         stage('aarch64_linux_linaro'){
             docker.withRegistry(registryUrl, registryCredentials) {
-                docker.image("${imgNameVer}").inside("-u 0:0 --entrypoint=''") {
+                docker.image("${imgNameVer}").inside("-u 0:0 --entrypoint='' ${env.diskCache} ${remoteUpload}") {
                     stage('Build'){
                         sshagent(['adasdai-jenkins-ssh']) {
                             sh '''
@@ -100,7 +100,7 @@ node('pulse_ec2') {
                                 bazel build @starter_kit_adaptive_xavier//:amsr_vector_fs_socal_for_software_update --config=aarch64_linux_linaro
 
                                 # Actual build
-                                bazel build //:minerva_mpu_adaptive_filesystem --config=aarch64_linux_linaro
+                                bazel build //:minerva_mpu_adaptive_filesystem --config=aarch64_linux_linaro --config=disk_cache --remote_upload_local_results=${isMaster}
                             '''
                         }
                     }
