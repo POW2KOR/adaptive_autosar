@@ -99,6 +99,23 @@ but in such a case the WORKSPACE file needs to be changed appropriately:
 ```
 sudo python3 collect_deps.py -d --auth_mode=prompt --path=<your_path>
 ```
+### Git hooks
+
+#### Pre-commit
+This repository runs git hooks using [pre-commit](https://pre-commit.com/). The following command can be used to install
+pre-commit.
+```
+pip3 install pre-commit==2.10.1
+```
+
+To enable pre-commit after cloning the repository, the following command can be used.
+```
+cd minerva_mpu_adaptive
+pre-commit install
+```
+
+Once enabaled, pre-commit will run before every local commit in order to suggest fixes for the checks defined in
+[.pre-commit-config.yaml](./pre-commit-config.yaml)
 
 # Build
 
