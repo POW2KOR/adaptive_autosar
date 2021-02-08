@@ -48,7 +48,6 @@ node('pulse_ec2') {
 
                                 # Actual build
                                 bazel build //:minerva_mpu_adaptive_filesystem --config=x86_64_linux
-                                bazel build //application/sw_update_client_minerva_adapter:sw_update_client_minerva_adapter_app --config=x86_64_linux
                             '''
                         }
                     }
@@ -72,7 +71,6 @@ node('pulse_ec2') {
 
                                 # Actual build
                                 bazel build //:minerva_mpu_adaptive_filesystem --config=aarch64_linux_ubuntu
-                                bazel build //application/sw_update_client_minerva_adapter:sw_update_client_minerva_adapter_app --config=aarch64_linux_ubuntu
                             '''
                         }
                     }
@@ -96,7 +94,6 @@ node('pulse_ec2') {
 
                                 # Actual build
                                 bazel build //:minerva_mpu_adaptive_filesystem --config=aarch64_linux_linaro
-                                bazel build //application/sw_update_client_minerva_adapter:sw_update_client_minerva_adapter_app --config=aarch64_linux_linaro
                             '''
                         }
                     }
