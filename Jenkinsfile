@@ -1,5 +1,5 @@
 import groovy.io.FileType
-node('pulse_ec2') { 
+node('pulse_ec2') {
     String registryUrl = "https://artifact.${env.SWF_DOMAIN}"
     String registryCredentials = 'adasdai-artifactory'
     String userId = sh (script: 'id -u', returnStdout: true).trim()
@@ -37,7 +37,7 @@ node('pulse_ec2') {
                         sh '/bin/buildifier -r --mode=check .'
                     }
                 } // docker
-            } 
+            }
         }
         stage('Static code analysis') {
             // @Todo:space to add the code analyzer
@@ -114,7 +114,7 @@ node('pulse_ec2') {
         stage('deploy') {
             // Add the code to push docker image to artifactoy.
         }
-    } 
+    }
     catch (e) {
         currentBuild.result = 'FAILURE'
         throw e

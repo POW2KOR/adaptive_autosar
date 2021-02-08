@@ -1,4 +1,4 @@
-# Software Update Client NVUpdate Adapter 
+# Software Update Client NVUpdate Adapter
 
 ```plantuml
 
@@ -13,7 +13,7 @@ title "Software Update Client Plugin"
 
 interface "SwdlPlugin" as swldplugin
 component [Nvidia Drive Update Library] as nv
-swldplugin - [Software Update Client NVUpdate Adapter] 
+swldplugin - [Software Update Client NVUpdate Adapter]
 
 component [Software Update Client] as swuc
 
@@ -47,15 +47,15 @@ Verify-->Rollback
 Activate-->Rollback
 Activate --> Verify
 GetResumePosition : optional to receive the resume position
-Process : file or pipe with 0 or exact resume position 
+Process : file or pipe with 0 or exact resume position
 Activate : prepare to switch to new version on reset
 Verify : check that everything is fine
 Revert : abort the download
 Rollback : undo the version switch
-Rollback -->CleanUp 
+Rollback -->CleanUp
  CleanUp--> [*]
  Revert--> [*]
 Rollback --> [*]
 
- 
+
  ```

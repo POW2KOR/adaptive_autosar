@@ -9,4 +9,4 @@ index 117e56eb..dca84727 100755
 -  createMissingSymlink jcontrol "$SCRIPT_DIR/jre/bin/ControlPanel"
    createMissingSymlink ../libjsig.so "$SCRIPT_DIR/jre/lib/amd64/server/libjsig.so"
  }
- 
+
