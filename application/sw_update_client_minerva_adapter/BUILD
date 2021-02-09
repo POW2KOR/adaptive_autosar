@@ -187,6 +187,9 @@ cc_binary(
     name = "sw_update_client_minerva_adapter_app",
     srcs = [
         "main.cpp",
+        "sw_update_error_domain.h",
+        "activation_manager.h",
+        "activation_manager.cpp",
 
         # This a workaround to resolve cyclic dependency. This is the reason why the target sw_update_client_minerva_adapter_app
         # build in 2 steps.
