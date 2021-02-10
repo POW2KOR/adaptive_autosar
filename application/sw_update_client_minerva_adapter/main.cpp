@@ -187,21 +187,44 @@ using namespace mb::swuc::service_interfaces::plugin::internal::methods;
 class SwUpdateService: public mb::swuc::service_interfaces::plugin::skeleton::SwdlPluginSkeleton {
 public:
     explicit SwUpdateService(ara::core::InstanceSpecifier server_port) 
-        : mb::swuc::service_interfaces::plugin::skeleton::SwdlPluginSkeleton(server_port, ara::com::MethodCallProcessingMode::kEvent) 
+        : mb::swuc::service_interfaces::plugin::skeleton::SwdlPluginSkeleton(server_port) 
     {}
 
     ~SwUpdateService() {}
 
     // Implementation for all function is not done by purpose
     // Reason is that the implementation is out of the scope
-    ara::core::Future<Rollback::Output> Rollback() override {}
-    ara::core::Future<GetResumePosition::Output> GetResumePosition() override {}
-    void CleanUp() override {}
-    void Revert() override {}
-    ara::core::Future<Verify::Output> Verify() override {}
-    void Process(const std::uint64_t& resumeOffset, const ::mb::swuc::types::ByteVector& file) override {}
-    ara::core::Future<Activate::Output> Activate() override {}
+    ara::core::Future<Rollback::Output> Rollback() override {
+        ara::core::Future<Rollback::Output> ret;
+        return ret;
+    }
+    
+    ara::core::Future<GetResumePosition::Output> GetResumePosition() override {
+        ara::core::Future<GetResumePosition::Output> ret;
+        return ret;
+    }
+    
+    void CleanUp() override {
+        return;
+    }
+    
+    void Revert() override {
+        return;
+    }
+    
+    ara::core::Future<Verify::Output> Verify() override {
+        ara::core::Future<Verify::Output> ret;
+        return ret;
+    }
+    
+    void Process(const std::uint64_t& resumeOffset, const ::mb::swuc::types::ByteVector& file) override {
+        return;
+    }
 
+    ara::core::Future<Activate::Output> Activate() override {
+        ara::core::Future<Activate::Output> ret;
+        return ret;
+    }
 };
 } // namespace Application
 
