@@ -1,16 +1,12 @@
-/***************************************************************************/ /**
-                                                                               * \file
-                                                                               *activation_manager.cpp
-                                                                               *
-                                                                               * \brief  Activation
-                                                                               *manager classes for
-                                                                               *timer driven
-                                                                               *activation \author
-                                                                               *Markus Braun \date
-                                                                               *2020-11-16 \note
-                                                                               *TODO: additional
-                                                                               *notes
-                                                                               ******************************************************************************/
+/**
+ * \file   activation_manager.cpp
+ *
+ * \brief  Activation manager classes for timer driven activation
+ * \author Markus Braun
+ * \date   2020-11-16
+ * \note   TODO: additional notes
+ **/
+
 /* include own header first to make sure it is self contained */
 #include "activation_manager.h"
 

@@ -1,16 +1,12 @@
-/***************************************************************************/ /**
-                                                                               * \file
-                                                                               *activation_manager.hpp
-                                                                               *
-                                                                               * \brief  Activation
-                                                                               *manager classes for
-                                                                               *timer driven
-                                                                               *activation \author
-                                                                               *Markus Braun \date
-                                                                               *2020-11-16 \note
-                                                                               *TODO: additional
-                                                                               *notes
-                                                                               ******************************************************************************/
+/**
+ * \file   activation_manager.hpp
+ *
+ * \brief  Activation manager classes for timer driven activation
+ * \author Markus Braun
+ * \date   2020-11-16
+ * \note   TODO: additional notes
+
+ **/
 #ifndef ACTIVATIONMANAGER_HPP
 #define ACTIVATIONMANAGER_HPP
 
@@ -27,10 +23,9 @@
 #include <spdlog/spdlog.h>
 #endif /* SPDLOG */
 
-/***************************************************************************/ /**
-                                                                               * \brief Activation
-                                                                               *manager base class.
-                                                                               ******************************************************************************/
+/**
+ * \brief Activation manager base class.
+ **/
 class ActivationManagerBase {
 protected:
     std::string name_; /**< Name of the activation manager */
@@ -49,149 +44,92 @@ protected:
     int64_t jitter_time_max_nsec_{0}; /**< Maximum wakeup jitter [ns] */
 
 public:
-    /***************************************************************************/ /**
-                                                                                   * \brief Deleted
-                                                                                   *default
-                                                                                   *constructor.
-                                                                                   ******************************************************************************/
+    /**
+     * \brief Deleted default constructor.
+     **/
     ActivationManagerBase() = delete;
 
-    /***************************************************************************/ /**
-                                                                                   * \brief
-                                                                                   *Constructor.
-                                                                                   ******************************************************************************/
+    /**
+     * \brief Constructor.
+     **/
     ActivationManagerBase(
         std::chrono::nanoseconds cycle_time, const std::string name = "activation manager");
 
-    /***************************************************************************/ /**
-                                                                                   * \brief
-                                                                                   *Destructor.
-                                                                                   ******************************************************************************/
+    /**
+     * \brief Destructor.
+     **/
     virtual ~ActivationManagerBase();
 
-    /***************************************************************************/ /**
-                                                                                   * \brief Wait
-                                                                                   *until activation
-                                                                                   *happens.
-                                                                                   *
-                                                                                   * \note The
-                                                                                   *implementations
-                                                                                   *of this function
-                                                                                   *MUST call
-                                                                                   *       initializeDesiredWakeup()
-                                                                                   *as first
-                                                                                   *instruction
-                                                                                   *after entering
-                                                                                   *the method to
-                                                                                   *ensure the
-                                                                                   *desired_wakeup_
-                                                                                   *is set up
-                                                                                   *correctly!
-                                                                                   *
-                                                                                   * \note The
-                                                                                   *implementations
-                                                                                   *of this function
-                                                                                   *MUST call
-                                                                                   *       calculateJitter()
-                                                                                   *as first
-                                                                                   *instruction
-                                                                                   *after the real
-                                                                                   *wake up happend
-                                                                                   *to ensure
-                                                                                   *correct jitter
-                                                                                   *calculation.
-                                                                                   *
-                                                                                   * \note The
-                                                                                   *implementations
-                                                                                   *of this function
-                                                                                   *MUST update the
-                                                                                   *       desired_wakeup_
-                                                                                   *member to enable
-                                                                                   *correct jitter
-                                                                                   *calculation in
-                                                                                   *the next cycle.
-                                                                                   ******************************************************************************/
+    /**
+     * \brief Wait until activation happens.
+     *
+     * \note The implementations of this function MUST call
+     *       initializeDesiredWakeup() as first instruction after entering the
+     *       method to ensure the desired_wakeup_ is set up correctly!
+     *
+     * \note The implementations of this function MUST call
+     *       calculateJitter() as first instruction after the real wake up
+     *       happend to ensure correct jitter calculation.
+     *
+     * \note The implementations of this function MUST update the
+     *       desired_wakeup_ member to enable correct jitter calculation in the
+     *       next cycle.
+     **/
     virtual void wait() = 0;
 
-    /***************************************************************************/ /**
-                                                                                   * \brief Get
-                                                                                   *cycle count
-                                                                                   *based on
-                                                                                   *activation type.
-                                                                                   ******************************************************************************/
+    /**
+     * \brief Get cycle count based on activation type.
+     **/
     virtual uint64_t getCycle() = 0;
 
 protected:
-    /***************************************************************************/ /**
-                                                                                   * \brief
-                                                                                   *Initialize the
-                                                                                   *desired wakeup
-                                                                                   *time if needed.
-                                                                                   ******************************************************************************/
+    /**
+     * \brief Initialize the desired wakeup time if needed.
+     **/
     void initializeDesiredWakeup();
 
-    /***************************************************************************/ /**
-                                                                                   * \brief Update
-                                                                                   *the actual
-                                                                                   *wakeup time.
-                                                                                   ******************************************************************************/
+    /**
+     * \brief Update the actual wakeup time.
+     **/
     void updateActualWakeup();
 
-    /***************************************************************************/ /**
-                                                                                   * \brief
-                                                                                   *Calculate wakeup
-                                                                                   *jitter and
-                                                                                   *missed
-                                                                                   *activations.
-                                                                                   ******************************************************************************/
+    /**
+     * \brief Calculate wakeup jitter and missed activations.
+     **/
     void calculateJitter();
 };
 
-/***************************************************************************/ /**
-                                                                               * \brief Activation
-                                                                               *manager purely based
-                                                                               *on a timer. The
-                                                                               *cycle time is
-                                                                               *derived from the
-                                                                               *parameters given in
-                                                                               *the call to setup()
-                                                                               ******************************************************************************/
+/**
+ * \brief Activation manager purely based on a timer. The cycle time is derived
+ *        from the parameters given in the call to setup()
+ **/
 class ActivationManagerTimer : public ActivationManagerBase {
 protected:
 public:
-    /***************************************************************************/ /**
-                                                                                   * \brief Deleted
-                                                                                   *default
-                                                                                   *constructor.
-                                                                                   ******************************************************************************/
+    /**
+     * \brief Deleted default constructor.
+     **/
     ActivationManagerTimer() = delete;
 
-    /***************************************************************************/ /**
-                                                                                   * \brief
-                                                                                   *Constructor.
-                                                                                   ******************************************************************************/
+    /**
+     * \brief Constructor.
+     **/
     ActivationManagerTimer(
         std::chrono::nanoseconds cycle_time, const std::string name = "activation manager");
 
-    /***************************************************************************/ /**
-                                                                                   * \brief
-                                                                                   *Destructor.
-                                                                                   ******************************************************************************/
+    /**
+     * \brief Destructor.
+     **/
     virtual ~ActivationManagerTimer();
 
-    /***************************************************************************/ /**
-                                                                                   * \brief Wait
-                                                                                   *until the timer
-                                                                                   *expires.
-                                                                                   ******************************************************************************/
+    /**
+     * \brief Wait until the timer expires.
+     **/
     void wait();
 
-    /***************************************************************************/ /**
-                                                                                   * \brief Get
-                                                                                   *monotonic
-                                                                                   *incremented
-                                                                                   *cycle count.
-                                                                                   ******************************************************************************/
+    /**
+     * \brief Get monotonic incremented cycle count.
+     **/
     uint64_t getCycle();
 };
 
