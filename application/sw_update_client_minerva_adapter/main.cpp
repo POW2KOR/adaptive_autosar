@@ -9,6 +9,8 @@
 #include "osabstraction/thread/thread.h"
 #include "sw_update_error_domain.h"
 
+#include "mb/swuc/service_interfaces/plugin/swdlplugin_skeleton.h"
+
 #include <csignal>
 #include <thread>
 
@@ -179,6 +181,28 @@ ara::core::Result<osabstraction::process::ProcessId> StartSignalHandlerThread()
             return R::FromError(SwUpdateAppErrc::kThreadCreationFailed, "Naming failed.");
         });
 }
+
+using namespace mb::swuc::service_interfaces::plugin::internal::methods;
+
+class SwUpdateService: public mb::swuc::service_interfaces::plugin::skeleton::SwdlPluginSkeleton {
+public:
+    explicit SwUpdateService(ara::core::InstanceSpecifier server_port) 
+        : mb::swuc::service_interfaces::plugin::skeleton::SwdlPluginSkeleton(server_port, ara::com::MethodCallProcessingMode::kEvent) 
+    {}
+
+    ~SwUpdateService() {}
+
+    // Implementation for all function is not done by purpose
+    // Reason is that the implementation is out of the scope
+    ara::core::Future<Rollback::Output> Rollback() override {}
+    ara::core::Future<GetResumePosition::Output> GetResumePosition() override {}
+    void CleanUp() override {}
+    void Revert() override {}
+    ara::core::Future<Verify::Output> Verify() override {}
+    void Process(const std::uint64_t& resumeOffset, const ::mb::swuc::types::ByteVector& file) override {}
+    ara::core::Future<Activate::Output> Activate() override {}
+
+};
 } // namespace Application
 
 int main()
@@ -197,6 +221,15 @@ int main()
         ara::core::Abort(msg);
     } else {
         ara::log::Logger& log{ara::log::CreateLogger("sw_update", "sw_update app")};
+
+        ara::core::Optional<Application::SwUpdateService> swUpdateServer;
+        
+        ara::core::basic_string_view<char> sv {"sw_update_client_minerva_adapter_app/sw_update_client_minerva_adapter_appRootSw/P_SrvIfc_0_sw_update_client_minerva_adapter"};
+        ara::core::InstanceSpecifier const swUpdate_instance_specifier{sv};
+        swUpdateServer.emplace(swUpdate_instance_specifier);
+
+        swUpdateServer->OfferService();
+
 
         Application::StartSignalHandlerThread().InspectError([](ara::core::ErrorCode const& error) {
             Application::has_initialization_failed_ = true;
@@ -217,6 +250,9 @@ int main()
             am->wait();
             log.LogDebug() << "Running in cycle " << am->getCycle();
         }
+
+        swUpdateServer->StopOfferService();
+        swUpdateServer.reset();
 
         /* Deinitialize ara::core */
         ara::core::Result<void> deinit_result{ara::core::Deinitialize()};
