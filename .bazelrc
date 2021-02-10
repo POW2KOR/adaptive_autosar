@@ -12,3 +12,8 @@ build:aarch64_linux_linaro  --host_crosstool_top=@bazel_tools//tools/cpp:toolcha
 
 # We need to find a better approach for specifting pthread as a default, the same way we do with the aarch64 toolchain
 build:x86_64_linux          --cpu=k8 --experimental_scale_timeouts=100
+
+# this configuration option is used for remote caching on CI
+# the path after keyword '--disk_cache="' is extracted in Jenkinsfile and used as efs cache mount volume inside docker container
+# because of which it is not recommended to use '--disk_cache="' keyword for any other purpose
+build:use_efs_build_cache   --disk_cache="/home/jenkins_agent/efs_cache/mpu"

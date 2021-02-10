@@ -5,10 +5,17 @@ node('pulse_ec2') {
     String userId = sh (script: 'id -u', returnStdout: true).trim()
     String groupId = sh (script: 'id -g', returnStdout: true).trim()
     def imgNameVer = "artifact.swf.daimler.com/adasdai-docker/minerva_mpu_docker/minerva_mpu:20201214084936"
-
+    boolean isMaster = (env.BRANCH_NAME == 'master')
+    String remoteUpload = "-e isMaster=${isMaster}"
+    
     try{
         stage('Checkout') {
             checkout scm
+        }
+        stage('Prepare') {
+            String bazelrc  = "${env.WORKSPACE}/.bazelrc"
+            DISK_CACHE = sh ( script: """sed -n 's/.*--disk_cache="\\(.*\\)"/\\1/p' ${bazelrc}""", returnStdout: true).trim()
+            env.diskCache = "-v /home/efs_cache/mpu:${DISK_CACHE}"
         }
         stage('Code formatting') {
             docker.withRegistry(registryUrl, registryCredentials) {
@@ -37,17 +44,17 @@ node('pulse_ec2') {
         }
         stage('x86_64_linux_ubuntu') {
             docker.withRegistry(registryUrl, registryCredentials) {
-                docker.image("${imgNameVer}").inside("-u 0:0 --entrypoint=''") {
+                docker.image("${imgNameVer}").inside("-u 0:0 --entrypoint='' ${env.diskCache} ${remoteUpload}") {
                     stage('Build'){
                         sshagent(['adasdai-jenkins-ssh']) {
                             sh '''
                                 # Workaround for circular dependency
-                                bazel build @starter_kit_adaptive_xavier//:amsr_vector_fs_socal_for_proxy --config=x86_64_linux
-                                bazel build @starter_kit_adaptive_xavier//:amsr_vector_fs_socal_for_skeleton --config=x86_64_linux
-                                bazel build @starter_kit_adaptive_xavier//:amsr_vector_fs_socal_for_software_update --config=x86_64_linux
+                                bazel build @starter_kit_adaptive_xavier//:amsr_vector_fs_socal_for_proxy --config=x86_64_linux --config=use_efs_build_cache --remote_upload_local_results=${isMaster}
+                                bazel build @starter_kit_adaptive_xavier//:amsr_vector_fs_socal_for_skeleton --config=x86_64_linux --config=use_efs_build_cache --remote_upload_local_results=${isMaster}
+                                bazel build @starter_kit_adaptive_xavier//:amsr_vector_fs_socal_for_software_update --config=x86_64_linux --config=use_efs_build_cache --remote_upload_local_results=${isMaster}
 
                                 # Actual build
-                                bazel build //:minerva_mpu_adaptive_filesystem --config=x86_64_linux
+                                bazel build //:minerva_mpu_adaptive_filesystem --config=x86_64_linux --config=use_efs_build_cache --remote_upload_local_results=${isMaster}
                             '''
                         }
                     }
@@ -60,17 +67,17 @@ node('pulse_ec2') {
         }
         stage('aarch64_linux_ubuntu'){
             docker.withRegistry(registryUrl, registryCredentials) {
-                docker.image("${imgNameVer}").inside("-u 0:0 --entrypoint=''") {
+                docker.image("${imgNameVer}").inside("-u 0:0 --entrypoint='' ${env.diskCache} ${remoteUpload}") {
                     stage('Build'){
                         sshagent(['adasdai-jenkins-ssh']) {
                             sh '''
                                 # Workaround for circular dependency
-                                bazel build @starter_kit_adaptive_xavier//:amsr_vector_fs_socal_for_proxy --config=aarch64_linux_ubuntu
-                                bazel build @starter_kit_adaptive_xavier//:amsr_vector_fs_socal_for_skeleton --config=aarch64_linux_ubuntu
-                                bazel build @starter_kit_adaptive_xavier//:amsr_vector_fs_socal_for_software_update --config=aarch64_linux_ubuntu
+                                bazel build @starter_kit_adaptive_xavier//:amsr_vector_fs_socal_for_proxy --config=aarch64_linux_ubuntu --config=use_efs_build_cache --remote_upload_local_results=${isMaster}
+                                bazel build @starter_kit_adaptive_xavier//:amsr_vector_fs_socal_for_skeleton --config=aarch64_linux_ubuntu --config=use_efs_build_cache --remote_upload_local_results=${isMaster}
+                                bazel build @starter_kit_adaptive_xavier//:amsr_vector_fs_socal_for_software_update --config=aarch64_linux_ubuntu --config=use_efs_build_cache --remote_upload_local_results=${isMaster}
 
                                 # Actual build
-                                bazel build //:minerva_mpu_adaptive_filesystem --config=aarch64_linux_ubuntu
+                                bazel build //:minerva_mpu_adaptive_filesystem --config=aarch64_linux_ubuntu --config=use_efs_build_cache --remote_upload_local_results=${isMaster}
                             '''
                         }
                     }
@@ -83,17 +90,17 @@ node('pulse_ec2') {
         }
         stage('aarch64_linux_linaro'){
             docker.withRegistry(registryUrl, registryCredentials) {
-                docker.image("${imgNameVer}").inside("-u 0:0 --entrypoint=''") {
+                docker.image("${imgNameVer}").inside("-u 0:0 --entrypoint='' ${env.diskCache} ${remoteUpload}") {
                     stage('Build'){
                         sshagent(['adasdai-jenkins-ssh']) {
                             sh '''
                                 # Workaround for circular dependency
-                                bazel build @starter_kit_adaptive_xavier//:amsr_vector_fs_socal_for_proxy --config=aarch64_linux_linaro
-                                bazel build @starter_kit_adaptive_xavier//:amsr_vector_fs_socal_for_skeleton --config=aarch64_linux_linaro
-                                bazel build @starter_kit_adaptive_xavier//:amsr_vector_fs_socal_for_software_update --config=aarch64_linux_linaro
+                                bazel build @starter_kit_adaptive_xavier//:amsr_vector_fs_socal_for_proxy --config=aarch64_linux_linaro --config=use_efs_build_cache --remote_upload_local_results=${isMaster}
+                                bazel build @starter_kit_adaptive_xavier//:amsr_vector_fs_socal_for_skeleton --config=aarch64_linux_linaro --config=use_efs_build_cache --remote_upload_local_results=${isMaster}
+                                bazel build @starter_kit_adaptive_xavier//:amsr_vector_fs_socal_for_software_update --config=aarch64_linux_linaro --config=use_efs_build_cache --remote_upload_local_results=${isMaster}
 
                                 # Actual build
-                                bazel build //:minerva_mpu_adaptive_filesystem --config=aarch64_linux_linaro
+                                bazel build //:minerva_mpu_adaptive_filesystem --config=aarch64_linux_linaro --config=use_efs_build_cache --remote_upload_local_results=${isMaster}
                             '''
                         }
                     }
