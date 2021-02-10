@@ -1,65 +1,65 @@
+#include "activation_manager.h"
 #include "ara/core/abort.h"
+#include "ara/core/error_code.h"
+#include "ara/core/error_domain.h"
+#include "ara/core/exception.h"
 #include "ara/core/initialization.h"
 #include "ara/exec/application_client.h"
 #include "ara/log/logging.h"
 #include "osabstraction/thread/thread.h"
-
-#include "ara/core/error_code.h" 
-#include "ara/core/error_domain.h"
-#include "ara/core/exception.h"
+#include "sw_update_error_domain.h"
 
 #include <csignal>
 #include <thread>
-
-#include "sw_update_error_domain.h"
-#include "activation_manager.h"
 
 namespace {
 /*!
  * \brief Initializes the signal handling.
  * \return void.
  */
-void InitializeSignalHandling() noexcept {
-  bool success{true};
-  sigset_t signals;
+void InitializeSignalHandling() noexcept
+{
+    bool success{true};
+    sigset_t signals;
 
-  /* Block all signals except the SIGABRT, SIGBUS, SIGFPE, SIGILL, SIGSEGV signals because blocking them will lead to
-   * undefined behavior. Their default handling shall not be changed (dependent on underlying POSIX environment, usually
-   * process is killed and a dump file is written). Signal mask will be inherited by subsequent threads. */
+    /* Block all signals except the SIGABRT, SIGBUS, SIGFPE, SIGILL, SIGSEGV signals because
+     * blocking them will lead to undefined behavior. Their default handling shall not be changed
+     * (dependent on underlying POSIX environment, usually process is killed and a dump file is
+     * written). Signal mask will be inherited by subsequent threads. */
 
-  success = success && (0 == sigfillset(&signals));
-  success = success && (0 == sigdelset(&signals, SIGABRT));
-  success = success && (0 == sigdelset(&signals, SIGBUS));
-  success = success && (0 == sigdelset(&signals, SIGFPE));
-  success = success && (0 == sigdelset(&signals, SIGILL));
-  success = success && (0 == sigdelset(&signals, SIGSEGV));
-  success = success && (0 == pthread_sigmask(SIG_SETMASK, &signals, nullptr));
+    success = success && (0 == sigfillset(&signals));
+    success = success && (0 == sigdelset(&signals, SIGABRT));
+    success = success && (0 == sigdelset(&signals, SIGBUS));
+    success = success && (0 == sigdelset(&signals, SIGFPE));
+    success = success && (0 == sigdelset(&signals, SIGILL));
+    success = success && (0 == sigdelset(&signals, SIGSEGV));
+    success = success && (0 == pthread_sigmask(SIG_SETMASK, &signals, nullptr));
 
-  if (!success) {
-    ara::core::Abort("InitializeSignalHandling failed.");
-  }
+    if (!success) {
+        ara::core::Abort("InitializeSignalHandling failed.");
+    }
 }
 } // namespace
 
 namespace Application {
 /*!
-* \brief Signal handler thread.
-*/
+ * \brief Signal handler thread.
+ */
 std::thread signal_handler_thread_{};
 
 /*!
-* \brief Flag to exit the application.
-*/
+ * \brief Flag to exit the application.
+ */
 std::atomic_bool exit_requested_{false};
 
 /*!
-* \brief Flag to mark if the application exit was triggered by a signal.
-*/
+ * \brief Flag to mark if the application exit was triggered by a signal.
+ */
 std::atomic_bool terminated_by_signal_{false};
 
 /*!
-* \brief Flag to indicate initialization error. Only used in main thread.
-*/
+ * \brief Flag to indicate initialization error. Only used in main thread.
+ */
 bool has_initialization_failed_{false};
 
 /**
@@ -112,7 +112,8 @@ void ReportState(
  * -    #35 request application exit.
  * \endinternal
  */
-void SignalHandlerThread() {
+void SignalHandlerThread()
+{
     sigset_t signal_set;
 
     /* #10 empty the set of signals. */
@@ -146,7 +147,6 @@ void SignalHandlerThread() {
     } while (!exit_requested_);
 }
 
-
 /*!
  * \brief Start a thread handling all signals send to this process.
  * \internal
@@ -157,12 +157,14 @@ void SignalHandlerThread() {
  * - #50 Set thread name and return the ara::core::Result object.
  * \endinternal
  */
-ara::core::Result<osabstraction::process::ProcessId> StartSignalHandlerThread() {
+ara::core::Result<osabstraction::process::ProcessId> StartSignalHandlerThread()
+{
     /* #10 Create ara::core::Result object. */
     using R = ara::core::Result<osabstraction::process::ProcessId>;
 
     /* #20 Create thread_name. */
-    vac::container::CStringView thread_name = vac::container::CStringView::FromLiteral("SwUpdateSignal", 10);
+    vac::container::CStringView thread_name
+        = vac::container::CStringView::FromLiteral("SwUpdateSignal", 10);
 
     /* #30 Start signal handler thread. */
     signal_handler_thread_ = std::thread(&SignalHandlerThread);
@@ -176,8 +178,8 @@ ara::core::Result<osabstraction::process::ProcessId> StartSignalHandlerThread() 
         .OrElse([thread_name](ara::core::ErrorCode) -> R {
             return R::FromError(SwUpdateAppErrc::kThreadCreationFailed, "Naming failed.");
         });
-    }
-} // Application namespace
+}
+} // namespace Application
 
 int main()
 {
@@ -200,14 +202,15 @@ int main()
             Application::has_initialization_failed_ = true;
         });
 
-        if(Application::has_initialization_failed_){
+        if (Application::has_initialization_failed_) {
             return -1;
         }
 
         /* Create the application object and run it */
         Application::ReportState(application_client, log, ara::exec::ApplicationState::kRunning);
 
-        std::shared_ptr<ActivationManagerBase> am(new ActivationManagerTimer(std::chrono::milliseconds(500)));
+        std::shared_ptr<ActivationManagerBase> am(
+            new ActivationManagerTimer(std::chrono::milliseconds(500)));
 
         while (!Application::exit_requested_) {
             /* Do nothing for now */
@@ -221,11 +224,12 @@ int main()
         if (!deinit_result.HasValue()) {
             char const* msg{"ara::core::Deinitialize() failed."};
             std::cerr << msg << "\nResult contains: " << deinit_result.Error().Message() << ", "
-                        << deinit_result.Error().UserMessage() << "\n";
+                      << deinit_result.Error().UserMessage() << "\n";
             ara::core::Abort(msg);
         }
-        
-        Application::ReportState(application_client, log, ara::exec::ApplicationState::kTerminating);
+
+        Application::ReportState(
+            application_client, log, ara::exec::ApplicationState::kTerminating);
     }
 
     return 0;
