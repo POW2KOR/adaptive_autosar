@@ -13,6 +13,16 @@ filegroup(
     ],
 )
 
+filegroup(
+    name = "logging_config_json",
+    srcs = ["configs/logging_config.json"],
+)
+
+filegroup(
+    name = "com_application_json",
+    srcs = ["configs/com_application.json"],
+)
+
 minerva_aa_codegen_rule(
     name = "sw_update_client_minerva_adapter_app_gen_rule",
     arxml_srcs = [":app_arxml"],
