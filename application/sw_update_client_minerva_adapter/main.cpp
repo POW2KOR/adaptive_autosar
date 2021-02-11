@@ -275,6 +275,9 @@ int main()
         ara::core::InstanceSpecifier const swUpdate_instance_specifier{instance_specifier_path};
         swUpdateServer.emplace(swUpdate_instance_specifier);
 
+        swUpdateServer->progress.Update(0);
+        swUpdateServer->status.Update(::mb::swuc::types::PluginStatus::kWorking);
+
         swUpdateServer->OfferService();
 
         std::shared_ptr<ActivationManagerBase> am(
