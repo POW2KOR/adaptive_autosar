@@ -281,9 +281,6 @@ int main()
 
         swUpdateServer->OfferService();
 
-        // std::shared_ptr<ActivationManagerBase> am(
-        //     new ActivationManagerTimer(std::chrono::milliseconds(500)));
-
         while (!Application::exit_requested_) {
             /* Do nothing for now */
             std::this_thread::sleep_for(std::chrono::milliseconds(500));
