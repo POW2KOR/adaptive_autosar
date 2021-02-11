@@ -276,6 +276,7 @@ int main()
         ara::core::InstanceSpecifier const swUpdate_instance_specifier{instance_specifier_path};
         swUpdateServer.emplace(swUpdate_instance_specifier);
 
+        // initial state is required by someip, so we assign it manually.
         swUpdateServer->progress.Update(0);
         swUpdateServer->status.Update(::mb::swuc::types::PluginStatus::kIdle);
 
