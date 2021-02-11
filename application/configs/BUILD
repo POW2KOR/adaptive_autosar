@@ -7,10 +7,10 @@ filegroup(
 
 filegroup(
     name = "logging_config_json",
-    srcs = ["logging_config.json"],
+    srcs = ["sw_update_client_minerva_adapter/logging_config.json"],
 )
 
 filegroup(
     name = "com_application_json",
-    srcs = ["com_application.json"],
+    srcs = ["sw_update_client_minerva_adapter/com_application.json"],
 )
