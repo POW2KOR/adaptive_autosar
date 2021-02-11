@@ -186,7 +186,8 @@ ara::core::Result<osabstraction::process::ProcessId> StartSignalHandlerThread()
 class SwUpdateService : public mb::swuc::service_interfaces::plugin::skeleton::SwdlPluginSkeleton {
 public:
     explicit SwUpdateService(ara::core::InstanceSpecifier server_port)
-        : mb::swuc::service_interfaces::plugin::skeleton::SwdlPluginSkeleton(server_port)
+        : mb::swuc::service_interfaces::plugin::skeleton::SwdlPluginSkeleton(
+              SwdlPluginSkeleton::Preconstruct(server_port).Value())
     {
     }
 
@@ -276,7 +277,7 @@ int main()
         swUpdateServer.emplace(swUpdate_instance_specifier);
 
         swUpdateServer->progress.Update(0);
-        swUpdateServer->status.Update(::mb::swuc::types::PluginStatus::kWorking);
+        swUpdateServer->status.Update(::mb::swuc::types::PluginStatus::kIdle);
 
         swUpdateServer->OfferService();
 
