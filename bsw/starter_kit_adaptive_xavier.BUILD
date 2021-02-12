@@ -169,16 +169,6 @@ filegroup(
 )
 
 filegroup(
-    name = "amsr_vector_fs_log_daemon_configs",
-    srcs = [
-        "mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-log-daemon/etc/exec_config.json",
-        "mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-log-daemon/etc/logd_config.json",
-        "mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-log-daemon/etc/logging_config.json",
-    ],
-    visibility = ["//visibility:public"],
-)
-
-filegroup(
     name = "amsr_vector_fs_someipprotocol_srcs",
     srcs = glob(["mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-someipprotocol/**"]),
     visibility = ["//visibility:public"],
@@ -199,16 +189,6 @@ filegroup(
 filegroup(
     name = "amsr_vector_fs_someipdaemon_srcs",
     srcs = glob(["mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-someipdaemon/**"]),
-    visibility = ["//visibility:public"],
-)
-
-filegroup(
-    name = "amsr_vector_fs_someipdaemon_configs",
-    srcs = [
-        "mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-someipdaemon/etc/exec_config.json",
-        "mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-someipdaemon/etc/logging_config.json",
-        "@minerva_mpu_adaptive//application/configs:someip_posix_json"
-    ],
     visibility = ["//visibility:public"],
 )
 
