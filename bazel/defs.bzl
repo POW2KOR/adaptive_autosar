@@ -193,7 +193,7 @@ def minerva_aa_codegen_rule(name, arxml_srcs, outs_list_dict, generators, ignore
 
             # This sed removes the <Description> xml tag and adds new lines.
             # This is due to the aforementioned xmllint bug.
-            sed -i "s/<\\/Description>/<\\/Description>\\\\n/g ; s/<[^>]\\+>/- /g" $$generator_messages_tempfile
+            sed -i "s/<\\/Description>/\\\\n/g ; s/<Description>/- /g" $$generator_messages_tempfile
 
             if [[ $$(wc -l $$generator_messages_tempfile | awk '{{print $$1}}') > 0 ]]; then
                 echo ""
