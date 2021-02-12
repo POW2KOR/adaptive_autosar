@@ -60,19 +60,19 @@ config_setting(
 # - https://github.com/bazelbuild/rules_foreign_cc/blob/d54c78ab86b40770ee19f0949db9d74a831ab9f0/tools/build_defs/framework.bzl#L400
 filegroup(
     name = "adaptive_autosar_executionmanager_binary",
-    srcs = ["@starter_kit_adaptive_xavier//:amsr_vector_fs_em_executionmanager"],
+    srcs = ["//bsw:amsr_vector_fs_em_executionmanager"],
     output_group = "amsr_vector_fs_em_executionmanager",
 )
 
 filegroup(
     name = "adaptive_autosar_log_daemon_binary",
-    srcs = ["@starter_kit_adaptive_xavier//:amsr_vector_fs_log_daemon"],
+    srcs = ["//bsw:amsr_vector_fs_log_daemon"],
     output_group = "amsr_vector_fs_log_daemon",
 )
 
 filegroup(
     name = "adaptive_autosar_someipdaemon_binary",
-    srcs = ["@starter_kit_adaptive_xavier//:someipd_posix"],
+    srcs = ["//bsw:someipd_posix"],
     output_group = "someipd_posix",
 )
 
@@ -259,28 +259,28 @@ container_image(
 
 target_build_dir_for_socal_proxy = select({
     ":minerva_host": [
-        "bazel-out/k8-fastbuild/bin/external/starter_kit_adaptive_xavier/amsr_vector_fs_socal_for_proxy/lib/libSocal.a",
+        "bazel-out/k8-fastbuild/bin/bsw/amsr_vector_fs_socal_for_proxy/lib/libSocal.a",
     ],
     ":minerva_target": [
-        "bazel-out/aarch64-fastbuild/bin/external/starter_kit_adaptive_xavier/amsr_vector_fs_socal_for_proxy/lib/libSocal.a",
+        "bazel-out/aarch64-fastbuild/bin/bsw/amsr_vector_fs_socal_for_proxy/lib/libSocal.a",
     ],
 })
 
 target_build_dir_for_socal_skeleton = select({
     ":minerva_host": [
-        "bazel-out/k8-fastbuild/bin/external/starter_kit_adaptive_xavier/amsr_vector_fs_socal_for_skeleton/lib/libSocal.a",
+        "bazel-out/k8-fastbuild/bin/bsw/amsr_vector_fs_socal_for_skeleton/lib/libSocal.a",
     ],
     ":minerva_target": [
-        "bazel-out/aarch64-fastbuild/bin/external/starter_kit_adaptive_xavier/amsr_vector_fs_socal_for_skeleton/lib/libSocal.a",
+        "bazel-out/aarch64-fastbuild/bin/bsw/amsr_vector_fs_socal_for_skeleton/lib/libSocal.a",
     ],
 })
 
 target_build_dir_for_socal_sw_update = select({
     ":minerva_host": [
-        "bazel-out/k8-fastbuild/bin/external/starter_kit_adaptive_xavier/amsr_vector_fs_socal_for_software_update/lib/libSocal.a",
+        "bazel-out/k8-fastbuild/bin/bsw/amsr_vector_fs_socal_for_software_update/lib/libSocal.a",
     ],
     ":minerva_target": [
-        "bazel-out/aarch64-fastbuild/bin/external/starter_kit_adaptive_xavier/amsr_vector_fs_socal_for_software_update/lib/libSocal.a",
+        "bazel-out/aarch64-fastbuild/bin/bsw/amsr_vector_fs_socal_for_software_update/lib/libSocal.a",
     ],
 })
 

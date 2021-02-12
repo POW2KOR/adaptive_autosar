@@ -158,8 +158,8 @@ BSW modules is "Release".
 To proceed with your build on host, change to your repository root directory and execute the following commands:
 
 ```
-bazel build @starter_kit_adaptive_xavier//:amsr_vector_fs_socal_for_proxy --config=<CONFIGURATION>
-bazel build @starter_kit_adaptive_xavier//:amsr_vector_fs_socal_for_skeleton --config=<CONFIGURATION>
+bazel build //bsw:amsr_vector_fs_socal_for_proxy --config=<CONFIGURATION>
+bazel build //bsw:amsr_vector_fs_socal_for_skeleton --config=<CONFIGURATION>
 bazel build //:minerva_mpu_adaptive_filesystem --config=<CONFIGURATION>
 ```
 
@@ -228,14 +228,14 @@ automatically uninstalled after 30 minutes and might need to be reinstalled. (Th
 Daimler laptops).
 
 ```
-:~/minerva_mpu_adaptive$ bazel build @starter_kit_adaptive_xavier//:amsr_vector_fs_sec_cryptostack \
+:~/minerva_mpu_adaptive$ bazel build //bsw:amsr_vector_fs_sec_cryptostack \
 --config=aarch64_linux_ubuntu
 ```
 
 You can use the Linaro toolchain provided by Nvidia with the `minerva_mpu_docker` image:
 
 ```
-:~/minerva_mpu_adaptive$ bazel build @starter_kit_adaptive_xavier//:amsr-vector-fs-sec-cryptostack \
+:~/minerva_mpu_adaptive$ bazel build //bsw:amsr-vector-fs-sec-cryptostack \
 --config=aarch64_linux_linaro
 ```
 
@@ -247,8 +247,8 @@ sudo apt-get install g++-aarch64-linux-gnu
 
 Build the filesystem like so:
 ```
-bazel build @starter_kit_adaptive_xavier//:amsr_vector_fs_socal_for_proxy --config=aarch64_linux_ubuntu
-bazel build @starter_kit_adaptive_xavier//:amsr_vector_fs_socal_for_skeleton --config=aarch64_linux_ubuntu
+bazel build //bsw:amsr_vector_fs_socal_for_proxy --config=aarch64_linux_ubuntu
+bazel build //bsw:amsr_vector_fs_socal_for_skeleton --config=aarch64_linux_ubuntu
 bazel build //:minerva_mpu_adaptive_filesystem --config=aarch64_linux_ubuntu
 ```
 
@@ -302,12 +302,11 @@ the Bazel build system, but hard-coded path includes.
 These steps are necessary due to the circular dependency workaround. They will not be needed once Vector ships a fix in
 the SIP:
 ```
-bazel build @starter_kit_adaptive_xavier//:amsr_vector_fs_socal_for_proxy --config=<CONFIGURATION>
-bazel build @starter_kit_adaptive_xavier//:amsr_vector_fs_socal_for_skeleton --config=<CONFIGURATION>
+bazel build //bsw:amsr_vector_fs_socal_for_proxy --config=<CONFIGURATION>
+bazel build //bsw:amsr_vector_fs_socal_for_skeleton --config=<CONFIGURATION>
 ```
-After that, you can initiate your actual building, because the circular dependency is worked around with the
-`@starter_kit_adaptive_xavier//:amsr_vector_fs_socal_headers` target
-and both `\\:socal_lib_for_proxy` and `\\:socal_lib_for_socal` file groups.
+After that, you can initiate your actual building, because the circular dependency is worked around with the 
+`//bsw:amsr_vector_fs_socal_headers` target and both `\\:socal_lib_for_proxy` and `\\:socal_lib_for_socal` file groups.
 
 ## Useful information
 For building the debug version use `--compilation_mode=dbg`. Other useful parameters for debugging purposes are

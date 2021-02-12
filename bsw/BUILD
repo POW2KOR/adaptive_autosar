@@ -163,10 +163,10 @@ cc_binary(
     ],
     linkstatic = 1,
     deps = [
-        "@starter_kit_adaptive_xavier//:amsr_vector_fs_applicationbase",
-        "@starter_kit_adaptive_xavier//:amsr_vector_fs_em_executionmanager",
-        "@starter_kit_adaptive_xavier//:amsr_vector_fs_libiostream",
-        "@starter_kit_adaptive_xavier//:amsr_vector_fs_log_api",
+        "//bsw:amsr_vector_fs_applicationbase",
+        "//bsw:amsr_vector_fs_em_executionmanager",
+        "//bsw:amsr_vector_fs_libiostream",
+        "//bsw:amsr_vector_fs_log_api",
     ],
 )
 
@@ -907,10 +907,10 @@ cc_library(
         ":starter_kit_proxy_socal_hdrs_lib",
         ":starter_kit_proxy_someipbinding_hdrs_lib",
         ":starter_kit_proxy_someipprotocol_hdrs_lib",
-        "@starter_kit_adaptive_xavier//:amsr_vector_fs_comcommon",
-        "@starter_kit_adaptive_xavier//:amsr_vector_fs_socal_headers",
-        "@starter_kit_adaptive_xavier//:amsr_vector_fs_someipbinding",
-        "@starter_kit_adaptive_xavier//:amsr_vector_fs_vajson",
+        ":amsr_vector_fs_comcommon",
+        ":amsr_vector_fs_socal_headers",
+        ":amsr_vector_fs_someipbinding",
+        ":amsr_vector_fs_vajson",
     ],
 )
 
@@ -939,12 +939,12 @@ cc_binary(
     deps = [
         ":starter_kit_proxy_modeldatatypes_hdrs_lib",
         ":starter_kit_proxy_socal_hdrs_lib",
-        "@starter_kit_adaptive_xavier//:amsr_vector_fs_em_executionmanager",
-        "@starter_kit_adaptive_xavier//:amsr_vector_fs_libvac",
-        "@starter_kit_adaptive_xavier//:amsr_vector_fs_log_api",
-        "@starter_kit_adaptive_xavier//:amsr_vector_fs_socal_for_proxy",
-        "@starter_kit_adaptive_xavier//:amsr_vector_fs_someipbinding",
-        "@starter_kit_adaptive_xavier//:amsr_vector_fs_vajson",
+        "//bsw:amsr_vector_fs_em_executionmanager",
+        "//bsw:amsr_vector_fs_libvac",
+        "//bsw:amsr_vector_fs_log_api",
+        "//bsw:amsr_vector_fs_socal_for_proxy",
+        "//bsw:amsr_vector_fs_someipbinding",
+        "//bsw:amsr_vector_fs_vajson",
     ],
 )
 
@@ -996,10 +996,10 @@ cc_library(
         ":starter_kit_skeleton_socal_hdrs_lib",
         ":starter_kit_skeleton_someipbinding_hdrs_lib",
         ":starter_kit_skeleton_someipprotocol_hdrs_lib",
-        "@starter_kit_adaptive_xavier//:amsr_vector_fs_comcommon",
-        "@starter_kit_adaptive_xavier//:amsr_vector_fs_socal_headers",
-        "@starter_kit_adaptive_xavier//:amsr_vector_fs_someipbinding",
-        "@starter_kit_adaptive_xavier//:amsr_vector_fs_vajson",
+        "//bsw:amsr_vector_fs_comcommon",
+        "//bsw:amsr_vector_fs_socal_headers",
+        "//bsw:amsr_vector_fs_someipbinding",
+        "//bsw:amsr_vector_fs_vajson",
     ],
 )
 
@@ -1028,12 +1028,12 @@ cc_binary(
     deps = [
         ":starter_kit_skeleton_modeldatatypes_hdrs_lib",
         ":starter_kit_skeleton_socal_hdrs_lib",
-        "@starter_kit_adaptive_xavier//:amsr_vector_fs_em_executionmanager",
-        "@starter_kit_adaptive_xavier//:amsr_vector_fs_libvac",
-        "@starter_kit_adaptive_xavier//:amsr_vector_fs_log_api",
-        "@starter_kit_adaptive_xavier//:amsr_vector_fs_socal_for_skeleton",
-        "@starter_kit_adaptive_xavier//:amsr_vector_fs_someipbinding",
-        "@starter_kit_adaptive_xavier//:amsr_vector_fs_vajson",
+        "//bsw:amsr_vector_fs_em_executionmanager",
+        "//bsw:amsr_vector_fs_libvac",
+        "//bsw:amsr_vector_fs_log_api",
+        "//bsw:amsr_vector_fs_socal_for_skeleton",
+        "//bsw:amsr_vector_fs_someipbinding",
+        "//bsw:amsr_vector_fs_vajson",
     ],
 )
 
@@ -1046,13 +1046,13 @@ CMAKE_SYSTEM_NAME_LINUX = "Linux"
 # so that we don't have any mismatches that might be harder to debug in the
 # future.
 CMAKE_TOOLCHAIN_DICT = {
-    ":minerva_host": {
+    "//:minerva_host": {
         "CMAKE_TRY_COMPILE_TARGET_TYPE": "STATIC_LIBRARY",
     },
-    ":minerva_drive_sdk": {
+    "//:minerva_drive_sdk": {
         "CMAKE_TRY_COMPILE_TARGET_TYPE": "STATIC_LIBRARY",
     },
-    ":minerva_target": {
+    "//:minerva_target": {
         "CMAKE_TRY_COMPILE_TARGET_TYPE": "STATIC_LIBRARY",
     },
     "//conditions:default": {
@@ -1069,7 +1069,7 @@ cmake_external(
         },
     ),
     generate_crosstool_file = True,
-    lib_source = ":amsr_vector_fs_libvac_srcs",
+    lib_source = "@starter_kit_adaptive_xavier//:amsr_vector_fs_libvac_srcs",
     static_libraries = [
         "libvac.a",
     ],
@@ -1086,7 +1086,7 @@ cmake_external(
     ),
     generate_crosstool_file = True,
     headers_only = True,
-    lib_source = ":amsr_vector_fs_msr4base_srcs",
+    lib_source = "@starter_kit_adaptive_xavier//:amsr_vector_fs_msr4base_srcs",
     visibility = ["//visibility:public"],
 )
 
@@ -1101,7 +1101,7 @@ cmake_external(
         },
     ),
     generate_crosstool_file = True,
-    lib_source = ":amsr_vector_fs_libiostream_srcs",
+    lib_source = "@starter_kit_adaptive_xavier//:amsr_vector_fs_libiostream_srcs",
     out_bin_dir = "sbin",
     static_libraries = [
         "libamsr-vector-fs-libiostream_libcharconv_vector_stl.a",
@@ -1125,7 +1125,7 @@ cmake_external(
         },
     ),
     generate_crosstool_file = True,
-    lib_source = ":amsr_vector_fs_thread_srcs",
+    lib_source = "@starter_kit_adaptive_xavier//:amsr_vector_fs_thread_srcs",
     out_bin_dir = "sbin",
     static_libraries = [
         "libvathread.a",
@@ -1149,7 +1149,7 @@ cmake_external(
         },
     ),
     generate_crosstool_file = True,
-    lib_source = ":amsr_vector_fs_vajson_srcs",
+    lib_source = "@starter_kit_adaptive_xavier//:amsr_vector_fs_vajson_srcs",
     static_libraries = [
         "libvajson.a",
     ],
@@ -1170,7 +1170,7 @@ cmake_external(
         },
     ),
     generate_crosstool_file = True,
-    lib_source = ":amsr_vector_fs_applicationbase_srcs",
+    lib_source = "@starter_kit_adaptive_xavier//:amsr_vector_fs_applicationbase_srcs",
     static_libraries = [
         "libapplication_base.a",
     ],
@@ -1190,7 +1190,7 @@ cmake_external(
         },
     ),
     generate_crosstool_file = True,
-    lib_source = ":amsr_vector_fs_libosabstraction_srcs",
+    lib_source = "@starter_kit_adaptive_xavier//:amsr_vector_fs_libosabstraction_srcs",
     static_libraries = [
         "libosabstraction.a",
     ],
@@ -1215,7 +1215,7 @@ cmake_external(
         },
     ),
     generate_crosstool_file = True,
-    lib_source = ":amsr_vector_fs_log_api_srcs",
+    lib_source = "@starter_kit_adaptive_xavier//:amsr_vector_fs_log_api_srcs",
     static_libraries = [
         "libamsr-log.a",
         "libara-logging.a",
@@ -1242,7 +1242,7 @@ cmake_external(
         },
     ),
     generate_crosstool_file = True,
-    lib_source = ":amsr_vector_fs_sec_cryptostack_driver_lib_es_srcs",
+    lib_source = "@starter_kit_adaptive_xavier//:amsr_vector_fs_sec_cryptostack_driver_lib_es_srcs",
     static_libraries = [
         "libamsr-vector-fs-sec-cryptostack-driver-lib_es.a",
     ],
@@ -1284,7 +1284,7 @@ cmake_external(
         },
     ),
     generate_crosstool_file = True,
-    lib_source = ":amsr_vector_fs_em_executionmanager_srcs",
+    lib_source = "@starter_kit_adaptive_xavier//:amsr_vector_fs_em_executionmanager_srcs",
     out_bin_dir = "sbin",
     static_libraries = [
         "libamsr-vector-fs-em-executionmanagement_application-client.a",
@@ -1321,7 +1321,7 @@ cmake_external(
         },
     ),
     generate_crosstool_file = True,
-    lib_source = ":amsr_vector_fs_sec_iam_srcs",
+    lib_source = "@starter_kit_adaptive_xavier//:amsr_vector_fs_sec_iam_srcs",
     static_libraries = [
         "libamsr-vector-fs-sec-iam_libserver.a",
         "libamsr-vector-fs-sec-iam_libcommon.a",
@@ -1351,7 +1351,7 @@ cmake_external(
         },
     ),
     generate_crosstool_file = True,
-    lib_source = ":amsr_vector_fs_comcommon_srcs",
+    lib_source = "@starter_kit_adaptive_xavier//:amsr_vector_fs_comcommon_srcs",
     static_libraries = [
         "libComCommon.a",
     ],
@@ -1388,7 +1388,7 @@ cmake_external(
         },
     ),
     generate_crosstool_file = True,
-    lib_source = ":amsr_vector_fs_sec_cryptostack_srcs",
+    lib_source = "@starter_kit_adaptive_xavier//:amsr_vector_fs_sec_cryptostack_srcs",
     static_libraries = [
         "libamsr-vector-fs-sec-cryptostack_libclient.a",
         "libamsr-vector-fs-sec-cryptostack_libserver.a",
@@ -1420,7 +1420,7 @@ cmake_external(
         },
     ),
     generate_crosstool_file = True,
-    lib_source = ":amsr_vector_fs_sec_libseccom_srcs",
+    lib_source = "@starter_kit_adaptive_xavier//:amsr_vector_fs_sec_libseccom_srcs",
     static_libraries = [
         "libamsr-vector-fs-sec-libseccom_libtls.a",
     ],
@@ -1464,7 +1464,7 @@ cmake_external(
         },
     ),
     generate_crosstool_file = True,
-    lib_source = ":amsr_vector_fs_communicationmiddleware_srcs",
+    lib_source = "@starter_kit_adaptive_xavier//:amsr_vector_fs_communicationmiddleware_srcs",
     static_libraries = [
         "libARA-IpcBinding-posix.a",
         "libARA.a",
@@ -1494,7 +1494,7 @@ cmake_external(
         },
     ),
     generate_crosstool_file = True,
-    lib_source = ":amsr_vector_fs_crc_srcs",
+    lib_source = "@starter_kit_adaptive_xavier//:amsr_vector_fs_crc_srcs",
     static_libraries = [
         "libamsr-vector-fs-crc_libinternal.a",
         "libamsr-vector-fs-crc_libcrc.a",
@@ -1517,7 +1517,7 @@ cmake_external(
         },
     ),
     generate_crosstool_file = True,
-    lib_source = ":amsr_vector_fs_e2e_srcs",
+    lib_source = "@starter_kit_adaptive_xavier//:amsr_vector_fs_e2e_srcs",
     static_libraries = [
         "libamsr-vector-fs-e2e_libe2e.a",
         "libamsr-vector-fs-e2e_libinternal.a",
@@ -1556,7 +1556,7 @@ cmake_external(
         },
     ),
     generate_crosstool_file = True,
-    lib_source = ":amsr_vector_fs_socal_srcs",
+    lib_source = "@starter_kit_adaptive_xavier//:amsr_vector_fs_socal_srcs",
     static_libraries = [
         "libSocal.a",
     ],
@@ -1596,7 +1596,7 @@ cmake_external(
         },
     ),
     generate_crosstool_file = True,
-    lib_source = ":amsr_vector_fs_socal_srcs",
+    lib_source = "@starter_kit_adaptive_xavier//:amsr_vector_fs_socal_srcs",
     static_libraries = [
         "libSocal.a",
     ],
@@ -1636,7 +1636,7 @@ cmake_external(
         },
     ),
     generate_crosstool_file = True,
-    lib_source = ":amsr_vector_fs_socal_srcs",
+    lib_source = "@starter_kit_adaptive_xavier//:amsr_vector_fs_socal_srcs",
     static_libraries = [
         "libSocal.a",
     ],
@@ -1676,7 +1676,7 @@ cmake_external(
         },
     ),
     generate_crosstool_file = True,
-    lib_source = ":amsr_vector_fs_socal_srcs",
+    lib_source = "@starter_kit_adaptive_xavier//:amsr_vector_fs_socal_srcs",
     headers_only = True,
     visibility = ["//visibility:public"],
     deps = [
@@ -1712,7 +1712,7 @@ cmake_external(
         },
     ),
     generate_crosstool_file = True,
-    lib_source = ":amsr_vector_fs_log_daemon_srcs",
+    lib_source = "@starter_kit_adaptive_xavier//:amsr_vector_fs_log_daemon_srcs",
     static_libraries = [
         "libamsr-vector-fs-log-daemon-service.a",
     ],
@@ -1737,7 +1737,7 @@ cmake_external(
         },
     ),
     generate_crosstool_file = True,
-    lib_source = ":amsr_vector_fs_someipprotocol_srcs",
+    lib_source = "@starter_kit_adaptive_xavier//:amsr_vector_fs_someipprotocol_srcs",
     static_libraries = [
         "libSomeIpProtocol.a",
     ],
@@ -1766,7 +1766,7 @@ cmake_external(
         },
     ),
     generate_crosstool_file = True,
-    lib_source = ":amsr_vector_fs_someipbinding_srcs",
+    lib_source = "@starter_kit_adaptive_xavier//:amsr_vector_fs_someipbinding_srcs",
     static_libraries = [
         "libSomeIpBindingInternal.a",
         "libSomeIpBinding.a",
@@ -1798,7 +1798,7 @@ cmake_external(
         },
     ),
     generate_crosstool_file = True,
-    lib_source = ":amsr_vector_fs_someipdaemonclient_srcs",
+    lib_source = "@starter_kit_adaptive_xavier//:amsr_vector_fs_someipdaemonclient_srcs",
     static_libraries = [
         "libSomeIpDaemonClient.a",
     ],
@@ -1843,7 +1843,7 @@ cmake_external(
         },
     ),
     generate_crosstool_file = True,
-    lib_source = ":amsr_vector_fs_someipdaemon_srcs",
+    lib_source = "@starter_kit_adaptive_xavier//:amsr_vector_fs_someipdaemon_srcs",
     visibility = ["//visibility:public"],
     deps = [
         ":amsr_vector_fs_thread",
