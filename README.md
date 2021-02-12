@@ -141,8 +141,8 @@ BSW modules is "Release".
 To proceed with your build on host, change to your repository root directory and execute the following commands:
 
 ```
-bazel build @starter_kit_adaptive_xavier//:amsr_vector_fs_socal_for_proxy --config=<your target config>
-bazel build @starter_kit_adaptive_xavier//:amsr_vector_fs_socal_for_skeleton --config=<your target config>
+bazel build @starter_kit_adaptive_xavier//:amsr_vector_fs_socal_for_proxy --config=<CONFIGURATION>
+bazel build @starter_kit_adaptive_xavier//:amsr_vector_fs_socal_for_skeleton --config=<CONFIGURATION>
 bazel build //:minerva_mpu_adaptive_filesystem --config=<CONFIGURATION>
 ```
 
@@ -285,8 +285,8 @@ the Bazel build system, but hard-coded path includes.
 These steps are necessary due to the circular dependency workaround. They will not be needed once Vector ships a fix in 
 the SIP:
 ```
-bazel build @starter_kit_adaptive_xavier//:amsr_vector_fs_socal_for_proxy --config=<your target config>
-bazel build @starter_kit_adaptive_xavier//:amsr_vector_fs_socal_for_skeleton --config=<your target config>
+bazel build @starter_kit_adaptive_xavier//:amsr_vector_fs_socal_for_proxy --config=<CONFIGURATION>
+bazel build @starter_kit_adaptive_xavier//:amsr_vector_fs_socal_for_skeleton --config=<CONFIGURATION>
 ```
 After that, you can initiate your actual building, because the circular dependency is worked around with the 
 `@starter_kit_adaptive_xavier//:amsr_vector_fs_socal_headers` target
