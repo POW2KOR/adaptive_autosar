@@ -225,9 +225,9 @@ def minerva_aa_codegen_rule(name, arxml_srcs, outs_list_dict, generators, ignore
         # list.
         comm -23 $$tmp_folder/generated.txt $$tmp_folder/outs.txt > $$tmp_folder/comparison.txt
 
-        # Ignore the GeneratorReport.html and GeneratorReport.xml files for the
-        # purpose of this error message.
-        #
+        # Ignore the generator_log.txt, GeneratorReport.html and 
+        # GeneratorReport.xml files for the purpose of this error message.
+        # 
         # Also ignore any other files which match ignore_matches
 
         for IGNORE_MATCH in generator_log.txt 'GeneratorReport.(html|xml)' {ignore_matches}
