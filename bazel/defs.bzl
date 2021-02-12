@@ -54,7 +54,7 @@ def minerva_aa_codegen_declare(name, path_to_generators, generators):
             visibility = ["//visibility:public"],
         )
 
-def minerva_aa_codegen_rule(name, arxml_srcs, outs_list_dict, generators, ignore_matches = []):
+def minerva_aa_codegen_rule(name, arxml_srcs, outs_list_dict, generators, ignore_matches = None):
     """
     A wrapper around genrule for Adaptive AUTOSAR code generation.
 
@@ -104,6 +104,12 @@ def minerva_aa_codegen_rule(name, arxml_srcs, outs_list_dict, generators, ignore
         sparingly, and don't put `.*` in the list of ignores, as this negates
         the benefits of the out_list_dict mismatch detection.
     """
+
+    # Python has a quirk with mutable defaults. I don't know if this happens in
+    # starlark as well, but I will change it like this defensively to avoid any
+    # potential issues which may be harder to debug in the future.
+    if ignore_matches == None:
+        ignore_matches = []
 
     gen_rule_name = name
     gen_rule_output_folder = "{}/output".format(gen_rule_name)
