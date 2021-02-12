@@ -1,3 +1,7 @@
+#include "application.h"
+#include "osabstraction/thread/thread.h"
+#include "sw_update_error_domain.h"
+
 #include "ara/core/abort.h"
 #include "ara/core/error_code.h"
 #include "ara/core/error_domain.h"
@@ -5,9 +9,6 @@
 #include "ara/core/initialization.h"
 #include "ara/exec/application_client.h"
 #include "ara/log/logging.h"
-#include "mb/swuc/service_interfaces/plugin/swdlplugin_skeleton.h"
-#include "osabstraction/thread/thread.h"
-#include "sw_update_error_domain.h"
 
 #include <csignal>
 #include <thread>
@@ -42,7 +43,7 @@ void InitializeSignalHandling() noexcept
 } // namespace
 
 namespace Application {
-using namespace mb::swuc::service_interfaces::plugin::internal::methods;
+
 
 /*!
  * \brief Signal handler thread.
@@ -182,60 +183,6 @@ ara::core::Result<osabstraction::process::ProcessId> StartSignalHandlerThread()
         });
 }
 
-class SwUpdateService : public mb::swuc::service_interfaces::plugin::skeleton::SwdlPluginSkeleton {
-public:
-    explicit SwUpdateService(ara::core::InstanceSpecifier server_port)
-        : mb::swuc::service_interfaces::plugin::skeleton::SwdlPluginSkeleton(
-              SwdlPluginSkeleton::Preconstruct(server_port).Value())
-    {
-    }
-
-    ~SwUpdateService()
-    {
-    }
-
-    // Implementation for all function is not done by purpose
-    // Reason is that the implementation is out of the scope
-    ara::core::Future<Rollback::Output> Rollback() override
-    {
-        ara::core::Future<Rollback::Output> ret;
-        return ret;
-    }
-
-    ara::core::Future<GetResumePosition::Output> GetResumePosition() override
-    {
-        ara::core::Future<GetResumePosition::Output> ret;
-        return ret;
-    }
-
-    void CleanUp() override
-    {
-        return;
-    }
-
-    void Revert() override
-    {
-        return;
-    }
-
-    ara::core::Future<Verify::Output> Verify() override
-    {
-        ara::core::Future<Verify::Output> ret;
-        return ret;
-    }
-
-    void Process(
-        const std::uint64_t& resumeOffset, const ::mb::swuc::types::ByteVector& file) override
-    {
-        return;
-    }
-
-    ara::core::Future<Activate::Output> Activate() override
-    {
-        ara::core::Future<Activate::Output> ret;
-        return ret;
-    }
-};
 } // namespace Application
 
 int main()

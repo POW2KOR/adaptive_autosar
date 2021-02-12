@@ -198,6 +198,7 @@ cc_binary(
     srcs = [
         "main.cpp",
         "sw_update_error_domain.h",
+        "application.h",
 
         # This a workaround to resolve cyclic dependency. This is the reason why the target sw_update_client_minerva_adapter_app
         # build in 2 steps.
