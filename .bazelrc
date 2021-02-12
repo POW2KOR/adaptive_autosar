@@ -6,9 +6,9 @@ build:aarch64_linux_ubuntu --crosstool_top=//bazel/toolchains/aarch64_linux_ubun
 build:aarch64_linux_linaro --crosstool_top=//bazel/toolchains/aarch64_linux_linaro_compiler:toolchain --host_crosstool_top=@bazel_tools//tools/cpp:toolchain
 
 # Choose target configuration explicitly
-build:aarch64_linux_ubuntu  --@starter_kit_adaptive_xavier//:build_target="minerva_target" --//:build_target="minerva_target"
-build:aarch64_linux_linaro  --@starter_kit_adaptive_xavier//:build_target="minerva_target" --//:build_target="minerva_target"
-build:x86_64_linux          --@starter_kit_adaptive_xavier//:build_target="minerva_host" --//:build_target="minerva_host"
+build:aarch64_linux_ubuntu  --//:build_target="minerva_target"
+build:aarch64_linux_linaro  --//:build_target="minerva_target"
+build:x86_64_linux          --//:build_target="minerva_host"
 
 # Specify target architecture
 build:aarch64_linux_ubuntu  --cpu=aarch64
