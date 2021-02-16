@@ -165,9 +165,11 @@ pkg_tar(
     files = {
         "//application/sw_update_client_minerva_adapter:sw_update_client_minerva_adapter_app_updatemanager_daemon_db": "opt/sw_update_client_minerva_adapter_app/etc/swcl_db.json",
         "//application/sw_update_client_minerva_adapter:sw_update_client_minerva_adapter_app_updatemanager_config": "opt/sw_update_client_minerva_adapter_app/etc/updatemanager.json",
-        "//application/sw_update_client_minerva_adapter:sw_update_client_minerva_adapter_app_updatemanager_swcluser_meta": "opt/sw_update_client_minerva_adapter_app/swcl_package_metadata.json",
-        "//application/sw_update_client_minerva_adapter:sw_update_client_minerva_adapter_app_someip_config": "opt/sw_update_client_minerva_adapter_app/configuration/someip_config.json",
-        "//application/sw_update_client_minerva_adapter:sw_update_client_minerva_adapter_app_exec_config": "opt/sw_update_client_minerva_adapter_app/configuration/exec_config.json",
+        "//application/sw_update_client_minerva_adapter:sw_update_client_minerva_adapter_app_updatemanager_swcluser_meta": "opt/sw_update_client_minerva_adapter_app/etc/swcl_package_metadata.json",
+        "//application/sw_update_client_minerva_adapter:sw_update_client_minerva_adapter_app_someip_config": "opt/sw_update_client_minerva_adapter_app/etc/someip_config.json",
+        "//application/sw_update_client_minerva_adapter:sw_update_client_minerva_adapter_app_exec_config": "opt/sw_update_client_minerva_adapter_app/etc/exec_config.json",
+        "//application/sw_update_client_minerva_adapter:logging_config_json": "opt/sw_update_client_minerva_adapter_app/etc/logging_config.json",
+        "//application/sw_update_client_minerva_adapter:com_application_json": "opt/sw_update_client_minerva_adapter_app/etc/com_application.json",
     },
     mode = "0755",
 )
