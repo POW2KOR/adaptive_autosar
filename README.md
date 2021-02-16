@@ -40,7 +40,7 @@ Then pull your image:
 ```
 docker pull artifact.swf.daimler.com/adasdai-docker/minerva_mpu_docker/minerva_mpu:<YYYYMMDDHHMMSS>
 ```
-where `<YYYYMMDDHHMMSS>` is the image version. We are currently targeting version `20210104191029`.
+where `<YYYYMMDDHHMMSS>` is the image version. We are currently targeting version `20210216120747`.
 
 
 ## Setup to build without docker
