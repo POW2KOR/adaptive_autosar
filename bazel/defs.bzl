@@ -202,14 +202,14 @@ def minerva_aa_codegen_rule(name, arxml_srcs, outs_list_dict, generators, ignore
 
         # Ignore the GeneratorReport.html and GeneratorReport.xml files for the
         # purpose of this error message.
-        # 
+        #
         # Also ignore any other files which match ignore_matches
 
         for IGNORE_MATCH in generator_log.txt 'GeneratorReport.(html|xml)' {ignore_matches}
         do
             sed -ri "/$$IGNORE_MATCH/d" $$tmp_folder/comparison.txt
         done
-       
+
         if [[ $$(wc -l $$tmp_folder/comparison.txt | awk '{{print $$1}}') > 0 ]]; then
             echo ""
             echo "Error: some generated files weren't found in the outs_list_dict list and weren't matched by any ignore_matches:"
