@@ -1,7 +1,4 @@
 #include "application.h"
-#include "osabstraction/thread/thread.h"
-#include "sw_update_error_domain.h"
-
 #include "ara/core/abort.h"
 #include "ara/core/error_code.h"
 #include "ara/core/error_domain.h"
@@ -9,6 +6,8 @@
 #include "ara/core/initialization.h"
 #include "ara/exec/application_client.h"
 #include "ara/log/logging.h"
+#include "osabstraction/thread/thread.h"
+#include "sw_update_error_domain.h"
 
 #include <csignal>
 #include <thread>
