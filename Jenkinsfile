@@ -4,7 +4,7 @@ node('pulse_ec2') {
     String registryCredentials = 'adasdai-artifactory'
     String userId = sh (script: 'id -u', returnStdout: true).trim()
     String groupId = sh (script: 'id -g', returnStdout: true).trim()
-    def imgNameVer = "artifact.swf.daimler.com/adasdai-docker/minerva_mpu_docker/minerva_mpu:20210129175255"
+    def imgNameVer = "artifact.swf.daimler.com/adasdai-docker/minerva_mpu_docker/minerva_mpu:20201214084936"
     boolean isMaster = (env.BRANCH_NAME == 'master')
     String remoteUpload = "-e isMaster=${isMaster}"
     
