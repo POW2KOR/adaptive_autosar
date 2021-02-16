@@ -54,17 +54,31 @@ def minerva_aa_codegen_declare(name, path_to_generators, generators):
             visibility = ["//visibility:public"],
         )
 
-def minerva_aa_codegen_rule(name, arxml_srcs, outs_list_dict, generators, ignore_matches = []):
+def minerva_aa_codegen_rule(name, arxml_srcs, outs_list_dict, generators, ignore_matches = None):
     """
     A wrapper around genrule for Adaptive AUTOSAR code generation.
 
     This macro is a wrapper around the native genrule with the appropriate
     configuration and script to generate code using the Vector Adaptive AUTOSAR
     code generators. It is designed to split the generated code into multiple
-    sub-targets each containing its own files in a dedicated subfolders. This
-    helps, for example, if you want to have a folder of headers which doesn't
-    contain other files. An error is thrown if the generator generates files
-    which are not found in the outs list.
+    sub-targets (configured by the outs_list_dict parameter) each containing
+    its own files in a dedicated subfolders. This helps, for example, if you
+    want to have a folder of headers which doesn't contain other files. An
+    error is thrown if the generator generates files which are not found in the
+    outs list.
+
+    For the rest of this document, <name> should be understood as the value
+    given to the name parameter of this macro.
+
+    Apart from the targets specified in outs_list_dict, there is a special
+    target defined by this macro. It is called just <name> and it is a
+    catch-all which contains all the files in the outs_list_dict, as well as the
+    generator reports and generator logs.
+
+    Note that the <name>_* subtargets are only run on-demand (or when depended
+    upon). But the <name> target is always an implicit dependency of all of
+    these subtargets. Therefore, the sub-targets have to be explicitly
+    asked-for to generate anything meaningful.
 
     Args:
         name: A unique name for this target.
@@ -90,6 +104,12 @@ def minerva_aa_codegen_rule(name, arxml_srcs, outs_list_dict, generators, ignore
         sparingly, and don't put `.*` in the list of ignores, as this negates
         the benefits of the out_list_dict mismatch detection.
     """
+
+    # Python has a quirk with mutable defaults. I don't know if this happens in
+    # starlark as well, but I will change it like this defensively to avoid any
+    # potential issues which may be harder to debug in the future.
+    if ignore_matches == None:
+        ignore_matches = []
 
     gen_rule_name = name
     gen_rule_output_folder = "{}/output".format(gen_rule_name)
@@ -125,6 +145,18 @@ def minerva_aa_codegen_rule(name, arxml_srcs, outs_list_dict, generators, ignore
 
             concatenated_outs.append(full_out_path)
 
+    for generator_report_file in [
+        "GeneratorReport.html",
+        "GeneratorReport.xml",
+        "generator_log.txt",
+    ]:
+        full_out_path = "{output_folder}/{file_name}".format(
+            output_folder = gen_rule_output_folder,
+            file_name = generator_report_file,
+        )
+
+        concatenated_outs.append(full_out_path)
+
     native.genrule(
         name = gen_rule_name,
         srcs = arxml_srcs,
@@ -133,6 +165,7 @@ def minerva_aa_codegen_rule(name, arxml_srcs, outs_list_dict, generators, ignore
         tmp_folder="/tmp/{tmp_folder}"
         output_folder="$(RULEDIR)/{output_folder}"
         arxml_srcs_folder="$(RULEDIR)/{arxml_srcs_folder}"
+        generator_log="$$output_folder/generator_log.txt"
 
         rm -rf $$output_folder
         rm -rf $$arxml_srcs_folder
@@ -141,7 +174,24 @@ def minerva_aa_codegen_rule(name, arxml_srcs, outs_list_dict, generators, ignore
         mkdir -p $$arxml_srcs_folder
         cp {arxml_srcs} $$arxml_srcs_folder
 
-        $(location @starter_kit_adaptive_xavier//:amsrgen_sh) -v {generators_arg} -x $$arxml_srcs_folder -o $$output_folder --saveProject > /dev/null
+        # Propagate the failure past the pipe
+        set -o pipefail
+
+        # Don't stop immediately on error, so we can handle it gracefully
+        set +e
+        $(location @starter_kit_adaptive_xavier//:amsrgen_sh) -v {generators_arg} -x $$arxml_srcs_folder -o $$output_folder --saveProject 1>$$generator_log 2>&1 
+
+        if [ $$? -ne 0 ]; then
+            echo ""
+            echo "The generator has failed executing. Please check the log for more details:"
+            echo $$generator_log
+            echo ""
+            
+            exit 1
+        fi
+
+        # From now you can stop on error
+        set -e
 
         echo $(OUTS) | tr " " "\\\\n" | sort > $$tmp_folder/outs.txt
         find $$output_folder -type f | sort > $$tmp_folder/generated.txt
@@ -152,14 +202,14 @@ def minerva_aa_codegen_rule(name, arxml_srcs, outs_list_dict, generators, ignore
 
         # Ignore the GeneratorReport.html and GeneratorReport.xml files for the
         # purpose of this error message.
-        # 
+        #
         # Also ignore any other files which match ignore_matches
 
-        for IGNORE_MATCHES in 'GeneratorReport.(html|xml)' {ignore_matches}
+        for IGNORE_MATCH in generator_log.txt 'GeneratorReport.(html|xml)' {ignore_matches}
         do
-            sed -ri "/$$IGNORE_MATCHES/d" $$tmp_folder/comparison.txt
+            sed -ri "/$$IGNORE_MATCH/d" $$tmp_folder/comparison.txt
         done
-       
+
         if [[ $$(wc -l $$tmp_folder/comparison.txt | awk '{{print $$1}}') > 0 ]]; then
             echo ""
             echo "Error: some generated files weren't found in the outs_list_dict list and weren't matched by any ignore_matches:"

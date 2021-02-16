@@ -1,7 +1,7 @@
 # This is the `CODEOWNERS` file for minerva_mpu_adaptive based on the documentation found
 # here https://git.swf.daimler.com/help/user/project/code_owners.md
 
-# However the code owner in the MR is still an optional reviewer. 
+# However the code owner in the MR is still an optional reviewer.
 # To make it useful we would need to have Gitlab silver/premium:
 # https://docs.gitlab.com/ee/user/project/protected_branches.html#protected-branches-approval-by-code-owners
 

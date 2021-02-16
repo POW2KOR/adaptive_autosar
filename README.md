@@ -65,7 +65,7 @@ sudo apt install g++
 
 For aarch64 cross-compilation:
 ```
-sudo apt install g++-aarch64-linux-gnu 
+sudo apt install g++-aarch64-linux-gnu
 ```
 
 
@@ -99,6 +99,23 @@ but in such a case the WORKSPACE file needs to be changed appropriately:
 ```
 sudo python3 collect_deps.py -d --auth_mode=prompt --path=<your_path>
 ```
+### Git hooks
+
+#### Pre-commit
+This repository runs git hooks using [pre-commit](https://pre-commit.com/). The following command can be used to install
+pre-commit.
+```
+pip3 install pre-commit==2.10.1
+```
+
+To enable pre-commit after cloning the repository, the following command can be used.
+```
+cd minerva_mpu_adaptive
+pre-commit install
+```
+
+Once enabaled, pre-commit will run before every local commit in order to suggest fixes for the checks defined in
+[.pre-commit-config.yaml](./pre-commit-config.yaml)
 
 # Build
 
@@ -108,7 +125,7 @@ the `build_env` you have to go through the extra step of entering it.
 ## Entering the docker `build_env`
 
 Currently, the command to enter the `build_env` is a bit messy, but in the future this will be covered by tools and
-the it will be much more simpler to use. 
+the it will be much more simpler to use.
 
 To enter the `build_env` docker container, run the following command:
 ```
@@ -127,7 +144,7 @@ docker run -it \
    -v /var/run/docker.sock:/var/run/docker.sock \
    -v $SSH_AUTH_SOCK:/ssh-agent \
    --workdir /root/workspace \
-   artifact.swf.daimler.com/adasdai-docker/minerva_mpu_docker/minerva_mpu:<YYYYMMDDHHMMSS> 
+   artifact.swf.daimler.com/adasdai-docker/minerva_mpu_docker/minerva_mpu:<YYYYMMDDHHMMSS>
 ```
 where: `<REPOSITORY>` is your local path to the cloned repo, e.g.
 `/lhome/$USER/workspace/minerva/minerva_mpu_adaptive/`, and `<YYYYMMDDHHMMSS>` is container's version (it is supposed
@@ -135,14 +152,14 @@ to be the same version you've pulled during the setup from earlier).
 
 ## The actual build steps
 The current Bazel build is based on [rules_foreign_cc](https://github.com/bazelbuild/rules_foreign_cc) for building
-external CMake projects. In particular, they are used to build the Vector BSW libraries and. Default build type for the 
+external CMake projects. In particular, they are used to build the Vector BSW libraries and. Default build type for the
 BSW modules is "Release".
 
 To proceed with your build on host, change to your repository root directory and execute the following commands:
 
 ```
-bazel build @starter_kit_adaptive_xavier//:amsr_vector_fs_socal_for_proxy --config=<your target config>
-bazel build @starter_kit_adaptive_xavier//:amsr_vector_fs_socal_for_skeleton --config=<your target config>
+bazel build @starter_kit_adaptive_xavier//:amsr_vector_fs_socal_for_proxy --config=<CONFIGURATION>
+bazel build @starter_kit_adaptive_xavier//:amsr_vector_fs_socal_for_skeleton --config=<CONFIGURATION>
 bazel build //:minerva_mpu_adaptive_filesystem --config=<CONFIGURATION>
 ```
 
@@ -153,7 +170,7 @@ where `<CONFIGURATION>` is the target toolchain configuration, e.g. (`x86_64_lin
 These commands invoke Bazel to build the full Minerva MPU Adaptive filesystem, with BSW and applications as well as
 their dependencies.
 
-**NOTE** The first two commands are needed to handle the circular dependency issue. For more information 
+**NOTE** The first two commands are needed to handle the circular dependency issue. For more information
 please refer to [this](#circular-dependency-workaround) section.
 # Running
 
@@ -169,7 +186,7 @@ where `<CONFIGURATION>` is your configuration type, e.g. `x86_64_linux`. This sh
 you've used during the build stage.
 This command invokes the rest of dependencies and launches demo application in a container.
 
-**NOTE** There might be an issue with firewall settings which blocks pulling the Ubuntu image from Dockerhub. 
+**NOTE** There might be an issue with firewall settings which blocks pulling the Ubuntu image from Dockerhub.
 For now, this might be solved by temporary disabling your firewall.
 
 There are two modes to run, the first mode is `--//:docker_entrypoint="shell"`, which drops to a shell inside the
@@ -200,7 +217,7 @@ docker exec -it <container id> /bin/bash
 
 # Miscellaneous
 
-## Build different targets for aarch64 target 
+## Build different targets for aarch64 target
 The aarch64 GCC cross-compiler needs to be installed on your system:
 ```
 sudo apt-get install g++-aarch64-linux-gnu
@@ -280,15 +297,15 @@ Currently, there is a circular linking dependency between `amsr_vector_fs_socal`
 dependency is through some custom temporary targets called `amsr_vector_fs_socal_for_proxy` and
 `amsr_vector_fs_socal_for_skeleton`. Whenever the generated sources for `ara::com` change (or on the first build),
 these targets have to be rebuilt manually. The manual rebuild is necessary these are not explicit build dependencies in
-the Bazel build system, but hard-coded path includes. 
+the Bazel build system, but hard-coded path includes.
 
-These steps are necessary due to the circular dependency workaround. They will not be needed once Vector ships a fix in 
+These steps are necessary due to the circular dependency workaround. They will not be needed once Vector ships a fix in
 the SIP:
 ```
-bazel build @starter_kit_adaptive_xavier//:amsr_vector_fs_socal_for_proxy --config=<your target config>
-bazel build @starter_kit_adaptive_xavier//:amsr_vector_fs_socal_for_skeleton --config=<your target config>
+bazel build @starter_kit_adaptive_xavier//:amsr_vector_fs_socal_for_proxy --config=<CONFIGURATION>
+bazel build @starter_kit_adaptive_xavier//:amsr_vector_fs_socal_for_skeleton --config=<CONFIGURATION>
 ```
-After that, you can initiate your actual building, because the circular dependency is worked around with the 
+After that, you can initiate your actual building, because the circular dependency is worked around with the
 `@starter_kit_adaptive_xavier//:amsr_vector_fs_socal_headers` target
 and both `\\:socal_lib_for_proxy` and `\\:socal_lib_for_socal` file groups.
 
@@ -325,10 +342,10 @@ environment variables. For now, we should take care on the following settings:
 
 - proxy settings in `~/.docker/config.json`: needed to set up access from ubuntu_18.04 image
   when it is started on host
-- proxy settings which are passed with `docker run` command: needed to set up access from 
+- proxy settings which are passed with `docker run` command: needed to set up access from
   minerva_mpu_docker
 - proxy settings in `BUILD` file: needed to set up access from ubuntu_18.04 image when it is started
   from inside minerva_mpu_docker container
 
-In case of proxy settings change, please change corresponding parameters according to your build and 
+In case of proxy settings change, please change corresponding parameters according to your build and
 launch strategy.
