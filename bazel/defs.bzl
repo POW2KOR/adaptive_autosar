@@ -390,4 +390,8 @@ def minerva_aa_bsw_module(name, srcs_filegroup, cache_entries = None, binaries =
         deps = deps,
         binaries = binaries,
         out_bin_dir = out_bin_dir,
+        make_commands = [
+            "make -j",
+            "make install",
+        ],
     )
