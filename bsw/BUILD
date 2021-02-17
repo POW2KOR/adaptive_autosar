@@ -1,5 +1,5 @@
 load("@rules_foreign_cc//tools/build_defs:cmake.bzl", "cmake_external")
-load("@minerva_mpu_adaptive//:bazel/defs.bzl", "minerva_aa_codegen_rule", "extend_and_select")
+load("@minerva_mpu_adaptive//:bazel/defs.bzl", "extend_and_select", "minerva_aa_codegen_rule")
 
 package(default_visibility = ["//visibility:public"])
 
@@ -903,14 +903,14 @@ cc_library(
     ],
     linkstatic = 1,
     deps = [
-        ":starter_kit_proxy_modeldatatypes_hdrs_lib",
-        ":starter_kit_proxy_socal_hdrs_lib",
-        ":starter_kit_proxy_someipbinding_hdrs_lib",
-        ":starter_kit_proxy_someipprotocol_hdrs_lib",
         ":amsr_vector_fs_comcommon",
         ":amsr_vector_fs_socal_headers",
         ":amsr_vector_fs_someipbinding",
         ":amsr_vector_fs_vajson",
+        ":starter_kit_proxy_modeldatatypes_hdrs_lib",
+        ":starter_kit_proxy_socal_hdrs_lib",
+        ":starter_kit_proxy_someipbinding_hdrs_lib",
+        ":starter_kit_proxy_someipprotocol_hdrs_lib",
     ],
 )
 
@@ -1294,13 +1294,12 @@ cmake_external(
     ],
     visibility = ["//visibility:public"],
     deps = [
-        ":amsr_vector_fs_vajson",
-        ":amsr_vector_fs_libvac",
-        ":amsr_vector_fs_log_api",
         ":amsr_vector_fs_applicationbase",
         ":amsr_vector_fs_libiostream",
         ":amsr_vector_fs_libosabstraction",
-
+        ":amsr_vector_fs_libvac",
+        ":amsr_vector_fs_log_api",
+        ":amsr_vector_fs_vajson",
     ],
 )
 
@@ -1475,12 +1474,12 @@ cmake_external(
     ],
     visibility = ["//visibility:public"],
     deps = [
-        ":amsr_vector_fs_sec_libseccom",
+        ":amsr_vector_fs_comcommon",
         ":amsr_vector_fs_libosabstraction",
         ":amsr_vector_fs_log_api",
         ":amsr_vector_fs_sec_cryptostack",
         ":amsr_vector_fs_sec_iam",
-        ":amsr_vector_fs_comcommon",
+        ":amsr_vector_fs_sec_libseccom",
     ],
 )
 
@@ -1501,8 +1500,8 @@ cmake_external(
     ],
     visibility = ["//visibility:public"],
     deps = [
-        ":amsr_vector_fs_msr4base",
         ":amsr_vector_fs_libvac",
+        ":amsr_vector_fs_msr4base",
     ],
 )
 
@@ -1524,10 +1523,10 @@ cmake_external(
     ],
     visibility = ["//visibility:public"],
     deps = [
-        ":amsr_vector_fs_msr4base",
-        ":amsr_vector_fs_libvac",
-        ":amsr_vector_fs_crc",
         ":amsr_vector_fs_applicationbase",
+        ":amsr_vector_fs_crc",
+        ":amsr_vector_fs_libvac",
+        ":amsr_vector_fs_msr4base",
     ],
 )
 
@@ -1562,12 +1561,12 @@ cmake_external(
     ],
     visibility = ["//visibility:public"],
     deps = [
-        "@minerva_mpu_adaptive//bsw:starter_kit_proxy_socal_srcs_lib",
+        ":amsr_vector_fs_comcommon",
         ":amsr_vector_fs_crc",
         ":amsr_vector_fs_e2e",
         ":amsr_vector_fs_libosabstraction",
         ":amsr_vector_fs_log_api",
-        ":amsr_vector_fs_comcommon",
+        "@minerva_mpu_adaptive//bsw:starter_kit_proxy_socal_srcs_lib",
     ],
 )
 
@@ -1602,12 +1601,12 @@ cmake_external(
     ],
     visibility = ["//visibility:public"],
     deps = [
-        "@minerva_mpu_adaptive//bsw:starter_kit_skeleton_socal_srcs_lib",
+        ":amsr_vector_fs_comcommon",
         ":amsr_vector_fs_crc",
         ":amsr_vector_fs_e2e",
         ":amsr_vector_fs_libosabstraction",
         ":amsr_vector_fs_log_api",
-        ":amsr_vector_fs_comcommon",
+        "@minerva_mpu_adaptive//bsw:starter_kit_skeleton_socal_srcs_lib",
     ],
 )
 
@@ -1642,12 +1641,12 @@ cmake_external(
     ],
     visibility = ["//visibility:public"],
     deps = [
-        "@minerva_mpu_adaptive//application/sw_update_client_minerva_adapter:sw_update_client_minerva_adapter_app_socal_srcs_lib",
+        ":amsr_vector_fs_comcommon",
         ":amsr_vector_fs_crc",
         ":amsr_vector_fs_e2e",
         ":amsr_vector_fs_libosabstraction",
         ":amsr_vector_fs_log_api",
-        ":amsr_vector_fs_comcommon",
+        "@minerva_mpu_adaptive//application/sw_update_client_minerva_adapter:sw_update_client_minerva_adapter_app_socal_srcs_lib",
     ],
 )
 
@@ -1676,15 +1675,15 @@ cmake_external(
         },
     ),
     generate_crosstool_file = True,
-    lib_source = "@starter_kit_adaptive_xavier//:amsr_vector_fs_socal_srcs",
     headers_only = True,
+    lib_source = "@starter_kit_adaptive_xavier//:amsr_vector_fs_socal_srcs",
     visibility = ["//visibility:public"],
     deps = [
+        ":amsr_vector_fs_comcommon",
         ":amsr_vector_fs_crc",
         ":amsr_vector_fs_e2e",
         ":amsr_vector_fs_libosabstraction",
         ":amsr_vector_fs_log_api",
-        ":amsr_vector_fs_comcommon",
     ],
 )
 
@@ -1743,8 +1742,8 @@ cmake_external(
     ],
     visibility = ["//visibility:public"],
     deps = [
-        ":amsr_vector_fs_libvac",
         ":amsr_vector_fs_comcommon",
+        ":amsr_vector_fs_libvac",
     ],
 )
 
@@ -1774,13 +1773,13 @@ cmake_external(
     ],
     visibility = ["//visibility:public"],
     deps = [
-        ":amsr_vector_fs_thread",
+        ":amsr_vector_fs_comcommon",
         ":amsr_vector_fs_libvac",
         ":amsr_vector_fs_log_api",
-        ":amsr_vector_fs_comcommon",
-        ":amsr_vector_fs_someipprotocol",
-        ":amsr_vector_fs_someipdaemonclient",
         ":amsr_vector_fs_socal_headers",
+        ":amsr_vector_fs_someipdaemonclient",
+        ":amsr_vector_fs_someipprotocol",
+        ":amsr_vector_fs_thread",
     ],
 )
 
@@ -1804,11 +1803,11 @@ cmake_external(
     ],
     visibility = ["//visibility:public"],
     deps = [
-        ":amsr_vector_fs_libvac",
-        ":amsr_vector_fs_log_api",
         ":amsr_vector_fs_comcommon",
         ":amsr_vector_fs_libosabstraction",
-        ":amsr_vector_fs_someipprotocol"
+        ":amsr_vector_fs_libvac",
+        ":amsr_vector_fs_log_api",
+        ":amsr_vector_fs_someipprotocol",
     ],
 )
 
@@ -1828,7 +1827,7 @@ cmake_external(
             "ADAPTIVE_MICROSAR_SIP_DIR": "$EXT_BUILD_ROOT/external/starter_kit_adaptive_xavier/mb_base_layer_adaptive_xavier/amsr_xavier",
             "BUILD_TESTS": "OFF",
             "ENABLE_DOXYGEN": "OFF",
-            "ENABLE_EXEC_MANAGER" : "ON",
+            "ENABLE_EXEC_MANAGER": "ON",
             "vac_DIR:PATH": "$EXT_BUILD_DEPS/amsr_vector_fs_libvac/lib/cmake/vac/",
             "ComCommon_DIR:PATH": "$EXT_BUILD_DEPS/amsr_vector_fs_comcommon/lib/cmake/ComCommon/",
             "SomeIpProtocol_DIR:PATH": "$EXT_BUILD_DEPS/amsr_vector_fs_someipprotocol/lib/cmake/SomeIpProtocol/",
@@ -1846,16 +1845,16 @@ cmake_external(
     lib_source = "@starter_kit_adaptive_xavier//:amsr_vector_fs_someipdaemon_srcs",
     visibility = ["//visibility:public"],
     deps = [
-        ":amsr_vector_fs_thread",
+        ":amsr_vector_fs_comcommon",
+        ":amsr_vector_fs_em_executionmanager",
         ":amsr_vector_fs_libosabstraction",
         ":amsr_vector_fs_libvac",
-        ":amsr_vector_fs_vajson",
         ":amsr_vector_fs_log_api",
-        ":amsr_vector_fs_sec_libseccom",
-        ":amsr_vector_fs_comcommon",
         ":amsr_vector_fs_sec_iam",
-        ":amsr_vector_fs_em_executionmanager",
-        ":amsr_vector_fs_someipprotocol",
+        ":amsr_vector_fs_sec_libseccom",
         ":amsr_vector_fs_someipdaemonclient",
+        ":amsr_vector_fs_someipprotocol",
+        ":amsr_vector_fs_thread",
+        ":amsr_vector_fs_vajson",
     ],
 )
