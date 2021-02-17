@@ -3,24 +3,6 @@ This file contains several utility functions and macros used within or with the
 Adaptive AUTOSAR BSW Bazel files.
 """
 
-def extend_and_select(select_dict, extension):
-    """
-    Take a select dict, extend each option with another value and then select
-
-    This function takes in a dictionary in the format required for the select
-    Bazel function. It then extends each of the options of the dictionary with
-    a given extension value. Finally, it does a select and returns it as the
-    final output.
-
-    Args:
-        select_dict: The dictionary in format.
-
-        extension: The value to use to extend each of the select options.
-    """
-    for _, value in select_dict.items():
-        value.update(extension)
-
-    return select(select_dict)
 
 def minerva_aa_codegen_declare(name, path_to_generators, generators):
     """
