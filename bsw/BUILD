@@ -1130,6 +1130,7 @@ minerva_aa_bsw_module(
         "libamsr-vector-fs-log-api-common.a",
     ],
     deps = [
+        ":amsr_vector_fs_libiostream",
         ":amsr_vector_fs_libosabstraction",
         ":amsr_vector_fs_libvac",
         ":amsr_vector_fs_thread",
@@ -1176,6 +1177,7 @@ minerva_aa_bsw_module(
         ":amsr_vector_fs_libosabstraction",
         ":amsr_vector_fs_libvac",
         ":amsr_vector_fs_log_api",
+        ":amsr_vector_fs_thread",
         ":amsr_vector_fs_vajson",
     ],
 )
@@ -1192,8 +1194,12 @@ minerva_aa_bsw_module(
         "libamsr-vector-fs-sec-iam_libclient.a",
     ],
     deps = [
+        ":amsr_vector_fs_libiostream",
         ":amsr_vector_fs_libosabstraction",
+        ":amsr_vector_fs_libvac",
         ":amsr_vector_fs_log_api",
+        ":amsr_vector_fs_thread",
+        ":amsr_vector_fs_vajson",
     ],
 )
 
@@ -1204,8 +1210,11 @@ minerva_aa_bsw_module(
         "libComCommon.a",
     ],
     deps = [
+        ":amsr_vector_fs_libiostream",
         ":amsr_vector_fs_libosabstraction",
+        ":amsr_vector_fs_libvac",
         ":amsr_vector_fs_log_api",
+        ":amsr_vector_fs_thread",
         ":amsr_vector_fs_vajson",
     ],
 )
@@ -1232,7 +1241,14 @@ minerva_aa_bsw_module(
     ],
     deps = [
         ":amsr_vector_fs_em_executionmanager",
+        ":amsr_vector_fs_libiostream",
+        ":amsr_vector_fs_libosabstraction",
+        ":amsr_vector_fs_libvac",
+        ":amsr_vector_fs_log_api",
+        ":amsr_vector_fs_msr4base",
         ":amsr_vector_fs_sec_cryptostack_driver_lib_es",
+        ":amsr_vector_fs_thread",
+        ":amsr_vector_fs_vajson",
     ],
 )
 
@@ -1243,8 +1259,15 @@ minerva_aa_bsw_module(
         "libamsr-vector-fs-sec-libseccom_libtls.a",
     ],
     deps = [
+        ":amsr_vector_fs_libiostream",
+        ":amsr_vector_fs_libosabstraction",
+        ":amsr_vector_fs_libvac",
         ":amsr_vector_fs_log_api",
+        ":amsr_vector_fs_msr4base",
         ":amsr_vector_fs_sec_cryptostack",
+        ":amsr_vector_fs_sec_cryptostack_driver_lib_es",
+        ":amsr_vector_fs_thread",
+        ":amsr_vector_fs_vajson",
     ],
 )
 
@@ -1321,8 +1344,13 @@ minerva_aa_bsw_module(
         ":amsr_vector_fs_comcommon",
         ":amsr_vector_fs_crc",
         ":amsr_vector_fs_e2e",
+        ":amsr_vector_fs_libiostream",
         ":amsr_vector_fs_libosabstraction",
+        ":amsr_vector_fs_libvac",
         ":amsr_vector_fs_log_api",
+        ":amsr_vector_fs_msr4base",
+        ":amsr_vector_fs_thread",
+        ":amsr_vector_fs_vajson",
         "@minerva_mpu_adaptive//bsw:starter_kit_proxy_socal_srcs_lib",
     ],
 )
@@ -1344,8 +1372,13 @@ minerva_aa_bsw_module(
         ":amsr_vector_fs_comcommon",
         ":amsr_vector_fs_crc",
         ":amsr_vector_fs_e2e",
+        ":amsr_vector_fs_libiostream",
         ":amsr_vector_fs_libosabstraction",
+        ":amsr_vector_fs_libvac",
         ":amsr_vector_fs_log_api",
+        ":amsr_vector_fs_msr4base",
+        ":amsr_vector_fs_thread",
+        ":amsr_vector_fs_vajson",
         "@minerva_mpu_adaptive//bsw:starter_kit_skeleton_socal_srcs_lib",
     ],
 )
@@ -1366,8 +1399,13 @@ minerva_aa_bsw_module(
         ":amsr_vector_fs_comcommon",
         ":amsr_vector_fs_crc",
         ":amsr_vector_fs_e2e",
+        ":amsr_vector_fs_libiostream",
         ":amsr_vector_fs_libosabstraction",
+        ":amsr_vector_fs_libvac",
         ":amsr_vector_fs_log_api",
+        ":amsr_vector_fs_msr4base",
+        ":amsr_vector_fs_thread",
+        ":amsr_vector_fs_vajson",
         "@minerva_mpu_adaptive//application/sw_update_client_minerva_adapter:sw_update_client_minerva_adapter_app_socal_srcs_lib",
     ],
 )
@@ -1387,8 +1425,13 @@ minerva_aa_bsw_module(
         ":amsr_vector_fs_comcommon",
         ":amsr_vector_fs_crc",
         ":amsr_vector_fs_e2e",
+        ":amsr_vector_fs_libiostream",
         ":amsr_vector_fs_libosabstraction",
+        ":amsr_vector_fs_libvac",
         ":amsr_vector_fs_log_api",
+        ":amsr_vector_fs_msr4base",
+        ":amsr_vector_fs_thread",
+        ":amsr_vector_fs_vajson",
     ],
 )
 
@@ -1412,9 +1455,11 @@ minerva_aa_bsw_module(
     ],
     deps = [
         ":amsr_vector_fs_em_executionmanager",
+        ":amsr_vector_fs_libiostream",
         ":amsr_vector_fs_libosabstraction",
         ":amsr_vector_fs_libvac",
         ":amsr_vector_fs_log_api",
+        ":amsr_vector_fs_thread",
         ":amsr_vector_fs_vajson",
     ],
 )
@@ -1427,7 +1472,12 @@ minerva_aa_bsw_module(
     ],
     deps = [
         ":amsr_vector_fs_comcommon",
+        ":amsr_vector_fs_libiostream",
+        ":amsr_vector_fs_libosabstraction",
         ":amsr_vector_fs_libvac",
+        ":amsr_vector_fs_log_api",
+        ":amsr_vector_fs_thread",
+        ":amsr_vector_fs_vajson",
     ],
 )
 
@@ -1444,12 +1494,18 @@ minerva_aa_bsw_module(
     ],
     deps = [
         ":amsr_vector_fs_comcommon",
+        ":amsr_vector_fs_crc",
+        ":amsr_vector_fs_e2e",
+        ":amsr_vector_fs_libiostream",
+        ":amsr_vector_fs_libosabstraction",
         ":amsr_vector_fs_libvac",
         ":amsr_vector_fs_log_api",
+        ":amsr_vector_fs_msr4base",
         ":amsr_vector_fs_socal_headers",
         ":amsr_vector_fs_someipdaemonclient",
         ":amsr_vector_fs_someipprotocol",
         ":amsr_vector_fs_thread",
+        ":amsr_vector_fs_vajson",
     ],
 )
 
@@ -1461,10 +1517,13 @@ minerva_aa_bsw_module(
     ],
     deps = [
         ":amsr_vector_fs_comcommon",
+        ":amsr_vector_fs_libiostream",
         ":amsr_vector_fs_libosabstraction",
         ":amsr_vector_fs_libvac",
         ":amsr_vector_fs_log_api",
         ":amsr_vector_fs_someipprotocol",
+        ":amsr_vector_fs_thread",
+        ":amsr_vector_fs_vajson",
     ],
 )
 
@@ -1487,9 +1546,13 @@ minerva_aa_bsw_module(
     deps = [
         ":amsr_vector_fs_comcommon",
         ":amsr_vector_fs_em_executionmanager",
+        ":amsr_vector_fs_libiostream",
         ":amsr_vector_fs_libosabstraction",
         ":amsr_vector_fs_libvac",
         ":amsr_vector_fs_log_api",
+        ":amsr_vector_fs_msr4base",
+        ":amsr_vector_fs_sec_cryptostack",
+        ":amsr_vector_fs_sec_cryptostack_driver_lib_es",
         ":amsr_vector_fs_sec_iam",
         ":amsr_vector_fs_sec_libseccom",
         ":amsr_vector_fs_someipdaemonclient",
