@@ -186,10 +186,10 @@ cc_library(
         ":sw_update_client_minerva_adapter_app_socal_hdrs_lib",
         ":sw_update_client_minerva_adapter_app_someipbinding_hdrs_lib",
         ":sw_update_client_minerva_adapter_app_someipprotocol_hdrs_lib",
-        "@starter_kit_adaptive_xavier//:amsr_vector_fs_comcommon",
-        "@starter_kit_adaptive_xavier//:amsr_vector_fs_socal_headers",
-        "@starter_kit_adaptive_xavier//:amsr_vector_fs_someipbinding",
-        "@starter_kit_adaptive_xavier//:amsr_vector_fs_vajson",
+        "//bsw:amsr_vector_fs_comcommon",
+        "//bsw:amsr_vector_fs_socal_headers",
+        "//bsw:amsr_vector_fs_someipbinding",
+        "//bsw:amsr_vector_fs_vajson",
     ],
 )
 
@@ -220,11 +220,11 @@ cc_binary(
     deps = [
         ":sw_update_client_minerva_adapter_app_modeldatatypes_hdrs_lib",
         ":sw_update_client_minerva_adapter_app_socal_hdrs_lib",
-        "@starter_kit_adaptive_xavier//:amsr_vector_fs_em_executionmanager",
-        "@starter_kit_adaptive_xavier//:amsr_vector_fs_libvac",
-        "@starter_kit_adaptive_xavier//:amsr_vector_fs_log_api",
-        "@starter_kit_adaptive_xavier//:amsr_vector_fs_socal_for_proxy",
-        "@starter_kit_adaptive_xavier//:amsr_vector_fs_someipbinding",
-        "@starter_kit_adaptive_xavier//:amsr_vector_fs_vajson",
+        "//bsw:amsr_vector_fs_em_executionmanager",
+        "//bsw:amsr_vector_fs_libvac",
+        "//bsw:amsr_vector_fs_log_api",
+        "//bsw:amsr_vector_fs_socal_for_proxy",
+        "//bsw:amsr_vector_fs_someipbinding",
+        "//bsw:amsr_vector_fs_vajson",
     ],
 )
