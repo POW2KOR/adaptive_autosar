@@ -1,15 +1,26 @@
-# Input data
+# How to create adaptive AUTOSAR app
+
+## About the document
+
+We keep the document for tracking steps that a develop needs to take to write the adaptive
+AUTOSAR app.
+
+The document may change as the adaptive AUTOSAR process in the project matures.
+
+## Input data
 
 The story beginns with an ARXML. For an AUTOSAR application you need a valid ARXML file.
 An example of the valid ARXML file you can find in this repo, just search for files with 
 extention `*.arxml`.
 
-# Code generators
+## Code generators
 
 Autosar havily utilizes code generation. So the very first that you need to do is to run
 code generators to obtain headers and cpp files.
 
-We have `minerva_aa_codegen_rule` that whould allow you to run code generator.
+We have a special Bazel rule called `minerva_aa_codegen_rule` which runs the code generator and gives you a bunch of
+generated files as an output. For more info on this read the docstring for `minerva_aa_codegen_rule` in
+`bazel/defs.bzl`.
 
 Keep in mind to run the code generator successfuly, you need not only ARXML for your app,
 but also general ARXMLs.
@@ -30,12 +41,14 @@ filegroup(
 )
 ```
 
-# Build libraries from code generated files
+## Build libraries from code generated files
 
-Once you generated the files, you need to create libraries from files. Depending on your scenario 
-the number of libraries may vary. Anyway we will take a look on 2 types of libraries: 
+Once you generated the files, you need to create libraries from files so that bazel can use them. Depending on your
+scenario, the number of libraries may vary. Anyway we will take a look on 2 types of libraries: 
  - header or srcs library
- - socal library
+ - socal codegen library
+
+### Header or srcs library
 
 The first case is a simple example of the libary:
 
@@ -50,10 +63,13 @@ cc_library(
 ```
 
 They all are more or less the same. The only library that is different is Socal. Socal has a cyclic
-dependency and Bazel is not that great in resolving cyclic depdendencies. So lat's take a deeper 
-look on socal source code library.
+dependency and Bazel is not that great in resolving cyclic depdendencies, but we have a temporary workaround 
+for this until Vector removes this cyclic dependency. So lat's take a deeper look on socal source code 
+library.
 
-This is a real example of the socal source code library.
+### Socal library based on the code generated files
+
+This is a real example of the socal codegen source code library:
 
 ```bash
 cc_library(
@@ -87,9 +103,8 @@ As we can see, it has 2 types of dependencies: code generated libraries and vect
 
 But do not be afraid, once you saw it, you can build the socal source code library for any app. 
 
-Once you have the socal source code library, you need to build the socal library (I know it sounds the same).
-
-The socal library is part of the `amsr_vector_fs_socal_for_software_update`.
+Once you have the socal codegen source code library, you need to build the BSW socal library 
+(I know it sounds very similar).
 
 ```bash
 cmake_external(
@@ -123,7 +138,7 @@ cmake_external(
     ],
     visibility = ["//visibility:public"],
     deps = [
-        # this dependency should be unique for each app you want to build and run
+        # this should point to the socal code gen library for this application
         "@minerva_mpu_adaptive//application/sw_update_client_minerva_adapter:sw_update_client_minerva_adapter_app_socal_srcs_lib",
 
         # standard set of dependencies. The same for all apps.
@@ -137,7 +152,7 @@ cmake_external(
 ```
 
 It is important here only 1 thing, check the first depedency. 
-The socal library should depend on the socal source code library. 
+The BSW socal library should depend on the socal codegen source code library. 
 
 Now once we have it, we need to make the generated `libSocal.a` visible outside. 
 For this we modify BUILD file from the root of the project and add the following:
@@ -159,14 +174,15 @@ filegroup(
 )
 ```
 
-Once you have done it, you are good to write and build the exacutable.
+Once you have done it, you are good to write and build the executable. Hopefully the need for this complicated step
+will be removed soon.
 
-# Build the executable
+## Build the executable
 
 Executable is also slightly tricky part, because we need to resolve cyclic dependency. But no worries.
 We know how to solve it.
 
-The exactable should look like this:
+The exacutable should look like this:
 
 ```bash
 cc_binary(
@@ -211,10 +227,11 @@ As we can see, we need to follow the order of `srcs`. All libraries
 we build on the previous step. So just keep in mind the order. And also do not forget
 to mention all libraries you depend on. Also `copts` and `linkopts` are mandatory.
 
-Once you are done, congratilations! We are close to be done. We just miss config files.
+Once you are done, congratulations! We are close to be done. We now miss the runtime 
+config manifest files.
 
 Every app should have a set of configs and one executable. Let's add created executable 
-to the docker image.
+to the filesystem.
 
 In the `BUILD` file in the ROOT of the repositry we have a target `minerva_mpu_adaptive_binaries`.
 It is important to add our executable to the files list and define the location of the 
@@ -250,9 +267,8 @@ We need the following configs:
 - someip_config.json
 - ... any other json config files from code gen
 
-Most of the config files are the result of the code generator. 
-When I was implementing `adaptive_sw_update_client_minerva_adapter_configs` 
-I had to add only `logging_config.json` and `com_application.json`.
+Most of the config files are the result of the code generator. At this moment, 
+the exception is `logging_config.json`and `com_application.json`.
 
 Example of the `logging_config.json`:
 
@@ -297,7 +313,7 @@ pkg_tar(
 )
 ```
 
-Config files should be located in `opt/NAME/etc/config.json`.
+Config files should be located in `opt/NAME/etc/`.
 
 All configs are collected in `minerva_mpu_adaptive_configs`.
 
