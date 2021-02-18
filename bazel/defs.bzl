@@ -37,7 +37,12 @@ def minerva_aa_codegen_declare(name, path_to_generators, generators):
             visibility = ["//visibility:public"],
         )
 
-def minerva_aa_codegen_rule(name, arxml_srcs, outs_list_dict, generators, ignore_matches = None):
+def minerva_aa_codegen_rule(
+        name,
+        arxml_srcs,
+        outs_list_dict,
+        generators,
+        ignore_matches = None):
     """
     A wrapper around genrule for Adaptive AUTOSAR code generation.
 
@@ -296,7 +301,15 @@ def minerva_aa_codegen_rule(name, arxml_srcs, outs_list_dict, generators, ignore
             outs = full_path_outs_list,
         )
 
-def minerva_aa_bsw_module(name, srcs_filegroup, cache_entries = None, binaries = None, static_libraries = None, deps = None, headers_only = False, out_bin_dir = "bin"):
+def minerva_aa_bsw_module(
+        name,
+        srcs_filegroup,
+        cache_entries = None,
+        binaries = None,
+        static_libraries = None,
+        deps = None,
+        headers_only = False,
+        out_bin_dir = "bin"):
     """
     A macro to handle Vector BSW CMake target definitions.
 
