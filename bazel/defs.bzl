@@ -3,24 +3,7 @@ This file contains several utility functions and macros used within or with the
 Adaptive AUTOSAR BSW Bazel files.
 """
 
-def extend_and_select(select_dict, extension):
-    """
-    Take a select dict, extend each option with another value and then select
-
-    This function takes in a dictionary in the format required for the select
-    Bazel function. It then extends each of the options of the dictionary with
-    a given extension value. Finally, it does a select and returns it as the
-    final output.
-
-    Args:
-        select_dict: The dictionary in format.
-
-        extension: The value to use to extend each of the select options.
-    """
-    for _, value in select_dict.items():
-        value.update(extension)
-
-    return select(select_dict)
+load("@rules_foreign_cc//tools/build_defs:cmake.bzl", "cmake_external")
 
 def minerva_aa_codegen_declare(name, path_to_generators, generators):
     """
@@ -269,3 +252,146 @@ def minerva_aa_codegen_rule(name, arxml_srcs, outs_list_dict, generators, ignore
             ),
             outs = full_path_outs_list,
         )
+
+def minerva_aa_bsw_module(name, srcs_filegroup, cache_entries = None, binaries = None, static_libraries = None, deps = None, headers_only = False, out_bin_dir = "bin"):
+    """
+    A macro to handle Vector BSW CMake target definitions.
+
+    It makes use of the deps fields to determine the cache_entries for the
+    cmake_external $EXT_BUILD_DEPS, to remove the need for duplicate
+    information and making the dependencies paths less error-prone.
+
+    Args:
+        name: A unique name for this bsw target.
+
+        srcs_filegroup: Filegroup containing the source for this CMake BSW
+            module.
+
+        cache_entries: Optional dictionary containing CMake cache entry
+            definitions to use for this module. The macro overrides some of
+            these cache entry definitions by itself.
+
+        binaries: Optional names of the resulting binaries.
+
+        static_libraries: Optional names of the resulting static libraries.
+
+        deps: Optional dependencies to be copied into the directory structure.
+            If the macro is a target of another BSW module, the cache_entries
+            get extended to add corect `<package>_DIR` entries and everything
+            should be handled.
+
+        headers_only: Optional flag variable to indicate that the library
+            produces only headers
+
+        out_bin_dir: Optional name of the output subdirectory with the binary
+            files, defaults to 'bin'.
+    """
+    if not deps:
+        deps = []
+
+    if not static_libraries:
+        static_libraries = []
+
+    if not binaries:
+        binaries = []
+
+    if not cache_entries:
+        cache_entries = {}
+
+    # CMAKE_TRY_COMPILE_TARGET_TYPE set to STATIC_LIBRARY is needed to make
+    # aarch64 builds work, I do not know exactly why using this option affects
+    # the linking of pthread, but it seems it does, so we're linking pthread
+    # manually where it's needed. Furthermore, we make the approach uniform
+    # across all the targets so that we don't have any mismatches that might be
+    # harder to debug in the future.
+    cache_entries["CMAKE_TRY_COMPILE_TARGET_TYPE"] = "STATIC_LIBRARY"
+    cache_entries["CMAKE_SYSTEM_NAME_LINUX"] = "Linux"
+
+    for dep in deps:
+        if dep == ":amsr_vector_fs_thread":
+            cache_entries["vathread_DIR:PATH"] = "$EXT_BUILD_DEPS/amsr_vector_fs_thread/lib/cmake/vathread/"
+
+        elif dep == ":amsr_vector_fs_msr4base":
+            cache_entries["amsr-vector-fs-msr4base_DIR:PATH"] = "$EXT_BUILD_DEPS/amsr_vector_fs_msr4base/lib/cmake/amsr-vector-fs-msr4base/"
+
+        elif dep == ":amsr_vector_fs_libiostream":
+            cache_entries["amsr-vector-fs-libiostream_libstream_vector_stl_DIR:PATH"] = "$EXT_BUILD_DEPS/amsr_vector_fs_libiostream/lib/cmake/amsr-vector-fs-libiostream_libstream_vector_stl/"
+            cache_entries["amsr-vector-fs-libiostream_libcharconv_vector_stl_DIR:PATH"] = "$EXT_BUILD_DEPS/amsr_vector_fs_libiostream/lib/cmake/amsr-vector-fs-libiostream_libcharconv_vector_stl/"
+            cache_entries["amsr-vector-fs-libiostream_libcharconv_common_DIR:PATH"] = "$EXT_BUILD_DEPS/amsr_vector_fs_libiostream/lib/cmake/amsr-vector-fs-libiostream_libcharconv_common/"
+
+        elif dep == ":amsr_vector_fs_libosabstraction":
+            cache_entries["osabstraction_DIR:PATH"] = "$EXT_BUILD_DEPS/amsr_vector_fs_libosabstraction/lib/cmake/osabstraction/"
+
+        elif dep == ":amsr_vector_fs_libvac":
+            cache_entries["vac_DIR:PATH"] = "$EXT_BUILD_DEPS/amsr_vector_fs_libvac/lib/cmake/vac/"
+
+        elif dep == ":amsr_vector_fs_vajson":
+            cache_entries["vajson_DIR:PATH"] = "$EXT_BUILD_DEPS/amsr_vector_fs_vajson/lib/cmake/vajson/"
+
+        elif dep == ":amsr_vector_fs_log_api":
+            cache_entries["amsr-vector-fs-log-api-common_DIR:PATH"] = "$EXT_BUILD_DEPS/amsr_vector_fs_log_api/lib/cmake/amsr-vector-fs-log-api-common/"
+            cache_entries["amsr-vector-fs-log-api-ipc-common_DIR:PATH"] = "$EXT_BUILD_DEPS/amsr_vector_fs_log_api/lib/cmake/amsr-vector-fs-log-api-ipc-common/"
+            cache_entries["amsr-vector-fs-log-api-ipc_DIR:PATH"] = "$EXT_BUILD_DEPS/amsr_vector_fs_log_api/lib/cmake/amsr-vector-fs-log-api-ipc/"
+            cache_entries["amsr-log_DIR:PATH"] = "$EXT_BUILD_DEPS/amsr_vector_fs_log_api/lib/cmake/amsr-log/"
+            cache_entries["ara-logging_DIR:PATH"] = "$EXT_BUILD_DEPS/amsr_vector_fs_log_api/lib/cmake/ara-logging/"
+
+        elif dep == ":amsr_vector_fs_sec_libseccom":
+            cache_entries["amsr-vector-fs-sec-libseccom_libcrypto_DIR:PATH"] = "$EXT_BUILD_DEPS/amsr_vector_fs_sec_libseccom/lib/cmake/amsr-vector-fs-sec-libseccom_libcrypto/"
+            cache_entries["amsr-vector-fs-sec-libseccom_libtls_DIR:PATH"] = "$EXT_BUILD_DEPS/amsr_vector_fs_sec_libseccom/lib/cmake/amsr-vector-fs-sec-libseccom_libtls/"
+
+        elif dep == ":amsr_vector_fs_comcommon":
+            cache_entries["ComCommon_DIR:PATH"] = "$EXT_BUILD_DEPS/amsr_vector_fs_comcommon/lib/cmake/ComCommon/"
+
+        elif dep == ":amsr_vector_fs_sec_iam":
+            cache_entries["amsr-vector-fs-sec-iam_libcommon_DIR:PATH"] = "$EXT_BUILD_DEPS/amsr_vector_fs_sec_iam/lib/cmake/amsr-vector-fs-sec-iam_libcommon/"
+            cache_entries["amsr-vector-fs-sec-iam_libara_DIR:PATH"] = "$EXT_BUILD_DEPS/amsr_vector_fs_sec_iam/lib/cmake/amsr-vector-fs-sec-iam_libara/"
+            cache_entries["amsr-vector-fs-sec-iam_libclient_DIR:PATH"] = "$EXT_BUILD_DEPS/amsr_vector_fs_sec_iam/lib/cmake/amsr-vector-fs-sec-iam_libclient/"
+
+        elif dep == ":amsr_vector_fs_em_executionmanager":
+            cache_entries["amsr-vector-fs-em-executionmanagement_application-client_DIR:PATH"] = "$EXT_BUILD_DEPS/amsr_vector_fs_em_executionmanager/lib/cmake/amsr-vector-fs-em-executionmanagement_application-client/"
+
+        elif dep == ":amsr_vector_fs_someipprotocol":
+            cache_entries["SomeIpProtocol_DIR:PATH"] = "$EXT_BUILD_DEPS/amsr_vector_fs_someipprotocol/lib/cmake/SomeIpProtocol/"
+
+        elif dep == ":amsr_vector_fs_someipdaemonclient":
+            cache_entries["SomeIpDaemonClient_DIR:PATH"] = "$EXT_BUILD_DEPS/amsr_vector_fs_someipdaemonclient/lib/cmake/SomeIpDaemonClient/"
+
+        elif dep == ":amsr_vector_fs_sec_cryptostack":
+            cache_entries["amsr-vector-fs-sec-cryptostack_libclient_DIR:PATH"] = "$EXT_BUILD_DEPS/amsr_vector_fs_sec_cryptostack/lib/cmake/amsr-vector-fs-sec-cryptostack_libclient/"
+            cache_entries["amsr-vector-fs-sec-cryptostack_libcommon_DIR:PATH"] = "$EXT_BUILD_DEPS/amsr_vector_fs_sec_cryptostack/lib/cmake/amsr-vector-fs-sec-cryptostack_libcommon/"
+            cache_entries["amsr-vector-fs-sec-cryptostack_libara_DIR:PATH"] = "$EXT_BUILD_DEPS/amsr_vector_fs_sec_cryptostack/lib/cmake/amsr-vector-fs-sec-cryptostack_libara/"
+            cache_entries["amsr-vector-fs-sec-cryptostack_libdriverfactory_DIR:PATH"] = "$EXT_BUILD_DEPS/amsr_vector_fs_sec_cryptostack/lib/cmake/amsr-vector-fs-sec-cryptostack_libdriverfactory/"
+            cache_entries["amsr-vector-fs-sec-cryptostack_libsoftwareprovider_DIR:PATH"] = "$EXT_BUILD_DEPS/amsr_vector_fs_sec_cryptostack/lib/cmake/amsr-vector-fs-sec-cryptostack_libsoftwareprovider/"
+
+        elif dep == ":amsr_vector_fs_sec_cryptostack_driver_lib_es":
+            cache_entries["amsr-vector-fs-sec-cryptostack-driver-lib_es_DIR:PATH"] = "$EXT_BUILD_DEPS/amsr_vector_fs_sec_cryptostack_driver_lib_es/lib/cmake/amsr-vector-fs-sec-cryptostack-driver-lib_es/"
+
+        elif dep == ":amsr_vector_fs_applicationbase":
+            cache_entries["application_base_DIR:PATH"] = "$EXT_BUILD_DEPS/amsr_vector_fs_applicationbase/lib/cmake/application_base/"
+
+        elif dep == ":amsr_vector_fs_crc":
+            cache_entries["amsr-vector-fs-crc_libinternal_DIR:PATH"] = "$EXT_BUILD_DEPS/amsr_vector_fs_crc/lib/cmake/amsr-vector-fs-crc_libinternal/"
+
+        elif dep == ":amsr_vector_fs_e2e":
+            cache_entries["amsr-vector-fs-e2e_libe2e_DIR:PATH"] = "$EXT_BUILD_DEPS/amsr_vector_fs_e2e/lib/cmake/amsr-vector-fs-e2e_libe2e/"
+            cache_entries["amsr-vector-fs-e2e_libinternal_DIR:PATH"] = "$EXT_BUILD_DEPS/amsr_vector_fs_e2e/lib/cmake/amsr-vector-fs-e2e_libinternal/"
+
+    if binaries:
+        cache_entries["CMAKE_EXE_LINKER_FLAGS"] = "-lpthread"
+
+    cmake_external(
+        name = name,
+        cache_entries = cache_entries,
+        generate_crosstool_file = True,
+        lib_source = srcs_filegroup,
+        headers_only = headers_only,
+        static_libraries = static_libraries,
+        visibility = ["//visibility:public"],
+        deps = deps,
+        binaries = binaries,
+        out_bin_dir = out_bin_dir,
+        make_commands = [
+            "make -j",
+            "make install",
+        ],
+    )
