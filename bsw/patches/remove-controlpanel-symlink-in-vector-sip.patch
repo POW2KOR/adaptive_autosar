@@ -1,7 +1,7 @@
-diff --git a/DaVinciConfigurator/Core/setupJreLinks.sh b/DaVinciConfigurator/Core/setupJreLinks.sh
+diff --git a/mb_base_layer_adaptive_xavier/amsr_xavier/DaVinciConfigurator/Core/setupJreLinks.sh b/mb_base_layer_adaptive_xavier/amsr_xavier/DaVinciConfigurator/Core/setupJreLinks.sh
 index 117e56eb..dca84727 100755
---- a/DaVinciConfigurator/Core/setupJreLinks.sh
-+++ b/DaVinciConfigurator/Core/setupJreLinks.sh
+--- a/mb_base_layer_adaptive_xavier/amsr_xavier/DaVinciConfigurator/Core/setupJreLinks.sh
++++ b/mb_base_layer_adaptive_xavier/amsr_xavier/DaVinciConfigurator/Core/setupJreLinks.sh
 @@ -151,7 +151,6 @@ createJreLink() {
  # The original tarball from Oracle contains these symlinks and its planned to use and extract the tarball in future.
  #

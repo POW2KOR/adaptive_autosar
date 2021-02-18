@@ -241,7 +241,6 @@ new_git_repository(
     commit = "379d1f0ece2724e78ea23fa9f863d8120c0457b5",  # the commit ID that bazel will use to fetch the external repository
     init_submodules = True,
     patch_args = [
-        "--directory=mb_base_layer_adaptive_xavier/amsr_xavier/",
         "-p1",
     ],
     patches = [
