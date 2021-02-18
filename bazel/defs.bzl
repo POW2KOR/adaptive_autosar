@@ -149,6 +149,7 @@ def minerva_aa_codegen_rule(name, arxml_srcs, outs_list_dict, generators, ignore
         output_folder="$(RULEDIR)/{output_folder}"
         arxml_srcs_folder="$(RULEDIR)/{arxml_srcs_folder}"
         generator_log="$$output_folder/generator_log.txt"
+        generator_messages_tempfile=`tempfile`
 
         rm -rf $$output_folder
         rm -rf $$arxml_srcs_folder
@@ -164,7 +165,11 @@ def minerva_aa_codegen_rule(name, arxml_srcs, outs_list_dict, generators, ignore
         set +e
         $(location @starter_kit_adaptive_xavier//:amsrgen_sh) -v {generators_arg} -x $$arxml_srcs_folder -o $$output_folder --saveProject 1>$$generator_log 2>&1 
 
+        # Process error messages from code generator
         if [ $$? -ne 0 ]; then
+            # We cannot use xmllint to display the generator error messages
+            # because the generator does not output a generator report xml file
+            # in case of fatal errors.
             echo ""
             echo "The generator has failed executing. Please check the log for more details:"
             echo $$generator_log
@@ -173,7 +178,44 @@ def minerva_aa_codegen_rule(name, arxml_srcs, outs_list_dict, generators, ignore
             exit 1
         fi
 
-        # From now you can stop on error
+        # If xmllint is installed, we print the generator's warning and
+        # non-fatal error messages.
+        if [ -x "$$(command -v xmllint)" ]; then
+            # Unfortunately, we can't use XPath text() to print because of a bug in
+            # xmllint which doesn't print new lines, so we're doing the newline add
+            # in sed in the next step
+
+            # Take the non-fatal error messages
+            xmllint --xpath "//ValidationResult[@severity=\\"Error\\"]/Description" $$output_folder/GeneratorReport.xml 1>$$generator_messages_tempfile 2>/dev/null
+
+            # Take the warning messages
+            xmllint --xpath "//ValidationResult[@severity=\\"Warning\\"]/Description" $$output_folder/GeneratorReport.xml 1>>$$generator_messages_tempfile 2>/dev/null
+
+            # This sed removes the <Description> xml tag and adds new lines.
+            # This is due to the aforementioned xmllint bug.
+            sed -i "s/<\\/Description>/\\\\n/g ; s/<Description>/- /g" $$generator_messages_tempfile
+
+            if [[ $$(wc -l $$generator_messages_tempfile | awk '{{print $$1}}') > 0 ]]; then
+                echo ""
+                echo "The code generator emitted the following warnings and non-fatal errors:"
+                cat $$generator_messages_tempfile
+                echo ""
+            fi
+        else
+            if grep -q -E 'severity="(Warning|Error)"' $$output_folder/GeneratorReport.xml; then
+                echo ""
+                echo "The generator has emitted some non-fatal errors or warnings. Please check the log for more details:"
+                echo $$generator_log
+                echo ""
+            fi
+
+        fi
+
+        # End process error messages from code generator
+
+        # Start process generated files
+
+        # From now we can stop on error
         set -e
 
         echo $(OUTS) | tr " " "\\\\n" | sort > $$tmp_folder/outs.txt
@@ -183,9 +225,9 @@ def minerva_aa_codegen_rule(name, arxml_srcs, outs_list_dict, generators, ignore
         # list.
         comm -23 $$tmp_folder/generated.txt $$tmp_folder/outs.txt > $$tmp_folder/comparison.txt
 
-        # Ignore the GeneratorReport.html and GeneratorReport.xml files for the
-        # purpose of this error message.
-        #
+        # Ignore the generator_log.txt, GeneratorReport.html and 
+        # GeneratorReport.xml files for the purpose of this error message.
+        # 
         # Also ignore any other files which match ignore_matches
 
         for IGNORE_MATCH in generator_log.txt 'GeneratorReport.(html|xml)' {ignore_matches}
@@ -207,6 +249,7 @@ def minerva_aa_codegen_rule(name, arxml_srcs, outs_list_dict, generators, ignore
 
             exit 1
         fi
+        # End process generated files
         """.format(
             arxml_srcs_folder = "{}/arxml_srcs".format(gen_rule_name),
             output_folder = gen_rule_output_folder,
