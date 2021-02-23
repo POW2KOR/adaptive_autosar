@@ -1,0 +1,29 @@
+diff --git a/examples/proxy-skeleton-demo-idc6/applications/skeleton-demo-idc6/src/activation_manager.cpp b/examples/proxy-skeleton-demo-idc6/applications/skeleton-demo-idc6/src/activation_manager.cpp
+index 62439ef..5d1c846 100644
+--- a/examples/proxy-skeleton-demo-idc6/applications/skeleton-demo-idc6/src/activation_manager.cpp
++++ b/examples/proxy-skeleton-demo-idc6/applications/skeleton-demo-idc6/src/activation_manager.cpp
+@@ -10,7 +10,8 @@
+ #include "activation_manager.h"
+ 
+ /* C system includes */
+-
++#include "cstdlib"
++#include "cerrno"
+ 
+ /* C++ system includes */
+ #include <cmath>
+
+ diff --git a/examples/proxy-skeleton-demo-idc6/applications/proxy-demo-idc6/src/activation_manager.cpp b/examples/proxy-skeleton-demo-idc6/applications/proxy-demo-idc6/src/activation_manager.cpp
+index 62439ef..5d1c846 100644
+--- a/examples/proxy-skeleton-demo-idc6/applications/proxy-demo-idc6/src/activation_manager.cpp
++++ b/examples/proxy-skeleton-demo-idc6/applications/proxy-demo-idc6/src/activation_manager.cpp
+@@ -10,7 +10,8 @@
+ #include "activation_manager.h"
+ 
+ /* C system includes */
+-
++#include "cstdlib"
++#include "cerrno"
+ 
+ /* C++ system includes */
+ #include <cmath>
