@@ -160,6 +160,7 @@ To proceed with your build on host, change to your repository root directory and
 ```
 bazel build //bsw:amsr_vector_fs_socal_for_proxy --config=<CONFIGURATION>
 bazel build //bsw:amsr_vector_fs_socal_for_skeleton --config=<CONFIGURATION>
+bazel build //bsw:amsr_vector_fs_socal_for_software_update --config=<CONFIGURATION>
 bazel build //:minerva_mpu_adaptive_filesystem --config=<CONFIGURATION>
 ```
 
@@ -249,6 +250,7 @@ Build the filesystem like so:
 ```
 bazel build //bsw:amsr_vector_fs_socal_for_proxy --config=aarch64_linux_ubuntu
 bazel build //bsw:amsr_vector_fs_socal_for_skeleton --config=aarch64_linux_ubuntu
+bazel build //bsw:amsr_vector_fs_socal_for_software_update --config=aarch64_linux_ubuntu
 bazel build //:minerva_mpu_adaptive_filesystem --config=aarch64_linux_ubuntu
 ```
 
@@ -289,8 +291,6 @@ After this run the below command to run execution manager:
 sudo ./sbin/amsr_vector_fs_em_executionmanager -a ./opt -m ./etc/machine_exec_config.json
 ```
 
-# Miscellaneous
-
 ## Circular dependency workaround
 Currently, there is a circular linking dependency between `amsr_vector_fs_socal` and the generated source code for
 `ara::com`. Bazel does not support circular linking dependencies. Currently, the only way to get rid of this circular
@@ -304,6 +304,7 @@ the SIP:
 ```
 bazel build //bsw:amsr_vector_fs_socal_for_proxy --config=<CONFIGURATION>
 bazel build //bsw:amsr_vector_fs_socal_for_skeleton --config=<CONFIGURATION>
+bazel build //bsw:amsr_vector_fs_socal_for_software_update --config=<CONFIGURATION>
 ```
 After that, you can initiate your actual building, because the circular dependency is worked around with the 
 `//bsw:amsr_vector_fs_socal_headers` target and both `\\:socal_lib_for_proxy` and `\\:socal_lib_for_socal` file groups.
