@@ -289,8 +289,6 @@ After this run the below command to run execution manager:
 sudo ./sbin/amsr_vector_fs_em_executionmanager -a ./opt -m ./etc/machine_exec_config.json
 ```
 
-# Miscellaneous
-
 ## Circular dependency workaround
 Currently, there is a circular linking dependency between `amsr_vector_fs_socal` and the generated source code for
 `ara::com`. Bazel does not support circular linking dependencies. Currently, the only way to get rid of this circular
