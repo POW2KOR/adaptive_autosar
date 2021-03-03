@@ -21,10 +21,10 @@ node('pulse_ec2') {
             docker.withRegistry(registryUrl, registryCredentials) {
                 docker.image("${imgNameVer}").inside("--entrypoint=''") {
                     stage('C++ formatting check') {
-                        sh './devops/scripts/clang-format-apply.sh True'
+                        sh "./devops/scripts/clang-format-apply.sh True ${env.gitlabTargetBranch}"
                     }
                     stage('Python formatting check'){
-                        sh './devops/scripts/yapf-format-apply.sh True'
+                        sh "./devops/scripts/yapf-format-apply.sh True ${env.gitlabTargetBranch}"
                     }
                     stage('Git message check'){
                         sh '''

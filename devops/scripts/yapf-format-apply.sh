@@ -13,10 +13,11 @@ echo ""
 echo "------------ Applying YAPF formatting for python ---------------"
 
 # Retrieve list of files that were changed in source branch
-# with respect to master (target branch)
-tb="origin/master"
+# with respect to target branch
+tb="origin/$2"
+echo "Target branch: ${tb}"
 
-# Get all modified files with respect to master
+# Get all modified files with respect to target branch
 filelist=`git diff ${tb}... --name-status | awk '{if($1 == "M") print $2}' | grep ".*\.py$" || continue`
 
 if [[ -z $filelist ]]; then
