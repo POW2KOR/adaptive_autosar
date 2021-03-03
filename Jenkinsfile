@@ -113,7 +113,6 @@ node('pulse_ec2') {
         }
         stage('deploy') {
             // Add the code to push docker image to artifactoy.
-            sh "env"
         }
     }
     catch (e) {
