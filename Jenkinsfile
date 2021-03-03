@@ -24,7 +24,7 @@ node('pulse_ec2') {
                         sh "./devops/scripts/clang-format-apply.sh True ${env.gitlabTargetBranch}"
                     }
                     stage('Python formatting check'){
-                        sh './devops/scripts/yapf-format-apply.sh True'
+                        sh "./devops/scripts/yapf-format-apply.sh True ${env.gitlabTargetBranch}"
                     }
                     stage('Git message check'){
                         sh '''
