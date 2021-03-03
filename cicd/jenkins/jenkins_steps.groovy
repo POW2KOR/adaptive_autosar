@@ -42,16 +42,7 @@ def compile_x86_64_linux_ubuntu(lib_name) {
             docker.withRegistry(env.registryUrl, env.registryCredentials) {
                 docker.image(DOCKER_IMAGE_COMPILATION).inside("-u 0:0 --entrypoint='' ${env.diskCache} ${remoteUpload}") {
                     sshagent([env.sshJenkinsCredentials]) {
-                        // TODO: Move into external shellscript
-                        sh '''
-                            # Workaround for circular dependency
-                            bazel build //bsw:amsr_vector_fs_socal_for_proxy --config=x86_64_linux --config=use_efs_build_cache --remote_upload_local_results=${isMaster}
-                            bazel build //bsw:amsr_vector_fs_socal_for_skeleton --config=x86_64_linux --config=use_efs_build_cache --remote_upload_local_results=${isMaster}
-                            bazel build //bsw:amsr_vector_fs_socal_for_software_update --config=x86_64_linux --config=use_efs_build_cache --remote_upload_local_results=${isMaster}
-
-                            # Actual build
-                            bazel build //:minerva_mpu_adaptive_filesystem --config=x86_64_linux --config=use_efs_build_cache --remote_upload_local_results=${isMaster}
-                        '''
+                        sh 'cicd/scripts/bash/runtime_functions.sh compile_x86_64_linux_ubuntu'
                     }
 
                     //TODO: Don't invoke Docker with 0:0 but fix the permissions properly than doing this hack
@@ -77,16 +68,7 @@ def compile_aarch64_linux_ubuntu(lib_name) {
             docker.withRegistry(env.registryUrl, env.registryCredentials) {
                 docker.image(DOCKER_IMAGE_COMPILATION).inside("-u 0:0 --entrypoint='' ${env.diskCache} ${remoteUpload}") {
                     sshagent([env.sshJenkinsCredentials]) {
-                        // TODO: Move into external shellscript
-                        sh '''
-                            # Workaround for circular dependency
-                            bazel build //bsw:amsr_vector_fs_socal_for_proxy --config=aarch64_linux_ubuntu --config=use_efs_build_cache --remote_upload_local_results=${isMaster}
-                            bazel build //bsw:amsr_vector_fs_socal_for_skeleton --config=aarch64_linux_ubuntu --config=use_efs_build_cache --remote_upload_local_results=${isMaster}
-                            bazel build //bsw:amsr_vector_fs_socal_for_software_update --config=aarch64_linux_ubuntu --config=use_efs_build_cache --remote_upload_local_results=${isMaster}
-
-                            # Actual build
-                            bazel build //:minerva_mpu_adaptive_filesystem --config=aarch64_linux_ubuntu --config=use_efs_build_cache --remote_upload_local_results=${isMaster}
-                        '''
+                        sh 'cicd/scripts/bash/runtime_functions.sh compile_aarch64_linux_ubuntu'
                     }
 
                     //TODO: Don't invoke Docker with 0:0 but fix the permissions properly than doing this hack
@@ -113,16 +95,7 @@ def compile_aarch64_linux_linaro(lib_name) {
             docker.withRegistry(env.registryUrl, env.registryCredentials) {
                 docker.image(DOCKER_IMAGE_COMPILATION).inside("-u 0:0 --entrypoint='' ${env.diskCache} ${remoteUpload}") {
                     sshagent([env.sshJenkinsCredentials]) {
-                        // TODO: Move into external shellscript
-                        sh '''
-                            # Workaround for circular dependency
-                            bazel build //bsw:amsr_vector_fs_socal_for_proxy --config=aarch64_linux_linaro --config=use_efs_build_cache --remote_upload_local_results=${isMaster}
-                            bazel build //bsw:amsr_vector_fs_socal_for_skeleton --config=aarch64_linux_linaro --config=use_efs_build_cache --remote_upload_local_results=${isMaster}
-                            bazel build //bsw:amsr_vector_fs_socal_for_software_update --config=aarch64_linux_linaro --config=use_efs_build_cache --remote_upload_local_results=${isMaster}
-
-                            # Actual build
-                            bazel build //:minerva_mpu_adaptive_filesystem --config=aarch64_linux_linaro --config=use_efs_build_cache --remote_upload_local_results=${isMaster}
-                        '''
+                        sh 'cicd/scripts/bash/runtime_functions.sh compile_aarch64_linux_linaro'
                     }
 
                     //TODO: Don't invoke Docker with 0:0 but fix the permissions properly than doing this hack
