@@ -1,4 +1,5 @@
 // -*- mode: groovy -*-
+lib_depot_utilities = load('ci-depot/jenkins/utilities.groovy')
 
 DOCKER_IMAGE_COMPILATION = "artifact.swf.daimler.com/adasdai-docker/minerva_mpu_docker/minerva_mpu:20210216120747"
 
@@ -12,6 +13,7 @@ def initialize() {
       node(env.NODE_UTILITY) {
         timeout(time: max_time, unit: 'MINUTES') {
             init_git()
+            // TODO: Try to get rid of the mess in here as much as possible
             rootDir = pwd()
 
             registryUrl = "https://artifact.${env.SWF_DOMAIN}"
@@ -40,6 +42,7 @@ def compile_x86_64_linux_ubuntu(lib_name) {
             docker.withRegistry(env.registryUrl, env.registryCredentials) {
                 docker.image(DOCKER_IMAGE_COMPILATION).inside("-u 0:0 --entrypoint='' ${env.diskCache} ${remoteUpload}") {
                     sshagent([env.sshJenkinsCredentials]) {
+                        // TODO: Move into external shellscript
                         sh '''
                             # Workaround for circular dependency
                             bazel build //bsw:amsr_vector_fs_socal_for_proxy --config=x86_64_linux --config=use_efs_build_cache --remote_upload_local_results=${isMaster}
@@ -57,7 +60,7 @@ def compile_x86_64_linux_ubuntu(lib_name) {
                 }
             }
 
-            pack_lib(lib_name, STASH_LIB_X86_64_LINUX_UBUNTU, true)
+            lib_depot_utilities.pack_lib(lib_name, STASH_LIB_X86_64_LINUX_UBUNTU)
         }
       }
     }]
@@ -74,6 +77,7 @@ def compile_aarch64_linux_ubuntu(lib_name) {
             docker.withRegistry(env.registryUrl, env.registryCredentials) {
                 docker.image(DOCKER_IMAGE_COMPILATION).inside("-u 0:0 --entrypoint='' ${env.diskCache} ${remoteUpload}") {
                     sshagent([env.sshJenkinsCredentials]) {
+                        // TODO: Move into external shellscript
                         sh '''
                             # Workaround for circular dependency
                             bazel build //bsw:amsr_vector_fs_socal_for_proxy --config=aarch64_linux_ubuntu --config=use_efs_build_cache --remote_upload_local_results=${isMaster}
@@ -91,7 +95,7 @@ def compile_aarch64_linux_ubuntu(lib_name) {
                 }
             }
 
-            pack_lib(lib_name, STASH_LIB_AARCH64_LINUX_UBUNTU, true)
+            lib_depot_utilities.pack_lib(lib_name, STASH_LIB_AARCH64_LINUX_UBUNTU)
         }
       }
     }]
@@ -109,6 +113,7 @@ def compile_aarch64_linux_linaro(lib_name) {
             docker.withRegistry(env.registryUrl, env.registryCredentials) {
                 docker.image(DOCKER_IMAGE_COMPILATION).inside("-u 0:0 --entrypoint='' ${env.diskCache} ${remoteUpload}") {
                     sshagent([env.sshJenkinsCredentials]) {
+                        // TODO: Move into external shellscript
                         sh '''
                             # Workaround for circular dependency
                             bazel build //bsw:amsr_vector_fs_socal_for_proxy --config=aarch64_linux_linaro --config=use_efs_build_cache --remote_upload_local_results=${isMaster}
@@ -126,7 +131,7 @@ def compile_aarch64_linux_linaro(lib_name) {
                 }
             }
 
-            pack_lib(lib_name, STASH_LIB_AARCH64_LINUX_LINARO, true)
+            lib_depot_utilities.pack_lib(lib_name, STASH_LIB_AARCH64_LINUX_LINARO)
         }
       }
     }]
