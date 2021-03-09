@@ -18,7 +18,7 @@ configurations without actually affecting the developer machine configuration.
 We call the docker container where we build things the `build_env` and the docker container where we run things the
 `run_env`.
 
-Yoy can find a guide on setting up docker on Daimler Ubuntu laptops
+You can find a guide on setting up docker on Daimler Ubuntu laptops
 [here](https://wiki.swf.daimler.com/display/ADASDAI/Setup+docker)
 
 
@@ -38,9 +38,9 @@ docker login artifact.swf.daimler.com
 ```
 Then pull your image:
 ```
-docker pull artifact.swf.daimler.com/adasdai-docker/minerva_mpu_docker/minerva_mpu:<YYYYMMDDHHMMSS>
+docker pull artifact.swf.daimler.com/adasdai-docker/minerva_mpu_docker/minerva_mpu:<commitID>
 ```
-where `<YYYYMMDDHHMMSS>` is the image version. We are currently targeting version `20210216120747`.
+where `<commitID>` is the image version. We are currently targeting version `013bbf502933076a7a1bbd13414c34723a1d3e78`.
 
 
 ## Setup to build without docker
@@ -144,10 +144,10 @@ docker run -it \
    -v /var/run/docker.sock:/var/run/docker.sock \
    -v $SSH_AUTH_SOCK:/ssh-agent \
    --workdir /root/workspace \
-   artifact.swf.daimler.com/adasdai-docker/minerva_mpu_docker/minerva_mpu:<YYYYMMDDHHMMSS>
+   artifact.swf.daimler.com/adasdai-docker/minerva_mpu_docker/minerva_mpu:<commitID>
 ```
 where: `<REPOSITORY>` is your local path to the cloned repo, e.g.
-`/lhome/$USER/workspace/minerva/minerva_mpu_adaptive/`, and `<YYYYMMDDHHMMSS>` is container's version (it is supposed
+`/lhome/$USER/workspace/minerva/minerva_mpu_adaptive/`, and `<commitID>` is container's version (it is supposed
 to be the same version you've pulled during the setup from earlier).
 
 ## The actual build steps
@@ -178,8 +178,15 @@ please refer to [this](#circular-dependency-workaround) section.
 ## Running on host with the run_env docker
 
 The following command will allow you to run the Minerva MPU Adaptive stack inside a docker container on your
-development machine. The run command uses the Bazel build graph and will detect if it is necessary to build/rebuild
-anything before running the stack. So you don't need to have a call a build step separately.
+development machine. There are few dependencies that should be resolved before going ahead with the build.
+The repo could be build for three separate toolchain:
+1. x86_64_linux_ubuntu
+2. aarch64_linux_ubuntu
+3. aarch64_linux_linaro
+
+Refer [Circular dependency workaround](#circular-dependency-workaround) before proceeding with actual build.
+
+### Running Docker
 ```
 bazel run //:minerva_mpu_adaptive_docker --config=<CONFIGURATION>
 ```
@@ -306,7 +313,7 @@ bazel build //bsw:amsr_vector_fs_socal_for_proxy --config=<CONFIGURATION>
 bazel build //bsw:amsr_vector_fs_socal_for_skeleton --config=<CONFIGURATION>
 bazel build //bsw:amsr_vector_fs_socal_for_software_update --config=<CONFIGURATION>
 ```
-After that, you can initiate your actual building, because the circular dependency is worked around with the 
+After that, you can initiate your actual building, because the circular dependency is worked around with the
 `//bsw:amsr_vector_fs_socal_headers` target and both `\\:socal_lib_for_proxy` and `\\:socal_lib_for_socal` file groups.
 
 ## Useful information
