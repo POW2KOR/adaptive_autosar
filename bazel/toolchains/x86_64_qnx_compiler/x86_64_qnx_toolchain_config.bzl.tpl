@@ -14,32 +14,53 @@ load("@bazel_tools//tools/build_defs/cc:action_names.bzl", "ACTION_NAMES")
 # archiver flags and all gcc tools. This template
 # is used by x86_64_qnx_configure.bzl.
 
-all_build_actions = [
+
+all_compile_actions = [
     ACTION_NAMES.c_compile,
     ACTION_NAMES.cpp_compile,
     ACTION_NAMES.linkstamp_compile,
-    ACTION_NAMES.cc_flags_make_variable,
-    ACTION_NAMES.cpp_module_codegen,
-    ACTION_NAMES.cpp_header_parsing,
-    ACTION_NAMES.cpp_module_compile,
     ACTION_NAMES.assemble,
     ACTION_NAMES.preprocess_assemble,
-    ACTION_NAMES.lto_indexing,
+    ACTION_NAMES.cpp_header_parsing,
+    ACTION_NAMES.cpp_module_compile,
+    ACTION_NAMES.cpp_module_codegen,
+    ACTION_NAMES.clif_match,
     ACTION_NAMES.lto_backend,
-    ACTION_NAMES.lto_index_for_executable,
-    ACTION_NAMES.lto_index_for_dynamic_library,
-    ACTION_NAMES.lto_index_for_nodeps_dynamic_library,
+]
+
+all_cpp_compile_actions = [
+    ACTION_NAMES.cpp_compile,
+    ACTION_NAMES.linkstamp_compile,
+    ACTION_NAMES.cpp_header_parsing,
+    ACTION_NAMES.cpp_module_compile,
+    ACTION_NAMES.cpp_module_codegen,
+    ACTION_NAMES.clif_match,
+]
+
+preprocessor_compile_actions = [
+    ACTION_NAMES.c_compile,
+    ACTION_NAMES.cpp_compile,
+    ACTION_NAMES.linkstamp_compile,
+    ACTION_NAMES.preprocess_assemble,
+    ACTION_NAMES.cpp_header_parsing,
+    ACTION_NAMES.cpp_module_compile,
+    ACTION_NAMES.clif_match,
+]
+
+codegen_compile_actions = [
+    ACTION_NAMES.c_compile,
+    ACTION_NAMES.cpp_compile,
+    ACTION_NAMES.linkstamp_compile,
+    ACTION_NAMES.assemble,
+    ACTION_NAMES.preprocess_assemble,
+    ACTION_NAMES.cpp_module_codegen,
+    ACTION_NAMES.lto_backend,
+]
+
+all_link_actions = [
     ACTION_NAMES.cpp_link_executable,
     ACTION_NAMES.cpp_link_dynamic_library,
     ACTION_NAMES.cpp_link_nodeps_dynamic_library,
-    ACTION_NAMES.strip,
-    ACTION_NAMES.objc_archive,
-    ACTION_NAMES.objc_compile,
-    ACTION_NAMES.objc_executable,
-    ACTION_NAMES.objc_fully_link,
-    ACTION_NAMES.objcpp_compile,
-    ACTION_NAMES.objcpp_executable,
-    ACTION_NAMES.clif_match,
 ]
 
 def _impl(ctx):
@@ -92,9 +113,7 @@ def _impl(ctx):
             enabled = True,
             flag_sets = [
                 flag_set(
-                    actions = [
-                        ACTION_NAMES.cpp_link_executable,
-                    ],
+                    actions = all_link_actions,
                     flag_groups = ([
                         flag_group(
                             flags = [
@@ -132,32 +151,7 @@ def _impl(ctx):
             enabled = True,
             flag_sets = [
                 flag_set(
-                    actions = [
-                        ACTION_NAMES.c_compile,
-                        ACTION_NAMES.cpp_compile,
-                        ACTION_NAMES.linkstamp_compile,
-                        ACTION_NAMES.cc_flags_make_variable,
-                        ACTION_NAMES.cpp_module_codegen,
-                        ACTION_NAMES.cpp_header_parsing,
-                        ACTION_NAMES.cpp_module_compile,
-                        ACTION_NAMES.assemble,
-                        ACTION_NAMES.preprocess_assemble,
-                        ACTION_NAMES.lto_indexing,
-                        ACTION_NAMES.lto_backend,
-                        ACTION_NAMES.lto_index_for_executable,
-                        ACTION_NAMES.lto_index_for_dynamic_library,
-                        ACTION_NAMES.lto_index_for_nodeps_dynamic_library,
-                        ACTION_NAMES.cpp_link_dynamic_library,
-                        ACTION_NAMES.cpp_link_nodeps_dynamic_library,
-                        ACTION_NAMES.strip,
-                        ACTION_NAMES.objc_archive,
-                        ACTION_NAMES.objc_compile,
-                        ACTION_NAMES.objc_executable,
-                        ACTION_NAMES.objc_fully_link,
-                        ACTION_NAMES.objcpp_compile,
-                        ACTION_NAMES.objcpp_executable,
-                        ACTION_NAMES.clif_match,
-                    ],
+                    actions = all_compile_actions,
                     flag_groups = ([
                         flag_group(
                             flags = [
@@ -250,20 +244,7 @@ def _impl(ctx):
             enabled = True,
             flag_sets = [
                 flag_set(
-                    actions = [
-                        ACTION_NAMES.preprocess_assemble,
-                        ACTION_NAMES.linkstamp_compile,
-                        ACTION_NAMES.c_compile,
-                        ACTION_NAMES.cpp_compile,
-                        ACTION_NAMES.cpp_header_parsing,
-                        ACTION_NAMES.cpp_module_compile,
-                        ACTION_NAMES.cpp_module_codegen,
-                        ACTION_NAMES.lto_backend,
-                        ACTION_NAMES.clif_match,
-                        ACTION_NAMES.cpp_link_executable,
-                        ACTION_NAMES.cpp_link_dynamic_library,
-                        ACTION_NAMES.cpp_link_nodeps_dynamic_library,
-                    ],
+                    actions = all_compile_actions + all_link_actions,
                     flag_groups = [
                         flag_group(
                             flags = ["--sysroot=%{TARGET_PATH}%/x86_64"],
