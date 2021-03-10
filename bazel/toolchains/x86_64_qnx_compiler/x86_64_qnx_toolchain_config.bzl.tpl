@@ -272,39 +272,6 @@ def _impl(ctx):
                 ),
             ],
         ),
-
-        feature(
-            name = "unfiltered_compile_flags",
-            enabled = True,
-            flag_sets = [
-                flag_set(
-                    actions = [
-                        ACTION_NAMES.assemble,
-                        ACTION_NAMES.preprocess_assemble,
-                        ACTION_NAMES.linkstamp_compile,
-                        ACTION_NAMES.c_compile,
-                        ACTION_NAMES.cpp_compile,
-                        ACTION_NAMES.cpp_header_parsing,
-                        ACTION_NAMES.cpp_module_compile,
-                        ACTION_NAMES.cpp_module_codegen,
-                        ACTION_NAMES.lto_backend,
-                        ACTION_NAMES.clif_match,
-                    ],
-                    flag_groups = [
-                        flag_group(
-                            flags = [
-                                "-Wno-builtin-macro-redefined",
-                                "-D__DATE__=\"redacted\"",
-                                "-D__TIMESTAMP__=\"redacted\"",
-                                "-D__TIME__=\"redacted\"",
-                                "-no-canonical-prefixes",
-                                "-fno-canonical-system-headers",
-                            ],
-                        ),
-                    ],
-                ),
-            ],
-        ),
     ]
 
     return cc_common.create_cc_toolchain_config_info(
