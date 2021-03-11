@@ -22,15 +22,15 @@ def _x86_64_qnx_toolchain_configure_impl(repository_ctx):
     else:
         x86_64_qnx_toolchain_target_path = "/opt/qnx/qnx700/target/qnx7"
 
-    _tpl(repository_ctx, "x86_64_qnx_toolchain_config.bzl", {
-        "%{HOST_PATH}%": x86_64_qnx_toolchain_host_path,
-        "%{TARGET_PATH}%": x86_64_qnx_toolchain_target_path,
-    })
-
     repository_ctx.symlink(repository_ctx.attr.build_file, "BUILD")
 
     repository_ctx.symlink(x86_64_qnx_toolchain_host_path, "qnx_host")
     repository_ctx.symlink(x86_64_qnx_toolchain_target_path, "qnx_target")
+
+    _tpl(repository_ctx, "x86_64_qnx_toolchain_config.bzl", {
+        "%{HOST_PATH}%": str(repository_ctx.path("qnx_host")),
+        "%{TARGET_PATH}%": str(repository_ctx.path("qnx_target")),
+    })
 
 x86_64_qnx_configure = repository_rule(
     implementation = _x86_64_qnx_toolchain_configure_impl,
