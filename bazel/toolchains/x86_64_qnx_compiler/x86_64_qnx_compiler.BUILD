@@ -66,8 +66,8 @@ filegroup(
 filegroup(
     name = "compiler_pieces",
     srcs = glob([
-        "qnx_host/usr/lib/gcc/x86_64-pc-nto-qnx7.0.0/5.4.0/**",
-        "qnx_target/x86_64/**",
+        "qnx_host/usr/**",
+        "qnx_target/**",
     ]),
 )
 
