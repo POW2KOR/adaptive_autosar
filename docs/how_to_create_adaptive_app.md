@@ -206,8 +206,8 @@ cc_binary(
     copts = [
         "-std=c++14",
     ],
-    linkopts = [
-        "-lpthread",
+    features = [
+        "pthread",
     ],
     linkstatic = 1,
     deps = [
