@@ -248,6 +248,7 @@ new_git_repository(
         "@//bsw:patches/add-c-headers-to-fix-qnx.patch",
         "@//bsw:patches/fix-cmake-package-exports.patch",
         "@//bsw:patches/remove-controlpanel-symlink-in-vector-sip.patch",
+        "@//bsw:patches/make-pthread-work-inside-bazel.patch",
     ],
     remote = "ssh://git@git.swf.daimler.com:7999/adasdai/starter_kit_adaptive_xavier.git",
     shallow_since = "1607616957 +0100",

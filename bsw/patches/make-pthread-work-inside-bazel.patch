@@ -1,0 +1,16 @@
+diff --git a/mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-libosabstraction/lib/CMakeLists.txt b/mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-libosabstraction/lib/CMakeLists.txt
+index 91edb120..ab04977e 100644
+--- a/mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-libosabstraction/lib/CMakeLists.txt
++++ b/mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-libosabstraction/lib/CMakeLists.txt
+@@ -104,9 +104,8 @@ if (vac_FOUND)
+ endif ()
+ 
+ if(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
+-  find_package(Threads REQUIRED)
+-  message(STATUS "Package Threads found = ${Threads_FOUND}")
+-  target_link_libraries(${LIBRARY_NAME} ${CMAKE_THREAD_LIBS_INIT})
++  message(STATUS "Hardcoding dependency on pthread")
++  target_link_libraries(${LIBRARY_NAME} pthread)
+   target_link_libraries(${LIBRARY_NAME} "rt")
+ endif()
+ 
