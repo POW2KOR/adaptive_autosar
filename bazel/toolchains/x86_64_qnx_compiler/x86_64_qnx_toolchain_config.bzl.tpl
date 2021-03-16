@@ -134,7 +134,6 @@ def _impl(ctx):
                                 
                                 "-lm",
                                 "-lc++",
-                                "-lsocket",
                             ],
                         ),
                     ]),
@@ -250,6 +249,31 @@ def _impl(ctx):
                             flags = ["--sysroot=%{TARGET_PATH}%/x86_64"],
                         ),
                     ],
+                ),
+            ],
+        ),
+
+        feature(
+            name = "socket",
+            enabled = True,
+            flag_sets = [
+                flag_set(
+                    actions = all_link_actions,
+                    flag_groups = [flag_group(flags = ["-lsocket"])],
+                    with_features = [with_feature_set(features = ["socket"])],
+                ),
+            ],
+        ),
+        feature(
+            name = "pthread",
+            enabled = True,
+            flag_sets = [
+                flag_set(
+                    actions = all_link_actions,
+                    # We keep this flag empty for the QNX toolchain since it is implicit
+                    # For other toolchains, we populate this with the correct flag
+                    flag_groups = [flag_group(flags = [""])],
+                    with_features = [with_feature_set(features = ["pthread"])],
                 ),
             ],
         ),
