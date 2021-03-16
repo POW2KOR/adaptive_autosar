@@ -19,7 +19,7 @@ We call the docker container where we build things the `build_env` and the docke
 `run_env`.
 
 You can find a guide on setting up docker on Daimler Ubuntu laptops
-[here](https://wiki.swf.daimler.com/display/ADASDAI/Setup+docker)
+[here](https://wiki.swf.daimler.com/display/swf/How+to+setup+docker)
 
 
 ## Setup to build from inside the docker container
