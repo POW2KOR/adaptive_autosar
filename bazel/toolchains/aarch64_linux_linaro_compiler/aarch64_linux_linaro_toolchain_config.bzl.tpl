@@ -16,6 +16,12 @@ load("@bazel_tools//tools/build_defs/cc:action_names.bzl", "ACTION_NAMES")
 # archiver flags and all gcc tools. This template
 # is used by aarch64_linux_linaro_configure.bzl.
 
+all_link_actions = [
+    ACTION_NAMES.cpp_link_executable,
+    ACTION_NAMES.cpp_link_dynamic_library,
+    ACTION_NAMES.cpp_link_nodeps_dynamic_library,
+]
+
 def _impl(ctx):
     tool_paths = [
         tool_path(
@@ -216,6 +222,30 @@ def _impl(ctx):
                             ],
                         ),
                     ],
+                ),
+            ],
+        ),
+        feature(
+            name = "socket",
+            enabled = True,
+            flag_sets = [
+                flag_set(
+                    # We keep this flag empty for the linux toolchain since it is implicit
+                    # For other toolchains, we populate this with the correct flag
+                    actions = all_link_actions,
+                    flag_groups = [flag_group(flags = [""])],
+                    with_features = [with_feature_set(features = ["socket"])],
+                ),
+            ],
+        ),
+        feature(
+            name = "pthread",
+            enabled = True,
+            flag_sets = [
+                flag_set(
+                    actions = all_link_actions,
+                    flag_groups = [flag_group(flags = ["-lpthread"])],
+                    with_features = [with_feature_set(features = ["pthread"])],
                 ),
             ],
         ),
