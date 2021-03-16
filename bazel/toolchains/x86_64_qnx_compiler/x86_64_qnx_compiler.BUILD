@@ -3,85 +3,87 @@ package(default_visibility = ["//visibility:public"])
 filegroup(
     name = "gcc",
     srcs = [
-        "bin/aarch64-linux-gnu-gcc",
+        "qnx_host/usr/bin/x86_64-pc-nto-qnx7.0.0-gcc",
     ],
 )
 
 filegroup(
     name = "ar",
     srcs = [
-        "bin/aarch64-linux-gnu-ar",
+        "qnx_host/usr/bin/x86_64-pc-nto-qnx7.0.0-ar",
     ],
 )
 
 filegroup(
     name = "ld",
     srcs = [
-        "bin/aarch64-linux-gnu-ld",
+        "qnx_host/usr/bin/x86_64-pc-nto-qnx7.0.0-ld",
     ],
 )
 
 filegroup(
     name = "dwp",
     srcs = [
-        "bin/aarch64-linux-gnu-dwp",
+        "qnx_host/usr/bin/x86_64-pc-nto-qnx7.0.0-dwp",
     ],
 )
 
 filegroup(
     name = "nm",
     srcs = [
-        "bin/aarch64-linux-gnu-nm",
+        "qnx_host/usr/bin/x86_64-pc-nto-qnx7.0.0-nm",
     ],
 )
 
 filegroup(
     name = "objcopy",
     srcs = [
-        "bin/aarch64-linux-gnu-objcopy",
+        "qnx_host/usr/bin/x86_64-pc-nto-qnx7.0.0-objcopy",
     ],
 )
 
 filegroup(
     name = "objdump",
     srcs = [
-        "bin/aarch64-linux-gnu-objdump",
+        "qnx_host/usr/bin/x86_64-pc-nto-qnx7.0.0-objdump",
     ],
 )
 
 filegroup(
     name = "strip",
     srcs = [
-        "bin/aarch64-linux-gnu-strip",
+        "qnx_host/usr/bin/x86_64-pc-nto-qnx7.0.0-strip",
     ],
 )
 
 filegroup(
     name = "as",
     srcs = [
-        "bin/aarch64-linux-gnu-as",
+        "qnx_host/usr/bin/x86_64-pc-nto-qnx7.0.0-as",
     ],
 )
 
 filegroup(
     name = "compiler_pieces",
     srcs = glob([
-        "lib/gcc/aarch64-linux-gnu/7.3.1/**",
-        "aarch64-linux-gnu/**",
+        "qnx_host/usr/lib/gcc/x86_64-pc-nto-qnx7.0.0/5.4.0/**",
+        "qnx_target/x86_64/**",
     ]),
 )
 
 filegroup(
     name = "dynamic_lib",
     srcs = glob(
-        ["aarch64-linux-gnu/lib64/*.so"],
+        ["qnx_host/usr/lib/gcc/x86_64-pc-nto-qnx7.0.0/5.4.0/**/*.so"],
+        ["qnx_target/x86_64/lib/**/*.so"],
     ),
 )
 
 filegroup(
     name = "static_lib",
     srcs = glob(
-        ["aarch64-linux-gnu/lib64/*.a"],
+        ["qnx_host/usr/lib/gcc/x86_64-pc-nto-qnx7.0.0/5.4.0/**/*.a"],
+        ["qnx_target/x86_64/lib/**/*.a"],
     ),
 )
 
