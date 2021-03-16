@@ -43,8 +43,8 @@ http_archive(
 
 http_archive(
     name = "rules_foreign_cc",
-    sha256 = "21177439c27c994fd9b6e04d4ed6cec79d7dbcf174649f8d70e396dd582d1c82",
-    strip_prefix = "rules_foreign_cc-ed95b95affecaa3ea3bf7bab3e0ab6aa847dfb06",
+    sha256 = "44bfeb6566f74e4e6e36acc33ee166b428d31a6f01a4f1c14056dc7d0f68c9b6",
+    strip_prefix = "rules_foreign_cc-eae19778d5fe8605f0f37332a712f05d4a17dc3b",
     url = "file:///usr/tools/bazel/rules_foreign_cc.zip",
 )
 

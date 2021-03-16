@@ -40,7 +40,7 @@ Then pull your image:
 ```
 docker pull artifact.swf.daimler.com/adasdai-docker/minerva_mpu_docker/minerva_mpu:<commitID>
 ```
-where `<commitID>` is the image version. We are currently targeting version `013bbf502933076a7a1bbd13414c34723a1d3e78`.
+where `<commitID>` is the image version. We are currently targeting version `e9eaa2018a759bea4927e25dca5224cbcd0bfdec`.
 
 
 ## Setup to build without docker
