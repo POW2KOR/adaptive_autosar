@@ -26,6 +26,12 @@ build:x86_64_qnx            --cpu=k8
 build:x86_64_qnx            --action_env=QNX_HOST --action_env=QNX_TARGET
 
 # this configuration option is used for remote caching on CI
-# the path after keyword '--disk_cache="' is extracted in Jenkinsfile and used as efs cache mount volume inside docker container
-# because of which it is not recommended to use '--disk_cache="' keyword for any other purpose
+# the path after keyword '--disk_cache="' is extracted in Jenkinsfile and used as efs cache mount volume inside docker
+# container because of which it is not recommended to use '--disk_cache="' keyword for any other purpose
 build:use_efs_build_cache   --disk_cache="/home/jenkins_agent/efs_cache/mpu"
+
+# Temporary workaround for not having features implemented for the x86_64_linux crosstool toolchain. We used to have
+# this like this and moved it in the toolchain file, but because we don't have a toolchain fuile for this platform
+# yet, we are adding it here. In the future we need to add a toolchain for this file and handle this via toolchain
+# features, like in the current toolchain files.
+build:x86_64_linux          --linkopt="-lpthread"
