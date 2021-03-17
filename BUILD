@@ -50,6 +50,25 @@ config_setting(
     },
 )
 
+string_flag(
+    name = "os",
+    build_setting_default = "linux",
+)
+
+config_setting(
+    name = "qnx",
+    flag_values = {
+        ":os": "qnx",
+    },
+)
+
+config_setting(
+    name = "linux",
+    flag_values = {
+        ":os": "linux",
+    },
+)
+
 # This filegroup is necessary so that we isolate the output group corresponding
 # to the binary of the cmake_external. Otherwise, it adds a lot of noise and
 # annoying stuff. Maybe we can find a better way in the future.

@@ -5,6 +5,25 @@ Adaptive AUTOSAR BSW Bazel files.
 
 load("@rules_foreign_cc//tools/build_defs:cmake.bzl", "cmake_external")
 
+def extend_and_select(select_dict, extension):
+    """
+    Take a select dict, extend each option with another value and then select
+
+    This function takes in a dictionary in the format required for the select
+    Bazel function. It then extends each of the options of the dictionary with
+    a given extension value. Finally, it does a select and returns it as the
+    final output.
+
+    Args:
+        select_dict: The dictionary in format.
+
+        extension: The value to use to extend each of the select options.
+    """
+    for _, value in select_dict.items():
+        value.update(extension)
+
+    return select(select_dict)
+
 def minerva_aa_codegen_declare(name, path_to_generators, generators):
     """
     A wrapper around native filegroup for Adaptive AUTOSAR code generators.
@@ -361,7 +380,6 @@ def minerva_aa_bsw_module(
     # across all the targets so that we don't have any mismatches that might be
     # harder to debug in the future.
     cache_entries["CMAKE_TRY_COMPILE_TARGET_TYPE"] = "STATIC_LIBRARY"
-    cache_entries["CMAKE_SYSTEM_NAME_LINUX"] = "Linux"
 
     for dep in deps:
         if dep == ":amsr_vector_fs_thread":
@@ -469,7 +487,17 @@ def minerva_aa_bsw_module(
 
     cmake_external(
         name = name,
-        cache_entries = cache_entries,
+        cache_entries = extend_and_select(
+            {
+                "//:qnx": {
+                    "CMAKE_SYSTEM_NAME": "QNX",
+                },
+                "//:linux": {
+                    "CMAKE_SYSTEM_NAME": "Linux",
+                },
+            },
+            cache_entries,
+        ),
         generate_crosstool_file = True,
         lib_source = srcs_filegroup,
         headers_only = headers_only,
