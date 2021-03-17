@@ -7,9 +7,10 @@ build:aarch64_linux_linaro  --crosstool_top=//bazel/toolchains/aarch64_linux_lin
 build:x86_64_qnx            --crosstool_top=//bazel/toolchains/x86_64_qnx_compiler:toolchain --host_crosstool_top=@bazel_tools//tools/cpp:toolchain
 
 # Choose target configuration explicitly
+build                       --//:build_target="minerva_host" --//:os="linux"
+build:x86_64_linux          --//:build_target="minerva_host" --//:os="linux"
 build:aarch64_linux_ubuntu  --//:build_target="minerva_target" --//:os="linux"
 build:aarch64_linux_linaro  --//:build_target="minerva_target" --//:os="linux"
-build:x86_64_linux          --//:build_target="minerva_host" --//:os="linux"
 
 build:x86_64_qnx            --//:os="qnx"
 
