@@ -2,9 +2,9 @@
 build                       --experimental_scale_timeouts=100
                 
 # Set our custom-configured cross compiling toolchain
-build:aarch64_linux_ubuntu --crosstool_top=//bazel/toolchains/aarch64_linux_ubuntu_compiler:toolchain --host_crosstool_top=@bazel_tools//tools/cpp:toolchain
-build:aarch64_linux_linaro --crosstool_top=//bazel/toolchains/aarch64_linux_linaro_compiler:toolchain --host_crosstool_top=@bazel_tools//tools/cpp:toolchain
-build:x86_64_qnx           --crosstool_top=//bazel/toolchains/x86_64_qnx_compiler:toolchain --host_crosstool_top=@bazel_tools//tools/cpp:toolchain
+build:aarch64_linux_ubuntu  --crosstool_top=//bazel/toolchains/aarch64_linux_ubuntu_compiler:toolchain --host_crosstool_top=@bazel_tools//tools/cpp:toolchain
+build:aarch64_linux_linaro  --crosstool_top=//bazel/toolchains/aarch64_linux_linaro_compiler:toolchain --host_crosstool_top=@bazel_tools//tools/cpp:toolchain
+build:x86_64_qnx            --crosstool_top=//bazel/toolchains/x86_64_qnx_compiler:toolchain --host_crosstool_top=@bazel_tools//tools/cpp:toolchain
 
 # Choose target configuration explicitly
 build:aarch64_linux_ubuntu  --//:build_target="minerva_target" --//:os="linux"
