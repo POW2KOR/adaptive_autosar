@@ -16,34 +16,6 @@ load("@bazel_tools//tools/build_defs/cc:action_names.bzl", "ACTION_NAMES")
 # archiver flags and all gcc tools. This template
 # is used by aarch64_linux_linaro_configure.bzl.
 
-all_build_actions = [
-    ACTION_NAMES.c_compile,
-    ACTION_NAMES.cpp_compile,
-    ACTION_NAMES.linkstamp_compile,
-    ACTION_NAMES.cc_flags_make_variable,
-    ACTION_NAMES.cpp_module_codegen,
-    ACTION_NAMES.cpp_header_parsing,
-    ACTION_NAMES.cpp_module_compile,
-    ACTION_NAMES.assemble,
-    ACTION_NAMES.preprocess_assemble,
-    ACTION_NAMES.lto_indexing,
-    ACTION_NAMES.lto_backend,
-    ACTION_NAMES.lto_index_for_executable,
-    ACTION_NAMES.lto_index_for_dynamic_library,
-    ACTION_NAMES.lto_index_for_nodeps_dynamic_library,
-    ACTION_NAMES.cpp_link_executable,
-    ACTION_NAMES.cpp_link_dynamic_library,
-    ACTION_NAMES.cpp_link_nodeps_dynamic_library,
-    ACTION_NAMES.strip,
-    ACTION_NAMES.objc_archive,
-    ACTION_NAMES.objc_compile,
-    ACTION_NAMES.objc_executable,
-    ACTION_NAMES.objc_fully_link,
-    ACTION_NAMES.objcpp_compile,
-    ACTION_NAMES.objcpp_executable,
-    ACTION_NAMES.clif_match,
-]
-
 def _impl(ctx):
     tool_paths = [
         tool_path(
