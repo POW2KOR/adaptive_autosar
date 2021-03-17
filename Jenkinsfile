@@ -42,6 +42,29 @@ node('pulse_ec2') {
         stage('Static code analysis') {
             // @Todo:space to add the code analyzer
         }
+        stage('implicit config') {
+            docker.withRegistry(registryUrl, registryCredentials) {
+                docker.image("${imgNameVer}").inside("-u 0:0 --entrypoint='' ${env.diskCache} ${remoteUpload}") {
+                    stage('Build'){
+                        sshagent(['adasdai-jenkins-ssh']) {
+                            sh '''
+                                # Workaround for circular dependency
+                                bazel build //bsw:amsr_vector_fs_socal_for_proxy --config=use_efs_build_cache --remote_upload_local_results=${isMaster}
+                                bazel build //bsw:amsr_vector_fs_socal_for_skeleton --config=use_efs_build_cache --remote_upload_local_results=${isMaster}
+                                bazel build //bsw:amsr_vector_fs_socal_for_software_update --config=use_efs_build_cache --remote_upload_local_results=${isMaster}
+
+                                # Actual build
+                                bazel build //:minerva_mpu_adaptive_filesystem --config=use_efs_build_cache --remote_upload_local_results=${isMaster}
+                            '''
+                        }
+                    }
+                    stage('Test'){
+                        // bazel command to run tests execution for x86_64_linux_ubuntu
+                    }
+                    sh "chown -R ${userId}:${groupId} ."
+                }
+            }
+        }
         stage('x86_64_linux_ubuntu') {
             docker.withRegistry(registryUrl, registryCredentials) {
                 docker.image("${imgNameVer}").inside("-u 0:0 --entrypoint='' ${env.diskCache} ${remoteUpload}") {
