@@ -11,11 +11,8 @@ build                       --//:build_target="minerva_host" --//:os="linux"
 build:x86_64_linux          --//:build_target="minerva_host" --//:os="linux"
 build:aarch64_linux_ubuntu  --//:build_target="minerva_target" --//:os="linux"
 build:aarch64_linux_linaro  --//:build_target="minerva_target" --//:os="linux"
-
-build:x86_64_qnx            --//:os="qnx"
-
 #@TODO build_target should be minerva_target, but that points to aarch64 when doing the circular dependency workaround
-build:x86_64_qnx            --//:build_target="minerva_host"
+build:x86_64_qnx            --//:build_target="minerva_host" --//:os="qnx"
 
 # Specify target architecture
 build                       --cpu=k8
