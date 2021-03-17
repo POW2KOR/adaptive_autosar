@@ -17,9 +17,10 @@ build:x86_64_qnx            --//:os="qnx"
 build:x86_64_qnx            --//:build_target="minerva_host"
 
 # Specify target architecture
+build                       --cpu=k8
+build:x86_64_linux          --cpu=k8
 build:aarch64_linux_ubuntu  --cpu=aarch64
 build:aarch64_linux_linaro  --cpu=aarch64
-build:x86_64_linux          --cpu=k8
 build:x86_64_qnx            --cpu=k8
 
 # This is needed for both Bazel toolchain configuration and for Bazel-native compilation to work
