@@ -157,8 +157,9 @@ cc_binary(
     copts = [
         "-std=c++14",
     ],
-    linkopts = [
-        "-lpthread",
+    features = [
+        "pthread",
+        "socket",
     ],
     linkstatic = 1,
     deps = [
@@ -931,8 +932,8 @@ cc_binary(
     copts = [
         "-std=c++14",
     ],
-    linkopts = [
-        "-lpthread",
+    features = [
+        "pthread",
     ],
     linkstatic = 1,
     deps = [
@@ -989,6 +990,9 @@ cc_library(
     copts = [
         "-std=c++14",
     ],
+    features = [
+        "pthread",
+    ],
     linkstatic = 1,
     deps = [
         ":starter_kit_skeleton_modeldatatypes_hdrs_lib",
@@ -1020,8 +1024,8 @@ cc_binary(
     copts = [
         "-std=c++14",
     ],
-    linkopts = [
-        "-lpthread",
+    features = [
+        "pthread",
     ],
     linkstatic = 1,
     deps = [
