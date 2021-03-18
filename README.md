@@ -2,11 +2,12 @@
 
 This is the MPU Adaptive AUTOSAR repository for the Minerva project.
 
-# Setting up
+## Setting up
 
 This guide describes how to build and run both from within the docker container and outside of it. The first method is
 preferred, but both are supported. See next section for more info.
-## The use of docker in this repository
+
+### The use of docker in this repository
 
 Currently we use docker both to build and to run our applications. Both cases are optional, but they make certain
 things easier and they enable a few extra use-cases. For example, for building, it allows us to deliver all the
@@ -21,8 +22,8 @@ We call the docker container where we build things the `build_env` and the docke
 You can find a guide on setting up docker on Daimler Ubuntu laptops
 [here](https://wiki.swf.daimler.com/display/swf/How+to+setup+docker)
 
+### Setup to build from inside the docker container
 
-## Setup to build from inside the docker container
 To build inside the docker container, you should get the docker image from Artifactory and check your local settings.
 The image includes all the dependencies needed, including Bazel, Bazel plugins and toolchains (for both x86 and
 aarch64).
@@ -36,40 +37,44 @@ To obtain an image, first you should log in to SWF Artifactory with your credent
 ```
 docker login artifact.swf.daimler.com
 ```
+
 Then pull your image:
+
 ```
 docker pull artifact.swf.daimler.com/adasdai-docker/minerva_mpu_docker/minerva_mpu:<commitID>
 ```
 where `<commitID>` is the image version. We are currently targeting version `e9eaa2018a759bea4927e25dca5224cbcd0bfdec`.
 
+### Setup to build without docker
 
-## Setup to build without docker
 In order to build on your host machine, you will need the following tools:
+
 - compiler toolchains for the target platform of choice
 - Bazel
 
 Information on how to set these up is below.
 
+#### Compiler
 
-### Compiler
 GCC compiler needs to be installed on your system.
-
 
 **IMPORTANT NOTE:** It might happen that your local installation of compiler is removed by automated Daimler IT policy
 every 30 minutes, so you need to reinstall it, or contact your system administrator and ask for policy change.
 
 For x86_64 host:
+
 ```
 sudo apt install g++
 ```
 
 For aarch64 cross-compilation:
+
 ```
 sudo apt install g++-aarch64-linux-gnu
 ```
 
+#### Bazel
 
-### Bazel
 Bazel is our currently used build system. Please refer to the
 [Bazel installation guide](https://docs.bazel.build/versions/master/install.html)
 
@@ -84,31 +89,38 @@ to a known path. These dependencies are kept at `/usr/tools/bazel`. Bazel is con
 The docker container `build_env` already has these dependencies embedded into it. To install these Bazel dependencies,
 use [this](https://git.swf.daimler.com/adasdai/minerva_mpu_docker/-/blob/master/scripts/collect_deps.py) script. Since
 the script will download everything to `/usr/tools/bazel/`, it needs to be called with sudo privileges:
+
 ```
 sudo python3 collect_deps.py
 ```
 
 For collecting also packages from Artifactory, the script shall be called with `auth_mode` parameter (it will ask for
 Artifactory credentials):
+
 ```
 sudo python3 collect_deps.py -d --auth_mode=prompt
 ```
 
 By default, everything will be installed under `/usr/tools/bazel`. It is possible to set another location,
 but in such a case the WORKSPACE file needs to be changed appropriately:
+
 ```
 sudo python3 collect_deps.py -d --auth_mode=prompt --path=<your_path>
 ```
-### Git hooks
 
-#### Pre-commit
+#### Git hooks
+
+##### Pre-commit
+
 This repository runs git hooks using [pre-commit](https://pre-commit.com/). The following command can be used to install
 pre-commit.
+
 ```
 pip3 install pre-commit==2.10.1
 ```
 
 To enable pre-commit after cloning the repository, the following command can be used.
+
 ```
 cd minerva_mpu_adaptive
 pre-commit install
@@ -117,17 +129,18 @@ pre-commit install
 Once enabaled, pre-commit will run before every local commit in order to suggest fixes for the checks defined in
 [.pre-commit-config.yaml](./pre-commit-config.yaml)
 
-# Build
+## Build
 
 The actual build instructions are the same, regardless if you use the `build_env` to build or not. However, if you use
 the `build_env` you have to go through the extra step of entering it.
 
-## Entering the docker `build_env`
+### Entering the docker `build_env`
 
 Currently, the command to enter the `build_env` is a bit messy, but in the future this will be covered by tools and
 the it will be much more simpler to use.
 
 To enter the `build_env` docker container, run the following command:
+
 ```
 docker run -it \
    --name=minerva_mpu_dev \
@@ -146,11 +159,13 @@ docker run -it \
    --workdir /root/workspace \
    artifact.swf.daimler.com/adasdai-docker/minerva_mpu_docker/minerva_mpu:<commitID>
 ```
+
 where: `<REPOSITORY>` is your local path to the cloned repo, e.g.
 `/lhome/$USER/workspace/minerva/minerva_mpu_adaptive/`, and `<commitID>` is container's version (it is supposed
 to be the same version you've pulled during the setup from earlier).
 
 ## The actual build steps
+
 The current Bazel build is based on [rules_foreign_cc](https://github.com/bazelbuild/rules_foreign_cc) for building
 external CMake projects. In particular, they are used to build the Vector BSW libraries and. Default build type for the
 BSW modules is "Release".
@@ -168,7 +183,6 @@ where `<CONFIGURATION>` is the target toolchain configuration, e.g. (`x86_64_lin
 `aarch64_linux_linaro`, `x86_64_qnx`). The `--config=x86_64_linux` may be skipped if you are building on an `x86_64`
 host for an `x86_64` target.
 
-
 **NOTE** The first three commands are needed to handle the circular dependency issue. For more information
 please refer to [this](#circular-dependency-workaround) section.
 
@@ -179,17 +193,19 @@ are not set, then Bazel will assume the following values:
 - `QNX_HOST=/opt/qnx/qnx700/host/linux/x86_64`
 - `QNX_TARGET=/opt/qnx/qnx700/target/qnx7`
 
-# Running
+## Running
 
-## Running on host with the run_env docker
+### Running on host with the run_env docker
 
 The following command will allow you to run the Minerva MPU Adaptive stack inside a docker container on your
 development machine. There are few dependencies that should be resolved before going ahead with the build.
 
-### Running Docker
+#### Running Docker
+
 ```
 bazel run //:minerva_mpu_adaptive_docker --config=<CONFIGURATION>
 ```
+
 where `<CONFIGURATION>` is your configuration type, e.g. `x86_64_linux`. This should be the same configuration
 you've used during the build stage.
 This command invokes the rest of dependencies and launches demo application in a container.
@@ -223,10 +239,12 @@ container.
 docker exec -it <container id> /bin/bash
 ```
 
-# Miscellaneous
+## Miscellaneous
 
-## Build different targets for aarch64 target
+### Build different targets for aarch64 target
+
 The aarch64 GCC cross-compiler needs to be installed on your system:
+
 ```
 sudo apt-get install g++-aarch64-linux-gnu
 ```
@@ -247,13 +265,14 @@ You can use the Linaro toolchain provided by Nvidia with the `minerva_mpu_docker
 --config=aarch64_linux_linaro
 ```
 
-
 Install aarch64 GCC cross-compiler using below command:
+
 ```
 sudo apt-get install g++-aarch64-linux-gnu
 ```
 
 Build the filesystem like so:
+
 ```
 bazel build //bsw:amsr_vector_fs_socal_for_proxy --config=aarch64_linux_ubuntu
 bazel build //bsw:amsr_vector_fs_socal_for_skeleton --config=aarch64_linux_ubuntu
@@ -261,25 +280,28 @@ bazel build //bsw:amsr_vector_fs_socal_for_software_update --config=aarch64_linu
 bazel build //:minerva_mpu_adaptive_filesystem --config=aarch64_linux_ubuntu
 ```
 
-Make sure the below content is present in `~/.ssh/config`
-    ```
-    Host xavier-a
-    HostName x41.rd.corpintra.net
-    Port 4004
+Make sure the below content is present in `~/.ssh/config`:
 
-    Host xavier-b
-    HostName x41.rd.corpintra.net
-    Port 4005
-    ```
+```
+Host xavier-a
+HostName x41.rd.corpintra.net
+Port 4004
+
+Host xavier-b
+HostName x41.rd.corpintra.net
+Port 4005
+```
 
 You will find the build product of the `minerva_mpu_adaptive_filesystem` target at:
 `bazel-out/aarch64-fastbuild/bin/minerva_mpu_adaptive_filesystem.tar`. We need to copy this to the AGX (we are copying
 to `xavier-a`), like so:
+
 ```
 scp bazel-out/aarch64-fastbuild/bin/minerva_mpu_adaptive_filesystem.tar $USER@xavier-a:
 ```
 
 Once the copy is successful untar the .tar file in xavier-a using below command:
+
 ```
 tar -xvf minerva_mpu_adaptive_filesystem.tar
 ```
@@ -287,6 +309,7 @@ tar -xvf minerva_mpu_adaptive_filesystem.tar
 Then, in `./opt/someipd_posix/etc/someipd-posix.json` change the paths to be relative.
 
 Change the IP addresses in the following files:
+
 - `opt/IDC_M_P_SoftwareClusterDesign_Base_TEST_SwComponentType_Executable/etc/someip_config.json`
 - `opt/IDC_M_P_SoftwareClusterDesign_Base_SwComponentType_Executable/etc/someip_config.json`
 
@@ -294,11 +317,13 @@ The IP Address of the AGX (`10.20.1.97`, can be found via `ip addr`). This is be
 address in the old NCD.
 
 After this run the below command to run execution manager:
+
 ```
 sudo ./sbin/amsr_vector_fs_em_executionmanager -a ./opt -m ./etc/machine_exec_config.json
 ```
 
-## Circular dependency workaround
+### Circular dependency workaround
+
 Currently, there is a circular linking dependency between `amsr_vector_fs_socal` and the generated source code for
 `ara::com`. Bazel does not support circular linking dependencies. Currently, the only way to get rid of this circular
 dependency is through some custom temporary targets called `amsr_vector_fs_socal_for_proxy` and
@@ -308,42 +333,51 @@ the Bazel build system, but hard-coded path includes.
 
 These steps are necessary due to the circular dependency workaround. They will not be needed once Vector ships a fix in
 the SIP:
+
 ```
 bazel build //bsw:amsr_vector_fs_socal_for_proxy --config=<CONFIGURATION>
 bazel build //bsw:amsr_vector_fs_socal_for_skeleton --config=<CONFIGURATION>
 bazel build //bsw:amsr_vector_fs_socal_for_software_update --config=<CONFIGURATION>
 ```
+
 After that, you can initiate your actual building, because the circular dependency is worked around with the
 `//bsw:amsr_vector_fs_socal_headers` target and both `\\:socal_lib_for_proxy` and `\\:socal_lib_for_socal` file groups.
 
-## Useful information
+### Useful information
+
 For building the debug version use `--compilation_mode=dbg`. Other useful parameters for debugging purposes are
 `--verbose_failures` and `--sandbox_debug`.
 
 Build results are under `bazel-bin`.
 
+### Formatting bazel files with buildifier
 
-## Formatting bazel files with buildifier
-### Installing
+#### Installing buildifier
+
 ```
 curl -fL "https://github.com/bazelbuild/buildtools/releases/download/3.5.0/buildifier" -o buildifier
 chmod +x buildifier
 sudo mv buildifier /bin/buildifier
 ```
 
-### Running
+#### Running buildifier
+
 In the root of the `minerva_mpu_adaptive` repo, run:
+
 ```
 buildifier -r .
 ```
+
 and check for changed files with
+
 ```
 git status
 ```
+
 If there are no files formatted, the output of above command will be empty. Else, it will show the list of files formatted.
 
+### Proxy handling in Docker
 
-## Proxy handling in Docker
 In order to allow Internet access from inside our docker containers, we need to pass to them proper
 environment variables. For now, we should take care on the following settings:
 
