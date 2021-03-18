@@ -165,26 +165,26 @@ bazel build //:minerva_mpu_adaptive_filesystem --config=<CONFIGURATION>
 ```
 
 where `<CONFIGURATION>` is the target toolchain configuration, e.g. (`x86_64_linux`, `aarch64_linux_ubuntu` or
-`aarch64_linux_linaro`). The `--config=x86_64_linux` may be skipped if you are building on an `x86_64` host for an
-`x86_64` target.
+`aarch64_linux_linaro`, `x86_64_qnx`). The `--config=x86_64_linux` may be skipped if you are building on an `x86_64`
+host for an `x86_64` target.
 
-These commands invoke Bazel to build the full Minerva MPU Adaptive filesystem, with BSW and applications as well as
-their dependencies.
 
-**NOTE** The first two commands are needed to handle the circular dependency issue. For more information
+**NOTE** The first three commands are needed to handle the circular dependency issue. For more information
 please refer to [this](#circular-dependency-workaround) section.
+
+For the `x86_64_qnx` toolchain to work, you need to have the `QNX_HOST` and `QNX_TARGET` set correctly in your
+environment. This is usually done by running something like: `source ~/qnx/qnx700/qnxsdp-env.sh`. If these variables
+are not set, then Bazel will assume the following values:
+
+- `QNX_HOST=/opt/qnx/qnx700/host/linux/x86_64`
+- `QNX_TARGET=/opt/qnx/qnx700/target/qnx7`
+
 # Running
 
 ## Running on host with the run_env docker
 
 The following command will allow you to run the Minerva MPU Adaptive stack inside a docker container on your
 development machine. There are few dependencies that should be resolved before going ahead with the build.
-The repo could be build for three separate toolchain:
-1. x86_64_linux_ubuntu
-2. aarch64_linux_ubuntu
-3. aarch64_linux_linaro
-
-Refer [Circular dependency workaround](#circular-dependency-workaround) before proceeding with actual build.
 
 ### Running Docker
 ```
