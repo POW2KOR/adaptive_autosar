@@ -2,24 +2,23 @@
 build                       --experimental_scale_timeouts=100
                 
 # Set our custom-configured cross compiling toolchain
-build:aarch64_linux_ubuntu --crosstool_top=//bazel/toolchains/aarch64_linux_ubuntu_compiler:toolchain --host_crosstool_top=@bazel_tools//tools/cpp:toolchain
-build:aarch64_linux_linaro --crosstool_top=//bazel/toolchains/aarch64_linux_linaro_compiler:toolchain --host_crosstool_top=@bazel_tools//tools/cpp:toolchain
-build:x86_64_qnx           --crosstool_top=//bazel/toolchains/x86_64_qnx_compiler:toolchain --host_crosstool_top=@bazel_tools//tools/cpp:toolchain
+build:aarch64_linux_ubuntu  --crosstool_top=//bazel/toolchains/aarch64_linux_ubuntu_compiler:toolchain --host_crosstool_top=@bazel_tools//tools/cpp:toolchain
+build:aarch64_linux_linaro  --crosstool_top=//bazel/toolchains/aarch64_linux_linaro_compiler:toolchain --host_crosstool_top=@bazel_tools//tools/cpp:toolchain
+build:x86_64_qnx            --crosstool_top=//bazel/toolchains/x86_64_qnx_compiler:toolchain --host_crosstool_top=@bazel_tools//tools/cpp:toolchain
 
 # Choose target configuration explicitly
+build                       --//:build_target="minerva_host" --//:os="linux"
+build:x86_64_linux          --//:build_target="minerva_host" --//:os="linux"
 build:aarch64_linux_ubuntu  --//:build_target="minerva_target" --//:os="linux"
 build:aarch64_linux_linaro  --//:build_target="minerva_target" --//:os="linux"
-build:x86_64_linux          --//:build_target="minerva_host" --//:os="linux"
-
-build:x86_64_qnx            --//:os="qnx"
-
 #@TODO build_target should be minerva_target, but that points to aarch64 when doing the circular dependency workaround
-build:x86_64_qnx            --//:build_target="minerva_host"
+build:x86_64_qnx            --//:build_target="minerva_host" --//:os="qnx"
 
 # Specify target architecture
+build                       --cpu=k8
+build:x86_64_linux          --cpu=k8
 build:aarch64_linux_ubuntu  --cpu=aarch64
 build:aarch64_linux_linaro  --cpu=aarch64
-build:x86_64_linux          --cpu=k8
 build:x86_64_qnx            --cpu=k8
 
 # This is needed for both Bazel toolchain configuration and for Bazel-native compilation to work
@@ -34,4 +33,8 @@ build:use_efs_build_cache   --disk_cache="/home/jenkins_agent/efs_cache/mpu"
 # this like this and moved it in the toolchain file, but because we don't have a toolchain fuile for this platform
 # yet, we are adding it here. In the future we need to add a toolchain for this file and handle this via toolchain
 # features, like in the current toolchain files.
+build                       --linkopt="-lpthread"
 build:x86_64_linux          --linkopt="-lpthread"
+build:aarch64_linux_ubuntu  --linkopt=""
+build:aarch64_linux_linaro  --linkopt=""
+build:x86_64_qnx            --linkopt=""
