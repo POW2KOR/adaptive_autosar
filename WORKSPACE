@@ -269,13 +269,13 @@ new_git_repository(
     # alternative for cloning using HTTPS
     # remote = "https://git.swf.daimler.com/adasdai/starter_kit_adaptive_xavier.git",
     build_file = "@//tools:collectd_mbient.BUILD",
-    #commit = "379d1f0ece2724e78ea23fa9f863d8120c0457b5",  # the commit ID that bazel will use to fetch the external repository
+    commit = "2575bc86875d8f681fbdabeac3b2ac61b7c91ffc",  # the commit ID that bazel will use to fetch the external repository
     init_submodules = True,
     patch_args = [
         "-p1",
     ],
     patches = [
-        "@//tools:patches/prevent-yocto-build.patch",
+        "@//tools:prevent-yocto-build.patch",
     ],
     remote = "ssh://git@git.swf.daimler.com:7999/mbient/collectd.git",
     shallow_since = "1607616957 +0100",
