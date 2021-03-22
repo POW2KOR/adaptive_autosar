@@ -80,6 +80,15 @@ Bazel is our currently used build system. Please refer to the
 
 At the moment we use version 3.7.0.
 
+**NOTE** Now `rules_foreign_cc` requires version 3.7.0 to be installed. Using lower versions results in error related to 
+platform(Windows). The reference for this issue and solution can be found 
+[here](https://github.com/bazelbuild/rules_foreign_cc/commit/f48ec05fed3170b8b32bbc4b6d8fd4175f8b8cff).
+
+Bazel version 3.7.0 can be downlaoded and installed from [link](https://github.com/bazelbuild/bazel/releases/tag/3.7.0).
+```
+sudo dpkg -i <path to bazel_3.7.0-linux-x86_64.deb>
+```
+
 **NOTE** For now, if Bazel version 4.0.0 is used, there is an issue with custom rules formatting. To avoid this, please
 add `--incompatible_restrict_string_escapes=false --incompatible_require_linker_input_cc_api=false` to
 each used Bazel command.
