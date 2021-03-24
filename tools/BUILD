@@ -75,7 +75,6 @@ genrule(
         "bin/collectd-tg",
         "bin/collectd-nagios",
         "etc/collectd.conf",
-        #"man/man3/Collectd::Unixsock.3pm",
         "sbin/collectdmon",
         "sbin/collectd",
     ],
