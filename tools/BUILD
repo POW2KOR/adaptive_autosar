@@ -15,7 +15,6 @@ genrule(
         libtoolize --copy --force 
         automake --add-missing --copy
         autoconf
-        pwd
 
         ./configure --host x86_64-ubuntu-linux-gnu --disable-all-plugins \
             --prefix $$(pwd)/../../collectd_artifacts \
