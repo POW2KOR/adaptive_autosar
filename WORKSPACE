@@ -233,7 +233,6 @@ container_pull(
 
 load("@bazel_tools//tools/build_defs/repo:git.bzl", "new_git_repository")
 
-'''
 new_git_repository(
     name = "starter_kit_adaptive_xavier",  # bazel will create under its own cache folder in the external folder package with the specified name(e.g. external/starter_kit_adaptive_xavier)
     # alternative for cloning using HTTPS
@@ -254,20 +253,19 @@ new_git_repository(
     remote = "ssh://git@git.swf.daimler.com:7999/adasdai/starter_kit_adaptive_xavier.git",
     shallow_since = "1607616957 +0100",
 )
-'''
 
 # Enable the below rule if you want to avoid cloning of repo at every run
 # You need to provide the path of vector_sip_aa repo locally
-new_local_repository(
+'''new_local_repository(
     name = "starter_kit_adaptive_xavier",
+    build_file = "<local_path_to_reposittory>",
     path = "/lhome/sathire/repos/starter_kit_adaptive_xavier",
-    build_file = "@//bsw:starter_kit_adaptive_xavier.BUILD",
-)
-'''
+)'''
+
 new_git_repository(
-    name = "collectd_mbient",  # bazel will create under its own cache folder in the external folder package with the specified name(e.g. external/starter_kit_adaptive_xavier)
+    name = "collectd_mbient",  # bazel will create under its own cache folder in the external folder package with the specified name(e.g. external/collectd_mbient)
     # alternative for cloning using HTTPS
-    # remote = "https://git.swf.daimler.com/adasdai/starter_kit_adaptive_xavier.git",
+    # remote = "https://git.swf.daimler.com/mbient/collectd.git",
     build_file = "@//tools:collectd_mbient.BUILD",
     commit = "2575bc86875d8f681fbdabeac3b2ac61b7c91ffc",  # the commit ID that bazel will use to fetch the external repository
     init_submodules = True,
@@ -279,11 +277,4 @@ new_git_repository(
     ],
     remote = "ssh://git@git.swf.daimler.com:7999/mbient/collectd.git",
     shallow_since = "1607616957 +0100",
-)
-'''
-
-new_local_repository(
-    name = "collectd_mbient",
-    path = "/lhome/sathire/repos/collectd_temp/collectd-mbient",
-    build_file = "@//tools:collectd_mbient.BUILD",
 )

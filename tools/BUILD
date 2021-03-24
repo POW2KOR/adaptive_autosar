@@ -2,11 +2,12 @@ package(default_visibility = ["//visibility:public"])
 
 genrule(
     name = "build_collectd",
-    srcs =  ["@collectd_mbient//:all_files"],
+    srcs = ["@collectd_mbient//:all_files"],
     outs = [
-        "output_log.txt"
+        "output_log.txt",
     ],
     cmd = """ 
+        set -e -o pipefail
         set -x
         cd external/collectd_mbient
 
@@ -48,5 +49,5 @@ genrule(
         make all
         tree . >> ../../$@
         make install  
-        """
+        """,
 )
