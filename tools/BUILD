@@ -78,9 +78,7 @@ genrule(
         "sbin/collectdmon",
         "sbin/collectd",
     ],
-    cmd = """ 
-        set -e -o pipefail
-        set -x
+    cmd = """
         cd external/collectd_mbient
 
         autoheader
