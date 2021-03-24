@@ -96,8 +96,9 @@ each used Bazel command.
 To avoid downloading Bazel dependencies from external sources all the time, we do a one-time download and installation
 to a known path. These dependencies are kept at `/usr/tools/bazel`. Bazel is configured to look for them at that path.
 The docker container `build_env` already has these dependencies embedded into it. To install these Bazel dependencies,
-use [this](https://git.swf.daimler.com/adasdai/minerva_mpu_docker/-/blob/master/scripts/collect_deps.py) script. Since
-the script will download everything to `/usr/tools/bazel/`, it needs to be called with sudo privileges:
+use
+[this](https://git.swf.daimler.com/adasdai/minerva_mpu_docker/-/blob/e9eaa2018a759bea4927e25dca5224cbcd0bfdec/scripts/collect_deps.py)
+script. Since the script will download everything to `/usr/tools/bazel/`, it needs to be called with sudo privileges:
 
 ```
 sudo python3 collect_deps.py
@@ -189,8 +190,9 @@ bazel build //:minerva_mpu_adaptive_filesystem --config=<CONFIGURATION>
 ```
 
 where `<CONFIGURATION>` is the target toolchain configuration, e.g. (`x86_64_linux`, `aarch64_linux_ubuntu` or
-`aarch64_linux_linaro`, `x86_64_qnx`). The `--config=x86_64_linux` may be skipped if you are building on an `x86_64`
-host for an `x86_64` target.
+`aarch64_linux_linaro`, `x86_64_qnx`). For now, you cannot skip `--config=x86_64_linux` even if you are building on
+an `x86_64` host for an `x86_64` target. Skipping would lead to linking issue. This will be fixed in the future by
+adding custom toolchain files for `x86_64_linux`.
 
 **NOTE** The first three commands are needed to handle the circular dependency issue. For more information
 please refer to [this](#circular-dependency-workaround) section.

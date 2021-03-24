@@ -482,9 +482,6 @@ def minerva_aa_bsw_module(
             cache_entries["amsr-vector-fs-e2e_libinternal_DIR:PATH"] = \
                 "$EXT_BUILD_DEPS/amsr_vector_fs_e2e/lib/cmake/amsr-vector-fs-e2e_libinternal/"
 
-    if binaries:
-        cache_entries["CMAKE_EXE_LINKER_FLAGS"] = "-lpthread"
-
     cmake_external(
         name = name,
         cache_entries = extend_and_select(
