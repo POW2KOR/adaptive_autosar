@@ -273,7 +273,7 @@ new_git_repository(
         "-p1",
     ],
     patches = [
-        "@//tools:prevent-yocto-build.patch",
+        "@//tools:remove-srcdir-prefix.patch",
     ],
     remote = "ssh://git@git.swf.daimler.com:7999/mbient/collectd.git",
     shallow_since = "1607616957 +0100",
