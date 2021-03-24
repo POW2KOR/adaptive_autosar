@@ -258,8 +258,8 @@ new_git_repository(
 # You need to provide the path of vector_sip_aa repo locally
 '''new_local_repository(
     name = "starter_kit_adaptive_xavier",
-    build_file = "<local_path_to_reposittory>",
-    path = "/lhome/sathire/repos/starter_kit_adaptive_xavier",
+    build_file = "@//bsw:starter_kit_adaptive_xavier.BUILD",
+    path = "<local_path_to_reposittory>",
 )'''
 
 new_git_repository(
