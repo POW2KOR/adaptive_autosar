@@ -7,8 +7,6 @@ genrule(
         "share/perl/5.26.1/Collectd/Plugins/OpenVZ.pm",
         "share/perl/5.26.1/Collectd/Unixsock.pm",
         "share/perl/5.26.1/Collectd.pm",
-        "share/collectd/java/collectd-api.jar",
-        "share/collectd/java/generic-jmx.jar",
         "share/collectd/postgresql_default.conf",
         "share/collectd/types.db",
         "lib/x86_64-linux-gnu/perl/5.26.1/auto/Collectd/.packlist",
@@ -89,7 +87,7 @@ genrule(
 
         ./configure --host x86_64-ubuntu-linux-gnu --disable-all-plugins \
             --prefix $$(pwd)/../../bazel-out/k8-fastbuild/bin/tools \
-            --disable-java \
+            --without-java \
             --disable-perl \
             --enable-cpu \
             --enable-csv \
