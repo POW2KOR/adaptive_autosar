@@ -122,8 +122,6 @@ def _impl(ctx):
                                 "-Wl,-z,relro,-z,now",
                                 "-pass-exit-codes",
 
-                                "-T%{TARGET_PATH}%/x86_64/lib/nto.link",
-
                                 "-L%{HOST_PATH}%/usr/lib/gcc/x86_64-pc-nto-qnx7.0.0/5.4.0/",
                                 "-L%{TARGET_PATH}%/x86_64/lib/gcc/5.4.0",
                                 "-L%{TARGET_PATH}%/usr/x86_64-pc-nto-qnx7.0.0/lib/",
