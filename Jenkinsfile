@@ -48,9 +48,6 @@ node('pulse_ec2') {
                     stage('Build'){
                         sshagent(['adasdai-jenkins-ssh']) {
                             sh '''
-                                # Build collectd and needed plugins
-                                bazel build //tools:build_collectd
-                                
                                 # Workaround for circular dependency
                                 bazel build //bsw:amsr_vector_fs_socal_for_proxy --config=x86_64_linux --config=use_efs_build_cache --remote_upload_local_results=${isMaster}
                                 bazel build //bsw:amsr_vector_fs_socal_for_skeleton --config=x86_64_linux --config=use_efs_build_cache --remote_upload_local_results=${isMaster}
