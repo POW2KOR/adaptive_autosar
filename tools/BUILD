@@ -88,8 +88,7 @@ genrule(
         ./configure --host x86_64-ubuntu-linux-gnu --disable-all-plugins \
             --prefix $$(pwd)/../../$(RULEDIR) \
             --without-java \
-            --without-perl \
-            --without-postgresql \
+            --disable-perl \
             --enable-cpu \
             --enable-csv \
             --enable-buddyinfo \
