@@ -1,0 +1,20 @@
+diff --git a/Makefile.am b/Makefile.am
+index 95c83010..00e17b58 100644
+--- a/Makefile.am
++++ b/Makefile.am
+@@ -589,8 +589,8 @@ liboconfig_la_SOURCES = \
+ 	src/liboconfig/oconfig.c \
+ 	src/liboconfig/oconfig.h \
+ 	src/liboconfig/aux_types.h \
+-	$(srcdir)/src/liboconfig/scanner.l \
+-	$(srcdir)/src/liboconfig/parser.y
++	src/liboconfig/scanner.l \
++	src/liboconfig/parser.y
+ liboconfig_la_CPPFLAGS = -I$(srcdir)/src/liboconfig $(AM_CPPFLAGS)
+ liboconfig_la_LDFLAGS = -avoid-version $(LEXLIB)
+ 
+@@ -2584,4 +2584,3 @@ generic-jmx.jar: $(JAVA_TIMESTAMP_FILE)
+ 
+ jar_DATA = collectd-api.jar generic-jmx.jar
+ endif
+-

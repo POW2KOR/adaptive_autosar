@@ -258,6 +258,21 @@ new_git_repository(
 # You need to provide the path of vector_sip_aa repo locally
 '''new_local_repository(
     name = "starter_kit_adaptive_xavier",
-    path = "<local_path_to_reposittory>",
     build_file = "@//bsw:starter_kit_adaptive_xavier.BUILD",
+    path = "<local_path_to_reposittory>",
 )'''
+
+new_git_repository(
+    name = "collectd_mbient",  # bazel will create under its own cache folder in the external folder package with the specified name(e.g. external/collectd_mbient)
+    build_file = "@//tools:collectd_mbient.BUILD",
+    commit = "2575bc86875d8f681fbdabeac3b2ac61b7c91ffc",  # the commit ID that bazel will use to fetch the external repository
+    init_submodules = True,
+    patch_args = [
+        "-p1",
+    ],
+    patches = [
+        "@//tools:remove-srcdir-prefix.patch",
+    ],
+    remote = "ssh://git@git.swf.daimler.com:7999/mbient/collectd.git",
+    shallow_since = "1607616957 +0100",
+)
