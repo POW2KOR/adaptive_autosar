@@ -264,8 +264,6 @@ new_git_repository(
 
 new_git_repository(
     name = "collectd_mbient",  # bazel will create under its own cache folder in the external folder package with the specified name(e.g. external/collectd_mbient)
-    # alternative for cloning using HTTPS
-    # remote = "https://git.swf.daimler.com/mbient/collectd.git",
     build_file = "@//tools:collectd_mbient.BUILD",
     commit = "2575bc86875d8f681fbdabeac3b2ac61b7c91ffc",  # the commit ID that bazel will use to fetch the external repository
     init_submodules = True,
