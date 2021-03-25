@@ -401,3 +401,19 @@ environment variables. For now, we should take care on the following settings:
 
 In case of proxy settings change, please change corresponding parameters according to your build and
 launch strategy.
+
+### ssh-keys handling in Docker
+During the bazel build, components need to be cloned that will require to have valid ssh keys to access swf git.
+If you are using docker build environment, the docker command uses the ssh-agent to utilize your keys from the host. 
+The docker build environment mounts the ssh-agent socket in the build environment using the following command-line
+arguments:
+```
+-v $SSH_AUTH_SOCK:/ssh-agent \
+```
+
+Use the following commands to add your keys to the ssh-agent and execute it:
+
+```
+eval `ssh-agent -s`
+ssh-add
+```
