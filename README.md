@@ -420,15 +420,9 @@ ssh-add
 
 ### Connection timeout issue while submodule init of gnulibs in collectd repo with VPN ON
 
-<<<<<<< HEAD
-if you face connection timeout issues while submodule init of `gnulibs` in collectd repo 
-either locally or through `collectd_mbient` rule of WORKSPACE file, then open `~/.gitconfig` file 
-and add below 2 lines
-=======
 if you face connection timeout issues while submodule init of `gnulibs` in collectd repo either
  locally or through `collectd_mbient` rule of WORKSPACE file, then open `~/.gitconfig` file 
  and add below 2 lines
->>>>>>> Fix review comments
 ```
 [url "https://git.savannah.gnu.org/git/"]
       insteadOf = git://git.savannah.gnu.org/
@@ -436,13 +430,8 @@ if you face connection timeout issues while submodule init of `gnulibs` in colle
 
 ### Build collectd and its plugins through bazel
 
-<<<<<<< HEAD
 The collectd repo is added as external repository using `new_git_repository` bazel repo rule 
 in WORKSPACE file.
-=======
-The collectd repo is added as external repository using `new_git_repository` bazel repo 
-rule in WORKSPACE file.
->>>>>>> Fix review comments
 collectd can be built and install binaries using
 ```
 bazel build //tools:build_collectd
