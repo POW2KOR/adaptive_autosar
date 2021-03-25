@@ -86,9 +86,10 @@ genrule(
         autoconf
 
         ./configure --host x86_64-ubuntu-linux-gnu --disable-all-plugins \
-            --prefix $$(pwd)/../../bazel-out/k8-fastbuild/bin/tools \
+            --prefix $$(pwd)/../../$(RULEDIR) \
             --without-java \
-            --disable-perl \
+            --without-perl \
+            --without-postgresql \
             --enable-cpu \
             --enable-csv \
             --enable-buddyinfo \
