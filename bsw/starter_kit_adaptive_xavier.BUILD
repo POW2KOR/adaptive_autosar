@@ -117,6 +117,12 @@ filegroup(
     visibility = ["//visibility:public"],
 )
 
+filegroup(
+    name = "amsr_vector_fs_per_libpersistency_srcs",
+    srcs = glob(["mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-per-libpersistency/**"]),
+    visibility = ["//visibility:public"],
+)
+
 ######################################################################################
 # Generators
 ######################################################################################
@@ -230,6 +236,7 @@ minerva_aa_codegen_declare(
         "amsr_applicationbase_init_deinit",
         "amsr_someipprotocol",
         "amsr_socal",
+        "amsr_persistency_config",
     ]
 )
 
