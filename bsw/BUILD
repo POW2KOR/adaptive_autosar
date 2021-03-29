@@ -3235,3 +3235,25 @@ minerva_aa_bsw_module(
         ":amsr_vector_fs_vajson",
     ],
 )
+
+minerva_aa_bsw_module(
+    name = "amsr_vector_fs_per_libpersistency",
+    srcs_filegroup = "@starter_kit_adaptive_xavier//:amsr_vector_fs_per_libpersistency_srcs",
+    static_libraries = [
+        "libpersistency-fs.a",
+        "libpersistency-common.a",
+    ],
+    out_include_dirs = [
+        "include/persistency",
+        "include/persistency-common",
+        "include/persistency-file-storage",
+        "include/persistency-fs",
+        "include/persistency-key-value-storage",
+    ],
+    deps = [
+        ":amsr_vector_fs_libvac",
+        ":amsr_vector_fs_vajson",
+        ":amsr_vector_fs_libiostream",
+        ":amsr_vector_fs_libosabstraction",
+    ],
+)
