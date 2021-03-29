@@ -1,0 +1,124 @@
+{
+    "files": [
+        {
+            "pattern": "https://github.com/bazelbuild/rules_foreign_cc/archive/eae19778d5fe8605f0f37332a712f05d4a17dc3b.zip",
+            "target": "tools/bazel/rules_foreign_cc.zip",
+            "props": "hash=44bfeb6566f74e4e6e36acc33ee166b428d31a6f01a4f1c14056dc7d0f68c9b6"
+        },
+        {
+            "pattern": "https://github.com/bazelbuild/rules_cc/archive/8bd6cd75d03c01bb82561a96d9c1f9f7157b13d0.zip",
+            "target": "tools/bazel/rules_cc.zip",
+            "props": "hash=1D4DBBD1E1E9B57D40BB0ADE51C9E882DA7658D5BFBF22BBD15B68E7879D761F"
+        },
+        {
+            "pattern": "https://github.com/bazelbuild/rules_java/archive/7cf3cefd652008d0a64a419c34c13bdca6c8f178.zip",
+            "target": "tools/bazel/rules_java.zip",
+            "props": "hash=BC81F1BA47EF5CC68AD32225C3D0E70B8C6F6077663835438DA8D5733F917598"
+        },
+        {
+            "pattern": "https://mirror.bazel.build/bazel_coverage_output_generator/releases/coverage_output_generator-v2.5.zip",
+            "target": "tools/bazel/remote_coverage_tools.zip",
+            "props": "hash=CD14F1CB4559E4723E63B7E7B06D09FCC3BD7BA58D03F354CDFF1439BD936A7D"
+        },
+        {
+            "pattern": "https://github.com/bazelbuild/rules_pkg/releases/download/0.2.5/rules_pkg-0.2.5.tar.gz",
+            "target": "tools/bazel/rules_pkg-0.2.5.tar.gz",
+            "props": "hash=352c090cc3d3f9a6b4e676cf42a6047c16824959b438895a76c2989c6d7c246a"
+        },
+        {
+            "pattern": "https://github.com/bazelbuild/rules_docker/releases/download/v0.15.0/rules_docker-v0.15.0.tar.gz",
+            "target": "tools/bazel/rules_docker-v0.15.0.tar.gz",
+            "props": "hash=1698624e878b0607052ae6131aa216d45ebb63871ec497f26c67455b34119c80"
+        },
+        {
+            "pattern": "https://github.com/bazelbuild/rules_go/releases/download/v0.24.2/rules_go-v0.24.2.tar.gz",
+            "target": "tools/bazel/rules_go-v0.24.2.tar.gz",
+            "props": "hash=08c3cd71857d58af3cda759112437d9e63339ac9c6e0042add43f4d94caf632d"
+        },
+        {
+            "pattern": "https://github.com/bazelbuild/bazel-gazelle/releases/download/v0.21.1/bazel-gazelle-v0.21.1.tar.gz",
+            "target": "tools/bazel/bazel-gazelle-v0.21.1.tar.gz",
+            "props": "hash=cdb02a887a7187ea4d5a27452311a75ed8637379a1287d8eeb952138ea485f7d"
+        },
+        {
+            "pattern": "https://github.com/bazelbuild/platforms/archive/681f1ee032566aa2d443cf0335d012925d9c58d4.zip",
+            "target": "tools/bazel/681f1ee032566aa2d443cf0335d012925d9c58d4.zip",
+            "props": "hash=ae95e4bfcd9f66e9dc73a92cee0107fede74163f788e3deefe00f3aaae75c431"
+        },
+        {
+            "pattern": "https://dl.google.com/go/go1.15.2.linux-amd64.tar.gz",
+            "target": "tools/bazel/go1.15.2.linux-amd64.tar.gz",
+            "props": "hash=b49fda1ca29a1946d6bb2a5a6982cf07ccd2aba849289508ee0f9918f6bb4552"
+        },
+        {
+            "pattern": "https://storage.googleapis.com/rules_docker/fdebd6e0b6c9185a115379166c1c067f88d53630/puller-darwin-amd64",
+            "target": "tools/bazel/puller-darwin-amd64",
+            "props": "hash=62b405511624528ba5b2716b1b93b5591c41edeca57195efc62da14001441c44"
+        },
+        {
+            "pattern": "https://storage.googleapis.com/rules_docker/fdebd6e0b6c9185a115379166c1c067f88d53630/puller-linux-amd64",
+            "target": "tools/bazel/puller-linux-amd64",
+            "props": "hash=1bcbbf86972cde8448dfab770a686801c46a1739f68f1d7a5373a4f0c3954846"
+        },
+        {
+            "pattern": "https://api.github.com/repos/google/go-containerregistry/tarball/e5f4efd48dbff3ab3165a944d6777f8db28f0ccb",
+            "target": "tools/bazel/google-go-containerregistry-v0.1.1-5-ge5f4efd.tar.gz",
+            "props": "hash=3a5f9ff61b48b928ce37e9d227a581571957b3b3ad5d45d148bce5433f9c9a6c"
+        },
+        {
+            "pattern": "https://api.github.com/repos/pkg/errors/tarball/614d223910a179a466c1767a985424175c39b465",
+            "target": "tools/bazel/pkg-errors-v0.9.1-0-g614d223.tar.gz",
+            "props": "hash=208d21a7da574026f68a8c9818fa7c6ede1b514ef9e72dc733b496ddcb7792a6"
+        },
+        {
+            "pattern": "https://mirror.bazel.build/github.com/golang/tools/archive/c024452afbcdebb4a0fbe1bb0eaea0d2dbff835b.zip",
+            "target": "tools/bazel/c024452afbcdebb4a0fbe1bb0eaea0d2dbff835b.zip",
+            "props": "hash=5b330e3bd29a52c235648457e1aa899d948cb1eb90a8b5caa0ac882be75572db"
+        },
+        {
+            "pattern": "https://mirror.bazel.build/openjdk/azul-zulu11.37.17-ca-jdk11.0.6/zulu11.37.17-ca-jdk11.0.6-linux_x64.tar.gz",
+            "target": "tools/bazel/zulu11.37.17-ca-jdk11.0.6-linux_x64.tar.gz",
+            "props": "hash=360626cc19063bc411bfed2914301b908a8f77a7919aaea007a977fa8fb3cde1"
+        },
+        {
+            "pattern": "https://mirror.bazel.build/bazel_java_tools/releases/javac11/v9.0/java_tools_javac11_linux-v9.0.zip",
+            "target": "tools/bazel/java_tools_javac11_linux-v9.0.zip",
+            "props": "hash=0be37f4227590ecb6bc929a6a7e427c65e6239363e4c3b28b1a211718b9636c9"
+        },
+        {
+            "pattern": "https://github.com/bazelbuild/rules_proto/archive/97d8af4dc474595af3900dd85cb3a29ad28cc313.tar.gz",
+            "target": "tools/bazel/rules_proto.tar.gz",
+            "props": "hash=602E7161D9195E50246177E7C55B2F39950A9CF7366F74ED5F22FD45750CD208"
+        },
+        {
+            "pattern": "https://github.com/bazelbuild/rules_python/releases/download/0.1.0/rules_python-0.1.0.tar.gz",
+            "target": "tools/bazel/rules_python-0.1.0.tar.gz",
+            "props": "hash=b6d46438523a3ec0f3cead544190ee13223a52f6a6765a29eae7b7cc24cc83a0"
+        },
+        {
+            "pattern": "https://mirror.bazel.build/github.com/bazelbuild/bazel-skylib/releases/download/1.0.3/bazel-skylib-1.0.3.tar.gz",
+            "target": "tools/bazel/bazel-skylib-1.0.3.tar.gz",
+            "props": "hash=1c531376ac7e5a180e0237938a2536de0c54d93f5c278634818e0efc952dd56c"
+        },
+        {
+            "pattern": "https://files.pythonhosted.org/packages/00/b6/9cfa56b4081ad13874b0c6f96af8ce16cfbc1cb06bedf8e9164ce5551ec1/pip-19.3.1-py2.py3-none-any.whl",
+            "target": "tools/bazel/pip-19.3.1-py2.py3-none-any.whl.zip",
+            "props": "hash=6917c65fc3769ecdc61405d3dfd97afdedd75808d200b2838d7d961cebc0c2c7"
+        },
+        {
+            "pattern": "https://files.pythonhosted.org/packages/e6/d5/451b913307b478c49eb29084916639dc53a88489b993530fed0a66bab8b9/pkginfo-1.5.0.1-py2.py3-none-any.whl",
+            "target": "tools/bazel/pkginfo-1.5.0.1-py2.py3-none-any.whl.zip",
+            "props": "hash=a6d9e40ca61ad3ebd0b72fbadd4fba16e4c0e4df0428c041e01e06eb6ee71f32"
+        },
+        {
+            "pattern": "https://files.pythonhosted.org/packages/54/28/c45d8b54c1339f9644b87663945e54a8503cfef59cf0f65b3ff5dd17cf64/setuptools-42.0.2-py2.py3-none-any.whl",
+            "target": "tools/bazel/setuptools-42.0.2-py2.py3-none-any.whl.zip",
+            "props": "hash=c8abd0f3574bc23afd2f6fd2c415ba7d9e097c8a99b845473b0d957ba1e2dac6"
+        },
+        {
+            "pattern": "https://files.pythonhosted.org/packages/00/83/b4a77d044e78ad1a45610eb88f745be2fd2c6d658f9798a15e384b7d57c9/wheel-0.33.6-py2.py3-none-any.whl",
+            "target": "tools/bazel/wheel-0.33.6-py2.py3-none-any.whl.zip",
+            "props": "hash=f4da1763d3becf2e2cd92a14a7c920f0f00eca30fdde9ea992c836685b9faf28"
+        }
+    ]
+}

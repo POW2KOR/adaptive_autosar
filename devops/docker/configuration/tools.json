@@ -1,0 +1,24 @@
+{
+    "files": [
+        {
+            "pattern": "adasdai/tools/gtest-framework/googletest.zip",
+            "target": "tools/bazel/googletest.zip",
+            "flat": "true"
+        },
+        {
+            "pattern": "adasdai/tools/linux/bazel/buildtools/4.0.1/buildifier",
+            "target": "tools/bazel/buildifier",
+            "flat": "true"
+        },
+        {
+            "pattern": "adasdai/tools/linux/bazel/buildtools/4.0.1/buildozer",
+            "target": "tools/bazel/buildozer",
+            "flat": "true"
+        },
+        {
+            "pattern": "adasdai/tools/linux/bazel/bazel_4.0.0-linux-x86_64.deb",
+            "target": "tools/bazel/bazel_4.0.0-linux-x86_64.deb",
+            "flat": "true"
+        }
+    ]
+}
