@@ -2560,43 +2560,51 @@ cc_binary(
 )
 
 cc_library(
-    name = "starter_kit_skeleton_socal_hdrs_lib",
+    name = "starter_kit_base_application_skeleton_persistency_hdrs_lib",
     hdrs = [
-        ":starter_kit_skeleton_socal_hdrs",
+        ":starter_kit_base_application_skeleton_persistency_config_hdrs",
     ],
-    strip_include_prefix = "starter_kit_skeleton_socal_hdrs/output/IDC_M_P_SoftwareClusterDesign_Base_SwComponentType_Executable/includes",
+    strip_include_prefix = "starter_kit_base_application_skeleton_persistency_config_hdrs/output/BaseApplicationExecutable/includes",
 )
 
 cc_library(
-    name = "starter_kit_skeleton_modeldatatypes_hdrs_lib",
+    name = "starter_kit_base_application_skeleton_socal_hdrs_lib",
     hdrs = [
-        ":starter_kit_skeleton_modeldatatypes_hdrs",
+        ":starter_kit_base_application_skeleton_socal_hdrs",
     ],
-    strip_include_prefix = "starter_kit_skeleton_modeldatatypes_hdrs/output/IDC_M_P_SoftwareClusterDesign_Base_SwComponentType_Executable/includes",
+    strip_include_prefix = "starter_kit_base_application_skeleton_socal_hdrs/output/BaseApplicationExecutable/includes",
 )
 
 cc_library(
-    name = "starter_kit_skeleton_someipbinding_hdrs_lib",
+    name = "starter_kit_base_application_skeleton_modeldatatypes_hdrs_lib",
     hdrs = [
-        ":starter_kit_skeleton_someipbinding_hdrs",
+        ":starter_kit_base_application_skeleton_modeldatatypes_hdrs",
     ],
-    strip_include_prefix = "starter_kit_skeleton_someipbinding_hdrs/output/IDC_M_P_SoftwareClusterDesign_Base_SwComponentType_Executable/includes",
+    strip_include_prefix = "starter_kit_base_application_skeleton_modeldatatypes_hdrs/output/BaseApplicationExecutable/includes",
 )
 
 cc_library(
-    name = "starter_kit_skeleton_someipprotocol_hdrs_lib",
+    name = "starter_kit_base_application_skeleton_someipbinding_hdrs_lib",
     hdrs = [
-        ":starter_kit_skeleton_someipprotocol_hdrs",
+        ":starter_kit_base_application_skeleton_someipbinding_hdrs",
     ],
-    strip_include_prefix = "starter_kit_skeleton_someipprotocol_hdrs/output/IDC_M_P_SoftwareClusterDesign_Base_SwComponentType_Executable/includes",
+    strip_include_prefix = "starter_kit_base_application_skeleton_someipbinding_hdrs/output/BaseApplicationExecutable/includes",
+)
+
+cc_library(
+    name = "starter_kit_base_application_skeleton_someipprotocol_hdrs_lib",
+    hdrs = [
+        ":starter_kit_base_application_skeleton_someipprotocol_hdrs",
+    ],
+    strip_include_prefix = "starter_kit_base_application_skeleton_someipprotocol_hdrs/output/BaseApplicationExecutable/includes",
 )
 
 cc_library(
     name = "starter_kit_skeleton_socal_srcs_lib",
     srcs = [
-        ":starter_kit_skeleton_socal_srcs",
-        ":starter_kit_skeleton_someipbinding_srcs",
-        ":starter_kit_skeleton_someipprotocol_srcs",
+        ":starter_kit_base_application_skeleton_socal_srcs",
+        ":starter_kit_base_application_skeleton_someipbinding_srcs",
+        ":starter_kit_base_application_skeleton_someipprotocol_srcs",
     ],
     copts = [
         "-std=c++14",
@@ -2606,10 +2614,10 @@ cc_library(
     ],
     linkstatic = 1,
     deps = [
-        ":starter_kit_skeleton_modeldatatypes_hdrs_lib",
-        ":starter_kit_skeleton_socal_hdrs_lib",
-        ":starter_kit_skeleton_someipbinding_hdrs_lib",
-        ":starter_kit_skeleton_someipprotocol_hdrs_lib",
+        ":starter_kit_base_application_skeleton_modeldatatypes_hdrs_lib",
+        ":starter_kit_base_application_skeleton_socal_hdrs_lib",
+        ":starter_kit_base_application_skeleton_someipbinding_hdrs_lib",
+        ":starter_kit_base_application_skeleton_someipprotocol_hdrs_lib",
         "//bsw:amsr_vector_fs_comcommon",
         "//bsw:amsr_vector_fs_socal_headers",
         "//bsw:amsr_vector_fs_someipbinding",
@@ -2627,10 +2635,11 @@ cc_binary(
         # The code generators depend on libSocal.a, contained in the @minerva_mpu_adaptive//:socal_lib_for_skeleton below.
         # That is why we put it in sources. It is important that this `:socal_lib_for_skeleton` is positioned earlier in
         # the list than the generated sources in `:starter_kit_skeleton_socal_srcs_lib` and
-        # `:starter_kit_skeleton_applicationbase_init_deinit_srcs`
+        # `:starter_kit_base_application_skeleton_applicationbase_init_deinit_srcs`
         "@minerva_mpu_adaptive//:socal_lib_for_skeleton",
         ":starter_kit_skeleton_socal_srcs_lib",
-        ":starter_kit_skeleton_applicationbase_init_deinit_srcs",
+        ":starter_kit_base_application_skeleton_applicationbase_init_deinit_srcs",
+        ":starter_kit_base_application_skeleton_persistency_config_hdrs",
     ],
     copts = [
         "-std=c++14",
@@ -2640,14 +2649,16 @@ cc_binary(
     ],
     linkstatic = 1,
     deps = [
-        ":starter_kit_skeleton_modeldatatypes_hdrs_lib",
-        ":starter_kit_skeleton_socal_hdrs_lib",
+        "starter_kit_base_application_skeleton_persistency_hdrs_lib",
+        ":starter_kit_base_application_skeleton_modeldatatypes_hdrs_lib",
+        ":starter_kit_base_application_skeleton_socal_hdrs_lib",
         "//bsw:amsr_vector_fs_em_executionmanager",
         "//bsw:amsr_vector_fs_libvac",
         "//bsw:amsr_vector_fs_log_api",
         "//bsw:amsr_vector_fs_socal_for_skeleton",
         "//bsw:amsr_vector_fs_someipbinding",
         "//bsw:amsr_vector_fs_vajson",
+        "//bsw:amsr_vector_fs_per_libpersistency",
     ],
 )
 
@@ -2677,6 +2688,10 @@ minerva_aa_bsw_module(
         "libamsr-vector-fs-libiostream_libcharconv_common.a",
     ],
     srcs_filegroup = "@starter_kit_adaptive_xavier//:amsr_vector_fs_libiostream_srcs",
+    out_include_dirs = [
+        "include/charconv",
+        "include/libcharconv_common",
+    ],
     deps = [
         ":amsr_vector_fs_libvac",
     ],
