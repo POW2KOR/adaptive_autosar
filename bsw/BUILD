@@ -182,6 +182,46 @@ minerva_aa_codegen_rule(
 )
 
 minerva_aa_codegen_rule(
+    name = "minerva_persistency_config_gen_rule",
+    arxml_srcs = [":complete_arxml"],
+    generators = [
+        "@starter_kit_adaptive_xavier//:generator_amsr_persistency_config",
+    ],
+    outs_list_dict = {
+        "starter_kit_base_application_skeleton_persistency_config_cmake": [
+            "BaseApplicationExecutable/amsr-vector-fs-per-libpersistency.cmake",
+        ],
+        "starter_kit_base_application_skeleton_persistency_config_json": [
+            "BaseApplicationExecutable/etc/per_key_value_storage_config.json",
+        ],
+        "starter_kit_base_application_skeleton_persistency_config_hdrs": [
+            "BaseApplicationExecutable/includes/ara/per/detail/dynamic_key_value_storage_decl.h",
+            "BaseApplicationExecutable/includes/ara/per/internal/config_validation_keys.h",
+            "BaseApplicationExecutable/includes/ara/per/key_value_storage_data_visitor.h",
+            "BaseApplicationExecutable/includes/ara/per/key_value_storage_variant.h",
+        ],
+        "starter_kit_base_application_skeleton_persistency_config_srcs": [
+            "BaseApplicationExecutable/src/ara/per/dynamic_object_parser.cpp",
+        ],
+        "starter_kit_diagnostic_manager_deamon_persistency_config_cmake": [
+            "DiagnosticManagerDeamonExecutable/amsr-vector-fs-per-libpersistency.cmake",
+        ],
+        "starter_kit_diagnostic_manager_deamon_persistency_config_json": [
+            "DiagnosticManagerDeamonExecutable/etc/per_file_storage_config.json",
+        ],
+        "starter_kit_diagnostic_manager_deamon_persistency_config_hdrs": [
+            "DiagnosticManagerDeamonExecutable/includes/ara/per/detail/dynamic_key_value_storage_decl.h",
+            "DiagnosticManagerDeamonExecutable/includes/ara/per/internal/config_validation_keys.h",
+            "DiagnosticManagerDeamonExecutable/includes/ara/per/key_value_storage_data_visitor.h",
+            "DiagnosticManagerDeamonExecutable/includes/ara/per/key_value_storage_variant.h",
+        ],
+        "starter_kit_diagnostic_manager_deamon_persistency_config_srcs": [
+            "DiagnosticManagerDeamonExecutable/src/ara/per/dynamic_object_parser.cpp",
+        ],
+    },
+)
+
+minerva_aa_codegen_rule(
     name = "starter_kit_application_modeldatatypes_api_gen_rule",
     arxml_srcs = [":complete_arxml"],
     generators = [
