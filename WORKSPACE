@@ -3,7 +3,7 @@ workspace(name = "minerva_mpu_adaptive")
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive", "http_file")
 load("//bazel/toolchains/aarch64_linux_ubuntu_compiler:aarch64_linux_ubuntu_configure.bzl", "aarch64_linux_ubuntu_configure")
 load("//bazel/toolchains/aarch64_linux_linaro_compiler:aarch64_linux_linaro_configure.bzl", "aarch64_linux_linaro_configure")
-load("//bazel/toolchains/qnx_compiler:qnx_configure.bzl", "x86_64_qnx_configure")
+load("//bazel/toolchains/qnx_compiler:qnx_configure.bzl", "qnx_toolchain_configure")
 
 # To avoid downloading dependencies from external sources all the time, they
 # were made part of the docker image and are loaded directly from there.
@@ -65,9 +65,16 @@ aarch64_linux_linaro_configure(
     build_file = "@//bazel/toolchains/aarch64_linux_linaro_compiler:aarch64_linux_linaro_compiler.BUILD",
 )
 
-x86_64_qnx_configure(
+qnx_toolchain_configure(
     name = "x86_64_qnx_compiler",
-    build_file = "@//bazel/toolchains/qnx_compiler:qnx_compiler.BUILD",
+    arch = "x86_64",
+    toolchain_prefix = "x86_64-pc",
+)
+
+qnx_toolchain_configure(
+    name = "aarch64_qnx_compiler",
+    arch = "aarch64",
+    toolchain_prefix = "aarch64-unknown",
 )
 
 http_archive(
