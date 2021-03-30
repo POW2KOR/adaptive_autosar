@@ -4,13 +4,13 @@ The script SHALL be ran from the root folder.
 
 Usage:
 - download all the dependencies (Artifactory authentification needed)
-python3 ./scripts/collect_deps.py
+python3 collect_deps.py
 
 - skip the dependencies from the internet (Artifactory authentification needed)
-python3 ./scripts/collect_deps.py -i
+python3 collect_deps.py -i
 
 - skip the dependencies from the Artifactory
-python3 ./scripts/collect_deps.py -a
+python3 collect_deps.py -a
 """
 
 import sys
