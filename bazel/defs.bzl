@@ -3,7 +3,7 @@ This file contains several utility functions and macros used within or with the
 Adaptive AUTOSAR BSW Bazel files.
 """
 
-load("@rules_foreign_cc//tools/build_defs:cmake.bzl", "cmake_external")
+load("@rules_foreign_cc//foreign_cc:cmake.bzl", "cmake")
 
 def extend_and_select(select_dict, extension):
     """
@@ -324,10 +324,10 @@ def minerva_aa_bsw_module(
         name,
         srcs_filegroup,
         cache_entries = None,
-        binaries = None,
-        static_libraries = None,
+        out_binaries = None,
+        out_static_libs = None,
         deps = None,
-        headers_only = False,
+        out_headers_only = False,
         out_bin_dir = "bin"):
     """
     A macro to handle Vector BSW CMake target definitions.
@@ -348,14 +348,14 @@ def minerva_aa_bsw_module(
 
         binaries: Optional names of the resulting binaries.
 
-        static_libraries: Optional names of the resulting static libraries.
+        out_static_libs: Optional names of the resulting static libraries.
 
         deps: Optional dependencies to be copied into the directory structure.
             If the macro is a target of another BSW module, the cache_entries
             get extended to add corect `<package>_DIR` entries and everything
             should be handled.
 
-        headers_only: Optional flag variable to indicate that the library
+        out_headers_only: Optional flag variable to indicate that the library
             produces only headers
 
         out_bin_dir: Optional name of the output subdirectory with the binary
@@ -364,11 +364,11 @@ def minerva_aa_bsw_module(
     if not deps:
         deps = []
 
-    if not static_libraries:
-        static_libraries = []
+    if not out_static_libs:
+        out_static_libs = []
 
-    if not binaries:
-        binaries = []
+    if not out_binaries:
+        out_binaries = []
 
     if not cache_entries:
         cache_entries = {}
@@ -482,7 +482,7 @@ def minerva_aa_bsw_module(
             cache_entries["amsr-vector-fs-e2e_libinternal_DIR:PATH"] = \
                 "$EXT_BUILD_DEPS/amsr_vector_fs_e2e/lib/cmake/amsr-vector-fs-e2e_libinternal/"
 
-    cmake_external(
+    cmake(
         name = name,
         cache_entries = extend_and_select(
             {
@@ -497,8 +497,8 @@ def minerva_aa_bsw_module(
         ),
         generate_crosstool_file = True,
         lib_source = srcs_filegroup,
-        headers_only = headers_only,
-        static_libraries = static_libraries,
+        out_headers_only = out_headers_only,
+        out_static_libs = out_static_libs,
         visibility = ["//visibility:public"],
         deps = deps,
         env = {
@@ -506,7 +506,7 @@ def minerva_aa_bsw_module(
             "QNX_TARGET": "$$EXT_BUILD_ROOT$$/external/x86_64_qnx_compiler/qnx_target",
             "QNX_HOST": "$$EXT_BUILD_ROOT$$/external/x86_64_qnx_compiler/qnx_host",
         },
-        binaries = binaries,
+        out_binaries = out_binaries,
         out_bin_dir = out_bin_dir,
         make_commands = [
             "make -j",
