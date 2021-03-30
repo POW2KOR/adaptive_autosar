@@ -31,7 +31,10 @@ def _qnx_toolchain_configure_impl(repository_ctx):
     repository_ctx.template(
         "BUILD",
         Label("//bazel/toolchains/qnx_compiler:qnx_compiler.BUILD.tpl"),
-        {},
+        {
+            "%{TOOLCHAIN_PREFIX}%": repository_ctx.attr.toolchain_prefix,
+            "%{ARCH}%": repository_ctx.attr.arch,
+        },
     )
 
 qnx_toolchain_configure = repository_rule(
