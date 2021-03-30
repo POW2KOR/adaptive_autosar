@@ -12,7 +12,7 @@ load("@bazel_tools//tools/build_defs/cc:action_names.bzl", "ACTION_NAMES")
 # doesn't provide configuration for the qnx gcc.
 # This file is used for setup of the compiler, linker,
 # archiver flags and all gcc tools. This template
-# is used by x86_64_qnx_configure.bzl.
+# is used by qnx_configure.bzl.
 
 
 all_compile_actions = [

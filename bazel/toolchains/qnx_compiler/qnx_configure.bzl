@@ -1,13 +1,13 @@
 # This implementation will create a rule that will be used for configuring
-# the x86_64_qnx toolchain path. The extra rule is needed in order
-# to have the possibility to set the compiler path over environment variable
+# the qnx toolchain path. The extra rule is needed in order to have the
+#possibility to set the compiler path over environment variable
 
 def _tpl(repository_ctx, tpl, substitutions = {}, out = None):
     if not out:
         out = tpl
     repository_ctx.template(
         out,
-        Label("//bazel/toolchains/x86_64_qnx_compiler:%s.tpl" % tpl),
+        Label("//bazel/toolchains/qnx_compiler:%s.tpl" % tpl),
         substitutions,
     )
 
@@ -27,7 +27,7 @@ def _x86_64_qnx_toolchain_configure_impl(repository_ctx):
     repository_ctx.symlink(x86_64_qnx_toolchain_host_path, "qnx_host")
     repository_ctx.symlink(x86_64_qnx_toolchain_target_path, "qnx_target")
 
-    _tpl(repository_ctx, "x86_64_qnx_toolchain_config.bzl", {
+    _tpl(repository_ctx, "qnx_toolchain_config.bzl", {
         "%{HOST_PATH}%": str(repository_ctx.path("qnx_host")),
         "%{TARGET_PATH}%": str(repository_ctx.path("qnx_target")),
     })
