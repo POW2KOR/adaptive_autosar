@@ -101,9 +101,9 @@ http_archive(
     patches = [
         "@//:bazel/patch_to_enable_selects_in_rules_docker_entrypoints.patch",
     ],
-    sha256 = "1698624e878b0607052ae6131aa216d45ebb63871ec497f26c67455b34119c80",
-    strip_prefix = "rules_docker-0.15.0",
-    url = "file:///usr/tools/bazel/rules_docker-v0.15.0.tar.gz",
+    sha256 = "95d39fd84ff4474babaf190450ee034d958202043e366b9fc38f438c9e6c3334",
+    strip_prefix = "rules_docker-0.16.0",
+    url = "file:///usr/tools/bazel/rules_docker-v0.16.0.tar.gz",
 )
 
 #The following packages are needed by io_bazel_rules_docker to create a docker image
@@ -111,8 +111,8 @@ http_archive(
 
 http_archive(
     name = "io_bazel_rules_go",
-    sha256 = "08c3cd71857d58af3cda759112437d9e63339ac9c6e0042add43f4d94caf632d",
-    url = "file:///usr/tools/bazel/rules_go-v0.24.2.tar.gz",
+    sha256 = "69de5c704a05ff37862f7e0f5534d4f479418afc21806c887db544a316f3cb6b",
+    url = "file:///usr/tools/bazel/rules_go-v0.27.0.tar.gz",
 )
 
 #io_bazel_rules_go needs go_sdk during creation of a docker image. In order to
