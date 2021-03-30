@@ -99,7 +99,7 @@ The docker container `build_env` already has these dependencies embedded into it
 use [this](devops/docker/scripts/collect_deps.py) script. Since the script will download everything to `/usr/tools/bazel/`,
 it needs to be called with sudo privileges. The following download options are available:
 
-```
+```bash
 # Download all the dependencies (Artifactory authentification needed)
 sudo python3 devops/docker/scripts/collect_deps.py
 
