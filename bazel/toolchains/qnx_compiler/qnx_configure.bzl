@@ -19,6 +19,9 @@ def _qnx_toolchain_configure_impl(repository_ctx):
     repository_ctx.symlink(qnx_toolchain_host_path, "qnx_host")
     repository_ctx.symlink(qnx_toolchain_target_path, "qnx_target")
 
+    spec_file_path = "//bazel/toolchains/qnx_compiler:specs/{}.specs".format(repository_ctx.attr.arch)
+    repository_ctx.symlink(Label(spec_file_path), "file.specs")
+
     # The target path for aarch64 is called aarch64le so we have to add this special case
     if repository_ctx.attr.arch == "aarch64":
         arch_for_target_path = "aarch64le"
@@ -37,6 +40,7 @@ def _qnx_toolchain_configure_impl(repository_ctx):
         {
             "%{HOST_PATH}%": str(repository_ctx.path("qnx_host")),
             "%{TARGET_PATH}%": str(repository_ctx.path("qnx_target")),
+            "%{SPECS_PATH}%": str(repository_ctx.path("file.specs")),
             "%{TOOLCHAIN_PREFIX}%": repository_ctx.attr.toolchain_prefix,
             "%{ARCH}%": repository_ctx.attr.arch,
             "%{ARCH_FOR_TARGET_PATH}%": arch_for_target_path,
