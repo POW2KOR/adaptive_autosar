@@ -14,7 +14,7 @@
 
 *invoke_as:
 %{!fwpa*:   %{fcompare-debug=*|fdump-final-insns=*:%:compare-debug-dump-opt()}   %{!S:-o %|.s |
- as %(asm_options) %m.s %A }  }
+ %$QNX_HOST/usr/bin/aarch64-unknown-nto-qnx7.0.0-as %(asm_options) %m.s %A }  }
 
 *cpp:
 %{!nostdinc: -isystem %$QNX_HOST/usr/lib/gcc/aarch64-unknown-nto-qnx7.0.0/%v1.%v2.%v3/include -isysroot %$QNX_TARGET/} %(cpp_cpu)  %{!EB:-D__LITTLEENDIAN__ -D__AARCH64EL__}  %{EB:-D__BIGENDIAN__ -D__AARCH64EB__}  %{posix:-D_POSIX_SOURCE}  %{pthread:}

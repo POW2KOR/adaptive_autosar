@@ -14,7 +14,7 @@
 
 *invoke_as:
 %{!fwpa*:   %{fcompare-debug=*|fdump-final-insns=*:%:compare-debug-dump-opt()}   %{!S:-o %|.s |
- as %(asm_options) %m.s %A }  }
+ %$QNX_HOST/usr/bin/x86_64-pc-nto-qnx7.0.0-as %(asm_options) %m.s %A }  }
 
 *cpp:
 %{!nostdinc: -isystem %$QNX_HOST/usr/lib/gcc/x86_64-pc-nto-qnx7.0.0/%v1.%v2.%v3/include -isysroot %$QNX_TARGET/} %(cpp_cpu)  %{posix:-D_POSIX_SOURCE} %{pthread:}
