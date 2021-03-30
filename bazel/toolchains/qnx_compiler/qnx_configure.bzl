@@ -1,3 +1,6 @@
+DEFAULT_QNX_TOOLCHAIN_TARGET_PATH = "/opt/qnx/qnx700/target/qnx7"
+DEFAULT_QNX_TOOLCHAIN_HOST_PATH = "/opt/qnx/qnx700/host/linux/x86_64"
+
 # This implementation will create a rule that will be used for configuring
 # the qnx toolchain path. The extra rule is needed in order to have the
 # possibility to set the compiler path over environment variable
@@ -6,12 +9,12 @@ def _qnx_toolchain_configure_impl(repository_ctx):
     if "QNX_HOST" in repository_ctx.os.environ:
         qnx_toolchain_host_path = repository_ctx.os.environ["QNX_HOST"]
     else:
-        qnx_toolchain_host_path = "/opt/qnx/qnx700/host/linux/x86_64"
+        qnx_toolchain_host_path = DEFAULT_QNX_TOOLCHAIN_HOST_PATH
 
     if "QNX_TARGET" in repository_ctx.os.environ:
         qnx_toolchain_target_path = repository_ctx.os.environ["QNX_TARGET"]
     else:
-        qnx_toolchain_target_path = "/opt/qnx/qnx700/target/qnx7"
+        qnx_toolchain_target_path = DEFAULT_QNX_TOOLCHAIN_TARGET_PATH
 
     repository_ctx.symlink(qnx_toolchain_host_path, "qnx_host")
     repository_ctx.symlink(qnx_toolchain_target_path, "qnx_target")
