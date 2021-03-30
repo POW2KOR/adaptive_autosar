@@ -1,9 +1,10 @@
-load("@x86_64_qnx_compiler//:qnx_toolchain_config.bzl", "cc_toolchain_config")
+load("@x86_64_qnx_compiler//:qnx_toolchain_config.bzl", "x86_64_cc_toolchain_config")
+load("@aarch64_qnx_compiler//:qnx_toolchain_config.bzl", "aarch64_cc_toolchain_config")
 load("@rules_cc//cc:defs.bzl", "cc_toolchain", "cc_toolchain_suite")
 
 package(default_visibility = ["//visibility:public"])
 
-cc_toolchain_config(name = "x86_64_qnx_toolchain_config")
+x86_64_cc_toolchain_config(name = "x86_64_qnx_toolchain_config")
 
 cc_toolchain(
     name = "x86_64-pc-nto-qnx7.0.0",
