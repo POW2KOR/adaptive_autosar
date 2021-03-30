@@ -6,15 +6,7 @@ initGatekeeper()
 // timeout in minutes
 max_time = 60
 
-assign_node_labels(
-    linux_cpu: 'pulse_ec2', 
-    linux_gpu_g3: 'minerva_linux_gpu_g3', 
-    linux_gpu_g4: 'minerva_linux_gpu_g4', 
-    windows_cpu: 'minerva_windows', 
-    windows_gpu_g3: 'minerva_windows_gpu_g3', 
-    windows_gpu_g4: 'minerva_windows_gpu_g4', 
-    utility: 'pulse_ec2',
-)
+assign_node_labels()
 
 
 lib_jenkins_steps = swf_load_script('cicd/jenkins/jenkins_steps.groovy')
