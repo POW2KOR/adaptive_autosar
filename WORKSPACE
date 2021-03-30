@@ -91,7 +91,7 @@ http_archive(
     url = "file:///usr/tools/bazel/rules_proto.tar.gz",
 )
 
-load("@rules_foreign_cc//:workspace_definitions.bzl", "rules_foreign_cc_dependencies")
+load("@rules_foreign_cc//foreign_cc:repositories.bzl", "rules_foreign_cc_dependencies")
 
 rules_foreign_cc_dependencies(register_default_tools = True)
 
