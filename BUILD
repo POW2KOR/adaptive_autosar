@@ -69,6 +69,20 @@ config_setting(
     },
 )
 
+config_setting(
+    name = "aarch64",
+    values = {
+        "cpu": "aarch64",
+    },
+)
+
+config_setting(
+    name = "k8",
+    values = {
+        "cpu": "k8",
+    },
+)
+
 # This filegroup is necessary so that we isolate the output group corresponding
 # to the binary of the cmake_external. Otherwise, it adds a lot of noise and
 # annoying stuff. Maybe we can find a better way in the future.

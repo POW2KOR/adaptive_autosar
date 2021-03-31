@@ -501,11 +501,18 @@ def minerva_aa_bsw_module(
         out_static_libs = out_static_libs,
         visibility = ["//visibility:public"],
         deps = deps,
-        env = {
-            # This enables QNX building to work, and is harmless in non-QNX building
-            "QNX_TARGET": "$$EXT_BUILD_ROOT$$/external/x86_64_qnx_compiler/qnx_target",
-            "QNX_HOST": "$$EXT_BUILD_ROOT$$/external/x86_64_qnx_compiler/qnx_host",
-        },
+        env = select({
+            "//:aarch64": {
+                # This enables QNX building to work, and is harmless in non-QNX building
+                "QNX_TARGET": "$$EXT_BUILD_ROOT$$/external/aarch64_qnx_compiler/qnx_target",
+                "QNX_HOST": "$$EXT_BUILD_ROOT$$/external/aarch64_qnx_compiler/qnx_host",
+            },
+            "//:k8": {
+                # This enables QNX building to work, and is harmless in non-QNX building
+                "QNX_TARGET": "$$EXT_BUILD_ROOT$$/external/x86_64_qnx_compiler/qnx_target",
+                "QNX_HOST": "$$EXT_BUILD_ROOT$$/external/x86_64_qnx_compiler/qnx_host",
+            },
+        }),
         out_binaries = out_binaries,
         out_bin_dir = out_bin_dir,
         make_commands = [
