@@ -80,8 +80,8 @@ Bazel is our currently used build system. Please refer to the
 
 At the moment we use version 3.7.0.
 
-**NOTE** Now `rules_foreign_cc` requires version 3.7.0 to be installed. Using lower versions results in error related to 
-platform(Windows). The reference for this issue and solution can be found 
+**NOTE** Now `rules_foreign_cc` requires version 3.7.0 to be installed. Using lower versions results in error related to
+platform(Windows). The reference for this issue and solution can be found
 [here](https://github.com/bazelbuild/rules_foreign_cc/commit/f48ec05fed3170b8b32bbc4b6d8fd4175f8b8cff).
 
 Bazel version 3.7.0 can be downlaoded and installed from [link](https://github.com/bazelbuild/bazel/releases/tag/3.7.0).
@@ -96,26 +96,18 @@ each used Bazel command.
 To avoid downloading Bazel dependencies from external sources all the time, we do a one-time download and installation
 to a known path. These dependencies are kept at `/usr/tools/bazel`. Bazel is configured to look for them at that path.
 The docker container `build_env` already has these dependencies embedded into it. To install these Bazel dependencies,
-use
-[this](https://git.swf.daimler.com/adasdai/minerva_mpu_docker/-/blob/e9eaa2018a759bea4927e25dca5224cbcd0bfdec/scripts/collect_deps.py)
-script. Since the script will download everything to `/usr/tools/bazel/`, it needs to be called with sudo privileges:
+use [this](devops/docker/scripts/collect_deps.py) script. Since the script will download everything to `/usr/tools/bazel/`,
+it needs to be called with sudo privileges. The following download options are available:
 
-```
-sudo python3 collect_deps.py
-```
+```bash
+# Download all the dependencies (Artifactory authentification needed)
+sudo python3 devops/docker/scripts/collect_deps.py
 
-For collecting also packages from Artifactory, the script shall be called with `auth_mode` parameter (it will ask for
-Artifactory credentials):
+# Skip the dependencies from the internet (Artifactory authentification needed)
+python3 devops/docker/scripts/collect_deps.py -i
 
-```
-sudo python3 collect_deps.py -d --auth_mode=prompt
-```
-
-By default, everything will be installed under `/usr/tools/bazel`. It is possible to set another location,
-but in such a case the WORKSPACE file needs to be changed appropriately:
-
-```
-sudo python3 collect_deps.py -d --auth_mode=prompt --path=<your_path>
+# Skip the dependencies from the Artifactory
+python3 devops/docker/scripts/collect_deps.py -a
 ```
 
 #### Git hooks
@@ -404,7 +396,7 @@ launch strategy.
 
 ### ssh-keys handling in Docker
 During the bazel build, components need to be cloned that will require to have valid ssh keys to access swf git.
-If you are using docker build environment, the docker command uses the ssh-agent to utilize your keys from the host. 
+If you are using docker build environment, the docker command uses the ssh-agent to utilize your keys from the host.
 The docker build environment mounts the ssh-agent socket in the build environment using the following command-line
 arguments:
 ```
@@ -420,8 +412,8 @@ ssh-add
 
 ### Connection timeout issue while submodule init of gnulibs in collectd repo with VPN on
 
-If you face connection timeout issues while submodule init of `gnulibs` in collectd repo 
-through `collectd_mbient` rule of WORKSPACE file, then open `~/.gitconfig` file 
+If you face connection timeout issues while submodule init of `gnulibs` in collectd repo
+through `collectd_mbient` rule of WORKSPACE file, then open `~/.gitconfig` file
 and add below 2 lines:
 ```
 [url "https://git.savannah.gnu.org/git/"]
