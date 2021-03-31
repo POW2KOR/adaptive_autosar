@@ -182,16 +182,16 @@ bazel build //:minerva_mpu_adaptive_filesystem --config=<CONFIGURATION>
 ```
 
 where `<CONFIGURATION>` is the target toolchain configuration, e.g. (`x86_64_linux`, `aarch64_linux_ubuntu` or
-`aarch64_linux_linaro`, `x86_64_qnx`). For now, you cannot skip `--config=x86_64_linux` even if you are building on
+`aarch64_linux_linaro`, `x86_64_qnx`, `aarch64_qnx`). For now, you cannot skip `--config=x86_64_linux` even if you are building on
 an `x86_64` host for an `x86_64` target. Skipping would lead to linking issue. This will be fixed in the future by
 adding custom toolchain files for `x86_64_linux`.
 
 **NOTE** The first three commands are needed to handle the circular dependency issue. For more information
 please refer to [this](#circular-dependency-workaround) section.
 
-For the `x86_64_qnx` toolchain to work, you need to have the `QNX_HOST` and `QNX_TARGET` set correctly in your
-environment. This is usually done by running something like: `source ~/qnx/qnx700/qnxsdp-env.sh`. If these variables
-are not set, then Bazel will assume the following values:
+For the `x86_64_qnx` and `aarch64_qnx` toolchains to work, you need to have the `QNX_HOST` and `QNX_TARGET` set
+correctly in your environment. This is usually done by running something like: `source ~/qnx/qnx700/qnxsdp-env.sh`. If
+these variables are not set, then Bazel will assume the following values:
 
 - `QNX_HOST=/opt/qnx/qnx700/host/linux/x86_64`
 - `QNX_TARGET=/opt/qnx/qnx700/target/qnx7`
