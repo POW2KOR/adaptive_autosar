@@ -185,7 +185,9 @@ def _impl(ctx):
                                 "-D__ELF__",
                                 "-D__%{ARCH}%__",
                                 "-D__LITTLEENDIAN__",
-                                
+
+                                "-specs=%{SPECS_PATH}%",                                
+
                                 "-nostdinc",
                                 "-nostdinc++",
 
