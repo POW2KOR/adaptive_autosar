@@ -159,10 +159,10 @@ For this we modify BUILD file from the root of the project and add the following
 
 ```bash
 target_build_dir_for_socal_sw_update = select({
-    ":minerva_host": [
+    ":k8": [
         "bazel-out/k8-fastbuild/bin/external/starter_kit_adaptive_xavier/amsr_vector_fs_socal_for_software_update/lib/libSocal.a",
     ],
-    ":minerva_target": [
+    ":aarch64": [
         "bazel-out/aarch64-fastbuild/bin/external/starter_kit_adaptive_xavier/amsr_vector_fs_socal_for_software_update/lib/libSocal.a",
     ],
 })
