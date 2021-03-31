@@ -20,7 +20,7 @@ We call the docker container where we build things the `build_env` and the docke
 `run_env`.
 
 You can find a guide on setting up docker on Daimler Ubuntu laptops
-[here](https://wiki.swf.daimler.com/display/swf/How+to+setup+docker)
+[here](https://wiki.swf.daimler.com/display/swf/How+to+setup+docker).
 
 ### Setup to build from inside the docker container
 
@@ -44,6 +44,11 @@ Then pull your image:
 docker pull artifact.swf.daimler.com/adasdai-docker/minerva_mpu_docker/minerva_mpu:<commitID>
 ```
 where `<commitID>` is the image version. We are currently targeting version `e9eaa2018a759bea4927e25dca5224cbcd0bfdec`.
+
+NOTE: You can use the `latest` tag to pull the latest docker image:
+```
+docker pull artifact.swf.daimler.com/adasdai-docker/minerva_mpu_docker/minerva_mpu:latest
+```
 
 ### Setup to build without docker
 
@@ -75,39 +80,44 @@ sudo apt install g++-aarch64-linux-gnu
 
 #### Bazel
 
-Bazel is our currently used build system. Please refer to the
-[Bazel installation guide](https://docs.bazel.build/versions/master/install.html)
+We currently use Bazel version 4.0.0 as our build system. The docker `build_env` container already has these
+dependencies embedded into it. If you are using the container, then you don't need to do any other further steps. The
+instructions below will show how to install Bazel and all of its dependencies.
 
-At the moment we use version 3.7.0.
-
-**NOTE** Now `rules_foreign_cc` requires version 3.7.0 to be installed. Using lower versions results in error related to
-platform(Windows). The reference for this issue and solution can be found
-[here](https://github.com/bazelbuild/rules_foreign_cc/commit/f48ec05fed3170b8b32bbc4b6d8fd4175f8b8cff).
-
-Bazel version 3.7.0 can be downlaoded and installed from [link](https://github.com/bazelbuild/bazel/releases/tag/3.7.0).
-```
-sudo dpkg -i <path to bazel_3.7.0-linux-x86_64.deb>
-```
-
-**NOTE** For now, if Bazel version 4.0.0 is used, there is an issue with custom rules formatting. To avoid this, please
-add `--incompatible_restrict_string_escapes=false --incompatible_require_linker_input_cc_api=false` to
-each used Bazel command.
+**NOTE** `rules_foreign_cc` requires minimum Bazel version 3.7.0. If you are seeing errors related to platform, update
+now. More info [here](https://github.com/bazelbuild/rules_foreign_cc/commit/f48ec05fed3170b8b32bbc4b6d8fd4175f8b8cff).
 
 To avoid downloading Bazel dependencies from external sources all the time, we do a one-time download and installation
-to a known path. These dependencies are kept at `/usr/tools/bazel`. Bazel is configured to look for them at that path.
-The docker container `build_env` already has these dependencies embedded into it. To install these Bazel dependencies,
-use [this](devops/docker/scripts/collect_deps.py) script. Since the script will download everything to `/usr/tools/bazel/`,
-it needs to be called with sudo privileges. The following download options are available:
+to a known path. The build system is currently configured to look for the dependencies under `/usr/tools/bazel`.
+
+This download can be done using [the collect_deps.py](devops/docker/scripts/collect_deps.py) script.
+
+The script will download:
+
+1. from the internet the packages based on the content of the
+[tools_web.json](https://git.swf.daimler.com/adasdai/minerva_mpu_docker/-/blob/master/configuration/tools_web.json)
+file
+2. from Artifactory the packages based on the content of the
+[tools.json](https://git.swf.daimler.com/adasdai/minerva_mpu_docker/-/blob/master/configuration/tools.json)
+file
+
+Please follow the following steps:
 
 ```bash
-# Download all the dependencies (Artifactory authentification needed)
-sudo python3 devops/docker/scripts/collect_deps.py
+# download all the dependencies using the python script
+# NOTE: when prompted enter your Artifactory credentials
+python3 devops/docker/scripts/collect_deps.py
 
-# Skip the dependencies from the internet (Artifactory authentification needed)
-python3 devops/docker/scripts/collect_deps.py -i
+# copy the downloaded files to /usr/tools/bazel/
+sudo mkdir -p /usr/tools/bazel/
+sudo cp tools/bazel/* /usr/tools/bazel/
 
-# Skip the dependencies from the Artifactory
-python3 devops/docker/scripts/collect_deps.py -a
+# optionally, you can install Bazel and its build tools
+sudo dpkg -i /usr/tools/bazel/bazel_4.0.0-linux-x86_64.deb
+sudo rm /usr/tools/bazel/bazel_4.0.0-linux-x86_64.deb
+sudo mv /usr/tools/bazel/buildifier /usr/local/bin/
+sudo mv /usr/tools/bazel/buildozer /usr/local/bin/
+sudo chmod +x /usr/local/bin/buildifier /usr/local/bin/buildozer
 ```
 
 #### Git hooks
@@ -128,7 +138,7 @@ cd minerva_mpu_adaptive
 pre-commit install
 ```
 
-Once enabaled, pre-commit will run before every local commit in order to suggest fixes for the checks defined in
+Once enabled, pre-commit will run before every local commit in order to suggest fixes for the checks defined in
 [.pre-commit-config.yaml](./pre-commit-config.yaml)
 
 ## Build
@@ -169,8 +179,8 @@ to be the same version you've pulled during the setup from earlier).
 ## The actual build steps
 
 The current Bazel build is based on [rules_foreign_cc](https://github.com/bazelbuild/rules_foreign_cc) for building
-external CMake projects. In particular, they are used to build the Vector BSW libraries and. Default build type for the
-BSW modules is "Release".
+external CMake projects. In particular, they are used to build the Vector BSW libraries. The default build type for 
+the BSW modules is "Release".
 
 To proceed with your build on host, change to your repository root directory and execute the following commands:
 
@@ -234,7 +244,7 @@ No matter what mode you are running, you can open extra terminals into the conta
 docker ps -qf "ancestor=bazel:minerva_mpu_adaptive_docker"
 ```
 
-- Enter the contaienr with `docker exec` like below. Replace `<container id>` with the id returned by the previous
+- Enter the container with `docker exec` like below. Replace `<container id>` with the id returned by the previous
 step. You can also run other commands than `/bin/bash`, provided that this command has been already added to the
 container.
 
