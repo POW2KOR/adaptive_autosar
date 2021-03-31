@@ -5,6 +5,7 @@ build                       --experimental_scale_timeouts=100
 build:aarch64_linux_ubuntu  --crosstool_top=//bazel/toolchains/aarch64_linux_ubuntu_compiler:toolchain --host_crosstool_top=@bazel_tools//tools/cpp:toolchain
 build:aarch64_linux_linaro  --crosstool_top=//bazel/toolchains/aarch64_linux_linaro_compiler:toolchain --host_crosstool_top=@bazel_tools//tools/cpp:toolchain
 build:x86_64_qnx            --crosstool_top=//bazel/toolchains/qnx_compiler:toolchain --host_crosstool_top=@bazel_tools//tools/cpp:toolchain
+build:aarch64_qnx           --crosstool_top=//bazel/toolchains/qnx_compiler:toolchain --host_crosstool_top=@bazel_tools//tools/cpp:toolchain
 
 # Choose target configuration explicitly
 build:x86_64_linux          --//:build_target="minerva_host" --//:os="linux"
@@ -12,15 +13,18 @@ build:aarch64_linux_ubuntu  --//:build_target="minerva_target" --//:os="linux"
 build:aarch64_linux_linaro  --//:build_target="minerva_target" --//:os="linux"
 #@TODO build_target should be minerva_target, but that points to aarch64 when doing the circular dependency workaround
 build:x86_64_qnx            --//:build_target="minerva_host" --//:os="qnx"
+build:aarch64_qnx           --//:build_target="minerva_target" --//:os="qnx"
 
 # Specify target architecture
 build:x86_64_linux          --cpu=k8
 build:aarch64_linux_ubuntu  --cpu=aarch64
 build:aarch64_linux_linaro  --cpu=aarch64
 build:x86_64_qnx            --cpu=k8
+build:aarch64_qnx           --cpu=aarch64
 
 # This is needed for both Bazel toolchain configuration and for Bazel-native compilation to work
 build:x86_64_qnx            --action_env=QNX_HOST --action_env=QNX_TARGET
+build:aarch64_qnx           --action_env=QNX_HOST --action_env=QNX_TARGET
 
 # this configuration option is used for remote caching on CI
 # the path after keyword '--disk_cache="' is extracted in Jenkinsfile and used as efs cache mount volume inside docker

@@ -19,19 +19,38 @@ def _qnx_toolchain_configure_impl(repository_ctx):
     repository_ctx.symlink(qnx_toolchain_host_path, "qnx_host")
     repository_ctx.symlink(qnx_toolchain_target_path, "qnx_target")
 
+    # The target path for aarch64 is called aarch64le so we have to add this special case
+    if repository_ctx.attr.arch == "aarch64":
+        arch_for_target_path = "aarch64le"
+    else:
+        arch_for_target_path = repository_ctx.attr.arch
+
+    # Bazel conventionally uses k8 as an architecture name for x86_64, so we convert
+    if repository_ctx.attr.arch == "x86_64":
+        target_cpu = "k8"
+    else:
+        target_cpu = repository_ctx.attr.arch
+
     repository_ctx.template(
         "qnx_toolchain_config.bzl",
         Label("//bazel/toolchains/qnx_compiler:qnx_toolchain_config.bzl.tpl"),
         {
             "%{HOST_PATH}%": str(repository_ctx.path("qnx_host")),
             "%{TARGET_PATH}%": str(repository_ctx.path("qnx_target")),
+            "%{TOOLCHAIN_PREFIX}%": repository_ctx.attr.toolchain_prefix,
+            "%{ARCH}%": repository_ctx.attr.arch,
+            "%{ARCH_FOR_TARGET_PATH}%": arch_for_target_path,
+            "%{TARGET_CPU}%": target_cpu,
         },
     )
 
     repository_ctx.template(
         "BUILD",
         Label("//bazel/toolchains/qnx_compiler:qnx_compiler.BUILD.tpl"),
-        {},
+        {
+            "%{TOOLCHAIN_PREFIX}%": repository_ctx.attr.toolchain_prefix,
+            "%{ARCH}%": repository_ctx.attr.arch,
+        },
     )
 
 qnx_toolchain_configure = repository_rule(

@@ -67,35 +67,35 @@ def _impl(ctx):
     tool_paths = [
         tool_path(
             name = "gcc",
-            path = "%{HOST_PATH}%/usr/bin/x86_64-pc-nto-qnx7.0.0-gcc",
+            path = "%{HOST_PATH}%/usr/bin/%{TOOLCHAIN_PREFIX}%-nto-qnx7.0.0-gcc",
         ),
         tool_path(
             name = "ld",
-            path = "%{HOST_PATH}%/usr/bin/x86_64-pc-nto-qnx7.0.0-ld",
+            path = "%{HOST_PATH}%/usr/bin/%{TOOLCHAIN_PREFIX}%-nto-qnx7.0.0-ld",
         ),
         tool_path(
             name = "ar",
-            path = "%{HOST_PATH}%/usr/bin/x86_64-pc-nto-qnx7.0.0-ar",
+            path = "%{HOST_PATH}%/usr/bin/%{TOOLCHAIN_PREFIX}%-nto-qnx7.0.0-ar",
         ),
         tool_path(
             name = "cpp",
-            path = "%{HOST_PATH}%/usr/bin/x86_64-pc-nto-qnx7.0.0-cpp",
+            path = "%{HOST_PATH}%/usr/bin/%{TOOLCHAIN_PREFIX}%-nto-qnx7.0.0-cpp",
         ),
         tool_path(
             name = "gcov",
-            path = "%{HOST_PATH}%/usr/bin/x86_64-pc-nto-qnx7.0.0-gcov",
+            path = "%{HOST_PATH}%/usr/bin/%{TOOLCHAIN_PREFIX}%-nto-qnx7.0.0-gcov",
         ),
         tool_path(
             name = "nm",
-            path = "%{HOST_PATH}%/usr/bin/x86_64-pc-nto-qnx7.0.0-nm",
+            path = "%{HOST_PATH}%/usr/bin/%{TOOLCHAIN_PREFIX}%-nto-qnx7.0.0-nm",
         ),
         tool_path(
             name = "objdump",
-            path = "%{HOST_PATH}%/usr/bin/x86_64-pc-nto-qnx7.0.0-objdump",
+            path = "%{HOST_PATH}%/usr/bin/%{TOOLCHAIN_PREFIX}%-nto-qnx7.0.0-objdump",
         ),
         tool_path(
             name = "strip",
-            path = "%{HOST_PATH}%/usr/bin/x86_64-pc-nto-qnx7.0.0-strip",
+            path = "%{HOST_PATH}%/usr/bin/%{TOOLCHAIN_PREFIX}%-nto-qnx7.0.0-strip",
         ),
     ]
 
@@ -122,13 +122,13 @@ def _impl(ctx):
                                 "-Wl,-z,relro,-z,now",
                                 "-pass-exit-codes",
 
-                                "-L%{HOST_PATH}%/usr/lib/gcc/x86_64-pc-nto-qnx7.0.0/5.4.0/",
-                                "-L%{TARGET_PATH}%/x86_64/lib/gcc/5.4.0",
-                                "-L%{TARGET_PATH}%/usr/x86_64-pc-nto-qnx7.0.0/lib/",
-		                        "-L%{TARGET_PATH}%/x86_64/lib/",
-                                "-L%{TARGET_PATH}%/x86_64/lib",
-                                "-L%{TARGET_PATH}%/x86_64/usr/lib",
-                                "-L%{TARGET_PATH}%/x86_64/opt/lib",
+                                "-L%{HOST_PATH}%/usr/lib/gcc/%{TOOLCHAIN_PREFIX}%-nto-qnx7.0.0/5.4.0/",
+                                "-L%{TARGET_PATH}%/%{ARCH_FOR_TARGET_PATH}%/lib/gcc/5.4.0",
+                                "-L%{TARGET_PATH}%/usr/%{TOOLCHAIN_PREFIX}%-nto-qnx7.0.0/lib/",
+		                        "-L%{TARGET_PATH}%/%{ARCH_FOR_TARGET_PATH}%/lib/",
+                                "-L%{TARGET_PATH}%/%{ARCH_FOR_TARGET_PATH}%/lib",
+                                "-L%{TARGET_PATH}%/%{ARCH_FOR_TARGET_PATH}%/usr/lib",
+                                "-L%{TARGET_PATH}%/%{ARCH_FOR_TARGET_PATH}%/opt/lib",
                                 
                                 "-lm",
                                 "-lc++",
@@ -183,7 +183,7 @@ def _impl(ctx):
                                 "-D__unix__",
                                 "-D__unix",
                                 "-D__ELF__",
-                                "-D__X86_64__",
+                                "-D__%{ARCH}%__",
                                 "-D__LITTLEENDIAN__",
                                 
                                 "-nostdinc",
@@ -191,7 +191,7 @@ def _impl(ctx):
 
                                 # C headers
                                 "-isystem%{TARGET_PATH}%/usr/include",
-                                "-isystem%{HOST_PATH}%/usr/lib/gcc/x86_64-pc-nto-qnx7.0.0/5.4.0/include",
+                                "-isystem%{HOST_PATH}%/usr/lib/gcc/%{TOOLCHAIN_PREFIX}%-nto-qnx7.0.0/5.4.0/include",
                                 
                                 # C++ headers
                                 "-isystem%{TARGET_PATH}%/usr/include/c++/v1"
@@ -244,7 +244,7 @@ def _impl(ctx):
                     actions = all_compile_actions + all_link_actions,
                     flag_groups = [
                         flag_group(
-                            flags = ["--sysroot=%{TARGET_PATH}%/x86_64"],
+                            flags = ["--sysroot=%{TARGET_PATH}%/%{ARCH_FOR_TARGET_PATH}%"],
                         ),
                     ],
                 ),
@@ -281,22 +281,22 @@ def _impl(ctx):
         ctx = ctx,
         features = features,
         cxx_builtin_include_directories = [
-            "%{HOST_PATH}%/usr/lib/gcc/x86_64-pc-nto-qnx7.0.0/5.4.0/include/",
+            "%{HOST_PATH}%/usr/lib/gcc/%{TOOLCHAIN_PREFIX}%-nto-qnx7.0.0/5.4.0/include/",
             "%{TARGET_PATH}%/usr/include/",
         ],
-        toolchain_identifier = "x86_64-pc-nto-qnx7.0.0",
+        toolchain_identifier = "%{TOOLCHAIN_PREFIX}%-nto-qnx7.0.0",
         host_system_name = "",
         target_system_name = "qnx",
-        target_cpu = "k8",
+        target_cpu = "%{TARGET_CPU}%",
         target_libc = "",
-        compiler = "x86_64-pc-nto-qnx7.0.0",
+        compiler = "%{TOOLCHAIN_PREFIX}%-nto-qnx7.0.0",
         abi_version = "",
         abi_libc_version = "",
-        builtin_sysroot = "%{TARGET_PATH}%/x86_64",
+        builtin_sysroot = "%{TARGET_PATH}%/%{ARCH_FOR_TARGET_PATH}%",
         tool_paths = tool_paths,
     )
 
-cc_toolchain_config = rule(
+%{ARCH}%_cc_toolchain_config = rule(
     implementation = _impl,
     attrs = {
     },
