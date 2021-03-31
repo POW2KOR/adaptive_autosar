@@ -1,5 +1,5 @@
 import groovy.io.FileType
-@Library('adas-jenkins-shared-lib@ADASDAI-3128-refactor-jenkinsfile') _
+@Library('adas-jenkins-shared-lib@master') _
 
 initGatekeeper()
 
