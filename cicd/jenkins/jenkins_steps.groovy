@@ -1,7 +1,7 @@
 // -*- mode: groovy -*-
 lib_depot_utilities = load('ci-depot/jenkins/utilities.groovy')
 
-DOCKER_IMAGE_COMPILATION = "artifact.swf.daimler.com/adasdai-docker/minerva_mpu_docker/minerva_mpu:20210216120747"
+DOCKER_IMAGE_COMPILATION = "artifact.swf.daimler.com/adasdai-docker/minerva_mpu_docker/minerva_mpu:9dbca8c0ac21aba4e85855923d761439c2df67d3"
 
 // stash libraries
 STASH_LIB_X86_64_LINUX_UBUNTU = '' //TODO: Fill in artifacts
