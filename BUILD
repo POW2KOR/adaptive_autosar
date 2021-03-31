@@ -6,32 +6,6 @@ load("@io_bazel_rules_docker//docker/util:run.bzl", "container_run_and_commit")
 package(default_visibility = ["//visibility:public"])
 
 string_flag(
-    name = "build_target",
-    build_setting_default = "minerva_host",
-)
-
-config_setting(
-    name = "minerva_host",
-    flag_values = {
-        ":build_target": "minerva_host",
-    },
-)
-
-config_setting(
-    name = "minerva_drive_sdk",
-    flag_values = {
-        ":build_target": "minerva_drive_sdk",
-    },
-)
-
-config_setting(
-    name = "minerva_target",
-    flag_values = {
-        ":build_target": "minerva_target",
-    },
-)
-
-string_flag(
     name = "docker_entrypoint",
     build_setting_default = "execution_manager",
 )
