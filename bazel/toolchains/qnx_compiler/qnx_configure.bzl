@@ -1,9 +1,10 @@
 DEFAULT_QNX_TOOLCHAIN_TARGET_PATH = "/opt/qnx/qnx700/target/qnx7"
 DEFAULT_QNX_TOOLCHAIN_HOST_PATH = "/opt/qnx/qnx700/host/linux/x86_64"
 
-# This implementation will create a rule that will be used for configuring
-# the qnx toolchain path. The extra rule is needed in order to have the
-# possibility to set the compiler path over environment variable
+# This file describes the repository rule which creates our self-contained QNX
+# compiler Bazel repositories. This makes use of some generic template files
+# which are then expanded into the final bazel files necessary for the
+# toolchain files.
 
 def _qnx_toolchain_configure_impl(repository_ctx):
     if "QNX_HOST" in repository_ctx.os.environ:
