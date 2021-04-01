@@ -2538,6 +2538,72 @@ cc_binary(
     ],
 )
 
+cc_binary(
+    name = "restart_app_demo_idc6",
+    srcs = [
+        ":starter_kit_restart_app_idc6_applicationbase_init_deinit_srcs",
+        "@starter_kit_adaptive_xavier//:restart_app_demo_idc6_srcs",
+    ],
+    copts = [
+        "-std=c++14",
+    ],
+    features = [
+        "pthread",
+    ],
+    linkstatic = 1,
+    deps = [
+        "//bsw:amsr_vector_fs_applicationbase",
+        "//bsw:amsr_vector_fs_em_executionmanager",
+        "//bsw:amsr_vector_fs_libvac",
+        "//bsw:amsr_vector_fs_log_api",
+        "//bsw:executionmanager_state_client_binary",
+    ],
+)
+
+cc_binary(
+    name = "shutdown_app_demo_idc6",
+    srcs = [
+        ":starter_kit_shutdown_app_idc6_applicationbase_init_deinit_srcs",
+        "@starter_kit_adaptive_xavier//:shutdown_app_demo_idc6_srcs",
+    ],
+    copts = [
+        "-std=c++14",
+    ],
+    features = [
+        "pthread",
+    ],
+    linkstatic = 1,
+    deps = [
+        "//bsw:amsr_vector_fs_applicationbase",
+        "//bsw:amsr_vector_fs_em_executionmanager",
+        "//bsw:amsr_vector_fs_libvac",
+        "//bsw:amsr_vector_fs_log_api",
+        "//bsw:executionmanager_state_client_binary",
+    ],
+)
+
+cc_binary(
+    name = "update_app_demo_idc6",
+    srcs = [
+        ":starter_kit_update_app_idc6_applicationbase_init_deinit_srcs",
+        "@starter_kit_adaptive_xavier//:update_app_v1_demo_idc6_srcs",
+    ],
+    copts = [
+        "-std=c++14",
+    ],
+    features = [
+        "pthread",
+    ],
+    linkstatic = 1,
+    deps = [
+        "//bsw:amsr_vector_fs_applicationbase",
+        "//bsw:amsr_vector_fs_em_executionmanager",
+        "//bsw:amsr_vector_fs_libvac",
+        "//bsw:amsr_vector_fs_log_api",
+        "//bsw:executionmanager_state_client_binary",
+    ],
+)
+
 minerva_aa_bsw_module(
     name = "amsr_vector_fs_libvac",
     out_static_libs = [

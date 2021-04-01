@@ -310,3 +310,39 @@ filegroup(
     ],
     visibility = ["//visibility:public"],
 )
+
+filegroup(
+    name = "restart_app_demo_idc6_srcs",
+    srcs = [
+        "examples/idc6-demo/applications/restart-app-demo-idc6/src/main.cpp",
+        "examples/idc6-demo/applications/restart-app-demo-idc6/src/application.h",
+        "examples/idc6-demo/applications/restart-app-demo-idc6/src/restart_app_demo_error_domain.cpp",
+        "examples/idc6-demo/applications/restart-app-demo-idc6/src/restart_app_demo_error_domain.h",
+        "examples/idc6-demo/applications/restart-app-demo-idc6/src/application.cpp",
+    ],
+    visibility = ["//visibility:public"],
+)
+
+filegroup(
+    name = "shutdown_app_demo_idc6_srcs",
+    srcs = [
+        "examples/idc6-demo/applications/shutdown-app-demo-idc6/src/main.cpp",
+        "examples/idc6-demo/applications/shutdown-app-demo-idc6/src/application.h",
+        "examples/idc6-demo/applications/shutdown-app-demo-idc6/src/shutdown_app_demo_error_domain.cpp",
+        "examples/idc6-demo/applications/shutdown-app-demo-idc6/src/shutdown_app_demo_error_domain.h",
+        "examples/idc6-demo/applications/shutdown-app-demo-idc6/src/application.cpp",
+    ],
+    visibility = ["//visibility:public"],
+)
+
+filegroup(
+    name = "update_app_v1_demo_idc6_srcs",
+    srcs = [
+        "examples/idc6-demo/applications/update-app-v1-demo-idc6/src/main.cpp",
+        "examples/idc6-demo/applications/update-app-v1-demo-idc6/src/application.h",
+        "examples/idc6-demo/applications/update-app-v1-demo-idc6/src/update_app_demo_error_domain.cpp",
+        "examples/idc6-demo/applications/update-app-v1-demo-idc6/src/update_app_demo_error_domain.h",
+        "examples/idc6-demo/applications/update-app-v1-demo-idc6/src/application.cpp",
+    ],
+    visibility = ["//visibility:public"],
+)
