@@ -10,7 +10,7 @@ assign_node_labels()
 
 
 lib_jenkins_steps = swf_load_script('cicd/jenkins/jenkins_steps.groovy')
-lib_code_formatting = swf_load_script('ci-depot/jenkins/codeFormattingSteps.groovy')
+lib_code_gatekeeper = swf_load_script('ci-depot/jenkins/gatekeeper.groovy')
 lib_depot_utilities = swf_load_script('ci-depot/jenkins/utilities.groovy')
 
 lib_depot_utilities.main_wrapper(
@@ -20,7 +20,7 @@ lib_depot_utilities.main_wrapper(
     ])
 
     lib_depot_utilities.parallel_stage('Sanity', [
-        lib_code_formatting.code_formatting()
+        lib_code_gatekeeper.inspect()
     ])
 
     lib_depot_utilities.parallel_stage('Builds', [
@@ -34,6 +34,6 @@ lib_depot_utilities.main_wrapper(
   }
 ,
 failure_handler: {
-  
+
 }
 )
