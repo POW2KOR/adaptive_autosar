@@ -2790,6 +2790,7 @@ minerva_aa_bsw_module(
         "CMAKE_VERBOSE_MAKEFILE": "ON",
         "ENABLE_DOXYGEN": "OFF",
         "ENABLE_EXEC_MANAGER": "ON",
+        "ADAPTIVE_MICROSAR_SIP_DIR": "$EXT_BUILD_ROOT/external/starter_kit_adaptive_xavier/mb_base_layer_adaptive_xavier/amsr_xavier",
     },
     out_binaries = [
         "amsr_vector_fs_sec_cryptostack_daemon",
