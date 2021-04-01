@@ -2531,10 +2531,10 @@ cc_binary(
         "//bsw:amsr_vector_fs_em_executionmanager",
         "//bsw:amsr_vector_fs_libvac",
         "//bsw:amsr_vector_fs_log_api",
+        "//bsw:amsr_vector_fs_per_libpersistency",
         "//bsw:amsr_vector_fs_socal_for_skeleton",
         "//bsw:amsr_vector_fs_someipbinding",
         "//bsw:amsr_vector_fs_vajson",
-        "//bsw:amsr_vector_fs_per_libpersistency",
     ],
 )
 
