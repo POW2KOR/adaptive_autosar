@@ -3274,7 +3274,36 @@ minerva_aa_bsw_module(
     deps = [
         ":amsr_vector_fs_libvac",
         ":amsr_vector_fs_vajson",
+    ],
+)
+
+minerva_aa_bsw_module(
+    name = "amsr_vector_fs_logutility",
+    out_static_libs = [
+        "liblog-utility.a",
+    ],
+    srcs_filegroup = "@starter_kit_adaptive_xavier//:amsr_vector_fs_logutility_srcs",
+    deps = [
         ":amsr_vector_fs_libiostream",
         ":amsr_vector_fs_libosabstraction",
+        ":amsr_vector_fs_libvac",
+        ":amsr_vector_fs_log_api",
+        ":amsr_vector_fs_thread",
+        ":amsr_vector_fs_vajson",
+    ],
+)
+
+minerva_aa_bsw_module(
+    name = "amsr_vector_fs_iointegritystream",
+    out_static_libs = [
+        "libiointegritystream.a",
+    ],
+    srcs_filegroup = "@starter_kit_adaptive_xavier//:amsr_vector_fs_iointegritystream_srcs",
+    deps = [
+        ":amsr_vector_fs_crc",
+        ":amsr_vector_fs_libiostream",
+        ":amsr_vector_fs_libvac",
+        ":amsr_vector_fs_msr4base",
+        ":amsr_vector_fs_vajson",
     ],
 )

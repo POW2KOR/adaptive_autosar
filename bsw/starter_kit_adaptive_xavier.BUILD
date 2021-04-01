@@ -141,6 +141,19 @@ filegroup(
     visibility = ["//visibility:public"],
 )
 
+filegroup(
+    name = "amsr_vector_fs_logutility_srcs",
+    srcs = glob(["mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-logutility/**"]),
+    visibility = ["//visibility:public"],
+)
+
+filegroup(
+    name = "amsr_vector_fs_iointegritystream_srcs",
+    srcs = glob(["mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-iointegritystream/**"]),
+    visibility = ["//visibility:public"],
+)
+
+
 ######################################################################################
 # Generators
 ######################################################################################
