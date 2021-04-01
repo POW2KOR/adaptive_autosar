@@ -3040,6 +3040,10 @@ minerva_aa_bsw_module(
     ],
     srcs_filegroup = "@starter_kit_adaptive_xavier//:amsr_vector_fs_per_libpersistency_srcs",
     deps = [
+        ":amsr_vector_fs_crc",
+        ":amsr_vector_fs_iointegritystream",
+        ":amsr_vector_fs_libiostream",
+        ":amsr_vector_fs_libosabstraction",
         ":amsr_vector_fs_libvac",
         ":amsr_vector_fs_vajson",
     ],
