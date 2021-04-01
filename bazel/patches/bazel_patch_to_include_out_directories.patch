@@ -1,0 +1,83 @@
+diff --git a/foreign_cc/private/framework.bzl b/foreign_cc/private/framework.bzl
+index 2ba7236..4bdba07 100644
+--- a/foreign_cc/private/framework.bzl
++++ b/foreign_cc/private/framework.bzl
+@@ -151,6 +151,10 @@ CC_EXTERNAL_RULE_ATTRIBUTES = {
+         mandatory = False,
+         default = "include",
+     ),
++    "out_include_dirs": attr.string_list(
++        doc = "Optional name of the extra Output directories with header files",
++        mandatory = False,
++    ),
+     "out_interface_libs": attr.string_list(
+         doc = "Optional names of the resulting interface libraries.",
+         mandatory = False,
+@@ -614,6 +618,7 @@ def _check_file_name(var):
+ _Outputs = provider(
+     doc = "Provider to keep different kinds of the external build output files and directories",
+     fields = dict(
++        out_include_dirs = "List of directory with header files",
+         out_include_dir = "Directory with header files (relative to install directory)",
+         out_binary_files = "Binary files, which will be created by the action",
+         libraries = "Library files, which will be created by the action",
+@@ -627,6 +632,7 @@ def _define_outputs(ctx, attrs, lib_name):
+     attr_interface_libs = []
+     attr_shared_libs = []
+     attr_static_libs = []
++    attr_include_dirs = []
+ 
+     # TODO: Until the the deprecated attributes are removed, we must
+     # create a mutatable list so we can ensure they're being included
+@@ -634,6 +640,7 @@ def _define_outputs(ctx, attrs, lib_name):
+     attr_interface_libs.extend(getattr(attrs, "out_interface_libs", []))
+     attr_shared_libs.extend(getattr(attrs, "out_shared_libs", []))
+     attr_static_libs.extend(getattr(attrs, "out_static_libs", []))
++    attr_include_dirs.extend(getattr(attrs, "out_include_dirs", []))
+ 
+     # TODO: These names are deprecated, remove
+     if getattr(attrs, "binaries", []):
+@@ -666,6 +673,10 @@ def _define_outputs(ctx, attrs, lib_name):
+ 
+     _check_file_name(lib_name)
+ 
++    declared_include_dirs = []
++    for include_dir in attr_include_dirs:
++        declared_include_dirs.append(ctx.actions.declare_directory(lib_name + "/" + include_dir))
++
+     out_include_dir = ctx.actions.declare_directory(lib_name + "/" + attrs.out_include_dir)
+ 
+     out_binary_files = _declare_out(ctx, lib_name, attrs.out_bin_dir, attr_binaries_libs)
+@@ -677,11 +688,13 @@ def _define_outputs(ctx, attrs, lib_name):
+     )
+ 
+     declared_outputs = [out_include_dir] + out_binary_files
++    declared_outputs += declared_include_dirs
+     declared_outputs += libraries.static_libraries
+     declared_outputs += libraries.shared_libraries + libraries.interface_libraries
+ 
+     return _Outputs(
+         out_include_dir = out_include_dir,
++        out_include_dirs = declared_include_dirs,
+         out_binary_files = out_binary_files,
+         libraries = libraries,
+         declared_outputs = declared_outputs,
+@@ -822,9 +835,16 @@ def _get_headers(compilation_info):
+     )
+ 
+ def _define_out_cc_info(ctx, attrs, inputs, outputs):
++    headers = [outputs.out_include_dir]
++    system_includes = [outputs.out_include_dir.path]
++
++    for include_dir in outputs.out_include_dirs:
++        headers.append(include_dir)
++        system_includes.append(include_dir.path)
++    
+     compilation_info = cc_common.create_compilation_context(
+-        headers = depset([outputs.out_include_dir]),
+-        system_includes = depset([outputs.out_include_dir.path]),
++        headers = depset(headers),
++        system_includes = depset(system_includes),
+         includes = depset([]),
+         quote_includes = depset([]),
+         defines = depset(attrs.defines),

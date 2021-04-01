@@ -328,7 +328,8 @@ def minerva_aa_bsw_module(
         out_static_libs = None,
         deps = None,
         out_headers_only = False,
-        out_bin_dir = "bin"):
+        out_bin_dir = "bin",
+        out_include_dirs = None):
     """
     A macro to handle Vector BSW CMake target definitions.
 
@@ -360,6 +361,9 @@ def minerva_aa_bsw_module(
 
         out_bin_dir: Optional name of the output subdirectory with the binary
             files, defaults to 'bin'.
+
+        out_include_dirs: Optional list of out directory contaning header files
+
     """
     if not deps:
         deps = []
@@ -372,6 +376,9 @@ def minerva_aa_bsw_module(
 
     if not cache_entries:
         cache_entries = {}
+
+    if not out_include_dirs:
+        out_include_dirs = []
 
     # CMAKE_TRY_COMPILE_TARGET_TYPE set to STATIC_LIBRARY is needed to make
     # aarch64 builds work, I do not know exactly why using this option affects
@@ -515,6 +522,7 @@ def minerva_aa_bsw_module(
         }),
         out_binaries = out_binaries,
         out_bin_dir = out_bin_dir,
+        out_include_dirs = out_include_dirs,
         make_commands = [
             "make -j",
             "make install",
