@@ -6,32 +6,6 @@ load("@io_bazel_rules_docker//docker/util:run.bzl", "container_run_and_commit")
 package(default_visibility = ["//visibility:public"])
 
 string_flag(
-    name = "build_target",
-    build_setting_default = "minerva_host",
-)
-
-config_setting(
-    name = "minerva_host",
-    flag_values = {
-        ":build_target": "minerva_host",
-    },
-)
-
-config_setting(
-    name = "minerva_drive_sdk",
-    flag_values = {
-        ":build_target": "minerva_drive_sdk",
-    },
-)
-
-config_setting(
-    name = "minerva_target",
-    flag_values = {
-        ":build_target": "minerva_target",
-    },
-)
-
-string_flag(
     name = "docker_entrypoint",
     build_setting_default = "execution_manager",
 )
@@ -291,28 +265,28 @@ container_image(
 # the root. The file is used in bsw/BUILD file later.
 
 target_build_dir_for_socal_proxy = select({
-    ":minerva_host": [
+    ":k8": [
         "bazel-out/k8-fastbuild/bin/bsw/amsr_vector_fs_socal_for_proxy/lib/libSocal.a",
     ],
-    ":minerva_target": [
+    ":aarch64": [
         "bazel-out/aarch64-fastbuild/bin/bsw/amsr_vector_fs_socal_for_proxy/lib/libSocal.a",
     ],
 })
 
 target_build_dir_for_socal_skeleton = select({
-    ":minerva_host": [
+    ":k8": [
         "bazel-out/k8-fastbuild/bin/bsw/amsr_vector_fs_socal_for_skeleton/lib/libSocal.a",
     ],
-    ":minerva_target": [
+    ":aarch64": [
         "bazel-out/aarch64-fastbuild/bin/bsw/amsr_vector_fs_socal_for_skeleton/lib/libSocal.a",
     ],
 })
 
 target_build_dir_for_socal_sw_update = select({
-    ":minerva_host": [
+    ":k8": [
         "bazel-out/k8-fastbuild/bin/bsw/amsr_vector_fs_socal_for_software_update/lib/libSocal.a",
     ],
-    ":minerva_target": [
+    ":aarch64": [
         "bazel-out/aarch64-fastbuild/bin/bsw/amsr_vector_fs_socal_for_software_update/lib/libSocal.a",
     ],
 })
