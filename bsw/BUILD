@@ -45,28 +45,49 @@ filegroup(
 filegroup(
     name = "proxy_com_application_config",
     srcs = [
-        "configs/IDC_M_P_SoftwareClusterDesign_Base_TEST_SwComponentType_Executable/com_application.json",
+        "configs/TestBaseApplicationExecutable/com_application.json",
     ],
 )
 
 filegroup(
     name = "proxy_logging_config",
     srcs = [
-        "configs/IDC_M_P_SoftwareClusterDesign_Base_TEST_SwComponentType_Executable/logging_config.json",
+        "configs/TestBaseApplicationExecutable/logging_config.json",
     ],
 )
 
 filegroup(
     name = "skeleton_com_application_config",
     srcs = [
-        "configs/IDC_M_P_SoftwareClusterDesign_Base_SwComponentType_Executable/com_application.json",
+        "configs/BaseApplicationExecutable/com_application.json",
     ],
 )
 
 filegroup(
     name = "skeleton_logging_config",
     srcs = [
-        "configs/IDC_M_P_SoftwareClusterDesign_Base_SwComponentType_Executable/logging_config.json",
+        "configs/BaseApplicationExecutable/logging_config.json",
+    ],
+)
+
+filegroup(
+    name = "restart_app_logging_config",
+    srcs = [
+        "configs/restart_app_demo_idc6/logging_config.json",
+    ],
+)
+
+filegroup(
+    name = "shutdown_app_logging_config",
+    srcs = [
+        "configs/shutdown_app_demo_idc6/logging_config.json",
+    ],
+)
+
+filegroup(
+    name = "update_app_v1_logging_config",
+    srcs = [
+        "configs/update_app_v1_demo_idc6/logging_config.json",
     ],
 )
 

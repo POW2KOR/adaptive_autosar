@@ -1,0 +1,11 @@
+{
+    "name": "ShutdownAppDemoIdc6",
+    "description": "IDC6 Shutdown App example application",
+    "dlt_id": "SHUT",
+    "log_mode": ["kConsole"],
+    "log_level": "kInfo",
+    "log_dir_path": "",
+    "ipc_port": 33,
+    "reconnection_retry_offset": 0,
+    "msg_buf_size": 1000
+}
