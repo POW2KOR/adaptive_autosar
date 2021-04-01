@@ -3202,3 +3202,97 @@ minerva_aa_bsw_module(
         ":amsr_vector_fs_vajson",
     ],
 )
+
+# It's header only library and doesn't generate any static libs(.a files)
+minerva_aa_bsw_module(
+    name = "amsr_vector_fs_dm_diagnosticmanager",
+    cache_entries = {
+        "BUILD_EXAMPLES": "OFF",
+        "APPLICATION_PREFIX": "opt",
+        "ENABLE_CODE_GENERATION": "ON",
+        "ADAPTIVE_MICROSAR_SIP_DIR": "$EXT_BUILD_ROOT/external/starter_kit_adaptive_xavier/mb_base_layer_adaptive_xavier/amsr_xavier",
+        "GENERATORS_COMMON_DIR": "$EXT_BUILD_ROOT/external/starter_kit_adaptive_xavier/mb_base_layer_adaptive_xavier/amsr_xavier/Generators",
+    },
+    out_headers_only = True,
+    out_include_dirs = [
+        "include",
+    ],
+    srcs_filegroup = "@starter_kit_adaptive_xavier//:amsr_vector_fs_dm_diagnosticmanager_srcs",
+    deps = [
+        ":amsr_vector_fs_applicationbase",
+        ":amsr_vector_fs_comcommon",
+        ":amsr_vector_fs_crc",
+        ":amsr_vector_fs_e2e",
+        ":amsr_vector_fs_em_executionmanager",
+        ":amsr_vector_fs_ipcbinding",
+        ":amsr_vector_fs_libiostream",
+        ":amsr_vector_fs_libosabstraction",
+        ":amsr_vector_fs_libvac",
+        ":amsr_vector_fs_log_api",
+        ":amsr_vector_fs_msr4base",
+        ":amsr_vector_fs_per_libpersistency",
+        ":amsr_vector_fs_socal_headers",
+        ":amsr_vector_fs_someipbinding",
+        ":amsr_vector_fs_someipdaemonclient",
+        ":amsr_vector_fs_someipprotocol",
+        ":amsr_vector_fs_thread",
+        ":amsr_vector_fs_vajson",
+    ],
+)
+
+minerva_aa_bsw_module(
+    name = "amsr_vector_fs_ipcbinding",
+    cache_entries = {
+        "ADAPTIVE_MICROSAR_SIP_DIR": "$EXT_BUILD_ROOT/external/starter_kit_adaptive_xavier/mb_base_layer_adaptive_xavier/amsr_xavier",
+    },
+    out_include_dirs = [
+        "include/IpcBinding",
+        "include/IpcBindingInternal",
+        "include/IpcBindingTransformationLayer",
+    ],
+    out_static_libs = [
+        "libIpcBinding.a",
+        "libIpcBindingTransformationLayer.a",
+        "libIpcBindingInternal.a",
+    ],
+    srcs_filegroup = "@starter_kit_adaptive_xavier//:amsr_vector_fs_ipcbinding_srcs",
+    deps = [
+        ":amsr_vector_fs_comcommon",
+        ":amsr_vector_fs_crc",
+        ":amsr_vector_fs_e2e",
+        ":amsr_vector_fs_libiostream",
+        ":amsr_vector_fs_libosabstraction",
+        ":amsr_vector_fs_libvac",
+        ":amsr_vector_fs_log_api",
+        ":amsr_vector_fs_msr4base",
+        ":amsr_vector_fs_socal_headers",
+        ":amsr_vector_fs_someipprotocol",
+        ":amsr_vector_fs_thread",
+        ":amsr_vector_fs_vajson",
+    ],
+)
+
+minerva_aa_bsw_module(
+    name = "amsr_vector_fs_timesync",
+    cache_entries = {
+        "APPLICATION_PREFIX": "opt",
+        "ENABLE_EXAMPLE_APPS": "ON",
+    },
+    out_binaries = [
+        "tsyncd",
+    ],
+    out_static_libs = [
+        "libamsr-vector-fs-tsync_common.a",
+    ],
+    srcs_filegroup = "@starter_kit_adaptive_xavier//:amsr_vector_fs_timesync_srcs",
+    deps = [
+        ":amsr_vector_fs_em_executionmanager",
+        ":amsr_vector_fs_libiostream",
+        ":amsr_vector_fs_libosabstraction",
+        ":amsr_vector_fs_libvac",
+        ":amsr_vector_fs_log_api",
+        ":amsr_vector_fs_msr4base",
+        ":amsr_vector_fs_thread",
+        ":amsr_vector_fs_vajson",
+    ],
+)

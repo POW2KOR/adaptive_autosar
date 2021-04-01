@@ -153,6 +153,24 @@ filegroup(
     visibility = ["//visibility:public"],
 )
 
+filegroup(
+    name = "amsr_vector_fs_dm_diagnosticmanager_srcs",
+    srcs = glob(["mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-dm-diagnosticmanager/**"]),
+    visibility = ["//visibility:public"],
+)
+
+filegroup(
+    name = "amsr_vector_fs_timesync_srcs",
+    srcs = glob(["mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-timesync/**"]),
+    visibility = ["//visibility:public"],
+)
+
+filegroup(
+    name = "amsr_vector_fs_ipcbinding_srcs",
+    srcs = glob(["mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-ipcbinding/**"]),
+    visibility = ["//visibility:public"],
+)
+
 ######################################################################################
 # Generators
 ######################################################################################
