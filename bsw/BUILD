@@ -2473,7 +2473,7 @@ cc_library(
 )
 
 cc_library(
-    name = "starter_kit_skeleton_socal_srcs_lib",
+    name = "starter_kit_base_application_skeleton_socal_srcs_lib",
     srcs = [
         ":starter_kit_base_application_skeleton_socal_srcs",
         ":starter_kit_base_application_skeleton_someipbinding_srcs",
@@ -2509,10 +2509,10 @@ cc_binary(
         # build in 2 steps.
         # The code generators depend on libSocal.a, contained in the @minerva_mpu_adaptive//:socal_lib_for_skeleton below.
         # That is why we put it in sources. It is important that this `:socal_lib_for_skeleton` is positioned earlier in
-        # the list than the generated sources in `:starter_kit_skeleton_socal_srcs_lib` and
+        # the list than the generated sources in `:starter_kit_base_application_skeleton_socal_srcs_lib` and
         # `:starter_kit_base_application_skeleton_applicationbase_init_deinit_srcs`
         "@minerva_mpu_adaptive//:socal_lib_for_skeleton",
-        ":starter_kit_skeleton_socal_srcs_lib",
+        ":starter_kit_base_application_skeleton_socal_srcs_lib",
         ":starter_kit_base_application_skeleton_applicationbase_init_deinit_srcs",
         ":starter_kit_base_application_skeleton_persistency_config_hdrs",
         ":starter_kit_base_application_skeleton_persistency_config_srcs",
@@ -2940,7 +2940,7 @@ minerva_aa_bsw_module(
         ":amsr_vector_fs_msr4base",
         ":amsr_vector_fs_thread",
         ":amsr_vector_fs_vajson",
-        "@minerva_mpu_adaptive//bsw:starter_kit_skeleton_socal_srcs_lib",
+        "@minerva_mpu_adaptive//bsw:starter_kit_base_application_skeleton_socal_srcs_lib",
     ],
 )
 
