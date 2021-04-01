@@ -1,0 +1,3 @@
+[submodule "ci-depot"]
+	path = ci-depot
+	url = ssh://git@git.swf.daimler.com:7999/swf/ci-depot.git
