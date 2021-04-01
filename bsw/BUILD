@@ -1487,44 +1487,62 @@ minerva_aa_codegen_rule(
     ],
     outs_list_dict = {
         "starter_kit_base_application_skeleton_updatemanager_daemon": [
-            "BaseApplicationExecutable/etc/swcl_db.json",
             "BaseApplicationExecutable/etc/updatemanager.json",
         ],
+        "starter_kit_base_application_skeleton_updatemanager_swcl_db_daemon": [
+            "BaseApplicationExecutable/etc/swcl_db.json",
+        ],
         "starter_kit_test_base_application_proxy_updatemanager_daemon": [
-            "TestBaseApplicationExecutable/etc/swcl_db.json",
             "TestBaseApplicationExecutable/etc/updatemanager.json",
         ],
+        "starter_kit_test_base_application_proxy_updatemanager_swcl_db_daemon": [
+            "TestBaseApplicationExecutable/etc/swcl_db.json",
+        ],
         "starter_kit_diagnostic_manager_updatemanager_daemon": [
-            "DiagnosticManagerDeamonExecutable/etc/swcl_db.json",
             "DiagnosticManagerDeamonExecutable/etc/updatemanager.json",
         ],
+        "starter_kit_diagnostic_manager_updatemanager_swcl_db_daemon": [
+            "DiagnosticManagerDeamonExecutable/etc/swcl_db.json",
+        ],
         "starter_kit_self_diagnostic_agent_updatemanager_daemon": [
-            "SelfDiagnosticAgentExecutable/etc/swcl_db.json",
             "SelfDiagnosticAgentExecutable/etc/updatemanager.json",
         ],
+        "starter_kit_self_diagnostic_agent_updatemanager_swcl_db_daemon": [
+            "SelfDiagnosticAgentExecutable/etc/swcl_db.json",
+        ],
         "starter_kit_amsr_cryptostack_daemon_updatemanager_daemon": [
-            "amsr_vector_fs_sec_cryptostack_daemon/etc/swcl_db.json",
             "amsr_vector_fs_sec_cryptostack_daemon/etc/updatemanager.json",
         ],
+        "starter_kit_amsr_cryptostack_daemon_updatemanager_swcl_db_daemon": [
+            "amsr_vector_fs_sec_cryptostack_daemon/etc/swcl_db.json",
+        ],
         "starter_kit_amsr_ucm_updatemanager_daemon": [
-            "amsr_vector_fs_ucm_updatemanager/etc/swcl_db.json",
             "amsr_vector_fs_ucm_updatemanager/etc/updatemanager.json",
         ],
+        "starter_kit_amsr_ucm_updatemanager_swcl_db_daemon": [
+            "amsr_vector_fs_ucm_updatemanager/etc/swcl_db.json",
+        ],
         "starter_kit_restart_app_idc6_updatemanager_daemon": [
-            "restart_app_demo_idc6/etc/swcl_db.json",
             "restart_app_demo_idc6/etc/updatemanager.json",
         ],
+        "starter_kit_restart_app_idc6_updatemanager_swcl_db_daemon": [
+            "restart_app_demo_idc6/etc/swcl_db.json",
+        ],
         "starter_kit_shutdown_app_idc6_updatemanager_daemon": [
-            "shutdown_app_demo_idc6/etc/swcl_db.json",
             "shutdown_app_demo_idc6/etc/updatemanager.json",
+        ],
+        "starter_kit_shutdown_app_idc6_updatemanager_swcl_db_daemon": [
+            "shutdown_app_demo_idc6/etc/swcl_db.json",
         ],
         "starter_kit_software_update_client_updatemanager_daemon": [
             "software_update_client/etc/swcl_db.json",
             "software_update_client/etc/updatemanager.json",
         ],
         "starter_kit_update_app_idc6_updatemanager_daemon": [
-            "update_app_demo_idc6/etc/swcl_db.json",
             "update_app_demo_idc6/etc/updatemanager.json",
+        ],
+        "starter_kit_update_app_idc6_updatemanager_swcl_db_daemon": [
+            "update_app_demo_idc6/etc/swcl_db.json",
         ],
     },
 )
