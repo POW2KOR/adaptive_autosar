@@ -123,6 +123,24 @@ filegroup(
     visibility = ["//visibility:public"],
 )
 
+filegroup(
+    name = "amsr_vector_fs_per_libpersistency_persistency_key_value_storage_srcs",
+    srcs = glob(["mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-per-libpersistency/lib/persistency-key-value-storage/src/**"]),
+    visibility = ["//visibility:public"],
+)
+
+filegroup(
+    name = "amsr_vector_fs_per_libpersistency_persistency_srcs",
+    srcs = glob(["mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-per-libpersistency/lib/persistency/src/**"]),
+    visibility = ["//visibility:public"],
+)
+
+filegroup(
+    name = "amsr_vector_fs_per_libpersistency_persistency_file_storage_srcs",
+    srcs = glob(["mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-per-libpersistency/lib/persistency-file-storage/src/**"]),
+    visibility = ["//visibility:public"],
+)
+
 ######################################################################################
 # Generators
 ######################################################################################

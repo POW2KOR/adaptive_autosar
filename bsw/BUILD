@@ -2669,6 +2669,9 @@ cc_binary(
     name = "skeleton_demo_idc6",
     srcs = [
         "@starter_kit_adaptive_xavier//:skeleton_demo_idc6_srcs",
+        "@starter_kit_adaptive_xavier//:amsr_vector_fs_per_libpersistency_persistency_srcs",
+        "@starter_kit_adaptive_xavier//:amsr_vector_fs_per_libpersistency_persistency_file_storage_srcs",
+        "@starter_kit_adaptive_xavier//:amsr_vector_fs_per_libpersistency_persistency_key_value_storage_srcs",
 
         # This a workaround to resolve cyclic dependency. This is the reason why the target skeleton_demo_idc6
         # build in 2 steps.
@@ -2680,6 +2683,7 @@ cc_binary(
         ":starter_kit_skeleton_socal_srcs_lib",
         ":starter_kit_base_application_skeleton_applicationbase_init_deinit_srcs",
         ":starter_kit_base_application_skeleton_persistency_config_hdrs",
+        ":starter_kit_base_application_skeleton_persistency_config_srcs",
     ],
     copts = [
         "-std=c++14",
