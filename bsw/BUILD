@@ -2625,8 +2625,10 @@ minerva_aa_bsw_module(
     },
     out_bin_dir = "sbin",
     out_static_libs = [
+        # libamsr-vector-fs-libiostream_libstream.a should
+        # go first in the list to avoid linking errors
+        "libamsr-vector-fs-libiostream_libstream.a",
         "libamsr-vector-fs-libiostream_libcharconv_vector_stl.a",
-        "libamsr-vector-fs-libiostream_libstream_vector_stl.a",
         "libamsr-vector-fs-libiostream_libcharconv_common.a",
     ],
     srcs_filegroup = "@starter_kit_adaptive_xavier//:amsr_vector_fs_libiostream_srcs",
@@ -2695,8 +2697,11 @@ minerva_aa_bsw_module(
         "ENABLE_SYS_LOG": "ON",
     },
     out_static_libs = [
-        "libamsr-log.a",
+        # It is important that libara-logging.a goes
+        # before libamsr-log.a. Or else there will be
+        # linking errors
         "libara-logging.a",
+        "libamsr-log.a",
         "libamsr-vector-fs-log-api-ipc.a",
         "libamsr-vector-fs-log-api-common.a",
     ],
