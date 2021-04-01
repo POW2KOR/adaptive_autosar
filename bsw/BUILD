@@ -3054,11 +3054,6 @@ minerva_aa_bsw_module(
 
 minerva_aa_bsw_module(
     name = "amsr_vector_fs_per_libpersistency",
-    srcs_filegroup = "@starter_kit_adaptive_xavier//:amsr_vector_fs_per_libpersistency_srcs",
-    static_libraries = [
-        "libpersistency-fs.a",
-        "libpersistency-common.a",
-    ],
     out_include_dirs = [
         "include/persistency",
         "include/persistency-common",
@@ -3066,6 +3061,11 @@ minerva_aa_bsw_module(
         "include/persistency-fs",
         "include/persistency-key-value-storage",
     ],
+    out_static_libs = [
+        "libpersistency-fs.a",
+        "libpersistency-common.a",
+    ],
+    srcs_filegroup = "@starter_kit_adaptive_xavier//:amsr_vector_fs_per_libpersistency_srcs",
     deps = [
         ":amsr_vector_fs_libvac",
         ":amsr_vector_fs_vajson",
