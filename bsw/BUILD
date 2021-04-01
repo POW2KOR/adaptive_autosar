@@ -3047,6 +3047,11 @@ minerva_aa_bsw_module(
     cache_entries = {
         "Socal_DIR:PATH": "$EXT_BUILD_DEPS/amsr_vector_fs_socal_headers/lib/cmake/Socal/",
     },
+    out_include_dirs = [
+        "include/SomeIpBinding",
+        "include/SomeIpBindingInternal",
+        "include/SomeIpBindingTransformationLayer",
+    ],
     out_static_libs = [
         "libSomeIpBindingInternal.a",
         "libSomeIpBinding.a",
