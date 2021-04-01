@@ -1,38 +1,32 @@
 diff --git a/mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-libosabstraction/lib/CMakeLists.txt b/mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-libosabstraction/lib/CMakeLists.txt
-index 91edb120..ab04977e 100644
+index 4d73a34f..da9cf0f3 100644
 --- a/mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-libosabstraction/lib/CMakeLists.txt
 +++ b/mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-libosabstraction/lib/CMakeLists.txt
-@@ -104,9 +104,8 @@ if (vac_FOUND)
+@@ -114,9 +114,6 @@ if (vac_FOUND)
  endif ()
  
  if(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
 -  find_package(Threads REQUIRED)
 -  message(STATUS "Package Threads found = ${Threads_FOUND}")
 -  target_link_libraries(${LIBRARY_NAME} ${CMAKE_THREAD_LIBS_INIT})
-+  message(STATUS "Hardcoding dependency on pthread")
-+  target_link_libraries(${LIBRARY_NAME} pthread)
    target_link_libraries(${LIBRARY_NAME} "rt")
  endif()
-
+ 
 diff --git a/mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-thread/lib/vathread/CMakeLists.txt b/mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-thread/lib/vathread/CMakeLists.txt
-index e78ee4b5..415ddd34 100644
+index fe167dd1..42011cf4 100644
 --- a/mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-thread/lib/vathread/CMakeLists.txt
 +++ b/mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-thread/lib/vathread/CMakeLists.txt
-@@ -32,11 +32,13 @@ file(GLOB_RECURSE LIB_SRC ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp ${CMAKE_CURRENT_
- #create a static library *.a
- add_library(${LIBRARY_NAME} STATIC ${LIB_SRC})
+@@ -34,10 +34,9 @@ add_library(${LIBRARY_NAME} STATIC ${LIB_SRC})
  
--# use pthread library on systems w/ multiple thread libs
--set(CMAKE_THREAD_PREFER_PTHREAD TRUE)
--find_package(Threads REQUIRED)
- find_package(vac REQUIRED)
--target_link_libraries(${LIBRARY_NAME} PUBLIC ${VAC_LIBRARIES} PRIVATE ${CMAKE_THREAD_LIBS_INIT})
-+target_link_libraries(${LIBRARY_NAME} PUBLIC ${VAC_LIBRARIES})
-+
-+if(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
+ if(${CMAKE_SYSTEM_NAME} MATCHES "QNX")
+   # avoid using find_package Threads because generates invalid compiler flag for cc1plus (-pthread)
+-else()
+-  # use pthread library on systems w/ multiple thread libs
+-  set(CMAKE_THREAD_PREFER_PTHREAD TRUE)
+-  find_package(Threads REQUIRED)
++elseif(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
 +  message(STATUS "Hardcoding dependency on pthread")
 +  target_link_libraries(${LIBRARY_NAME} PRIVATE pthread)
-+endif()
+ endif()
  
- target_include_directories(${LIBRARY_NAME} PUBLIC
-         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+ find_package(vac REQUIRED)

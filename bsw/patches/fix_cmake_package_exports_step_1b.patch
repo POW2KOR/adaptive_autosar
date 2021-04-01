@@ -1,0 +1,67 @@
+diff --git a/mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-iointegritystream/CMakeLists.txt b/mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-iointegritystream/CMakeLists.txt
+index ca568ea5..379f99fa 100644
+--- a/mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-iointegritystream/CMakeLists.txt
++++ b/mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-iointegritystream/CMakeLists.txt
+@@ -95,8 +95,8 @@ if (LIBIOSTREAM_CHAR_CONV_SELECTOR MATCHES WRAPPER)
+ endif()
+ 
+ message(STATUS "Importing libiostream")
+-set(amsr-vector-fs-libiostream_libstream_DIR ${PROJECT_BINARY_DIR}/../amsr-vector-fs-libiostream/lib/libstream/)
+-set(amsr-vector-fs-libiostream_libcharconv_${SUFFIX_VARIANTS}_DIR ${PROJECT_BINARY_DIR}/../amsr-vector-fs-libiostream/lib/libcharconv_${SUFFIX_VARIANTS}/)
++#set(amsr-vector-fs-libiostream_libstream_DIR ${PROJECT_BINARY_DIR}/../amsr-vector-fs-libiostream/lib/libstream/)
++#set(amsr-vector-fs-libiostream_libcharconv_${SUFFIX_VARIANTS}_DIR ${PROJECT_BINARY_DIR}/../amsr-vector-fs-libiostream/lib/libcharconv_${SUFFIX_VARIANTS}/)
+ find_package(amsr-vector-fs-libiostream_libstream REQUIRED)
+ 
+ message(STATUS "-------------------------------------------------------------")
+diff --git a/mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-libiostream/lib/libstream/CMakeLists.txt b/mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-libiostream/lib/libstream/CMakeLists.txt
+index 28be363a..b2f7c1f3 100644
+--- a/mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-libiostream/lib/libstream/CMakeLists.txt
++++ b/mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-libiostream/lib/libstream/CMakeLists.txt
+@@ -34,7 +34,7 @@
+ 
+ set(INSTALL_CMAKE_DIR ${CMAKE_INSTALL_LIBDIR}/cmake)
+ set(INSTALL_LIB_DIR ${CMAKE_INSTALL_LIBDIR})
+-set(INSTALL_INCLUDE_DIR ${CMAKE_INSTALL_INCLUDEDIR}/libstream)
++set(INSTALL_INCLUDE_DIR ${CMAKE_INSTALL_INCLUDEDIR}/)
+ 
+ set(SRCROOT "${CMAKE_CURRENT_SOURCE_DIR}/src")
+ set(INCROOT "${CMAKE_CURRENT_SOURCE_DIR}/include")
+diff --git a/mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-socal/lib/socal/CMakeLists.txt b/mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-socal/lib/socal/CMakeLists.txt
+index 59905ae9..1eda7a6e 100644
+--- a/mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-socal/lib/socal/CMakeLists.txt
++++ b/mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-socal/lib/socal/CMakeLists.txt
+@@ -38,7 +38,7 @@ set(LIBRARY_NAME Socal)
+ set(PACKAGE_NAME ${LIBRARY_NAME})
+ set(INSTALL_LIB_DIR ${CMAKE_INSTALL_LIBDIR})
+ set(INSTALL_CMAKE_DIR ${CMAKE_INSTALL_LIBDIR}/cmake/${LIBRARY_NAME})
+-set(INSTALL_INCLUDE_DIR ${CMAKE_INSTALL_INCLUDEDIR}/${LIBRARY_NAME})
++set(INSTALL_INCLUDE_DIR ${CMAKE_INSTALL_INCLUDEDIR}/)
+ 
+ find_package(vac REQUIRED)
+ find_package(amsr-vector-fs-libiostream_libstream REQUIRED)
+diff --git a/mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-someipdaemonclient/lib/someip_daemon_client/CMakeLists.txt b/mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-someipdaemonclient/lib/someip_daemon_client/CMakeLists.txt
+index 9a60fb98..4513db42 100644
+--- a/mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-someipdaemonclient/lib/someip_daemon_client/CMakeLists.txt
++++ b/mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-someipdaemonclient/lib/someip_daemon_client/CMakeLists.txt
+@@ -38,7 +38,7 @@ set(LIBRARY_NAME SomeIpDaemonClient)
+ set(PACKAGE_NAME ${LIBRARY_NAME})
+ set(INSTALL_LIB_DIR ${CMAKE_INSTALL_LIBDIR})
+ set(INSTALL_CMAKE_DIR ${CMAKE_INSTALL_LIBDIR}/cmake/${LIBRARY_NAME})
+-set(INSTALL_INCLUDE_DIR ${CMAKE_INSTALL_INCLUDEDIR}/${LIBRARY_NAME})
++set(INSTALL_INCLUDE_DIR ${CMAKE_INSTALL_INCLUDEDIR}/)
+ 
+ find_package(vac REQUIRED)
+ find_package(ara-logging REQUIRED)
+diff --git a/mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-vajson/lib/CMakeLists.txt b/mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-vajson/lib/CMakeLists.txt
+index b6695de2..d9f23634 100644
+--- a/mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-vajson/lib/CMakeLists.txt
++++ b/mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-vajson/lib/CMakeLists.txt
+@@ -37,7 +37,7 @@ set(TARGET_NAME libvajson-project)
+ set(LIBRARY_NAME vajson)
+ set(INSTALL_CMAKE_DIR ${CMAKE_INSTALL_LIBDIR}/cmake/${LIBRARY_NAME})
+ set(INSTALL_LIB_DIR ${CMAKE_INSTALL_LIBDIR})
+-set(INSTALL_INCLUDE_DIR ${CMAKE_INSTALL_INCLUDEDIR}/${LIBRARY_NAME})
++set(INSTALL_INCLUDE_DIR ${CMAKE_INSTALL_INCLUDEDIR}/)
+ 
+ file(RELATIVE_PATH REL_INSTALL_DIR /${INSTALL_CMAKE_DIR} /)
+ 
