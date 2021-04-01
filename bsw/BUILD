@@ -2624,6 +2624,11 @@ minerva_aa_bsw_module(
         "ENABLE_WRAPPER": "OFF",
     },
     out_bin_dir = "sbin",
+    out_include_dirs = [
+        "include/charconv",
+        "include/libcharconv_common",
+        "include/iostream",
+    ],
     out_static_libs = [
         # libamsr-vector-fs-libiostream_libstream.a should
         # go first in the list to avoid linking errors
@@ -2632,10 +2637,6 @@ minerva_aa_bsw_module(
         "libamsr-vector-fs-libiostream_libcharconv_common.a",
     ],
     srcs_filegroup = "@starter_kit_adaptive_xavier//:amsr_vector_fs_libiostream_srcs",
-    out_include_dirs = [
-        "include/charconv",
-        "include/libcharconv_common",
-    ],
     deps = [
         ":amsr_vector_fs_libvac",
     ],
