@@ -2370,7 +2370,6 @@ cc_library(
     ],
     linkstatic = 1,
     deps = [
-        ":amsr_vector_fs_comcommon",
         ":amsr_vector_fs_socal_headers",
         ":amsr_vector_fs_someipbinding",
         ":amsr_vector_fs_vajson",
@@ -2474,7 +2473,6 @@ cc_library(
         ":starter_kit_base_application_skeleton_socal_hdrs_lib",
         ":starter_kit_base_application_skeleton_someipbinding_hdrs_lib",
         ":starter_kit_base_application_skeleton_someipprotocol_hdrs_lib",
-        "//bsw:amsr_vector_fs_comcommon",
         "//bsw:amsr_vector_fs_socal_headers",
         "//bsw:amsr_vector_fs_someipbinding",
         "//bsw:amsr_vector_fs_vajson",
@@ -2694,22 +2692,6 @@ minerva_aa_bsw_module(
 )
 
 minerva_aa_bsw_module(
-    name = "amsr_vector_fs_comcommon",
-    out_static_libs = [
-        "libComCommon.a",
-    ],
-    srcs_filegroup = "@starter_kit_adaptive_xavier//:amsr_vector_fs_comcommon_srcs",
-    deps = [
-        ":amsr_vector_fs_libiostream",
-        ":amsr_vector_fs_libosabstraction",
-        ":amsr_vector_fs_libvac",
-        ":amsr_vector_fs_log_api",
-        ":amsr_vector_fs_thread",
-        ":amsr_vector_fs_vajson",
-    ],
-)
-
-minerva_aa_bsw_module(
     name = "amsr_vector_fs_sec_cryptostack",
     cache_entries = {
         "CMAKE_EXPORT_NO_PACKAGE_REGISTRY": "ON",
@@ -2780,7 +2762,6 @@ minerva_aa_bsw_module(
     ],
     srcs_filegroup = "@starter_kit_adaptive_xavier//:amsr_vector_fs_communicationmiddleware_srcs",
     deps = [
-        ":amsr_vector_fs_comcommon",
         ":amsr_vector_fs_libosabstraction",
         ":amsr_vector_fs_log_api",
         ":amsr_vector_fs_sec_cryptostack",
@@ -2831,7 +2812,6 @@ minerva_aa_bsw_module(
     ],
     srcs_filegroup = "@starter_kit_adaptive_xavier//:amsr_vector_fs_socal_srcs",
     deps = [
-        ":amsr_vector_fs_comcommon",
         ":amsr_vector_fs_crc",
         ":amsr_vector_fs_e2e",
         ":amsr_vector_fs_libiostream",
@@ -2859,7 +2839,6 @@ minerva_aa_bsw_module(
     ],
     srcs_filegroup = "@starter_kit_adaptive_xavier//:amsr_vector_fs_socal_srcs",
     deps = [
-        ":amsr_vector_fs_comcommon",
         ":amsr_vector_fs_crc",
         ":amsr_vector_fs_e2e",
         ":amsr_vector_fs_libiostream",
@@ -2886,7 +2865,6 @@ minerva_aa_bsw_module(
     ],
     srcs_filegroup = "@starter_kit_adaptive_xavier//:amsr_vector_fs_socal_srcs",
     deps = [
-        ":amsr_vector_fs_comcommon",
         ":amsr_vector_fs_crc",
         ":amsr_vector_fs_e2e",
         ":amsr_vector_fs_libiostream",
@@ -2912,7 +2890,6 @@ minerva_aa_bsw_module(
     out_headers_only = True,
     srcs_filegroup = "@starter_kit_adaptive_xavier//:amsr_vector_fs_socal_srcs",
     deps = [
-        ":amsr_vector_fs_comcommon",
         ":amsr_vector_fs_crc",
         ":amsr_vector_fs_e2e",
         ":amsr_vector_fs_libiostream",
@@ -2961,7 +2938,6 @@ minerva_aa_bsw_module(
     ],
     srcs_filegroup = "@starter_kit_adaptive_xavier//:amsr_vector_fs_someipprotocol_srcs",
     deps = [
-        ":amsr_vector_fs_comcommon",
         ":amsr_vector_fs_libiostream",
         ":amsr_vector_fs_libosabstraction",
         ":amsr_vector_fs_libvac",
@@ -2983,7 +2959,6 @@ minerva_aa_bsw_module(
     ],
     srcs_filegroup = "@starter_kit_adaptive_xavier//:amsr_vector_fs_someipbinding_srcs",
     deps = [
-        ":amsr_vector_fs_comcommon",
         ":amsr_vector_fs_crc",
         ":amsr_vector_fs_e2e",
         ":amsr_vector_fs_libiostream",
@@ -3006,7 +2981,6 @@ minerva_aa_bsw_module(
     ],
     srcs_filegroup = "@starter_kit_adaptive_xavier//:amsr_vector_fs_someipdaemonclient_srcs",
     deps = [
-        ":amsr_vector_fs_comcommon",
         ":amsr_vector_fs_libiostream",
         ":amsr_vector_fs_libosabstraction",
         ":amsr_vector_fs_libvac",
@@ -3034,7 +3008,6 @@ minerva_aa_bsw_module(
     ],
     srcs_filegroup = "@starter_kit_adaptive_xavier//:amsr_vector_fs_someipdaemon_srcs",
     deps = [
-        ":amsr_vector_fs_comcommon",
         ":amsr_vector_fs_em_executionmanager",
         ":amsr_vector_fs_libiostream",
         ":amsr_vector_fs_libosabstraction",
