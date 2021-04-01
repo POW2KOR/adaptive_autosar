@@ -2388,8 +2388,10 @@ cc_library(
     ],
     linkstatic = 1,
     deps = [
+        ":amsr_vector_fs_sec_libseccom",
         ":amsr_vector_fs_socal_headers",
         ":amsr_vector_fs_someipbinding",
+        ":amsr_vector_fs_someipprotocol",
         ":amsr_vector_fs_vajson",
         ":starter_kit_test_base_application_proxy_modeldatatypes_hdrs_lib",
         ":starter_kit_test_base_application_proxy_socal_hdrs_lib",
