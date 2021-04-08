@@ -101,60 +101,48 @@ cc_library(
 
 As we can see, it has 2 types of dependencies: code generated libraries and vector libraries.
 
-But do not be afraid, once you saw it, you can build the socal source code library for any app. 
+But do not be afraid, once you saw it, you can build the socal source code library for any app.
 
-Once you have the socal codegen source code library, you need to build the BSW socal library 
+Once you have the socal codegen source code library, you need to build the BSW socal library
 (I know it sounds very similar).
 
 ```bash
-cmake_external(
+minerva_aa_bsw_module(
     name = "amsr_vector_fs_socal_for_software_update",
-    cache_entries = extend_and_select(
-        CMAKE_TOOLCHAIN_DICT,
-        {
-            "CMAKE_SYSTEM_NAME": CMAKE_SYSTEM_NAME_LINUX,
-            "CMAKE_EXPORT_NO_PACKAGE_REGISTRY": "ON",
-            "CMAKE_FIND_PACKAGE_NO_PACKAGE_REGISTRY": "ON",
-            "CMAKE_VERBOSE_MAKEFILE": "ON",
-            "BUILD_TESTS": "OFF",
-            "ENABLE_EXEC_MANAGER": "ON",
-            "vac_DIR:PATH": "$EXT_BUILD_DEPS/amsr_vector_fs_libvac/lib/cmake/vac/",
-            "ara-logging_DIR:PATH": "$EXT_BUILD_DEPS/amsr_vector_fs_log_api/lib/cmake/ara-logging/",
-            "vajson_DIR:PATH": "$EXT_BUILD_DEPS/amsr_vector_fs_vajson/lib/cmake/vajson/",
-            "amsr-vector-fs-log-api-common_DIR:PATH": "$EXT_BUILD_DEPS/amsr_vector_fs_log_api/lib/cmake/amsr-vector-fs-log-api-common/",
-            "amsr-vector-fs-log-api-ipc-common_DIR:PATH": "$EXT_BUILD_DEPS/amsr_vector_fs_log_api/lib/cmake/amsr-vector-fs-log-api-ipc-common/",
-            "amsr-vector-fs-log-api-ipc_DIR:PATH": "$EXT_BUILD_DEPS/amsr_vector_fs_log_api/lib/cmake/amsr-vector-fs-log-api-ipc/",
-            "osabstraction_DIR:PATH": "$EXT_BUILD_DEPS/amsr_vector_fs_libosabstraction/lib/cmake/osabstraction/",
-            "ComCommon_DIR:PATH": "$EXT_BUILD_DEPS/amsr_vector_fs_comcommon/lib/cmake/ComCommon/",
-            "amsr-vector-fs-crc_libinternal_DIR:PATH": "$EXT_BUILD_DEPS/amsr_vector_fs_crc/lib/cmake/amsr-vector-fs-crc_libinternal/",
-            "amsr-vector-fs-e2e_libe2e_DIR:PATH": "$EXT_BUILD_DEPS/amsr_vector_fs_e2e/lib/cmake/amsr-vector-fs-e2e_libe2e/",
-            "amsr-vector-fs-e2e_libinternal_DIR:PATH": "$EXT_BUILD_DEPS/amsr_vector_fs_e2e/lib/cmake/amsr-vector-fs-e2e_libinternal/",
-        },
-    ),
-    generate_crosstool_file = True,
-    lib_source = ":amsr_vector_fs_socal_srcs",
+    cache_entries = {
+        "CMAKE_EXPORT_NO_PACKAGE_REGISTRY": "ON",
+        "CMAKE_FIND_PACKAGE_NO_PACKAGE_REGISTRY": "ON",
+        "CMAKE_VERBOSE_MAKEFILE": "ON",
+        "BUILD_TESTS": "OFF",
+    },
+    srcs_filegroup = "@starter_kit_adaptive_xavier//:amsr_vector_fs_socal_srcs",
     static_libraries = [
         "libSocal.a",
     ],
-    visibility = ["//visibility:public"],
     deps = [
         # this should point to the socal code gen library for this application
         "@minerva_mpu_adaptive//application/sw_update_client_minerva_adapter:sw_update_client_minerva_adapter_app_socal_srcs_lib",
 
         # standard set of dependencies. The same for all apps.
+        ":amsr_vector_fs_comcommon",
         ":amsr_vector_fs_crc",
         ":amsr_vector_fs_e2e",
+        ":amsr_vector_fs_libiostream",
         ":amsr_vector_fs_libosabstraction",
+        ":amsr_vector_fs_libvac",
         ":amsr_vector_fs_log_api",
-        ":amsr_vector_fs_comcommon",
+        ":amsr_vector_fs_msr4base",
+        ":amsr_vector_fs_thread",
+        ":amsr_vector_fs_vajson",
+
     ],
 )
 ```
 
-It is important here only 1 thing, check the first depedency. 
-The BSW socal library should depend on the socal codegen source code library. 
+It is important here only 1 thing, check the first depedency.
+The BSW socal library should depend on the socal codegen source code library.
 
-Now once we have it, we need to make the generated `libSocal.a` visible outside. 
+Now once we have it, we need to make the generated `libSocal.a` visible outside.
 For this we modify BUILD file from the root of the project and add the following:
 
 ```bash
