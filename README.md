@@ -358,8 +358,8 @@ After that, you can initiate your actual building, because the circular dependen
 
 ### Useful information
 
-For building the debug version use `--compilation_mode=dbg`. Other useful parameters for debugging purposes are
-`--verbose_failures` and `--sandbox_debug`.
+For building the debug version use `--compilation_mode=dbg`. For building binaries stripped of debug information, use
+`--compilation_mode=opt`.  Other useful parameters for debugging purposes are `--verbose_failures` and `--sandbox_debug`.
 
 Build results are under `bazel-bin`.
 
