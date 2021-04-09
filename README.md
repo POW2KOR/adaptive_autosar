@@ -22,17 +22,19 @@ We call the docker container where we build things the `build_env` and the docke
 You can find a guide on setting up docker on Daimler Ubuntu laptops
 [here](https://wiki.swf.daimler.com/display/swf/How+to+setup+docker).
 
-### Setup to build from inside the docker container
+### Setup to build with `build_env` devcontainer
 
-To build inside the docker container, you should get the docker image from Artifactory and check your local settings.
-The image includes all the dependencies needed, including Bazel, Bazel plugins and toolchains (for both x86 and
-aarch64).
+#### Download the `build_env` devcontainer
 
-Docker images are pushed to Artifactory from a CI/CD pipeline. Please check
+First, you have to fetch the base image from Artifactory. This image is quite big and might require you to keep your
+computer turned on overnight in order to finish the download. The image includes all the dependencies needed, including
+Bazel, Bazel plugins and toolchains (for both x86 and aarch64).
+
+These images are pushed to Artifactory from a CI/CD pipeline. Please check
 [SWF Artifactory](https://artifact.swf.daimler.com/list/adasdai-docker/minerva_mpu_docker/minerva_mpu/) to find a
 full list.
 
-To obtain an image, first you should log in to SWF Artifactory with your credentials:
+To be able to download an image, first you should log in to SWF Artifactory with your credentials:
 
 ```
 docker login artifact.swf.daimler.com
@@ -43,12 +45,32 @@ Then pull your image:
 ```
 docker pull artifact.swf.daimler.com/adasdai-docker/minerva_mpu_docker/minerva_mpu:<commitID>
 ```
-where `<commitID>` is the image version. We are currently targeting version `e9eaa2018a759bea4927e25dca5224cbcd0bfdec`.
 
-NOTE: You can use the `latest` tag to pull the latest docker image:
+where `<commitID>` is the image version. We are currently targeting version `e9eaa2018a759bea4927e25dca5224cbcd0bfdec`.
+You can also use the `latest` tag to pull the latest image.
+
+#### Entering the devcontainer
+
+There are multiple tools which support devcontainers:
+[VS Code with the Remote Development plugin](https://code.visualstudio.com/docs/remote/containers#_getting-started)
+ (preferred) or the [devc CLI tool](https://github.com/nikaro/devc).
+
+We will only be discussing the VS Code method for now. Make sure you have the
+[Remote Development plugin](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack)
+installed. Once this is done, open the repository with VS Code by running this command:
+
 ```
-docker pull artifact.swf.daimler.com/adasdai-docker/minerva_mpu_docker/minerva_mpu:latest
+cd minerva_mpu_adaptive
+code .
 ```
+
+Once VS Code has started, press `Ctrl-Shift-P` and type "Focus on Containers View". Then in the top bar you will see a
+`+` sign. Click on it and then select "Open Current Folder in Container View". The first start is expected to take
+around 2 minutes. Subsequent starts will be much quicker.
+
+The devcontainer will set up your `git` and `ssh` inside the container to work with SWF git. This assumes you have your
+x509 SWF certificates stored in `~/.ssh/gsep`. The devcontainer is configured to run in host network mode and the proxy
+is configured for you. `ssh-agent` forwarding is handled through VS Code. Bash history is persisted between sessions.
 
 ### Setup to build without docker
 
@@ -143,38 +165,7 @@ Once enabled, pre-commit will run before every local commit in order to suggest 
 
 ## Build
 
-The actual build instructions are the same, regardless if you use the `build_env` to build or not. However, if you use
-the `build_env` you have to go through the extra step of entering it.
-
-### Entering the docker `build_env`
-
-Currently, the command to enter the `build_env` is a bit messy, but in the future this will be covered by tools and
-the it will be much more simpler to use.
-
-To enter the `build_env` docker container, run the following command:
-
-```
-docker run -it \
-   --name=minerva_mpu_dev \
-   --rm \
-   --privileged \
-   --network=host \
-   -e HTTP_PROXY=$http_proxy \
-   -e HTTPS_PROXY=$https_proxy \
-   -e no_proxy=hksmirror.rd.corpintra.net,ubunturepo.rd.corpintra.net \
-   -e SSH_AUTH_SOCK=/ssh-agent \
-   -v /lib/modules/$(uname -r):/lib/modules/$(uname -r) \
-   -v /dev/bus/usb:/dev/bus/usb \
-   -v <REPOSITORY>:/root/workspace/minerva_mpu_adaptive \
-   -v /var/run/docker.sock:/var/run/docker.sock \
-   -v $SSH_AUTH_SOCK:/ssh-agent \
-   --workdir /root/workspace \
-   artifact.swf.daimler.com/adasdai-docker/minerva_mpu_docker/minerva_mpu:<commitID>
-```
-
-where: `<REPOSITORY>` is your local path to the cloned repo, e.g.
-`/lhome/$USER/workspace/minerva/minerva_mpu_adaptive/`, and `<commitID>` is container's version (it is supposed
-to be the same version you've pulled during the setup from earlier).
+The actual build instructions are the same, regardless if you use the `build_env` to build or not.
 
 ## The actual build steps
 
@@ -388,37 +379,6 @@ git status
 ```
 
 If there are no files formatted, the output of above command will be empty. Else, it will show the list of files formatted.
-
-### Proxy handling in Docker
-
-In order to allow Internet access from inside our docker containers, we need to pass to them proper
-environment variables. For now, we should take care on the following settings:
-
-- proxy settings in `~/.docker/config.json`: needed to set up access from ubuntu_18.04 image
-  when it is started on host
-- proxy settings which are passed with `docker run` command: needed to set up access from
-  minerva_mpu_docker
-- proxy settings in `BUILD` file: needed to set up access from ubuntu_18.04 image when it is started
-  from inside minerva_mpu_docker container
-
-In case of proxy settings change, please change corresponding parameters according to your build and
-launch strategy.
-
-### ssh-keys handling in Docker
-During the bazel build, components need to be cloned that will require to have valid ssh keys to access swf git.
-If you are using docker build environment, the docker command uses the ssh-agent to utilize your keys from the host.
-The docker build environment mounts the ssh-agent socket in the build environment using the following command-line
-arguments:
-```
--v $SSH_AUTH_SOCK:/ssh-agent \
-```
-
-Use the following commands to add your keys to the ssh-agent and execute it:
-
-```
-eval `ssh-agent -s`
-ssh-add
-```
 
 ### Connection timeout issue while submodule init of gnulibs in collectd repo with VPN on
 
