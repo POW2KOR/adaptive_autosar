@@ -68,11 +68,12 @@ Once VS Code has started, press `Ctrl-Shift-P` and type "Focus on Containers Vie
 `+` sign. Click on it and then select "Open Current Folder in Container View". The first start is expected to take
 around 2 minutes. Subsequent starts will be much quicker.
 
-The devcontainer will set up your `git` and `ssh` inside the container to work with SWF git. This assumes you have your
-x509 SWF certificates stored in `~/.ssh/gsep`. The devcontainer is configured to run in host network mode and the proxy
-is configured for you. `ssh-agent` forwarding is handled through VS Code. Bash history is persisted between sessions.
-VS Code also has a feature where it makes sure that the user ID of the user inside the devcontainer matches the one
-outside the container. The devcontainer is configured to support this feature.
+The devcontainer will set up your `git` and `ssh` inside the container to work with SWF git. This assumes you have the
+environment outside the docker container already working with SWF git and that you have your x509 SWF certificates
+stored in `~/.ssh/gsep`. The devcontainer is configured to run in host network mode and the proxy is configured for
+you. `ssh-agent` forwarding is handled through VS Code. Bash history is persisted between sessions. VS Code also has a
+feature where it makes sure that the user ID of the user inside the devcontainer matches the one outside the container.
+The devcontainer is configured to support this feature.
 
 ### Setup to build without `build_env` devcontainer
 
