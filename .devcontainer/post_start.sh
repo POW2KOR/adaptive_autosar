@@ -14,9 +14,9 @@ printf "Setting up bash history persistency permissions\n"
 sudo chown -R $UID:$UID /command_history
 
 printf "\nAll done 👌\n\n"
-printf "👉 Build with something like:\n"
+printf "👉 Build with something like:\n\n"
 
 printf "bazel build //bsw:amsr_vector_fs_socal_for_proxy --config=x86_64_linux && "
 printf "bazel build //bsw:amsr_vector_fs_socal_for_skeleton --config=x86_64_linux && "
 printf "bazel build //bsw:amsr_vector_fs_socal_for_software_update --config=x86_64_linux && "
-printf "bazel build //:minerva_mpu_adaptive_filesystem --config=x86_64_linux"
+printf "bazel build //:minerva_mpu_adaptive_filesystem --config=x86_64_linux\n\n"
