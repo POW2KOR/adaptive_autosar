@@ -11,7 +11,7 @@ cp -r /host/.ssh/gsep $HOME/.ssh
 printf "Setting up bash history persistency permissions\n"
 
 # We do a chown because VS Code will change the UID and GID to match the current user
-sudo chown -R $UID:$UID /commandhistory
+sudo chown -R $UID:$UID /command_history
 
 printf "\nAll done 👌\n\n"
 printf "👉 Build with something like:\n"
