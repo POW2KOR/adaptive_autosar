@@ -175,9 +175,6 @@ http_archive(
     name = "org_golang_x_tools",
     patch_args = ["-p1"],
     patches = [
-        # deletegopls removes the gopls subdirectorye. It contains a nested
-        # module with additional dependencies. It's not needed by rules_go.
-        # "@io_bazel_rules_go//third_party:org_golang_x_tools-deletegopls.patch",
         # gazelle args: -repo_root . -go_prefix golang.org/x/tools -go_naming_convention import_alias
         "@io_bazel_rules_go//third_party:org_golang_x_tools-gazelle.patch",
     ],
