@@ -2,7 +2,7 @@
   "name": "ProxyDemoIdc6",
   "description": "IDC6 proxy example application",
   "dlt_id": "Prox",
-  "log_mode" : ["kConsole"],
+  "log_mode" : ["kConsole", "kRemote"],
   "log_level" : "kInfo",
   "log_dir_path": "./log",
   "ipc_port": 33,

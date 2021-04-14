@@ -2,7 +2,7 @@
   "name" : "amsr_vector_fs_em_executionmanager",
   "description" : "The Adaptive AUTOSAR Execution Manager",
   "dlt_id": "EXMA",
-  "log_mode" : ["kConsole"],
+  "log_mode" : ["kConsole", "kRemote"],
   "log_level" : "kInfo",
   "log_dir_path": "./log",
   "ipc_port": 33,
