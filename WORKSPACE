@@ -45,7 +45,7 @@ http_archive(
     name = "rules_foreign_cc",
     patch_args = ["-p1"],
     patches = [
-        "@//:bazel/patches/bazel_patch_to_include_out_directories.patch",
+        "@//:bazel/patches/rules_foreign_cc_support_multiple_include_out_dirs.patch",
     ],
     sha256 = "44bfeb6566f74e4e6e36acc33ee166b428d31a6f01a4f1c14056dc7d0f68c9b6",
     strip_prefix = "rules_foreign_cc-eae19778d5fe8605f0f37332a712f05d4a17dc3b",
@@ -110,7 +110,7 @@ http_archive(
     name = "io_bazel_rules_docker",
     patch_args = ["-p1"],
     patches = [
-        "@//:bazel/patch_to_enable_selects_in_rules_docker_entrypoints.patch",
+        "@//:bazel/patches/patch_to_enable_selects_in_rules_docker_entrypoints.patch",
     ],
     sha256 = "95d39fd84ff4474babaf190450ee034d958202043e366b9fc38f438c9e6c3334",
     strip_prefix = "rules_docker-0.16.0",
