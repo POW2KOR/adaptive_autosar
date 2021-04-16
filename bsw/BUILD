@@ -3032,6 +3032,9 @@ minerva_aa_bsw_module(
 
 minerva_aa_bsw_module(
     name = "amsr_vector_fs_someipprotocol",
+    out_include_dirs = [
+        "include/SomeIpProtocol",
+    ],
     out_static_libs = [
         "libSomeIpProtocol.a",
     ],

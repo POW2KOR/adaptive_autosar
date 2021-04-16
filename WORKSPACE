@@ -246,23 +246,10 @@ new_git_repository(
     # alternative for cloning using HTTPS
     # remote = "https://git.swf.daimler.com/adasdai/starter_kit_adaptive_xavier.git",
     build_file = "@//bsw:starter_kit_adaptive_xavier.BUILD",
-    commit = "b69605a96ef1c70743b93272ac1f0f6366ed9c6f",  # the commit ID that bazel will use to fetch the external repository
+    commit = "af9b567099297ce671b24b8b9eb3edc7f30ab610",  # the commit ID that bazel will use to fetch the external repository
     init_submodules = True,
-    patch_args = [
-        "-p1",
-    ],
-    patches = [
-        "@//bsw:patches/add-c-headers-to-fix-qnx.patch",
-        "@//bsw:patches/add-pthread-header-to-fix-qnx.patch",
-        "@//bsw:patches/delete_uds_protocol_file_that_is_causing_copilation_issue.patch",
-        "@//bsw:patches/fix_cmake_include_path_for_persistency.patch",
-        "@//bsw:patches/fix_cmake_package_exports_step_1b.patch",
-        "@//bsw:patches/fix-cmake-package-exports.patch",
-        "@//bsw:patches/make-pthread-work-inside-bazel.patch",
-        "@//bsw:patches/remove-controlpanel-symlink-in-vector-sip.patch",
-    ],
     remote = "ssh://git@git.swf.daimler.com:7999/adasdai/starter_kit_adaptive_xavier.git",
-    shallow_since = "1618587744 +0200",
+    shallow_since = "1619023366 +0200",
 )
 
 # Enable the below rule if you want to avoid cloning of repo at every run
