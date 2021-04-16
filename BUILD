@@ -162,6 +162,7 @@ pkg_tar(
         "//bsw:starter_kit_base_application_skeleton_updatemanager_swcl_db_daemon": "swcl_db.json",
         "//bsw:skeleton_logging_config": "logging_config.json",
         "//bsw:starter_kit_base_application_skeleton_someip_config": "someip_config.json",
+        "//bsw:starter_kit_base_application_skeleton_persistency_config_json": "per_key_value_storage_config.json",
     },
     mode = "0755",
     package_dir = "/opt/BaseApplicationExecutable/etc/",
