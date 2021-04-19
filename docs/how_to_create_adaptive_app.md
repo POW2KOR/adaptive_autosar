@@ -346,7 +346,7 @@ Now we can build and run the app:
 
 ```bash
 # build the socal
-bazel build @starter_kit_adaptive_xavier//:amsr_vector_fs_socal_for_software_update
+bazel build //bsw:amsr_vector_fs_socal_for_software_update
 
 # build the docker image
 bazel build //:minerva_mpu_adaptive_docker
