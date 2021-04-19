@@ -10,7 +10,7 @@ The document may change as the adaptive AUTOSAR process in the project matures.
 ## Input data
 
 The story beginns with an ARXML. For an AUTOSAR application you need a valid ARXML file.
-An example of the valid ARXML file you can find in this repo, just search for files with 
+An example of the valid ARXML file you can find in this repo, just search for files with
 extention `*.arxml`.
 
 ## Code generators
@@ -44,7 +44,7 @@ filegroup(
 ## Build libraries from code generated files
 
 Once you generated the files, you need to create libraries from files so that bazel can use them. Depending on your
-scenario, the number of libraries may vary. Anyway we will take a look on 2 types of libraries: 
+scenario, the number of libraries may vary. Anyway we will take a look on 2 types of libraries:
  - header or srcs library
  - socal codegen library
 
@@ -63,8 +63,8 @@ cc_library(
 ```
 
 They all are more or less the same. The only library that is different is Socal. Socal has a cyclic
-dependency and Bazel is not that great in resolving cyclic depdendencies, but we have a temporary workaround 
-for this until Vector removes this cyclic dependency. So lat's take a deeper look on socal source code 
+dependency and Bazel is not that great in resolving cyclic depdendencies, but we have a temporary workaround
+for this until Vector removes this cyclic dependency. So lat's take a deeper look on socal source code
 library.
 
 ### Socal library based on the code generated files
@@ -215,14 +215,14 @@ As we can see, we need to follow the order of `srcs`. All libraries
 we build on the previous step. So just keep in mind the order. And also do not forget
 to mention all libraries you depend on. Also `copts` and `linkopts` are mandatory.
 
-Once you are done, congratulations! We are close to be done. We now miss the runtime 
+Once you are done, congratulations! We are close to be done. We now miss the runtime
 config manifest files.
 
-Every app should have a set of configs and one executable. Let's add created executable 
+Every app should have a set of configs and one executable. Let's add created executable
 to the filesystem.
 
 In the `BUILD` file in the ROOT of the repositry we have a target `minerva_mpu_adaptive_binaries`.
-It is important to add our executable to the files list and define the location of the 
+It is important to add our executable to the files list and define the location of the
 executable in the docker image.
 
 As we can see, executable location has the following pattern: `opt/NAME/bin/NAME`.
@@ -249,13 +249,13 @@ pkg_tar(
 Now let's clarify the config files we need to run the app.
 
 We need the following configs:
-- logging_config.json 
+- logging_config.json
 - com_application.json
 - exec_config.json
 - someip_config.json
 - ... any other json config files from code gen
 
-Most of the config files are the result of the code generator. At this moment, 
+Most of the config files are the result of the code generator. At this moment,
 the exception is `logging_config.json`and `com_application.json`.
 
 Example of the `logging_config.json`:
@@ -323,7 +323,7 @@ pkg_tar(
 )
 ```
 
-And the very last step you need to do is to add `someipd-posix.json`. Currently 
+And the very last step you need to do is to add `someipd-posix.json`. Currently
 we use `bsw/configs/someipd_posix/someipd-posix.json` to store all someip configs.
 
 Example of the file `someipd-posix.json`:

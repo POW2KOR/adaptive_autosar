@@ -179,7 +179,7 @@ to be the same version you've pulled during the setup from earlier).
 ## The actual build steps
 
 The current Bazel build is based on [rules_foreign_cc](https://github.com/bazelbuild/rules_foreign_cc) for building
-external CMake projects. In particular, they are used to build the Vector BSW libraries. The default build type for 
+external CMake projects. In particular, they are used to build the Vector BSW libraries. The default build type for
 the BSW modules is "Release".
 
 To proceed with your build on host, change to your repository root directory and execute the following commands:

@@ -17,7 +17,7 @@ testing purposes
 # General concept
 
 ## Design notes
-In order to communicate with NVidia DriveUpdate, we need to pass requests from the Software Update client to the 
+In order to communicate with NVidia DriveUpdate, we need to pass requests from the Software Update client to the
 NVidia DriveUpdate server. To achieve this, an intermediate entity called Software Update client adapter is used.
 
 Software Update client communicates with Software Update client adapter via ara::com. Then, data from the requests is
@@ -67,9 +67,9 @@ library. This replacement is the Test DriveUpdate Link library, which should pro
 original one. All the corresponding calls to the DULL functions should be serialized and passed to the Test DriveUpdate
 server, which emulates request processing and generates responses according to the test plan.
 
-When a request is sent by the Test Update client, it is finally received by the Test DriveUpdate server. Here we can 
+When a request is sent by the Test Update client, it is finally received by the Test DriveUpdate server. Here we can
 check data integrity and generate a certain response for a given request. From the point of view of a test case logic,
-we send a message, wait until it is received on the other side, check the received data, decide what to reply on 
+we send a message, wait until it is received on the other side, check the received data, decide what to reply on
 that, send a reply, then check the reply received by the Test Update client. This approach allows us to not hard-code
 the expected behavior, but to alter it according to our needs, i.e. generate various errors for correct requests and
 check for correct behavior of our Software Update client adapter for all possible inputs from both sides.
