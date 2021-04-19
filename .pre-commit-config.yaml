@@ -1,11 +1,16 @@
 repos:
-    - repo: https://github.com/pre-commit/pre-commit-hooks
-      rev: v2.3.0
-      hooks:
-          - id: check-json
-          - id: end-of-file-fixer
-            exclude: .specs|.bzl|.patch
-          - id: trailing-whitespace
-            exclude: .specs|.bzl|.patch|BUILD|.bazelrc
-          - id: mixed-line-ending
-            exclude: .specs|.bzl|.patch
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v2.3.0
+    hooks:
+      - id: check-json
+      - id: end-of-file-fixer
+        exclude: .specs|.bzl|.patch
+      - id: trailing-whitespace
+        exclude: .specs|.bzl|.patch|BUILD|.bazelrc
+      - id: mixed-line-ending
+        exclude: .specs|.bzl|.patch
+  - repo: https://github.com/jlebar/pre-commit-hooks
+    rev: 07a539b8db43298f124ace23c90b4b871911b8c4
+    hooks:
+      - id: bazel-buildifier
+        args: ["-r", "--mode=check"]
