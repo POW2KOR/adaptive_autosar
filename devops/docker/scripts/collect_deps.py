@@ -30,14 +30,16 @@ artifactory = "https://artifact.swf.daimler.com/"
 arg_parser = argparse.ArgumentParser(
     prog="collect_deps",
     usage="%(prog)s [options]",
-    description="Collect dependencies for docker image"
+    description="Collect dependencies for docker image",
 )
 
 # add arguments
-arg_parser.add_argument("-i", action="store_false",
-                        help="Don't download dependencies from the internet")
-arg_parser.add_argument("-a", action="store_false",
-                        help="Don't download dependencies from artifactory")
+arg_parser.add_argument(
+    "-i", action="store_false", help="Don't download dependencies from the internet"
+)
+arg_parser.add_argument(
+    "-a", action="store_false", help="Don't download dependencies from artifactory"
+)
 
 
 class HashAlgo(Enum):
@@ -105,7 +107,9 @@ def downloadPackage(remote, localFile, expectedHash=None, user=None, password=No
             urllib.request.install_opener(opener)
 
         try:
-            with urllib.request.urlopen(request_param) as response, open(localFile, 'wb') as out_file:
+            with urllib.request.urlopen(request_param) as response, open(
+                localFile, "wb"
+            ) as out_file:
                 shutil.copyfileobj(response, out_file)
 
             print("Downloading " + localFile + " finished.")
@@ -155,7 +159,9 @@ def downloadArtifactoryFiles():
     ret = True
 
     for tool in tools_artifactory["files"]:
-        if not downloadPackage((artifactory + tool["pattern"]), tool["target"], user=user, password=passwd):
+        if not downloadPackage(
+            (artifactory + tool["pattern"]), tool["target"], user=user, password=passwd
+        ):
             print("Downloading " + tool["target"] + " failed!")
             ret = False
     return ret
