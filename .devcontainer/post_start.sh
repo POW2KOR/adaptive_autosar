@@ -8,10 +8,11 @@ sed -i "s|$1|$HOME|g" $HOME/.gitconfig
 mkdir -p $HOME/.ssh
 cp -r /host/.ssh/gsep $HOME/.ssh
 
-printf "Setting up bash history persistency permissions\n"
+printf "Setting up bash history and bazel cache persistency permissions\n"
 
 # We do a chown because VS Code will change the UID and GID to match the current user
 sudo chown -R $UID:$UID /command_history
+sudo chown -R $UID:$UID /bazel_cache
 
 printf "\nAll done 👌\n\n"
 printf "👉 Build with something like:\n\n"

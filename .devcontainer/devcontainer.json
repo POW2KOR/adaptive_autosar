@@ -19,7 +19,9 @@
     "type=bind,source=/dev/bus/usb,target=/dev/bus/usb",
     "type=bind,source=${localEnv:HOME}/.gitconfig,target=/host/.gitconfig",
     "type=bind,source=${localEnv:HOME}/.ssh/gsep,target=/host/.ssh/gsep",
+    "type=bind,source=${localWorkspaceFolder}/.devcontainer/.bazelrc,target=/etc/bazel.bazelrc",
     "type=volume,source=minerva_mpu_build_env_command_history,target=/command_history",
+    "type=volume,source=minerva_mpu_build_env_bazel_cache,target=/bazel_cache"
   ],
   "postStartCommand":
 	"/bin/bash ${containerWorkspaceFolder}/.devcontainer/post_start.sh ${localEnv:HOME}"
