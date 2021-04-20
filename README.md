@@ -46,7 +46,7 @@ Then pull your image:
 docker pull artifact.swf.daimler.com/adasdai-docker/minerva_mpu_docker/minerva_mpu:<commitID>
 ```
 
-where `<commitID>` is the image version. We are currently targeting version `e9eaa2018a759bea4927e25dca5224cbcd0bfdec`.
+where `<commitID>` is the image version. We are currently targeting version `ee9e1d58328695c0280fa807f477abcb037e7347`.
 You can also use the `latest` tag to pull the latest image.
 
 #### Entering the devcontainer
