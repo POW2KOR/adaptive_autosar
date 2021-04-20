@@ -11,6 +11,9 @@ ENV SHELL /bin/bash
 RUN groupadd --gid $USER_GID $USERNAME \
     && useradd --uid $USER_UID --gid $USER_GID -m $USERNAME \
     && apt-get update \
+    # xmllint is necessary for pretty-printing generator messages
+    # from bazel genrules
+    && apt-get install -y libxml2-utils \
     && apt-get install -y git gpgconf \
     # Add sudo support
     && apt-get install -y sudo \
