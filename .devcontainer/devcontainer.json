@@ -24,5 +24,11 @@
     "type=volume,source=minerva_mpu_build_env_bazel_cache,target=/bazel_cache"
   ],
   "postStartCommand":
-	"/bin/bash ${containerWorkspaceFolder}/.devcontainer/post_start.sh ${localEnv:HOME}"
+	"/bin/bash ${containerWorkspaceFolder}/.devcontainer/post_start.sh ${localEnv:HOME}",
+	"extensions": [
+		"bazelbuild.vscode-bazel",
+		"ms-vscode.cpptools",
+		"eamodio.gitlens",
+		"davidanson.vscode-markdownlint"
+	]
 }
