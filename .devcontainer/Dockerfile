@@ -1,4 +1,4 @@
-FROM artifact.swf.daimler.com/adasdai-docker/minerva_mpu_docker/minerva_mpu:ee9e1d58328695c0280fa807f477abcb037e7347
+FROM artifact.swf.daimler.com/adasdai-docker/minerva_mpu_docker/minerva_mpu:8d3dc7399055600accf9fbb1a6c7d64bac573dce
 
 # The default UID and GID will be changed by VS Code devcontainers to match the current user
 ARG USERNAME=dev
