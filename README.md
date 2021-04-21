@@ -162,6 +162,43 @@ docker exec -it <container id> /bin/bash
 
 ## Miscellaneous
 
+### Git hooks
+
+#### Pre-commit
+
+This repository runs git hooks using [pre-commit](https://pre-commit.com/). The following command can be used to install
+pre-commit.
+
+```
+pip3 install pre-commit==2.10.1
+```
+
+To enable pre-commit after cloning the repository, the following command can be used.
+
+```
+cd minerva_mpu_adaptive
+pre-commit install
+```
+
+Once enabled, pre-commit will run before every local commit in order to suggest fixes for the checks defined in
+[.pre-commit-config.yaml](./pre-commit-config.yaml)
+
+
+### Proxy handling in Docker
+
+In order to allow Internet access from inside our docker containers, we need to pass to them proper
+environment variables. For now, we should take care on the following settings:
+
+- proxy settings in `~/.docker/config.json`: needed to set up access from ubuntu_18.04 image
+  when it is started on host
+- proxy settings which are passed with `docker run` command: needed to set up access from
+  minerva_mpu_docker
+- proxy settings in `BUILD` file: needed to set up access from ubuntu_18.04 image when it is started
+  from inside minerva_mpu_docker container
+
+In case of proxy settings change, please change corresponding parameters according to your build and
+launch strategy.
+
 ### Build different targets for aarch64 target
 
 The aarch64 GCC cross-compiler needs to be installed on your system:
