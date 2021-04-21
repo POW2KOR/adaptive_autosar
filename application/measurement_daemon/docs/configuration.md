@@ -19,7 +19,7 @@ Measurement configuration for an executable file is stored in `.ini` configurati
 configuration parameters is below.
 
 Each configuration file should contain the `COMMON` section containing parser-related parameters, and other sections
-named as variables under observation. 
+named as variables under observation.
 
 
 ### Common section description
