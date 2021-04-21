@@ -1,5 +1,5 @@
 // -*- mode: groovy -*-
-lib_depot_utilities = load('ci-depot/jenkins/utilities.groovy')
+lib_depot_utilities = load('devops/ci-depot/jenkins/utilities.groovy')
 
 DOCKER_IMAGE_COMPILATION = "artifact.swf.daimler.com/adasdai-docker/minerva_mpu_docker/minerva_mpu:bdcc935587335d4ccff41d0945384396e0014ab7"
 
@@ -42,7 +42,7 @@ def compile_x86_64_linux_ubuntu(lib_name) {
             docker.withRegistry(env.registryUrl, env.registryCredentials) {
                 docker.image(DOCKER_IMAGE_COMPILATION).inside("-u 0:0 --entrypoint='' ${env.diskCache} ${remoteUpload}") {
                     sshagent([env.sshJenkinsCredentials]) {
-                        sh 'cicd/scripts/bash/runtime_functions.sh compile_x86_64_linux_ubuntu'
+                        sh 'devops/cicd/scripts/bash/runtime_functions.sh compile_x86_64_linux_ubuntu'
                     }
 
                     //TODO: Don't invoke Docker with 0:0 but fix the permissions properly than doing this hack
@@ -68,7 +68,7 @@ def compile_aarch64_linux_ubuntu(lib_name) {
             docker.withRegistry(env.registryUrl, env.registryCredentials) {
                 docker.image(DOCKER_IMAGE_COMPILATION).inside("-u 0:0 --entrypoint='' ${env.diskCache} ${remoteUpload}") {
                     sshagent([env.sshJenkinsCredentials]) {
-                        sh 'cicd/scripts/bash/runtime_functions.sh compile_aarch64_linux_ubuntu'
+                        sh 'devops/cicd/scripts/bash/runtime_functions.sh compile_aarch64_linux_ubuntu'
                     }
 
                     //TODO: Don't invoke Docker with 0:0 but fix the permissions properly than doing this hack
@@ -95,7 +95,7 @@ def compile_aarch64_linux_linaro(lib_name) {
             docker.withRegistry(env.registryUrl, env.registryCredentials) {
                 docker.image(DOCKER_IMAGE_COMPILATION).inside("-u 0:0 --entrypoint='' ${env.diskCache} ${remoteUpload}") {
                     sshagent([env.sshJenkinsCredentials]) {
-                        sh 'cicd/scripts/bash/runtime_functions.sh compile_aarch64_linux_linaro'
+                        sh 'devops/cicd/scripts/bash/runtime_functions.sh compile_aarch64_linux_linaro'
                     }
 
                     //TODO: Don't invoke Docker with 0:0 but fix the permissions properly than doing this hack
