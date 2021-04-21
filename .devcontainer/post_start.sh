@@ -2,11 +2,11 @@
 
 printf "\nSetting up .gitconfig and copying over GSEP keys\n"
 
-cp /host/.gitconfig $HOME/.gitconfig
+sudo cp /host/.gitconfig $HOME/.gitconfig
 sed -i "s|$1|$HOME|g" $HOME/.gitconfig
 
 mkdir -p $HOME/.ssh
-cp -r /host/.ssh/gsep $HOME/.ssh
+sudo cp -r /host/.ssh/gsep $HOME/.ssh
 
 printf "Setting up bash history and bazel cache persistency permissions\n"
 

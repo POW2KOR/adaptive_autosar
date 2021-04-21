@@ -1,3 +1,4 @@
+// Please keep this file in sync with devops/scripts/enter_build_env_docker.sh
 {
   "name": "minerva_mpu_build_env",
   "runArgs": [
