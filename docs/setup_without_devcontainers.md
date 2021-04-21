@@ -1,4 +1,28 @@
-# Setup to build without docker
+# Setups to build without devcontainers
+
+There are two ways to build without devcontainers:
+
+* [setup to build with plain docker](#setup-to-build-with-plain-docker) instead of devcontainers
+* [setup to build without any docker](#setup-to-build-without-docker) at all
+
+## Setup to build with plain docker
+
+Make sure you have setup your login credentials for the SWF Artifactory Docker registry, as described in the
+[README](../README.md#setup-credentials-for-swf-artifactory-docker-registry)
+
+Then, simply run `./devops/scripts/enter_build_env_docker.sh`.
+
+The first start is expected to take a long time. This is because it will fetch the base image from Artifactory, which
+is currently around 25 GB. It might require your computer turned on overnight in order to finish the download.
+Subsequent starts will be much quicker.
+
+Currently the main drawback is that the UID of the user inside the container will not match the UID on the host
+machine. This part is handled transparently through VS Code. For most tasks, this is not needed.
+
+Bash command history and the bazel build cache will be persisted for you. However, you will have to do any clean-up
+manually.
+
+## Setup to build without docker
 
 In order to build on your host machine, you will need the following tools:
 
@@ -7,7 +31,7 @@ In order to build on your host machine, you will need the following tools:
 
 Information on how to set these up is below.
 
-## Compiler
+### Compiler
 
 GCC compiler needs to be installed on your system.
 
@@ -26,7 +50,7 @@ For aarch64 cross-compilation:
 sudo apt install g++-aarch64-linux-gnu
 ```
 
-## Bazel
+### Bazel
 
 We currently use Bazel version 4.0.0 as our build system. The docker `build_env` container already has these
 dependencies embedded into it. If you are using the container, then you don't need to do any other further steps. The
@@ -69,24 +93,3 @@ sudo mv /usr/tools/bazel/buildifier /usr/local/bin/
 sudo mv /usr/tools/bazel/buildozer /usr/local/bin/
 sudo chmod +x /usr/local/bin/buildifier /usr/local/bin/buildozer
 ```
-
-## Git hooks
-
-### Pre-commit
-
-This repository runs git hooks using [pre-commit](https://pre-commit.com/). The following command can be used to install
-pre-commit.
-
-```
-pip3 install pre-commit==2.10.1
-```
-
-To enable pre-commit after cloning the repository, the following command can be used.
-
-```
-cd minerva_mpu_adaptive
-pre-commit install
-```
-
-Once enabled, pre-commit will run before every local commit in order to suggest fixes for the checks defined in
-[.pre-commit-config.yaml](./pre-commit-config.yaml)

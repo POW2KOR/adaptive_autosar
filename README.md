@@ -4,52 +4,42 @@ This is the MPU Adaptive AUTOSAR repository for the Minerva project.
 
 ## Setting up
 
-This guide describes how to build and run both from within the docker container and outside of it. The first method is
-preferred, but both are supported. See next section for more info.
+This guide describes three ways how to build and run. The first method is preferred, but all are supported.
+
+* build with devcontainers, described [below](#build-with-build_env-devcontainer)
+* [setup to build with plain docker](docs/setup_without_devcontainers.md#setup-to-build-with-plain-docker) instead of devcontainers
+* [setup to build without any docker](docs/setup_without_devcontainers.md#setup-to-build-without-docker) at all
 
 ### The use of docker in this repository
 
 Currently we use docker both to build and to run our applications. Both cases are optional, but they make certain
 things easier and they enable a few extra use-cases. For example, for building, it allows us to deliver all the
 dependencies and tools under one package (NVIDIA Drive SDK, toolchains, Bazel dependencies) and have little
-interference from Daimler IT. Believe it or not, Daimler IT uninstalls your `g++-aarch64-linux-gnu` deb package after
-30 minutes. For running, this allows us to make use of docker virtual networks with custom subnets and IP address
-configurations without actually affecting the developer machine configuration.
-
-We call the docker container where we build things the `build_env` and the docker container where we run things the
-`run_env`.
+interference from Daimler IT. For running, this allows us to make use of docker virtual networks with custom subnets
+and IP address configurations without actually affecting the developer machine configuration.
 
 You can find a guide on setting up docker on Daimler Ubuntu laptops
 [here](https://wiki.swf.daimler.com/display/swf/How+to+setup+docker).
 
-### Setup to build with `build_env` devcontainer
+We call the docker container where we build things the `build_env` and the docker container where we run things the
+`run_env`.
 
-#### Download the `build_env` devcontainer
+The `build_env` is currently configured in
+[this repository](https://git.swf.daimler.com/adasdai/minerva_mpu_docker/). The CI/CD pipeline for this repository
+pushes new version of the repository to
+[SWF Artifactory](https://artifact.swf.daimler.com/list/adasdai-docker/minerva_mpu_docker/minerva_mpu/) on merge. The
+image includes all the dependencies needed, including Bazel, Bazel plugins and toolchains (for both x86 and aarch64).
 
-First, you have to fetch the base image from Artifactory. This image is quite big and might require you to keep your
-computer turned on overnight in order to finish the download. The image includes all the dependencies needed, including
-Bazel, Bazel plugins and toolchains (for both x86 and aarch64).
+### Setup credentials for SWF Artifactory Docker registry
 
-These images are pushed to Artifactory from a CI/CD pipeline. Please check
-[SWF Artifactory](https://artifact.swf.daimler.com/list/adasdai-docker/minerva_mpu_docker/minerva_mpu/) to find a
-full list.
-
-To be able to download an image, first you should log in to SWF Artifactory with your credentials:
+Our main docker container registry resides in SWF artifactory. To be able to download an image, first you should log
+in to SWF Artifactory with your credentials:
 
 ```
 docker login artifact.swf.daimler.com
 ```
 
-Then pull your image:
-
-```
-docker pull artifact.swf.daimler.com/adasdai-docker/minerva_mpu_docker/minerva_mpu:<commitID>
-```
-
-where `<commitID>` is the image version. We are currently targeting version `ee9e1d58328695c0280fa807f477abcb037e7347`.
-You can also use the `latest` tag to pull the latest image.
-
-#### Entering the devcontainer
+### Build with `build_env` devcontainer
 
 There are multiple tools which support devcontainers:
 [VS Code with the Remote Development plugin](https://code.visualstudio.com/docs/remote/containers#_getting-started)
@@ -65,20 +55,18 @@ code .
 ```
 
 Once VS Code has started, press `Ctrl-Shift-P` and type "Focus on Containers View". Then in the top bar you will see a
-`+` sign. Click on it and then select "Open Current Folder in Container View". The first start is expected to take
-around 2 minutes. Subsequent starts will be much quicker.
+`+` sign. Click on it and then select "Open Current Folder in Container View".
+
+The first start is expected to take a long time. This is because it will fetch the base image from Artifactory, which
+is currently around 25 GB. It might require your computer turned on overnight in order to finish the download.
+Subsequent starts will be much quicker.
 
 The devcontainer will set up your `git` and `ssh` inside the container to work with SWF git. This assumes you have the
 environment outside the docker container already working with SWF git and that you have your x509 SWF certificates
 stored in `~/.ssh/gsep`. The devcontainer is configured to run in host network mode and the proxy is configured for
-you. `ssh-agent` forwarding is handled through VS Code. Bash history is persisted between sessions. VS Code also has a
-feature where it makes sure that the user ID of the user inside the devcontainer matches the one outside the container.
-The devcontainer is configured to support this feature.
-
-### Setup to build without `build_env` devcontainer
-
-For setting up the build without the devcontainer, more info in
-[docs/setup_without_docker.md](docs/setup_without_docker.md).
+you. `ssh-agent` and `gpg-agent` forwarding is handled through VS Code. Bash history and Bazel build cache is persisted
+between sessions. VS Code also has a feature where it makes sure that the user ID of the user inside the devcontainer
+matches the one outside the container. The devcontainer is configured to support this feature.
 
 ## Build
 
