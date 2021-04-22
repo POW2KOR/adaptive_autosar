@@ -156,8 +156,8 @@ filegroup(
 filegroup(
     name = "mex_arxml",
     srcs = [
-        "mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-em-executionmanager/mex/MexDefs.arxml",
         "mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-applicationbase/mex/BswExecutableModelExtension.arxml",
+        "mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-em-executionmanager/mex/MexDefs.arxml",
     ],
     visibility = ["//visibility:public"],
 )
@@ -204,7 +204,6 @@ filegroup(
 
 minerva_aa_codegen_declare(
     name = "generator",
-    path_to_generators = "mb_base_layer_adaptive_xavier/amsr_xavier/Generators",
     generators = [
         "amsr_em_machine_config",
         "amsr_em_exec_config",
@@ -215,7 +214,8 @@ minerva_aa_codegen_declare(
         "amsr_applicationbase_init_deinit",
         "amsr_someipprotocol",
         "amsr_socal",
-    ]
+    ],
+    path_to_generators = "mb_base_layer_adaptive_xavier/amsr_xavier/Generators",
 )
 
 filegroup(
@@ -223,15 +223,15 @@ filegroup(
     srcs = [
         "examples/proxy-skeleton-demo-idc6/applications/proxy-demo-idc6/etc/com_application.json",
         "examples/proxy-skeleton-demo-idc6/applications/proxy-demo-idc6/etc/logging_config.json",
-        "examples/proxy-skeleton-demo-idc6/applications/proxy-demo-idc6/src/proxy_demo_error_domain.cpp",
         "examples/proxy-skeleton-demo-idc6/applications/proxy-demo-idc6/src/activation_manager.cpp",
-        "examples/proxy-skeleton-demo-idc6/applications/proxy-demo-idc6/src/proxy_demo_error_domain.h",
-        "examples/proxy-skeleton-demo-idc6/applications/proxy-demo-idc6/src/application.h",
-        "examples/proxy-skeleton-demo-idc6/applications/proxy-demo-idc6/src/remote_parking.h",
-        "examples/proxy-skeleton-demo-idc6/applications/proxy-demo-idc6/src/application.cpp",
-        "examples/proxy-skeleton-demo-idc6/applications/proxy-demo-idc6/src/main.cpp",
         "examples/proxy-skeleton-demo-idc6/applications/proxy-demo-idc6/src/activation_manager.h",
+        "examples/proxy-skeleton-demo-idc6/applications/proxy-demo-idc6/src/application.cpp",
+        "examples/proxy-skeleton-demo-idc6/applications/proxy-demo-idc6/src/application.h",
+        "examples/proxy-skeleton-demo-idc6/applications/proxy-demo-idc6/src/main.cpp",
+        "examples/proxy-skeleton-demo-idc6/applications/proxy-demo-idc6/src/proxy_demo_error_domain.cpp",
+        "examples/proxy-skeleton-demo-idc6/applications/proxy-demo-idc6/src/proxy_demo_error_domain.h",
         "examples/proxy-skeleton-demo-idc6/applications/proxy-demo-idc6/src/remote_parking.cpp",
+        "examples/proxy-skeleton-demo-idc6/applications/proxy-demo-idc6/src/remote_parking.h",
     ],
     visibility = ["//visibility:public"],
 )
@@ -241,18 +241,17 @@ filegroup(
     srcs = [
         "examples/proxy-skeleton-demo-idc6/applications/skeleton-demo-idc6/etc/com_application.json",
         "examples/proxy-skeleton-demo-idc6/applications/skeleton-demo-idc6/etc/logging_config.json",
-        "examples/proxy-skeleton-demo-idc6/applications/skeleton-demo-idc6/src/skeleton_demo_error_domain.cpp",
-        "examples/proxy-skeleton-demo-idc6/applications/skeleton-demo-idc6/src/activation_manager.cpp",
-        "examples/proxy-skeleton-demo-idc6/applications/skeleton-demo-idc6/src/skeleton_demo_error_domain.h",
-        "examples/proxy-skeleton-demo-idc6/applications/skeleton-demo-idc6/src/application.h",
-        "examples/proxy-skeleton-demo-idc6/applications/skeleton-demo-idc6/src/RemoteParking_server.h",
-        "examples/proxy-skeleton-demo-idc6/applications/skeleton-demo-idc6/src/application.cpp",
-        "examples/proxy-skeleton-demo-idc6/applications/skeleton-demo-idc6/src/main.cpp",
-        "examples/proxy-skeleton-demo-idc6/applications/skeleton-demo-idc6/src/activation_manager.h",
-        "examples/proxy-skeleton-demo-idc6/applications/skeleton-demo-idc6/src/RemoteParking_server.cpp",
-        "examples/proxy-skeleton-demo-idc6/applications/skeleton-demo-idc6/src/HomeParking_server.h",
         "examples/proxy-skeleton-demo-idc6/applications/skeleton-demo-idc6/src/HomeParking_server.cpp",
-
+        "examples/proxy-skeleton-demo-idc6/applications/skeleton-demo-idc6/src/HomeParking_server.h",
+        "examples/proxy-skeleton-demo-idc6/applications/skeleton-demo-idc6/src/RemoteParking_server.cpp",
+        "examples/proxy-skeleton-demo-idc6/applications/skeleton-demo-idc6/src/RemoteParking_server.h",
+        "examples/proxy-skeleton-demo-idc6/applications/skeleton-demo-idc6/src/activation_manager.cpp",
+        "examples/proxy-skeleton-demo-idc6/applications/skeleton-demo-idc6/src/activation_manager.h",
+        "examples/proxy-skeleton-demo-idc6/applications/skeleton-demo-idc6/src/application.cpp",
+        "examples/proxy-skeleton-demo-idc6/applications/skeleton-demo-idc6/src/application.h",
+        "examples/proxy-skeleton-demo-idc6/applications/skeleton-demo-idc6/src/main.cpp",
+        "examples/proxy-skeleton-demo-idc6/applications/skeleton-demo-idc6/src/skeleton_demo_error_domain.cpp",
+        "examples/proxy-skeleton-demo-idc6/applications/skeleton-demo-idc6/src/skeleton_demo_error_domain.h",
     ],
     visibility = ["//visibility:public"],
 )
