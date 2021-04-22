@@ -4,177 +4,73 @@ This is the MPU Adaptive AUTOSAR repository for the Minerva project.
 
 ## Setting up
 
-This guide describes how to build and run both from within the docker container and outside of it. The first method is
-preferred, but both are supported. See next section for more info.
+This guide describes three ways how to build and run. The first method is preferred, but all are supported.
+
+* build with devcontainers, described [below](#build-with-build_env-devcontainer)
+* [setup to build with plain docker](docs/setup_without_devcontainers.md#setup-to-build-with-plain-docker) instead of devcontainers
+* [setup to build without any docker](docs/setup_without_devcontainers.md#setup-to-build-without-docker) at all
 
 ### The use of docker in this repository
 
 Currently we use docker both to build and to run our applications. Both cases are optional, but they make certain
 things easier and they enable a few extra use-cases. For example, for building, it allows us to deliver all the
 dependencies and tools under one package (NVIDIA Drive SDK, toolchains, Bazel dependencies) and have little
-interference from Daimler IT. Believe it or not, Daimler IT uninstalls your `g++-aarch64-linux-gnu` deb package after
-30 minutes. For running, this allows us to make use of docker virtual networks with custom subnets and IP address
-configurations without actually affecting the developer machine configuration.
-
-We call the docker container where we build things the `build_env` and the docker container where we run things the
-`run_env`.
+interference from Daimler IT. For running, this allows us to make use of docker virtual networks with custom subnets
+and IP address configurations without actually affecting the developer machine configuration.
 
 You can find a guide on setting up docker on Daimler Ubuntu laptops
 [here](https://wiki.swf.daimler.com/display/swf/How+to+setup+docker).
 
-### Setup to build from inside the docker container
+We call the docker container where we build things the `build_env` and the docker container where we run things the
+`run_env`.
 
-To build inside the docker container, you should get the docker image from Artifactory and check your local settings.
-The image includes all the dependencies needed, including Bazel, Bazel plugins and toolchains (for both x86 and
-aarch64).
+The `build_env` is currently configured in
+[this repository](https://git.swf.daimler.com/adasdai/minerva_mpu_docker/). The CI/CD pipeline for this repository
+pushes new version of the repository to
+[SWF Artifactory](https://artifact.swf.daimler.com/list/adasdai-docker/minerva_mpu_docker/minerva_mpu/) on merge. The
+image includes all the dependencies needed, including Bazel, Bazel plugins and toolchains (for both x86 and aarch64).
 
-Docker images are pushed to Artifactory from a CI/CD pipeline. Please check
-[SWF Artifactory](https://artifact.swf.daimler.com/list/adasdai-docker/minerva_mpu_docker/minerva_mpu/) to find a
-full list.
+### Setup credentials for SWF Artifactory Docker registry
 
-To obtain an image, first you should log in to SWF Artifactory with your credentials:
+Our main docker container registry resides in SWF artifactory. To be able to download an image, first you should log
+in to SWF Artifactory with your credentials:
 
 ```
 docker login artifact.swf.daimler.com
 ```
 
-Then pull your image:
+### Build with `build_env` devcontainer
 
-```
-docker pull artifact.swf.daimler.com/adasdai-docker/minerva_mpu_docker/minerva_mpu:<commitID>
-```
-where `<commitID>` is the image version. We are currently targeting version `e9eaa2018a759bea4927e25dca5224cbcd0bfdec`.
+There are multiple tools which support devcontainers:
+[VS Code with the Remote Development plugin](https://code.visualstudio.com/docs/remote/containers#_getting-started)
+ (preferred) or the [devc CLI tool](https://github.com/nikaro/devc).
 
-NOTE: You can use the `latest` tag to pull the latest docker image:
-```
-docker pull artifact.swf.daimler.com/adasdai-docker/minerva_mpu_docker/minerva_mpu:latest
-```
-
-### Setup to build without docker
-
-In order to build on your host machine, you will need the following tools:
-
-- compiler toolchains for the target platform of choice
-- Bazel
-
-Information on how to set these up is below.
-
-#### Compiler
-
-GCC compiler needs to be installed on your system.
-
-**IMPORTANT NOTE:** It might happen that your local installation of compiler is removed by automated Daimler IT policy
-every 30 minutes, so you need to reinstall it, or contact your system administrator and ask for policy change.
-
-For x86_64 host:
-
-```
-sudo apt install g++
-```
-
-For aarch64 cross-compilation:
-
-```
-sudo apt install g++-aarch64-linux-gnu
-```
-
-#### Bazel
-
-We currently use Bazel version 4.0.0 as our build system. The docker `build_env` container already has these
-dependencies embedded into it. If you are using the container, then you don't need to do any other further steps. The
-instructions below will show how to install Bazel and all of its dependencies.
-
-**NOTE** `rules_foreign_cc` requires minimum Bazel version 3.7.0. If you are seeing errors related to platform, update
-now. More info [here](https://github.com/bazelbuild/rules_foreign_cc/commit/f48ec05fed3170b8b32bbc4b6d8fd4175f8b8cff).
-
-To avoid downloading Bazel dependencies from external sources all the time, we do a one-time download and installation
-to a known path. The build system is currently configured to look for the dependencies under `/usr/tools/bazel`.
-
-This download can be done using [the collect_deps.py](devops/docker/scripts/collect_deps.py) script.
-
-The script will download:
-
-1. from the internet the packages based on the content of the
-[tools_web.json](https://git.swf.daimler.com/adasdai/minerva_mpu_docker/-/blob/master/configuration/tools_web.json)
-file
-2. from Artifactory the packages based on the content of the
-[tools.json](https://git.swf.daimler.com/adasdai/minerva_mpu_docker/-/blob/master/configuration/tools.json)
-file
-
-Please follow the following steps:
-
-```bash
-# download all the dependencies using the python script
-# NOTE: when prompted enter your Artifactory credentials
-python3 devops/docker/scripts/collect_deps.py
-
-# copy the downloaded files to /usr/tools/bazel/
-sudo mkdir -p /usr/tools/bazel/
-sudo cp tools/bazel/* /usr/tools/bazel/
-
-# optionally, you can install Bazel and its build tools
-sudo dpkg -i /usr/tools/bazel/bazel_4.0.0-linux-x86_64.deb
-sudo rm /usr/tools/bazel/bazel_4.0.0-linux-x86_64.deb
-sudo mv /usr/tools/bazel/buildifier /usr/local/bin/
-sudo mv /usr/tools/bazel/buildozer /usr/local/bin/
-sudo chmod +x /usr/local/bin/buildifier /usr/local/bin/buildozer
-```
-
-#### Git hooks
-
-##### Pre-commit
-
-This repository runs git hooks using [pre-commit](https://pre-commit.com/). The following command can be used to install
-pre-commit.
-
-```
-pip3 install pre-commit==2.10.1
-```
-
-To enable pre-commit after cloning the repository, the following command can be used.
+We will only be discussing the VS Code method for now. Make sure you have the
+[Remote Development plugin](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack)
+installed. Once this is done, open the repository with VS Code by running this command:
 
 ```
 cd minerva_mpu_adaptive
-pre-commit install
+code .
 ```
 
-Once enabled, pre-commit will run before every local commit in order to suggest fixes for the checks defined in
-[.pre-commit-config.yaml](./pre-commit-config.yaml)
+Once VS Code has started, press `Ctrl-Shift-P` and type "Focus on Containers View". Then in the top bar you will see a
+`+` sign. Click on it and then select "Open Current Folder in Container View".
+
+The first start is expected to take a long time. This is because it will fetch the base image from Artifactory, which
+is currently around 25 GB. It might require your computer turned on overnight in order to finish the download.
+Subsequent starts will be much quicker.
+
+The devcontainer will set up your `git` and `ssh` inside the container to work with SWF git. This assumes you have the
+environment outside the docker container already working with SWF git and that you have your x509 SWF certificates
+stored in `~/.ssh/gsep`. The devcontainer is configured to run in host network mode and the proxy is configured for
+you. `ssh-agent` and `gpg-agent` forwarding is handled through VS Code. Bash history and Bazel build cache is persisted
+between sessions. VS Code also has a feature where it makes sure that the user ID of the user inside the devcontainer
+matches the one outside the container. The devcontainer is configured to support this feature.
 
 ## Build
 
-The actual build instructions are the same, regardless if you use the `build_env` to build or not. However, if you use
-the `build_env` you have to go through the extra step of entering it.
-
-### Entering the docker `build_env`
-
-Currently, the command to enter the `build_env` is a bit messy, but in the future this will be covered by tools and
-the it will be much more simpler to use.
-
-To enter the `build_env` docker container, run the following command:
-
-```
-docker run -it \
-   --name=minerva_mpu_dev \
-   --rm \
-   --privileged \
-   --network=host \
-   -e HTTP_PROXY=$http_proxy \
-   -e HTTPS_PROXY=$https_proxy \
-   -e no_proxy=hksmirror.rd.corpintra.net,ubunturepo.rd.corpintra.net \
-   -e SSH_AUTH_SOCK=/ssh-agent \
-   -v /lib/modules/$(uname -r):/lib/modules/$(uname -r) \
-   -v /dev/bus/usb:/dev/bus/usb \
-   -v <REPOSITORY>:/root/workspace/minerva_mpu_adaptive \
-   -v /var/run/docker.sock:/var/run/docker.sock \
-   -v $SSH_AUTH_SOCK:/ssh-agent \
-   --workdir /root/workspace \
-   artifact.swf.daimler.com/adasdai-docker/minerva_mpu_docker/minerva_mpu:<commitID>
-```
-
-where: `<REPOSITORY>` is your local path to the cloned repo, e.g.
-`/lhome/$USER/workspace/minerva/minerva_mpu_adaptive/`, and `<commitID>` is container's version (it is supposed
-to be the same version you've pulled during the setup from earlier).
+The actual build instructions are the same, regardless if you use the `build_env` to build or not.
 
 ## The actual build steps
 
@@ -253,6 +149,43 @@ docker exec -it <container id> /bin/bash
 ```
 
 ## Miscellaneous
+
+### Git hooks
+
+#### Pre-commit
+
+This repository runs git hooks using [pre-commit](https://pre-commit.com/). The following command can be used to install
+pre-commit.
+
+```
+pip3 install pre-commit==2.10.1
+```
+
+To enable pre-commit after cloning the repository, the following command can be used.
+
+```
+cd minerva_mpu_adaptive
+pre-commit install
+```
+
+Once enabled, pre-commit will run before every local commit in order to suggest fixes for the checks defined in
+[.pre-commit-config.yaml](./pre-commit-config.yaml)
+
+
+### Proxy handling in Docker
+
+In order to allow Internet access from inside our docker containers, we need to pass to them proper
+environment variables. For now, we should take care on the following settings:
+
+- proxy settings in `~/.docker/config.json`: needed to set up access from ubuntu_18.04 image
+  when it is started on host
+- proxy settings which are passed with `docker run` command: needed to set up access from
+  minerva_mpu_docker
+- proxy settings in `BUILD` file: needed to set up access from ubuntu_18.04 image when it is started
+  from inside minerva_mpu_docker container
+
+In case of proxy settings change, please change corresponding parameters according to your build and
+launch strategy.
 
 ### Build different targets for aarch64 target
 
@@ -388,37 +321,6 @@ git status
 ```
 
 If there are no files formatted, the output of above command will be empty. Else, it will show the list of files formatted.
-
-### Proxy handling in Docker
-
-In order to allow Internet access from inside our docker containers, we need to pass to them proper
-environment variables. For now, we should take care on the following settings:
-
-- proxy settings in `~/.docker/config.json`: needed to set up access from ubuntu_18.04 image
-  when it is started on host
-- proxy settings which are passed with `docker run` command: needed to set up access from
-  minerva_mpu_docker
-- proxy settings in `BUILD` file: needed to set up access from ubuntu_18.04 image when it is started
-  from inside minerva_mpu_docker container
-
-In case of proxy settings change, please change corresponding parameters according to your build and
-launch strategy.
-
-### ssh-keys handling in Docker
-During the bazel build, components need to be cloned that will require to have valid ssh keys to access swf git.
-If you are using docker build environment, the docker command uses the ssh-agent to utilize your keys from the host.
-The docker build environment mounts the ssh-agent socket in the build environment using the following command-line
-arguments:
-```
--v $SSH_AUTH_SOCK:/ssh-agent \
-```
-
-Use the following commands to add your keys to the ssh-agent and execute it:
-
-```
-eval `ssh-agent -s`
-ssh-add
-```
 
 ### Connection timeout issue while submodule init of gnulibs in collectd repo with VPN on
 
