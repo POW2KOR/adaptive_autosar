@@ -13,4 +13,4 @@ repos:
     rev: 07a539b8db43298f124ace23c90b4b871911b8c4
     hooks:
       - id: bazel-buildifier
-        args: ["-r", "--mode=check"]
+        args: ["--mode=check"]
