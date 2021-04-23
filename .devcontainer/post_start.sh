@@ -8,7 +8,9 @@ sed -i "s|$1|$HOME|g" $HOME/.gitconfig
 mkdir -p $HOME/.ssh
 sudo cp -r /host/.ssh/gsep $HOME/.ssh
 
-printf "Setting up bash history and bazel cache persistency permissions\n"
+printf "Setting up x509 certificates, bash history and bazel cache persistency permissions\n"
+
+sudo chown -R $UID:$UID $HOME/.ssh
 
 # We do a chown because VS Code will change the UID and GID to match the current user
 sudo chown -R $UID:$UID /command_history
