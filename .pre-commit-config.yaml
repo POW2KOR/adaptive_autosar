@@ -3,6 +3,9 @@ repos:
     rev: v2.3.0
     hooks:
       - id: check-json
+        # ignoring devcontainer.json because the pre-commit JSON check is
+        # strict and doesn't support comments
+        exclude: .devcontainer/devcontainer.json
       - id: end-of-file-fixer
         exclude: .specs|.bzl|.patch
       - id: trailing-whitespace
@@ -13,3 +16,8 @@ repos:
     rev: 20.8b1
     hooks:
       - id: black
+  - repo: https://github.com/jlebar/pre-commit-hooks
+    rev: 07a539b8db43298f124ace23c90b4b871911b8c4
+    hooks:
+      - id: bazel-buildifier
+        args: ["--mode=check"]

@@ -1,0 +1,35 @@
+// Please keep this file in sync with devops/scripts/enter_build_env_docker.sh
+{
+  "name": "minerva_mpu_build_env",
+  "runArgs": [
+    "--privileged",
+    "--network=host"
+  ],
+  "dockerFile": "Dockerfile",
+  "containerUser": "dev",
+  "containerEnv": {
+    "HTTP_PROXY": "${localEnv:HTTP_PROXY}",
+    "HTTPS_PROXY": "${localEnv:HTTPS_PROXY}",
+    "NO_PROXY": "${localEnv:NO_PROXY}",
+    "http_proxy": "${localEnv:http_proxy}",
+    "https_proxy": "${localEnv:https_proxy}",
+    "no_proxy": "${localEnv:no_proxy}"
+  },
+  "mounts": [
+    "type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock",
+    "type=bind,source=/dev/bus/usb,target=/dev/bus/usb",
+    "type=bind,source=${localEnv:HOME}/.gitconfig,target=/host/.gitconfig",
+    "type=bind,source=${localEnv:HOME}/.ssh/gsep,target=/host/.ssh/gsep",
+    "type=bind,source=${localWorkspaceFolder}/.devcontainer/.bazelrc,target=/etc/bazel.bazelrc",
+    "type=volume,source=minerva_mpu_build_env_command_history,target=/command_history",
+    "type=volume,source=minerva_mpu_build_env_bazel_cache,target=/bazel_cache"
+  ],
+  "postStartCommand":
+	"/bin/bash ${containerWorkspaceFolder}/.devcontainer/post_start.sh ${localEnv:HOME}",
+	"extensions": [
+		"bazelbuild.vscode-bazel",
+		"ms-vscode.cpptools",
+		"eamodio.gitlens",
+		"davidanson.vscode-markdownlint"
+	]
+}
