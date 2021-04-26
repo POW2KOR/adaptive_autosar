@@ -112,19 +112,13 @@ development machine. There are few dependencies that should be resolved before g
 
 #### Running Docker
 
-Before running the minerva_mpu_adaptive_docker make sure all the Bridge networks
-are removed or deleted. Use below command:
-
-```
-./tools/remove_bridge_networks.sh
-```
-
-Then, try creating the `mnv0` docker network with requiered subnet for
-application to run using below command:
+Before running, you will need to create a docker network configured for the subnet in the NCD. This should be a one-time
+setup. Run the command below:
 
 ```
 docker network create --subnet 10.21.17.0/24 mnv0
 ```
+
 Then, run the application with below command:
 
 ```
@@ -163,6 +157,16 @@ container.
 ```
 docker exec -it <container id> /bin/bash
 ```
+
+### Connecting to remote DLT
+
+All of the applications apart from the `log-daemon` are configured to output remote DLT over TCP at IP address
+`10.21.17.98` and port `49361`.
+
+Sometimes, you may not be able to connect to this address. This can happen because you have multiple interfaces on your
+system which have the same 10.21.17.0/24 subnet associated to them and your DLT viewer might be confused about which one
+of these to use. To check this, run `ip add | grep 10.21.17.` and see if you get more than one match. If this is true,
+you can use the `./tools/remove_bridge_networks.sh` script to clean up your bridge interfaces.
 
 ## Miscellaneous
 
