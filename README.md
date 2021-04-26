@@ -288,7 +288,9 @@ After this run the below command to run execution manager:
 sudo ./sbin/amsr_vector_fs_em_executionmanager -a ./opt -m ./etc/machine_exec_config.json
 ```
 
-### Circular dependency workaround
+### Known issues and fixes
+
+#### Circular dependency workaround
 
 Currently, there is a circular linking dependency between `amsr_vector_fs_socal` and the generated source code for
 `ara::com`. Bazel does not support circular linking dependencies. Currently, the only way to get rid of this circular
@@ -308,6 +310,21 @@ bazel build //bsw:amsr_vector_fs_socal_for_software_update --config=<CONFIGURATI
 
 After that, you can initiate your actual building, because the circular dependency is worked around with the
 `//bsw:amsr_vector_fs_socal_headers` target and both `\\:socal_lib_for_proxy` and `\\:socal_lib_for_socal` file groups.
+
+#### Workaround for the "no such package" issue
+
+If a build without docker has beed initiated, and Bazel-generated directories present in the working directory, then
+the following error might happen when Docker build container is used:
+
+```
+ERROR: Skipping '//:os': no such package 'bazel-out/aarch64-fastbuild/bin/bsw/amsr_vector_fs_socal_for_skeleton/lib':
+Unable to determine the local repository for directory
+/workspaces/minerva_mpu_adaptive/bazel-out/aarch64-fastbuild/bin/bsw/amsr_vector_fs_socal_for_skeleton/lib
+WARNING: Target pattern parsing failed.
+```
+
+In such a case, it is needed to remove Bazel-generated directories (`bazel-bin`, `bazel-minerva_mpu_adaptive`,
+`bazel-out`, `bazel-testlogs`) from host.
 
 ### Useful information
 
