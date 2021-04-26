@@ -7,7 +7,8 @@ This is the MPU Adaptive AUTOSAR repository for the Minerva project.
 This guide describes three ways how to build and run. The first method is preferred, but all are supported.
 
 * build with devcontainers, described [below](#build-with-build_env-devcontainer)
-* [setup to build with plain docker](docs/setup_without_devcontainers.md#setup-to-build-with-plain-docker) instead of devcontainers
+* [setup to build with plain docker](docs/setup_without_devcontainers.md#setup-to-build-with-plain-docker) instead of
+devcontainers
 * [setup to build without any docker](docs/setup_without_devcontainers.md#setup-to-build-without-docker) at all
 
 ### The use of docker in this repository
@@ -88,9 +89,9 @@ bazel build //:minerva_mpu_adaptive_filesystem --config=<CONFIGURATION>
 ```
 
 where `<CONFIGURATION>` is the target toolchain configuration, e.g. (`x86_64_linux`, `aarch64_linux_ubuntu` or
-`aarch64_linux_linaro`, `x86_64_qnx`, `aarch64_qnx`). For now, you cannot skip `--config=x86_64_linux` even if you are building on
-an `x86_64` host for an `x86_64` target. Skipping would lead to linking issue. This will be fixed in the future by
-adding custom toolchain files for `x86_64_linux`.
+`aarch64_linux_linaro`, `x86_64_qnx`, `aarch64_qnx`). For now, you cannot skip `--config=x86_64_linux` even if you are
+building on an `x86_64` host for an `x86_64` target. Skipping would lead to linking issue. This will be fixed in the
+future by adding custom toolchain files for `x86_64_linux`.
 
 **NOTE** The first three commands are needed to handle the circular dependency issue. For more information
 please refer to [this](#circular-dependency-workaround) section.
@@ -335,7 +336,8 @@ and check for changed files with
 git status
 ```
 
-If there are no files formatted, the output of above command will be empty. Else, it will show the list of files formatted.
+If there are no files formatted, the output of above command will be empty. Else, it will show the list of files
+formatted.
 
 ### Connection timeout issue while submodule init of gnulibs in collectd repo with VPN on
 
