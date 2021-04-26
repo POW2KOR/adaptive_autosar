@@ -111,6 +111,21 @@ development machine. There are few dependencies that should be resolved before g
 
 #### Running Docker
 
+Before running the minerva_mpu_adaptive_docker make sure all the Bridge networks
+are removed or deleted. Use below command:
+
+```
+./tools/remove_bridge_networks.sh
+```
+
+Then, try creating the `mnv0` docker network with requiered subnet for
+application to run using below command:
+
+```
+docker network create --subnet 10.21.17.0/24 mnv0
+```
+Then, run the application with below command:
+
 ```
 bazel run //:minerva_mpu_adaptive_docker --config=<CONFIGURATION>
 ```
