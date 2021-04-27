@@ -9,9 +9,9 @@ max_time = 60
 assign_node_labels()
 
 
-lib_jenkins_steps = swf_load_script('cicd/jenkins/jenkins_steps.groovy')
-lib_code_gatekeeper = swf_load_script('ci-depot/jenkins/gatekeeper.groovy')
-lib_depot_utilities = swf_load_script('ci-depot/jenkins/utilities.groovy')
+lib_jenkins_steps = swf_load_script('devops/cicd/jenkins/jenkins_steps.groovy')
+lib_code_gatekeeper = swf_load_script('devops/ci-depot/jenkins/gatekeeper.groovy')
+lib_depot_utilities = swf_load_script('devops/ci-depot/jenkins/utilities.groovy')
 
 lib_depot_utilities.main_wrapper(
   core_logic: {

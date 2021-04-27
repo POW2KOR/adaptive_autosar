@@ -7,7 +7,8 @@ This is the MPU Adaptive AUTOSAR repository for the Minerva project.
 This guide describes three ways how to build and run. The first method is preferred, but all are supported.
 
 * build with devcontainers, described [below](#build-with-build_env-devcontainer)
-* [setup to build with plain docker](docs/setup_without_devcontainers.md#setup-to-build-with-plain-docker) instead of devcontainers
+* [setup to build with plain docker](docs/setup_without_devcontainers.md#setup-to-build-with-plain-docker) instead of
+devcontainers
 * [setup to build without any docker](docs/setup_without_devcontainers.md#setup-to-build-without-docker) at all
 
 ### The use of docker in this repository
@@ -88,9 +89,9 @@ bazel build //:minerva_mpu_adaptive_filesystem --config=<CONFIGURATION>
 ```
 
 where `<CONFIGURATION>` is the target toolchain configuration, e.g. (`x86_64_linux`, `aarch64_linux_ubuntu` or
-`aarch64_linux_linaro`, `x86_64_qnx`, `aarch64_qnx`). For now, you cannot skip `--config=x86_64_linux` even if you are building on
-an `x86_64` host for an `x86_64` target. Skipping would lead to linking issue. This will be fixed in the future by
-adding custom toolchain files for `x86_64_linux`.
+`aarch64_linux_linaro`, `x86_64_qnx`, `aarch64_qnx`). For now, you cannot skip `--config=x86_64_linux` even if you are
+building on an `x86_64` host for an `x86_64` target. Skipping would lead to linking issue. This will be fixed in the
+future by adding custom toolchain files for `x86_64_linux`.
 
 **NOTE** The first three commands are needed to handle the circular dependency issue. For more information
 please refer to [this](#circular-dependency-workaround) section.
@@ -110,6 +111,15 @@ The following command will allow you to run the Minerva MPU Adaptive stack insid
 development machine. There are few dependencies that should be resolved before going ahead with the build.
 
 #### Running Docker
+
+Before running, you will need to create a docker network configured for the subnet in the NCD. This should be a one-time
+setup. Run the command below:
+
+```
+docker network create --subnet 10.21.17.0/24 mnv0
+```
+
+Then, run the application with below command:
 
 ```
 bazel run //:minerva_mpu_adaptive_docker --config=<CONFIGURATION>
@@ -147,6 +157,16 @@ container.
 ```
 docker exec -it <container id> /bin/bash
 ```
+
+### Connecting to remote DLT
+
+All of the applications apart from the `log-daemon` are configured to output remote DLT over TCP at IP address
+`10.21.17.98` and port `49361`.
+
+Sometimes, you may not be able to connect to this address. This can happen because you have multiple interfaces on your
+system which have the same 10.21.17.0/24 subnet associated to them and your DLT viewer might be confused about which one
+of these to use. To check this, run `ip add | grep 10.21.17.` and see if you get more than one match. If this is true,
+you can use the `./tools/remove_bridge_networks.sh` script to clean up your bridge interfaces.
 
 ## Miscellaneous
 
@@ -320,7 +340,8 @@ and check for changed files with
 git status
 ```
 
-If there are no files formatted, the output of above command will be empty. Else, it will show the list of files formatted.
+If there are no files formatted, the output of above command will be empty. Else, it will show the list of files
+formatted.
 
 ### Connection timeout issue while submodule init of gnulibs in collectd repo with VPN on
 
