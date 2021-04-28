@@ -1,6 +1,7 @@
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v2.3.0
+    # v3.4.0
+    rev: 6e2418c5521b7d606e72914dced3253f9ace1205
     hooks:
       - id: check-json
         # ignoring devcontainer.json because the pre-commit JSON check is
@@ -13,7 +14,8 @@ repos:
       - id: mixed-line-ending
         exclude: .specs|.bzl|.patch
   - repo: https://github.com/psf/black
-    rev: 67d5532c3392280de0ce717a1ab728eca2beb698
+    # 21.4b1
+    rev: 1728bb441e6cc3ba5a5ce52ec62014bbfa435a82
     hooks:
       - id: black
   - repo: https://github.com/jlebar/pre-commit-hooks
