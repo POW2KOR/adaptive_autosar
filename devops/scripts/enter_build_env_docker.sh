@@ -2,7 +2,10 @@
 
 # Please keep this file in sync with .devcontainer/devcontainer.json
 
-repo_root=`realpath $(dirname ${BASH_SOURCE[0]})/../..`
+current_path=`dirname $(cd -P -- "$(dirname -- "$0")" && printf '%s\n' "$(pwd -P)/$(basename -- "$0")")`
+repo_root=$current_path/../..
+
+echo "Repo root is $repo_root"
 
 cd $repo_root/.devcontainer
 
