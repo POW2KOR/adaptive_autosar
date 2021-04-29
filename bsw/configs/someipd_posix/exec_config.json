@@ -1,31 +1,31 @@
 {
-    "category" : "PLATFORM_LEVEL",
-    "name" : "someipd_posix",
-    "isAdaptiveApplication" : 1,
-    "processes" : [
-      {
-        "name" : "someipd",
-        "startupConfigs" : [
-          {
-            "schedulingPolicy" : "SCHEDULING-POLICY-FIFO",
-            "schedulingPriority" : 80,
-            "options" : [
-              "-c" ,
-              "./etc/someipd-posix.json"
-            ],
-            "executionDependency" : {
-            },
-            "functionGroups": [
-              {
-                "name": "MachineState",
-                "states": [
-                  "Startup",
-                  "Running"
-                ]
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  }
+  "category" : "PLATFORM_LEVEL",
+  "name" : "someipd_posix",
+  "isAdaptiveApplication" : 1,
+  "processes" : [
+    {
+      "name" : "someipd",
+      "startupConfigs" : [
+        {
+          "schedulingPolicy" : "SCHEDULING-POLICY-FIFO",
+          "schedulingPriority" : 80,
+          "options" : [
+            "-c" ,
+            "./etc/someipd-posix.json"
+          ],
+          "executionDependency" : {
+          },
+          "functionGroups": [
+            {
+              "name": "MachineState",
+              "states": [
+                "Startup",
+                "Running"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
