@@ -180,7 +180,7 @@ def minerva_aa_codegen_rule(
         mkdir -p $$tmp_folder
         mkdir -p $$output_folder
         mkdir -p $$arxml_srcs_folder
-        cp {arxml_srcs} $$arxml_srcs_folder
+        cp --parents {arxml_srcs} $$arxml_srcs_folder
 
         # Propagate the failure past the pipe
         set -o pipefail
