@@ -43,49 +43,49 @@ filegroup(
 )
 
 filegroup(
-    name = "proxy_com_application_config",
+    name = "starter_kit_test_base_application_proxy_com_application_config",
     srcs = [
         "configs/TestBaseApplicationExecutable/com_application.json",
     ],
 )
 
 filegroup(
-    name = "proxy_logging_config",
+    name = "starter_kit_test_base_application_proxy_logging_config",
     srcs = [
         "configs/TestBaseApplicationExecutable/logging_config.json",
     ],
 )
 
 filegroup(
-    name = "skeleton_com_application_config",
+    name = "starter_kit_base_application_skeleton_com_application_config",
     srcs = [
         "configs/BaseApplicationExecutable/com_application.json",
     ],
 )
 
 filegroup(
-    name = "skeleton_logging_config",
+    name = "starter_kit_base_application_skeleton_logging_config",
     srcs = [
         "configs/BaseApplicationExecutable/logging_config.json",
     ],
 )
 
 filegroup(
-    name = "restart_app_logging_config",
+    name = "starter_kit_restart_app_logging_config",
     srcs = [
         "configs/restart_app_demo_idc6/logging_config.json",
     ],
 )
 
 filegroup(
-    name = "shutdown_app_logging_config",
+    name = "starter_kit_shutdown_app_logging_config",
     srcs = [
         "configs/shutdown_app_demo_idc6/logging_config.json",
     ],
 )
 
 filegroup(
-    name = "update_app_v1_logging_config",
+    name = "starter_kit_update_app_v1_logging_config",
     srcs = [
         "configs/update_app_v1_demo_idc6/logging_config.json",
     ],
