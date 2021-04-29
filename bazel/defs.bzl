@@ -187,7 +187,7 @@ def minerva_aa_codegen_rule(
 
         # Don't stop immediately on error, so we can handle it gracefully
         set +e
-        $(location @starter_kit_adaptive_xavier//:amsrgen_sh) -v {generators_arg} -x $$arxml_srcs_folder -o $$output_folder --saveProject 1>$$generator_log 2>&1 
+        $(location @starter_kit_adaptive_xavier//:amsrgen_sh) -v {generators_arg} -x $$arxml_srcs_folder -o $$output_folder --saveProject 1>$$generator_log 2>&1
 
         # Process error messages from code generator
         if [ $$? -ne 0 ]; then
