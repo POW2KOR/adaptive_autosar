@@ -1,7 +1,7 @@
 {
-  "name" : "amsr_vector_fs_em_executionmanager",
+  "name" : "VExc",
   "description" : "The Adaptive AUTOSAR Execution Manager",
-  "dlt_id": "EXMA",
+  "dlt_id": "VExc",
   "log_mode" : ["kConsole", "kRemote"],
   "log_level" : "kInfo",
   "log_dir_path": "./log",
