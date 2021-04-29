@@ -95,7 +95,9 @@ pkg_tar(
         "//bsw:restart_app_demo_idc6": "opt/restart_app_demo_idc6/bin/restart_app_demo_idc6",
         "//bsw:shutdown_app_demo_idc6": "opt/shutdown_app_demo_idc6/bin/shutdown_app_demo_idc6",
         "//bsw:update_app_demo_idc6": "opt/update_app_demo_idc6/bin/update_app_demo_idc6",
-        "//application/sw_update_client_minerva_adapter:sw_update_client_minerva_adapter_app": "opt/sw_update_client_minerva_adapter_app/bin/sw_update_client_minerva_adapter_app",
+        # For now we are commenting out the references for sw_update_client application
+        # as we are not able to build the application with latest delivery
+        #"//application/sw_update_client_minerva_adapter:sw_update_client_minerva_adapter_app": "opt/sw_update_client_minerva_adapter_app/bin/sw_update_client_minerva_adapter_app",
     },
     mode = "0755",
     package_dir = "/",
@@ -239,7 +241,9 @@ pkg_tar(
         ":adaptive_autosar_proxy_configs",
         ":adaptive_autosar_skeleton_configs",
         ":adaptive_autosar_someipdaemon_configs",
-        ":adaptive_sw_update_client_minerva_adapter_configs",
+        # For now we are commenting out the references for sw_update_client application
+        # as we are not able to build the application with latest delivery
+        #":adaptive_sw_update_client_minerva_adapter_configs",
         ":restart_app_demo_configs",
         ":shutdown_app_demo_configs",
         ":update_app_v1_demo_configs",
