@@ -264,7 +264,6 @@ filegroup(
 
 minerva_aa_codegen_declare(
     name = "generator",
-    path_to_generators = "mb_base_layer_adaptive_xavier/amsr_xavier/Generators",
     generators = [
         "amsr_em_machine_config",
         "amsr_em_exec_config",
@@ -276,7 +275,8 @@ minerva_aa_codegen_declare(
         "amsr_someipprotocol",
         "amsr_socal",
         "amsr_persistency_config",
-    ]
+    ],
+    path_to_generators = "mb_base_layer_adaptive_xavier/amsr_xavier/Generators",
 )
 
 filegroup(
