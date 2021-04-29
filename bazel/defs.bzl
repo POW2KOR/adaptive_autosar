@@ -347,7 +347,7 @@ def minerva_aa_bsw_module(
             definitions to use for this module. The macro overrides some of
             these cache entry definitions by itself.
 
-        binaries: Optional names of the resulting binaries.
+        out_binaries: Optional names of the resulting binaries.
 
         out_static_libs: Optional names of the resulting static libraries.
 
