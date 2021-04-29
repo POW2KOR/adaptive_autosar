@@ -3154,6 +3154,7 @@ minerva_aa_bsw_module(
         ":amsr_vector_fs_libiostream",
         ":amsr_vector_fs_libosabstraction",
         ":amsr_vector_fs_libvac",
+        ":amsr_vector_fs_msr4base",
         ":amsr_vector_fs_vajson",
     ],
 )
