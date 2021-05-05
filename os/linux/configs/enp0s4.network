@@ -1,0 +1,6 @@
+[Match]
+Name=enp0s4
+
+[Network]
+Address=10.127.17.98/24
+Gateway=10.127.17.1
