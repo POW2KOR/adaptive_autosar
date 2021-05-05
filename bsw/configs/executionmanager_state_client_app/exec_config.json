@@ -27,10 +27,6 @@
             }
           ],
           "cores": {
-            "shallNotRunOn": [
-              2,
-              3
-            ]
           },
           "enterTimeoutNanoSeconds" : 20000000000000000,
           "exitTimeoutNanoSeconds" : 30000000000000000

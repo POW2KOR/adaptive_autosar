@@ -1,7 +1,7 @@
 {
-    "name": "SOME/IP communication daemon",
+    "name": "VSom",
     "description": "SOME/IP communication daemon",
-    "dlt_id": "SOIP",
+    "dlt_id": "VSom",
     "log_mode": ["kConsole", "kRemote"],
     "log_level": "kInfo",
     "log_dir_path": "tmp",

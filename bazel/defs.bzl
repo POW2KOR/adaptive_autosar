@@ -187,7 +187,7 @@ def minerva_aa_codegen_rule(
 
         # Don't stop immediately on error, so we can handle it gracefully
         set +e
-        $(location @starter_kit_adaptive_xavier//:amsrgen_sh) -v {generators_arg} -x $$arxml_srcs_folder -o $$output_folder --saveProject 1>$$generator_log 2>&1 
+        $(location @starter_kit_adaptive_xavier//:amsrgen_sh) -v {generators_arg} -x $$arxml_srcs_folder -o $$output_folder --saveProject 1>$$generator_log 2>&1
 
         # Process error messages from code generator
         if [ $$? -ne 0 ]; then
@@ -400,6 +400,8 @@ def minerva_aa_bsw_module(
         elif dep == ":amsr_vector_fs_libiostream":
             cache_entries["amsr-vector-fs-libiostream_libstream_vector_stl_DIR:PATH"] = \
                 "$EXT_BUILD_DEPS/amsr_vector_fs_libiostream/lib/cmake/amsr-vector-fs-libiostream_libstream_vector_stl/"
+            cache_entries["amsr-vector-fs-libiostream_libstream_DIR:PATH"] = \
+                "$EXT_BUILD_DEPS/amsr_vector_fs_libiostream/lib/cmake/amsr-vector-fs-libiostream_libstream/"
             cache_entries["amsr-vector-fs-libiostream_libcharconv_vector_stl_DIR:PATH"] = \
                 "$EXT_BUILD_DEPS/amsr_vector_fs_libiostream/lib/cmake/amsr-vector-fs-libiostream_libcharconv_vector_stl/"
             cache_entries["amsr-vector-fs-libiostream_libcharconv_common_DIR:PATH"] = \
@@ -482,12 +484,22 @@ def minerva_aa_bsw_module(
         elif dep == ":amsr_vector_fs_crc":
             cache_entries["amsr-vector-fs-crc_libinternal_DIR:PATH"] = \
                 "$EXT_BUILD_DEPS/amsr_vector_fs_crc/lib/cmake/amsr-vector-fs-crc_libinternal/"
+            cache_entries["amsr-vector-fs-crc_libcrc_DIR:PATH"] = \
+                "$EXT_BUILD_DEPS/amsr_vector_fs_crc/lib/cmake/amsr-vector-fs-crc_libcrc/"
 
         elif dep == ":amsr_vector_fs_e2e":
             cache_entries["amsr-vector-fs-e2e_libe2e_DIR:PATH"] = \
                 "$EXT_BUILD_DEPS/amsr_vector_fs_e2e/lib/cmake/amsr-vector-fs-e2e_libe2e/"
             cache_entries["amsr-vector-fs-e2e_libinternal_DIR:PATH"] = \
                 "$EXT_BUILD_DEPS/amsr_vector_fs_e2e/lib/cmake/amsr-vector-fs-e2e_libinternal/"
+
+        elif dep == ":amsr_vector_fs_logutility":
+            cache_entries["log-utility_DIR:PATH"] = \
+                "$EXT_BUILD_DEPS/amsr_vector_fs_logutility/lib/cmake/log-utility/"
+
+        elif dep == ":amsr_vector_fs_iointegritystream":
+            cache_entries["iointegritystream_DIR:PATH"] = \
+                "$EXT_BUILD_DEPS/amsr_vector_fs_iointegritystream/lib/cmake/iointegritystream/"
 
     cmake(
         name = name,

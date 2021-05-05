@@ -2,7 +2,6 @@
 {
   "name": "minerva_mpu_build_env",
   "runArgs": [
-    "--privileged",
     "--network=host"
   ],
   "dockerFile": "Dockerfile",

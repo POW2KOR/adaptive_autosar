@@ -1,0 +1,11 @@
+{
+    "name": "RestartAppDemoIdc6",
+    "description": "IDC6 Restart App example application",
+    "dlt_id": "REST",
+    "log_mode": ["kConsole"],
+    "log_level": "kInfo",
+    "log_dir_path": "",
+    "ipc_port": 33,
+    "reconnection_retry_offset": 0,
+    "msg_buf_size": 1000
+}

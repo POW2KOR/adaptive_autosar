@@ -1,7 +1,7 @@
 {
-    "name": "amsr_vector_fs_log_daemon",
+    "name": "VLog",
     "description" : "The Adaptive AUTOSAR Log Daemon",
-    "dlt_id": "LOGD",
+    "dlt_id": "VLog",
     "log_mode": ["kConsole"],
     "log_level": "kInfo",
     "log_dir_path": "tmp",

@@ -1,0 +1,24 @@
+[Unit]
+Description=Run the adaptive stack
+BindsTo=dev-ttyAMA0.device
+After=dev-ttyAMA0.device systemd-user-sessions.service
+After=network-online.target
+Wants=network-online.target
+Conflicts=serial-getty@ttyAMA0.service
+
+[Service]
+Type=idle
+RemainAfterExit=yes
+ExecStart=/sbin/amsr_vector_fs_em_executionmanager -a /opt -m /etc/machine_exec_config.json
+StandardInput=tty
+StandardOutput=tty
+StandardError=tty
+TTYPath=/dev/ttyAMA0
+UtmpIdentifier=ttyAMA0
+TTYReset=yes
+TTYVHangup=yes
+IgnoreSIGPIPE=no
+SendSIGHUP=yes
+
+[Install]
+WantedBy=getty.target

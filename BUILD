@@ -90,9 +90,14 @@ pkg_tar(
         ":adaptive_autosar_log_daemon_binary": "opt/amsr_vector_fs_log_daemon/bin/amsr_vector_fs_log_daemon",
         ":adaptive_autosar_executionmanager_binary": "sbin/amsr_vector_fs_em_executionmanager",
         "//bsw:executionmanager_state_client_binary": "opt/executionmanager_state_client_app/bin/executionmanager_state_client_app",
-        "//bsw:skeleton_demo_idc6": "opt/IDC_M_P_SoftwareClusterDesign_Base_SwComponentType_Executable/bin/IDC_M_P_SoftwareClusterDesign_Base_SwComponentType_Executable",
-        "//bsw:proxy_demo_idc6": "opt/IDC_M_P_SoftwareClusterDesign_Base_TEST_SwComponentType_Executable/bin/IDC_M_P_SoftwareClusterDesign_Base_TEST_SwComponentType_Executable",
-        "//application/sw_update_client_minerva_adapter:sw_update_client_minerva_adapter_app": "opt/sw_update_client_minerva_adapter_app/bin/sw_update_client_minerva_adapter_app",
+        "//bsw:skeleton_demo_idc6": "opt/BaseApplicationExecutable/bin/BaseApplicationExecutable",
+        "//bsw:proxy_demo_idc6": "opt/TestBaseApplicationExecutable/bin/TestBaseApplicationExecutable",
+        "//bsw:restart_app_demo_idc6": "opt/restart_app_demo_idc6/bin/restart_app_demo_idc6",
+        "//bsw:shutdown_app_demo_idc6": "opt/shutdown_app_demo_idc6/bin/shutdown_app_demo_idc6",
+        "//bsw:update_app_demo_idc6": "opt/update_app_demo_idc6/bin/update_app_demo_idc6",
+        # For now we are commenting out the references for sw_update_client application
+        # as we are not able to build the application with latest delivery
+        #"//application/sw_update_client_minerva_adapter:sw_update_client_minerva_adapter_app": "opt/sw_update_client_minerva_adapter_app/bin/sw_update_client_minerva_adapter_app",
     },
     mode = "0755",
     package_dir = "/",
@@ -135,25 +140,71 @@ pkg_tar(
 pkg_tar(
     name = "adaptive_autosar_proxy_configs",
     srcs = {
-        "//bsw:proxy_com_application_config": "com_application.json",
-        "//bsw:starter_kit_proxy_exec_config": "exec_config.json",
-        "//bsw:proxy_logging_config": "logging_config.json",
-        "//bsw:starter_kit_proxy_someip_config": "someip_config.json",
+        "//bsw:starter_kit_test_base_application_proxy_com_application_config": "com_application.json",
+        "//bsw:starter_kit_test_base_application_proxy_exec_config": "exec_config.json",
+        "//bsw:starter_kit_test_base_application_proxy_updatemanager_swcluster_meta": "swcl_package_metadata.json",
+        "//bsw:starter_kit_test_base_application_proxy_updatemanager_daemon": "updatemanager.json",
+        "//bsw:starter_kit_test_base_application_proxy_updatemanager_swcl_db_daemon": "swcl_db.json",
+        "//bsw:starter_kit_test_base_application_proxy_logging_config": "logging_config.json",
+        "//bsw:starter_kit_test_base_application_proxy_someip_config": "someip_config.json",
     },
     mode = "0755",
-    package_dir = "/opt/IDC_M_P_SoftwareClusterDesign_Base_TEST_SwComponentType_Executable/etc/",
+    package_dir = "/opt/TestBaseApplicationExecutable/etc/",
 )
 
 pkg_tar(
     name = "adaptive_autosar_skeleton_configs",
     srcs = {
-        "//bsw:skeleton_com_application_config": "com_application.json",
-        "//bsw:starter_kit_skeleton_exec_config": "exec_config.json",
-        "//bsw:skeleton_logging_config": "logging_config.json",
-        "//bsw:starter_kit_skeleton_someip_config": "someip_config.json",
+        "//bsw:starter_kit_base_application_skeleton_com_application_config": "com_application.json",
+        "//bsw:starter_kit_base_application_skeleton_exec_config": "exec_config.json",
+        "//bsw:starter_kit_base_application_skeleton_updatemanager_swcluster_meta": "swcl_package_metadata.json",
+        "//bsw:starter_kit_base_application_skeleton_updatemanager_daemon": "updatemanager.json",
+        "//bsw:starter_kit_base_application_skeleton_updatemanager_swcl_db_daemon": "swcl_db.json",
+        "//bsw:starter_kit_base_application_skeleton_logging_config": "logging_config.json",
+        "//bsw:starter_kit_base_application_skeleton_someip_config": "someip_config.json",
+        "//bsw:starter_kit_base_application_skeleton_persistency_config_json": "per_key_value_storage_config.json",
     },
     mode = "0755",
-    package_dir = "/opt/IDC_M_P_SoftwareClusterDesign_Base_SwComponentType_Executable/etc/",
+    package_dir = "/opt/BaseApplicationExecutable/etc/",
+)
+
+pkg_tar(
+    name = "restart_app_demo_configs",
+    srcs = {
+        "//bsw:starter_kit_restart_app_idc6_exec_config": "exec_config.json",
+        "//bsw:starter_kit_restart_app_idc6_updatemanager_swcluster_meta": "swcl_package_metadata.json",
+        "//bsw:starter_kit_restart_app_idc6_updatemanager_daemon": "updatemanager.json",
+        "//bsw:starter_kit_restart_app_idc6_updatemanager_swcl_db_daemon": "swcl_db.json",
+        "//bsw:starter_kit_restart_app_logging_config": "logging_config.json",
+    },
+    mode = "0755",
+    package_dir = "/opt/restart_app_demo_idc6/etc/",
+)
+
+pkg_tar(
+    name = "shutdown_app_demo_configs",
+    srcs = {
+        "//bsw:starter_kit_shutdown_app_idc6_exec_config": "exec_config.json",
+        "//bsw:starter_kit_shutdown_app_idc6_updatemanager_swcluster_meta": "swcl_package_metadata.json",
+        "//bsw:starter_kit_shutdown_app_idc6_updatemanager_daemon": "updatemanager.json",
+        "//bsw:starter_kit_shutdown_app_idc6_updatemanager_swcl_db_daemon": "swcl_db.json",
+        "//bsw:starter_kit_shutdown_app_logging_config": "logging_config.json",
+    },
+    mode = "0755",
+    package_dir = "/opt/shutdown_app_demo_idc6/etc/",
+)
+
+pkg_tar(
+    name = "update_app_v1_demo_configs",
+    srcs = {
+        "//bsw:starter_kit_update_app_idc6_exec_config": "exec_config.json",
+        "//bsw:starter_kit_update_app_idc6_updatemanager_swcluster_meta": "swcl_package_metadata.json",
+        "//bsw:starter_kit_update_app_idc6_updatemanager_daemon": "updatemanager.json",
+        "//bsw:starter_kit_update_app_idc6_updatemanager_swcl_db_daemon": "swcl_db.json",
+        "//bsw:starter_kit_update_app_v1_logging_config": "logging_config.json",
+    },
+    mode = "0755",
+    package_dir = "/opt/update_app_demo_idc6/etc/",
 )
 
 pkg_tar(
@@ -191,7 +242,12 @@ pkg_tar(
         ":adaptive_autosar_proxy_configs",
         ":adaptive_autosar_skeleton_configs",
         ":adaptive_autosar_someipdaemon_configs",
-        ":adaptive_sw_update_client_minerva_adapter_configs",
+        # For now we are commenting out the references for sw_update_client application
+        # as we are not able to build the application with latest delivery
+        #":adaptive_sw_update_client_minerva_adapter_configs",
+        ":restart_app_demo_configs",
+        ":shutdown_app_demo_configs",
+        ":update_app_v1_demo_configs",
     ],
 )
 

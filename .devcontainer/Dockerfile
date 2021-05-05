@@ -4,8 +4,18 @@ FROM artifact.swf.daimler.com/adasdai-docker/minerva_mpu_docker/minerva_mpu:bdcc
 ARG USERNAME=dev
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
+ARG DEBIAN_FRONTEND=noninteractive
 
 ENV SHELL /bin/bash
+
+# These should be moved to minerva_mpu_docker once proposal is discussed with
+# workstream
+RUN apt update \
+    && apt install -y \
+    # Needed for kernel building
+    flex bison libssl-dev \
+    # Needed for QEMU execution
+    qemu-system-arm libguestfs-tools qemu-efi
 
 # Create the user
 RUN groupadd --gid $USER_GID $USERNAME \
