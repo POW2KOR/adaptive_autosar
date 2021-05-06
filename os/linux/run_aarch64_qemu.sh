@@ -35,36 +35,38 @@ fi
 printf "Preparing filesystem...\n"
 
 if [ ! -f "driveos.ext4.qcow2" ]; then
-    virt-make-fs --format=qcow2 --type=ext4 --size=+500M /drive/drive-t186ref-linux/targetfs/ driveos.ext4.qcow2
+    virt-make-fs --format=qcow2 --type=ext4 --size=+500M /drive/drive-t186ref-linux/targetfs/ driveos-tmp.ext4.qcow2
 
     # Setup networking
-    guestfish -a driveos.ext4.qcow2 -i ln-sf /lib/systemd/system/systemd-networkd-wait-online.service /etc/systemd/system/network-online.target.wants/systemd-networkd-wait-online.service
-    guestfish -a driveos.ext4.qcow2 -i ln-sf /lib/systemd/system/systemd-networkd.socket /etc/systemd/system/sockets.target.wants/systemd-networkd.socket
-    guestfish -a driveos.ext4.qcow2 -i ln-sf /lib/systemd/system/systemd-networkd.service /etc/systemd/system/multi-user.target.wants/systemd-networkd.service
-    guestfish -a driveos.ext4.qcow2 -i ln-sf /lib/systemd/system/systemd-networkd.service /etc/systemd/system/dbus-org.freedesktop.network1.service
+    guestfish -a driveos-tmp.ext4.qcow2 -i ln-sf /lib/systemd/system/systemd-networkd-wait-online.service /etc/systemd/system/network-online.target.wants/systemd-networkd-wait-online.service
+    guestfish -a driveos-tmp.ext4.qcow2 -i ln-sf /lib/systemd/system/systemd-networkd.socket /etc/systemd/system/sockets.target.wants/systemd-networkd.socket
+    guestfish -a driveos-tmp.ext4.qcow2 -i ln-sf /lib/systemd/system/systemd-networkd.service /etc/systemd/system/multi-user.target.wants/systemd-networkd.service
+    guestfish -a driveos-tmp.ext4.qcow2 -i ln-sf /lib/systemd/system/systemd-networkd.service /etc/systemd/system/dbus-org.freedesktop.network1.service
 
-    virt-copy-in -a driveos.ext4.qcow2 ../configs/enp0s1.network /etc/systemd/network
-    virt-copy-in -a driveos.ext4.qcow2 ../configs/enp0s2.network /etc/systemd/network
-    virt-copy-in -a driveos.ext4.qcow2 ../configs/enp0s3.network /etc/systemd/network
-    virt-copy-in -a driveos.ext4.qcow2 ../configs/enp0s4.network /etc/systemd/network
+    virt-copy-in -a driveos-tmp.ext4.qcow2 ../configs/enp0s1.network /etc/systemd/network
+    virt-copy-in -a driveos-tmp.ext4.qcow2 ../configs/enp0s2.network /etc/systemd/network
+    virt-copy-in -a driveos-tmp.ext4.qcow2 ../configs/enp0s3.network /etc/systemd/network
+    virt-copy-in -a driveos-tmp.ext4.qcow2 ../configs/enp0s4.network /etc/systemd/network
 
     # Activate sshd
-    guestfish -a driveos.ext4.qcow2 -i rm /etc/ssh/sshd_not_to_be_run
+    guestfish -a driveos-tmp.ext4.qcow2 -i rm /etc/ssh/sshd_not_to_be_run
 
     # Disable OEM setup for NVIDIA. We automate it.
-    guestfish -a driveos.ext4.qcow2 -i ln-sf /lib/systemd/system/multi-user.target /lib/systemd/system/default.target
+    guestfish -a driveos-tmp.ext4.qcow2 -i ln-sf /lib/systemd/system/multi-user.target /lib/systemd/system/default.target
 
     # Currently the modules are built for a different kernel than we use.
-    guestfish -a driveos.ext4.qcow2 -i rm-rf /lib/modules
-    guestfish -a driveos.ext4.qcow2 -i rm /etc/modules-load.d/modules.conf
+    guestfish -a driveos-tmp.ext4.qcow2 -i rm-rf /lib/modules
+    guestfish -a driveos-tmp.ext4.qcow2 -i rm /etc/modules-load.d/modules.conf
 
     # Clean-up and streamline initialization
-    guestfish -a driveos.ext4.qcow2 -i rm /etc/systemd/system/multi-user.target.wants/drive-setup.service
-    guestfish -a driveos.ext4.qcow2 -i rm /etc/systemd/system/multi-user.target.wants/nv_duv3.service
-    guestfish -a driveos.ext4.qcow2 -i rm /etc/systemd/system/multi-user.target.wants/nv_network_configure.service
-    guestfish -a driveos.ext4.qcow2 -i rm /etc/systemd/system/network-online.target.wants/nv_networkd_wait_online.service
-    guestfish -a driveos.ext4.qcow2 -i rm /etc/systemd/system/ssh.service.wants/nv_ssh_host_keys.service
-    guestfish -a driveos.ext4.qcow2 -i rm-rf /etc/systemd/system/tegra.target.wants
+    guestfish -a driveos-tmp.ext4.qcow2 -i rm /etc/systemd/system/multi-user.target.wants/drive-setup.service
+    guestfish -a driveos-tmp.ext4.qcow2 -i rm /etc/systemd/system/multi-user.target.wants/nv_duv3.service
+    guestfish -a driveos-tmp.ext4.qcow2 -i rm /etc/systemd/system/multi-user.target.wants/nv_network_configure.service
+    guestfish -a driveos-tmp.ext4.qcow2 -i rm /etc/systemd/system/network-online.target.wants/nv_networkd_wait_online.service
+    guestfish -a driveos-tmp.ext4.qcow2 -i rm /etc/systemd/system/ssh.service.wants/nv_ssh_host_keys.service
+    guestfish -a driveos-tmp.ext4.qcow2 -i rm-rf /etc/systemd/system/tegra.target.wants
+
+    mv driveos-tmp.ext4.qcow2 driveos.ext4.qcow2
 fi
 
 qemu-img create -b driveos.ext4.qcow2 -f qcow2 adaptive_overlay.ext4.qcow2
