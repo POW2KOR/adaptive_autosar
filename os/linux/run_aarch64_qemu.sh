@@ -6,6 +6,20 @@ set -e
 # set to false, it will boot into a login prompt.
 BOOT_INTO_ADAPTIVE_STACK=true
 
+# Path to tar to include at the root of the filesystem, usually to the adaptive
+# stack tar.
+PATH_TO_ADAPTIVE_TAR="../../../bazel-bin/minerva_mpu_adaptive_filesystem.tar"
+
+# Extra space to add on the disk. Should be big enough to fit the unpacked tar
+# from above.
+EXTRA_SPACE_ON_DISK="1G"
+
+# How much memory should the emulator have.
+EMULATOR_MEMORY_SIZE="1024M"
+
+# How many cores is the guest permitted to use.
+EMULATOR_SMP=4
+
 if [ ! -d "runtime" ]; then
     mkdir runtime
 fi
@@ -37,7 +51,7 @@ fi
 printf "Preparing filesystem...\n"
 
 if [ ! -f "driveos.ext4.qcow2" ]; then
-    virt-make-fs --format=qcow2 --type=ext4 --size=+1G /drive/drive-t186ref-linux/targetfs/ driveos-tmp.ext4.qcow2
+    virt-make-fs --format=qcow2 --type=ext4 --size=+$EXTRA_SPACE_ON_DISK /drive/drive-t186ref-linux/targetfs/ driveos-tmp.ext4.qcow2
 
     # Setup networking
     guestfish -a driveos-tmp.ext4.qcow2 -i ln-sf /lib/systemd/system/systemd-networkd-wait-online.service /etc/systemd/system/network-online.target.wants/systemd-networkd-wait-online.service
@@ -80,7 +94,7 @@ guestfish -a adaptive_overlay.ext4.qcow2 -i ln-sf /lib/systemd/system/adaptive-s
 fi
 
 # Add the adaptive stack to the filesystem
-virt-tar-in -a adaptive_overlay.ext4.qcow2 ../../../bazel-bin/minerva_mpu_adaptive_filesystem.tar /
+virt-tar-in -a adaptive_overlay.ext4.qcow2 $PATH_TO_ADAPTIVE_TAR /
 
 printf "Booting...\n"
 
@@ -88,8 +102,8 @@ qemu-system-aarch64 \
 -nographic \
 -machine virt \
 -cpu cortex-a53 \
--smp 4 \
--m 1024M \
+-smp $EMULATOR_SMP \
+-m $EMULATOR_MEMORY_SIZE \
 -bios /usr/share/qemu-efi-aarch64/QEMU_EFI.fd \
 -kernel kernel-build/arch/arm64/boot/Image \
 -append "console=ttyAMA0 root=/dev/vda rw quiet" \
