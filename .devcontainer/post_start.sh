@@ -1,6 +1,6 @@
 #!/bin/bash
 
-printf "\nSetup read permissions for Drive OS targetfs for sudo-less image building\n"
+printf "\nSetting up read permissions for Drive OS targetfs for sudo-less image building\n"
 sudo chmod -R +r /drive/drive-t186ref-linux/targetfs/
 sudo find /drive/drive-t186ref-linux/targetfs/ -type d -exec chmod +x {} \;
 
