@@ -53,16 +53,11 @@ printf "Preparing filesystem...\n"
 if [ ! -f "driveos.ext4.qcow2" ]; then
     virt-make-fs --format=qcow2 --type=ext4 --size=+$EXTRA_SPACE_ON_DISK /drive/drive-t186ref-linux/targetfs/ driveos-tmp.ext4.qcow2
 
-    # Setup networking
+    # Enable networking with systemd-networkd
     guestfish -a driveos-tmp.ext4.qcow2 -i ln-sf /lib/systemd/system/systemd-networkd-wait-online.service /etc/systemd/system/network-online.target.wants/systemd-networkd-wait-online.service
     guestfish -a driveos-tmp.ext4.qcow2 -i ln-sf /lib/systemd/system/systemd-networkd.socket /etc/systemd/system/sockets.target.wants/systemd-networkd.socket
     guestfish -a driveos-tmp.ext4.qcow2 -i ln-sf /lib/systemd/system/systemd-networkd.service /etc/systemd/system/multi-user.target.wants/systemd-networkd.service
     guestfish -a driveos-tmp.ext4.qcow2 -i ln-sf /lib/systemd/system/systemd-networkd.service /etc/systemd/system/dbus-org.freedesktop.network1.service
-
-    virt-copy-in -a driveos-tmp.ext4.qcow2 ../configs/enp0s1.network /etc/systemd/network
-    virt-copy-in -a driveos-tmp.ext4.qcow2 ../configs/enp0s2.network /etc/systemd/network
-    virt-copy-in -a driveos-tmp.ext4.qcow2 ../configs/enp0s3.network /etc/systemd/network
-    virt-copy-in -a driveos-tmp.ext4.qcow2 ../configs/enp0s4.network /etc/systemd/network
 
     # Activate sshd
     guestfish -a driveos-tmp.ext4.qcow2 -i rm /etc/ssh/sshd_not_to_be_run
@@ -92,6 +87,12 @@ if [ "$BOOT_INTO_ADAPTIVE_STACK" = true ] ; then
 virt-copy-in -a adaptive_overlay.ext4.qcow2 ../configs/adaptive-stack.service /lib/systemd/system/
 guestfish -a adaptive_overlay.ext4.qcow2 -i ln-sf /lib/systemd/system/adaptive-stack.service /etc/systemd/system/multi-user.target.wants/adaptive-stack.service
 fi
+
+# Configure the network interfaces
+virt-copy-in -a adaptive_overlay.ext4.qcow2 ../configs/enp0s1.network /etc/systemd/network
+virt-copy-in -a adaptive_overlay.ext4.qcow2 ../configs/enp0s2.network /etc/systemd/network
+virt-copy-in -a adaptive_overlay.ext4.qcow2 ../configs/enp0s3.network /etc/systemd/network
+virt-copy-in -a adaptive_overlay.ext4.qcow2 ../configs/enp0s4.network /etc/systemd/network
 
 # Add the adaptive stack to the filesystem
 virt-tar-in -a adaptive_overlay.ext4.qcow2 $PATH_TO_ADAPTIVE_TAR /
