@@ -15,7 +15,10 @@ RUN apt update \
     # Needed for kernel building
     flex bison libssl-dev \
     # Needed for QEMU execution
-    qemu-system-arm libguestfs-tools qemu-efi
+    qemu-system-arm libguestfs-tools qemu-efi \
+    # Needed for libguestfs to work
+    linux-image-generic \
+    && chmod +r /boot/vmlinuz-*
 
 # Create the user
 RUN groupadd --gid $USER_GID $USERNAME \
