@@ -35,7 +35,7 @@ fi
 printf "Preparing filesystem...\n"
 
 if [ ! -f "driveos.ext4.qcow2" ]; then
-    virt-make-fs --format=qcow2 --type=ext4 --size=+500M /drive/drive-t186ref-linux/targetfs/ driveos-tmp.ext4.qcow2
+    virt-make-fs --format=qcow2 --type=ext4 --size=+1G /drive/drive-t186ref-linux/targetfs/ driveos-tmp.ext4.qcow2
 
     # Setup networking
     guestfish -a driveos-tmp.ext4.qcow2 -i ln-sf /lib/systemd/system/systemd-networkd-wait-online.service /etc/systemd/system/network-online.target.wants/systemd-networkd-wait-online.service
