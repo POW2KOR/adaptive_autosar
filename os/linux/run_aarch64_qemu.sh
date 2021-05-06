@@ -1,5 +1,9 @@
 set -e
 
+# If this flag is set to true it will boot directly into the adaptive stack, if
+# set to false, it will boot into a login prompt.
+BOOT_INTO_ADAPTIVE_STACK=true
+
 if [ ! -d "runtime" ]; then
     mkdir runtime
 fi
@@ -45,10 +49,6 @@ virt-copy-in -a driveos.ext4.qcow2 ../configs/enp0s2.network /etc/systemd/networ
 virt-copy-in -a driveos.ext4.qcow2 ../configs/enp0s3.network /etc/systemd/network
 virt-copy-in -a driveos.ext4.qcow2 ../configs/enp0s4.network /etc/systemd/network
 
-# Install systemd service for adaptive-stack
-virt-copy-in -a driveos.ext4.qcow2 ../configs/adaptive-stack.service /lib/systemd/system/
-guestfish -a driveos.ext4.qcow2 -i ln-sf /lib/systemd/system/adaptive-stack.service /etc/systemd/system/multi-user.target.wants/adaptive-stack.service
-
 # Activate sshd
 guestfish -a driveos.ext4.qcow2 -i rm /etc/ssh/sshd_not_to_be_run
 
@@ -66,6 +66,12 @@ guestfish -a driveos.ext4.qcow2 -i rm /etc/systemd/system/multi-user.target.want
 guestfish -a driveos.ext4.qcow2 -i rm /etc/systemd/system/network-online.target.wants/nv_networkd_wait_online.service
 guestfish -a driveos.ext4.qcow2 -i rm /etc/systemd/system/ssh.service.wants/nv_ssh_host_keys.service
 guestfish -a driveos.ext4.qcow2 -i rm-rf /etc/systemd/system/tegra.target.wants
+
+if [ "$BOOT_INTO_ADAPTIVE_STACK" = true ] ; then
+# Install systemd service for adaptive-stack
+virt-copy-in -a driveos.ext4.qcow2 ../configs/adaptive-stack.service /lib/systemd/system/
+guestfish -a driveos.ext4.qcow2 -i ln-sf /lib/systemd/system/adaptive-stack.service /etc/systemd/system/multi-user.target.wants/adaptive-stack.service
+fi
 
 printf "Booting...\n"
 
