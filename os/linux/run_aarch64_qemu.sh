@@ -36,9 +36,6 @@ printf "Preparing filesystem...\n"
 
 virt-make-fs --format=qcow2 --type=ext4 --size=+500M /drive/drive-t186ref-linux/targetfs/ driveos.ext4.qcow2
 
-# Add the adaptive stack to the filesystem
-virt-tar-in -a driveos.ext4.qcow2 ../../../bazel-bin/minerva_mpu_adaptive_filesystem.tar /
-
 # Setup networking
 guestfish -a driveos.ext4.qcow2 -i ln-sf /lib/systemd/system/systemd-networkd-wait-online.service /etc/systemd/system/network-online.target.wants/systemd-networkd-wait-online.service
 guestfish -a driveos.ext4.qcow2 -i ln-sf /lib/systemd/system/systemd-networkd.socket /etc/systemd/system/sockets.target.wants/systemd-networkd.socket
@@ -73,6 +70,9 @@ if [ "$BOOT_INTO_ADAPTIVE_STACK" = true ] ; then
 virt-copy-in -a driveos.ext4.qcow2 ../configs/adaptive-stack.service /lib/systemd/system/
 guestfish -a driveos.ext4.qcow2 -i ln-sf /lib/systemd/system/adaptive-stack.service /etc/systemd/system/multi-user.target.wants/adaptive-stack.service
 fi
+
+# Add the adaptive stack to the filesystem
+virt-tar-in -a driveos.ext4.qcow2 ../../../bazel-bin/minerva_mpu_adaptive_filesystem.tar /
 
 printf "Booting...\n"
 
