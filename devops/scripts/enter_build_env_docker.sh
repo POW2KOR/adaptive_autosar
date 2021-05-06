@@ -28,6 +28,7 @@ docker run -it \
    --mount type=volume,source=minerva_mpu_build_env_command_history,target=/command_history \
    --mount type=volume,source=minerva_mpu_build_env_bazel_cache,target=/bazel_cache \
    -v $repo_root:/workspaces/minerva_mpu_adaptive \
+   -v /dev/kvm:/dev/kvm \
    -v /var/run/docker.sock:/var/run/docker.sock \
    --workdir /workspaces/minerva_mpu_adaptive \
    -t minerva_mpu_build_env_image:latest \
