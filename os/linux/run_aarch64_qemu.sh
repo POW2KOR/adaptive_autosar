@@ -26,6 +26,7 @@ if [ ! -f "kernel-build/arch/arm64/boot/Image" ]; then
     mkdir kernel-build
     make -C linux-5.12 O=${PWD}/kernel-build defconfig
 
+    # Using up all the cores might lock up your machine
     CORES_FOR_LINUX_BUILD=$(expr `nproc` - 1)
 
     make -j$CORES_FOR_LINUX_BUILD -C linux-5.12 O=${PWD}/kernel-build
