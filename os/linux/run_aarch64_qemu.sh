@@ -65,14 +65,16 @@ guestfish -a driveos.ext4.qcow2 -i rm /etc/systemd/system/network-online.target.
 guestfish -a driveos.ext4.qcow2 -i rm /etc/systemd/system/ssh.service.wants/nv_ssh_host_keys.service
 guestfish -a driveos.ext4.qcow2 -i rm-rf /etc/systemd/system/tegra.target.wants
 
+qemu-img create -b driveos.ext4.qcow2 -f qcow2 adaptive_overlay.ext4.qcow2
+
 if [ "$BOOT_INTO_ADAPTIVE_STACK" = true ] ; then
 # Install systemd service for adaptive-stack
-virt-copy-in -a driveos.ext4.qcow2 ../configs/adaptive-stack.service /lib/systemd/system/
-guestfish -a driveos.ext4.qcow2 -i ln-sf /lib/systemd/system/adaptive-stack.service /etc/systemd/system/multi-user.target.wants/adaptive-stack.service
+virt-copy-in -a adaptive_overlay.ext4.qcow2 ../configs/adaptive-stack.service /lib/systemd/system/
+guestfish -a adaptive_overlay.ext4.qcow2 -i ln-sf /lib/systemd/system/adaptive-stack.service /etc/systemd/system/multi-user.target.wants/adaptive-stack.service
 fi
 
 # Add the adaptive stack to the filesystem
-virt-tar-in -a driveos.ext4.qcow2 ../../../bazel-bin/minerva_mpu_adaptive_filesystem.tar /
+virt-tar-in -a adaptive_overlay.ext4.qcow2 ../../../bazel-bin/minerva_mpu_adaptive_filesystem.tar /
 
 printf "Booting...\n"
 
@@ -85,7 +87,7 @@ qemu-system-aarch64 \
 -bios /usr/share/qemu-efi-aarch64/QEMU_EFI.fd \
 -kernel kernel-build/arch/arm64/boot/Image \
 -append "console=ttyAMA0 root=/dev/vda rw quiet" \
--drive file=driveos.ext4.qcow2,format=qcow2,if=none,id=drive0 \
+-drive file=adaptive_overlay.ext4.qcow2,format=qcow2,if=none,id=drive0 \
 -device virtio-blk-device,drive=drive0 \
 -device virtio-net-pci,netdev=net1 \
 -netdev user,id=net1,net=10.1.17.0/24 \
