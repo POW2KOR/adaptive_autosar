@@ -1,3 +1,5 @@
+#!/bin/bash
+
 set -e
 
 # If this flag is set to true it will boot directly into the adaptive stack, if
