@@ -33,8 +33,6 @@ if [ ! -f "kernel-build/arch/arm64/boot/Image" ]; then
 
     tar xf linux-5.12.tar.xz
 
-    cd linux-5.12
-
     export ARCH=arm64
     export CROSS_COMPILE=/drive/toolchains/gcc-linaro-7.3.1-2018.05-x86_64_aarch64-linux-gnu/bin/aarch64-linux-gnu-
     export LOCALVERSION="-tegra"
