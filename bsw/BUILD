@@ -30,27 +30,6 @@ filegroup(
 )
 
 filegroup(
-    name = "amsr_vector_fs_log_daemon_exec_config",
-    srcs = [
-        "configs/amsr_vector_fs_log_daemon/exec_config.json",
-    ],
-)
-
-filegroup(
-    name = "amsr_vector_fs_log_daemon_logd_config",
-    srcs = [
-        "configs/amsr_vector_fs_log_daemon/logd_config.json",
-    ],
-)
-
-filegroup(
-    name = "amsr_vector_fs_log_daemon_logging_config",
-    srcs = [
-        "configs/amsr_vector_fs_log_daemon/logging_config.json",
-    ],
-)
-
-filegroup(
     name = "starter_kit_test_base_application_proxy_com_application_config",
     srcs = [
         "configs/TestBaseApplicationExecutable/com_application.json",
