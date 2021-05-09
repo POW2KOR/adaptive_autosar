@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<AUTOSAR xmlns="http://autosar.org/schema/r4.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_00047.xsd">
+  <AR-PACKAGES>
+    <AR-PACKAGE>
+      <SHORT-NAME>vector</SHORT-NAME>
+      <AR-PACKAGES>
+        <AR-PACKAGE>
+          <SHORT-NAME>bsw</SHORT-NAME>
+          <ELEMENTS>
+            <ADAPTIVE-APPLICATION-SW-COMPONENT-TYPE>
+              <SHORT-NAME>amsr_vector_fs_log_daemon_swc</SHORT-NAME>
+            </ADAPTIVE-APPLICATION-SW-COMPONENT-TYPE>
+            <EXECUTABLE>
+              <SHORT-NAME>amsr_vector_fs_log_daemon</SHORT-NAME>
+              <CATEGORY>PLATFORM_LEVEL</CATEGORY>
+              <ROOT-SW-COMPONENT-PROTOTYPE>
+                <SHORT-NAME>amsr_vector_fs_log_daemon_root_type</SHORT-NAME>
+              </ROOT-SW-COMPONENT-PROTOTYPE>
+            </EXECUTABLE>
+            <PROCESS>
+              <SHORT-NAME>LogDaemonDefaultProcess</SHORT-NAME>
+              <ADMIN-DATA>
+                <SDGS>
+                  <SDG GID="DvMex:LogTraceProcessExtensions">
+                    <SDG GID="DvMex:MaxQueueSize">
+                      <SD>1000</SD>
+                    </SDG>
+                    <SDG GID="DvMex:ConfigDirPath">
+                      <SD>tmp</SD>
+                    </SDG>
+                    <SDG GID="DvMex:MaxNumberOfLogSinks">
+                      <SD>6</SD>
+                    </SDG>
+                    <SDG GID="DvMex:MaxSupportedLogLevel">
+                      <SD>VERBOSE</SD>
+                    </SDG>
+                    <SDG GID="DvMex:MaxLoggers">
+                      <SD>50</SD>
+                    </SDG>
+                  </SDG>
+                </SDGS>
+              </ADMIN-DATA>
+              <EXECUTABLE-REF DEST="EXECUTABLE">/vector/bsw/amsr_vector_fs_log_daemon</EXECUTABLE-REF>
+              <LOG-TRACE-DEFAULT-LOG-LEVEL>INFO</LOG-TRACE-DEFAULT-LOG-LEVEL>
+              <LOG-TRACE-LOG-MODE>CONSOLE</LOG-TRACE-LOG-MODE>
+              <LOG-TRACE-PROCESS-DESC>Vector Log Daemon</LOG-TRACE-PROCESS-DESC>
+              <LOG-TRACE-PROCESS-ID>LOGD</LOG-TRACE-PROCESS-ID>
+              <PROCESS-STATE-MACHINE>
+                <SHORT-NAME>amsr_vector_fs_log_daemon_process_mode</SHORT-NAME>
+                <TYPE-TREF DEST="MODE-DECLARATION-GROUP">/DataTypes/ModelManagement/ApplicationSatates</TYPE-TREF>
+              </PROCESS-STATE-MACHINE>
+              <STATE-DEPENDENT-STARTUP-CONFIGS>
+                <STATE-DEPENDENT-STARTUP-CONFIG>
+                  <FUNCTION-GROUP-STATE-IREFS>
+                    <FUNCTION-GROUP-STATE-IREF>
+                      <CONTEXT-MODE-DECLARATION-GROUP-PROTOTYPE-REF DEST="MODE-DECLARATION-GROUP-PROTOTYPE">/vector/LogMachine/MachineState</CONTEXT-MODE-DECLARATION-GROUP-PROTOTYPE-REF>
+                      <TARGET-MODE-DECLARATION-REF DEST="MODE-DECLARATION">/vector/MachineStates/Startup</TARGET-MODE-DECLARATION-REF>
+                    </FUNCTION-GROUP-STATE-IREF>
+                    <FUNCTION-GROUP-STATE-IREF>
+                      <CONTEXT-MODE-DECLARATION-GROUP-PROTOTYPE-REF DEST="MODE-DECLARATION-GROUP-PROTOTYPE">/vector/LogMachine/MachineState</CONTEXT-MODE-DECLARATION-GROUP-PROTOTYPE-REF>
+                      <TARGET-MODE-DECLARATION-REF DEST="MODE-DECLARATION">/vector/MachineStates/Shutdown</TARGET-MODE-DECLARATION-REF>
+                    </FUNCTION-GROUP-STATE-IREF>
+                    <FUNCTION-GROUP-STATE-IREF>
+                      <CONTEXT-MODE-DECLARATION-GROUP-PROTOTYPE-REF DEST="MODE-DECLARATION-GROUP-PROTOTYPE">/vector/LogMachine/MachineState</CONTEXT-MODE-DECLARATION-GROUP-PROTOTYPE-REF>
+                      <TARGET-MODE-DECLARATION-REF DEST="MODE-DECLARATION">/vector/MachineStates/Restart</TARGET-MODE-DECLARATION-REF>
+                    </FUNCTION-GROUP-STATE-IREF>
+                    <FUNCTION-GROUP-STATE-IREF>
+                      <CONTEXT-MODE-DECLARATION-GROUP-PROTOTYPE-REF DEST="MODE-DECLARATION-GROUP-PROTOTYPE">/vector/LogMachine/MachineState</CONTEXT-MODE-DECLARATION-GROUP-PROTOTYPE-REF>
+                      <TARGET-MODE-DECLARATION-REF DEST="MODE-DECLARATION">/vector/MachineStates/Running</TARGET-MODE-DECLARATION-REF>
+                    </FUNCTION-GROUP-STATE-IREF>
+                  </FUNCTION-GROUP-STATE-IREFS>
+                  <STARTUP-CONFIG-REF DEST="STARTUP-CONFIG">/vector/bsw/log_daemon_startup_config/StartupRunning</STARTUP-CONFIG-REF>
+                </STATE-DEPENDENT-STARTUP-CONFIG>
+              </STATE-DEPENDENT-STARTUP-CONFIGS>
+            </PROCESS>
+            <PROCESS-TO-MACHINE-MAPPING-SET>
+              <SHORT-NAME>LogProcessToMachineMapping</SHORT-NAME>
+              <PROCESS-TO-MACHINE-MAPPINGS>
+                <PROCESS-TO-MACHINE-MAPPING>
+                  <SHORT-NAME>LogProcToMachineMapping</SHORT-NAME>
+                  <MACHINE-REF DEST="MACHINE">/vector/LogMachine</MACHINE-REF>
+                  <NON-OS-MODULE-INSTANTIATION-REF DEST="LOG-AND-TRACE-INSTANTIATION">/vector/LogMachine/LogAndTraceInstantiation</NON-OS-MODULE-INSTANTIATION-REF>
+                  <PROCESS-REF DEST="PROCESS">/vector/bsw/LogDaemonDefaultProcess</PROCESS-REF>
+                </PROCESS-TO-MACHINE-MAPPING>
+              </PROCESS-TO-MACHINE-MAPPINGS>
+            </PROCESS-TO-MACHINE-MAPPING-SET>
+            <STARTUP-CONFIG-SET>
+              <SHORT-NAME>log_daemon_startup_config</SHORT-NAME>
+              <STARTUP-CONFIGS>
+                <STARTUP-CONFIG>
+                  <SHORT-NAME>StartupRunning</SHORT-NAME>
+                  <SCHEDULING-POLICY>SCHEDULING-POLICY-FIFO</SCHEDULING-POLICY>
+                  <SCHEDULING-PRIORITY>80</SCHEDULING-PRIORITY>
+                  <STARTUP-OPTIONS>
+                    <STARTUP-OPTION>
+                      <OPTION-ARGUMENT>./etc/logging_config.json</OPTION-ARGUMENT>
+                      <OPTION-KIND>COMMAND-LINE-SHORT-FORM</OPTION-KIND>
+                      <OPTION-NAME>l</OPTION-NAME>
+                    </STARTUP-OPTION>
+                  </STARTUP-OPTIONS>
+                </STARTUP-CONFIG>
+              </STARTUP-CONFIGS>
+            </STARTUP-CONFIG-SET>
+          </ELEMENTS>
+        </AR-PACKAGE>
+      </AR-PACKAGES>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>

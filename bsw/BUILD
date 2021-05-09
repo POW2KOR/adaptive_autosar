@@ -13,6 +13,14 @@ filegroup(
 )
 
 filegroup(
+    name = "amsr_vector_fs_log_daemon_arxml",
+    srcs = [
+        "arxmls/logdaemon.arxml",
+        "arxmls/logdaemon_machine.arxml",
+    ],
+)
+
+filegroup(
     name = "complete_arxml",
     srcs = [
         "@starter_kit_adaptive_xavier//:mex_arxml",
@@ -199,6 +207,26 @@ minerva_aa_codegen_rule(
     ],
     outs_list_dict = {
         "minerva_machine_exec_config": ["IDC6_M_P1_XAVIER/machine_exec_config.json"],
+    },
+)
+
+minerva_aa_codegen_rule(
+    name = "minerva_amsr_fs_log_daemon_config_gen_rule",
+    arxml_srcs = [
+        ":complete_arxml",
+        ":amsr_vector_fs_log_daemon_arxml",
+    ],
+    generators = [
+        "@starter_kit_adaptive_xavier//:generator_amsr_logdaemon_config",
+        "@starter_kit_adaptive_xavier//:generator_amsr_logapi_config",
+    ],
+    outs_list_dict = {
+        "minerva_amsr_fs_log_daemon_logd_config": [
+            "amsr_vector_fs_log_daemon/etc/logd_config.json",
+        ],
+        "minerva_amsr_fs_log_daemon_logging_config": [
+            "amsr_vector_fs_log_daemon/etc/logging_config.json",
+        ],
     },
 )
 
@@ -1178,7 +1206,10 @@ minerva_aa_codegen_rule(
 
 minerva_aa_codegen_rule(
     name = "starter_kit_application_exec_config_gen_rule",
-    arxml_srcs = [":complete_arxml"],
+    arxml_srcs = [
+        ":complete_arxml",
+        ":amsr_vector_fs_log_daemon_arxml",
+    ],
     generators = [
         "@starter_kit_adaptive_xavier//:generator_amsr_em_exec_config",
     ],
@@ -1212,6 +1243,9 @@ minerva_aa_codegen_rule(
         ],
         "starter_kit_update_app_idc6_exec_config": [
             "update_app_demo_idc6/configuration/exec_config.json",
+        ],
+        "starter_kit_amsr_log_daemon_exec_config": [
+            "amsr_vector_fs_log_daemon/configuration/exec_config.json",
         ],
     },
 )
