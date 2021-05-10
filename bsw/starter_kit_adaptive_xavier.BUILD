@@ -275,6 +275,8 @@ minerva_aa_codegen_declare(
         "amsr_someipprotocol",
         "amsr_socal",
         "amsr_persistency_config",
+        "amsr_logdaemon_config",
+        "amsr_logapi_config",
     ],
     path_to_generators = "mb_base_layer_adaptive_xavier/amsr_xavier/Generators",
 )
