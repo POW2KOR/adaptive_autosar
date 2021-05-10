@@ -30,14 +30,17 @@ artifactory = "https://artifact.swf.daimler.com/"
 arg_parser = argparse.ArgumentParser(
     prog="collect_deps",
     usage="%(prog)s [options]",
-    description="Collect dependencies for docker image"
+    description="Collect dependencies for docker image",
 )
 
 # add arguments
-arg_parser.add_argument("-i", action="store_false",
-                        help="Don't download dependencies from the internet")
-arg_parser.add_argument("-a", action="store_false",
-                        help="Don't download dependencies from artifactory")
+arg_parser.add_argument(
+    "-i", action="store_false", help="Don't download dependencies from the internet"
+)
+arg_parser.add_argument(
+    "-a", action="store_false", help="Don't download dependencies from artifactory"
+)
+
 
 class HashAlgo(Enum):
     NONE = 0
@@ -48,6 +51,7 @@ class HashAlgo(Enum):
 
 # parse arguments
 args = arg_parser.parse_args()
+
 
 def getFileHash(file, algo):
     BUF_SIZE = 65536  # read in 64kb chunks!
@@ -73,7 +77,9 @@ def getFileHash(file, algo):
     return calcHash.hexdigest()
 
 
-def downloadPackage(remote, localFile, path=None, expectedHash=None, user=None, password=None):
+def downloadPackage(
+    remote, localFile, path=None, expectedHash=None, user=None, password=None
+):
 
     if not os.path.isfile(localFile):
         localPath = os.path.dirname(localFile)
@@ -103,7 +109,9 @@ def downloadPackage(remote, localFile, path=None, expectedHash=None, user=None, 
             urllib.request.install_opener(opener)
 
         try:
-            with urllib.request.urlopen(request_param) as response, open(localFile, 'wb') as out_file:
+            with urllib.request.urlopen(request_param) as response, open(
+                localFile, "wb"
+            ) as out_file:
                 shutil.copyfileobj(response, out_file)
 
             print("Downloading " + localFile + " finished.")
@@ -125,21 +133,21 @@ def downloadPackage(remote, localFile, path=None, expectedHash=None, user=None, 
         else:
             print("Failed to generate SHA256 hash for file " + localFile)
             return False
-    
+
     if path != None:
         if not os.path.exists(path):
             try:
                 os.makedirs(path)
             except OSError:
-                print ("Failed to create target directory: %s" % path)
+                print("Failed to create target directory: %s" % path)
                 return False
             else:
-                print ("Target directory %s created successfully" % path)
+                print("Target directory %s created successfully" % path)
             try:
                 shutil.unpack_archive(localFile, path)
-                print ("Successfully extracted %s to %s" % (localFile, path))
+                print("Successfully extracted %s to %s" % (localFile, path))
             except:
-                print ("Failed to unpack archive: %s" % localFile)
+                print("Failed to unpack archive: %s" % localFile)
                 os.rmdir(path)
                 return False
 
@@ -170,31 +178,36 @@ def downloadArtifactoryFiles():
     ret = True
 
     for tool in tools_artifactory["files"]:
-        if not downloadPackage((artifactory + tool["pattern"]), tool["target"], None, user=user, password=passwd):
+        if not downloadPackage(
+            (artifactory + tool["pattern"]),
+            tool["target"],
+            None,
+            user=user,
+            password=passwd,
+        ):
             print("Downloading " + tool["target"] + " failed!")
             ret = False
 
-    
     return ret
 
 
 ret = 0
 
-if (args.i):
+if args.i:
     with open("./devops/docker/configuration/tools_web.json", "r") as myFile:
         data = myFile.read()
     myFile.close()
     tools_web = json.loads(data)
     for tool in tools_web["files"]:
         fileHash = tool["props"].split("=")[1]
-        if "path" in tool: 
+        if "path" in tool:
             path = tool["path"]
         else:
-            path = None    
+            path = None
         if not downloadPackage(tool["pattern"], tool["target"], path, fileHash):
             print("Downloading " + tool["pattern"] + " failed!")
             ret = 1
-            
-if (ret == 0 and args.a):
+
+if ret == 0 and args.a:
     if not downloadArtifactoryFiles():
         ret = 1
