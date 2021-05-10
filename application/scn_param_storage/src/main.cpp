@@ -45,6 +45,8 @@ void InitializeSignalHandling() noexcept
 
 namespace Application {
 
+using vac::container::literals::operator""_sv;
+
 /*!
  * \brief Signal handler thread.
  */
@@ -91,19 +93,19 @@ void ReportState(
 
     /* #20 check if invalid application state was detected. */
     if (!error_occurred) {
-        logger.LogDebug() << "sw_update app is reporting Application state "
+        logger.LogDebug() << "scn_param_storage app is reporting Application state "
                           << application_state_string.c_str();
 
         /* #30 send application state */
         if (application_client.ReportApplicationState(application_state)
             == ara::exec::ApplicationReturnType::kSuccess) {
             logger.LogDebug()
-                << "sw_update app reported Application state "
+                << "scn_param_storage app reported Application state "
                 << application_state_string.c_str() << " successfully";
         } else {
             /* #35 application state could not be set. */
             logger.LogError()
-                << "sw_update app could not report the Application state "
+                << "scn_param_storage app could not report the Application state "
                 << application_state_string.c_str();
         }
     }
@@ -170,15 +172,14 @@ ara::core::Result<osabstraction::process::ProcessId> StartSignalHandlerThread()
     using R = ara::core::Result<osabstraction::process::ProcessId>;
 
     /* #20 Create thread_name. */
-    vac::container::CStringView thread_name
-        = vac::container::CStringView::FromLiteral("SigH", 5);
+    vac::container::CStringView thread_name = "SigH"_sv;
 
     /* #30 Start signal handler thread. */
     signal_handler_thread = std::thread(&SignalHandlerThread);
 
     /* #40 Create the thread native_handle object. */
     std::thread::native_handle_type const thread_id{
-        (signal_handler_thread).native_handle()};
+        signal_handler_thread.native_handle()};
 
     /* #50 Set thread name and return the ara::core::Result object. */
     return osabstraction::thread::SetNameOfThread(thread_id, thread_name)

@@ -97,6 +97,7 @@ pkg_tar(
         # as we are not able to build the application with latest delivery
         #"//application/sw_update_client_minerva_adapter:sw_update_client_minerva_adapter_app": "opt/sw_update_client_minerva_adapter_app/bin/sw_update_client_minerva_adapter_app",
         "//application/stub_application:stub_application": "opt/stub_application/bin/stub_application",
+        "//application/scn_param_storage": "opt/scn_param_storage/bin/scn_param_storage",
         "//application/idc6mt:idc6mt": "opt/idc6mt/bin/idc6mt",
     },
     mode = "0755",
@@ -243,6 +244,16 @@ pkg_tar(
 )
 
 pkg_tar(
+    name = "adaptive_scn_param_storage_configs",
+    files = {
+        "//application/scn_param_storage:scn_param_storage_exec_config": "opt/scn_param_storage/etc/exec_config.json",
+        "//application/scn_param_storage:logging_config_json": "opt/scn_param_storage/etc/logging_config.json",
+        "//application/scn_param_storage:com_application_json": "opt/scn_param_storage/etc/com_application.json",
+    },
+    mode = "0755",
+)
+
+pkg_tar(
     name = "adaptive_idc6mt_configs",
     files = {
         "//application/idc6mt:idc6mt_exec_config": "opt/idc6mt/etc/exec_config.json",
@@ -266,6 +277,7 @@ pkg_tar(
         # as we are not able to build the application with latest delivery
         #":adaptive_sw_update_client_minerva_adapter_configs",
         ":adaptive_idc6mt_configs",
+        ":adaptive_scn_param_storage_configs",
         ":adaptive_stub_applications_configs",
         ":restart_app_demo_configs",
         ":shutdown_app_demo_configs",
@@ -327,6 +339,15 @@ target_build_dir_for_socal_sw_update = select({
     ],
 })
 
+target_build_dir_for_socal_scn_param_storage = select({
+    ":k8": [
+        "bazel-out/k8-fastbuild/bin/bsw/amsr_vector_fs_socal_for_scn_param_storage/lib/libSocal.a",
+    ],
+    ":aarch64": [
+        "bazel-out/aarch64-fastbuild/bin/bsw/amsr_vector_fs_socal_for_scn_param_storage/lib/libSocal.a",
+    ],
+})
+
 filegroup(
     name = "socal_lib_for_proxy",
     srcs = target_build_dir_for_socal_proxy,
@@ -342,5 +363,11 @@ filegroup(
 filegroup(
     name = "socal_lib_for_sw_update",
     srcs = target_build_dir_for_socal_sw_update,
+    visibility = ["//visibility:public"],
+)
+
+filegroup(
+    name = "socal_lib_for_scn_param_storage",
+    srcs = target_build_dir_for_socal_scn_param_storage,
     visibility = ["//visibility:public"],
 )

@@ -117,8 +117,8 @@ inline constexpr ara::core::ErrorCode MakeErrorCode(
 /*!
  * \brief Array of error domain message strings.
  */
-constexpr std::array<ara::core::ErrorDomain::StringType, 5> kMessages{
-    {"Unknown error.", "Error during creation of a thread."}};
+constexpr std::array<ara::core::ErrorDomain::StringType, 2> kMessages {
+    "Unknown error.", "Error during creation of a thread."};
 
 ScnParamStorageErrorDomain::StringType ScnParamStorageErrorDomain::Message(
     ara::core::ErrorDomain::CodeType error_code) const noexcept
