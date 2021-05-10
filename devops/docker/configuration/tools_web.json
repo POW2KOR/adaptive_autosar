@@ -26,14 +26,14 @@
             "props": "hash=352c090cc3d3f9a6b4e676cf42a6047c16824959b438895a76c2989c6d7c246a"
         },
         {
-            "pattern": "https://github.com/bazelbuild/rules_docker/releases/download/v0.15.0/rules_docker-v0.15.0.tar.gz",
-            "target": "tools/bazel/rules_docker-v0.15.0.tar.gz",
-            "props": "hash=1698624e878b0607052ae6131aa216d45ebb63871ec497f26c67455b34119c80"
+            "pattern": "https://github.com/bazelbuild/rules_docker/releases/download/v0.16.0/rules_docker-v0.16.0.tar.gz",
+            "target": "tools/bazel/rules_docker-v0.16.0.tar.gz",
+            "props": "hash=95d39fd84ff4474babaf190450ee034d958202043e366b9fc38f438c9e6c3334"
         },
         {
-            "pattern": "https://github.com/bazelbuild/rules_go/releases/download/v0.24.2/rules_go-v0.24.2.tar.gz",
-            "target": "tools/bazel/rules_go-v0.24.2.tar.gz",
-            "props": "hash=08c3cd71857d58af3cda759112437d9e63339ac9c6e0042add43f4d94caf632d"
+            "pattern": "https://github.com/bazelbuild/rules_go/releases/download/v0.27.0/rules_go-v0.27.0.tar.gz",
+            "target": "tools/bazel/rules_go-v0.27.0.tar.gz",
+            "props": "hash=69de5c704a05ff37862f7e0f5534d4f479418afc21806c887db544a316f3cb6b"
         },
         {
             "pattern": "https://github.com/bazelbuild/bazel-gazelle/releases/download/v0.21.1/bazel-gazelle-v0.21.1.tar.gz",
@@ -48,6 +48,7 @@
         {
             "pattern": "https://dl.google.com/go/go1.15.2.linux-amd64.tar.gz",
             "target": "tools/bazel/go1.15.2.linux-amd64.tar.gz",
+            "path": "tools/bazel/go_sdk",
             "props": "hash=b49fda1ca29a1946d6bb2a5a6982cf07ccd2aba849289508ee0f9918f6bb4552"
         },
         {

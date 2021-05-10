@@ -31,6 +31,11 @@ lib_depot_utilities.main_wrapper(
 
     lib_depot_utilities.parallel_stage('Tests', [
     ])
+
+     lib_depot_utilities.parallel_stage('Deploy', [
+       lib_jenkins_steps.deploy_docker()
+    ])
+
   }
 ,
 failure_handler: {
