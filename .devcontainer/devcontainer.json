@@ -2,6 +2,7 @@
 {
   "name": "minerva_mpu_build_env",
   "runArgs": [
+    "--privileged",
     "--network=host"
   ],
   "dockerFile": "Dockerfile",
@@ -17,6 +18,7 @@
   "mounts": [
     "type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock",
     "type=bind,source=/dev/bus/usb,target=/dev/bus/usb",
+    "type=bind,source=/dev/kvm,target=/dev/kvm",
     "type=bind,source=${localEnv:HOME}/.gitconfig,target=/host/.gitconfig",
     "type=bind,source=${localEnv:HOME}/.ssh/gsep,target=/host/.ssh/gsep",
     "type=bind,source=${localWorkspaceFolder}/.devcontainer/.bazelrc,target=/etc/bazel.bazelrc",
