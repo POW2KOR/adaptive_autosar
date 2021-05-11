@@ -501,6 +501,38 @@ def minerva_aa_bsw_module(
             cache_entries["iointegritystream_DIR:PATH"] = \
                 "$EXT_BUILD_DEPS/amsr_vector_fs_iointegritystream/lib/cmake/iointegritystream/"
 
+        elif dep == ":amsr_vector_fs_socal_headers":
+            cache_entries["Socal_DIR:PATH"] = \
+                "$EXT_BUILD_DEPS/amsr_vector_fs_socal_headers/lib/cmake/Socal/"
+
+        elif dep == ":amsr_vector_fs_someipbinding":
+            cache_entries["SomeIpBinding_DIR:PATH"] = \
+                "$EXT_BUILD_DEPS/amsr_vector_fs_someipbinding/lib/cmake/SomeIpBinding/"
+            cache_entries["SomeIpBindingInternal_DIR:PATH"] = \
+                "$EXT_BUILD_DEPS/amsr_vector_fs_someipbinding/lib/cmake/SomeIpBindingInternal/"
+            cache_entries["SomeIpBindingTransformationLayer_DIR:PATH"] = \
+                "$EXT_BUILD_DEPS/amsr_vector_fs_someipbinding/lib/cmake/SomeIpBindingTransformationLayer/"
+
+        elif dep == ":amsr_vector_fs_ipcbinding":
+            cache_entries["IpcBinding_DIR:PATH"] = \
+                "$EXT_BUILD_DEPS/amsr_vector_fs_ipcbinding/lib/cmake/IpcBinding/"
+            cache_entries["IpcBindingInternal_DIR:PATH"] = \
+                "$EXT_BUILD_DEPS/amsr_vector_fs_ipcbinding/lib/cmake/IpcBindingInternal"
+            cache_entries["IpcBindingTransformationLayer_DIR:PATH"] = \
+                "$EXT_BUILD_DEPS/amsr_vector_fs_ipcbinding/lib/cmake/IpcBindingTransformationLayer"
+
+        elif dep == ":amsr_vector_fs_per_libpersistency":
+            cache_entries["persistency_DIR:PATH"] = \
+                "$EXT_BUILD_DEPS/amsr_vector_fs_per_libpersistency/lib/cmake/persistency/"
+            cache_entries["persistency-key-value-storage_DIR:PATH"] = \
+                "$EXT_BUILD_DEPS/amsr_vector_fs_per_libpersistency/lib/cmake/persistency-key-value-storage/"
+            cache_entries["persistency-common_DIR:PATH"] = \
+                "$EXT_BUILD_DEPS/amsr_vector_fs_per_libpersistency/lib/cmake/persistency-common/"
+            cache_entries["persistency-file-storage_DIR:PATH"] = \
+                "$EXT_BUILD_DEPS/amsr_vector_fs_per_libpersistency/lib/cmake/persistency-file-storage/"
+            cache_entries["persistency-fs_DIR:PATH"] = \
+                "$EXT_BUILD_DEPS/amsr_vector_fs_per_libpersistency/lib/cmake/persistency-fs/"
+
     cmake(
         name = name,
         cache_entries = extend_and_select(
