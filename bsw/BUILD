@@ -3270,7 +3270,7 @@ minerva_aa_bsw_module(
     name = "amsr_vector_fs_timesync",
     cache_entries = {
         "APPLICATION_PREFIX": "opt",
-        "ENABLE_EXAMPLE_APPS": "ON",
+        "ENABLE_EXAMPLE_APPS": "OFF",
     },
     out_binaries = [
         "tsyncd",
