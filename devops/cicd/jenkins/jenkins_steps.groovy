@@ -138,9 +138,9 @@ def deploy_docker() {
                 withEnv(["DOCKER_BUILDKIT=1"]) {
                     def builderImg = docker.build(imgNameVer, "-f ./devops/docker/Dockerfile.build_env  --build-arg BUILDKIT_INLINE_CACHE=1 .")
                     echo 'Publishing the docker image to artifactory'
-                    bat("docker push ${imgNameVer}")
-                    bat("docker tag ${imgNameVer} ${imgName}:latest")
-                    bat("docker push ${imgName}:latest")
+                    sh"docker push ${imgNameVer}"
+                    sh"docker tag ${imgNameVer} ${imgName}:latest"
+                    sh"docker push ${imgName}:latest"
                     }
                 }
             }
