@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<AUTOSAR xmlns="http://autosar.org/schema/r4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" S="51C2F664788005D9B556FED106E0BA60D6D1F26E" T="2020-11-11T10:33:01+01:00" xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_00047.xsd">
+  <AR-PACKAGES>
+    <AR-PACKAGE UUID="f771792e92c533f297a1b6eb53ac2ad9">
+      <SHORT-NAME>DataTypes</SHORT-NAME>
+      <AR-PACKAGES>
+        <AR-PACKAGE UUID="23e2dfbc0a6f3ade8ded22f0a70efc93">
+          <SHORT-NAME>ModelManagement</SHORT-NAME>
+          <ELEMENTS>
+            <MODE-DECLARATION-GROUP UUID="W9ebbfaa9cc3411de7b922247f63a079cXWa4de9d67142461958c6f2eba4e4ad5cf00">
+              <SHORT-NAME>MachineStates</SHORT-NAME>
+              <INITIAL-MODE-REF DEST="MODE-DECLARATION">/DataTypes/ModelManagement/MachineStates/Startup</INITIAL-MODE-REF>
+              <MODE-DECLARATIONS>
+                <MODE-DECLARATION UUID="W9ebbfaa9cc3411de7b922247f63a079cxObfa84a01176fb37f8274e72c00">
+                  <SHORT-NAME>Running</SHORT-NAME>
+                  <VALUE>0</VALUE>
+                </MODE-DECLARATION>
+                <MODE-DECLARATION UUID="W9ebbfaa9cc3411de7b922247f63a079cxObfa84a01176fb37f8274e73a00">
+                  <SHORT-NAME>Restart</SHORT-NAME>
+                  <VALUE>3</VALUE>
+                </MODE-DECLARATION>
+                <MODE-DECLARATION UUID="W9ebbfaa9cc3411de7b922247f63a079cxObfa84a01176fb37f8274e74900">
+                  <SHORT-NAME>Off</SHORT-NAME>
+                  <VALUE>4</VALUE>
+                </MODE-DECLARATION>
+                <MODE-DECLARATION UUID="W9ebbfaa9cc3411de7b922247f63a079cxObfa84a01176fb37f8274e75800">
+                  <SHORT-NAME>Startup</SHORT-NAME>
+                  <VALUE>1</VALUE>
+                </MODE-DECLARATION>
+                <MODE-DECLARATION UUID="W9ebbfaa9cc3411de7b922247f63a079cxObfa84a01176fb37f8274e76800">
+                  <SHORT-NAME>Shutdown</SHORT-NAME>
+                  <VALUE>2</VALUE>
+                </MODE-DECLARATION>
+              </MODE-DECLARATIONS>
+            </MODE-DECLARATION-GROUP>
+          </ELEMENTS>
+        </AR-PACKAGE>
+      </AR-PACKAGES>
+    </AR-PACKAGE>
+    <AR-PACKAGE UUID="b59f8f3be4f63eb0b7be4d7b52dc2573">
+      <SHORT-NAME>Machine</SHORT-NAME>
+      <ELEMENTS>
+        <MACHINE UUID="Obfa84a01176fb37f82748351xObfa84a01176fb37f82748ecf00">
+          <SHORT-NAME>IDC6_M_P1_XAVIER</SHORT-NAME>
+          <FUNCTION-GROUPS>
+            <MODE-DECLARATION-GROUP-PROTOTYPE UUID="Obfa84a01176fb37f82748ee8XObfa84a01176fb37f82748ee700">
+              <SHORT-NAME>MachineState</SHORT-NAME>
+              <TYPE-TREF DEST="MODE-DECLARATION-GROUP">/DataTypes/ModelManagement/MachineStates</TYPE-TREF>
+            </MODE-DECLARATION-GROUP-PROTOTYPE>
+          </FUNCTION-GROUPS>
+          <MACHINE-DESIGN-REF DEST="MACHINE-DESIGN">/Topology/HardwareComponents/IDC_Adpative</MACHINE-DESIGN-REF>
+          <PROCESSORS>
+            <PROCESSOR UUID="Obfa84a01176fb37f8274838aXObfa84a01176fb37f8274838900">
+              <SHORT-NAME>IDC6_M_P1</SHORT-NAME>
+              <CORES>
+                <PROCESSOR-CORE UUID="Obfa84a01176fb37f8274838axN9ff33df1779b4b574221b6200">
+                  <SHORT-NAME>IDC6_M_Core0</SHORT-NAME>
+                  <ADMIN-DATA>
+                    <SDGS>
+                      <SDG GID="DV:Adaptive">
+                        <SD GID="DV:ProcessorCoreNumber">0</SD>
+                      </SDG>
+                    </SDGS>
+                  </ADMIN-DATA>
+                  <CORE-ID>0</CORE-ID>
+                </PROCESSOR-CORE>
+                <PROCESSOR-CORE UUID="Obfa84a01176fb37f8274838axObfa84a01176fb37f8274839700">
+                  <SHORT-NAME>IDC6_M_Core1</SHORT-NAME>
+                  <ADMIN-DATA>
+                    <SDGS>
+                      <SDG GID="DV:Adaptive">
+                        <SD GID="DV:ProcessorCoreNumber">1</SD>
+                      </SDG>
+                    </SDGS>
+                  </ADMIN-DATA>
+                  <CORE-ID>1</CORE-ID>
+                </PROCESSOR-CORE>
+                <PROCESSOR-CORE UUID="Obfa84a01176fb37f8274838axN9ff33df1779b4b574221afe00">
+                  <SHORT-NAME>IDC6_M_Core2</SHORT-NAME>
+                  <ADMIN-DATA>
+                    <SDGS>
+                      <SDG GID="DV:Adaptive">
+                        <SD GID="DV:ProcessorCoreNumber">2</SD>
+                      </SDG>
+                    </SDGS>
+                  </ADMIN-DATA>
+                  <CORE-ID>2</CORE-ID>
+                </PROCESSOR-CORE>
+                <PROCESSOR-CORE UUID="Obfa84a01176fb37f8274838axN9ff33df1779b4b574221a9800">
+                  <SHORT-NAME>IDC6_M_Core3</SHORT-NAME>
+                  <ADMIN-DATA>
+                    <SDGS>
+                      <SDG GID="DV:Adaptive">
+                        <SD GID="DV:ProcessorCoreNumber">3</SD>
+                      </SDG>
+                    </SDGS>
+                  </ADMIN-DATA>
+                  <CORE-ID>3</CORE-ID>
+                </PROCESSOR-CORE>
+                <PROCESSOR-CORE UUID="Obfa84a01176fb37f8274838axN9ff33df1779b4b5742219ee00">
+                  <SHORT-NAME>IDC6_M_Core4</SHORT-NAME>
+                  <ADMIN-DATA>
+                    <SDGS>
+                      <SDG GID="DV:Adaptive">
+                        <SD GID="DV:ProcessorCoreNumber">4</SD>
+                      </SDG>
+                    </SDGS>
+                  </ADMIN-DATA>
+                  <CORE-ID>4</CORE-ID>
+                </PROCESSOR-CORE>
+                <PROCESSOR-CORE UUID="Obfa84a01176fb37f8274838axN9ff33df1779b4b574221b7900">
+                  <SHORT-NAME>IDC6_M_Core5</SHORT-NAME>
+                  <ADMIN-DATA>
+                    <SDGS>
+                      <SDG GID="DV:Adaptive">
+                        <SD GID="DV:ProcessorCoreNumber">5</SD>
+                      </SDG>
+                    </SDGS>
+                  </ADMIN-DATA>
+                  <CORE-ID>5</CORE-ID>
+                </PROCESSOR-CORE>
+              </CORES>
+            </PROCESSOR>
+          </PROCESSORS>
+        </MACHINE>
+      </ELEMENTS>
+      <AR-PACKAGES>
+        <AR-PACKAGE UUID="147b1e89e85732b7b809eb03755db7c6">
+          <SHORT-NAME>StartupConfigSets</SHORT-NAME>
+          <ELEMENTS>
+            <STARTUP-CONFIG-SET UUID="Obfa84a01176fb37f8275186exObfa84a01176fb37f82751f3c00">
+              <SHORT-NAME>startupConf</SHORT-NAME>
+              <STARTUP-CONFIGS>
+                <STARTUP-CONFIG UUID="Obfa84a01176fb37f8275186exObfa84a01176fb37f82751f4700">
+                  <SHORT-NAME>STARTUP_CONFIG_DEFAULT</SHORT-NAME>
+                  <SCHEDULING-POLICY>SCHEDULING-POLICY-ROUND-ROBIN</SCHEDULING-POLICY>
+                  <SCHEDULING-PRIORITY>20</SCHEDULING-PRIORITY>
+                  <STARTUP-OPTIONS>
+                    <STARTUP-OPTION>
+                      <OPTION-ARGUMENT>./etc/application.json</OPTION-ARGUMENT>
+                      <OPTION-KIND>COMMAND-LINE-SHORT-FORM</OPTION-KIND>
+                      <OPTION-NAME>c</OPTION-NAME>
+                    </STARTUP-OPTION>
+                  </STARTUP-OPTIONS>
+                </STARTUP-CONFIG>
+              </STARTUP-CONFIGS>
+            </STARTUP-CONFIG-SET>
+          </ELEMENTS>
+        </AR-PACKAGE>
+      </AR-PACKAGES>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>

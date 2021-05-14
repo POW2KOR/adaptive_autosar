@@ -98,6 +98,7 @@ pkg_tar(
         # For now we are commenting out the references for sw_update_client application
         # as we are not able to build the application with latest delivery
         #"//application/sw_update_client_minerva_adapter:sw_update_client_minerva_adapter_app": "opt/sw_update_client_minerva_adapter_app/bin/sw_update_client_minerva_adapter_app",
+        "//application/stub_application:stub_application": "opt/stub_application/bin/stub_application",
     },
     mode = "0755",
     package_dir = "/",
@@ -233,6 +234,16 @@ pkg_tar(
 )
 
 pkg_tar(
+    name = "adaptive_stub_applications_configs",
+    files = {
+        "//application/stub_application:stub_application_exec_config": "opt/stub_application/etc/exec_config.json",
+        "//application/stub_application:logging_config_json": "opt/stub_application/etc/logging_config.json",
+        "//application/stub_application:com_application_json": "opt/stub_application/etc/com_application.json",
+    },
+    mode = "0755",
+)
+
+pkg_tar(
     name = "minerva_mpu_adaptive_configs",
     mode = "0755",
     package_dir = "",
@@ -245,6 +256,7 @@ pkg_tar(
         # For now we are commenting out the references for sw_update_client application
         # as we are not able to build the application with latest delivery
         #":adaptive_sw_update_client_minerva_adapter_configs",
+        ":adaptive_stub_applications_configs",
         ":restart_app_demo_configs",
         ":shutdown_app_demo_configs",
         ":update_app_v1_demo_configs",
