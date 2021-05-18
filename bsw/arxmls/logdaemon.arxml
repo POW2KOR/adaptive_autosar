@@ -123,5 +123,28 @@
         </AR-PACKAGE>
       </AR-PACKAGES>
     </AR-PACKAGE>
+    <AR-PACKAGE>
+    <SHORT-NAME>DataTypes</SHORT-NAME>
+      <AR-PACKAGES>
+        <AR-PACKAGE>
+        <SHORT-NAME>ModelManagement</SHORT-NAME>
+        <ELEMENTS>
+        <MODE-DECLARATION-GROUP>
+              <SHORT-NAME>ApplicationStates</SHORT-NAME>
+              <MODE-DECLARATIONS>
+                <MODE-DECLARATION>
+                  <SHORT-NAME>Running</SHORT-NAME>
+                  <VALUE>0</VALUE>
+                </MODE-DECLARATION>
+                <MODE-DECLARATION>
+                  <SHORT-NAME>Terminating</SHORT-NAME>
+                  <VALUE>1</VALUE>
+                </MODE-DECLARATION>
+              </MODE-DECLARATIONS>
+            </MODE-DECLARATION-GROUP>
+        </ELEMENTS>
+        </AR-PACKAGE>
+      </AR-PACKAGES>
+    </AR-PACKAGE>
   </AR-PACKAGES>
 </AUTOSAR>
