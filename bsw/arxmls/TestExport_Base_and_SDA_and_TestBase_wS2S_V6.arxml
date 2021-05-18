@@ -17965,6 +17965,43 @@
             </MODE-DECLARATION-GROUP-PROTOTYPE>
           </FUNCTION-GROUPS>
           <MACHINE-DESIGN-REF DEST="MACHINE-DESIGN">/Topology/HardwareComponents/IDC_Adpative</MACHINE-DESIGN-REF>
+          <MODULE-INSTANTIATIONS>
+            <LOG-AND-TRACE-INSTANTIATION>
+              <SHORT-NAME>LogAndTraceInstantiation</SHORT-NAME>
+              <ADMIN-DATA>
+                <SDGS>
+                  <SDG GID="DvMex:LogAndTraceInstantiationExtensions">
+                    <SDG GID="DvMex:IpcPort">
+                      <SD>33</SD>
+                    </SDG>
+                    <SDG GID="DvMex:OutputConfiguration">
+                      <SDG GID="DvMex:OutputConfigurationClass">
+                        <SDG-CAPTION>
+                          <SHORT-NAME>tcp0</SHORT-NAME>
+                        </SDG-CAPTION>
+                        <SDG GID="DvMex:MessageBufferSize">
+                          <SD>1000</SD>
+                        </SDG>
+                        <SDG GID="DvMex:BufferStrategy">
+                          <SD>DROP-NEW</SD>
+                        </SDG>
+                        <SDG GID="DvMex:NetworkConfiguration">
+                          <SDX-REF DEST="ETHERNET-NETWORK-CONFIGURATION">/Machine/IDC6_M_P1_XAVIER/LogAndTraceInstantiation/EthernetNetworkConfiguration</SDX-REF>
+                        </SDG>
+                      </SDG>
+                    </SDG>
+                  </SDG>
+                </SDGS>
+              </ADMIN-DATA>
+              <NETWORK-CONFIGURATIONS>
+                <ETHERNET-NETWORK-CONFIGURATION>
+                  <SHORT-NAME>EthernetNetworkConfiguration</SHORT-NAME>
+                  <COMMUNICATION-CONNECTOR-REF DEST="ETHERNET-COMMUNICATION-CONNECTOR">/Topology/HardwareComponents/IDC_Adpative/EthernetConnector</COMMUNICATION-CONNECTOR-REF>
+                  <TCP-PORT>49361</TCP-PORT>
+                </ETHERNET-NETWORK-CONFIGURATION>
+              </NETWORK-CONFIGURATIONS>
+            </LOG-AND-TRACE-INSTANTIATION>
+          </MODULE-INSTANTIATIONS>
           <PROCESSORS>
             <PROCESSOR UUID="Obfa84a01176fb37f8274838aXObfa84a01176fb37f8274838900">
               <SHORT-NAME>IDC6_M_P1</SHORT-NAME>
