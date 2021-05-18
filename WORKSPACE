@@ -246,7 +246,7 @@ new_git_repository(
     # alternative for cloning using HTTPS
     # remote = "https://git.swf.daimler.com/adasdai/starter_kit_adaptive_xavier.git",
     build_file = "@//bsw:starter_kit_adaptive_xavier.BUILD",
-    commit = "af9b567099297ce671b24b8b9eb3edc7f30ab610",  # the commit ID that bazel will use to fetch the external repository
+    commit = "639ef0778a5a5f1603eb9bd15f127128b642d83e",  # the commit ID that bazel will use to fetch the external repository
     init_submodules = True,
     remote = "ssh://git@git.swf.daimler.com:7999/adasdai/starter_kit_adaptive_xavier.git",
     shallow_since = "1619023366 +0200",
