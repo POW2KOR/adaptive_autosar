@@ -200,7 +200,6 @@ filegroup(
         "examples/idc6-demo/arxml/Step1ab_PersistencyDesign.arxml",
         "examples/idc6-demo/arxml/Step1ab_PersistencyPortPrototypeMapping.arxml",
         "examples/idc6-demo/arxml/SystemApplications.arxml",
-        "examples/idc6-demo/arxml/TestExport_Base_and_SDA_and_TestBase_wS2S_V6.arxml",
         "examples/idc6-demo/arxml/cryptostack.arxml",
         "examples/idc6-demo/arxml/packagemanagement_extensions.arxml",
         "examples/idc6-demo/arxml/sda_PackageManagement_Ipc_Required.arxml",
