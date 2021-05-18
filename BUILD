@@ -1,7 +1,5 @@
 load("@bazel_skylib//rules:common_settings.bzl", "string_flag")
 load("@rules_pkg//:pkg.bzl", "pkg_deb", "pkg_tar")
-load("@io_bazel_rules_docker//container:container.bzl", "container_image")
-load("@io_bazel_rules_docker//docker/util:run.bzl", "container_run_and_commit")
 
 package(default_visibility = ["//visibility:public"])
 
@@ -295,48 +293,6 @@ pkg_deb(
     maintainer = "Minerva Platform",
     package = "minerva_mpu_adaptive",
     version = "0.0.0",
-)
-
-container_run_and_commit(
-    name = "minerva_mpu_adaptive_docker_image",
-    commands = [
-        "apt update",
-        "apt-get install -y iproute2 strace",
-    ],
-    docker_run_flags = [
-        "--env http_proxy=http://172.17.0.1:3128",
-        "--env https_proxy=http://172.17.0.1:3128",
-    ],
-    image = "@ubuntu_18.04//image",
-)
-
-container_image(
-    name = "minerva_mpu_adaptive_docker",
-    base = ":minerva_mpu_adaptive_docker_image",
-    docker_run_flags = " ".join([
-        "-it",
-        "--cap-add SYS_NICE",
-        "--cap-add NET_ADMIN",
-        "--ip 10.21.17.98",
-        "--sysctl net.ipv6.conf.all.disable_ipv6=0",
-        "--net mnv0",
-    ]),
-    entrypoint = select({
-        ":docker_entrypoint_execution_manager": [
-            "/bin/sh",
-            "-c",
-            "ip link set lo multicast on && ip route add ff01::0/16 dev lo && /sbin/amsr_vector_fs_em_executionmanager -a /opt -m /etc/machine_exec_config.json",
-        ],
-        ":docker_entrypoint_shell": [
-            "/bin/sh",
-        ],
-    }),
-    # The legacy_run_behavior is not disabled on container_image by default
-    legacy_run_behavior = False,
-    stamp = True,
-    tars = [
-        ":minerva_mpu_adaptive_filesystem",
-    ],
 )
 
 # We need it as a temporary workaround to resolve cyclic dependency between code generator and
