@@ -17949,6 +17949,15 @@
       <ELEMENTS>
         <MACHINE UUID="Obfa84a01176fb37f82748351xObfa84a01176fb37f82748ecf00">
           <SHORT-NAME>IDC6_M_P1_XAVIER</SHORT-NAME>
+          <ADMIN-DATA>
+            <SDGS>
+              <SDG GID="DvMex:MachineExtensions">
+                <SDG GID="DvMex:EcuId">
+                  <SD>ECU1</SD>
+                </SDG>
+              </SDG>
+            </SDGS>
+          </ADMIN-DATA>
           <FUNCTION-GROUPS>
             <MODE-DECLARATION-GROUP-PROTOTYPE UUID="Obfa84a01176fb37f82748ee8XObfa84a01176fb37f82748ee700">
               <SHORT-NAME>MachineState</SHORT-NAME>
