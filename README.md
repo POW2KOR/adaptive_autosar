@@ -1,6 +1,6 @@
-# Minerva MPU repository
+# Adaptive Autosar repository
 
-This is the MPU Adaptive AUTOSAR repository for the Minerva project.
+This is the MPU Adaptive AUTOSAR repository for the Gen20x.i3 project.
 
 Apart from this document, you will find more documentation under `docs/`.
 
