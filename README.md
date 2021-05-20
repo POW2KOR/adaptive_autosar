@@ -13,17 +13,16 @@ devcontainers
 
 ### The use of docker in this repository
 
-Currently we use docker both to build and to run our applications. Both cases are optional, but they make certain
-things easier and they enable a few extra use-cases. For example, for building, it allows us to deliver all the
-dependencies and tools under one package (NVIDIA Drive SDK, toolchains, Bazel dependencies) and have little
-interference from Daimler IT. For running, this allows us to make use of docker virtual networks with custom subnets
-and IP address configurations without actually affecting the developer machine configuration.
+Currently we use docker to build applications. It is optional, but it makes certain things easier and they enable a few
+extra use-cases. For example, for building, it allows us to deliver all the dependencies and tools under one package
+(NVIDIA Drive SDK, toolchains, Bazel dependencies) and have little interference from Daimler IT. In the past we also
+used to use docker to run as well, but began to hit issues with network and firewall configurations, as well as not
+being able to run our stack in the CI pipelines.
 
 You can find a guide on setting up docker on Daimler Ubuntu laptops
 [here](https://wiki.swf.daimler.com/display/swf/How+to+setup+docker).
 
-We call the docker container where we build things the `build_env` and the docker container where we run things the
-`run_env`.
+We call the docker container where we build things `build_env` and sometimes `devcontainer`.
 
 The `build_env` is currently configured in
 [this repository](https://git.swf.daimler.com/adasdai/minerva_mpu_docker/). The CI/CD pipeline for this repository
@@ -109,68 +108,42 @@ these variables are not set, then Bazel will assume the following values:
 
 ## Running
 
-### Running on host with the run_env docker
+### Running on host with QEMU
 
-The following command will allow you to run the Minerva MPU Adaptive stack inside a docker container on your
-development machine. There are few dependencies that should be resolved before going ahead with the build.
+This method is currently known to only work with the `build_env`. This is because it needs the NVIDIA DRIVE OS Linux
+files which come as part of the `build_env` container. If you would want to make this work without the
+`build_env`, you would have to make sure you have the correct DRIVE OS SDK dependencies placed at `/drive`.
 
-#### Running Docker
+Our QEMU execution environment currently only support aarch64 executables. This is because it uses DRIVE OS Linux as a
+base, which NVIDIA provides only for aarch64.
 
-Before running, you will need to create a docker network configured for the subnet in the NCD. This should be a one-time
-setup. Run the command below:
+The execution is currently done through a script, although this will be moved back to be done through bazel in the
+future.
 
-```
-docker network create --subnet 10.21.17.0/24 mnv0
-```
+First, make sure you built the stack using the steps above. Use the `aarch64_linux_linaro` config. This uses the DRIVE
+SDK toolchain.
 
-Then, run the application with below command:
-
-```
-bazel run //:minerva_mpu_adaptive_docker --config=<CONFIGURATION>
-```
-
-where `<CONFIGURATION>` is your configuration type, e.g. `x86_64_linux`. This should be the same configuration
-you've used during the build stage.
-This command invokes the rest of dependencies and launches demo application in a container.
-
-**NOTE** There might be an issue with firewall settings which blocks pulling the Ubuntu image from Dockerhub.
-For now, this might be solved by temporary disabling your firewall.
-
-There are two modes to run, the first mode is `--//:docker_entrypoint="shell"`, which drops to a shell inside the
-container, where you can run any command. The other mode is `--//:docker_entrypoint="execution_manager"`, which is also
-the implicit default, configures the IP stack for the Vector BSW and then starts the execution manager.
-
-Currently, if you enter into shell mode, you will have to setup the network stack yourself before running the
-application. This is something that will be addressed in the future, but has to be done manually at the moment. For
-more information, look into `minerva_mpu_adaptive/BUILD` in the `entrypoint` parameter of the target with
-`name = "minerva_mpu_adaptive_docker"`. This mode is useful if you want to do quick changes/iteration without losing
-your current state.
-
-No matter what mode you are running, you can open extra terminals into the container by using the following method:
-
-- Get the id of the container using the command below. If nothing is printed, it means your container is not running.
+Then run like so:
 
 ```
-docker ps -qf "ancestor=bazel:minerva_mpu_adaptive_docker"
+cd os/linux # Important!
+./run_aarch64_qemu.sh
 ```
 
-- Enter the container with `docker exec` like below. Replace `<container id>` with the id returned by the previous
-step. You can also run other commands than `/bin/bash`, provided that this command has been already added to the
-container.
+On first run, the script will download and build the Linux kernel and it will also put together the DRIVE OS
+Linux filesystem. Depending on your machine, this might be enough time for you to have lunch, a cake and a couple of
+coffees. Luckily, subsequent runs will re-use the results from the first run, so you will only have to do this once.
 
-```
-docker exec -it <container id> /bin/bash
-```
+If you open up the `os/linux/run_aarch64_qemu.sh` script, you will see a bunch of configurable parameters. The most
+important is `BOOT_INTO_ADAPTIVE_STACK`. When it is set to true, this will cause the QEMU instance to start the Adaptive
+AUTOSAR stack as soon as systemd has finished booting the system. When it is set to false, this will cause the QEMU
+instance to drop to a login prompt once systemd has finished booting the system. The username is `nvidia` and password
+`nvidia`. To know which command to use to start the Adaptive stack, read the `ExecStart` field from the `os/linux/configs/adaptive-stack.service` file in this repository.
 
 ### Connecting to remote DLT
 
 All of the applications apart from the `log-daemon` are configured to output remote DLT over TCP at IP address
 `10.21.17.98` and port `49361`.
-
-Sometimes, you may not be able to connect to this address. This can happen because you have multiple interfaces on your
-system which have the same 10.21.17.0/24 subnet associated to them and your DLT viewer might be confused about which one
-of these to use. To check this, run `ip add | grep 10.21.17.` and see if you get more than one match. If this is true,
-you can use the `./tools/remove_bridge_networks.sh` script to clean up your bridge interfaces.
 
 ## Miscellaneous
 

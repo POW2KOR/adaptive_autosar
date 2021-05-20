@@ -26,47 +26,6 @@
             "props": "hash=352c090cc3d3f9a6b4e676cf42a6047c16824959b438895a76c2989c6d7c246a"
         },
         {
-            "pattern": "https://github.com/bazelbuild/rules_docker/releases/download/v0.16.0/rules_docker-v0.16.0.tar.gz",
-            "target": "tools/bazel/rules_docker-v0.16.0.tar.gz",
-            "props": "hash=95d39fd84ff4474babaf190450ee034d958202043e366b9fc38f438c9e6c3334"
-        },
-        {
-            "pattern": "https://github.com/bazelbuild/rules_go/releases/download/v0.27.0/rules_go-v0.27.0.tar.gz",
-            "target": "tools/bazel/rules_go-v0.27.0.tar.gz",
-            "props": "hash=69de5c704a05ff37862f7e0f5534d4f479418afc21806c887db544a316f3cb6b"
-        },
-        {
-            "pattern": "https://github.com/bazelbuild/bazel-gazelle/releases/download/v0.21.1/bazel-gazelle-v0.21.1.tar.gz",
-            "target": "tools/bazel/bazel-gazelle-v0.21.1.tar.gz",
-            "props": "hash=cdb02a887a7187ea4d5a27452311a75ed8637379a1287d8eeb952138ea485f7d"
-        },
-        {
-            "pattern": "https://github.com/bazelbuild/platforms/archive/681f1ee032566aa2d443cf0335d012925d9c58d4.zip",
-            "target": "tools/bazel/681f1ee032566aa2d443cf0335d012925d9c58d4.zip",
-            "props": "hash=ae95e4bfcd9f66e9dc73a92cee0107fede74163f788e3deefe00f3aaae75c431"
-        },
-        {
-            "pattern": "https://dl.google.com/go/go1.15.2.linux-amd64.tar.gz",
-            "target": "tools/bazel/go1.15.2.linux-amd64.tar.gz",
-            "path": "tools/bazel/go_sdk",
-            "props": "hash=b49fda1ca29a1946d6bb2a5a6982cf07ccd2aba849289508ee0f9918f6bb4552"
-        },
-        {
-            "pattern": "https://storage.googleapis.com/rules_docker/fdebd6e0b6c9185a115379166c1c067f88d53630/puller-darwin-amd64",
-            "target": "tools/bazel/puller-darwin-amd64",
-            "props": "hash=62b405511624528ba5b2716b1b93b5591c41edeca57195efc62da14001441c44"
-        },
-        {
-            "pattern": "https://storage.googleapis.com/rules_docker/fdebd6e0b6c9185a115379166c1c067f88d53630/puller-linux-amd64",
-            "target": "tools/bazel/puller-linux-amd64",
-            "props": "hash=1bcbbf86972cde8448dfab770a686801c46a1739f68f1d7a5373a4f0c3954846"
-        },
-        {
-            "pattern": "https://api.github.com/repos/google/go-containerregistry/tarball/e5f4efd48dbff3ab3165a944d6777f8db28f0ccb",
-            "target": "tools/bazel/google-go-containerregistry-v0.1.1-5-ge5f4efd.tar.gz",
-            "props": "hash=3a5f9ff61b48b928ce37e9d227a581571957b3b3ad5d45d148bce5433f9c9a6c"
-        },
-        {
             "pattern": "https://api.github.com/repos/pkg/errors/tarball/614d223910a179a466c1767a985424175c39b465",
             "target": "tools/bazel/pkg-errors-v0.9.1-0-g614d223.tar.gz",
             "props": "hash=208d21a7da574026f68a8c9818fa7c6ede1b514ef9e72dc733b496ddcb7792a6"
@@ -85,11 +44,6 @@
             "pattern": "https://mirror.bazel.build/bazel_java_tools/releases/javac11/v9.0/java_tools_javac11_linux-v9.0.zip",
             "target": "tools/bazel/java_tools_javac11_linux-v9.0.zip",
             "props": "hash=0be37f4227590ecb6bc929a6a7e427c65e6239363e4c3b28b1a211718b9636c9"
-        },
-        {
-            "pattern": "https://github.com/bazelbuild/rules_proto/archive/97d8af4dc474595af3900dd85cb3a29ad28cc313.tar.gz",
-            "target": "tools/bazel/rules_proto.tar.gz",
-            "props": "hash=602E7161D9195E50246177E7C55B2F39950A9CF7366F74ED5F22FD45750CD208"
         },
         {
             "pattern": "https://github.com/bazelbuild/rules_python/releases/download/0.1.0/rules_python-0.1.0.tar.gz",
