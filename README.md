@@ -108,7 +108,7 @@ these variables are not set, then Bazel will assume the following values:
 
 ## Running
 
-### Running on host with QEMU
+### Running a virtual ECU with QEMU
 
 This method is currently known to only work with the `build_env`. This is because it needs the NVIDIA DRIVE OS Linux
 files which come as part of the `build_env` container. If you would want to make this work without the
