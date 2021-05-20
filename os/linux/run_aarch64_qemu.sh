@@ -78,6 +78,7 @@ if [ ! -f "driveos.ext4.qcow2" ]; then
     mv driveos-tmp.ext4.qcow2 driveos.ext4.qcow2
 fi
 
+rm -f adaptive_overlay.ext4.qcow2
 qemu-img create -b driveos.ext4.qcow2 -f qcow2 adaptive_overlay.ext4.qcow2
 
 if [ "$BOOT_INTO_ADAPTIVE_STACK" = true ] ; then
