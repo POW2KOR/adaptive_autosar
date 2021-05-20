@@ -10,8 +10,11 @@ ENV SHELL /bin/bash
 
 # These should be moved to minerva_mpu_docker once proposal is discussed with
 # workstream
-RUN apt update \
+RUN curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | bash \
+    && apt update \
     && apt install -y \
+    # Install latest git LFS to avoid OAuth token issues
+    git-lfs \
     # Needed for kernel building
     flex bison libssl-dev \
     # Needed for QEMU execution
@@ -37,3 +40,5 @@ RUN SNIPPET="export PROMPT_COMMAND='history -a' && export HISTFILE=/command_hist
 
 # Set the default user
 USER $USERNAME
+
+RUN git lfs install
