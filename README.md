@@ -138,7 +138,8 @@ If you open up the `os/linux/run_aarch64_qemu.sh` script, you will see a bunch o
 important is `BOOT_INTO_ADAPTIVE_STACK`. When it is set to true, this will cause the QEMU instance to start the Adaptive
 AUTOSAR stack as soon as systemd has finished booting the system. When it is set to false, this will cause the QEMU
 instance to drop to a login prompt once systemd has finished booting the system. The username is `nvidia` and password
-`nvidia`. To know which command to use to start the Adaptive stack, read the `ExecStart` field from the `os/linux/configs/adaptive-stack.service` file in this repository.
+`nvidia`. To know which command to use to start the Adaptive stack, read the `ExecStart` field from the
+`os/linux/configs/adaptive-stack.service` file in this repository.
 
 ### Connecting to remote DLT
 
