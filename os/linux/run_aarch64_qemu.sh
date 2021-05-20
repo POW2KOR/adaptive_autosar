@@ -29,7 +29,7 @@ cd runtime
 if [ ! -f "kernel-build/arch/arm64/boot/Image" ]; then
     printf "Fetch and build kernel...\n"
 
-    wget https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-5.12.tar.xz
+    wget -c -N https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-5.12.tar.xz
 
     tar xf linux-5.12.tar.xz
 
