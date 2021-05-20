@@ -3,21 +3,38 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_00047.xsd">
   <AR-PACKAGES>
     <AR-PACKAGE>
-      <SHORT-NAME>vector</SHORT-NAME>
+      <SHORT-NAME>Application</SHORT-NAME>
       <AR-PACKAGES>
         <AR-PACKAGE>
-          <SHORT-NAME>bsw</SHORT-NAME>
+          <SHORT-NAME>AdaptiveApplicationSwComponentTypes</SHORT-NAME>
           <ELEMENTS>
             <ADAPTIVE-APPLICATION-SW-COMPONENT-TYPE>
               <SHORT-NAME>amsr_vector_fs_log_daemon_swc</SHORT-NAME>
             </ADAPTIVE-APPLICATION-SW-COMPONENT-TYPE>
+          </ELEMENTS>
+        </AR-PACKAGE>
+        <AR-PACKAGE>
+          <SHORT-NAME>Executables</SHORT-NAME>
+          <ELEMENTS>
             <EXECUTABLE>
               <SHORT-NAME>amsr_vector_fs_log_daemon</SHORT-NAME>
               <CATEGORY>PLATFORM_LEVEL</CATEGORY>
               <ROOT-SW-COMPONENT-PROTOTYPE>
                 <SHORT-NAME>amsr_vector_fs_log_daemon_root_type</SHORT-NAME>
+                <APPLICATION-TYPE-TREF DEST="ADAPTIVE-APPLICATION-SW-COMPONENT-TYPE">/Application/AdaptiveApplicationSwComponentTypes/amsr_vector_fs_log_daemon_swc</APPLICATION-TYPE-TREF>
               </ROOT-SW-COMPONENT-PROTOTYPE>
+              <VERSION>1.00.00.0000</VERSION>
             </EXECUTABLE>
+          </ELEMENTS>
+        </AR-PACKAGE>
+      </AR-PACKAGES>
+    </AR-PACKAGE>
+    <AR-PACKAGE>
+      <SHORT-NAME>ApplicationDeployment</SHORT-NAME>
+      <AR-PACKAGES>
+        <AR-PACKAGE>
+          <SHORT-NAME>Processes</SHORT-NAME>
+          <ELEMENTS>
             <PROCESS>
               <SHORT-NAME>LogDaemonDefaultProcess</SHORT-NAME>
               <ADMIN-DATA>
@@ -41,7 +58,7 @@
                   </SDG>
                 </SDGS>
               </ADMIN-DATA>
-              <EXECUTABLE-REF DEST="EXECUTABLE">/vector/bsw/amsr_vector_fs_log_daemon</EXECUTABLE-REF>
+              <EXECUTABLE-REF DEST="EXECUTABLE">/Application/Executables/amsr_vector_fs_log_daemon</EXECUTABLE-REF>
               <LOG-TRACE-DEFAULT-LOG-LEVEL>INFO</LOG-TRACE-DEFAULT-LOG-LEVEL>
               <LOG-TRACE-LOG-MODE>CONSOLE</LOG-TRACE-LOG-MODE>
               <LOG-TRACE-PROCESS-DESC>Vector Log Daemon</LOG-TRACE-PROCESS-DESC>
@@ -54,23 +71,23 @@
                 <STATE-DEPENDENT-STARTUP-CONFIG>
                   <FUNCTION-GROUP-STATE-IREFS>
                     <FUNCTION-GROUP-STATE-IREF>
-                      <CONTEXT-MODE-DECLARATION-GROUP-PROTOTYPE-REF DEST="MODE-DECLARATION-GROUP-PROTOTYPE">/vector/LogMachine/MachineState</CONTEXT-MODE-DECLARATION-GROUP-PROTOTYPE-REF>
-                      <TARGET-MODE-DECLARATION-REF DEST="MODE-DECLARATION">/vector/MachineStates/Startup</TARGET-MODE-DECLARATION-REF>
+                      <CONTEXT-MODE-DECLARATION-GROUP-PROTOTYPE-REF DEST="MODE-DECLARATION-GROUP-PROTOTYPE">/Machine/IDC6_M_P1_XAVIER/MachineState</CONTEXT-MODE-DECLARATION-GROUP-PROTOTYPE-REF>
+                      <TARGET-MODE-DECLARATION-REF DEST="MODE-DECLARATION">/DataTypes/ModelManagement/MachineStates/Startup</TARGET-MODE-DECLARATION-REF>
                     </FUNCTION-GROUP-STATE-IREF>
                     <FUNCTION-GROUP-STATE-IREF>
-                      <CONTEXT-MODE-DECLARATION-GROUP-PROTOTYPE-REF DEST="MODE-DECLARATION-GROUP-PROTOTYPE">/vector/LogMachine/MachineState</CONTEXT-MODE-DECLARATION-GROUP-PROTOTYPE-REF>
-                      <TARGET-MODE-DECLARATION-REF DEST="MODE-DECLARATION">/vector/MachineStates/Shutdown</TARGET-MODE-DECLARATION-REF>
+                      <CONTEXT-MODE-DECLARATION-GROUP-PROTOTYPE-REF DEST="MODE-DECLARATION-GROUP-PROTOTYPE">/Machine/IDC6_M_P1_XAVIER/MachineState</CONTEXT-MODE-DECLARATION-GROUP-PROTOTYPE-REF>
+                      <TARGET-MODE-DECLARATION-REF DEST="MODE-DECLARATION">/DataTypes/ModelManagement/MachineStates/Shutdown</TARGET-MODE-DECLARATION-REF>
                     </FUNCTION-GROUP-STATE-IREF>
                     <FUNCTION-GROUP-STATE-IREF>
-                      <CONTEXT-MODE-DECLARATION-GROUP-PROTOTYPE-REF DEST="MODE-DECLARATION-GROUP-PROTOTYPE">/vector/LogMachine/MachineState</CONTEXT-MODE-DECLARATION-GROUP-PROTOTYPE-REF>
-                      <TARGET-MODE-DECLARATION-REF DEST="MODE-DECLARATION">/vector/MachineStates/Restart</TARGET-MODE-DECLARATION-REF>
+                      <CONTEXT-MODE-DECLARATION-GROUP-PROTOTYPE-REF DEST="MODE-DECLARATION-GROUP-PROTOTYPE">/Machine/IDC6_M_P1_XAVIER/MachineState</CONTEXT-MODE-DECLARATION-GROUP-PROTOTYPE-REF>
+                      <TARGET-MODE-DECLARATION-REF DEST="MODE-DECLARATION">/DataTypes/ModelManagement/MachineStates/Restart</TARGET-MODE-DECLARATION-REF>
                     </FUNCTION-GROUP-STATE-IREF>
                     <FUNCTION-GROUP-STATE-IREF>
-                      <CONTEXT-MODE-DECLARATION-GROUP-PROTOTYPE-REF DEST="MODE-DECLARATION-GROUP-PROTOTYPE">/vector/LogMachine/MachineState</CONTEXT-MODE-DECLARATION-GROUP-PROTOTYPE-REF>
-                      <TARGET-MODE-DECLARATION-REF DEST="MODE-DECLARATION">/vector/MachineStates/Running</TARGET-MODE-DECLARATION-REF>
+                      <CONTEXT-MODE-DECLARATION-GROUP-PROTOTYPE-REF DEST="MODE-DECLARATION-GROUP-PROTOTYPE">/Machine/IDC6_M_P1_XAVIER/MachineState</CONTEXT-MODE-DECLARATION-GROUP-PROTOTYPE-REF>
+                      <TARGET-MODE-DECLARATION-REF DEST="MODE-DECLARATION">/DataTypes/ModelManagement/MachineStates/Running</TARGET-MODE-DECLARATION-REF>
                     </FUNCTION-GROUP-STATE-IREF>
                   </FUNCTION-GROUP-STATE-IREFS>
-                  <STARTUP-CONFIG-REF DEST="STARTUP-CONFIG">/vector/bsw/log_daemon_startup_config/StartupRunning</STARTUP-CONFIG-REF>
+                  <STARTUP-CONFIG-REF DEST="STARTUP-CONFIG">/ApplicationDeployment/Processes/log_daemon_startup_config/STARTUP_CONFIG_RUNNING</STARTUP-CONFIG-REF>
                 </STATE-DEPENDENT-STARTUP-CONFIG>
               </STATE-DEPENDENT-STARTUP-CONFIGS>
             </PROCESS>
@@ -79,9 +96,9 @@
               <PROCESS-TO-MACHINE-MAPPINGS>
                 <PROCESS-TO-MACHINE-MAPPING>
                   <SHORT-NAME>LogProcToMachineMapping</SHORT-NAME>
-                  <MACHINE-REF DEST="MACHINE">/vector/LogMachine</MACHINE-REF>
-                  <NON-OS-MODULE-INSTANTIATION-REF DEST="LOG-AND-TRACE-INSTANTIATION">/vector/LogMachine/LogAndTraceInstantiation</NON-OS-MODULE-INSTANTIATION-REF>
-                  <PROCESS-REF DEST="PROCESS">/vector/bsw/LogDaemonDefaultProcess</PROCESS-REF>
+                  <MACHINE-REF DEST="MACHINE">/Machine/IDC6_M_P1_XAVIER</MACHINE-REF>
+                  <NON-OS-MODULE-INSTANTIATION-REF DEST="LOG-AND-TRACE-INSTANTIATION">/Machine/IDC6_M_P1_XAVIER/LogAndTraceInstantiation</NON-OS-MODULE-INSTANTIATION-REF>
+                  <PROCESS-REF DEST="PROCESS">/ApplicationDeployment/Processes/LogDaemonDefaultProcess</PROCESS-REF>
                 </PROCESS-TO-MACHINE-MAPPING>
               </PROCESS-TO-MACHINE-MAPPINGS>
             </PROCESS-TO-MACHINE-MAPPING-SET>
@@ -89,7 +106,7 @@
               <SHORT-NAME>log_daemon_startup_config</SHORT-NAME>
               <STARTUP-CONFIGS>
                 <STARTUP-CONFIG>
-                  <SHORT-NAME>StartupRunning</SHORT-NAME>
+                  <SHORT-NAME>STARTUP_CONFIG_RUNNING</SHORT-NAME>
                   <SCHEDULING-POLICY>SCHEDULING-POLICY-FIFO</SCHEDULING-POLICY>
                   <SCHEDULING-PRIORITY>80</SCHEDULING-PRIORITY>
                   <STARTUP-OPTIONS>
@@ -103,6 +120,29 @@
               </STARTUP-CONFIGS>
             </STARTUP-CONFIG-SET>
           </ELEMENTS>
+        </AR-PACKAGE>
+      </AR-PACKAGES>
+    </AR-PACKAGE>
+    <AR-PACKAGE>
+    <SHORT-NAME>DataTypes</SHORT-NAME>
+      <AR-PACKAGES>
+        <AR-PACKAGE>
+        <SHORT-NAME>ModelManagement</SHORT-NAME>
+        <ELEMENTS>
+        <MODE-DECLARATION-GROUP>
+              <SHORT-NAME>ApplicationStates</SHORT-NAME>
+              <MODE-DECLARATIONS>
+                <MODE-DECLARATION>
+                  <SHORT-NAME>Running</SHORT-NAME>
+                  <VALUE>0</VALUE>
+                </MODE-DECLARATION>
+                <MODE-DECLARATION>
+                  <SHORT-NAME>Terminating</SHORT-NAME>
+                  <VALUE>1</VALUE>
+                </MODE-DECLARATION>
+              </MODE-DECLARATIONS>
+            </MODE-DECLARATION-GROUP>
+        </ELEMENTS>
         </AR-PACKAGE>
       </AR-PACKAGES>
     </AR-PACKAGE>

@@ -3,8 +3,8 @@ load("@minerva_mpu_adaptive//:bazel/defs.bzl", "minerva_aa_bsw_module", "minerva
 package(default_visibility = ["//visibility:public"])
 
 filegroup(
-    name = "machine_arxml",
-    srcs = ["arxmls/machine.arxml"],
+    name = "idc_ecu_extract_arxml",
+    srcs = ["arxmls/TestExport_Base_and_SDA_and_TestBase_wS2S_V6.arxml"],
 )
 
 filegroup(
@@ -16,13 +16,13 @@ filegroup(
     name = "amsr_vector_fs_log_daemon_arxml",
     srcs = [
         "arxmls/logdaemon.arxml",
-        "arxmls/logdaemon_machine.arxml",
     ],
 )
 
 filegroup(
     name = "complete_arxml",
     srcs = [
+        ":idc_ecu_extract_arxml",
         "@starter_kit_adaptive_xavier//:mex_arxml",
         "@starter_kit_adaptive_xavier//:ncd_arxml",
         "@starter_kit_adaptive_xavier//:standard_types_arxml",
@@ -192,7 +192,8 @@ minerva_aa_codegen_rule(
 minerva_aa_codegen_rule(
     name = "minerva_amsr_fs_log_daemon_config_gen_rule",
     arxml_srcs = [
-        ":complete_arxml",
+        "@starter_kit_adaptive_xavier//:mex_arxml",
+        ":idc_ecu_extract_arxml",
         ":amsr_vector_fs_log_daemon_arxml",
     ],
     generators = [
