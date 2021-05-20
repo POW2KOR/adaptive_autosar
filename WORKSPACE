@@ -37,7 +37,6 @@ rules_pkg_dependencies()
 http_archive(
     name = "remote_coverage_tools",
     sha256 = "cd14f1cb4559e4723e63b7e7b06d09fcc3bd7ba58d03f354cdff1439bd936a7d",
-    #strip_prefix = "remote_coverage_tools",
     url = "file:///usr/tools/bazel/remote_coverage_tools.zip",
 )
 
@@ -55,7 +54,6 @@ http_archive(
 http_archive(
     name = "rules_python",
     sha256 = "b6d46438523a3ec0f3cead544190ee13223a52f6a6765a29eae7b7cc24cc83a0",
-    #strip_prefix = "rules_foreign_cc-ed95b95affecaa3ea3bf7bab3e0ab6aa847dfb06",
     url = "file:///usr/tools/bazel/rules_python-0.1.0.tar.gz",
 )
 
@@ -84,7 +82,6 @@ qnx_toolchain_configure(
 http_archive(
     name = "bazel_skylib",
     sha256 = "1c531376ac7e5a180e0237938a2536de0c54d93f5c278634818e0efc952dd56c",
-    #strip_prefix = "rules_foreign_cc-ed95b95affecaa3ea3bf7bab3e0ab6aa847dfb06",
     url = "file:///usr/tools/bazel/bazel-skylib-1.0.3.tar.gz",
 )
 
@@ -95,19 +92,14 @@ http_archive(
     url = "file:///usr/tools/bazel/googletest.zip",
 )
 
-http_archive(
-    name = "rules_proto",
-    sha256 = "602e7161d9195e50246177e7c55b2f39950a9cf7366f74ed5f22fd45750cd208",
-    strip_prefix = "rules_proto-97d8af4dc474595af3900dd85cb3a29ad28cc313",
-    url = "file:///usr/tools/bazel/rules_proto.tar.gz",
-)
-
 load("@rules_foreign_cc//foreign_cc:repositories.bzl", "rules_foreign_cc_dependencies")
 
 rules_foreign_cc_dependencies(register_default_tools = True)
 
 load("@bazel_tools//tools/build_defs/repo:git.bzl", "new_git_repository")
 
+# If you want to make frequent changes to the starter_kit or amsr_xavier, consider
+# using the --override_repository bazel command-line argument.
 new_git_repository(
     name = "starter_kit_adaptive_xavier",  # bazel will create under its own cache folder in the external folder package with the specified name(e.g. external/starter_kit_adaptive_xavier)
     # alternative for cloning using HTTPS
@@ -116,16 +108,8 @@ new_git_repository(
     commit = "639ef0778a5a5f1603eb9bd15f127128b642d83e",  # the commit ID that bazel will use to fetch the external repository
     init_submodules = True,
     remote = "ssh://git@git.swf.daimler.com:7999/adasdai/starter_kit_adaptive_xavier.git",
-    shallow_since = "1619023366 +0200",
+    shallow_since = "1621327161 +0200",
 )
-
-# Enable the below rule if you want to avoid cloning of repo at every run
-# You need to provide the path of vector_sip_aa repo locally
-'''new_local_repository(
-    name = "starter_kit_adaptive_xavier",
-    build_file = "@//bsw:starter_kit_adaptive_xavier.BUILD",
-    path = "<local_path_to_reposittory>",
-)'''
 
 new_git_repository(
     name = "collectd_mbient",  # bazel will create under its own cache folder in the external folder package with the specified name(e.g. external/collectd_mbient)
