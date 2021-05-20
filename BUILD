@@ -99,6 +99,7 @@ pkg_tar(
         # as we are not able to build the application with latest delivery
         #"//application/sw_update_client_minerva_adapter:sw_update_client_minerva_adapter_app": "opt/sw_update_client_minerva_adapter_app/bin/sw_update_client_minerva_adapter_app",
         "//application/stub_application:stub_application": "opt/stub_application/bin/stub_application",
+        "//application/idc6mt:idc6mt": "opt/idc6mt/bin/idc6mt",
     },
     mode = "0755",
     package_dir = "/",
@@ -244,6 +245,16 @@ pkg_tar(
 )
 
 pkg_tar(
+    name = "adaptive_idc6mt_configs",
+    files = {
+        "//application/idc6mt:idc6mt_exec_config": "opt/idc6mt/etc/exec_config.json",
+        "//application/idc6mt:logging_config_json": "opt/idc6mt/etc/logging_config.json",
+        "//application/idc6mt:com_application_json": "opt/idc6mt/etc/com_application.json",
+    },
+    mode = "0755",
+)
+
+pkg_tar(
     name = "minerva_mpu_adaptive_configs",
     mode = "0755",
     package_dir = "",
@@ -256,6 +267,7 @@ pkg_tar(
         # For now we are commenting out the references for sw_update_client application
         # as we are not able to build the application with latest delivery
         #":adaptive_sw_update_client_minerva_adapter_configs",
+        ":adaptive_idc6mt_configs",
         ":adaptive_stub_applications_configs",
         ":restart_app_demo_configs",
         ":shutdown_app_demo_configs",

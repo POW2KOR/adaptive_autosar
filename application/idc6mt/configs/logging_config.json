@@ -1,0 +1,11 @@
+{
+    "name": "IDC6MT",
+    "description": "IDC6 Measurement and Trace Daemon",
+    "dlt_id": "MTD",
+    "log_mode": ["kConsole"],
+    "log_level": "kVerbose",
+    "log_dir_path": "./log",
+    "ipc_port": 33,
+    "reconnection_retry_offset": 0,
+    "msg_buf_size": 1000
+}
