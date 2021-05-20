@@ -74,15 +74,10 @@ A docker service restart is needed to apply the settings:
 ```
 sudo systemctl restart docker
 ```
-
-If you need also docker support inside the docker image you need to add the `-v /var/run/docker.sock:/var/run/docker.sock` option to mount the docker socket.
-
 ## Building the image locally (not recommended, instead download it from Artifactory)
 ```
 docker build -t minerva_mpu --network=host --build-arg https_proxy=$https_proxy --build-arg http_proxy=$http_proxy --build-arg no_proxy=hksmirror.rd.corpintra.net,ubunturepo.rd.corpintra.net .
 ```
-If you want to have the same docker system group ID add to the docker build ``--build-arg BUILD_DOCKER_GID=`getent group docker | awk -F: '{printf "%d\n", $3}'` ``.
-
 ## Setting up SSH agent authentication inside docker
 If you need to use your SSH keys from inside the container you can use `ssh-agent`.
 
