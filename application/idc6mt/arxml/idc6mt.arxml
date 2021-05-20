@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<AUTOSAR xmlns="http://autosar.org/schema/r4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" S="51C2F664788005D9B556FED106E0BA60D6D1F26E" T="2020-11-11T10:33:01+01:00" xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_00047.xsd">
+  <ADMIN-DATA/>
+  <AR-PACKAGES>
+    <AR-PACKAGE UUID="3aa58fa9-26d7-452a-bead-dfdb7bf9ccc8">
+      <SHORT-NAME>mb</SHORT-NAME>
+      <AR-PACKAGES>
+        <AR-PACKAGE UUID="555b6d7b-f06e-43d1-8e39-c41eac84d525">
+          <SHORT-NAME>Design</SHORT-NAME>
+          <ELEMENTS>
+            <ADAPTIVE-APPLICATION-SW-COMPONENT-TYPE UUID="9cbbe2be-459d-44b1-bda0-eadef74803bc">
+              <SHORT-NAME>Idc6MtDaemon</SHORT-NAME>
+            </ADAPTIVE-APPLICATION-SW-COMPONENT-TYPE>
+            <EXECUTABLE UUID="1906d016-4c30-4440-9ff2-d85f59ca86b8">
+              <SHORT-NAME>idc6mt</SHORT-NAME>
+              <CATEGORY>APPLICATION_LEVEL</CATEGORY>
+              <ROOT-SW-COMPONENT-PROTOTYPE UUID="a0babcb0-61ff-4f6e-8393-25ecac39afc1">
+                <SHORT-NAME>Idc6MtDaemonRootSwc</SHORT-NAME>
+                <APPLICATION-TYPE-TREF DEST="ADAPTIVE-APPLICATION-SW-COMPONENT-TYPE">/mb/Design/Idc6MtDaemon</APPLICATION-TYPE-TREF>
+              </ROOT-SW-COMPONENT-PROTOTYPE>
+            </EXECUTABLE>
+          </ELEMENTS>
+        </AR-PACKAGE>
+        <AR-PACKAGE UUID="1ed78ad9-6e5b-40e6-bd4b-52b2c339b816">
+          <SHORT-NAME>Deployment</SHORT-NAME>
+          <ELEMENTS>
+            <PROCESS UUID="8beb5818-a1d4-46b4-85ef-483989e50fec">
+              <SHORT-NAME>idc6mt</SHORT-NAME>
+              <EXECUTABLE-REF DEST="EXECUTABLE">/mb/Design/idc6mt</EXECUTABLE-REF>
+              <STATE-DEPENDENT-STARTUP-CONFIGS>
+                <STATE-DEPENDENT-STARTUP-CONFIG>
+                  <FUNCTION-GROUP-STATE-IREFS>
+                    <FUNCTION-GROUP-STATE-IREF>
+                      <CONTEXT-MODE-DECLARATION-GROUP-PROTOTYPE-REF DEST="MODE-DECLARATION-GROUP-PROTOTYPE">/Machine/IDC6_M_P1_XAVIER/MachineState</CONTEXT-MODE-DECLARATION-GROUP-PROTOTYPE-REF>
+                      <TARGET-MODE-DECLARATION-REF DEST="MODE-DECLARATION">/DataTypes/ModelManagement/MachineStates/Running</TARGET-MODE-DECLARATION-REF>
+                    </FUNCTION-GROUP-STATE-IREF>
+                  </FUNCTION-GROUP-STATE-IREFS>
+                  <STARTUP-CONFIG-REF DEST="STARTUP-CONFIG">/Machine/StartupConfigSets/startupConf/STARTUP_CONFIG_DEFAULT</STARTUP-CONFIG-REF>
+                </STATE-DEPENDENT-STARTUP-CONFIG>
+              </STATE-DEPENDENT-STARTUP-CONFIGS>
+            </PROCESS>
+            <PROCESS-TO-MACHINE-MAPPING-SET UUID="68aa2bcb-1008-4ad0-b25f-f3a997ee5792">
+              <SHORT-NAME>MbAppsToMachineMapping</SHORT-NAME>
+              <PROCESS-TO-MACHINE-MAPPINGS>
+                <PROCESS-TO-MACHINE-MAPPING UUID="53600094-302a-4d75-95b3-256f8f102176">
+                  <SHORT-NAME>Idc6MtdToMachineMapping</SHORT-NAME>
+                  <MACHINE-REF DEST="MACHINE">/Machine/IDC6_M_P1_XAVIER</MACHINE-REF>
+                  <PROCESS-REF DEST="PROCESS">/mb/Deployment/idc6mt</PROCESS-REF>
+                </PROCESS-TO-MACHINE-MAPPING>
+              </PROCESS-TO-MACHINE-MAPPINGS>
+            </PROCESS-TO-MACHINE-MAPPING-SET>
+          </ELEMENTS>
+        </AR-PACKAGE>
+      </AR-PACKAGES>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>
