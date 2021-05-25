@@ -108,7 +108,7 @@ these variables are not set, then Bazel will assume the following values:
 
 ## Running
 
-### Running on host with QEMU
+### Running a virtual ECU with QEMU
 
 This method is currently known to only work with the `build_env`. This is because it needs the NVIDIA DRIVE OS Linux
 files which come as part of the `build_env` container. If you would want to make this work without the
@@ -138,7 +138,8 @@ If you open up the `os/linux/run_aarch64_qemu.sh` script, you will see a bunch o
 important is `BOOT_INTO_ADAPTIVE_STACK`. When it is set to true, this will cause the QEMU instance to start the Adaptive
 AUTOSAR stack as soon as systemd has finished booting the system. When it is set to false, this will cause the QEMU
 instance to drop to a login prompt once systemd has finished booting the system. The username is `nvidia` and password
-`nvidia`. To know which command to use to start the Adaptive stack, read the `ExecStart` field from the `os/linux/configs/adaptive-stack.service` file in this repository.
+`nvidia`. To know which command to use to start the Adaptive stack, read the `ExecStart` field from the
+`os/linux/configs/adaptive-stack.service` file in this repository.
 
 ### Connecting to remote DLT
 
@@ -361,3 +362,26 @@ collectd can be built and install binaries using:
 bazel build //tools:build_collectd
 ```
 The binaries are generated in `bazel-bin/tools` directory.
+
+### Try out modifications to the BSW or starter kit
+
+If you want to build the stack with a modified version of the starter kit or the BSW, first clone the starter kit:
+
+```
+git clone --recurse-submodules ssh://git@git.swf.daimler.com:7999/adasdai/starter_kit_adaptive_xavier.git
+```
+
+Then do your modifications to the source. At the end you have to copy the `BUILD` file and add a `WORKSPACE` file:
+
+```
+cp minerva_mpu_adaptive/bsw/starter_kit_adaptive_xavier.BUILD <path to starter kit clone>/BUILD
+echo "workspace(name = \"starter_kit_adaptive_xavier\")" > <path to starter kit clone>/WORKSPACE
+```
+
+Finally, open `.bazelrc`, and add the following line:
+```
+build --override_repository=starter_kit_adaptive_xavier=<path to starter kit clone>
+```
+
+Where you replace `<path to starter kit clone>` with the path to your modified starter kit
+repository.
