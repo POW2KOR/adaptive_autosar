@@ -4,7 +4,14 @@ This is the MPU Adaptive AUTOSAR repository for the Minerva project.
 
 ## Setting up
 
-This guide describes three ways how to build and run. The first method is preferred, but all are supported.
+Regardless of which of the following setup methods you use, please make sure you set up your SWF gitlab according to
+[this guide](https://wiki.swf.daimler.com/display/swf/How+to+use+HTTPS+to+checkout+from+GitLab). Our scripts will assume
+that you have stored your x509 client certificates in `~/.ssh/gsep`. Our development environment scripts and automation
+are currently not configured to work with SSH key authentication or `ssh-agent`. If you want to contribute this
+improvement, it is welcome. Once you have done this setup, you will still use the SSH clone URLs from the Gitlab web
+interface, but git will internally convert these into HTTPS requests using the OAuth token and x509 client certificates.
+
+This document describes three ways how to build and run. The first method is preferred, but all are supported.
 
 * build with devcontainers, described [below](#build-with-build_env-devcontainer)
 * [setup to build with plain docker](docs/setup_without_devcontainers.md#setup-to-build-with-plain-docker) instead of
