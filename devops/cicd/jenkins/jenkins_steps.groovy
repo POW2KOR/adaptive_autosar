@@ -2,7 +2,7 @@
 import groovy.json.JsonOutput
 
 lib_depot_utilities = load('devops/ci-depot/jenkins/utilities.groovy')
-imgName ="artifact.swf.daimler.com/adasdai-docker/minerva_mpu_docker/minerva_mpu"
+imgName = 'artifact.swf.daimler.com/adasdai-docker/minerva_mpu_docker/minerva_mpu'
 
 // stash libraries
 STASH_LIB_X86_64_LINUX_UBUNTU = '' //TODO: Fill in artifacts
@@ -35,7 +35,7 @@ def initialize() {
 }
 
 def collect_deps() {
-    sh "python3 devops/docker/scripts/collect_deps.py -a"
+    sh 'python3 devops/docker/scripts/collect_deps.py -a'
     def JsonOutput = groovy.json.JsonOutput
     def downloadSpec = readJSON file: "${env.WORKSPACE}/devops/docker/configuration/tools.json"
     def server = Artifactory.server 'default-artifactory-server-id'
@@ -43,7 +43,7 @@ def collect_deps() {
     server.credentialsId = registryCredentials
     server.download spec: JsonOutput.toJson(downloadSpec)
 
-    sh "ls -la tools/bazel"
+    sh 'ls -la tools/bazel'
 }
 
 def compile_x86_64_linux_ubuntu(lib_name) {
@@ -54,8 +54,8 @@ def compile_x86_64_linux_ubuntu(lib_name) {
             collect_deps()
             // TODO move docker and ssh agent boilerplate into library function
             docker.withRegistry(env.registryUrl, env.registryCredentials) {
-                withEnv(["DOCKER_BUILDKIT=1"]) {
-                    def builderImg = docker.build(imgNameVer, "-f ./devops/docker/Dockerfile.build_env  --build-arg BUILDKIT_INLINE_CACHE=1 .")
+                withEnv(['DOCKER_BUILDKIT=1']) {
+                    def builderImg = docker.build(imgNameVer, '-f ./devops/docker/Dockerfile.build_env  --build-arg BUILDKIT_INLINE_CACHE=1 .')
                     builderImg.inside("-u 0:0 --entrypoint='' ${env.diskCache} ${remoteUpload}") {
                         sshagent([env.sshJenkinsCredentials]) {
                             sh 'devops/cicd/scripts/bash/runtime_functions.sh compile_x86_64_linux_ubuntu'
@@ -65,7 +65,6 @@ def compile_x86_64_linux_ubuntu(lib_name) {
                         sh "chown -R ${userId}:${groupId} ."
                     }
                 }
-
             }
             lib_depot_utilities.pack_lib(lib_name, STASH_LIB_X86_64_LINUX_UBUNTU)
         }
@@ -81,8 +80,8 @@ def compile_aarch64_linux_ubuntu(lib_name) {
             collect_deps()
             // TODO move docker and ssh agent boilerplate into library function
             docker.withRegistry(env.registryUrl, env.registryCredentials) {
-                withEnv(["DOCKER_BUILDKIT=1"]) {
-                    def builderImg = docker.build(imgNameVer, "-f ./devops/docker/Dockerfile.build_env  --build-arg BUILDKIT_INLINE_CACHE=1 .")
+                withEnv(['DOCKER_BUILDKIT=1']) {
+                    def builderImg = docker.build(imgNameVer, '-f ./devops/docker/Dockerfile.build_env  --build-arg BUILDKIT_INLINE_CACHE=1 .')
                     builderImg.inside("-u 0:0 --entrypoint='' ${env.diskCache} ${remoteUpload}") {
                         sshagent([env.sshJenkinsCredentials]) {
                             sh 'devops/cicd/scripts/bash/runtime_functions.sh compile_aarch64_linux_ubuntu'
@@ -107,8 +106,8 @@ def compile_aarch64_linux_linaro(lib_name) {
             collect_deps()
             // TODO move docker and ssh agent boilerplate into library function
             docker.withRegistry(env.registryUrl, env.registryCredentials) {
-                withEnv(["DOCKER_BUILDKIT=1"]) {
-                    def builderImg = docker.build(imgNameVer, "-f ./devops/docker/Dockerfile.build_env  --build-arg BUILDKIT_INLINE_CACHE=1 .")
+                withEnv(['DOCKER_BUILDKIT=1']) {
+                    def builderImg = docker.build(imgNameVer, '-f ./devops/docker/Dockerfile.build_env  --build-arg BUILDKIT_INLINE_CACHE=1 .')
                     builderImg.inside("-u 0:0 --entrypoint='' ${env.diskCache} ${remoteUpload}") {
                         sshagent([env.sshJenkinsCredentials]) {
                             sh 'devops/cicd/scripts/bash/runtime_functions.sh compile_aarch64_linux_linaro'
@@ -127,7 +126,7 @@ def compile_aarch64_linux_linaro(lib_name) {
 return this
 
 def deploy_docker() {
-  return ['DOCKER_MPU': {
+    return ['DOCKER_MPU': {
     if (env.gitlabSourceBranch == 'master') {
       node(env.NODE_LINUX_CPU) {
         timeout(time: max_time, unit: 'MINUTES') {
@@ -135,18 +134,18 @@ def deploy_docker() {
             collect_deps()
             // TODO move docker and ssh agent boilerplate into library function
             docker.withRegistry(env.registryUrl, env.registryCredentials) {
-                withEnv(["DOCKER_BUILDKIT=1"]) {
-                    def builderImg = docker.build(imgNameVer, "-f ./devops/docker/Dockerfile.build_env  --build-arg BUILDKIT_INLINE_CACHE=1 .")
+                withEnv(['DOCKER_BUILDKIT=1']) {
+                    def builderImg = docker.build(imgNameVer, '-f ./devops/docker/Dockerfile.build_env  --build-arg BUILDKIT_INLINE_CACHE=1 .')
                     echo 'Publishing the docker image to artifactory'
                     sh"docker push ${imgNameVer}"
                     sh"docker tag ${imgNameVer} ${imgName}:latest"
                     sh"docker push ${imgName}:latest"
-                    }
                 }
             }
         }
       }
-      else{
+    }
+      else {
           println 'Publishing the docker image to Artifactory is skipped. (Only commit build)'
       }
     }]
