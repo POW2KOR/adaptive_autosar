@@ -127,7 +127,7 @@ return this
 
 def deploy_docker() {
     return ['DOCKER_MPU': {
-    if (env.gitlabSourceBranch == 'master') {
+    if (env.BRANCH_NAME == 'master') {
       node(env.NODE_LINUX_CPU) {
         timeout(time: max_time, unit: 'MINUTES') {
             init_git()
