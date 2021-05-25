@@ -19,6 +19,11 @@
             "pattern": "adasdai/tools/linux/bazel/bazel_4.0.0-linux-x86_64.deb",
             "target": "tools/bazel/bazel_4.0.0-linux-x86_64.deb",
             "flat": "true"
+        },
+        {
+            "pattern": "adasdai/tools/linux/cmake-3.20.2-linux-x86_64.sh",
+            "target": "tools/cmake-3.20.2-linux-x86_64.sh",
+            "flat": "true"
         }
     ]
 }

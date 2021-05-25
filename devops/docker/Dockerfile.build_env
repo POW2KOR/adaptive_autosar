@@ -10,6 +10,8 @@ COPY devops/docker/configuration/known_hosts /${BUILD_USER}/.ssh/
 COPY ./tools/bazel/ /usr/tools/bazel/
 RUN  mkdir -p /usr/packageList
 COPY devops/docker/scripts/package_in_html.py /usr/packageList/
+RUN mkdir -p /opt/cmake
+COPY ./tools/cmake-3.20.2-linux-x86_64.sh /opt/cmake/
 
 
 USER root
@@ -55,7 +57,14 @@ RUN if [ -z $BUILD_DOCKER_GID ]; then echo "DOCKER GID will not set to system on
     pip3 install -r /${BUILD_USER}/requirement.txt --ignore-installed && \
     ln -s /usr/bin/clang-format-7 /usr/bin/clang-format && \
     cd /tmp && git init && git-lfs install && \
-    rm -rf .git && rm -rf /tmp/*
+    rm -rf .git && rm -rf /tmp/* && \
+    # upgrade CMake
+    apt-get remove --assume-yes cmake && \
+    sh /opt/cmake/cmake-3.20.2-linux-x86_64.sh --skip-license --prefix=/opt/cmake/ --exclude-subdir && \
+    rm /opt/cmake/cmake-3.20.2-linux-x86_64.sh && \
+    apt autoremove --assume-yes
+
+ENV PATH="/opt/cmake/bin:$PATH"
 
 USER ${BUILD_USER}
 
