@@ -169,33 +169,6 @@ pre-commit install
 Once enabled, pre-commit will run before every local commit in order to suggest fixes for the checks defined in
 [.pre-commit-config.yaml](./pre-commit-config.yaml). These checks are performed automatically in the CI pipeline.
 
-### Formatting bazel files with buildifier
-
-#### Installing buildifier
-
-```
-curl -fL "https://github.com/bazelbuild/buildtools/releases/download/3.5.0/buildifier" -o buildifier
-chmod +x buildifier
-sudo mv buildifier /bin/buildifier
-```
-
-#### Running buildifier
-
-In the root of the `minerva_mpu_adaptive` repo, run:
-
-```
-buildifier -r .
-```
-
-and check for changed files with
-
-```
-git status
-```
-
-If there are no files formatted, the output of above command will be empty. Else, it will show the list of files
-formatted.
-
 ### Build collectd and its plugins through bazel
 
 collectd can be built and install binaries using:
