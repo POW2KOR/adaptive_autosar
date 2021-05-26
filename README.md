@@ -73,8 +73,7 @@ The devcontainer will set up your `git` and `ssh` inside the container to work w
 environment outside the docker container already working with SWF git and that you have your x509 SWF certificates
 stored in `~/.ssh/gsep`. The devcontainer is configured to run in host network mode and the proxy is configured for
 you. `ssh-agent` and `gpg-agent` forwarding is handled through VS Code. Bash history and Bazel build cache is persisted
-between sessions. VS Code also has a feature where it makes sure that the user ID of the user inside the devcontainer
-matches the one outside the container. The devcontainer is configured to support this feature.
+between sessions. Your user ID inside the devcontainer will be made to match the one outside the container.
 
 ## Build
 
