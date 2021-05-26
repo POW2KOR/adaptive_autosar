@@ -31,11 +31,12 @@ You can find a guide on setting up docker on Daimler Ubuntu laptops
 
 We call the docker container where we build things `build_env` and sometimes `devcontainer`.
 
-The `build_env` is currently configured in
-[this repository](https://git.swf.daimler.com/adasdai/minerva_mpu_docker/). The CI/CD pipeline for this repository
+The CI environment can be found [here](devops/docker/Dockerfile.build_env). The CI/CD pipeline for this repository
 pushes new version of the repository to
 [SWF Artifactory](https://artifact.swf.daimler.com/list/adasdai-docker/minerva_mpu_docker/minerva_mpu/) on merge. The
 image includes all the dependencies needed, including Bazel, Bazel plugins and toolchains (for both x86 and aarch64).
+The `devcontainer` adds [a few changes](.devcontainer/Dockerfile) on top of that but these are expected to be merged
+into a single file with the CI environment soon.
 
 ### Setup credentials for SWF Artifactory Docker registry
 
