@@ -166,9 +166,8 @@ def deploy_docker() {
                 }
             }
         }
-      }
     }
-      else {
+    else{
           println 'Publishing the docker image to Artifactory is skipped. (Only commit build)'
       }
     }]
