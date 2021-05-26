@@ -156,18 +156,10 @@ All of the applications apart from the `log-daemon` are configured to output rem
 
 ## Miscellaneous
 
-### Git hooks
+### Pre-commit checks
 
-#### Pre-commit
-
-This repository runs git hooks using [pre-commit](https://pre-commit.com/). The following command can be used to install
-pre-commit.
-
-```
-pip3 install pre-commit==2.10.1
-```
-
-To enable pre-commit after cloning the repository, the following command can be used.
+We use a took called `pre-commit` for various static checks before creating a commit. To enable `pre-commit`,
+after cloning the repository:
 
 ```
 cd minerva_mpu_adaptive
@@ -175,14 +167,7 @@ pre-commit install
 ```
 
 Once enabled, pre-commit will run before every local commit in order to suggest fixes for the checks defined in
-[.pre-commit-config.yaml](./pre-commit-config.yaml)
-
-### Useful information
-
-For building the debug version use `--compilation_mode=dbg`. For building binaries stripped of debug information, use
-`--compilation_mode=opt`.  Other useful parameters for debugging purposes are `--verbose_failures` and `--sandbox_debug`.
-
-Build results are under `bazel-bin`.
+[.pre-commit-config.yaml](./pre-commit-config.yaml).
 
 ### Formatting bazel files with buildifier
 
