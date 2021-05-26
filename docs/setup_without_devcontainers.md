@@ -62,16 +62,14 @@ now. More info [here](https://github.com/bazelbuild/rules_foreign_cc/commit/f48e
 To avoid downloading Bazel dependencies from external sources all the time, we do a one-time download and installation
 to a known path. The build system is currently configured to look for the dependencies under `/usr/tools/bazel`.
 
-This download can be done using [the collect_deps.py](devops/docker/scripts/collect_deps.py) script.
+This download can be done using [the collect_deps.py](../devops/docker/scripts/collect_deps.py) script.
 
 The script will download:
 
 1. from the internet the packages based on the content of the
-[tools_web.json](https://git.swf.daimler.com/adasdai/minerva_mpu_docker/-/blob/master/configuration/tools_web.json)
-file
-2. from Artifactory the packages based on the content of the
-[tools.json](https://git.swf.daimler.com/adasdai/minerva_mpu_docker/-/blob/master/configuration/tools.json)
-file
+[tools_web.json](../devops/docker/configuration/tools_web.json) file
+2. from Artifactory the packages based on the content of the [tools.json](../devops/docker/configuration/tools.json)
+file.
 
 Please follow the following steps:
 
