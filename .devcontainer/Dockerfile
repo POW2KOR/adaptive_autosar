@@ -19,16 +19,17 @@ RUN curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.d
     flex bison libssl-dev \
     # Needed for QEMU execution
     qemu-system-arm libguestfs-tools qemu-efi \
+    # Install for sudo support
+    sudo \
     # Needed for libguestfs to work
     linux-image-generic \
-    && chmod +r /boot/vmlinuz-*
+    && chmod +r /boot/vmlinuz-* \
+    && rm -rf /var/lib/{apt,dpkg,cache,log}/
 
 # Create the user
 RUN groupadd --gid $USER_GID $USERNAME \
     && useradd --uid $USER_UID --gid $USER_GID -m $USERNAME \
-    && apt-get update \
     # Add sudo support
-    && apt-get install -y sudo \
     && echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME \
     && chmod 0440 /etc/sudoers.d/$USERNAME
 
