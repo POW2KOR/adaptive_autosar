@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<AUTOSAR xmlns="http://autosar.org/schema/r4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" S="51C2F664788005D9B556FED106E0BA60D6D1F26E" T="2020-11-11T10:33:01+01:00" xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_00047.xsd">
+  <ADMIN-DATA/>
+  <AR-PACKAGES>
+    <AR-PACKAGE UUID="3aa58fa9-26d7-452a-bead-dfdb7bf9ccc8">
+      <SHORT-NAME>mb</SHORT-NAME>
+      <AR-PACKAGES>
+        <AR-PACKAGE UUID="1ed78ad9-6e5b-40e6-bd4b-52b2c339b816">
+          <SHORT-NAME>Deployment</SHORT-NAME>
+          <ELEMENTS>
+            <PROCESS UUID="8beb5818-a1d4-46b4-85ef-483989e50fec">
+              <SHORT-NAME>scn_param_storage</SHORT-NAME>
+              <EXECUTABLE-REF DEST="EXECUTABLE">/mb/Design/scn_param_storage</EXECUTABLE-REF>
+              <STATE-DEPENDENT-STARTUP-CONFIGS>
+                <STATE-DEPENDENT-STARTUP-CONFIG>
+                  <FUNCTION-GROUP-STATE-IREFS>
+                    <FUNCTION-GROUP-STATE-IREF>
+                      <CONTEXT-MODE-DECLARATION-GROUP-PROTOTYPE-REF DEST="MODE-DECLARATION-GROUP-PROTOTYPE">/Machine/IDC6_M_P1_XAVIER/MachineState</CONTEXT-MODE-DECLARATION-GROUP-PROTOTYPE-REF>
+                      <TARGET-MODE-DECLARATION-REF DEST="MODE-DECLARATION">/DataTypes/ModelManagement/MachineStates/Running</TARGET-MODE-DECLARATION-REF>
+                    </FUNCTION-GROUP-STATE-IREF>
+                  </FUNCTION-GROUP-STATE-IREFS>
+                  <STARTUP-CONFIG-REF DEST="STARTUP-CONFIG">/Machine/StartupConfigSets/startupConf/STARTUP_CONFIG_DEFAULT</STARTUP-CONFIG-REF>
+                </STATE-DEPENDENT-STARTUP-CONFIG>
+              </STATE-DEPENDENT-STARTUP-CONFIGS>
+            </PROCESS>
+            <PROCESS-TO-MACHINE-MAPPING-SET UUID="68aa2bcb-1008-4ad0-b25f-f3a997ee5792">
+              <SHORT-NAME>MbAppsToMachineMapping</SHORT-NAME>
+              <PROCESS-TO-MACHINE-MAPPINGS>
+                <PROCESS-TO-MACHINE-MAPPING UUID="53600094-302a-4d75-95b3-256f8f102176">
+                  <SHORT-NAME>ScnParamStorageToMachineMapping</SHORT-NAME>
+                  <MACHINE-REF DEST="MACHINE">/Machine/IDC6_M_P1_XAVIER</MACHINE-REF>
+                  <PROCESS-REF DEST="PROCESS">/mb/Deployment/scn_param_storage</PROCESS-REF>
+                </PROCESS-TO-MACHINE-MAPPING>
+              </PROCESS-TO-MACHINE-MAPPINGS>
+            </PROCESS-TO-MACHINE-MAPPING-SET>
+          </ELEMENTS>
+        </AR-PACKAGE>
+      </AR-PACKAGES>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>
