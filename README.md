@@ -213,26 +213,3 @@ collectd can be built and install binaries using:
 bazel build //tools:build_collectd
 ```
 The binaries are generated in `bazel-bin/tools` directory.
-
-### Try out modifications to the BSW or starter kit
-
-If you want to build the stack with a modified version of the starter kit or the BSW, first clone the starter kit:
-
-```
-git clone --recurse-submodules ssh://git@git.swf.daimler.com:7999/adasdai/starter_kit_adaptive_xavier.git
-```
-
-Then do your modifications to the source. At the end you have to copy the `BUILD` file and add a `WORKSPACE` file:
-
-```
-cp minerva_mpu_adaptive/bsw/starter_kit_adaptive_xavier.BUILD <path to starter kit clone>/BUILD
-echo "workspace(name = \"starter_kit_adaptive_xavier\")" > <path to starter kit clone>/WORKSPACE
-```
-
-Finally, open `.bazelrc`, and add the following line:
-```
-build --override_repository=starter_kit_adaptive_xavier=<path to starter kit clone>
-```
-
-Where you replace `<path to starter kit clone>` with the path to your modified starter kit
-repository.
