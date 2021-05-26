@@ -177,8 +177,9 @@ pre-commit install
 Once enabled, pre-commit will run before every local commit in order to suggest fixes for the checks defined in
 [.pre-commit-config.yaml](./pre-commit-config.yaml)
 
+### Known issues and fixes
 
-### Proxy handling in Docker
+#### Proxy handling in Docker
 
 In order to allow Internet access from inside our docker containers, we need to pass to them proper
 environment variables. For now, we should take care on the following settings:
@@ -192,8 +193,6 @@ environment variables. For now, we should take care on the following settings:
 
 In case of proxy settings change, please change corresponding parameters according to your build and
 launch strategy.
-
-### Known issues and fixes
 
 #### Workaround for the "no such package" issue
 
