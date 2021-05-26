@@ -17,8 +17,8 @@ launch strategy.
 
 ## Workaround for the "no such package" issue
 
-If a build without docker has beed initiated, and Bazel-generated directories present in the working directory, then
-the following error might happen when Docker build container is used:
+If a build without docker has beed initiated, and Bazel-generated directories present in the working directory, then the
+following error might happen when Docker build container is used:
 
 ```
 ERROR: Skipping '//:os': no such package 'bazel-out/aarch64-fastbuild/bin/bsw/amsr_vector_fs_socal_for_skeleton/lib':
