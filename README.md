@@ -2,6 +2,8 @@
 
 This is the MPU Adaptive AUTOSAR repository for the Minerva project.
 
+Apart from this document, you will find more documentation under `docs/`.
+
 ## Setting up
 
 Regardless of which of the following setup methods you use, please make sure you set up your SWF gitlab according to
