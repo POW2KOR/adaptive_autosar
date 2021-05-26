@@ -90,4 +90,6 @@ sudo rm /usr/tools/bazel/bazel_4.0.0-linux-x86_64.deb
 sudo mv /usr/tools/bazel/buildifier /usr/local/bin/
 sudo mv /usr/tools/bazel/buildozer /usr/local/bin/
 sudo chmod +x /usr/local/bin/buildifier /usr/local/bin/buildozer
+
+pip3 install -r configuration/requirement.txt --ignore-installed
 ```
