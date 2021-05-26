@@ -167,7 +167,7 @@ pre-commit install
 ```
 
 Once enabled, pre-commit will run before every local commit in order to suggest fixes for the checks defined in
-[.pre-commit-config.yaml](./pre-commit-config.yaml).
+[.pre-commit-config.yaml](./pre-commit-config.yaml). These checks are performed automatically in the CI pipeline.
 
 ### Formatting bazel files with buildifier
 
