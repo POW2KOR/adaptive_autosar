@@ -196,16 +196,6 @@ git status
 If there are no files formatted, the output of above command will be empty. Else, it will show the list of files
 formatted.
 
-### Connection timeout issue while submodule init of gnulibs in collectd repo with VPN on
-
-If you face connection timeout issues while submodule init of `gnulibs` in collectd repo
-through `collectd_mbient` rule of WORKSPACE file, then open `~/.gitconfig` file
-and add below 2 lines:
-```
-[url "https://git.savannah.gnu.org/git/"]
-      insteadOf = git://git.savannah.gnu.org/
-```
-
 ### Build collectd and its plugins through bazel
 
 collectd can be built and install binaries using:

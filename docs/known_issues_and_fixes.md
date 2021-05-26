@@ -29,3 +29,13 @@ WARNING: Target pattern parsing failed.
 
 In such a case, it is needed to remove Bazel-generated directories (`bazel-bin`, `bazel-minerva_mpu_adaptive`,
 `bazel-out`, `bazel-testlogs`) from host.
+
+## Connection timeout issue while submodule init of gnulibs in collectd repo with VPN on
+
+If you face connection timeout issues while submodule init of `gnulibs` in collectd repo through `collectd_mbient` rule
+of WORKSPACE file, then open `~/.gitconfig` file and add below 2 lines:
+
+```
+[url "https://git.savannah.gnu.org/git/"]
+      insteadOf = git://git.savannah.gnu.org/
+```
