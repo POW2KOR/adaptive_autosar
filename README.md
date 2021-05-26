@@ -177,38 +177,6 @@ pre-commit install
 Once enabled, pre-commit will run before every local commit in order to suggest fixes for the checks defined in
 [.pre-commit-config.yaml](./pre-commit-config.yaml)
 
-### Known issues and fixes
-
-#### Proxy handling in Docker
-
-In order to allow Internet access from inside our docker containers, we need to pass to them proper
-environment variables. For now, we should take care on the following settings:
-
-- proxy settings in `~/.docker/config.json`: needed to set up access from ubuntu_18.04 image
-  when it is started on host
-- proxy settings which are passed with `docker run` command: needed to set up access from
-  minerva_mpu_docker
-- proxy settings in `BUILD` file: needed to set up access from ubuntu_18.04 image when it is started
-  from inside minerva_mpu_docker container
-
-In case of proxy settings change, please change corresponding parameters according to your build and
-launch strategy.
-
-#### Workaround for the "no such package" issue
-
-If a build without docker has beed initiated, and Bazel-generated directories present in the working directory, then
-the following error might happen when Docker build container is used:
-
-```
-ERROR: Skipping '//:os': no such package 'bazel-out/aarch64-fastbuild/bin/bsw/amsr_vector_fs_socal_for_skeleton/lib':
-Unable to determine the local repository for directory
-/workspaces/minerva_mpu_adaptive/bazel-out/aarch64-fastbuild/bin/bsw/amsr_vector_fs_socal_for_skeleton/lib
-WARNING: Target pattern parsing failed.
-```
-
-In such a case, it is needed to remove Bazel-generated directories (`bazel-bin`, `bazel-minerva_mpu_adaptive`,
-`bazel-out`, `bazel-testlogs`) from host.
-
 ### Useful information
 
 For building the debug version use `--compilation_mode=dbg`. For building binaries stripped of debug information, use
