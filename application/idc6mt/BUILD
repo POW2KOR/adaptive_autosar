@@ -7,7 +7,7 @@ filegroup(
     srcs = [
         "arxml/idc6mt.arxml",
         "arxml/states.arxml",
-        "@starter_kit_adaptive_xavier//:mex_arxml",
+        "@amsr_xavier//:mex_arxml",
         "@starter_kit_adaptive_xavier//:standard_types_arxml",
     ],
 )
@@ -26,8 +26,8 @@ minerva_aa_codegen_rule(
     name = "idc6mt_gen_rule",
     arxml_srcs = [":app_arxml"],
     generators = [
-        "@starter_kit_adaptive_xavier//:generator_amsr_em_exec_config",
-        "@starter_kit_adaptive_xavier//:generator_amsr_applicationbase_init_deinit",
+        "@amsr_xavier//:generator_amsr_em_exec_config",
+        "@amsr_xavier//:generator_amsr_applicationbase_init_deinit",
     ],
     outs_list_dict = {
         "idc6mt_exec_config": [
