@@ -12,7 +12,8 @@ filegroup(
 minerva_aa_codegen_rule(
     name = "minerva_amsr_fs_log_daemon_config_gen_rule",
     arxml_srcs = [
-        "//application:complete_arxml",
+        "//arxmls:x6aa_idc_ecu_extract_arxml",
+        "@amsr_xavier//:mex_arxml",
         ":amsr_vector_fs_log_daemon_arxml",
     ],
     generators = [
