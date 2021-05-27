@@ -456,6 +456,14 @@ def minerva_aa_bsw_module(
         elif dep == ":amsr_vector_fs_em_executionmanager":
             cache_entries["amsr-vector-fs-em-executionmanagement_application-client_DIR:PATH"] = \
                 "$EXT_BUILD_DEPS/amsr_vector_fs_em_executionmanager/lib/cmake/amsr-vector-fs-em-executionmanagement_application-client/"
+            cache_entries["amsr-vector-fs-em-executionmanagement_common-lib_DIR:PATH"] = \
+                "$EXT_BUILD_DEPS/amsr_vector_fs_em_executionmanager/lib/cmake/amsr-vector-fs-em-executionmanagement_common-lib/"
+            cache_entries["amsr-vector-fs-em-executionmanagement_failure-handler-client_DIR:PATH"] = \
+                "$EXT_BUILD_DEPS/amsr_vector_fs_em_executionmanager/lib/cmake/amsr-vector-fs-em-executionmanagement_failure-handler-client/"
+            cache_entries["amsr-vector-fs-em-executionmanagement_recovery-action-client_DIR:PATH"] = \
+                "$EXT_BUILD_DEPS/amsr_vector_fs_em_executionmanager/lib/cmake/amsr-vector-fs-em-executionmanagement_recovery-action-client/"
+            cache_entries["amsr-vector-fs-em-executionmanagement_state-client_DIR:PATH"] = \
+                "$EXT_BUILD_DEPS/amsr_vector_fs_em_executionmanager/lib/cmake/amsr-vector-fs-em-executionmanagement_state-client/"
 
         elif dep == ":amsr_vector_fs_someipprotocol":
             cache_entries["SomeIpProtocol_DIR:PATH"] = \
@@ -476,6 +484,8 @@ def minerva_aa_bsw_module(
                 "$EXT_BUILD_DEPS/amsr_vector_fs_sec_cryptostack/lib/cmake/amsr-vector-fs-sec-cryptostack_libdriverfactory/"
             cache_entries["amsr-vector-fs-sec-cryptostack_libsoftwareprovider_DIR:PATH"] = \
                 "$EXT_BUILD_DEPS/amsr_vector_fs_sec_cryptostack/lib/cmake/amsr-vector-fs-sec-cryptostack_libsoftwareprovider/"
+            cache_entries["amsr-vector-fs-sec-cryptostack_libipc_DIR:PATH"] = \
+                "$EXT_BUILD_DEPS/amsr_vector_fs_sec_cryptostack/lib/cmake/amsr-vector-fs-sec-cryptostack_libipc/"
 
         elif dep == ":amsr_vector_fs_sec_cryptostack_driver_lib_es":
             cache_entries["amsr-vector-fs-sec-cryptostack-driver-lib_es_DIR:PATH"] = \

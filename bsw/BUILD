@@ -2,6 +2,40 @@ load("@minerva_mpu_adaptive//:bazel/defs.bzl", "minerva_aa_bsw_module")
 
 package(default_visibility = ["//visibility:public"])
 
+################
+# BSW modules
+################
+
+minerva_aa_bsw_module(
+    name = "amsr_vector_fs_socal",
+    cache_entries = {
+        "CMAKE_EXPORT_NO_PACKAGE_REGISTRY": "ON",
+        "CMAKE_FIND_PACKAGE_NO_PACKAGE_REGISTRY": "ON",
+        "CMAKE_VERBOSE_MAKEFILE": "ON",
+        "BUILD_TESTS": "OFF",
+        "ENABLE_EXEC_MANAGER": "ON",
+        "Socal_DIR:PATH": "$EXT_BUILD_DEPS/amsr_vector_fs_socal_headers/lib/cmake/Socal/",
+    },
+    out_static_libs = [
+        "libSocal.a",
+    ],
+    srcs_filegroup = "@starter_kit_adaptive_xavier//:amsr_vector_fs_socal_srcs",
+    deps = [
+        ":amsr_vector_fs_characterconversion",
+        ":amsr_vector_fs_crc",
+        ":amsr_vector_fs_e2e",
+        ":amsr_vector_fs_libiostream",
+        ":amsr_vector_fs_libosabstraction",
+        ":amsr_vector_fs_libvac",
+        ":amsr_vector_fs_log_api",
+        ":amsr_vector_fs_logutility",
+        ":amsr_vector_fs_msr4base",
+        ":amsr_vector_fs_thread",
+        ":amsr_vector_fs_vajson",
+        ":someipd_posix",
+    ],
+)
+
 minerva_aa_bsw_module(
     name = "amsr_vector_fs_libvac",
     out_static_libs = [
@@ -83,6 +117,9 @@ minerva_aa_bsw_module(
 
 minerva_aa_bsw_module(
     name = "amsr_vector_fs_libosabstraction",
+    out_include_dirs = [
+        "include/",
+    ],
     out_static_libs = [
         "libosabstraction.a",
     ],
@@ -207,6 +244,7 @@ minerva_aa_bsw_module(
         "libamsr-vector-fs-sec-cryptostack_libsoftwareprovider.a",
         "libamsr-vector-fs-sec-cryptostack_libcommon.a",
         "libamsr-vector-fs-sec-cryptostack_libserver.a",
+        "libamsr-vector-fs-sec-cryptostack_libipc.a",
     ],
     srcs_filegroup = "@amsr_xavier//:amsr_vector_fs_sec_cryptostack_srcs",
     deps = [
@@ -216,6 +254,7 @@ minerva_aa_bsw_module(
         ":amsr_vector_fs_libosabstraction",
         ":amsr_vector_fs_libvac",
         ":amsr_vector_fs_log_api",
+        ":amsr_vector_fs_logutility",
         ":amsr_vector_fs_msr4base",
         ":amsr_vector_fs_sec_cryptostack_driver_lib_es",
         ":amsr_vector_fs_thread",
@@ -235,6 +274,7 @@ minerva_aa_bsw_module(
         ":amsr_vector_fs_libosabstraction",
         ":amsr_vector_fs_libvac",
         ":amsr_vector_fs_log_api",
+        ":amsr_vector_fs_logutility",
         ":amsr_vector_fs_msr4base",
         ":amsr_vector_fs_sec_cryptostack",
         ":amsr_vector_fs_sec_cryptostack_driver_lib_es",
@@ -459,6 +499,7 @@ minerva_aa_bsw_module(
         ":amsr_vector_fs_libosabstraction",
         ":amsr_vector_fs_libvac",
         ":amsr_vector_fs_log_api",
+        ":amsr_vector_fs_logutility",
         ":amsr_vector_fs_thread",
         ":amsr_vector_fs_vajson",
     ],
@@ -510,6 +551,7 @@ minerva_aa_bsw_module(
         ":amsr_vector_fs_libosabstraction",
         ":amsr_vector_fs_libvac",
         ":amsr_vector_fs_log_api",
+        ":amsr_vector_fs_logutility",
         ":amsr_vector_fs_someipprotocol",
         ":amsr_vector_fs_thread",
         ":amsr_vector_fs_vajson",
@@ -573,6 +615,7 @@ minerva_aa_bsw_module(
         ":amsr_vector_fs_libiostream",
         ":amsr_vector_fs_libosabstraction",
         ":amsr_vector_fs_libvac",
+        ":amsr_vector_fs_logutility",
         ":amsr_vector_fs_msr4base",
         ":amsr_vector_fs_vajson",
     ],
@@ -605,6 +648,7 @@ minerva_aa_bsw_module(
         ":amsr_vector_fs_characterconversion",
         ":amsr_vector_fs_crc",
         ":amsr_vector_fs_libiostream",
+        ":amsr_vector_fs_libosabstraction",
         ":amsr_vector_fs_libvac",
         ":amsr_vector_fs_msr4base",
         ":amsr_vector_fs_vajson",
@@ -625,6 +669,7 @@ minerva_aa_bsw_module(
     srcs_filegroup = "@amsr_xavier//:amsr_vector_fs_dm_diagnosticmanager_srcs",
     deps = [
         ":amsr_vector_fs_applicationbase",
+        ":amsr_vector_fs_characterconversion",
         ":amsr_vector_fs_crc",
         ":amsr_vector_fs_e2e",
         ":amsr_vector_fs_iointegritystream",
@@ -653,12 +698,15 @@ minerva_aa_bsw_module(
         "include/IpcBindingTransformationLayer",
     ],
     out_static_libs = [
+        # It is Important to has the below
+        # Libraries in this order
         "libIpcBinding.a",
-        "libIpcBindingTransformationLayer.a",
         "libIpcBindingInternal.a",
+        "libIpcBindingTransformationLayer.a",
     ],
     srcs_filegroup = "@amsr_xavier//:amsr_vector_fs_ipcbinding_srcs",
     deps = [
+        ":amsr_vector_fs_characterconversion",
         ":amsr_vector_fs_crc",
         ":amsr_vector_fs_e2e",
         ":amsr_vector_fs_libiostream",
@@ -667,6 +715,7 @@ minerva_aa_bsw_module(
         ":amsr_vector_fs_log_api",
         ":amsr_vector_fs_logutility",
         ":amsr_vector_fs_msr4base",
+        ":amsr_vector_fs_socal",
         ":amsr_vector_fs_socal_headers",
         ":amsr_vector_fs_someipprotocol",
         ":amsr_vector_fs_thread",
@@ -679,6 +728,7 @@ minerva_aa_bsw_module(
     cache_entries = {
         "APPLICATION_PREFIX": "opt",
         "ENABLE_EXAMPLE_APPS": "OFF",
+        "ADAPTIVE_MICROSAR_SIP_DIR": "$EXT_BUILD_ROOT/external/starter_kit_adaptive_xavier/mb_base_layer_adaptive_xavier/amsr_xavier",
     },
     out_binaries = [
         "tsyncd",
@@ -688,6 +738,8 @@ minerva_aa_bsw_module(
     ],
     srcs_filegroup = "@amsr_xavier//:amsr_vector_fs_timesync_srcs",
     deps = [
+        ":amsr_vector_fs_applicationbase",
+        ":amsr_vector_fs_characterconversion",
         ":amsr_vector_fs_em_executionmanager",
         ":amsr_vector_fs_libiostream",
         ":amsr_vector_fs_libosabstraction",
