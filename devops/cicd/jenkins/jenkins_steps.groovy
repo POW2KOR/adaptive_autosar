@@ -46,6 +46,24 @@ def collect_deps() {
     sh 'ls -la tools/bazel'
 }
 
+def sw_package_create() {
+    sh "python3 /usr/packageList/package_in_html.py -o ${commitId} -d ${imgNameVer}"
+    def uploadSpec = """
+        {
+            "files": [
+                {
+                    "pattern": "${commitId}.html",
+                    "target": "adasdai/minerva/minerva_mpu_docker/",
+                    "recursive": "false"
+                }
+            ]
+        }"""
+    def server = Artifactory.server 'default-artifactory-server-id'
+    server.credentialsId = registryCredentials
+    echo 'Uploading binaries to the artifactory'
+    server.upload(uploadSpec)
+}
+
 def compile_x86_64_linux_ubuntu(lib_name) {
     return ['x86_64_linux_ubuntu': {
       node(env.NODE_LINUX_CPU) {
@@ -140,12 +158,16 @@ def deploy_docker() {
                     sh"docker push ${imgNameVer}"
                     sh"docker tag ${imgNameVer} ${imgName}:latest"
                     sh"docker push ${imgName}:latest"
+                    builderImg.inside("-u 0:0 --entrypoint='' ${env.diskCache} ${remoteUpload}") {
+                        echo 'Publishing the installed software report to artifactory'
+                        sw_package_create()
+                        }
+                    }
                 }
             }
         }
-      }
     }
-      else {
+    else{
           println 'Publishing the docker image to Artifactory is skipped. (Only commit build)'
       }
     }]
