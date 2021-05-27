@@ -7,7 +7,7 @@ filegroup(
     srcs = [
         "arxml/states.arxml",
         "arxml/stub_application.arxml",
-        "@starter_kit_adaptive_xavier//:mex_arxml",
+        "@amsr_xavier//:mex_arxml",
         "@starter_kit_adaptive_xavier//:standard_types_arxml",
     ],
 )
@@ -26,8 +26,8 @@ minerva_aa_codegen_rule(
     name = "stub_application_gen_rule",
     arxml_srcs = [":app_arxml"],
     generators = [
-        "@starter_kit_adaptive_xavier//:generator_amsr_em_exec_config",
-        "@starter_kit_adaptive_xavier//:generator_amsr_applicationbase_init_deinit",
+        "@amsr_xavier//:generator_amsr_em_exec_config",
+        "@amsr_xavier//:generator_amsr_applicationbase_init_deinit",
     ],
     outs_list_dict = {
         "stub_application_exec_config": [
