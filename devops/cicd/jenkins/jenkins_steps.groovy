@@ -46,7 +46,7 @@ def collect_deps() {
     sh 'ls -la tools/bazel'
 }
 
-def SW_package_create() {
+def sw_package_create() {
     sh "python3 /usr/packageList/package_in_html.py -o ${commitId} -d ${imgNameVer}"
     def uploadSpec = """
         {
@@ -160,7 +160,7 @@ def deploy_docker() {
                     sh"docker push ${imgName}:latest"
                     builderImg.inside("-u 0:0 --entrypoint='' ${env.diskCache} ${remoteUpload}") {
                         echo 'Publishing the installed software report to artifactory'
-                        SW_package_create()
+                        sw_package_create()
                         }
                     }
                 }
