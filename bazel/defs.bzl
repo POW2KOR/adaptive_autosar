@@ -122,9 +122,9 @@ def minerva_aa_codegen_rule(
     gen_rule_output_folder = "{}/output".format(gen_rule_name)
 
     tools_list = [
-        "@starter_kit_adaptive_xavier//:generator_common_tools",
-        "@starter_kit_adaptive_xavier//:amsrgen_sh",
-        "@starter_kit_adaptive_xavier//:setup_jre_link_sh",
+        "@amsr_xavier//:generator_common_tools",
+        "@amsr_xavier//:amsrgen_sh",
+        "@amsr_xavier//:setup_jre_link_sh",
     ]
 
     generators_arg_list = []
@@ -187,7 +187,7 @@ def minerva_aa_codegen_rule(
 
         # Don't stop immediately on error, so we can handle it gracefully
         set +e
-        $(location @starter_kit_adaptive_xavier//:amsrgen_sh) -v {generators_arg} -x $$arxml_srcs_folder -o $$output_folder --saveProject 1>$$generator_log 2>&1
+        $(location @amsr_xavier//:amsrgen_sh) -v {generators_arg} -x $$arxml_srcs_folder -o $$output_folder --saveProject 1>$$generator_log 2>&1
 
         # Process error messages from code generator
         if [ $$? -ne 0 ]; then
