@@ -82,6 +82,10 @@ between sessions. Your user ID inside the devcontainer will be made to match the
 
 The actual build instructions are the same, regardless if you use the `build_env` to build or not.
 
+The build will typically require more than 40-50 GB of memory because it has a high degree of parallelism. If you don't
+have that much phyiscal RAM on your machine, follow
+[this guide](docs/bazel_tips_and_tricks.md#increasing-the-size-of-the-swap) to increase the size of the swap.
+
 ## The actual build steps
 
 The current Bazel build is based on [rules_foreign_cc](https://github.com/bazelbuild/rules_foreign_cc) for building

@@ -31,3 +31,26 @@ build --override_repository=starter_kit_adaptive_xavier=<path to starter kit clo
 
 Where you replace `<path to starter kit clone>` with the path to your modified starter kit
 repository.
+
+## Increasing the size of the swap
+
+The current build configuration has enough parallelism that it will eat through your RAM very quickly. To avoid
+out-of-memory issues, increase the size of the machine swap like so:
+
+```
+sudo fallocate -l 64G /swapfile
+sudo chmod 600 /swapfile
+sudo mkswap /swapfile
+
+sudo swapon /swapfile
+```
+
+You should now be able to see when running `top` or `htop` that the swap available has increased.
+
+To persist this change between restarts, add this line to the end of your `/etc/fstab`:
+
+```
+/swapfile swap swap defaults 0 0
+```
+
+And check it with `sudo mount -fav`.
