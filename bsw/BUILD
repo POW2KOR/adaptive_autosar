@@ -23,7 +23,7 @@ filegroup(
     name = "complete_arxml",
     srcs = [
         ":idc_ecu_extract_arxml",
-        "@starter_kit_adaptive_xavier//:mex_arxml",
+        "@amsr_xavier//:mex_arxml",
         "@starter_kit_adaptive_xavier//:ncd_arxml",
         "@starter_kit_adaptive_xavier//:standard_types_arxml",
     ],
@@ -131,10 +131,10 @@ minerva_aa_codegen_rule(
     name = "executionmanager_state_client_app_gen_rule",
     arxml_srcs = [":executionmanager_state_client_app_arxml"],
     generators = [
-        "@starter_kit_adaptive_xavier//:generator_amsr_updatemanager_swcluster_meta",
-        "@starter_kit_adaptive_xavier//:generator_amsr_updatemanager_daemon",
-        "@starter_kit_adaptive_xavier//:generator_amsr_em_exec_config",
-        "@starter_kit_adaptive_xavier//:generator_amsr_applicationbase_init_deinit",
+        "@amsr_xavier//:generator_amsr_updatemanager_swcluster_meta",
+        "@amsr_xavier//:generator_amsr_updatemanager_daemon",
+        "@amsr_xavier//:generator_amsr_em_exec_config",
+        "@amsr_xavier//:generator_amsr_applicationbase_init_deinit",
     ],
     outs_list_dict = {
         "executionmanager_state_client_updatemanager_daemon_db": [
@@ -160,7 +160,7 @@ cc_binary(
     name = "executionmanager_state_client_binary",
     srcs = [
         ":executionmanager_state_client_applicationbase_init_deinit_srcs",
-        "@starter_kit_adaptive_xavier//:amsr_vector_fs_em_executionmanager_addon_demo_application_srcs",
+        "@amsr_xavier//:amsr_vector_fs_em_executionmanager_addon_demo_application_srcs",
     ],
     copts = [
         "-std=c++14",
@@ -182,7 +182,7 @@ minerva_aa_codegen_rule(
     name = "minerva_machine_exec_config_gen_rule",
     arxml_srcs = [":complete_arxml"],
     generators = [
-        "@starter_kit_adaptive_xavier//:generator_amsr_em_machine_config",
+        "@amsr_xavier//:generator_amsr_em_machine_config",
     ],
     outs_list_dict = {
         "minerva_machine_exec_config": ["IDC6_M_P1_XAVIER/machine_exec_config.json"],
@@ -192,13 +192,13 @@ minerva_aa_codegen_rule(
 minerva_aa_codegen_rule(
     name = "minerva_amsr_fs_log_daemon_config_gen_rule",
     arxml_srcs = [
-        "@starter_kit_adaptive_xavier//:mex_arxml",
+        "@amsr_xavier//:mex_arxml",
         ":idc_ecu_extract_arxml",
         ":amsr_vector_fs_log_daemon_arxml",
     ],
     generators = [
-        "@starter_kit_adaptive_xavier//:generator_amsr_logdaemon_config",
-        "@starter_kit_adaptive_xavier//:generator_amsr_logapi_config",
+        "@amsr_xavier//:generator_amsr_logdaemon_config",
+        "@amsr_xavier//:generator_amsr_logapi_config",
     ],
     outs_list_dict = {
         "minerva_amsr_fs_log_daemon_logd_config": [
@@ -214,7 +214,7 @@ minerva_aa_codegen_rule(
     name = "minerva_persistency_config_gen_rule",
     arxml_srcs = [":complete_arxml"],
     generators = [
-        "@starter_kit_adaptive_xavier//:generator_amsr_persistency_config",
+        "@amsr_xavier//:generator_amsr_persistency_config",
     ],
     outs_list_dict = {
         "starter_kit_base_application_skeleton_persistency_config_cmake": [
@@ -254,7 +254,7 @@ minerva_aa_codegen_rule(
     name = "starter_kit_application_modeldatatypes_api_gen_rule",
     arxml_srcs = [":complete_arxml"],
     generators = [
-        "@starter_kit_adaptive_xavier//:generator_amsr_modelleddatatypes_api",
+        "@amsr_xavier//:generator_amsr_modelleddatatypes_api",
     ],
     outs_list_dict = {
         "starter_kit_base_application_skeleton_modeldatatypes_hdrs": [
@@ -1191,7 +1191,7 @@ minerva_aa_codegen_rule(
         ":amsr_vector_fs_log_daemon_arxml",
     ],
     generators = [
-        "@starter_kit_adaptive_xavier//:generator_amsr_em_exec_config",
+        "@amsr_xavier//:generator_amsr_em_exec_config",
     ],
     outs_list_dict = {
         "starter_kit_base_application_skeleton_exec_config": [
@@ -1234,7 +1234,7 @@ minerva_aa_codegen_rule(
     name = "starter_kit_application_someipbinding_gen_rule",
     arxml_srcs = [":complete_arxml"],
     generators = [
-        "@starter_kit_adaptive_xavier//:generator_amsr_someipbinding",
+        "@amsr_xavier//:generator_amsr_someipbinding",
     ],
     outs_list_dict = {
         "starter_kit_base_application_skeleton_someip_config": [
@@ -1457,7 +1457,7 @@ minerva_aa_codegen_rule(
     name = "starter_kit_application_updatemanager_swcluster_meta_gen_rule",
     arxml_srcs = [":complete_arxml"],
     generators = [
-        "@starter_kit_adaptive_xavier//:generator_amsr_updatemanager_swcluster_meta",
+        "@amsr_xavier//:generator_amsr_updatemanager_swcluster_meta",
     ],
     outs_list_dict = {
         "starter_kit_base_application_skeleton_updatemanager_swcluster_meta": [
@@ -1497,7 +1497,7 @@ minerva_aa_codegen_rule(
     name = "starter_kit_application_updatemanager_daemon_gen_rule",
     arxml_srcs = [":complete_arxml"],
     generators = [
-        "@starter_kit_adaptive_xavier//:generator_amsr_updatemanager_daemon",
+        "@amsr_xavier//:generator_amsr_updatemanager_daemon",
     ],
     outs_list_dict = {
         "starter_kit_base_application_skeleton_updatemanager_daemon": [
@@ -1565,7 +1565,7 @@ minerva_aa_codegen_rule(
     name = "starter_kit_application_applicationbase_init_deinit_gen_rule",
     arxml_srcs = [":complete_arxml"],
     generators = [
-        "@starter_kit_adaptive_xavier//:generator_amsr_applicationbase_init_deinit",
+        "@amsr_xavier//:generator_amsr_applicationbase_init_deinit",
     ],
     outs_list_dict = {
         "starter_kit_base_application_skeleton_applicationbase_init_deinit_srcs": [
@@ -1599,7 +1599,7 @@ minerva_aa_codegen_rule(
     name = "starter_kit_application_someipprotocol_gen_rule",
     arxml_srcs = [":complete_arxml"],
     generators = [
-        "@starter_kit_adaptive_xavier//:generator_amsr_someipprotocol",
+        "@amsr_xavier//:generator_amsr_someipprotocol",
     ],
     outs_list_dict = {
         "starter_kit_base_application_skeleton_someipprotocol_srcs": [
@@ -2112,7 +2112,7 @@ minerva_aa_codegen_rule(
     name = "starter_kit_application_socal_gen_rule",
     arxml_srcs = [":complete_arxml"],
     generators = [
-        "@starter_kit_adaptive_xavier//:generator_amsr_socal",
+        "@amsr_xavier//:generator_amsr_socal",
     ],
     outs_list_dict = {
         "starter_kit_base_application_skeleton_socal_srcs": [
@@ -2517,9 +2517,9 @@ cc_binary(
     name = "skeleton_demo_idc6",
     srcs = [
         "@starter_kit_adaptive_xavier//:skeleton_demo_idc6_srcs",
-        "@starter_kit_adaptive_xavier//:amsr_vector_fs_per_libpersistency_persistency_srcs",
-        "@starter_kit_adaptive_xavier//:amsr_vector_fs_per_libpersistency_persistency_file_storage_srcs",
-        "@starter_kit_adaptive_xavier//:amsr_vector_fs_per_libpersistency_persistency_key_value_storage_srcs",
+        "@amsr_xavier//:amsr_vector_fs_per_libpersistency_persistency_srcs",
+        "@amsr_xavier//:amsr_vector_fs_per_libpersistency_persistency_file_storage_srcs",
+        "@amsr_xavier//:amsr_vector_fs_per_libpersistency_persistency_key_value_storage_srcs",
 
         # This a workaround to resolve cyclic dependency. This is the reason why the target skeleton_demo_idc6
         # build in 2 steps.
@@ -2625,13 +2625,13 @@ minerva_aa_bsw_module(
     out_static_libs = [
         "libvac.a",
     ],
-    srcs_filegroup = "@starter_kit_adaptive_xavier//:amsr_vector_fs_libvac_srcs",
+    srcs_filegroup = "@amsr_xavier//:amsr_vector_fs_libvac_srcs",
 )
 
 minerva_aa_bsw_module(
     name = "amsr_vector_fs_msr4base",
     out_headers_only = True,
-    srcs_filegroup = "@starter_kit_adaptive_xavier//:amsr_vector_fs_msr4base_srcs",
+    srcs_filegroup = "@amsr_xavier//:amsr_vector_fs_msr4base_srcs",
 )
 
 minerva_aa_bsw_module(
@@ -2652,7 +2652,7 @@ minerva_aa_bsw_module(
         "libamsr-vector-fs-libiostream_libcharconv_vector_stl.a",
         "libamsr-vector-fs-libiostream_libcharconv_common.a",
     ],
-    srcs_filegroup = "@starter_kit_adaptive_xavier//:amsr_vector_fs_libiostream_srcs",
+    srcs_filegroup = "@amsr_xavier//:amsr_vector_fs_libiostream_srcs",
     deps = [
         ":amsr_vector_fs_libvac",
     ],
@@ -2667,7 +2667,7 @@ minerva_aa_bsw_module(
     out_static_libs = [
         "libvathread.a",
     ],
-    srcs_filegroup = "@starter_kit_adaptive_xavier//:amsr_vector_fs_thread_srcs",
+    srcs_filegroup = "@amsr_xavier//:amsr_vector_fs_thread_srcs",
     deps = [
         ":amsr_vector_fs_libvac",
     ],
@@ -2678,7 +2678,7 @@ minerva_aa_bsw_module(
     out_static_libs = [
         "libvajson.a",
     ],
-    srcs_filegroup = "@starter_kit_adaptive_xavier//:amsr_vector_fs_vajson_srcs",
+    srcs_filegroup = "@amsr_xavier//:amsr_vector_fs_vajson_srcs",
     deps = [
         ":amsr_vector_fs_libiostream",
         ":amsr_vector_fs_libvac",
@@ -2690,7 +2690,7 @@ minerva_aa_bsw_module(
     out_static_libs = [
         "libapplication_base.a",
     ],
-    srcs_filegroup = "@starter_kit_adaptive_xavier//:amsr_vector_fs_applicationbase_srcs",
+    srcs_filegroup = "@amsr_xavier//:amsr_vector_fs_applicationbase_srcs",
     deps = [
         ":amsr_vector_fs_libvac",
     ],
@@ -2701,7 +2701,7 @@ minerva_aa_bsw_module(
     out_static_libs = [
         "libosabstraction.a",
     ],
-    srcs_filegroup = "@starter_kit_adaptive_xavier//:amsr_vector_fs_libosabstraction_srcs",
+    srcs_filegroup = "@amsr_xavier//:amsr_vector_fs_libosabstraction_srcs",
     deps = [
         ":amsr_vector_fs_libvac",
     ],
@@ -2722,7 +2722,7 @@ minerva_aa_bsw_module(
         "libamsr-vector-fs-log-api-ipc.a",
         "libamsr-vector-fs-log-api-common.a",
     ],
-    srcs_filegroup = "@starter_kit_adaptive_xavier//:amsr_vector_fs_log_api_srcs",
+    srcs_filegroup = "@amsr_xavier//:amsr_vector_fs_log_api_srcs",
     deps = [
         ":amsr_vector_fs_libiostream",
         ":amsr_vector_fs_libosabstraction",
@@ -2737,7 +2737,7 @@ minerva_aa_bsw_module(
     out_static_libs = [
         "libamsr-vector-fs-sec-cryptostack-driver-lib_es.a",
     ],
-    srcs_filegroup = "@starter_kit_adaptive_xavier//:amsr_vector_fs_sec_cryptostack_driver_lib_es_srcs",
+    srcs_filegroup = "@amsr_xavier//:amsr_vector_fs_sec_cryptostack_driver_lib_es_srcs",
     deps = [
         ":amsr_vector_fs_libvac",
         ":amsr_vector_fs_msr4base",
@@ -2764,7 +2764,7 @@ minerva_aa_bsw_module(
         "libamsr-vector-fs-em-executionmanagement_recovery-action-client.a",
         "libamsr-vector-fs-em-executionmanagement_failure-handler-client.a",
     ],
-    srcs_filegroup = "@starter_kit_adaptive_xavier//:amsr_vector_fs_em_executionmanager_srcs",
+    srcs_filegroup = "@amsr_xavier//:amsr_vector_fs_em_executionmanager_srcs",
     deps = [
         ":amsr_vector_fs_applicationbase",
         ":amsr_vector_fs_libiostream",
@@ -2786,7 +2786,7 @@ minerva_aa_bsw_module(
         "libamsr-vector-fs-sec-iam_libcommon.a",
         "libamsr-vector-fs-sec-iam_libclient.a",
     ],
-    srcs_filegroup = "@starter_kit_adaptive_xavier//:amsr_vector_fs_sec_iam_srcs",
+    srcs_filegroup = "@amsr_xavier//:amsr_vector_fs_sec_iam_srcs",
     deps = [
         ":amsr_vector_fs_libiostream",
         ":amsr_vector_fs_libosabstraction",
@@ -2818,7 +2818,7 @@ minerva_aa_bsw_module(
         "libamsr-vector-fs-sec-cryptostack_libdriverfactory.a",
         "libamsr-vector-fs-sec-cryptostack_libsoftwareprovider.a",
     ],
-    srcs_filegroup = "@starter_kit_adaptive_xavier//:amsr_vector_fs_sec_cryptostack_srcs",
+    srcs_filegroup = "@amsr_xavier//:amsr_vector_fs_sec_cryptostack_srcs",
     deps = [
         ":amsr_vector_fs_em_executionmanager",
         ":amsr_vector_fs_libiostream",
@@ -2837,7 +2837,7 @@ minerva_aa_bsw_module(
     out_static_libs = [
         "libamsr-vector-fs-sec-libseccom_libtls.a",
     ],
-    srcs_filegroup = "@starter_kit_adaptive_xavier//:amsr_vector_fs_sec_libseccom_srcs",
+    srcs_filegroup = "@amsr_xavier//:amsr_vector_fs_sec_libseccom_srcs",
     deps = [
         ":amsr_vector_fs_libiostream",
         ":amsr_vector_fs_libosabstraction",
@@ -2868,7 +2868,7 @@ minerva_aa_bsw_module(
         "libSomeIP-posix.a",
         "libSomeIP-posix-common.a",
     ],
-    srcs_filegroup = "@starter_kit_adaptive_xavier//:amsr_vector_fs_communicationmiddleware_srcs",
+    srcs_filegroup = "@amsr_xavier//:amsr_vector_fs_communicationmiddleware_srcs",
     deps = [
         ":amsr_vector_fs_libosabstraction",
         ":amsr_vector_fs_log_api",
@@ -2884,7 +2884,7 @@ minerva_aa_bsw_module(
         "libamsr-vector-fs-crc_libinternal.a",
         "libamsr-vector-fs-crc_libcrc.a",
     ],
-    srcs_filegroup = "@starter_kit_adaptive_xavier//:amsr_vector_fs_crc_srcs",
+    srcs_filegroup = "@amsr_xavier//:amsr_vector_fs_crc_srcs",
     deps = [
         ":amsr_vector_fs_libvac",
         ":amsr_vector_fs_msr4base",
@@ -2897,7 +2897,7 @@ minerva_aa_bsw_module(
         "libamsr-vector-fs-e2e_libe2e.a",
         "libamsr-vector-fs-e2e_libinternal.a",
     ],
-    srcs_filegroup = "@starter_kit_adaptive_xavier//:amsr_vector_fs_e2e_srcs",
+    srcs_filegroup = "@amsr_xavier//:amsr_vector_fs_e2e_srcs",
     deps = [
         ":amsr_vector_fs_applicationbase",
         ":amsr_vector_fs_crc",
@@ -2918,7 +2918,7 @@ minerva_aa_bsw_module(
     out_static_libs = [
         "libSocal.a",
     ],
-    srcs_filegroup = "@starter_kit_adaptive_xavier//:amsr_vector_fs_socal_srcs",
+    srcs_filegroup = "@amsr_xavier//:amsr_vector_fs_socal_srcs",
     deps = [
         ":amsr_vector_fs_crc",
         ":amsr_vector_fs_e2e",
@@ -2946,7 +2946,7 @@ minerva_aa_bsw_module(
     out_static_libs = [
         "libSocal.a",
     ],
-    srcs_filegroup = "@starter_kit_adaptive_xavier//:amsr_vector_fs_socal_srcs",
+    srcs_filegroup = "@amsr_xavier//:amsr_vector_fs_socal_srcs",
     deps = [
         ":amsr_vector_fs_crc",
         ":amsr_vector_fs_e2e",
@@ -2973,7 +2973,7 @@ minerva_aa_bsw_module(
     out_static_libs = [
         "libSocal.a",
     ],
-    srcs_filegroup = "@starter_kit_adaptive_xavier//:amsr_vector_fs_socal_srcs",
+    srcs_filegroup = "@amsr_xavier//:amsr_vector_fs_socal_srcs",
     deps = [
         ":amsr_vector_fs_crc",
         ":amsr_vector_fs_e2e",
@@ -2999,7 +2999,7 @@ minerva_aa_bsw_module(
         "ENABLE_EXEC_MANAGER": "ON",
     },
     out_headers_only = True,
-    srcs_filegroup = "@starter_kit_adaptive_xavier//:amsr_vector_fs_socal_srcs",
+    srcs_filegroup = "@amsr_xavier//:amsr_vector_fs_socal_srcs",
     deps = [
         ":amsr_vector_fs_crc",
         ":amsr_vector_fs_e2e",
@@ -3031,7 +3031,7 @@ minerva_aa_bsw_module(
     out_static_libs = [
         "libamsr-vector-fs-log-daemon-service.a",
     ],
-    srcs_filegroup = "@starter_kit_adaptive_xavier//:amsr_vector_fs_log_daemon_srcs",
+    srcs_filegroup = "@amsr_xavier//:amsr_vector_fs_log_daemon_srcs",
     deps = [
         ":amsr_vector_fs_em_executionmanager",
         ":amsr_vector_fs_libiostream",
@@ -3052,7 +3052,7 @@ minerva_aa_bsw_module(
     out_static_libs = [
         "libSomeIpProtocol.a",
     ],
-    srcs_filegroup = "@starter_kit_adaptive_xavier//:amsr_vector_fs_someipprotocol_srcs",
+    srcs_filegroup = "@amsr_xavier//:amsr_vector_fs_someipprotocol_srcs",
     deps = [
         ":amsr_vector_fs_libiostream",
         ":amsr_vector_fs_libosabstraction",
@@ -3078,7 +3078,7 @@ minerva_aa_bsw_module(
         "libSomeIpBinding.a",
         "libSomeIpBindingTransformationLayer.a",
     ],
-    srcs_filegroup = "@starter_kit_adaptive_xavier//:amsr_vector_fs_someipbinding_srcs",
+    srcs_filegroup = "@amsr_xavier//:amsr_vector_fs_someipbinding_srcs",
     deps = [
         ":amsr_vector_fs_crc",
         ":amsr_vector_fs_e2e",
@@ -3101,7 +3101,7 @@ minerva_aa_bsw_module(
     out_static_libs = [
         "libSomeIpDaemonClient.a",
     ],
-    srcs_filegroup = "@starter_kit_adaptive_xavier//:amsr_vector_fs_someipdaemonclient_srcs",
+    srcs_filegroup = "@amsr_xavier//:amsr_vector_fs_someipdaemonclient_srcs",
     deps = [
         ":amsr_vector_fs_libiostream",
         ":amsr_vector_fs_libosabstraction",
@@ -3128,7 +3128,7 @@ minerva_aa_bsw_module(
     out_binaries = [
         "someipd_posix",
     ],
-    srcs_filegroup = "@starter_kit_adaptive_xavier//:amsr_vector_fs_someipdaemon_srcs",
+    srcs_filegroup = "@amsr_xavier//:amsr_vector_fs_someipdaemon_srcs",
     deps = [
         ":amsr_vector_fs_em_executionmanager",
         ":amsr_vector_fs_libiostream",
@@ -3161,7 +3161,7 @@ minerva_aa_bsw_module(
         "libpersistency-fs.a",
         "libpersistency-common.a",
     ],
-    srcs_filegroup = "@starter_kit_adaptive_xavier//:amsr_vector_fs_per_libpersistency_srcs",
+    srcs_filegroup = "@amsr_xavier//:amsr_vector_fs_per_libpersistency_srcs",
     deps = [
         ":amsr_vector_fs_crc",
         ":amsr_vector_fs_iointegritystream",
@@ -3178,7 +3178,7 @@ minerva_aa_bsw_module(
     out_static_libs = [
         "liblog-utility.a",
     ],
-    srcs_filegroup = "@starter_kit_adaptive_xavier//:amsr_vector_fs_logutility_srcs",
+    srcs_filegroup = "@amsr_xavier//:amsr_vector_fs_logutility_srcs",
     deps = [
         ":amsr_vector_fs_libiostream",
         ":amsr_vector_fs_libosabstraction",
@@ -3194,7 +3194,7 @@ minerva_aa_bsw_module(
     out_static_libs = [
         "libiointegritystream.a",
     ],
-    srcs_filegroup = "@starter_kit_adaptive_xavier//:amsr_vector_fs_iointegritystream_srcs",
+    srcs_filegroup = "@amsr_xavier//:amsr_vector_fs_iointegritystream_srcs",
     deps = [
         ":amsr_vector_fs_crc",
         ":amsr_vector_fs_libiostream",
@@ -3215,7 +3215,7 @@ minerva_aa_bsw_module(
     out_include_dirs = [
         "include",
     ],
-    srcs_filegroup = "@starter_kit_adaptive_xavier//:amsr_vector_fs_dm_diagnosticmanager_srcs",
+    srcs_filegroup = "@amsr_xavier//:amsr_vector_fs_dm_diagnosticmanager_srcs",
     deps = [
         ":amsr_vector_fs_applicationbase",
         ":amsr_vector_fs_crc",
@@ -3250,7 +3250,7 @@ minerva_aa_bsw_module(
         "libIpcBindingTransformationLayer.a",
         "libIpcBindingInternal.a",
     ],
-    srcs_filegroup = "@starter_kit_adaptive_xavier//:amsr_vector_fs_ipcbinding_srcs",
+    srcs_filegroup = "@amsr_xavier//:amsr_vector_fs_ipcbinding_srcs",
     deps = [
         ":amsr_vector_fs_crc",
         ":amsr_vector_fs_e2e",
@@ -3279,7 +3279,7 @@ minerva_aa_bsw_module(
     out_static_libs = [
         "libamsr-vector-fs-tsync_common.a",
     ],
-    srcs_filegroup = "@starter_kit_adaptive_xavier//:amsr_vector_fs_timesync_srcs",
+    srcs_filegroup = "@amsr_xavier//:amsr_vector_fs_timesync_srcs",
     deps = [
         ":amsr_vector_fs_em_executionmanager",
         ":amsr_vector_fs_libiostream",
