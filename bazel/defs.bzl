@@ -408,14 +408,8 @@ def minerva_aa_bsw_module(
                 "$EXT_BUILD_DEPS/amsr_vector_fs_msr4base/lib/cmake/amsr-vector-fs-msr4base/"
 
         elif dep == ":amsr_vector_fs_libiostream":
-            cache_entries["amsr-vector-fs-libiostream_libstream_vector_stl_DIR:PATH"] = \
-                "$EXT_BUILD_DEPS/amsr_vector_fs_libiostream/lib/cmake/amsr-vector-fs-libiostream_libstream_vector_stl/"
-            cache_entries["amsr-vector-fs-libiostream_libstream_DIR:PATH"] = \
-                "$EXT_BUILD_DEPS/amsr_vector_fs_libiostream/lib/cmake/amsr-vector-fs-libiostream_libstream/"
-            cache_entries["amsr-vector-fs-libiostream_libcharconv_vector_stl_DIR:PATH"] = \
-                "$EXT_BUILD_DEPS/amsr_vector_fs_libiostream/lib/cmake/amsr-vector-fs-libiostream_libcharconv_vector_stl/"
-            cache_entries["amsr-vector-fs-libiostream_libcharconv_common_DIR:PATH"] = \
-                "$EXT_BUILD_DEPS/amsr_vector_fs_libiostream/lib/cmake/amsr-vector-fs-libiostream_libcharconv_common/"
+            cache_entries["amsr-vector-fs-libiostream_DIR:PATH"] = \
+                "$EXT_BUILD_DEPS/amsr_vector_fs_libiostream/lib/cmake/amsr-vector-fs-libiostream/"
 
         elif dep == ":amsr_vector_fs_libosabstraction":
             cache_entries["osabstraction_DIR:PATH"] = \
@@ -542,6 +536,14 @@ def minerva_aa_bsw_module(
                 "$EXT_BUILD_DEPS/amsr_vector_fs_per_libpersistency/lib/cmake/persistency-file-storage/"
             cache_entries["persistency-fs_DIR:PATH"] = \
                 "$EXT_BUILD_DEPS/amsr_vector_fs_per_libpersistency/lib/cmake/persistency-fs/"
+
+        elif dep == ":amsr_vector_fs_characterconversion":
+            cache_entries["amsr-vector-fs-characterconversion_DIR:PATH"] = \
+                "$EXT_BUILD_DEPS/amsr_vector_fs_characterconversion/lib/cmake/amsr-vector-fs-characterconversion/"
+            cache_entries["amsr-vector-fs-characterconversion_common_DIR:PATH"] = \
+                "$EXT_BUILD_DEPS/amsr_vector_fs_characterconversion/lib/cmake/amsr-vector-fs-characterconversion_common/"
+            cache_entries["amsr-vector-fs-characterconversion_vector_DIR:PATH"] = \
+                "$EXT_BUILD_DEPS/amsr_vector_fs_characterconversion/lib/cmake/amsr-vector-fs-characterconversion_vector/"
 
     cmake(
         name = name,

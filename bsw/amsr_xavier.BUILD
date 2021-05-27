@@ -263,6 +263,7 @@ minerva_aa_codegen_declare(
         "amsr_persistency_config",
         "amsr_logdaemon_config",
         "amsr_logapi_config",
+        "amsr_ipcbinding",
     ],
     path_to_generators = "Generators",
 )
