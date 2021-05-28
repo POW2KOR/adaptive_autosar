@@ -48,13 +48,6 @@ filegroup(
 )
 
 filegroup(
-    name = "starter_kit_restart_app_logging_config",
-    srcs = [
-        "configs/restart_app_demo_idc6/logging_config.json",
-    ],
-)
-
-filegroup(
     name = "starter_kit_shutdown_app_logging_config",
     srcs = [
         "configs/shutdown_app_demo_idc6/logging_config.json",
@@ -2477,28 +2470,6 @@ cc_binary(
         "//bsw:amsr_vector_fs_socal_for_skeleton",
         "//bsw:amsr_vector_fs_someipbinding",
         "//bsw:amsr_vector_fs_vajson",
-    ],
-)
-
-cc_binary(
-    name = "restart_app_demo_idc6",
-    srcs = [
-        ":starter_kit_restart_app_idc6_applicationbase_init_deinit_srcs",
-        "@starter_kit_adaptive_xavier//:restart_app_demo_idc6_srcs",
-    ],
-    copts = [
-        "-std=c++14",
-    ],
-    features = [
-        "pthread",
-    ],
-    linkstatic = 1,
-    deps = [
-        "//bsw:amsr_vector_fs_applicationbase",
-        "//bsw:amsr_vector_fs_em_executionmanager",
-        "//bsw:amsr_vector_fs_libvac",
-        "//bsw:amsr_vector_fs_log_api",
-        "//bsw:executionmanager_state_client_binary",
     ],
 )
 

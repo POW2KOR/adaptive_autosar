@@ -90,7 +90,7 @@ pkg_tar(
         "//application/executionmanager_state_client_app:app": "opt/executionmanager_state_client_app/bin/executionmanager_state_client_app",
         "//bsw:skeleton_demo_idc6": "opt/BaseApplicationExecutable/bin/BaseApplicationExecutable",
         "//bsw:proxy_demo_idc6": "opt/TestBaseApplicationExecutable/bin/TestBaseApplicationExecutable",
-        "//bsw:restart_app_demo_idc6": "opt/restart_app_demo_idc6/bin/restart_app_demo_idc6",
+        "//application/restart_app_demo_idc6:app": "opt/restart_app_demo_idc6/bin/restart_app_demo_idc6",
         "//bsw:shutdown_app_demo_idc6": "opt/shutdown_app_demo_idc6/bin/shutdown_app_demo_idc6",
         "//bsw:update_app_demo_idc6": "opt/update_app_demo_idc6/bin/update_app_demo_idc6",
         # For now we are commenting out the references for sw_update_client application
@@ -172,11 +172,11 @@ pkg_tar(
 pkg_tar(
     name = "restart_app_demo_configs",
     srcs = {
-        "//bsw:starter_kit_restart_app_idc6_exec_config": "exec_config.json",
-        "//bsw:starter_kit_restart_app_idc6_updatemanager_swcluster_meta": "swcl_package_metadata.json",
-        "//bsw:starter_kit_restart_app_idc6_updatemanager_daemon": "updatemanager.json",
-        "//bsw:starter_kit_restart_app_idc6_updatemanager_swcl_db_daemon": "swcl_db.json",
-        "//bsw:starter_kit_restart_app_logging_config": "logging_config.json",
+        "//application/restart_app_demo_idc6:exec_config": "exec_config.json",
+        "//application/restart_app_demo_idc6:updatemanager_swcluster_meta": "swcl_package_metadata.json",
+        "//application/restart_app_demo_idc6:updatemanager_daemon": "updatemanager.json",
+        "//application/restart_app_demo_idc6:updatemanager_swcl_db_daemon": "swcl_db.json",
+        "//application/restart_app_demo_idc6:logging_config": "logging_config.json",
     },
     mode = "0755",
     package_dir = "/opt/restart_app_demo_idc6/etc/",
