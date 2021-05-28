@@ -170,7 +170,7 @@ def minerva_aa_codegen_rule(
         srcs = arxml_srcs,
         outs = concatenated_outs,
         cmd = """
-        tmp_folder="/tmp/{tmp_folder}"
+        tmp_folder=$$(mktemp -d)
         output_folder="$(RULEDIR)/{output_folder}"
         arxml_srcs_folder="$(RULEDIR)/{arxml_srcs_folder}"
         generator_log="$$output_folder/generator_log.txt"
@@ -288,7 +288,6 @@ def minerva_aa_codegen_rule(
         """.format(
             arxml_srcs_folder = "{}/arxml_srcs".format(gen_rule_name),
             output_folder = gen_rule_output_folder,
-            tmp_folder = gen_rule_name,
             generators_arg = " ".join(generators_arg_list),
             arxml_srcs = " ".join(arxml_srcs_arg_list),
             ignore_matches = " ".join(ignore_matches),
