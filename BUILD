@@ -90,8 +90,6 @@ pkg_tar(
         "//application/executionmanager_state_client_app:app": "opt/executionmanager_state_client_app/bin/executionmanager_state_client_app",
         "//application/skeleton_demo_idc6:app": "opt/BaseApplicationExecutable/bin/BaseApplicationExecutable",
         "//application/proxy_demo_idc6:app": "opt/TestBaseApplicationExecutable/bin/TestBaseApplicationExecutable",
-        "//application/restart_app_demo_idc6:app": "opt/restart_app_demo_idc6/bin/restart_app_demo_idc6",
-        "//application/shutdown_app_demo_idc6:app": "opt/shutdown_app_demo_idc6/bin/shutdown_app_demo_idc6",
         "//application/update_app_demo_idc6:app_v1": "opt/update_app_demo_idc6/bin/update_app_demo_idc6",
         # For now we are commenting out the references for sw_update_client application
         # as we are not able to build the application with latest delivery
@@ -168,33 +166,6 @@ pkg_tar(
     mode = "0755",
     package_dir = "/opt/BaseApplicationExecutable/etc/",
 )
-
-pkg_tar(
-    name = "restart_app_demo_configs",
-    srcs = {
-        "//application/restart_app_demo_idc6:exec_config": "exec_config.json",
-        "//application/restart_app_demo_idc6:updatemanager_swcluster_meta": "swcl_package_metadata.json",
-        "//application/restart_app_demo_idc6:updatemanager_daemon": "updatemanager.json",
-        "//application/restart_app_demo_idc6:updatemanager_swcl_db_daemon": "swcl_db.json",
-        "//application/restart_app_demo_idc6:logging_config": "logging_config.json",
-    },
-    mode = "0755",
-    package_dir = "/opt/restart_app_demo_idc6/etc/",
-)
-
-pkg_tar(
-    name = "shutdown_app_demo_configs",
-    srcs = {
-        "//application/shutdown_app_demo_idc6:exec_config": "exec_config.json",
-        "//application/shutdown_app_demo_idc6:updatemanager_swcluster_meta": "swcl_package_metadata.json",
-        "//application/shutdown_app_demo_idc6:updatemanager_daemon": "updatemanager.json",
-        "//application/shutdown_app_demo_idc6:updatemanager_swcl_db_daemon": "swcl_db.json",
-        "//application/shutdown_app_demo_idc6:logging_config": "logging_config.json",
-    },
-    mode = "0755",
-    package_dir = "/opt/shutdown_app_demo_idc6/etc/",
-)
-
 pkg_tar(
     name = "update_app_v1_demo_configs",
     srcs = {
@@ -279,8 +250,6 @@ pkg_tar(
         ":adaptive_idc6mt_configs",
         ":adaptive_scn_param_storage_configs",
         ":adaptive_stub_applications_configs",
-        ":restart_app_demo_configs",
-        ":shutdown_app_demo_configs",
         ":update_app_v1_demo_configs",
     ],
 )
