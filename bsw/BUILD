@@ -20,20 +20,6 @@ filegroup(
 )
 
 filegroup(
-    name = "starter_kit_base_application_skeleton_com_application_config",
-    srcs = [
-        "configs/BaseApplicationExecutable/com_application.json",
-    ],
-)
-
-filegroup(
-    name = "starter_kit_base_application_skeleton_logging_config",
-    srcs = [
-        "configs/BaseApplicationExecutable/logging_config.json",
-    ],
-)
-
-filegroup(
     name = "starter_kit_shutdown_app_logging_config",
     srcs = [
         "configs/shutdown_app_demo_idc6/logging_config.json",
