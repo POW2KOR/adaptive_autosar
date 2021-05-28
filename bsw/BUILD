@@ -13,27 +13,6 @@ filegroup(
 )
 
 filegroup(
-    name = "someipd_posix_logging_config",
-    srcs = [
-        "configs/someipd_posix/logging_config.json",
-    ],
-)
-
-filegroup(
-    name = "someipd_posix_exec_config",
-    srcs = [
-        "configs/someipd_posix/exec_config.json",
-    ],
-)
-
-filegroup(
-    name = "someipd_posix_someip_config",
-    srcs = [
-        "configs/someipd_posix/someipd-posix.json",
-    ],
-)
-
-filegroup(
     name = "em_logging_config",
     srcs = [
         "configs/etc/logging_config.json",

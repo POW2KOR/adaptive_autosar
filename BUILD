@@ -130,9 +130,9 @@ pkg_tar(
 pkg_tar(
     name = "adaptive_autosar_someipdaemon_configs",
     srcs = {
-        "//bsw:someipd_posix_logging_config": "logging_config.json",
-        "//bsw:someipd_posix_exec_config": "exec_config.json",
-        "//bsw:someipd_posix_someip_config": "someipd-posix.json",
+        "//application/someipd_posix:logging_config": "logging_config.json",
+        "//application/someipd_posix:exec_config": "exec_config.json",
+        "//application/someipd_posix:someip_config": "someipd-posix.json",
     },
     mode = "0755",
     package_dir = "/opt/someipd_posix/etc/",
