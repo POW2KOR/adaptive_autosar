@@ -351,23 +351,19 @@ target_build_dir_for_socal_scn_param_storage = select({
 filegroup(
     name = "socal_lib_for_proxy",
     srcs = target_build_dir_for_socal_proxy,
-    visibility = ["//visibility:public"],
 )
 
 filegroup(
     name = "socal_lib_for_skeleton",
     srcs = target_build_dir_for_socal_skeleton,
-    visibility = ["//visibility:public"],
 )
 
 filegroup(
     name = "socal_lib_for_sw_update",
     srcs = target_build_dir_for_socal_sw_update,
-    visibility = ["//visibility:public"],
 )
 
 filegroup(
     name = "socal_lib_for_scn_param_storage",
     srcs = target_build_dir_for_socal_scn_param_storage,
-    visibility = ["//visibility:public"],
 )
