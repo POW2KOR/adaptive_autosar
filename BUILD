@@ -91,7 +91,7 @@ pkg_tar(
         "//application/skeleton_demo_idc6:app": "opt/BaseApplicationExecutable/bin/BaseApplicationExecutable",
         "//application/proxy_demo_idc6:app": "opt/TestBaseApplicationExecutable/bin/TestBaseApplicationExecutable",
         "//application/restart_app_demo_idc6:app": "opt/restart_app_demo_idc6/bin/restart_app_demo_idc6",
-        "//bsw:shutdown_app_demo_idc6": "opt/shutdown_app_demo_idc6/bin/shutdown_app_demo_idc6",
+        "//application/shutdown_app_demo_idc6:app": "opt/shutdown_app_demo_idc6/bin/shutdown_app_demo_idc6",
         "//bsw:update_app_demo_idc6": "opt/update_app_demo_idc6/bin/update_app_demo_idc6",
         # For now we are commenting out the references for sw_update_client application
         # as we are not able to build the application with latest delivery
@@ -185,11 +185,11 @@ pkg_tar(
 pkg_tar(
     name = "shutdown_app_demo_configs",
     srcs = {
-        "//bsw:starter_kit_shutdown_app_idc6_exec_config": "exec_config.json",
-        "//bsw:starter_kit_shutdown_app_idc6_updatemanager_swcluster_meta": "swcl_package_metadata.json",
-        "//bsw:starter_kit_shutdown_app_idc6_updatemanager_daemon": "updatemanager.json",
-        "//bsw:starter_kit_shutdown_app_idc6_updatemanager_swcl_db_daemon": "swcl_db.json",
-        "//bsw:starter_kit_shutdown_app_logging_config": "logging_config.json",
+        "//application/shutdown_app_demo_idc6:exec_config": "exec_config.json",
+        "//application/shutdown_app_demo_idc6:updatemanager_swcluster_meta": "swcl_package_metadata.json",
+        "//application/shutdown_app_demo_idc6:updatemanager_daemon": "updatemanager.json",
+        "//application/shutdown_app_demo_idc6:updatemanager_swcl_db_daemon": "swcl_db.json",
+        "//application/shutdown_app_demo_idc6:logging_config": "logging_config.json",
     },
     mode = "0755",
     package_dir = "/opt/shutdown_app_demo_idc6/etc/",

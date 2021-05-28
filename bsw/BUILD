@@ -20,13 +20,6 @@ filegroup(
 )
 
 filegroup(
-    name = "starter_kit_shutdown_app_logging_config",
-    srcs = [
-        "configs/shutdown_app_demo_idc6/logging_config.json",
-    ],
-)
-
-filegroup(
     name = "starter_kit_update_app_v1_logging_config",
     srcs = [
         "configs/update_app_v1_demo_idc6/logging_config.json",
