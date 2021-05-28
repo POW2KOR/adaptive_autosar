@@ -119,9 +119,9 @@ pkg_tar(
 pkg_tar(
     name = "adaptive_autosar_log_daemon_configs",
     files = {
-        "//bsw:minerva_amsr_fs_log_daemon_logging_config": "logging_config.json",
-        "//bsw:minerva_amsr_fs_log_daemon_logd_config": "logd_config.json",
-        "//bsw:starter_kit_amsr_log_daemon_exec_config": "exec_config.json",
+        "//application/amsr_vector_fs_log_daemon:logging_config": "logging_config.json",
+        "//application/amsr_vector_fs_log_daemon:logd_config": "logd_config.json",
+        "//application/amsr_vector_fs_log_daemon:exec_config": "exec_config.json",
     },
     mode = "0755",
     package_dir = "/opt/amsr_vector_fs_log_daemon/etc/",
