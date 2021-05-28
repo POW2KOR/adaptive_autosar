@@ -262,6 +262,12 @@ filegroup(
     visibility = ["//visibility:public"],
 )
 
+filegroup(
+    name = "amsr_vector_fs_diagnosticmanager",
+    srcs = glob(["mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-diagnosticmanager/**"]),
+    visibility = ["//visibility:public"],
+)
+
 # Generators
 
 filegroup(

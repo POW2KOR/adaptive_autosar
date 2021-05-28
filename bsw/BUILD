@@ -618,6 +618,8 @@ minerva_aa_bsw_module(
         ":amsr_vector_fs_logutility",
         ":amsr_vector_fs_msr4base",
         ":amsr_vector_fs_vajson",
+        ":amsr_vector_fs_log_api",
+        ":amsr_vector_fs_thread",
     ],
 )
 
@@ -795,6 +797,7 @@ minerva_aa_bsw_module(
         ":amsr_vector_fs_socal",
         ":amsr_vector_fs_thread",
         ":amsr_vector_fs_vajson",
+        ":amsr_vector_fs_msr4base",
     ],
 )
 
@@ -866,6 +869,9 @@ minerva_aa_bsw_module(
         ":amsr_vector_fs_socal",
         ":amsr_vector_fs_thread",
         ":amsr_vector_fs_udstransport",
+        ":amsr_vector_fs_log_api",
+        ":amsr_vector_fs_vajson",
+        ":amsr_vector_fs_msr4base",
     ],
 )
 
@@ -888,6 +894,9 @@ minerva_aa_bsw_module(
         ":amsr_vector_fs_logutility",
         ":amsr_vector_fs_socal",
         ":amsr_vector_fs_thread",
+        ":amsr_vector_fs_log_api",
+        ":amsr_vector_fs_vajson",
+        ":amsr_vector_fs_msr4base",
     ],
 )
 
@@ -917,3 +926,35 @@ minerva_aa_bsw_module(
         ":amsr_vector_fs_diagnosticrpccombinding",
     ],
 )
+
+minerva_aa_bsw_module(
+    name = "amsr_vector_fs_diagnosticmanager",
+    out_headers_only = True,
+    srcs_filegroup = "@starter_kit_adaptive_xavier//:amsr_vector_fs_diagnosticmanager",
+    deps = [
+        ":amsr_vector_fs_applicationbase",
+        ":amsr_vector_fs_libvac",
+        ":amsr_vector_fs_libosabstraction",
+        ":amsr_vector_fs_vajson",
+        ":amsr_vector_fs_logutility",
+        ":amsr_vector_fs_log_api",
+        ":amsr_vector_fs_thread",
+        ":amsr_vector_fs_socal",
+        ":amsr_vector_fs_libiostream",
+        ":amsr_vector_fs_characterconversion",
+        ":amsr_vector_fs_e2e",
+        ":amsr_vector_fs_crc",
+        ":amsr_vector_fs_udstransport",
+        ":amsr_vector_fs_diagnosticutility",
+        ":amsr_vector_fs_diagnosticrpc",
+        ":amsr_vector_fs_diagnosticrpccombinding",
+        ":amsr_vector_fs_msr4base",
+        ":amsr_vector_fs_someipbinding",
+        ":amsr_vector_fs_someipprotocol",
+        ":amsr_vector_fs_someipdaemonclient",
+        ":amsr_vector_fs_ipcbinding",
+        ":amsr_vector_fs_per_libpersistency",
+        ":amsr_vector_fs_iointegritystream",
+    ],
+)
+
