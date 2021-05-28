@@ -3,11 +3,6 @@ load("@minerva_mpu_adaptive//:bazel/defs.bzl", "minerva_aa_bsw_module", "minerva
 package(default_visibility = ["//visibility:public"])
 
 filegroup(
-    name = "idc_ecu_extract_arxml",
-    srcs = ["arxmls/TestExport_Base_and_SDA_and_TestBase_wS2S_V6.arxml"],
-)
-
-filegroup(
     name = "executionmanager_state_client_app_arxml",
     srcs = ["arxmls/executionmanager_state_client_app.arxml"],
 )
