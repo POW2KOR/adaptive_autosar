@@ -152,8 +152,9 @@ def minerva_aa_codegen_rule(
 
             concatenated_outs.append(full_out_path)
 
+    # Ignoring GeneratorReport.html because it somehow doesn't always get
+    # generated even though everything runs successfully.
     for generator_report_file in [
-        "GeneratorReport.html",
         "GeneratorReport.xml",
         "generator_log.txt",
     ]:
