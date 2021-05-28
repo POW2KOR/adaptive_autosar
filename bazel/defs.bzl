@@ -595,6 +595,12 @@ def minerva_aa_bsw_module(
             cache_entries["LibAraDiag_DIR:PATH"] = \
                 "$EXT_BUILD_DEPS/amsr_vector_fs_aradiag/lib/cmake/LibAraDiag/"
 
+        elif dep == ":amsr_vector_fs_diagnosticmanager":
+            cache_entries["DiagDaemon_DIR:PATH"] = \
+                "$EXT_BUILD_DEPS/amsr_vector_fs_diagnosticmanager/lib/cmake/DiagDaemon/"
+            cache_entries["LibDiagDaemon_DIR:PATH"] = \
+                "$EXT_BUILD_DEPS/amsr_vector_fs_diagnosticmanager/lib/cmake/LibDiagDaemon/"
+
     cmake(
         name = name,
         cache_entries = extend_and_select(
