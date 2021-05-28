@@ -107,10 +107,10 @@ pkg_tar(
 pkg_tar(
     name = "minerva_mpu_adaptive_etc",
     srcs = [
-        "//bsw:machine_exec_config",
+        "//machine/idc6_m_p1_xavier:machine_exec_config",
     ],
     files = {
-        "//bsw:em_logging_config": "logging_config.json",
+        "//machine/idc6_m_p1_xavier:em_logging_config": "logging_config.json",
     },
     mode = "0755",
     package_dir = "/etc",

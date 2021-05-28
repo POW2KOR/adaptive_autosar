@@ -2,41 +2,7 @@ load("@minerva_mpu_adaptive//:bazel/defs.bzl", "minerva_aa_bsw_module", "minerva
 
 package(default_visibility = ["//visibility:public"])
 
-filegroup(
-    name = "complete_arxml",
-    srcs = [
-        ":idc_ecu_extract_arxml",
-        "@amsr_xavier//:mex_arxml",
-        "@starter_kit_adaptive_xavier//:ncd_arxml",
-        "@starter_kit_adaptive_xavier//:standard_types_arxml",
-    ],
-)
 
-filegroup(
-    name = "em_logging_config",
-    srcs = [
-        "configs/etc/logging_config.json",
-    ],
-)
-
-filegroup(
-    name = "machine_exec_config",
-    srcs = [
-        "configs/etc/machine_exec_config.json",
-    ],
-)
-
-
-minerva_aa_codegen_rule(
-    name = "minerva_machine_exec_config_gen_rule",
-    arxml_srcs = [":complete_arxml"],
-    generators = [
-        "@amsr_xavier//:generator_amsr_em_machine_config",
-    ],
-    outs_list_dict = {
-        "minerva_machine_exec_config": ["IDC6_M_P1_XAVIER/machine_exec_config.json"],
-    },
-)
 
 minerva_aa_codegen_rule(
     name = "minerva_persistency_config_gen_rule",
