@@ -13,10 +13,6 @@ the SIP:
 ```
 bazel build //bsw:amsr_vector_fs_socal_for_proxy --config=<CONFIGURATION>
 bazel build //bsw:amsr_vector_fs_socal_for_skeleton --config=<CONFIGURATION>
-
-# For now we are commenting out the references for socal_for_software_update as we are not able to build the target
-with latest delivery, but we're bringing it back in a future step.
-# bazel build //bsw:amsr_vector_fs_socal_for_software_update --config=<CONFIGURATION>
 ```
 
 After that, you can initiate your actual building, because the circular dependency is worked around with the

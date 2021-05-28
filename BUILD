@@ -91,9 +91,6 @@ pkg_tar(
         "//application/skeleton_demo_idc6:app": "opt/BaseApplicationExecutable/bin/BaseApplicationExecutable",
         "//application/proxy_demo_idc6:app": "opt/TestBaseApplicationExecutable/bin/TestBaseApplicationExecutable",
         "//application/update_app_demo_idc6:app_v1": "opt/update_app_demo_idc6/bin/update_app_demo_idc6",
-        # For now we are commenting out the references for sw_update_client application
-        # as we are not able to build the application with latest delivery
-        #"//application/sw_update_client_minerva_adapter:sw_update_client_minerva_adapter_app": "opt/sw_update_client_minerva_adapter_app/bin/sw_update_client_minerva_adapter_app",
         "//application/stub_application:stub_application": "opt/stub_application/bin/stub_application",
         "//application/scn_param_storage": "opt/scn_param_storage/bin/scn_param_storage",
         "//application/idc6mt:idc6mt": "opt/idc6mt/bin/idc6mt",
@@ -191,20 +188,6 @@ pkg_tar(
 )
 
 pkg_tar(
-    name = "adaptive_sw_update_client_minerva_adapter_configs",
-    files = {
-        "//application/sw_update_client_minerva_adapter:sw_update_client_minerva_adapter_app_updatemanager_daemon_db": "opt/sw_update_client_minerva_adapter_app/etc/swcl_db.json",
-        "//application/sw_update_client_minerva_adapter:sw_update_client_minerva_adapter_app_updatemanager_config": "opt/sw_update_client_minerva_adapter_app/etc/updatemanager.json",
-        "//application/sw_update_client_minerva_adapter:sw_update_client_minerva_adapter_app_updatemanager_swcluser_meta": "opt/sw_update_client_minerva_adapter_app/etc/swcl_package_metadata.json",
-        "//application/sw_update_client_minerva_adapter:sw_update_client_minerva_adapter_app_someip_config": "opt/sw_update_client_minerva_adapter_app/etc/someip_config.json",
-        "//application/sw_update_client_minerva_adapter:sw_update_client_minerva_adapter_app_exec_config": "opt/sw_update_client_minerva_adapter_app/etc/exec_config.json",
-        "//application/sw_update_client_minerva_adapter:logging_config_json": "opt/sw_update_client_minerva_adapter_app/etc/logging_config.json",
-        "//application/sw_update_client_minerva_adapter:com_application_json": "opt/sw_update_client_minerva_adapter_app/etc/com_application.json",
-    },
-    mode = "0755",
-)
-
-pkg_tar(
     name = "adaptive_stub_applications_configs",
     files = {
         "//application/stub_application:stub_application_exec_config": "opt/stub_application/etc/exec_config.json",
@@ -244,9 +227,6 @@ pkg_tar(
         ":adaptive_autosar_proxy_configs",
         ":adaptive_autosar_skeleton_configs",
         ":adaptive_autosar_someipdaemon_configs",
-        # For now we are commenting out the references for sw_update_client application
-        # as we are not able to build the application with latest delivery
-        #":adaptive_sw_update_client_minerva_adapter_configs",
         ":adaptive_idc6mt_configs",
         ":adaptive_scn_param_storage_configs",
         ":adaptive_stub_applications_configs",
@@ -298,16 +278,6 @@ target_build_dir_for_socal_skeleton = select({
         "bazel-out/aarch64-fastbuild/bin/bsw/amsr_vector_fs_socal_for_skeleton/lib/libSocal.a",
     ],
 })
-
-target_build_dir_for_socal_sw_update = select({
-    ":k8": [
-        "bazel-out/k8-fastbuild/bin/bsw/amsr_vector_fs_socal_for_software_update/lib/libSocal.a",
-    ],
-    ":aarch64": [
-        "bazel-out/aarch64-fastbuild/bin/bsw/amsr_vector_fs_socal_for_software_update/lib/libSocal.a",
-    ],
-})
-
 target_build_dir_for_socal_scn_param_storage = select({
     ":k8": [
         "bazel-out/k8-fastbuild/bin/bsw/amsr_vector_fs_socal_for_scn_param_storage/lib/libSocal.a",
@@ -327,10 +297,6 @@ filegroup(
     srcs = target_build_dir_for_socal_skeleton,
 )
 
-filegroup(
-    name = "socal_lib_for_sw_update",
-    srcs = target_build_dir_for_socal_sw_update,
-)
 
 filegroup(
     name = "socal_lib_for_scn_param_storage",

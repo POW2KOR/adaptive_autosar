@@ -400,34 +400,6 @@ minerva_aa_bsw_module(
 )
 
 minerva_aa_bsw_module(
-    name = "amsr_vector_fs_socal_for_software_update",
-    cache_entries = {
-        "CMAKE_EXPORT_NO_PACKAGE_REGISTRY": "ON",
-        "CMAKE_FIND_PACKAGE_NO_PACKAGE_REGISTRY": "ON",
-        "CMAKE_VERBOSE_MAKEFILE": "ON",
-        "BUILD_TESTS": "OFF",
-    },
-    out_static_libs = [
-        "libSocal.a",
-    ],
-    srcs_filegroup = "@amsr_xavier//:amsr_vector_fs_socal_srcs",
-    deps = [
-        ":amsr_vector_fs_characterconversion",
-        ":amsr_vector_fs_crc",
-        ":amsr_vector_fs_e2e",
-        ":amsr_vector_fs_libiostream",
-        ":amsr_vector_fs_libosabstraction",
-        ":amsr_vector_fs_libvac",
-        ":amsr_vector_fs_log_api",
-        ":amsr_vector_fs_logutility",
-        ":amsr_vector_fs_msr4base",
-        ":amsr_vector_fs_thread",
-        ":amsr_vector_fs_vajson",
-        "@minerva_mpu_adaptive//application/sw_update_client_minerva_adapter:sw_update_client_minerva_adapter_app_socal_srcs_lib",
-    ],
-)
-
-minerva_aa_bsw_module(
     name = "amsr_vector_fs_socal_headers",
     cache_entries = {
         "CMAKE_EXPORT_NO_PACKAGE_REGISTRY": "ON",
