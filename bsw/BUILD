@@ -20,20 +20,6 @@ filegroup(
 )
 
 filegroup(
-    name = "starter_kit_test_base_application_proxy_com_application_config",
-    srcs = [
-        "configs/TestBaseApplicationExecutable/com_application.json",
-    ],
-)
-
-filegroup(
-    name = "starter_kit_test_base_application_proxy_logging_config",
-    srcs = [
-        "configs/TestBaseApplicationExecutable/logging_config.json",
-    ],
-)
-
-filegroup(
     name = "starter_kit_base_application_skeleton_com_application_config",
     srcs = [
         "configs/BaseApplicationExecutable/com_application.json",
@@ -2330,40 +2316,6 @@ cc_library(
         ":starter_kit_test_base_application_proxy_socal_hdrs_lib",
         ":starter_kit_test_base_application_proxy_someipbinding_hdrs_lib",
         ":starter_kit_test_base_application_proxy_someipprotocol_hdrs_lib",
-    ],
-)
-
-cc_binary(
-    name = "proxy_demo_idc6",
-    srcs = [
-        "@starter_kit_adaptive_xavier//:proxy_demo_idc6_srcs",
-
-        # This a workaround to resolve cyclic dependency. This is the reason why the target proxy_demo_idc6
-        # build in 2 steps.
-        # The code generators depend on libSocal.a, contained in the @minerva_mpu_adaptive//:socal_lib_for_proxy below.
-        # That is why we put it in sources. It is important that this `:socal_lib_for_proxy` is positioned earlier in
-        # the list than the generated sources in `:starter_kit_test_base_application_proxy_socal_srcs_lib` and
-        # `:starter_kit_test_base_application_proxy_applicationbase_init_deinit_srcs`
-        "@minerva_mpu_adaptive//:socal_lib_for_proxy",
-        ":starter_kit_test_base_application_proxy_socal_srcs_lib",
-        ":starter_kit_test_base_application_proxy_applicationbase_init_deinit_srcs",
-    ],
-    copts = [
-        "-std=c++14",
-    ],
-    features = [
-        "pthread",
-    ],
-    linkstatic = 1,
-    deps = [
-        ":starter_kit_test_base_application_proxy_modeldatatypes_hdrs_lib",
-        ":starter_kit_test_base_application_proxy_socal_hdrs_lib",
-        "//bsw:amsr_vector_fs_em_executionmanager",
-        "//bsw:amsr_vector_fs_libvac",
-        "//bsw:amsr_vector_fs_log_api",
-        "//bsw:amsr_vector_fs_socal_for_proxy",
-        "//bsw:amsr_vector_fs_someipbinding",
-        "//bsw:amsr_vector_fs_vajson",
     ],
 )
 
