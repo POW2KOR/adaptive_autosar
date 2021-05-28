@@ -92,7 +92,7 @@ pkg_tar(
         "//application/proxy_demo_idc6:app": "opt/TestBaseApplicationExecutable/bin/TestBaseApplicationExecutable",
         "//application/restart_app_demo_idc6:app": "opt/restart_app_demo_idc6/bin/restart_app_demo_idc6",
         "//application/shutdown_app_demo_idc6:app": "opt/shutdown_app_demo_idc6/bin/shutdown_app_demo_idc6",
-        "//bsw:update_app_demo_idc6": "opt/update_app_demo_idc6/bin/update_app_demo_idc6",
+        "//application/update_app_demo_idc6:app_v1": "opt/update_app_demo_idc6/bin/update_app_demo_idc6",
         # For now we are commenting out the references for sw_update_client application
         # as we are not able to build the application with latest delivery
         #"//application/sw_update_client_minerva_adapter:sw_update_client_minerva_adapter_app": "opt/sw_update_client_minerva_adapter_app/bin/sw_update_client_minerva_adapter_app",
@@ -198,11 +198,11 @@ pkg_tar(
 pkg_tar(
     name = "update_app_v1_demo_configs",
     srcs = {
-        "//bsw:starter_kit_update_app_idc6_exec_config": "exec_config.json",
-        "//bsw:starter_kit_update_app_idc6_updatemanager_swcluster_meta": "swcl_package_metadata.json",
-        "//bsw:starter_kit_update_app_idc6_updatemanager_daemon": "updatemanager.json",
-        "//bsw:starter_kit_update_app_idc6_updatemanager_swcl_db_daemon": "swcl_db.json",
-        "//bsw:starter_kit_update_app_v1_logging_config": "logging_config.json",
+        "//application/update_app_demo_idc6:exec_config": "exec_config.json",
+        "//application/update_app_demo_idc6:updatemanager_swcluster_meta": "swcl_package_metadata.json",
+        "//application/update_app_demo_idc6:updatemanager_daemon": "updatemanager.json",
+        "//application/update_app_demo_idc6:updatemanager_swcl_db_daemon": "swcl_db.json",
+        "//application/update_app_demo_idc6:logging_config": "logging_config.json",
     },
     mode = "0755",
     package_dir = "/opt/update_app_demo_idc6/etc/",

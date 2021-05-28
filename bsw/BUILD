@@ -20,13 +20,6 @@ filegroup(
 )
 
 filegroup(
-    name = "starter_kit_update_app_v1_logging_config",
-    srcs = [
-        "configs/update_app_v1_demo_idc6/logging_config.json",
-    ],
-)
-
-filegroup(
     name = "someipd_posix_logging_config",
     srcs = [
         "configs/someipd_posix/logging_config.json",
