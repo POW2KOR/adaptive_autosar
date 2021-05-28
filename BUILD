@@ -88,8 +88,6 @@ pkg_tar(
         ":adaptive_autosar_log_daemon_binary": "opt/amsr_vector_fs_log_daemon/bin/amsr_vector_fs_log_daemon",
         ":adaptive_autosar_executionmanager_binary": "sbin/amsr_vector_fs_em_executionmanager",
         "//application/executionmanager_state_client_app:app": "opt/executionmanager_state_client_app/bin/executionmanager_state_client_app",
-        "//application/skeleton_demo_idc6:app": "opt/BaseApplicationExecutable/bin/BaseApplicationExecutable",
-        "//application/proxy_demo_idc6:app": "opt/TestBaseApplicationExecutable/bin/TestBaseApplicationExecutable",
         "//application/update_app_demo_idc6:app_v1": "opt/update_app_demo_idc6/bin/update_app_demo_idc6",
         "//application/stub_application:stub_application": "opt/stub_application/bin/stub_application",
         "//application/scn_param_storage": "opt/scn_param_storage/bin/scn_param_storage",
@@ -133,36 +131,7 @@ pkg_tar(
     package_dir = "/opt/someipd_posix/etc/",
 )
 
-pkg_tar(
-    name = "adaptive_autosar_proxy_configs",
-    srcs = {
-        "//application/proxy_demo_idc6:com_application_config": "com_application.json",
-        "//application/proxy_demo_idc6:exec_config": "exec_config.json",
-        "//application/proxy_demo_idc6:updatemanager_swcluster_meta": "swcl_package_metadata.json",
-        "//application/proxy_demo_idc6:updatemanager_daemon": "updatemanager.json",
-        "//application/proxy_demo_idc6:updatemanager_swcl_db_daemon": "swcl_db.json",
-        "//application/proxy_demo_idc6:logging_config": "logging_config.json",
-        "//application/proxy_demo_idc6:someip_config": "someip_config.json",
-    },
-    mode = "0755",
-    package_dir = "/opt/TestBaseApplicationExecutable/etc/",
-)
 
-pkg_tar(
-    name = "adaptive_autosar_skeleton_configs",
-    srcs = {
-        "//application/skeleton_demo_idc6:com_application_config": "com_application.json",
-        "//application/skeleton_demo_idc6:exec_config": "exec_config.json",
-        "//application/skeleton_demo_idc6:updatemanager_swcluster_meta": "swcl_package_metadata.json",
-        "//application/skeleton_demo_idc6:updatemanager_swcl_db_daemon": "swcl_db.json",
-        "//application/skeleton_demo_idc6:updatemanager_daemon": "updatemanager.json",
-        "//application/skeleton_demo_idc6:logging_config": "logging_config.json",
-        "//application/skeleton_demo_idc6:someip_config": "someip_config.json",
-        "//application/skeleton_demo_idc6:persistency_config_json": "per_key_value_storage_config.json",
-    },
-    mode = "0755",
-    package_dir = "/opt/BaseApplicationExecutable/etc/",
-)
 pkg_tar(
     name = "update_app_v1_demo_configs",
     srcs = {
@@ -224,8 +193,6 @@ pkg_tar(
     deps = [
         ":adaptive_autosar_executionmanager_state_client_configs",
         ":adaptive_autosar_log_daemon_configs",
-        ":adaptive_autosar_proxy_configs",
-        ":adaptive_autosar_skeleton_configs",
         ":adaptive_autosar_someipdaemon_configs",
         ":adaptive_idc6mt_configs",
         ":adaptive_scn_param_storage_configs",
@@ -261,23 +228,7 @@ pkg_deb(
 # Desision to put it here is due to the bazel nature of the relative pates. So we left it in
 # the root. The file is used in bsw/BUILD file later.
 
-target_build_dir_for_socal_proxy = select({
-    ":k8": [
-        "bazel-out/k8-fastbuild/bin/bsw/amsr_vector_fs_socal_for_proxy/lib/libSocal.a",
-    ],
-    ":aarch64": [
-        "bazel-out/aarch64-fastbuild/bin/bsw/amsr_vector_fs_socal_for_proxy/lib/libSocal.a",
-    ],
-})
 
-target_build_dir_for_socal_skeleton = select({
-    ":k8": [
-        "bazel-out/k8-fastbuild/bin/bsw/amsr_vector_fs_socal_for_skeleton/lib/libSocal.a",
-    ],
-    ":aarch64": [
-        "bazel-out/aarch64-fastbuild/bin/bsw/amsr_vector_fs_socal_for_skeleton/lib/libSocal.a",
-    ],
-})
 target_build_dir_for_socal_scn_param_storage = select({
     ":k8": [
         "bazel-out/k8-fastbuild/bin/bsw/amsr_vector_fs_socal_for_scn_param_storage/lib/libSocal.a",
@@ -286,17 +237,6 @@ target_build_dir_for_socal_scn_param_storage = select({
         "bazel-out/aarch64-fastbuild/bin/bsw/amsr_vector_fs_socal_for_scn_param_storage/lib/libSocal.a",
     ],
 })
-
-filegroup(
-    name = "socal_lib_for_proxy",
-    srcs = target_build_dir_for_socal_proxy,
-)
-
-filegroup(
-    name = "socal_lib_for_skeleton",
-    srcs = target_build_dir_for_socal_skeleton,
-)
-
 
 filegroup(
     name = "socal_lib_for_scn_param_storage",

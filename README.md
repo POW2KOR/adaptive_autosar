@@ -95,13 +95,6 @@ the BSW modules is "Release".
 To proceed with your build on host, change to your repository root directory and execute the following commands:
 
 ```
-bazel build //bsw:amsr_vector_fs_socal_for_proxy --config=<CONFIGURATION>
-bazel build //bsw:amsr_vector_fs_socal_for_skeleton --config=<CONFIGURATION>
-
-# For now we are commenting out the references for socal_for_software_update as we are not able to build the target
-with latest delivery, but we're bringing it back in a future step.
-# bazel build //bsw:amsr_vector_fs_socal_for_software_update --config=<CONFIGURATION>
-
 bazel build //:minerva_mpu_adaptive_filesystem --config=<CONFIGURATION>
 ```
 
@@ -109,9 +102,6 @@ where `<CONFIGURATION>` is the target toolchain configuration, e.g. (`x86_64_lin
 `aarch64_linux_linaro`, `x86_64_qnx`, `aarch64_qnx`). For now, you cannot skip `--config=x86_64_linux` even if you are
 building on an `x86_64` host for an `x86_64` target. Skipping would lead to linking issue. This will be fixed in the
 future by adding custom toolchain files for `x86_64_linux`.
-
-**NOTE** The first three commands are needed to handle the circular dependency issue. For more information
-please refer to [this](docs/circular_dependency_workaround.md) section.
 
 For the `x86_64_qnx` and `aarch64_qnx` toolchains to work, you need to have the `QNX_HOST` and `QNX_TARGET` set
 correctly in your environment. This is usually done by running something like: `source ~/qnx/qnx700/qnxsdp-env.sh`. If
