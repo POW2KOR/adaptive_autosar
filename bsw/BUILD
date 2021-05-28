@@ -2668,7 +2668,7 @@ minerva_aa_bsw_module(
         ":amsr_vector_fs_msr4base",
         ":amsr_vector_fs_thread",
         ":amsr_vector_fs_vajson",
-        "@minerva_mpu_adaptive//bsw:starter_kit_test_base_application_proxy_socal_srcs_lib",
+        "@minerva_mpu_adaptive//application/proxy_demo_idc6:socal_srcs_lib",
     ],
 )
 
@@ -2696,7 +2696,7 @@ minerva_aa_bsw_module(
         ":amsr_vector_fs_msr4base",
         ":amsr_vector_fs_thread",
         ":amsr_vector_fs_vajson",
-        "@minerva_mpu_adaptive//bsw:starter_kit_base_application_skeleton_socal_srcs_lib",
+        "@minerva_mpu_adaptive//application/skeleton_demo_idc6:socal_srcs_lib",
     ],
 )
 
