@@ -35,7 +35,7 @@ with the path where you checked out the the repository. Then comment or temporar
 Copy the corresponding `BUILD` file and add a `WORKSPACE` file using the commands below:
 
 ```
-cp minerva_mpu_adaptive/bsw/starter_kit_adaptive_xavier.BUILD <path to starter_kit clone>/BUILD
+cp minerva_mpu_adaptive/application/starter_kit_adaptive_xavier.BUILD <path to starter_kit clone>/BUILD
 echo "workspace(name = \"starter_kit_adaptive_xavier\")" > <path to starter_kit clone>/WORKSPACE
 # or
 cp minerva_mpu_adaptive/bsw/amsr_xavier.BUILD <path to amsr_xavier clone>/BUILD
