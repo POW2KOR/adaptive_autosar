@@ -87,7 +87,7 @@ pkg_tar(
         ":adaptive_autosar_someipdaemon_binary": "opt/someipd_posix/bin/someipd_posix",
         ":adaptive_autosar_log_daemon_binary": "opt/amsr_vector_fs_log_daemon/bin/amsr_vector_fs_log_daemon",
         ":adaptive_autosar_executionmanager_binary": "sbin/amsr_vector_fs_em_executionmanager",
-        "//bsw:executionmanager_state_client_binary": "opt/executionmanager_state_client_app/bin/executionmanager_state_client_app",
+        "//application/executionmanager_state_client_app:app": "opt/executionmanager_state_client_app/bin/executionmanager_state_client_app",
         "//bsw:skeleton_demo_idc6": "opt/BaseApplicationExecutable/bin/BaseApplicationExecutable",
         "//bsw:proxy_demo_idc6": "opt/TestBaseApplicationExecutable/bin/TestBaseApplicationExecutable",
         "//bsw:restart_app_demo_idc6": "opt/restart_app_demo_idc6/bin/restart_app_demo_idc6",
@@ -211,10 +211,10 @@ pkg_tar(
 pkg_tar(
     name = "adaptive_autosar_executionmanager_state_client_configs",
     files = {
-        "//bsw:executionmanager_state_client_updatemanager_daemon_db": "opt/executionmanager_state_client_app/etc/swcl_db.json",
-        "//bsw:executionmanager_state_client_updatemanager_swcluser_meta": "opt/executionmanager_state_client_app/etc/swcl_package_metadata.json",
-        "//bsw:executionmanager_state_client_app_logging_config": "opt/executionmanager_state_client_app/etc/logging_config.json",
-        "//bsw:executionmanager_state_client_app_exec_config": "opt/executionmanager_state_client_app/etc/exec_config.json",
+        "//application/executionmanager_state_client_app:updatemanager_daemon_db": "opt/executionmanager_state_client_app/etc/swcl_db.json",
+        "//application/executionmanager_state_client_app:updatemanager_swcluser_meta": "opt/executionmanager_state_client_app/etc/swcl_package_metadata.json",
+        "//application/executionmanager_state_client_app:logging_config": "opt/executionmanager_state_client_app/etc/logging_config.json",
+        "//application/executionmanager_state_client_app:exec_config": "opt/executionmanager_state_client_app/etc/exec_config.json",
     },
     mode = "0755",
 )

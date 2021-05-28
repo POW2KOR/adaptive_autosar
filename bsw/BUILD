@@ -3,11 +3,6 @@ load("@minerva_mpu_adaptive//:bazel/defs.bzl", "minerva_aa_bsw_module", "minerva
 package(default_visibility = ["//visibility:public"])
 
 filegroup(
-    name = "executionmanager_state_client_app_arxml",
-    srcs = ["arxmls/executionmanager_state_client_app.arxml"],
-)
-
-filegroup(
     name = "amsr_vector_fs_log_daemon_arxml",
     srcs = [
         "arxmls/logdaemon.arxml",
@@ -95,20 +90,6 @@ filegroup(
 )
 
 filegroup(
-    name = "executionmanager_state_client_app_logging_config",
-    srcs = [
-        "configs/executionmanager_state_client_app/logging_config.json",
-    ],
-)
-
-filegroup(
-    name = "executionmanager_state_client_app_exec_config",
-    srcs = [
-        "configs/executionmanager_state_client_app/exec_config.json",
-    ],
-)
-
-filegroup(
     name = "em_logging_config",
     srcs = [
         "configs/etc/logging_config.json",
@@ -122,56 +103,6 @@ filegroup(
     ],
 )
 
-minerva_aa_codegen_rule(
-    name = "executionmanager_state_client_app_gen_rule",
-    arxml_srcs = [":executionmanager_state_client_app_arxml"],
-    generators = [
-        "@amsr_xavier//:generator_amsr_updatemanager_swcluster_meta",
-        "@amsr_xavier//:generator_amsr_updatemanager_daemon",
-        "@amsr_xavier//:generator_amsr_em_exec_config",
-        "@amsr_xavier//:generator_amsr_applicationbase_init_deinit",
-    ],
-    outs_list_dict = {
-        "executionmanager_state_client_updatemanager_daemon_db": [
-            "executionmanager_state_client_app/etc/swcl_db.json",
-        ],
-        "executionmanager_state_client_updatemanager_swcluser_meta": [
-            "executionmanager_state_client_app/swcl_package_metadata.json",
-        ],
-        # We're not using this exec_config because the code generator isn't
-        # able to generate a proper config file when category PLATFORM_LEVEL
-        # is selected. So instead,
-        # :executionmanager_state_client_app_exec_config gets used.
-        "executionmanager_state_client_exec_config": [
-            "executionmanager_state_client_app/configuration/exec_config.json",
-        ],
-        "executionmanager_state_client_applicationbase_init_deinit_srcs": [
-            "executionmanager_state_client_app/src/ara/core/initialization.cpp",
-        ],
-    },
-)
-
-cc_binary(
-    name = "executionmanager_state_client_binary",
-    srcs = [
-        ":executionmanager_state_client_applicationbase_init_deinit_srcs",
-        "@amsr_xavier//:amsr_vector_fs_em_executionmanager_addon_demo_application_srcs",
-    ],
-    copts = [
-        "-std=c++14",
-    ],
-    features = [
-        "pthread",
-        "socket",
-    ],
-    linkstatic = 1,
-    deps = [
-        "//bsw:amsr_vector_fs_applicationbase",
-        "//bsw:amsr_vector_fs_em_executionmanager",
-        "//bsw:amsr_vector_fs_libiostream",
-        "//bsw:amsr_vector_fs_log_api",
-    ],
-)
 
 minerva_aa_codegen_rule(
     name = "minerva_machine_exec_config_gen_rule",
