@@ -757,8 +757,163 @@ minerva_aa_bsw_module(
         "libamsr-vector-fs-characterconversion_common.a",
         "libamsr-vector-fs-characterconversion_vector.a",
     ],
-    srcs_filegroup = "@starter_kit_adaptive_xavier//:amsr_vector_fs_characterconversion",
+    srcs_filegroup = "@amsr_xavier//:amsr_vector_fs_characterconversion",
     deps = [
         ":amsr_vector_fs_libvac",
+    ],
+)
+
+# In this library the ARG_INTERFACE flag is Default set
+# Depending on this flag it either creas an static library
+# Because the flag it set to true it doesn't create one.
+minerva_aa_bsw_module(
+    name = "amsr_vector_fs_udstransport",
+    out_headers_only = True,
+    srcs_filegroup = "@amsr_xavier//:amsr_vector_fs_udstransport",
+    deps = [
+        ":amsr_vector_fs_libosabstraction",
+        ":amsr_vector_fs_libvac",
+    ],
+)
+
+minerva_aa_bsw_module(
+    name = "amsr_vector_fs_diagnosticutility",
+    out_static_libs = [
+        "libLibDiagUtility.a",
+    ],
+    srcs_filegroup = "@amsr_xavier//:amsr_vector_fs_diagnosticutility",
+    deps = [
+        ":amsr_vector_fs_applicationbase",
+        ":amsr_vector_fs_characterconversion",
+        ":amsr_vector_fs_crc",
+        ":amsr_vector_fs_e2e",
+        ":amsr_vector_fs_libiostream",
+        ":amsr_vector_fs_libosabstraction",
+        ":amsr_vector_fs_libvac",
+        ":amsr_vector_fs_log_api",
+        ":amsr_vector_fs_logutility",
+        ":amsr_vector_fs_socal",
+        ":amsr_vector_fs_thread",
+        ":amsr_vector_fs_vajson",
+    ],
+)
+
+# In this library the ARG_INTERFACE flag is Default set
+# Depending on this flag it either creas an static library
+# Because the flag it set to true it doesn't create one.
+minerva_aa_bsw_module(
+    name = "amsr_vector_fs_pduhdrtpbinding",
+    out_headers_only = True,
+    srcs_filegroup = "@amsr_xavier//:amsr_vector_fs_pduhdrtpbinding",
+    deps = [
+        ":amsr_vector_fs_applicationbase",
+        ":amsr_vector_fs_characterconversion",
+        ":amsr_vector_fs_crc",
+        ":amsr_vector_fs_diagnosticutility",
+        ":amsr_vector_fs_e2e",
+        ":amsr_vector_fs_libiostream",
+        ":amsr_vector_fs_libosabstraction",
+        ":amsr_vector_fs_libvac",
+        ":amsr_vector_fs_log_api",
+        ":amsr_vector_fs_logutility",
+        ":amsr_vector_fs_socal",
+        ":amsr_vector_fs_thread",
+        ":amsr_vector_fs_udstransport",
+        ":amsr_vector_fs_vajson",
+    ],
+)
+
+# In this library the ARG_INTERFACE flag is Default set
+# Depending on this flag it either creas an static library
+# Because the flag it set to true it doesn't create one.
+minerva_aa_bsw_module(
+    name = "amsr_vector_fs_doipbinding",
+    out_headers_only = True,
+    srcs_filegroup = "@amsr_xavier//:amsr_vector_fs_doipbinding",
+    deps = [
+        ":amsr_vector_fs_applicationbase",
+        ":amsr_vector_fs_characterconversion",
+        ":amsr_vector_fs_crc",
+        ":amsr_vector_fs_diagnosticutility",
+        ":amsr_vector_fs_e2e",
+        ":amsr_vector_fs_libiostream",
+        ":amsr_vector_fs_libosabstraction",
+        ":amsr_vector_fs_libvac",
+        ":amsr_vector_fs_logutility",
+        ":amsr_vector_fs_socal",
+        ":amsr_vector_fs_thread",
+        ":amsr_vector_fs_udstransport",
+    ],
+)
+
+# In this library the ARG_INTERFACE flag is Default set
+# Depending on this flag it either creas an static library
+# Because the flag it set to true it doesn't create one.
+minerva_aa_bsw_module(
+    name = "amsr_vector_fs_diagnosticrpc",
+    out_headers_only = True,
+    srcs_filegroup = "@amsr_xavier//:amsr_vector_fs_diagnosticrpc",
+    deps = [
+        ":amsr_vector_fs_applicationbase",
+        ":amsr_vector_fs_characterconversion",
+        ":amsr_vector_fs_crc",
+        ":amsr_vector_fs_diagnosticutility",
+        ":amsr_vector_fs_e2e",
+        ":amsr_vector_fs_libiostream",
+        ":amsr_vector_fs_libosabstraction",
+        ":amsr_vector_fs_libvac",
+        ":amsr_vector_fs_logutility",
+        ":amsr_vector_fs_socal",
+        ":amsr_vector_fs_thread",
+        ":amsr_vector_fs_udstransport",
+    ],
+)
+
+minerva_aa_bsw_module(
+    name = "amsr_vector_fs_diagnosticrpccombinding",
+    out_static_libs = [
+        "libLibDiagnosticRpcComBinding.a",
+    ],
+    srcs_filegroup = "@amsr_xavier//:amsr_vector_fs_diagnosticrpccombinding",
+    deps = [
+        ":amsr_vector_fs_applicationbase",
+        ":amsr_vector_fs_characterconversion",
+        ":amsr_vector_fs_crc",
+        ":amsr_vector_fs_diagnosticrpc",
+        ":amsr_vector_fs_diagnosticutility",
+        ":amsr_vector_fs_e2e",
+        ":amsr_vector_fs_libiostream",
+        ":amsr_vector_fs_libosabstraction",
+        ":amsr_vector_fs_libvac",
+        ":amsr_vector_fs_logutility",
+        ":amsr_vector_fs_socal",
+        ":amsr_vector_fs_thread",
+    ],
+)
+
+# In this library the ARG_INTERFACE flag is Default set
+# Depending on this flag it either creas an static library
+# Because the flag it set to true it doesn't create one.
+minerva_aa_bsw_module(
+    name = "amsr_vector_fs_aradiag",
+    out_headers_only = True,
+    srcs_filegroup = "@amsr_xavier//:amsr_vector_fs_aradiag",
+    deps = [
+        ":amsr_vector_fs_applicationbase",
+        ":amsr_vector_fs_libvac",
+        ":amsr_vector_fs_libosabstraction",
+        #":amsr_vector_fs_vajson",
+        ":amsr_vector_fs_logutility",
+        #":amsr_vector_fs_log_api",
+        ":amsr_vector_fs_thread",
+        ":amsr_vector_fs_socal",
+        ":amsr_vector_fs_libiostream",
+        ":amsr_vector_fs_characterconversion",
+        ":amsr_vector_fs_e2e",
+        ":amsr_vector_fs_crc",
+        ":amsr_vector_fs_udstransport",
+        ":amsr_vector_fs_diagnosticutility",
+        ":amsr_vector_fs_diagnosticrpc",
+        ":amsr_vector_fs_diagnosticrpccombinding",
     ],
 )

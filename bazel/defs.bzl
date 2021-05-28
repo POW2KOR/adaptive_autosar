@@ -519,6 +519,10 @@ def minerva_aa_bsw_module(
             cache_entries["Socal_DIR:PATH"] = \
                 "$EXT_BUILD_DEPS/amsr_vector_fs_socal_headers/lib/cmake/Socal/"
 
+        elif dep == ":amsr_vector_fs_socal":
+            cache_entries["Socal_DIR:PATH"] = \
+                "$EXT_BUILD_DEPS/amsr_vector_fs_socal/lib/cmake/Socal/"
+
         elif dep == ":amsr_vector_fs_someipbinding":
             cache_entries["SomeIpBinding_DIR:PATH"] = \
                 "$EXT_BUILD_DEPS/amsr_vector_fs_someipbinding/lib/cmake/SomeIpBinding/"
@@ -554,6 +558,42 @@ def minerva_aa_bsw_module(
                 "$EXT_BUILD_DEPS/amsr_vector_fs_characterconversion/lib/cmake/amsr-vector-fs-characterconversion_common/"
             cache_entries["amsr-vector-fs-characterconversion_vector_DIR:PATH"] = \
                 "$EXT_BUILD_DEPS/amsr_vector_fs_characterconversion/lib/cmake/amsr-vector-fs-characterconversion_vector/"
+
+        elif dep == ":amsr_vector_fs_udstransport":
+            cache_entries["LibUdsTransportApi_DIR:PATH"] = \
+                "$EXT_BUILD_DEPS/amsr_vector_fs_udstransport/lib/cmake/LibUdsTransportApi/"
+
+        elif dep == ":amsr_vector_fs_diagnosticutility":
+            cache_entries["LibDiagUtility_DIR:PATH"] = \
+                "$EXT_BUILD_DEPS/amsr_vector_fs_diagnosticutility/lib/cmake/LibDiagUtility/"
+
+        elif dep == ":amsr_vector_fs_pduhdrtpbinding":
+            cache_entries["LibPduHdrTpBinding_DIR:PATH"] = \
+                "$EXT_BUILD_DEPS/amsr_vector_fs_pduhdrtpbinding/lib/cmake/LibPduHdrTpBinding/"
+
+        elif dep == ":amsr_vector_fs_doipbinding":
+            cache_entries["LibDoipBinding_DIR:PATH"] = \
+                "$EXT_BUILD_DEPS/amsr_vector_fs_doipbinding/lib/cmake/LibDoIpBinding/"
+
+        elif dep == ":amsr_vector_fs_diagnosticrpc":
+            cache_entries["LibDiagApiRpc_DIR:PATH"] = \
+                "$EXT_BUILD_DEPS/amsr_vector_fs_diagnosticrpc/lib/cmake/LibDiagApiRpc/"
+            cache_entries["LibDiagComCommon_DIR:PATH"] = \
+                "$EXT_BUILD_DEPS/amsr_vector_fs_diagnosticrpc/lib/cmake/LibDiagComCommon/"
+            cache_entries["LibDiagDaemonRpc_DIR:PATH"] = \
+                "$EXT_BUILD_DEPS/amsr_vector_fs_diagnosticrpc/lib/cmake/LibDiagDaemonRpc/"
+
+        elif dep == ":amsr_vector_fs_diagnosticrpccombinding":
+            cache_entries["LibDiagComApi_DIR:PATH"] = \
+                "$EXT_BUILD_DEPS/amsr_vector_fs_diagnosticrpccombinding/lib/cmake/LibDiagComApi/"
+            cache_entries["LibDiagComDaemon_DIR:PATH"] = \
+                "$EXT_BUILD_DEPS/amsr_vector_fs_diagnosticrpccombinding/lib/cmake/LibDiagComDaemon/"
+            cache_entries["LibDiagnosticRpcComBinding_DIR:PATH"] = \
+                "$EXT_BUILD_DEPS/amsr_vector_fs_diagnosticrpccombinding/lib/cmake/LibDiagnosticRpcComBinding/"
+
+        elif dep == ":amsr_vector_fs_aradiag":
+            cache_entries["LibAraDiag_DIR:PATH"] = \
+                "$EXT_BUILD_DEPS/amsr_vector_fs_aradiag/lib/cmake/LibAraDiag/"
 
     cmake(
         name = name,
