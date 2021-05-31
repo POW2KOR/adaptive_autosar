@@ -152,8 +152,9 @@ def minerva_aa_codegen_rule(
 
             concatenated_outs.append(full_out_path)
 
+    # Ignoring GeneratorReport.html because it somehow doesn't always get
+    # generated even though everything runs successfully.
     for generator_report_file in [
-        "GeneratorReport.html",
         "GeneratorReport.xml",
         "generator_log.txt",
     ]:
@@ -169,7 +170,7 @@ def minerva_aa_codegen_rule(
         srcs = arxml_srcs,
         outs = concatenated_outs,
         cmd = """
-        tmp_folder="/tmp/{tmp_folder}"
+        tmp_folder=$$(mktemp -d)
         output_folder="$(RULEDIR)/{output_folder}"
         arxml_srcs_folder="$(RULEDIR)/{arxml_srcs_folder}"
         generator_log="$$output_folder/generator_log.txt"
@@ -187,7 +188,17 @@ def minerva_aa_codegen_rule(
 
         # Don't stop immediately on error, so we can handle it gracefully
         set +e
-        $(location @amsr_xavier//:amsrgen_sh) -v {generators_arg} -x $$arxml_srcs_folder -o $$output_folder --saveProject 1>$$generator_log 2>&1
+        
+        # In case of generator failure, we retry up to five times as a temporary workaround
+        tries=0
+        until [ "$$tries" -ge 5 ]
+        do
+            rm -rf $$output_folder/*
+            rm -f $$generator_log
+            $(location @amsr_xavier//:amsrgen_sh) -v {generators_arg} -x $$arxml_srcs_folder -o $$output_folder --saveProject 1>$$generator_log 2>&1 && break
+            tries=$$((tries+1)) 
+            sleep 15
+        done
 
         # Process error messages from code generator
         if [ $$? -ne 0 ]; then
@@ -277,7 +288,6 @@ def minerva_aa_codegen_rule(
         """.format(
             arxml_srcs_folder = "{}/arxml_srcs".format(gen_rule_name),
             output_folder = gen_rule_output_folder,
-            tmp_folder = gen_rule_name,
             generators_arg = " ".join(generators_arg_list),
             arxml_srcs = " ".join(arxml_srcs_arg_list),
             ignore_matches = " ".join(ignore_matches),
