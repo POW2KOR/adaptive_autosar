@@ -69,16 +69,9 @@ filegroup(
     output_group = "amsr_vector_fs_em_executionmanager",
 )
 
-filegroup(
-    name = "adaptive_autosar_someipdaemon_binary",
-    srcs = ["//bsw:someipd_posix"],
-    output_group = "someipd_posix",
-)
-
 pkg_tar(
     name = "minerva_mpu_adaptive_binaries",
     files = {
-        ":adaptive_autosar_someipdaemon_binary": "opt/someipd_posix/bin/someipd_posix",
         ":adaptive_autosar_executionmanager_binary": "sbin/amsr_vector_fs_em_executionmanager",
         "//application/update_app_demo_idc6:app_v1": "opt/update_app_demo_idc6/bin/update_app_demo_idc6",
         "//application/stub_application:stub_application": "opt/stub_application/bin/stub_application",
@@ -97,17 +90,6 @@ pkg_tar(
     },
     mode = "0755",
     package_dir = "/etc",
-)
-
-pkg_tar(
-    name = "adaptive_autosar_someipdaemon_configs",
-    srcs = {
-        "//application/someipd_posix:logging_config": "logging_config.json",
-        "//application/someipd_posix:exec_config": "exec_config.json",
-        "//application/someipd_posix:someip_config": "someipd-posix.json",
-    },
-    mode = "0755",
-    package_dir = "/opt/someipd_posix/etc/",
 )
 
 pkg_tar(
@@ -138,7 +120,6 @@ pkg_tar(
     mode = "0755",
     package_dir = "",
     deps = [
-        ":adaptive_autosar_someipdaemon_configs",
         ":adaptive_stub_applications_configs",
         ":update_app_v1_demo_configs",
     ],
@@ -150,6 +131,7 @@ pkg_tar(
         ":minerva_mpu_adaptive_binaries",
         ":minerva_mpu_adaptive_configs",
         ":minerva_mpu_adaptive_etc",
+        "//application/someipd_posix:package",
         "//application/scn_param_storage:package",
         "//application/idc6mt:package",
         "//application/executionmanager_state_client_app:package",
