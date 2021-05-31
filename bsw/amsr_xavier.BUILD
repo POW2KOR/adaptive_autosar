@@ -274,6 +274,12 @@ filegroup(
     visibility = ["//visibility:public"],
 )
 
+filegroup(
+    name = "amsr_vector_fs_characterconversion",
+    srcs = glob(["BSW/amsr-vector-fs-characterconversion/**"]),
+    visibility = ["//visibility:public"],
+)
+
 # Generators
 
 filegroup(
