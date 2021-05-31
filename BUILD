@@ -1,4 +1,5 @@
-load("@bazel_skylib//rules:common_settings.bzl", "string_flag")
+load("@bazel_skylib//rules:common_settings.bzl", "bool_flag", "string_flag")
+load("@minerva_mpu_adaptive//:bazel/defs.bzl", "append_and_select")
 load("@rules_pkg//:pkg.bzl", "pkg_deb", "pkg_tar")
 
 package(default_visibility = ["//visibility:public"])
@@ -55,21 +56,41 @@ config_setting(
     },
 )
 
+bool_flag(
+    name = "mt",
+    build_setting_default = False,
+)
+
+config_setting(
+    name = "mt_present",
+    flag_values = {
+        ":mt": "True",
+    },
+)
+
 pkg_tar(
     name = "minerva_mpu_adaptive_filesystem",
     files = {
         "//machine/idc6_m_p1_xavier:machine_exec_config": "/etc/machine_exec_config.json",
     },
-    deps = [
-        "//application/amsr_vector_fs_em_executionmanager:package",
-        "//application/update_app_demo_idc6:package",
-        "//application/stub_application:package",
-        "//application/someipd_posix:package",
-        "//application/scn_param_storage:package",
-        "//application/idc6mt:package",
-        "//application/executionmanager_state_client_app:package",
-        "//application/amsr_vector_fs_log_daemon:package",
-    ],
+    deps =
+        append_and_select(
+            {
+                ":mt_present": [
+                    "//application/idc6mt:package",
+                    "//application/stub_application:package",
+                ],
+                "//conditions:default": [],
+            },
+            [
+                "//application/amsr_vector_fs_em_executionmanager:package",
+                "//application/update_app_demo_idc6:package",
+                "//application/someipd_posix:package",
+                "//application/scn_param_storage:package",
+                "//application/executionmanager_state_client_app:package",
+                "//application/amsr_vector_fs_log_daemon:package",
+            ],
+        ),
 )
 
 pkg_deb(

@@ -110,6 +110,8 @@ these variables are not set, then Bazel will assume the following values:
 - `QNX_HOST=/opt/qnx/qnx700/host/linux/x86_64`
 - `QNX_TARGET=/opt/qnx/qnx700/target/qnx7`
 
+If you want to add the measurement techonology tools to the stack, call bazel with `--//:mt`.
+
 ## Running
 
 ### Running a virtual ECU with QEMU

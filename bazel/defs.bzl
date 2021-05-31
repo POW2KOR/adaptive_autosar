@@ -7,7 +7,7 @@ load("@rules_foreign_cc//foreign_cc:cmake.bzl", "cmake")
 
 def extend_and_select(select_dict, extension):
     """
-    Take a select dict, extend each option with another value and then select
+    Take a select dict, extend each option dict and then select.
 
     This function takes in a dictionary in the format required for the select
     Bazel function. It then extends each of the options of the dictionary with
@@ -21,6 +21,26 @@ def extend_and_select(select_dict, extension):
     """
     for _, value in select_dict.items():
         value.update(extension)
+
+    return select(select_dict)
+
+
+def append_and_select(select_dict, extension):
+    """
+    Take a select dict, append each to each option list and then select.
+
+    This function takes in a dictionary in the format required for the select
+    Bazel function. It then extends each of the options of the dictionary with
+    a given extension value. Finally, it does a select and returns it as the
+    final output.
+
+    Args:
+        select_dict: The dictionary in format.
+
+        extension: The value to use to extend each of the select options.
+    """
+    for _, value in select_dict.items():
+        value.extend(extension)
 
     return select(select_dict)
 
