@@ -103,7 +103,7 @@ load("@bazel_tools//tools/build_defs/repo:git.bzl", "new_git_repository")
 new_git_repository(
     name = "starter_kit_adaptive_xavier",  # bazel will create under its own cache folder in the external folder package with the specified name(e.g. external/starter_kit_adaptive_xavier)
     build_file = "@//:application/starter_kit_adaptive_xavier.BUILD",
-    commit = "639ef0778a5a5f1603eb9bd15f127128b642d83e",
+    commit = "cc3a30df5b6505c10904fa8ab602593115c79960",
     remote = "ssh://git@git.swf.daimler.com:7999/adasdai/starter_kit_adaptive_xavier.git",
     shallow_since = "1621327161 +0200",
 )
@@ -111,13 +111,13 @@ new_git_repository(
 '''new_local_repository(
     name = "starter_kit_adaptive_xavier",
     build_file = "@//bsw:starter_kit_adaptive_xavier.BUILD",
-    path = "<local_path_to_reposittory>",
+    #path = "<local_path_to_reposittory>",
 )'''
 
 new_git_repository(
     name = "amsr_xavier",  # bazel will create under its own cache folder in the external folder package with the specified name(e.g. external/amsr_xavier)
     build_file = "@//bsw:amsr_xavier.BUILD",
-    commit = "d71adafad3e68798fca3330d7eb0cee91828fdc7",
+    commit = "42b66a381440af2325136b384b3f87dcf9444649",
     remote = "ssh://git@git.swf.daimler.com:7999/adasdai/amsr_xavier.git",
 )
 
