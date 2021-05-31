@@ -73,7 +73,6 @@ pkg_tar(
     name = "minerva_mpu_adaptive_binaries",
     files = {
         ":adaptive_autosar_executionmanager_binary": "sbin/amsr_vector_fs_em_executionmanager",
-        "//application/update_app_demo_idc6:app_v1": "opt/update_app_demo_idc6/bin/update_app_demo_idc6",
     },
     mode = "0755",
     package_dir = "/",
@@ -92,33 +91,11 @@ pkg_tar(
 )
 
 pkg_tar(
-    name = "update_app_v1_demo_configs",
-    srcs = {
-        "//application/update_app_demo_idc6:exec_config": "exec_config.json",
-        "//application/update_app_demo_idc6:updatemanager_swcluster_meta": "swcl_package_metadata.json",
-        "//application/update_app_demo_idc6:updatemanager_daemon": "updatemanager.json",
-        "//application/update_app_demo_idc6:updatemanager_swcl_db_daemon": "swcl_db.json",
-        "//application/update_app_demo_idc6:logging_config": "logging_config.json",
-    },
-    mode = "0755",
-    package_dir = "/opt/update_app_demo_idc6/etc/",
-)
-
-pkg_tar(
-    name = "minerva_mpu_adaptive_configs",
-    mode = "0755",
-    package_dir = "",
-    deps = [
-        ":update_app_v1_demo_configs",
-    ],
-)
-
-pkg_tar(
     name = "minerva_mpu_adaptive_filesystem",
     deps = [
         ":minerva_mpu_adaptive_binaries",
-        ":minerva_mpu_adaptive_configs",
         ":minerva_mpu_adaptive_etc",
+        "//application/update_app_demo_idc6:package",
         "//application/stub_application:package",
         "//application/someipd_posix:package",
         "//application/scn_param_storage:package",

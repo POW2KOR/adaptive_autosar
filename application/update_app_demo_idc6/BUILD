@@ -1,3 +1,4 @@
+load("@rules_pkg//:pkg.bzl", "pkg_tar")
 load("@minerva_mpu_adaptive//:bazel/defs.bzl", "minerva_aa_codegen_rule")
 
 package(default_visibility = ["//visibility:public"])
@@ -96,7 +97,7 @@ minerva_aa_codegen_rule(
         "updatemanager_daemon": [
             "update_app_demo_idc6/etc/updatemanager.json",
         ],
-        "updatemanager_swcl_db_daemon": [
+        "updatemanager_swcl_db": [
             "update_app_demo_idc6/etc/swcl_db.json",
         ],
     },
@@ -128,4 +129,23 @@ cc_binary(
         "//bsw:amsr_vector_fs_libvac",
         "//bsw:amsr_vector_fs_log_api",
     ],
+)
+
+pkg_tar(
+    name = "package_v1",
+    files = {
+        ":app_v1": "bin/update_app_demo_idc6",
+        ":exec_config": "etc/exec_config.json",
+        ":updatemanager_swcl_db": "etc/swcl_db.json",
+        ":updatemanager_swcluster_meta": "etc/swcl_package_metadata.json",
+        ":updatemanager_daemon": "etc/updatemanager.json",
+        ":logging_config": "etc/logging_config.json",
+    },
+    mode = "0755",
+    package_dir = "opt/update_app_demo_idc6",
+)
+
+alias(
+    name = "package",
+    actual = ":package_v1",
 )
