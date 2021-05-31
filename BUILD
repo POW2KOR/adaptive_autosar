@@ -70,12 +70,6 @@ filegroup(
 )
 
 filegroup(
-    name = "adaptive_autosar_log_daemon_binary",
-    srcs = ["//bsw:amsr_vector_fs_log_daemon"],
-    output_group = "amsr_vector_fs_log_daemon",
-)
-
-filegroup(
     name = "adaptive_autosar_someipdaemon_binary",
     srcs = ["//bsw:someipd_posix"],
     output_group = "someipd_posix",
@@ -85,7 +79,6 @@ pkg_tar(
     name = "minerva_mpu_adaptive_binaries",
     files = {
         ":adaptive_autosar_someipdaemon_binary": "opt/someipd_posix/bin/someipd_posix",
-        ":adaptive_autosar_log_daemon_binary": "opt/amsr_vector_fs_log_daemon/bin/amsr_vector_fs_log_daemon",
         ":adaptive_autosar_executionmanager_binary": "sbin/amsr_vector_fs_em_executionmanager",
         "//application/executionmanager_state_client_app:app": "opt/executionmanager_state_client_app/bin/executionmanager_state_client_app",
         "//application/update_app_demo_idc6:app_v1": "opt/update_app_demo_idc6/bin/update_app_demo_idc6",
@@ -107,17 +100,6 @@ pkg_tar(
     },
     mode = "0755",
     package_dir = "/etc",
-)
-
-pkg_tar(
-    name = "adaptive_autosar_log_daemon_configs",
-    files = {
-        "//application/amsr_vector_fs_log_daemon:logging_config": "logging_config.json",
-        "//application/amsr_vector_fs_log_daemon:logd_config": "logd_config.json",
-        "//application/amsr_vector_fs_log_daemon:exec_config": "exec_config.json",
-    },
-    mode = "0755",
-    package_dir = "/opt/amsr_vector_fs_log_daemon/etc/",
 )
 
 pkg_tar(
@@ -191,7 +173,6 @@ pkg_tar(
     package_dir = "",
     deps = [
         ":adaptive_autosar_executionmanager_state_client_configs",
-        ":adaptive_autosar_log_daemon_configs",
         ":adaptive_autosar_someipdaemon_configs",
         ":adaptive_idc6mt_configs",
         ":adaptive_scn_param_storage_configs",
@@ -206,6 +187,7 @@ pkg_tar(
         ":minerva_mpu_adaptive_binaries",
         ":minerva_mpu_adaptive_configs",
         ":minerva_mpu_adaptive_etc",
+        "//application/amsr_vector_fs_log_daemon:package",
     ],
 )
 
