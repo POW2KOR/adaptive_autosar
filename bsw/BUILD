@@ -19,7 +19,7 @@ minerva_aa_bsw_module(
     out_static_libs = [
         "libSocal.a",
     ],
-    srcs_filegroup = "@starter_kit_adaptive_xavier//:amsr_vector_fs_socal_srcs",
+    srcs_filegroup = "@amsr_xavier//:amsr_vector_fs_socal_srcs",
     deps = [
         ":amsr_vector_fs_characterconversion",
         ":amsr_vector_fs_crc",
@@ -861,7 +861,7 @@ minerva_aa_bsw_module(
 minerva_aa_bsw_module(
     name = "amsr_vector_fs_diagnosticmanager",
     out_headers_only = True,
-    srcs_filegroup = "@starter_kit_adaptive_xavier//:amsr_vector_fs_diagnosticmanager",
+    srcs_filegroup = "@amsr_xavier//:amsr_vector_fs_diagnosticmanager",
     deps = [
         ":amsr_vector_fs_applicationbase",
         ":amsr_vector_fs_characterconversion",
@@ -899,7 +899,7 @@ minerva_aa_bsw_module(
         "amsr_swupdateclient",
     ],
     #out_headers_only = True,
-    srcs_filegroup = "@starter_kit_adaptive_xavier//:amsr_vector_fs_swupdateclient",
+    srcs_filegroup = "@amsr_xavier//:amsr_vector_fs_swupdateclient",
     deps = [
         ":amsr_vector_fs_applicationbase",
         ":amsr_vector_fs_libvac",
