@@ -83,7 +83,6 @@ pkg_tar(
         "//application/update_app_demo_idc6:app_v1": "opt/update_app_demo_idc6/bin/update_app_demo_idc6",
         "//application/stub_application:stub_application": "opt/stub_application/bin/stub_application",
         "//application/scn_param_storage": "opt/scn_param_storage/bin/scn_param_storage",
-        "//application/idc6mt:idc6mt": "opt/idc6mt/bin/idc6mt",
     },
     mode = "0755",
     package_dir = "/",
@@ -146,22 +145,11 @@ pkg_tar(
 )
 
 pkg_tar(
-    name = "adaptive_idc6mt_configs",
-    files = {
-        "//application/idc6mt:idc6mt_exec_config": "opt/idc6mt/etc/exec_config.json",
-        "//application/idc6mt:logging_config_json": "opt/idc6mt/etc/logging_config.json",
-        "//application/idc6mt:com_application_json": "opt/idc6mt/etc/com_application.json",
-    },
-    mode = "0755",
-)
-
-pkg_tar(
     name = "minerva_mpu_adaptive_configs",
     mode = "0755",
     package_dir = "",
     deps = [
         ":adaptive_autosar_someipdaemon_configs",
-        ":adaptive_idc6mt_configs",
         ":adaptive_scn_param_storage_configs",
         ":adaptive_stub_applications_configs",
         ":update_app_v1_demo_configs",
@@ -174,6 +162,7 @@ pkg_tar(
         ":minerva_mpu_adaptive_binaries",
         ":minerva_mpu_adaptive_configs",
         ":minerva_mpu_adaptive_etc",
+        "//application/idc6mt:package",
         "//application/executionmanager_state_client_app:package",
         "//application/amsr_vector_fs_log_daemon:package",
     ],
