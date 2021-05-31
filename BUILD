@@ -74,7 +74,6 @@ pkg_tar(
     files = {
         ":adaptive_autosar_executionmanager_binary": "sbin/amsr_vector_fs_em_executionmanager",
         "//application/update_app_demo_idc6:app_v1": "opt/update_app_demo_idc6/bin/update_app_demo_idc6",
-        "//application/stub_application:stub_application": "opt/stub_application/bin/stub_application",
     },
     mode = "0755",
     package_dir = "/",
@@ -106,21 +105,10 @@ pkg_tar(
 )
 
 pkg_tar(
-    name = "adaptive_stub_applications_configs",
-    files = {
-        "//application/stub_application:stub_application_exec_config": "opt/stub_application/etc/exec_config.json",
-        "//application/stub_application:logging_config_json": "opt/stub_application/etc/logging_config.json",
-        "//application/stub_application:com_application_json": "opt/stub_application/etc/com_application.json",
-    },
-    mode = "0755",
-)
-
-pkg_tar(
     name = "minerva_mpu_adaptive_configs",
     mode = "0755",
     package_dir = "",
     deps = [
-        ":adaptive_stub_applications_configs",
         ":update_app_v1_demo_configs",
     ],
 )
@@ -131,6 +119,7 @@ pkg_tar(
         ":minerva_mpu_adaptive_binaries",
         ":minerva_mpu_adaptive_configs",
         ":minerva_mpu_adaptive_etc",
+        "//application/stub_application:package",
         "//application/someipd_posix:package",
         "//application/scn_param_storage:package",
         "//application/idc6mt:package",
