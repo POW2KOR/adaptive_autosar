@@ -55,46 +55,13 @@ config_setting(
     },
 )
 
-# This filegroup is necessary so that we isolate the output group corresponding
-# to the binary of the cmake_external. Otherwise, it adds a lot of noise and
-# annoying stuff. Maybe we can find a better way in the future.
-# To list the output groups, I used this method:
-# https://stackoverflow.com/a/61282031
-# More information here:
-# - https://docs.bazel.build/versions/master/skylark/rules.html#requesting-output-files
-# - https://github.com/bazelbuild/rules_foreign_cc/blob/d54c78ab86b40770ee19f0949db9d74a831ab9f0/tools/build_defs/framework.bzl#L400
-filegroup(
-    name = "adaptive_autosar_executionmanager_binary",
-    srcs = ["//bsw:amsr_vector_fs_em_executionmanager"],
-    output_group = "amsr_vector_fs_em_executionmanager",
-)
-
-pkg_tar(
-    name = "minerva_mpu_adaptive_binaries",
-    files = {
-        ":adaptive_autosar_executionmanager_binary": "sbin/amsr_vector_fs_em_executionmanager",
-    },
-    mode = "0755",
-    package_dir = "/",
-)
-
-pkg_tar(
-    name = "minerva_mpu_adaptive_etc",
-    srcs = [
-        "//machine/idc6_m_p1_xavier:machine_exec_config",
-    ],
-    files = {
-        "//machine/idc6_m_p1_xavier:em_logging_config": "logging_config.json",
-    },
-    mode = "0755",
-    package_dir = "/etc",
-)
-
 pkg_tar(
     name = "minerva_mpu_adaptive_filesystem",
+    files = {
+        "//machine/idc6_m_p1_xavier:machine_exec_config": "/etc/machine_exec_config.json",
+    },
     deps = [
-        ":minerva_mpu_adaptive_binaries",
-        ":minerva_mpu_adaptive_etc",
+        "//application/amsr_vector_fs_em_executionmanager:package",
         "//application/update_app_demo_idc6:package",
         "//application/stub_application:package",
         "//application/someipd_posix:package",
