@@ -1,3 +1,4 @@
+load("@rules_pkg//:pkg.bzl", "pkg_tar")
 load("@minerva_mpu_adaptive//:bazel/defs.bzl", "minerva_aa_codegen_rule")
 
 package(default_visibility = ["//visibility:public"])
@@ -26,7 +27,7 @@ minerva_aa_codegen_rule(
         "executionmanager_state_client_app.*exec_config.*",
     ],
     outs_list_dict = {
-        "updatemanager_daemon_db": [
+        "updatemanager_swcl_db": [
             "executionmanager_state_client_app/etc/swcl_db.json",
         ],
         "updatemanager_swcluser_meta": [
@@ -72,4 +73,17 @@ cc_binary(
         "//bsw:amsr_vector_fs_libiostream",
         "//bsw:amsr_vector_fs_log_api",
     ],
+)
+
+pkg_tar(
+    name = "package",
+    files = {
+        ":app": "bin/executionmanager_state_client_app",
+        ":logging_config": "etc/logging_config.json",
+        ":exec_config": "etc/exec_config.json",
+        ":updatemanager_swcl_db": "etc/swcl_db.json",
+        ":updatemanager_swcluser_meta": "etc/swcl_package_metadata.json",
+    },
+    mode = "0755",
+    package_dir = "opt/executionmanager_state_client_app",
 )

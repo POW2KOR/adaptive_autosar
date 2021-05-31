@@ -80,7 +80,6 @@ pkg_tar(
     files = {
         ":adaptive_autosar_someipdaemon_binary": "opt/someipd_posix/bin/someipd_posix",
         ":adaptive_autosar_executionmanager_binary": "sbin/amsr_vector_fs_em_executionmanager",
-        "//application/executionmanager_state_client_app:app": "opt/executionmanager_state_client_app/bin/executionmanager_state_client_app",
         "//application/update_app_demo_idc6:app_v1": "opt/update_app_demo_idc6/bin/update_app_demo_idc6",
         "//application/stub_application:stub_application": "opt/stub_application/bin/stub_application",
         "//application/scn_param_storage": "opt/scn_param_storage/bin/scn_param_storage",
@@ -127,17 +126,6 @@ pkg_tar(
 )
 
 pkg_tar(
-    name = "adaptive_autosar_executionmanager_state_client_configs",
-    files = {
-        "//application/executionmanager_state_client_app:updatemanager_daemon_db": "opt/executionmanager_state_client_app/etc/swcl_db.json",
-        "//application/executionmanager_state_client_app:updatemanager_swcluser_meta": "opt/executionmanager_state_client_app/etc/swcl_package_metadata.json",
-        "//application/executionmanager_state_client_app:logging_config": "opt/executionmanager_state_client_app/etc/logging_config.json",
-        "//application/executionmanager_state_client_app:exec_config": "opt/executionmanager_state_client_app/etc/exec_config.json",
-    },
-    mode = "0755",
-)
-
-pkg_tar(
     name = "adaptive_stub_applications_configs",
     files = {
         "//application/stub_application:stub_application_exec_config": "opt/stub_application/etc/exec_config.json",
@@ -172,7 +160,6 @@ pkg_tar(
     mode = "0755",
     package_dir = "",
     deps = [
-        ":adaptive_autosar_executionmanager_state_client_configs",
         ":adaptive_autosar_someipdaemon_configs",
         ":adaptive_idc6mt_configs",
         ":adaptive_scn_param_storage_configs",
@@ -187,6 +174,7 @@ pkg_tar(
         ":minerva_mpu_adaptive_binaries",
         ":minerva_mpu_adaptive_configs",
         ":minerva_mpu_adaptive_etc",
+        "//application/executionmanager_state_client_app:package",
         "//application/amsr_vector_fs_log_daemon:package",
     ],
 )
