@@ -576,50 +576,6 @@ minerva_aa_bsw_module(
 )
 
 minerva_aa_bsw_module(
-    name = "amsr_vector_fs_dm_diagnosticmanager",
-    cache_entries = {
-        "BUILD_EXAMPLES": "OFF",
-        "APPLICATION_PREFIX": "opt",
-        "ENABLE_CODE_GENERATION": "OFF",
-        #"LibDoIpBinding_DIR:PATH" : "$EXT_BUILD_DEPS/amsr_vector_fs_doipbinding/lib/cmake/LibDoIpBinding/",
-    },
-    out_headers_only = True,
-    out_include_dirs = [
-        "include",
-    ],
-    srcs_filegroup = "@amsr_xavier//:amsr_vector_fs_dm_diagnosticmanager_srcs",
-    deps = [
-        ":amsr_vector_fs_applicationbase",
-        ":amsr_vector_fs_aradiag",
-        ":amsr_vector_fs_characterconversion",
-        ":amsr_vector_fs_crc",
-        ":amsr_vector_fs_diagnosticmanager",
-        ":amsr_vector_fs_diagnosticrpc",
-        ":amsr_vector_fs_diagnosticrpccombinding",
-        ":amsr_vector_fs_diagnosticutility",
-        ":amsr_vector_fs_doipbinding",
-        ":amsr_vector_fs_e2e",
-        ":amsr_vector_fs_iointegritystream",
-        ":amsr_vector_fs_ipcbinding",
-        ":amsr_vector_fs_libiostream",
-        ":amsr_vector_fs_libosabstraction",
-        ":amsr_vector_fs_libvac",
-        ":amsr_vector_fs_log_api",
-        ":amsr_vector_fs_logutility",
-        ":amsr_vector_fs_msr4base",
-        ":amsr_vector_fs_pduhdrtpbinding",
-        ":amsr_vector_fs_per_libpersistency",
-        ":amsr_vector_fs_socal_headers",
-        ":amsr_vector_fs_someipbinding",
-        ":amsr_vector_fs_someipdaemonclient",
-        ":amsr_vector_fs_someipprotocol",
-        ":amsr_vector_fs_thread",
-        ":amsr_vector_fs_udstransport",
-        ":amsr_vector_fs_vajson",
-    ],
-)
-
-minerva_aa_bsw_module(
     name = "amsr_vector_fs_ipcbinding",
     out_include_dirs = [
         "include/IpcBinding",
