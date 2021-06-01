@@ -819,7 +819,8 @@ minerva_aa_bsw_module(
     ],
 )
 
-# this module is still WIP
+# This module does not build currently. Unclear if the missing header files
+# are coming from the generator or are missing from the delivery.
 minerva_aa_bsw_module(
     name = "amsr_vector_fs_swupdateclient",
     cache_entries = {
