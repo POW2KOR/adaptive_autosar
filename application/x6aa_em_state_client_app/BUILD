@@ -5,11 +5,11 @@ package(default_visibility = ["//visibility:public"])
 
 filegroup(
     name = "app_arxml",
-    srcs = ["arxml/executionmanager_state_client_app.arxml"],
+    srcs = ["arxml/app.arxml"],
 )
 
 minerva_aa_codegen_rule(
-    name = "executionmanager_state_client_app_gen_rule",
+    name = "app_gen_rule",
     arxml_srcs = [
         ":app_arxml",
         "@amsr_xavier//:mex_arxml",
@@ -24,17 +24,17 @@ minerva_aa_codegen_rule(
         # We're not using this exec_config because the code generator isn't
         # able to generate a proper config file when category PLATFORM_LEVEL
         # is selected. So instead, config/exec_config.json gets used.
-        "executionmanager_state_client_app.*exec_config.*",
+        "x6aa_em_state_client_app.*exec_config.*",
     ],
     outs_list_dict = {
         "updatemanager_swcl_db": [
-            "executionmanager_state_client_app/etc/swcl_db.json",
+            "x6aa_em_state_client_app/etc/swcl_db.json",
         ],
         "updatemanager_swcluser_meta": [
-            "executionmanager_state_client_app/swcl_package_metadata.json",
+            "x6aa_em_state_client_app/swcl_package_metadata.json",
         ],
         "applicationbase_init_deinit_srcs": [
-            "executionmanager_state_client_app/src/ara/core/initialization.cpp",
+            "x6aa_em_state_client_app/src/ara/core/initialization.cpp",
         ],
     },
 )
@@ -78,12 +78,12 @@ cc_binary(
 pkg_tar(
     name = "package",
     files = {
-        ":app": "bin/executionmanager_state_client_app",
+        ":app": "bin/x6aa_em_state_client_app",
         ":logging_config": "etc/logging_config.json",
         ":exec_config": "etc/exec_config.json",
         ":updatemanager_swcl_db": "etc/swcl_db.json",
         ":updatemanager_swcluser_meta": "etc/swcl_package_metadata.json",
     },
     mode = "0755",
-    package_dir = "opt/executionmanager_state_client_app",
+    package_dir = "opt/x6aa_em_state_client_app",
 )

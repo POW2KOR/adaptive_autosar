@@ -8,14 +8,14 @@
 					<SHORT-NAME>platform</SHORT-NAME>
 					<ELEMENTS>
 						<ADAPTIVE-APPLICATION-SW-COMPONENT-TYPE>
-							<SHORT-NAME>executionmanager_state_client_app_sw_component_type</SHORT-NAME>
+							<SHORT-NAME>x6aa_em_state_client_app_swc_type</SHORT-NAME>
 						</ADAPTIVE-APPLICATION-SW-COMPONENT-TYPE>
 						<EXECUTABLE>
-							<SHORT-NAME>executionmanager_state_client_app</SHORT-NAME>
+							<SHORT-NAME>x6aa_em_state_client_app</SHORT-NAME>
 							<CATEGORY>APPLICATION_LEVEL</CATEGORY>
 							<ROOT-SW-COMPONENT-PROTOTYPE>
-								<SHORT-NAME>execution_manager_addon_root_swc</SHORT-NAME>
-								<APPLICATION-TYPE-TREF DEST="ADAPTIVE-APPLICATION-SW-COMPONENT-TYPE">/mb/platform/executionmanager_state_client_app_sw_component_type</APPLICATION-TYPE-TREF>
+								<SHORT-NAME>x6aa_em_state_client_app_root_swc</SHORT-NAME>
+								<APPLICATION-TYPE-TREF DEST="ADAPTIVE-APPLICATION-SW-COMPONENT-TYPE">/mb/platform/x6aa_em_state_client_app_root_swc_type</APPLICATION-TYPE-TREF>
 							</ROOT-SW-COMPONENT-PROTOTYPE>
 						</EXECUTABLE>
 					</ELEMENTS>

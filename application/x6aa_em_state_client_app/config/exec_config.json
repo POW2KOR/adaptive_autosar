@@ -1,12 +1,12 @@
 
 {
   "category" : "PLATFORM_LEVEL",
-  "name" : "executionmanager_state_client_app",
+  "name" : "x6aa_em_state_client_app",
   "isAdaptiveApplication" : 1,
   "processes" : [
     {
-      "name" : "executionmanager_state_client_process",
-      "shortNamePath" : "/mb/platform/executionmanager_state_client_app",
+      "name" : "x6aa_em_state_client_process",
+      "shortNamePath" : "/mb/platform/x6aa_em_state_client_app",
       "startupConfigs": [
         {
           "schedulingPolicy" : "SCHEDULING-POLICY-ROUND-ROBIN",
