@@ -82,7 +82,7 @@ filegroup(
 
 filegroup(
     name = "amsr_vector_fs_em_executionmanager_addon_demo_application_srcs",
-    srcs = glob(["BSW/amsr-vector-fs-em-executionmanager/addon/amsr-vector-fs-em-executionmanager-demo-application/**"]),
+    srcs = glob(["BSW/amsr-vector-fs-em-executionmanager/example/em_example_app/src/**"]),
     visibility = ["//visibility:public"],
 )
 
