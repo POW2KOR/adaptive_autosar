@@ -131,7 +131,6 @@ pkg_tar(
     package_dir = "/opt/someipd_posix/etc/",
 )
 
-
 pkg_tar(
     name = "update_app_v1_demo_configs",
     srcs = {
@@ -227,7 +226,6 @@ pkg_deb(
 # socal library. The issue reported and confirmed by Vector.
 # Desision to put it here is due to the bazel nature of the relative pates. So we left it in
 # the root. The file is used in bsw/BUILD file later.
-
 
 target_build_dir_for_socal_scn_param_storage = select({
     ":k8": [

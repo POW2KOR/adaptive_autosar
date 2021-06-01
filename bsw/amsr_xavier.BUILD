@@ -7,9 +7,12 @@ filegroup(
     srcs = [
         "BSW/amsr-vector-fs-applicationbase/mex/BswExecutableModelExtension.arxml",
         "BSW/amsr-vector-fs-applicationbase/mex/PhmMexDefsExecutable.arxml",
+        "BSW/amsr-vector-fs-dm-diagnosticmanager/mex/MexDefsAraDiagConfig.arxml",
+        "BSW/amsr-vector-fs-dm-diagnosticmanager/mex/MexDefsTransportProtocols.arxml",
         "BSW/amsr-vector-fs-em-executionmanager/mex/MexDefs.arxml",
         "BSW/amsr-vector-fs-log-api/mex/MexDefs.arxml",
         "BSW/amsr-vector-fs-log-daemon/mex/MexDefs.arxml",
+        "BSW/amsr-vector-fs-nm-networkmanager/mex/MexDefsNmExtensionModel.arxml",
         "BSW/amsr-vector-fs-phm-healthmanager/mex/MexDefsAdditionalModelParameters.arxml",
         "BSW/amsr-vector-fs-phm-healthmanager/mex/MexDefsAliveSupervision.arxml",
         "BSW/amsr-vector-fs-phm-healthmanager/mex/MexDefsHealthChannelID.arxml",
@@ -17,9 +20,6 @@ filegroup(
         "BSW/amsr-vector-fs-phm-healthmanager/mex/MexDefsRule.arxml",
         "BSW/amsr-vector-fs-phm-healthmanager/mex/MexDefsSupervisedEntityID.arxml",
         "BSW/amsr-vector-fs-someipbinding/mex/SignalbasedModelExtension.arxml",
-        "BSW/amsr-vector-fs-nm-networkmanager/mex/MexDefsNmExtensionModel.arxml",
-        "BSW/amsr-vector-fs-dm-diagnosticmanager/mex/MexDefsTransportProtocols.arxml",
-        "BSW/amsr-vector-fs-dm-diagnosticmanager/mex/MexDefsAraDiagConfig.arxml",
     ],
     visibility = ["//visibility:public"],
 )
