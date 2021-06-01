@@ -592,7 +592,7 @@ def minerva_aa_bsw_module(
                 "$EXT_BUILD_DEPS/amsr_vector_fs_pduhdrtpbinding/lib/cmake/LibPduHdrTpBinding/"
 
         elif dep == ":amsr_vector_fs_doipbinding":
-            cache_entries["LibDoipBinding_DIR:PATH"] = \
+            cache_entries["LibDoIpBinding_DIR:PATH"] = \
                 "$EXT_BUILD_DEPS/amsr_vector_fs_doipbinding/lib/cmake/LibDoIpBinding/"
 
         elif dep == ":amsr_vector_fs_diagnosticrpc":
