@@ -288,34 +288,6 @@ minerva_aa_bsw_module(
 )
 
 minerva_aa_bsw_module(
-    name = "amsr_vector_fs_communicationmiddleware",
-    cache_entries = {
-        "CMAKE_EXPORT_NO_PACKAGE_REGISTRY": "ON",
-        "CMAKE_FIND_PACKAGE_NO_PACKAGE_REGISTRY": "ON",
-        "CMAKE_VERBOSE_MAKEFILE": "ON",
-        "BUILD_TESTS": "OFF",
-        "ENABLE_EXEC_MANAGER": "ON",
-        "ADAPTIVE_MICROSAR_SIP_DIR": "$EXT_BUILD_ROOT/external/starter_kit_adaptive_xavier/mb_base_layer_adaptive_xavier/amsr_xavier",
-    },
-    out_static_libs = [
-        "libARA-IpcBinding-posix.a",
-        "libARA.a",
-        "libARA-SomeIP-posix.a",
-        "libIpcBinding-posix.a",
-        "libSomeIP-posix.a",
-        "libSomeIP-posix-common.a",
-    ],
-    srcs_filegroup = "@amsr_xavier//:amsr_vector_fs_communicationmiddleware_srcs",
-    deps = [
-        ":amsr_vector_fs_libosabstraction",
-        ":amsr_vector_fs_log_api",
-        ":amsr_vector_fs_sec_cryptostack",
-        ":amsr_vector_fs_sec_iam",
-        ":amsr_vector_fs_sec_libseccom",
-    ],
-)
-
-minerva_aa_bsw_module(
     name = "amsr_vector_fs_crc",
     out_static_libs = [
         # Here it is Important that libcrc.a goes before
