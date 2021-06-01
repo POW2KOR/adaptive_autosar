@@ -60,6 +60,7 @@ minerva_aa_bsw_module(
         "include/charconv",
         "include/libcharconv_common",
         "include/iostream",
+        "include/libstream",
     ],
     out_static_libs = [
         # libamsr-vector-fs-libiostream_libstream.a should
@@ -93,6 +94,9 @@ minerva_aa_bsw_module(
 
 minerva_aa_bsw_module(
     name = "amsr_vector_fs_vajson",
+    out_include_dirs = [
+        "include/vajson"
+    ],
     out_static_libs = [
         "libvajson.a",
     ],
@@ -679,6 +683,9 @@ minerva_aa_bsw_module(
 
 minerva_aa_bsw_module(
     name = "amsr_vector_fs_characterconversion",
+    out_include_dirs = [
+        "include/common"
+    ],
     out_static_libs = [
         "libamsr-vector-fs-characterconversion_common.a",
         "libamsr-vector-fs-characterconversion_vector.a",
