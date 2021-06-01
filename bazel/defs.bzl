@@ -24,7 +24,6 @@ def extend_and_select(select_dict, extension):
 
     return select(select_dict)
 
-
 def append_and_select(select_dict, extension):
     """
     Take a select dict, append each to each option list and then select.
