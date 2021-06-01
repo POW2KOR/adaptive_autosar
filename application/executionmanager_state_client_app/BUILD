@@ -9,7 +9,10 @@ filegroup(
 
 minerva_aa_codegen_rule(
     name = "executionmanager_state_client_app_gen_rule",
-    arxml_srcs = [":app_arxml"],
+    arxml_srcs = [
+        ":app_arxml",
+        "@amsr_xavier//:mex_arxml",
+    ],
     generators = [
         "@amsr_xavier//:generator_amsr_updatemanager_swcluster_meta",
         "@amsr_xavier//:generator_amsr_updatemanager_daemon",
