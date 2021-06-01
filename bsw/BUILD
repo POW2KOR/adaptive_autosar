@@ -63,11 +63,6 @@ minerva_aa_bsw_module(
         "include/libstream",
     ],
     out_static_libs = [
-        # libamsr-vector-fs-libiostream_libstream.a should
-        # go first in the list to avoid linking errors
-        #"libamsr-vector-fs-libiostream_libstream.a",
-        #"libamsr-vector-fs-libiostream_libcharconv_vector_stl.a",
-        #"libamsr-vector-fs-libiostream_libcharconv_common.a",
         "libamsr-vector-fs-libiostream.a",
     ],
     srcs_filegroup = "@amsr_xavier//:amsr_vector_fs_libiostream_srcs",
@@ -833,7 +828,6 @@ minerva_aa_bsw_module(
     out_binaries = [
         "amsr_swupdateclient",
     ],
-    #out_headers_only = True,
     srcs_filegroup = "@amsr_xavier//:amsr_vector_fs_swupdateclient",
     deps = [
         ":amsr_vector_fs_applicationbase",
