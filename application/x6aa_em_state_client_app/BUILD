@@ -53,11 +53,16 @@ filegroup(
     ],
 )
 
+filegroup(
+    name = "srcs",
+    srcs = glob(["src/**"]),
+)
+
 cc_binary(
     name = "app",
     srcs = [
+        ":srcs",
         ":applicationbase_init_deinit_srcs",
-        "@amsr_xavier//:amsr_vector_fs_em_executionmanager_addon_demo_application_srcs",
     ],
     copts = [
         "-std=c++14",
