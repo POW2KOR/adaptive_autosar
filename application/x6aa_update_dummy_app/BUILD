@@ -114,7 +114,36 @@ cc_binary(
     name = "app_v1",
     srcs = [
         ":applicationbase_init_deinit_srcs",
-        "@starter_kit_adaptive_xavier//:update_app_v1_demo_idc6_srcs",
+        "src/application_v1.cpp",
+        "src/application.h",
+        "src/main.cpp",
+        "src/update_app_demo_error_domain.cpp",
+        "src/update_app_demo_error_domain.h",
+    ],
+    copts = [
+        "-std=c++14",
+    ],
+    features = [
+        "pthread",
+    ],
+    linkstatic = 1,
+    deps = [
+        "//bsw:amsr_vector_fs_applicationbase",
+        "//bsw:amsr_vector_fs_em_executionmanager",
+        "//bsw:amsr_vector_fs_libvac",
+        "//bsw:amsr_vector_fs_log_api",
+    ],
+)
+
+cc_binary(
+    name = "app_v2",
+    srcs = [
+        ":applicationbase_init_deinit_srcs",
+        "src/application_v2.cpp",
+        "src/application.h",
+        "src/main.cpp",
+        "src/update_app_demo_error_domain.cpp",
+        "src/update_app_demo_error_domain.h",
     ],
     copts = [
         "-std=c++14",
