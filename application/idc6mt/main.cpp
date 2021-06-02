@@ -13,6 +13,7 @@
 #include "ara/exec/application_client.h"
 #include "ara/log/logging.h"
 #include "osabstraction/thread/thread.h"
+#include "osabstraction/process/process.h"
 #include "vac/language/throw_or_terminate.h"
 
 #include "accessor/variable.h"
