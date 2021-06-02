@@ -45,16 +45,13 @@ minerva_aa_codegen_rule(
         "@amsr_xavier//:generator_amsr_em_exec_config",
     ],
     ignore_matches = [
-        "BaseApplicationExecutable.*",
-        "TestBaseApplicationExecutable.*",
-        "DiagnosticManagerDeamonExecutable.*",
+        "X6AA_Cnfg_Mngr_Executable.*",
+        "X6AA_DLT_Executable.*",
+        "X6AA_Dummy_SWC_1_Executable.*",
+        "X6AA_Dummy_SWC_2_Executable.*",
+        "X6AA_Ressource_Executable.*",
         "SelfDiagnosticAgentExecutable.*",
-        "amsr_vector_fs_ucm_updatemanager.*",
-        "software_update_client.*",
-        "shutdown_app_demo_idc6.*",
-        "update_app_demo_idc6.*",
-        "restart_app_demo_idc6.*",
-        "amsr_vector_fs_sec_cryptostack_daemon.*",
+        "TransmissionManager_ROVExecutable.*"
     ],
     outs_list_dict = {
         "exec_config": [
