@@ -3,6 +3,16 @@ load("@minerva_mpu_adaptive//:bazel/defs.bzl", "minerva_aa_codegen_rule")
 
 package(default_visibility = ["//visibility:public"])
 
+filegroup(
+    name = "logging_config",
+    srcs = ["configs/logging_config.json"],
+)
+
+filegroup(
+    name = "com_application",
+    srcs = ["configs/com_application.json"],
+)
+
 minerva_aa_codegen_rule(
     name = "exec_config_gen_rule",
     arxml_srcs = [
@@ -22,7 +32,7 @@ minerva_aa_codegen_rule(
         "DiagnosticManagerDeamonExecutable.*",
     ],
     outs_list_dict = {
-        "x6aa_config_manager_exec_config": [
+        "exec_config": [
             "X6AA_Cnfg_Mngr_Executable/configuration/exec_config.json",
         ],
     },
@@ -47,7 +57,7 @@ minerva_aa_codegen_rule(
         "DiagnosticManagerDeamonExecutable.*",
     ],
     outs_list_dict = {
-        "x6aa_config_manager_init_deinit_srcs": [
+        "applicationbase_init_deinit_srcs": [
             "X6AA_Cnfg_Mngr_Executable/src/ara/core/initialization.cpp",
         ],
     },
@@ -72,7 +82,7 @@ minerva_aa_codegen_rule(
         "DiagnosticManagerDeamonExecutable.*",
     ],
     outs_list_dict = {
-        "x6aa_config_manager_swcluster_meta": [
+        "swcluster_meta": [
             "X6AA_Cnfg_Mngr_Executable/swcl_package_metadata.json",
         ],
     },
@@ -97,10 +107,10 @@ minerva_aa_codegen_rule(
         "DiagnosticManagerDeamonExecutable.*",
     ],
     outs_list_dict = {
-        "x6aa_config_manager_swcl_db": [
+        "swcl_db": [
             "X6AA_Cnfg_Mngr_Executable/etc/swcl_db.json",
         ],
-        "x6aa_config_manager_updatemanager_daemon": [
+        "updatemanager_daemon": [
             "X6AA_Cnfg_Mngr_Executable/etc/updatemanager.json",
         ],
     },
@@ -148,7 +158,7 @@ minerva_aa_codegen_rule(
         "DiagnosticManagerDeamonExecutable.*",
     ],
     outs_list_dict = {
-        "x6aa_config_manager_modeldatatypes_hdrs": [
+        "modeldatatypes_hdrs": [
             "X6AA_Cnfg_Mngr_Executable/include/DataTypes/NS_REC_activateSarStorage0131VcEventType_t/impl_type_rec_activatesarstorage0131vceventtype_t.h",
             "X6AA_Cnfg_Mngr_Executable/include/DataTypes/NS_REC_configureSarTriggerEvents0136VcEventType_t/impl_type_rec_configuresartriggerevents0136vceventtype_t.h",
             "X6AA_Cnfg_Mngr_Executable/include/DataTypes/NS_REC_vechicleInformation0400VcEventType_t/impl_type_rec_vechicleinformation0400vceventtype_t.h",
@@ -176,13 +186,16 @@ minerva_aa_codegen_rule(
         "DiagnosticManagerDeamonExecutable.*",
     ],
     outs_list_dict = {
-        "x6aa_config_manager_someip_config": [
+        "someip_binding_initializer": [
+            "X6AA_Cnfg_Mngr_Executable/src/amsr/someip_binding_transformation_layer/internal/someip_binding_initializer.cpp",
+        ],
+        "someip_config": [
             "X6AA_Cnfg_Mngr_Executable/configuration/someip_config.json",
         ],
-        "x6aa_config_manager_static_sd_config": [
+        "static_sd_config": [
             "X6AA_Cnfg_Mngr_Executable/configuration/static_sd_config.json",
         ],
-        "x6aa_config_manager_someip_binding_hdrs": [
+        "someipbinding_hdrs": [
             "X6AA_Cnfg_Mngr_Executable/include/amsr/someip_binding_transformation_layer/internal/DataTypes/REC_EVC_CfgBit_01_26_Pr5_ST3_2nibgl9yx8nj74mt7kvhiab7f/deserializer_REC_EVC_CfgBit_01_26_Pr5_ST3_2nibgl9yx8nj74mt7kvhiab7f_1.h",
             "X6AA_Cnfg_Mngr_Executable/include/amsr/someip_binding_transformation_layer/internal/services/ns_extvehicleconfig_service_st3/SI_ExtVehicleConfig_Service_ST3_proxy_someip_binding.h",
             "X6AA_Cnfg_Mngr_Executable/include/amsr/someip_binding_transformation_layer/internal/services/ns_extvehicleconfig_service_st3/SI_ExtVehicleConfig_Service_ST3_proxy_someip_binding_init.h",
@@ -195,7 +208,7 @@ minerva_aa_codegen_rule(
             "X6AA_Cnfg_Mngr_Executable/include/amsr/someip_binding_transformation_layer/internal/services/ns_si_dummyswc_2_to_cnfg_mngr/SI_X6AA_Dummy_B2_Service_Reserved_proxy_someip_methods.h",
             "X6AA_Cnfg_Mngr_Executable/include/amsr/someip_binding_transformation_layer/internal/services/ns_si_dummyswc_2_to_cnfg_mngr/SI_X6AA_Dummy_B2_Service_Reserved_someip_proxy_factory.h",
         ],
-        "x6aa_config_manager_someip_binding_srcs": [
+        "someipbinding_srcs": [
             "X6AA_Cnfg_Mngr_Executable/src/amsr/someip_binding_transformation_layer/internal/DataTypes/REC_EVC_CfgBit_01_26_Pr5_ST3_2nibgl9yx8nj74mt7kvhiab7f/deserializer_REC_EVC_CfgBit_01_26_Pr5_ST3_2nibgl9yx8nj74mt7kvhiab7f_1.cpp",
             "X6AA_Cnfg_Mngr_Executable/src/amsr/someip_binding_transformation_layer/internal/services/ns_extvehicleconfig_service_st3/SI_ExtVehicleConfig_Service_ST3_proxy_someip_binding.cpp",
             "X6AA_Cnfg_Mngr_Executable/src/amsr/someip_binding_transformation_layer/internal/services/ns_extvehicleconfig_service_st3/SI_ExtVehicleConfig_Service_ST3_proxy_someip_binding_init.cpp",
@@ -203,7 +216,6 @@ minerva_aa_codegen_rule(
             "X6AA_Cnfg_Mngr_Executable/src/amsr/someip_binding_transformation_layer/internal/services/ns_si_dummyswc_2_to_cnfg_mngr/SI_X6AA_Dummy_B2_Service_Reserved_proxy_someip_binding.cpp",
             "X6AA_Cnfg_Mngr_Executable/src/amsr/someip_binding_transformation_layer/internal/services/ns_si_dummyswc_2_to_cnfg_mngr/SI_X6AA_Dummy_B2_Service_Reserved_proxy_someip_binding_init.cpp",
             "X6AA_Cnfg_Mngr_Executable/src/amsr/someip_binding_transformation_layer/internal/services/ns_si_dummyswc_2_to_cnfg_mngr/SI_X6AA_Dummy_B2_Service_Reserved_proxy_someip_event_manager.cpp",
-            "X6AA_Cnfg_Mngr_Executable/src/amsr/someip_binding_transformation_layer/internal/someip_binding_initializer.cpp",
         ],
     },
 )
@@ -227,7 +239,7 @@ minerva_aa_codegen_rule(
         "DiagnosticManagerDeamonExecutable.*",
     ],
     outs_list_dict = {
-        "x6aa_config_manager_someip_protocol_hdrs": [
+        "someipprotocol_hdrs": [
             "X6AA_Cnfg_Mngr_Executable/include/amsr/someip_protocol/internal/dataprototype_deserialization/services_ns_extvehicleconfig_service_st3/events/deserializer_Ev_EVC_CfgBit_01_26_Pr5_ST3.h",
             "X6AA_Cnfg_Mngr_Executable/include/amsr/someip_protocol/internal/dataprototype_deserialization/services_ns_si_dummyswc_2_to_cnfg_mngr/events/deserializer_Ev_CalculationResult.h",
             "X6AA_Cnfg_Mngr_Executable/include/amsr/someip_protocol/internal/dataprototype_serialization/services_ns_si_cnfg_mngr_to_dummyswc/events/serializer_Ev_activateSarStorage0131VcEvent.h",
@@ -238,7 +250,7 @@ minerva_aa_codegen_rule(
             "X6AA_Cnfg_Mngr_Executable/include/amsr/someip_protocol/internal/datatype_serialization/DataTypes/NS_REC_configureSarTriggerEvents0136VcEventType_t/serializer_REC_configureSarTriggerEvents0136VcEventType_t.h",
             "X6AA_Cnfg_Mngr_Executable/include/amsr/someip_protocol/internal/datatype_serialization/DataTypes/NS_REC_vechicleInformation0400VcEventType_t/serializer_REC_vechicleInformation0400VcEventType_t.h",
         ],
-        "x6aa_config_manager_someip_protocol_srcs": [
+        "someipprotocol_srcs": [
             "X6AA_Cnfg_Mngr_Executable/src/amsr/someip_protocol/internal/dataprototype_deserialization/services_ns_extvehicleconfig_service_st3/events/deserializer_Ev_EVC_CfgBit_01_26_Pr5_ST3.cpp",
             "X6AA_Cnfg_Mngr_Executable/src/amsr/someip_protocol/internal/dataprototype_deserialization/services_ns_si_dummyswc_2_to_cnfg_mngr/events/deserializer_Ev_CalculationResult.cpp",
             "X6AA_Cnfg_Mngr_Executable/src/amsr/someip_protocol/internal/dataprototype_serialization/services_ns_si_cnfg_mngr_to_dummyswc/events/serializer_Ev_activateSarStorage0131VcEvent.cpp",
@@ -267,41 +279,33 @@ minerva_aa_codegen_rule(
         "DiagnosticManagerDeamonExecutable.*",
     ],
     outs_list_dict = {
-        "x6aa_config_manager_runtime_gen_cpp": [
+        "runtime_gen": [
             "X6AA_Cnfg_Mngr_Executable/src/ara/com/runtime_gen.cpp",
         ],
-        "x6aa_config_manager_socal_extvehicleconfig_proxy_hdrs": [
-            "X6AA_Cnfg_Mngr_Executable/include/services/ns_extvehicleconfig_service_st3/SI_ExtVehicleConfig_Service_ST3.h",
-            "X6AA_Cnfg_Mngr_Executable/include/services/ns_extvehicleconfig_service_st3/SI_ExtVehicleConfig_Service_ST3_proxy_internal.h",
-            "X6AA_Cnfg_Mngr_Executable/include/services/ns_extvehicleconfig_service_st3/SI_ExtVehicleConfig_Service_ST3_proxy_update_manager.h",
-            "X6AA_Cnfg_Mngr_Executable/include/services/ns_extvehicleconfig_service_st3/SI_ExtVehicleConfig_Service_ST3_types.h",
-            "X6AA_Cnfg_Mngr_Executable/include/services/ns_extvehicleconfig_service_st3/si_extvehicleconfig_service_st3_common.h",
-            "X6AA_Cnfg_Mngr_Executable/include/services/ns_extvehicleconfig_service_st3/si_extvehicleconfig_service_st3_proxy.h",
-        ],
-        "x6aa_config_manager_socal_extvehicleconfig_proxy_srcs": [
-            "X6AA_Cnfg_Mngr_Executable/src/services/ns_extvehicleconfig_service_st3/si_extvehicleconfig_service_st3.cpp",
-            "X6AA_Cnfg_Mngr_Executable/src/services/ns_extvehicleconfig_service_st3/si_extvehicleconfig_service_st3_proxy.cpp",
-        ],
-        "x6aa_config_manager_socal_proxy_hdrs": [
+        "socal_hdrs": [
             "X6AA_Cnfg_Mngr_Executable/include/services/ns_si_dummyswc_2_to_cnfg_mngr/SI_X6AA_Dummy_B2_Service_Reserved.h",
             "X6AA_Cnfg_Mngr_Executable/include/services/ns_si_dummyswc_2_to_cnfg_mngr/SI_X6AA_Dummy_B2_Service_Reserved_proxy_internal.h",
             "X6AA_Cnfg_Mngr_Executable/include/services/ns_si_dummyswc_2_to_cnfg_mngr/SI_X6AA_Dummy_B2_Service_Reserved_proxy_update_manager.h",
             "X6AA_Cnfg_Mngr_Executable/include/services/ns_si_dummyswc_2_to_cnfg_mngr/SI_X6AA_Dummy_B2_Service_Reserved_types.h",
             "X6AA_Cnfg_Mngr_Executable/include/services/ns_si_dummyswc_2_to_cnfg_mngr/si_x6aa_dummy_b2_service_reserved_common.h",
             "X6AA_Cnfg_Mngr_Executable/include/services/ns_si_dummyswc_2_to_cnfg_mngr/si_x6aa_dummy_b2_service_reserved_proxy.h",
-        ],
-        "x6aa_config_manager_socal_proxy_srcs": [
-            "X6AA_Cnfg_Mngr_Executable/src/services/ns_si_dummyswc_2_to_cnfg_mngr/si_x6aa_dummy_b2_service_reserved.cpp",
-            "X6AA_Cnfg_Mngr_Executable/src/services/ns_si_dummyswc_2_to_cnfg_mngr/si_x6aa_dummy_b2_service_reserved_proxy.cpp",
-        ],
-        "x6aa_config_manager_socal_skeleton_hdrs": [
+            "X6AA_Cnfg_Mngr_Executable/include/services/ns_extvehicleconfig_service_st3/SI_ExtVehicleConfig_Service_ST3.h",
+            "X6AA_Cnfg_Mngr_Executable/include/services/ns_extvehicleconfig_service_st3/SI_ExtVehicleConfig_Service_ST3_proxy_internal.h",
+            "X6AA_Cnfg_Mngr_Executable/include/services/ns_extvehicleconfig_service_st3/SI_ExtVehicleConfig_Service_ST3_proxy_update_manager.h",
+            "X6AA_Cnfg_Mngr_Executable/include/services/ns_extvehicleconfig_service_st3/SI_ExtVehicleConfig_Service_ST3_types.h",
+            "X6AA_Cnfg_Mngr_Executable/include/services/ns_extvehicleconfig_service_st3/si_extvehicleconfig_service_st3_common.h",
+            "X6AA_Cnfg_Mngr_Executable/include/services/ns_extvehicleconfig_service_st3/si_extvehicleconfig_service_st3_proxy.h",
             "X6AA_Cnfg_Mngr_Executable/include/services/ns_si_cnfg_mngr_to_dummyswc/SI_X6AA_Cnfg_Mngr_Service_Reserved.h",
             "X6AA_Cnfg_Mngr_Executable/include/services/ns_si_cnfg_mngr_to_dummyswc/SI_X6AA_Cnfg_Mngr_Service_Reserved_skeleton_impl_interface.h",
             "X6AA_Cnfg_Mngr_Executable/include/services/ns_si_cnfg_mngr_to_dummyswc/SI_X6AA_Cnfg_Mngr_Service_Reserved_types.h",
             "X6AA_Cnfg_Mngr_Executable/include/services/ns_si_cnfg_mngr_to_dummyswc/si_x6aa_cnfg_mngr_service_reserved_common.h",
             "X6AA_Cnfg_Mngr_Executable/include/services/ns_si_cnfg_mngr_to_dummyswc/si_x6aa_cnfg_mngr_service_reserved_skeleton.h",
         ],
-        "x6aa_config_manager_socal_skeleton_srcs": [
+        "socal_srcs": [
+            "X6AA_Cnfg_Mngr_Executable/src/services/ns_si_dummyswc_2_to_cnfg_mngr/si_x6aa_dummy_b2_service_reserved.cpp",
+            "X6AA_Cnfg_Mngr_Executable/src/services/ns_si_dummyswc_2_to_cnfg_mngr/si_x6aa_dummy_b2_service_reserved_proxy.cpp",
+            "X6AA_Cnfg_Mngr_Executable/src/services/ns_extvehicleconfig_service_st3/si_extvehicleconfig_service_st3.cpp",
+            "X6AA_Cnfg_Mngr_Executable/src/services/ns_extvehicleconfig_service_st3/si_extvehicleconfig_service_st3_proxy.cpp",
             "X6AA_Cnfg_Mngr_Executable/src/services/ns_si_cnfg_mngr_to_dummyswc/si_x6aa_cnfg_mngr_service_reserved.cpp",
             "X6AA_Cnfg_Mngr_Executable/src/services/ns_si_cnfg_mngr_to_dummyswc/si_x6aa_cnfg_mngr_service_reserved_skeleton.cpp",
         ],
@@ -327,13 +331,15 @@ minerva_aa_codegen_rule(
         "DiagnosticManagerDeamonExecutable.*",
     ],
     outs_list_dict = {
-        "x6aa_config_manager_ipcbinding_hdrs": [
+        "ipc_binding_life_cycle_manager": [
+            "X6AA_Cnfg_Mngr_Executable/src/amsr/ipc_binding_transformation_layer/internal/ipc_binding_life_cycle_manager.cpp",
+        ],
+        "ipcbinding_hdrs": [
             "X6AA_Cnfg_Mngr_Executable/include/amsr/ipc_binding_transformation_layer/internal/services/ns_si_cnfg_mngr_to_dummyswc/SI_X6AA_Cnfg_Mngr_Service_Reserved_skeleton_ipc_binding.h",
             "X6AA_Cnfg_Mngr_Executable/include/amsr/ipc_binding_transformation_layer/internal/services/ns_si_cnfg_mngr_to_dummyswc/SI_X6AA_Cnfg_Mngr_Service_Reserved_skeleton_ipc_event_manager.h",
             "X6AA_Cnfg_Mngr_Executable/include/amsr/ipc_binding_transformation_layer/internal/services/ns_si_cnfg_mngr_to_dummyswc/SI_X6AA_Cnfg_Mngr_Service_Reserved_skeleton_ipc_method_manager.h",
         ],
-        "x6aa_config_manager_ipcbinding_srcs": [
-            "X6AA_Cnfg_Mngr_Executable/src/amsr/ipc_binding_transformation_layer/internal/ipc_binding_life_cycle_manager.cpp",
+        "ipcbinding_srcs": [
             "X6AA_Cnfg_Mngr_Executable/src/amsr/ipc_binding_transformation_layer/internal/services/ns_si_cnfg_mngr_to_dummyswc/SI_X6AA_Cnfg_Mngr_Service_Reserved_skeleton_ipc_binding.cpp",
             "X6AA_Cnfg_Mngr_Executable/src/amsr/ipc_binding_transformation_layer/internal/services/ns_si_cnfg_mngr_to_dummyswc/SI_X6AA_Cnfg_Mngr_Service_Reserved_skeleton_ipc_event_manager.cpp",
             "X6AA_Cnfg_Mngr_Executable/src/amsr/ipc_binding_transformation_layer/internal/services/ns_si_cnfg_mngr_to_dummyswc/SI_X6AA_Cnfg_Mngr_Service_Reserved_skeleton_ipc_method_manager.cpp",
@@ -341,36 +347,86 @@ minerva_aa_codegen_rule(
     },
 )
 
-filegroup(
-    name = "srcs",
-    srcs = glob(["src/**"]),
+cc_library(
+    name = "socal_hdrs_lib",
+    hdrs = [
+        ":socal_hdrs",
+    ],
+    strip_include_prefix = "socal_hdrs/output/X6AA_Cnfg_Mngr_Executable/include",
 )
+
+cc_library(
+    name = "modeldatatypes_hdrs_lib",
+    hdrs = [
+        ":modeldatatypes_hdrs",
+    ],
+    strip_include_prefix = "modeldatatypes_hdrs/output/X6AA_Cnfg_Mngr_Executable/include",
+)
+
+cc_library(
+    name = "someipbinding_hdrs_lib",
+    hdrs = [
+        ":someipbinding_hdrs",
+    ],
+    strip_include_prefix = "someipbinding_hdrs/output/X6AA_Cnfg_Mngr_Executable/include",
+)
+
+cc_library(
+    name = "ipcbinding_hdrs_lib",
+    hdrs = [
+        ":ipcbinding_hdrs",
+    ],
+    strip_include_prefix = "ipcbinding_hdrs/output/X6AA_Cnfg_Mngr_Executable/include",
+)
+
+cc_library(
+    name = "someipprotocol_hdrs_lib",
+    hdrs = [
+        ":someipprotocol_hdrs",
+    ],
+    strip_include_prefix = "someipprotocol_hdrs/output/X6AA_Cnfg_Mngr_Executable/include",
+)
+
+cc_library(
+    name = "socal_srcs_lib",
+    srcs = [
+        ":socal_srcs",
+        ":someipbinding_srcs",
+        ":someipprotocol_srcs",
+        ":ipcbinding_srcs",
+        ":runtime_gen"
+    ],
+    copts = [
+        "-std=c++14",
+    ],
+    linkstatic = 1,
+    deps = [
+        ":modeldatatypes_hdrs_lib",
+        ":socal_hdrs_lib",
+        ":someipbinding_hdrs_lib",
+        ":ipcbinding_hdrs_lib",
+        ":someipprotocol_hdrs_lib",
+        "//bsw:amsr_vector_fs_socal_headers",
+        "//bsw:amsr_vector_fs_vajson",
+        "//bsw:amsr_vector_fs_ipcbinding",
+        "//bsw:amsr_vector_fs_someipbinding",
+    ],
+)
+
 
 cc_binary(
     name = "app",
     srcs = [
-        #":srcs",
-        ":x6aa_config_manager_updatemanager_daemon",
-        ":x6aa_config_manager_swcluster_meta",
-        ":x6aa_config_manager_swcl_db",
-        ":x6aa_config_manager_static_sd_config",
-        ":x6aa_config_manager_someip_protocol_srcs",
-        ":x6aa_config_manager_someip_protocol_hdrs",
-        ":x6aa_config_manager_someip_config",
-        ":x6aa_config_manager_someip_binding_srcs",
-        ":x6aa_config_manager_someip_binding_hdrs",
-        ":x6aa_config_manager_socal_skeleton_srcs",
-        ":x6aa_config_manager_socal_skeleton_hdrs",
-        ":x6aa_config_manager_socal_proxy_srcs",
-        ":x6aa_config_manager_socal_proxy_hdrs",
-        ":x6aa_config_manager_socal_extvehicleconfig_proxy_srcs",
-        ":x6aa_config_manager_socal_extvehicleconfig_proxy_hdrs",
-        ":x6aa_config_manager_runtime_gen_cpp",
-        ":x6aa_config_manager_modeldatatypes_hdrs",
-        ":x6aa_config_manager_ipcbinding_srcs",
-        ":x6aa_config_manager_ipcbinding_hdrs",
-        ":x6aa_config_manager_init_deinit_srcs",
-        ":x6aa_config_manager_exec_config",
+        "src/main.cpp",
+        "src/scn_param_storage_error_domain.h",
+
+        "@minerva_mpu_adaptive//:socal_lib_for_x6aa_config_manager",
+        ":socal_srcs_lib",
+        ":applicationbase_init_deinit_srcs",
+
+        ":someip_binding_initializer",
+        ":ipc_binding_life_cycle_manager",
+
     ],
     copts = [
         "-std=c++14",
@@ -385,6 +441,7 @@ cc_binary(
         "//bsw:amsr_vector_fs_em_executionmanager",
         "//bsw:amsr_vector_fs_libiostream",
         "//bsw:amsr_vector_fs_log_api",
+        "//bsw:amsr_vector_fs_socal_for_x6aa_config_manager",
     ],
 )
 
@@ -392,13 +449,14 @@ pkg_tar(
     name = "package",
     files = {
         ":app": "bin/x6aa_config_manager",
-        #":logging_config": "etc/logging_config.json",
-        ":x6aa_config_manager_exec_config": "etc/exec_config.json",
-        ":x6aa_config_manager_swcl_db": "etc/swcl_db.json",
-        ":updatemanager_swcluster_meta_gen_rule": "etc/swcl_package_metadata.json",
-        ":x6aa_config_manager_static_sd_config": "configuration/static_sd_config.json",
-        ":x6aa_config_manager_someip_config": "configuration/someip_config.json",
-        ":x6aa_config_manager_updatemanager_daemon": "etc/updatemanager.json",
+        ":logging_config": "etc/logging_config.json",
+        ":com_application": "etc/logging_config.json",
+        ":exec_config": "etc/exec_config.json",
+        ":swcl_db": "etc/swcl_db.json",
+        ":swcluster_meta": "etc/swcl_package_metadata.json",
+        ":static_sd_config": "etc/static_sd_config.json",
+        ":someip_config": "etc/someip_config.json",
+        ":updatemanager_daemon": "etc/updatemanager.json",
     },
     mode = "0755",
     package_dir = "opt/x6aa_config_manager",

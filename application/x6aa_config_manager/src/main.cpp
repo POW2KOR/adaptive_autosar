@@ -7,6 +7,7 @@
 #include "vac/language/throw_or_terminate.h"
 #include "ara/log/logging.h"
 #include "osabstraction/thread/thread.h"
+#include "osabstraction/process/process.h"
 #include "scn_param_storage_error_domain.h"
 
 #include <iostream>

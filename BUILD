@@ -86,7 +86,7 @@ pkg_tar(
                 "//application/amsr_vector_fs_em_executionmanager:package",
                 "//application/x6aa_update_dummy_app:package",
                 "//application/someipd_posix:package",
-                "//application/scn_param_storage:package",
+                "//application/x6aa_config_manager:package",
                 "//application/x6aa_em_state_client_app:package",
                 "//application/amsr_vector_fs_log_daemon:package",
             ],
@@ -111,16 +111,16 @@ pkg_deb(
 # Desision to put it here is due to the bazel nature of the relative pates. So we left it in
 # the root. The file is used in bsw/BUILD file later.
 
-target_build_dir_for_socal_scn_param_storage = select({
+target_build_dir_for_socal_x6aa_config_manager = select({
     ":k8": [
-        "bazel-out/k8-fastbuild/bin/bsw/amsr_vector_fs_socal_for_scn_param_storage/lib/libSocal.a",
+        "bazel-out/k8-fastbuild/bin/bsw/amsr_vector_fs_socal_for_x6aa_config_manager/lib/libSocal.a",
     ],
     ":aarch64": [
-        "bazel-out/aarch64-fastbuild/bin/bsw/amsr_vector_fs_socal_for_scn_param_storage/lib/libSocal.a",
+        "bazel-out/aarch64-fastbuild/bin/bsw/amsr_vector_fs_socal_for_x6aa_config_manager/lib/libSocal.a",
     ],
 })
 
 filegroup(
-    name = "socal_lib_for_scn_param_storage",
-    srcs = target_build_dir_for_socal_scn_param_storage,
+    name = "socal_lib_for_x6aa_config_manager",
+    srcs = target_build_dir_for_socal_x6aa_config_manager,
 )
