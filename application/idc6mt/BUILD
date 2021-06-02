@@ -9,7 +9,6 @@ filegroup(
         "arxml/idc6mt.arxml",
         "arxml/states.arxml",
         "@amsr_xavier//:mex_arxml",
-        "@starter_kit_adaptive_xavier//:standard_types_arxml",
     ],
 )
 

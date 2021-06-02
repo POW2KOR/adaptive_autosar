@@ -9,7 +9,6 @@ filegroup(
         "arxml/states.arxml",
         "arxml/stub_application.arxml",
         "@amsr_xavier//:mex_arxml",
-        "@starter_kit_adaptive_xavier//:standard_types_arxml",
     ],
 )
 
