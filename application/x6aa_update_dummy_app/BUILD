@@ -5,7 +5,10 @@ package(default_visibility = ["//visibility:public"])
 
 filegroup(
     name = "app_arxml",
-    srcs = ["arxml/app.arxml"],
+    srcs = [
+        "arxml/app.arxml",
+        "arxml/states.arxml",
+    ],
 )
 
 minerva_aa_codegen_rule(
