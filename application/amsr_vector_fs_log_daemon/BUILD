@@ -52,6 +52,7 @@ minerva_aa_codegen_rule(
         "X6AA_Ressource_Executable.*",
         "SelfDiagnosticAgentExecutable.*",
         "TransmissionManager_ROVExecutable.*",
+        "DiagnosticManagerDeamonExecutable.*",
     ],
     outs_list_dict = {
         "exec_config": [
