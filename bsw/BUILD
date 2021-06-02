@@ -16,6 +16,9 @@ minerva_aa_bsw_module(
         "ENABLE_EXEC_MANAGER": "ON",
         "Socal_DIR:PATH": "$EXT_BUILD_DEPS/amsr_vector_fs_socal_headers/lib/cmake/Socal/",
     },
+    out_include_dirs = [
+        "include/Socal/",
+    ],
     out_static_libs = [
         "libSocal.a",
     ],
@@ -323,6 +326,9 @@ minerva_aa_bsw_module(
         "ENABLE_EXEC_MANAGER": "ON",
     },
     out_headers_only = True,
+    out_include_dirs = [
+        "include/Socal/",
+    ],
     srcs_filegroup = "@amsr_xavier//:amsr_vector_fs_socal_srcs",
     deps = [
         ":amsr_vector_fs_characterconversion",
@@ -427,6 +433,9 @@ minerva_aa_bsw_module(
 
 minerva_aa_bsw_module(
     name = "amsr_vector_fs_someipdaemonclient",
+    out_include_dirs = [
+        "include/SomeIpDaemonClient",
+    ],
     out_static_libs = [
         "libSomeIpDaemonClient.a",
     ],
