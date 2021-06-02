@@ -450,7 +450,7 @@ pkg_tar(
     files = {
         ":app": "bin/x6aa_config_manager",
         ":logging_config": "etc/logging_config.json",
-        ":com_application": "etc/logging_config.json",
+        ":com_application": "etc/com_application.json",
         ":exec_config": "etc/exec_config.json",
         ":swcl_db": "etc/swcl_db.json",
         ":swcluster_meta": "etc/swcl_package_metadata.json",
