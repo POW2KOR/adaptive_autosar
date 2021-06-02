@@ -84,7 +84,7 @@ pkg_tar(
             },
             [
                 "//application/amsr_vector_fs_em_executionmanager:package",
-                "//application/update_app_demo_idc6:package",
+                "//application/x6aa_update_dummy_app:package",
                 "//application/someipd_posix:package",
                 "//application/scn_param_storage:package",
                 "//application/x6aa_em_state_client_app:package",
