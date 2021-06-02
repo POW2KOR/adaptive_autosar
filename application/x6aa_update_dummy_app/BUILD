@@ -97,12 +97,12 @@ filegroup(
 cc_binary(
     name = "app_v1",
     srcs = [
-        ":app_v1_applicationbase_init_deinit_srcs",
-        "src/application_v1.cpp",
         "src/application.h",
+        "src/application_v1.cpp",
         "src/main.cpp",
         "src/update_app_demo_error_domain.cpp",
         "src/update_app_demo_error_domain.h",
+        ":app_v1_applicationbase_init_deinit_srcs",
     ],
     copts = [
         "-std=c++14",
@@ -122,12 +122,12 @@ cc_binary(
 cc_binary(
     name = "app_v2",
     srcs = [
-        ":app_v1_applicationbase_init_deinit_srcs",
-        "src/application_v2.cpp",
         "src/application.h",
+        "src/application_v2.cpp",
         "src/main.cpp",
         "src/update_app_demo_error_domain.cpp",
         "src/update_app_demo_error_domain.h",
+        ":app_v1_applicationbase_init_deinit_srcs",
     ],
     copts = [
         "-std=c++14",

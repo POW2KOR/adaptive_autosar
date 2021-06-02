@@ -61,8 +61,8 @@ filegroup(
 cc_binary(
     name = "app",
     srcs = [
-        ":srcs",
         ":applicationbase_init_deinit_srcs",
+        ":srcs",
     ],
     copts = [
         "-std=c++14",
