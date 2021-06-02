@@ -124,7 +124,7 @@ std::int8_t Application::Run() {
 
     log_.LogInfo() << "Update demo application started";
 
-    log_.LogInfo() << "Hello from the other side (Partition B)!!!!!!!!!!!!!";
+    log_.LogInfo() << "Hello from v2";
 
   } else {
     ret = EXIT_FAILURE;
