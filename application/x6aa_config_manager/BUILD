@@ -390,43 +390,39 @@ cc_library(
 cc_library(
     name = "socal_srcs_lib",
     srcs = [
+        ":ipcbinding_srcs",
+        ":runtime_gen",
         ":socal_srcs",
         ":someipbinding_srcs",
         ":someipprotocol_srcs",
-        ":ipcbinding_srcs",
-        ":runtime_gen"
     ],
     copts = [
         "-std=c++14",
     ],
     linkstatic = 1,
     deps = [
+        ":ipcbinding_hdrs_lib",
         ":modeldatatypes_hdrs_lib",
         ":socal_hdrs_lib",
         ":someipbinding_hdrs_lib",
-        ":ipcbinding_hdrs_lib",
         ":someipprotocol_hdrs_lib",
-        "//bsw:amsr_vector_fs_socal_headers",
-        "//bsw:amsr_vector_fs_vajson",
         "//bsw:amsr_vector_fs_ipcbinding",
+        "//bsw:amsr_vector_fs_socal_headers",
         "//bsw:amsr_vector_fs_someipbinding",
+        "//bsw:amsr_vector_fs_vajson",
     ],
 )
-
 
 cc_binary(
     name = "app",
     srcs = [
         "src/main.cpp",
         "src/scn_param_storage_error_domain.h",
-
-        "@minerva_mpu_adaptive//:socal_lib_for_x6aa_config_manager",
-        ":socal_srcs_lib",
         ":applicationbase_init_deinit_srcs",
-
-        ":someip_binding_initializer",
         ":ipc_binding_life_cycle_manager",
-
+        ":socal_srcs_lib",
+        ":someip_binding_initializer",
+        "@minerva_mpu_adaptive//:socal_lib_for_x6aa_config_manager",
     ],
     copts = [
         "-std=c++14",
@@ -448,7 +444,7 @@ cc_binary(
 pkg_tar(
     name = "package",
     files = {
-        ":app": "bin/x6aa_config_manager",
+        ":app": "bin/X6AA_Cnfg_Mngr_Executable",
         ":logging_config": "etc/logging_config.json",
         ":com_application": "etc/com_application.json",
         ":exec_config": "etc/exec_config.json",
@@ -459,5 +455,5 @@ pkg_tar(
         ":updatemanager_daemon": "etc/updatemanager.json",
     },
     mode = "0755",
-    package_dir = "opt/x6aa_config_manager",
+    package_dir = "opt/X6AA_Cnfg_Mngr_Executable",
 )
