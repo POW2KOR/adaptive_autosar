@@ -1,4 +1,5 @@
 {
-    "applications": [],
-    "static_service_discovery": {}
+    "applications": [
+        "/opt/X6AA_Cnfg_Mngr_Executable/etc/someip_config.json"
+    ]
 }
