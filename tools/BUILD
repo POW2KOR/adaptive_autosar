@@ -1,7 +1,6 @@
 package(default_visibility = ["//visibility:public"])
 
 load("@rules_foreign_cc//tools/build_defs:configure.bzl", "configure_make")
-# https://github.com/bazelbuild/rules_foreign_cc/tree/main/docs#configure_make
 
 configure_make(
     name = "build_collectd",
