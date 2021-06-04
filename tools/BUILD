@@ -5,27 +5,25 @@ load("@rules_foreign_cc//tools/build_defs:configure.bzl", "configure_make")
 
 configure_make(
     name = "build_collectd",
-    configure_in_place = True,
     autogen = True,
     autogen_command = "build.sh",
     configure_command = "configure",
-    configure_options = 
+    configure_in_place = True,
+    configure_options =
         select({
-            "//:aarch64":
-            [
+            "//:aarch64": [
                 "--host aarch64-ubuntu-linux-gnu",
             ],
-            "//:k8":
-            [
+            "//:k8": [
                 "--host x86_64-ubuntu-linux-gnu",
             ],
         }) + [
-        "--with-fp-layout=nothing",
-        "--disable-werror",
-        "--without-java",
-        "--enable-cpu",
-        "--enable-csv",
-    ],
+            "--with-fp-layout=nothing",
+            "--disable-werror",
+            "--without-java",
+            "--enable-cpu",
+            "--enable-csv",
+        ],
     lib_source = "@collectd_mbient//:all_files",
     out_bin_dir = "sbin",
     out_binaries = [
