@@ -1,9 +1,9 @@
 {
-    "name": "ScnParamStorage",
-    "description": "Application responsible for implementing SCN param storage skeleton, SCN data storage and error reporting",
-    "dlt_id": "VCPS",
+    "name": "X6AA_Cnfg_Mngr_Executable",
+    "description": "Application responsible for implementing X6AA_Cnfg_Mngr_Executable skeleton, X6AA_Cnfg_Mngr_Executablestorage and error reporting",
+    "dlt_id": "CnMg",
     "log_mode": ["kConsole", "kRemote"],
-    "log_level": "kInfo",
+    "log_level": "kDebug",
     "log_dir_path": "./log",
     "ipc_port": 33,
     "reconnection_retry_offset": 0,
