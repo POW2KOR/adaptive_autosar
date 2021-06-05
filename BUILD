@@ -87,6 +87,7 @@ pkg_tar(
                 "//application/x6aa_update_dummy_app:package",
                 "//application/someipd_posix:package",
                 "//application/x6aa_config_manager:package",
+                "//application/x6aa_dummy_swc_1:package",
                 "//application/x6aa_em_state_client_app:package",
                 "//application/amsr_vector_fs_log_daemon:package",
             ],
@@ -105,3 +106,18 @@ pkg_deb(
     package = "minerva_mpu_adaptive",
     version = "0.0.0",
 )
+
+)
+
+target_build_dir_for_socal_x6aa_dummy_swc_1 = select({
+    ":k8": [
+        "bazel-out/k8-fastbuild/bin/bsw/amsr_vector_fs_socal_for_x6aa_dummy_swc_1/lib/libSocal.a",
+    ],
+    ":aarch64": [
+        "bazel-out/aarch64-fastbuild/bin/bsw/amsr_vector_fs_socal_for_x6aa_dummy_swc_1/lib/libSocal.a",
+    ],
+})
+
+filegroup(
+    name = "socal_lib_for_x6aa_dummy_swc_1",
+    srcs = target_build_dir_for_socal_x6aa_dummy_swc_1,
