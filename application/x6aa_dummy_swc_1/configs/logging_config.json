@@ -1,0 +1,11 @@
+{
+    "name": "X6AA_Dummy_SWC_1_Executable",
+    "description": "A sample variant coding consumer",
+    "dlt_id": "SWC1",
+    "log_mode": ["kConsole", "kRemote"],
+    "log_level": "kInfo",
+    "log_dir_path": "./log",
+    "ipc_port": 33,
+    "reconnection_retry_offset": 0,
+    "msg_buf_size": 1000
+}
