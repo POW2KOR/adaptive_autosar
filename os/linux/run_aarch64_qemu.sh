@@ -94,6 +94,7 @@ virt-copy-in -a adaptive_overlay.ext4.qcow2 ../configs/enp0s1.network /etc/syste
 virt-copy-in -a adaptive_overlay.ext4.qcow2 ../configs/enp0s2.network /etc/systemd/network
 virt-copy-in -a adaptive_overlay.ext4.qcow2 ../configs/enp0s3.network /etc/systemd/network
 virt-copy-in -a adaptive_overlay.ext4.qcow2 ../configs/enp0s4.network /etc/systemd/network
+virt-copy-in -a adaptive_overlay.ext4.qcow2 ../configs/enp0s5.network /etc/systemd/network
 
 # Add the adaptive stack to the filesystem
 virt-tar-in -a adaptive_overlay.ext4.qcow2 $PATH_TO_ADAPTIVE_TAR /
@@ -118,4 +119,6 @@ qemu-system-aarch64 \
 -device virtio-net-pci,netdev=net21 \
 -netdev user,id=net21,net=10.21.17.0/24 \
 -device virtio-net-pci,netdev=net127 \
--netdev user,id=net127,net=10.127.17.0/24
+-netdev user,id=net127,net=10.127.17.0/24 \
+-device virtio-net-pci,netdev=net113 \
+-netdev user,id=net113,net=10.20.1.0/24
