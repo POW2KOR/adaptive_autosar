@@ -415,8 +415,10 @@ cc_library(
 cc_binary(
     name = "app",
     srcs = [
+        "src/vc_cnfg_mngr_server.h",
+        "src/x6aa_cnfg_mngr_executable_error_domain.h",
         "src/main.cpp",
-        "src/scn_param_storage_error_domain.h",
+        "src/vc_cnfg_mngr_server.cpp",
         ":applicationbase_init_deinit_srcs",
         ":ipc_binding_life_cycle_manager",
         ":someip_binding_initializer",
