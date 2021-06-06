@@ -24,7 +24,7 @@
 #include "ara/core/result.h"
 #include "ara/core/initialization.h"
 
-#include "vc_cnfg_mngr_server.h"
+#include "vc_cnfg_mngr_server/vc_cnfg_mngr_server.h"
 
 using vac::container::operator""_sv;
 

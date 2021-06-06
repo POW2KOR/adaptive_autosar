@@ -415,10 +415,12 @@ cc_library(
 cc_binary(
     name = "app",
     srcs = [
-        "src/vc_cnfg_mngr_server.h",
+        "src/vc_cnfg_mngr_server/vc_cnfg_mngr_server.h",
         "src/x6aa_cnfg_mngr_executable_error_domain.h",
         "src/main.cpp",
-        "src/vc_cnfg_mngr_server.cpp",
+        "src/vc_cnfg_mngr_server/vc_cnfg_mngr_server.cpp",
+        "src/persistency-interface/persistent_mem_accessor.h",
+        "src/persistency-interface/persistent_mem_accessor.cpp",
         ":applicationbase_init_deinit_srcs",
         ":ipc_binding_life_cycle_manager",
         ":someip_binding_initializer",
@@ -431,6 +433,7 @@ cc_binary(
         "pthread",
         "socket",
     ],
+    includes = ["src/",],
     linkstatic = 1,
     deps = [
         ":socal_srcs_lib",

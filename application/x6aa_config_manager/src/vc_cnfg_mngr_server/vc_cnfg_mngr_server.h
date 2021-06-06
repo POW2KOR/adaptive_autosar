@@ -28,6 +28,7 @@
 #include "ara/log/logging.h"
 #include "osabstraction/thread/thread.h"
 #include "services/ns_si_cnfg_mngr_to_dummyswc/si_x6aa_cnfg_mngr_service_reserved_skeleton.h"
+#include "persistency-interface/persistent_mem_accessor.h"
 
 #include <iostream>
 #include <csignal>
@@ -137,9 +138,10 @@ class VcCnfgMngrServer final {
    */
   ara::core::Optional<services::ns_si_cnfg_mngr_to_dummyswc::skeleton::SI_X6AA_Cnfg_Mngr_Service_ReservedSkeleton> siX6aaCnfgMngrServiceReservedSkeletonServer;
 
-  /* Placeholder for presistency integration 
-  persistency::PersistencySkeletonDemo persistencySkeletonDemo_;
-  */
+  /*
+   *  presistency integration 
+   */
+  application::VariantCodingApp::PersistentMemAccessor memAccessor;
 };
 
 }  // namespace application

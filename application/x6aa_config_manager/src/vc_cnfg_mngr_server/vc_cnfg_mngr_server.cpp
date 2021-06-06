@@ -122,37 +122,9 @@ std::int8_t VcCnfgMngrServer::Run() {
 
       std::this_thread::sleep_for(std::chrono::milliseconds(5000));
 
-      /*##### send out data variant coding data #### */
-      ::DataTypes::NS_REC_activateSarStorage0131VcEventType_t::REC_activateSarStorage0131VcEventType_t activateSarStorage0131VcEventData;
-      ::DataTypes::NS_REC_configureSarTriggerEvents0136VcEventType_t::REC_configureSarTriggerEvents0136VcEventType_t configureSarTriggerEvents0136VcEventData;
-      ::DataTypes::NS_REC_vechicleInformation0400VcEventType_t::REC_vechicleInformation0400VcEventType_t vechicleInformation0400VcEventData;
-
-
-      /* TODO these values shall come from persistency interface in next sprint 
-              param storage class shall have an object of persistency interface class for reading these values from 
-              permanent storage */
-      
-      /*##### vechicleInformation0400VcEventData #### */
-      vechicleInformation0400VcEventData.body_style     = 0x3F;
-      vechicleInformation0400VcEventData.veh_line       = 0x3F;
-      vechicleInformation0400VcEventData.amg_type       = 0xFF;
-      vechicleInformation0400VcEventData.guard_lvl_b4   = 0x0;
-      vechicleInformation0400VcEventData.reserved       = 0x0;
-      vechicleInformation0400VcEventData.guard_lvl_b7   = 0x0;
-      vechicleInformation0400VcEventData.hybrid_avl     = 0x0;
-      vechicleInformation0400VcEventData.plugin_hybrid_avl = 0x0;
-      vechicleInformation0400VcEventData.veh_backdoors_avl = 0x0;
-
-      /*##### activateSarStorage0131VcEventData #### */
-      activateSarStorage0131VcEventData.sarDataStorageStatus = 0x1;
-
-      /*##### configureSarTriggerEvents0136VcEventData #### */
-      configureSarTriggerEvents0136VcEventData.triggerEventActivationStatusByte1 = 0x0;
-      configureSarTriggerEvents0136VcEventData.triggerEventActivationStatusByte2 = 0x0;
-
-      siX6aaCnfgMngrServiceReservedSkeletonServer->Ev_activateSarStorage0131VcEvent.Send(activateSarStorage0131VcEventData);
-      siX6aaCnfgMngrServiceReservedSkeletonServer->Ev_configureSarTriggerEvents0136VcEvent.Send(configureSarTriggerEvents0136VcEventData);
-      siX6aaCnfgMngrServiceReservedSkeletonServer->Ev_vechicleInformation0400VcEvent.Send(vechicleInformation0400VcEventData);
+      siX6aaCnfgMngrServiceReservedSkeletonServer->Ev_activateSarStorage0131VcEvent.Send(memAccessor.ReadActivateSarStorage0131VcEventData());
+      siX6aaCnfgMngrServiceReservedSkeletonServer->Ev_configureSarTriggerEvents0136VcEvent.Send(memAccessor.ReadConfigureSarTriggerEvents0136VcEventData());
+      siX6aaCnfgMngrServiceReservedSkeletonServer->Ev_vechicleInformation0400VcEvent.Send(memAccessor.ReadVechicleInformation0400VcEventData());
     }
 
   } else {
