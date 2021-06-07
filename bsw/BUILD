@@ -580,7 +580,7 @@ minerva_aa_bsw_module(
     name = "amsr_vector_fs_timesync",
     cache_entries = {
         "APPLICATION_PREFIX": "opt",
-        "ENABLE_EXAMPLE_APPS": "OFF",
+        "ENABLE_EXAMPLES": "OFF",
         "ADAPTIVE_MICROSAR_SIP_DIR": "$EXT_BUILD_ROOT/external/starter_kit_adaptive_xavier/mb_base_layer_adaptive_xavier/amsr_xavier",
     },
     out_binaries = [
