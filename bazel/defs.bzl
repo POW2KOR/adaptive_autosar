@@ -208,15 +208,15 @@ def minerva_aa_codegen_rule(
         # Don't stop immediately on error, so we can handle it gracefully
         set +e
         
-        # In case of generator failure, we retry up to five times as a temporary workaround
+        # In case of generator failure, we retry up to three times as a temporary workaround
         tries=0
-        until [ "$$tries" -ge 5 ]
+        until [ "$$tries" -ge 3 ]
         do
             rm -rf $$output_folder/*
             rm -f $$generator_log
             $(location @amsr_xavier//:amsrgen_sh) -v {generators_arg} -x $$arxml_srcs_folder -o $$output_folder --saveProject 1>$$generator_log 2>&1 && break
             tries=$$((tries+1)) 
-            sleep 15
+            sleep 1
         done
 
         # Process error messages from code generator
