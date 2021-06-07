@@ -12,3 +12,6 @@ files get built into the filesystem using this package.
 `bazel build` with `--//:mt`.
 * Implemented a cyclic dependency workaround for socal which doesn't require extra targets and extra commands to be
 run.
+* `ara::com` was integrated into `x6aa_dummy_swc_1`. Therefore, for the circular dependency workaround, you now need
+to run `bazel build //bsw:amsr_vector_fs_socal_for_x6aa_dummy_swc_1 --config=<CONFIGURATION>` before your
+`bazel build //:minerva_mpu_adaptive_filesystem --config=<CONFIGURATION>`.

@@ -95,6 +95,8 @@ the BSW modules is "Release".
 To proceed with your build on host, change to your repository root directory and execute the following commands:
 
 ```
+bazel build //bsw:amsr_vector_fs_socal_for_x6aa_dummy_swc_1 --config=<CONFIGURATION>
+
 bazel build //:minerva_mpu_adaptive_filesystem --config=<CONFIGURATION>
 ```
 
