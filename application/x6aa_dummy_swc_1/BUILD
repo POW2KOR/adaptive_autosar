@@ -138,7 +138,8 @@ minerva_aa_codegen_rule(
         "modeldatatypes_hdrs": [
             "X6AA_Dummy_SWC_1_Executable/include/DataTypes/NS_REC_vechicleInformation0400VcEventType_t/impl_type_rec_vechicleinformation0400vceventtype_t.h",
             "X6AA_Dummy_SWC_1_Executable/include/DataTypes/NS_REC_configureSarTriggerEvents0136VcEventType_t/impl_type_rec_configuresartriggerevents0136vceventtype_t.h",
-            "X6AA_Dummy_SWC_1_Executable/include/DataTypes/NS_REC_activateSarStorage0131VcEventType_t/impl_type_rec_activatesarstorage0131vceventtype_t.h",        ],
+            "X6AA_Dummy_SWC_1_Executable/include/DataTypes/NS_REC_activateSarStorage0131VcEventType_t/impl_type_rec_activatesarstorage0131vceventtype_t.h",
+        ],
     },
 )
 
@@ -168,7 +169,7 @@ minerva_aa_codegen_rule(
             "X6AA_Dummy_SWC_1_Executable/include/amsr/someip_protocol/internal/dataprototype_deserialization/services_ns_si_cnfg_mngr_to_dummyswc/events/deserializer_Ev_activateSarStorage0131VcEvent.h",
             "X6AA_Dummy_SWC_1_Executable/include/amsr/someip_protocol/internal/dataprototype_deserialization/services_ns_si_cnfg_mngr_to_dummyswc/events/deserializer_Ev_configureSarTriggerEvents0136VcEvent.h",
             "X6AA_Dummy_SWC_1_Executable/include/amsr/someip_protocol/internal/dataprototype_deserialization/services_ns_si_cnfg_mngr_to_dummyswc/events/deserializer_Ev_vechicleInformation0400VcEvent.h",
-         ],
+        ],
         "someipprotocol_srcs": [
             "X6AA_Dummy_SWC_1_Executable/src/amsr/someip_protocol/internal/dataprototype_deserialization/services_ns_si_cnfg_mngr_to_dummyswc/events/deserializer_Ev_configureSarTriggerEvents0136VcEvent.cpp",
             "X6AA_Dummy_SWC_1_Executable/src/amsr/someip_protocol/internal/dataprototype_deserialization/services_ns_si_cnfg_mngr_to_dummyswc/events/deserializer_Ev_activateSarStorage0131VcEvent.cpp",
@@ -245,7 +246,7 @@ minerva_aa_codegen_rule(
             "X6AA_Dummy_SWC_1_Executable/src/amsr/ipc_binding_transformation_layer/internal/services/ns_si_cnfg_mngr_to_dummyswc/SI_X6AA_Cnfg_Mngr_Service_Reserved_proxy_ipc_methods.cpp",
             "X6AA_Dummy_SWC_1_Executable/src/amsr/ipc_binding_transformation_layer/internal/services/ns_si_cnfg_mngr_to_dummyswc/SI_X6AA_Cnfg_Mngr_Service_Reserved_proxy_ipc_binding.cpp",
             "X6AA_Dummy_SWC_1_Executable/src/amsr/ipc_binding_transformation_layer/internal/services/ns_si_cnfg_mngr_to_dummyswc/SI_X6AA_Cnfg_Mngr_Service_Reserved_proxy_ipc_event_manager.cpp",
-       ],
+        ],
     },
 )
 
