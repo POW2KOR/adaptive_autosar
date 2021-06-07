@@ -1,0 +1,12 @@
+[Unit]
+Description=Enable ipv6 loopback
+
+[Service]
+Type=oneshot
+User=root
+RemainAfterExit=yes
+ExecStart=/usr/bin/sudo /bin/bash -lc 'ip link set lo multicast on'
+ExecStart=/usr/bin/sudo /bin/bash -lc 'ip route add ff01::0/16 dev lo'
+
+[Install]
+WantedBy=getty.target

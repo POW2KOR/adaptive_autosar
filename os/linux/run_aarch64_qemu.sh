@@ -85,8 +85,9 @@ qemu-img create -b driveos.ext4.qcow2 -f qcow2 adaptive_overlay.ext4.qcow2
 
 if [ "$BOOT_INTO_ADAPTIVE_STACK" = true ] ; then
     # Install systemd service for adaptive-stack
-    virt-copy-in -a adaptive_overlay.ext4.qcow2 ../configs/adaptive-stack.service /lib/systemd/system/
+    virt-copy-in -a adaptive_overlay.ext4.qcow2 ../configs/adaptive-stack.service ../configs/enable-ipv6-loopback.service /lib/systemd/system/
     guestfish -a adaptive_overlay.ext4.qcow2 -i ln-sf /lib/systemd/system/adaptive-stack.service /etc/systemd/system/multi-user.target.wants/adaptive-stack.service
+    guestfish -a adaptive_overlay.ext4.qcow2 -i ln-sf /lib/systemd/system/enable-ipv6-loopback.service /etc/systemd/system/multi-user.target.wants/enable-ipv6-loopback.service
 fi
 
 # Configure the network interfaces

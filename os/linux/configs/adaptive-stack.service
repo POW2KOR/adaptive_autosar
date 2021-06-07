@@ -4,6 +4,7 @@ BindsTo=dev-ttyAMA0.device
 After=dev-ttyAMA0.device systemd-user-sessions.service
 After=network-online.target
 Wants=network-online.target
+After=enable-ipv6-loopback.service
 Conflicts=serial-getty@ttyAMA0.service
 
 [Service]
