@@ -197,7 +197,6 @@ Consider the following content for your `.vscode/settings.json`:
 }
 ```
 
-> approvals, branch strat, squash
 ### Pre-commit checks
 
 We use a took called `pre-commit` for various static checks before creating a commit. To enable `pre-commit`,
