@@ -418,11 +418,21 @@ cc_binary(
     srcs = [
         "src/main.cpp",
         "src/scn_param_storage_error_domain.h",
+        # This a workaround to resolve cyclic dependency. 
+        # This is the reason why the target x6aa_config_manager is build in 2 steps.
+        # The code generators depend on libSocal.a, contained in the 
+        # minerva_mpu_adaptive//:socal_lib_for_x6aa_config_manager below. 
+        # That is why we put it in sources. It is important that this 
+        # :socal_lib_for_x6aa_config_manager is positioned earlier in 
+        # the list than the generated sources in :socal_srcs_lib and 
+        # :applicationbase_init_deinit_srcs. Furthermore :someip_binding_initializer
+        # and :ipc_binding_life_cycle_manager are last because they provide symbols 
+        # asked by :socal_srcs_lib
+        "@minerva_mpu_adaptive//:socal_lib_for_x6aa_config_manager",
         ":applicationbase_init_deinit_srcs",
         ":ipc_binding_life_cycle_manager",
         ":socal_srcs_lib",
         ":someip_binding_initializer",
-        "@minerva_mpu_adaptive//:socal_lib_for_x6aa_config_manager",
     ],
     copts = [
         "-std=c++14",
