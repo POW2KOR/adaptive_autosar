@@ -79,7 +79,7 @@ pkg_tar(
                 ":mt_present": [
                     "//application/idc6mt:package",
                     "//application/stub_application:package",
-                ],      
+                ],
                 "//conditions:default": [],
             },
             [

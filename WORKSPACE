@@ -119,7 +119,7 @@ new_git_repository(
     build_file = "@//bsw:amsr_xavier.BUILD",
     commit = "139a7c9dfc6c1322eea0eaf53323cde7321486d0",
     remote = "ssh://git@git.swf.daimler.com:7999/autosarbas/mb-base-layer-ap3-projekthaus/ap3-baselayer/amsr_xavier.git",
-    shallow_since = "1623082397 +0000"
+    shallow_since = "1623082397 +0000",
 )
 
 '''new_local_repository(
