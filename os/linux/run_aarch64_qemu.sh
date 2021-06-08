@@ -121,5 +121,5 @@ qemu-system-aarch64 \
 -netdev user,id=net21,net=10.21.17.0/24,hostfwd=tcp::13490-10.21.17.98:49361 \
 -device virtio-net-pci,netdev=net127 \
 -netdev user,id=net127,net=10.127.17.0/24 \
--device virtio-net-pci,netdev=net113 \
--netdev user,id=net113,net=10.20.1.0/24
+-device virtio-net-pci,netdev=net254 \
+-netdev user,id=net254,net=169.254.18.0/24

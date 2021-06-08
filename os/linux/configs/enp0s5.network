@@ -2,5 +2,5 @@
 Name=enp0s5
 
 [Network]
-Address=10.20.1.113/24
-Gateway=10.20.1.1
+Address=169.254.18.98/24
+Gateway=169.254.1.1
