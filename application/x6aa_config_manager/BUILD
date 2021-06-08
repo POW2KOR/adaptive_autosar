@@ -414,6 +414,14 @@ cc_library(
 )
 
 cc_library(
+    name = "persistency_hdrs_lib",
+    hdrs = [
+        ":persistency_hdrs",
+    ],
+    strip_include_prefix = "persistency_hdrs/output/X6AA_Cnfg_Mngr_Executable/include",
+)
+
+cc_library(
     name = "socal_srcs_lib",
     srcs = [
         ":ipcbinding_srcs",
@@ -449,8 +457,12 @@ cc_binary(
         "src/x6aa_cnfg_mngr_executable_error_domain.h",
         ":applicationbase_init_deinit_srcs",
         ":ipc_binding_life_cycle_manager",
+        ":persistency_srcs",
         ":someip_binding_initializer",
         "//bsw:amsr_vector_fs_socal_libsocal_a",
+        "@amsr_xavier//:amsr_vector_fs_per_libpersistency_persistency_file_storage_srcs",
+        "@amsr_xavier//:amsr_vector_fs_per_libpersistency_persistency_key_value_storage_srcs",
+        "@amsr_xavier//:amsr_vector_fs_per_libpersistency_persistency_srcs",
     ],
     copts = [
         "-std=c++14",
@@ -462,11 +474,14 @@ cc_binary(
     includes = ["src/"],
     linkstatic = 1,
     deps = [
+        ":persistency_hdrs_lib",
         ":socal_srcs_lib",
         "//bsw:amsr_vector_fs_applicationbase",
+        "//bsw:amsr_vector_fs_characterconversion",
         "//bsw:amsr_vector_fs_em_executionmanager",
         "//bsw:amsr_vector_fs_libiostream",
         "//bsw:amsr_vector_fs_log_api",
+        "//bsw:amsr_vector_fs_per_libpersistency",
         "//bsw:amsr_vector_fs_socal",
     ],
 )
@@ -483,6 +498,7 @@ pkg_tar(
         ":static_sd_config": "etc/static_sd_config.json",
         ":someip_config": "etc/someip_config.json",
         ":updatemanager_daemon": "etc/updatemanager.json",
+        ":persistency_config_json": "etc/per_key_value_storage_config.json",
     },
     mode = "0755",
     package_dir = "opt/X6AA_Cnfg_Mngr_Executable",

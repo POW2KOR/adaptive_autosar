@@ -43,6 +43,7 @@ minerva_aa_codegen_rule(
     arxml_srcs = [
         "//arxmls:x6aa_idc_ecu_extract_arxml",
         "@amsr_xavier//:mex_arxml",
+        "//application/x6aa_config_manager:app_arxml",
     ],
     generators = [
         "@amsr_xavier//:generator_amsr_applicationbase_init_deinit",
@@ -121,6 +122,7 @@ minerva_aa_codegen_rule(
     arxml_srcs = [
         "//arxmls:x6aa_idc_ecu_extract_arxml",
         "@amsr_xavier//:mex_arxml",
+        "//application/x6aa_config_manager:app_arxml",
     ],
     generators = [
         "@amsr_xavier//:generator_amsr_modelleddatatypes_api",

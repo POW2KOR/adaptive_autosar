@@ -589,6 +589,7 @@ minerva_aa_bsw_module(
     name = "amsr_vector_fs_characterconversion",
     out_include_dirs = [
         "include/common",
+        "include/charconv_vector",
     ],
     out_static_libs = [
         "libamsr-vector-fs-characterconversion_common.a",
