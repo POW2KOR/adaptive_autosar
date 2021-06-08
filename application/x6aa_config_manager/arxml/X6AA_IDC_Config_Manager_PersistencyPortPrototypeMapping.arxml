@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<AUTOSAR xmlns="http://autosar.org/schema/r4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" S="274A2A54189A424ADED76DEF2E00A5BFBFCC2DD5" T="2020-11-11T10:33:01+01:00" xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_00047.xsd">
+  <ADMIN-DATA>
+    <LANGUAGE>EN</LANGUAGE>
+  </ADMIN-DATA>
+  <AR-PACKAGES>
+    <AR-PACKAGE UUID="0d75b96b-5624-4d34-beba-d199fe8836b9">
+      <SHORT-NAME>PersistencyPortPrototypeMapping</SHORT-NAME>
+      <ELEMENTS>
+        <PERSISTENCY-PORT-PROTOTYPE-TO-KEY-VALUE-DATABASE-MAPPING UUID="b750099a-f3b5-4ba6-ab47-545ae7763d16">
+          <SHORT-NAME>PortPrototypeToKvsMapping</SHORT-NAME>
+          <KEY-VALUE-STORAGE-REF DEST="PERSISTENCY-KEY-VALUE-DATABASE">/deployment/MyPersistencyKvsDatabase</KEY-VALUE-STORAGE-REF>
+          <PORT-PROTOTYPE-IREF>
+            <CONTEXT-ROOT-SW-COMPONENT-PROTOTYPE-REF DEST="ROOT-SW-COMPONENT-PROTOTYPE">/Application/Executables/X6AA_Cnfg_Mngr_Executable/X6AA_Cnfg_Mngr_ExecutableRootSwc</CONTEXT-ROOT-SW-COMPONENT-PROTOTYPE-REF>
+            <TARGET-PORT-PROTOTYPE-REF DEST="PR-PORT-PROTOTYPE">/Application/AdaptiveApplicationSwComponentTypes/X6AA_Cnfg_Mngr_SWC/MyPersistencyKvsPrPortPrototype</TARGET-PORT-PROTOTYPE-REF>
+          </PORT-PROTOTYPE-IREF>
+          <PROCESS-REF DEST="PROCESS">/ApplicationDeployment/Processes/BaseApplication</PROCESS-REF>
+        </PERSISTENCY-PORT-PROTOTYPE-TO-KEY-VALUE-DATABASE-MAPPING>
+      </ELEMENTS>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>

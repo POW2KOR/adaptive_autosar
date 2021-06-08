@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<AUTOSAR xmlns="http://autosar.org/schema/r4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" S="274A2A54189A424ADED76DEF2E00A5BFBFCC2DD5" T="2020-11-11T10:33:01+01:00" xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_00047.xsd">
+  <ADMIN-DATA>
+    <LANGUAGE>EN</LANGUAGE>
+  </ADMIN-DATA>
+  <AR-PACKAGES>
+    <AR-PACKAGE UUID="b7d1b215-3919-4f43-bc0c-63aeabe83251">
+      <SHORT-NAME>deployment</SHORT-NAME>
+      <ELEMENTS>
+        <PERSISTENCY-KEY-VALUE-DATABASE UUID="9f43be9e-43ec-419e-802d-2297a68d65fb">
+          <SHORT-NAME>MyPersistencyKvsDatabase</SHORT-NAME>
+          <UPDATE-STRATEGY>KEEP-EXISTING</UPDATE-STRATEGY>
+          <URI>./var/key_value_storage</URI>
+        </PERSISTENCY-KEY-VALUE-DATABASE>
+      </ELEMENTS>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>
