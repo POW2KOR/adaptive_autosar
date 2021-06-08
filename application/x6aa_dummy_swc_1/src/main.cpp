@@ -229,8 +229,18 @@ int main()
             application_client, log, ara::exec::ApplicationState::kRunning);
 
         application::VariantCodingConsumer vc_consumer;
-        vc_consumer.FindService();
-        vc_consumer.SubscribeToEvents();
+
+        /* Reporting fatal below as only purpose of this application is
+         * consume vatiant coding data and if services are not found then this application
+         * will endup with fatal error. This can be changed later on*/
+        if (false == vc_consumer.FindService()) {
+            log.LogFatal()
+                << "X6AADummySWC1Executable could not find variant coding service, timeout occured:";
+        }
+        if (false == vc_consumer.SubscribeToEvents()) {
+            log.LogFatal()
+                << "X6AADummySWC1Executable could not find subscribe to variant coding events:";
+        }
 
         while (!application::exit_requested) {
             /* Do nothing for now */

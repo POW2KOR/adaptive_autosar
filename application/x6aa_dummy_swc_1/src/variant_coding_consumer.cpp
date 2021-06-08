@@ -39,6 +39,7 @@ VariantCodingConsumer::~VariantCodingConsumer() {}
 
 bool VariantCodingConsumer::FindService() {
   bool retval = true;
+  uint32_t max_try_count = 1000; /* one while loop count is of nearly 10ms and timeout would be 100s (1000*10ms)*/
 
   /* Start searching for VariantCodingService */
   GetLogger().LogInfo() << "Start searching for VariantCoding Service";
@@ -53,6 +54,12 @@ bool VariantCodingConsumer::FindService() {
     static int counter = 0;
     if (++counter % 10 == 0) {
       GetLogger().LogInfo() << "Still searching for VariantCodingService";
+    }
+    if (--max_try_count == 0)
+    {
+      GetLogger().LogFatal() << "Failed to find VariantCodingService -- timeout occured";
+      retval = false;
+      break;
     }
   }
 
@@ -117,26 +124,17 @@ void VariantCodingConsumer::FindServiceHandler(
   } else if (variant_coding_services.size() == 1) {
     /* If there is exactly one service found */
     GetLogger().LogInfo() << "Found one VariantCodingService instance";
-
-    /* Get proxy instance */
-    variant_coding_service_proxy =
-      std::make_shared<services::ns_si_cnfg_mngr_to_dummyswc::proxy::SI_X6AA_Cnfg_Mngr_Service_ReservedProxy> 
-      (variant_coding_services[0]);
-
-    /* Remember that a service is found */
-    variant_coding_service_found.store(true);
   } else {
     /* If there are multiple services found */
     GetLogger().LogInfo() << "Found multiple instances of VariantCodingService, use the first one";
-
-    /* Get proxy instance */
-    variant_coding_service_proxy =
-      std::make_shared<services::ns_si_cnfg_mngr_to_dummyswc::proxy::SI_X6AA_Cnfg_Mngr_Service_ReservedProxy>
-      (variant_coding_services[0]);
-
-    /* Remember that a service is found */
-    variant_coding_service_found.store(true);
   }
+  /* Get proxy instance */
+  variant_coding_service_proxy =
+    std::make_shared<services::ns_si_cnfg_mngr_to_dummyswc::proxy::SI_X6AA_Cnfg_Mngr_Service_ReservedProxy> 
+    (variant_coding_services[0]);
+
+  /* Remember that a service is found */
+  variant_coding_service_found.store(true);
 }
 
 
