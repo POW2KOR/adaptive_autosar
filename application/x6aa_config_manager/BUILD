@@ -4,6 +4,15 @@ load("@minerva_mpu_adaptive//:bazel/defs.bzl", "minerva_aa_codegen_rule")
 package(default_visibility = ["//visibility:public"])
 
 filegroup(
+    name = "app_arxml",
+    srcs = [
+        "arxml/X6AA_IDC_Config_Manager_PersistencyDeployment.arxml",
+        "arxml/X6AA_IDC_Config_Manager_PersistencyDesign.arxml",
+        "arxml/X6AA_IDC_Config_Manager_PersistencyPortPrototypeMapping.arxml",
+    ],
+)
+
+filegroup(
     name = "logging_config",
     srcs = ["configs/logging_config.json"],
 )
@@ -121,6 +130,7 @@ minerva_aa_codegen_rule(
     arxml_srcs = [
         "//arxmls:x6aa_idc_ecu_extract_arxml",
         "@amsr_xavier//:mex_arxml",
+        ":app_arxml",
     ],
     generators = [
         "@amsr_xavier//:generator_amsr_persistency_config",
@@ -135,7 +145,21 @@ minerva_aa_codegen_rule(
         "DiagnosticManagerDeamonExecutable.*",
     ],
     outs_list_dict = {
-        # Currently there are no ara::per interfaces
+        "persistency_cmake": [
+            "X6AA_Cnfg_Mngr_Executable/amsr-vector-fs-per-libpersistency.cmake",
+        ],
+        "persistency_config_json": [
+            "X6AA_Cnfg_Mngr_Executable/etc/per_key_value_storage_config.json",
+        ],
+        "persistency_hdrs": [
+            "X6AA_Cnfg_Mngr_Executable/include/ara/per/detail/dynamic_key_value_storage_decl.h",
+            "X6AA_Cnfg_Mngr_Executable/include/ara/per/internal/config_validation_keys.h",
+            "X6AA_Cnfg_Mngr_Executable/include/ara/per/key_value_storage_data_visitor.h",
+            "X6AA_Cnfg_Mngr_Executable/include/ara/per/key_value_storage_variant.h",
+        ],
+        "persistency_srcs": [
+            "X6AA_Cnfg_Mngr_Executable/src/ara/per/dynamic_object_parser.cpp",
+        ],
     },
 )
 
