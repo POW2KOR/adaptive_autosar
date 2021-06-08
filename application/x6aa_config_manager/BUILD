@@ -126,6 +126,8 @@ minerva_aa_codegen_rule(
 minerva_aa_codegen_rule(
     name = "persistency_config_gen_rule",
     arxml_srcs = [
+        "//arxmls:x6aa_idc_ecu_extract_arxml",
+        "@amsr_xavier//:mex_arxml",
         ":app_arxml",
     ],
     generators = [
