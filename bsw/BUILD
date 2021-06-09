@@ -39,6 +39,12 @@ minerva_aa_bsw_module(
     ],
 )
 
+filegroup(
+    name = "amsr_vector_fs_socal_libsocal_a",
+    srcs = [":amsr_vector_fs_socal"],
+    output_group = "libSocal.a",
+)
+
 minerva_aa_bsw_module(
     name = "amsr_vector_fs_socal_for_x6aa_config_manager",
     cache_entries = {
