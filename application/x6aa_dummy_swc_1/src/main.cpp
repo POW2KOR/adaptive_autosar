@@ -4,14 +4,14 @@
 #include "ara/core/exception.h"
 #include "ara/core/initialization.h"
 #include "ara/exec/application_client.h"
-#include "vac/language/throw_or_terminate.h"
 #include "ara/log/logging.h"
 #include "osabstraction/thread/thread.h"
-#include "x6aa_dummy_swc_1_executable_error_domain.h"
+#include "vac/language/throw_or_terminate.h"
 #include "variant_coding_consumer.h"
+#include "x6aa_dummy_swc_1_executable_error_domain.h"
 
-#include <iostream>
 #include <csignal>
+#include <iostream>
 #include <thread>
 
 namespace {
@@ -87,9 +87,8 @@ void ReportState(
     } else {
         /* #15 invalid application state detected */
         error_occurred = true;
-        logger.LogError()
-            << "ReportState called with an invalid application state: "
-            << application_state_string.c_str();
+        logger.LogError() << "ReportState called with an invalid application state: "
+                          << application_state_string.c_str();
     }
 
     /* #20 check if invalid application state was detected. */
@@ -100,9 +99,8 @@ void ReportState(
         /* #30 send application state */
         if (application_client.ReportApplicationState(application_state)
             == ara::exec::ApplicationReturnType::kSuccess) {
-            logger.LogDebug()
-                << "X6AADummySWC1Executable app reported Application state "
-                << application_state_string.c_str() << " successfully";
+            logger.LogDebug() << "X6AADummySWC1Executable app reported Application state "
+                              << application_state_string.c_str() << " successfully";
         } else {
             /* #35 application state could not be set. */
             logger.LogError()
@@ -179,14 +177,11 @@ ara::core::Result<osabstraction::process::ProcessId> StartSignalHandlerThread()
     signal_handler_thread = std::thread(&SignalHandlerThread);
 
     /* #40 Create the thread native_handle object. */
-    std::thread::native_handle_type const thread_id{
-        signal_handler_thread.native_handle()};
+    std::thread::native_handle_type const thread_id{signal_handler_thread.native_handle()};
 
     /* #50 Set thread name and return the ara::core::Result object. */
     return osabstraction::thread::SetNameOfThread(thread_id, thread_name)
-        .AndThen([]() -> R {
-            return R{osabstraction::process::GetProcessId()};
-        })
+        .AndThen([]() -> R { return R{osabstraction::process::GetProcessId()}; })
         .OrElse([thread_name](ara::core::ErrorCode) -> R {
             return R::FromError(
                 X6AADummySWC1ExecutableErrc::kThreadCreationFailed, "Naming failed.");
@@ -195,7 +190,7 @@ ara::core::Result<osabstraction::process::ProcessId> StartSignalHandlerThread()
 
 size_t heartbeat_counter = 0;
 
-} // namespace Application
+} // namespace application
 
 int main()
 {
@@ -206,27 +201,23 @@ int main()
 
     if (!init_result.HasValue()) {
         char const* msg{"ara::core::Initialize() failed."};
-        std::cerr
-            << msg << "\nResult contains: " << init_result.Error().Message()
-            << ", " << init_result.Error().UserMessage() << "\n";
+        std::cerr << msg << "\nResult contains: " << init_result.Error().Message() << ", "
+                  << init_result.Error().UserMessage() << "\n";
 
         ara::core::Abort(msg);
     } else {
-        ara::log::Logger& log{
-            ara::log::CreateLogger("APP", "X6AADummySWC1Executable")};
+        ara::log::Logger& log{ara::log::CreateLogger("APP", "X6AADummySWC1Executable")};
 
-        application::StartSignalHandlerThread()
-            .InspectError([](ara::core::ErrorCode const& error) {
-                application::has_initialization_failed = true;
-            });
+        application::StartSignalHandlerThread().InspectError([](ara::core::ErrorCode const& error) {
+            application::has_initialization_failed = true;
+        });
 
         if (application::has_initialization_failed) {
             return -1;
         }
 
         /* Create the application object and run it */
-        application::ReportState(
-            application_client, log, ara::exec::ApplicationState::kRunning);
+        application::ReportState(application_client, log, ara::exec::ApplicationState::kRunning);
 
         application::VariantCodingConsumer vc_consumer;
 
@@ -234,8 +225,8 @@ int main()
          * consume vatiant coding data and if services are not found then this application
          * will endup with fatal error. This can be changed later on*/
         if (false == vc_consumer.FindService()) {
-            log.LogFatal()
-                << "X6AADummySWC1Executable could not find variant coding service, timeout occured:";
+            log.LogFatal() << "X6AADummySWC1Executable could not find variant coding service, "
+                              "timeout occured:";
         }
         if (false == vc_consumer.SubscribeToEvents()) {
             log.LogFatal()
@@ -244,9 +235,8 @@ int main()
 
         while (!application::exit_requested) {
             /* Do nothing for now */
-            log.LogInfo()
-                << "X6AADummySWC1Executable Running, hearbeat: "
-                << application::heartbeat_counter++;
+            log.LogInfo() << "X6AADummySWC1Executable Running, hearbeat: "
+                          << application::heartbeat_counter++;
             std::this_thread::sleep_for(std::chrono::seconds(1));
         }
 
@@ -257,10 +247,8 @@ int main()
 
         if (!deinit_result.HasValue()) {
             char const* msg{"ara::core::Deinitialize() failed."};
-            std::cerr
-                << msg << "\nResult contains: "
-                << deinit_result.Error().Message() << ", "
-                << deinit_result.Error().UserMessage() << "\n";
+            std::cerr << msg << "\nResult contains: " << deinit_result.Error().Message() << ", "
+                      << deinit_result.Error().UserMessage() << "\n";
             ara::core::Abort(msg);
         }
 

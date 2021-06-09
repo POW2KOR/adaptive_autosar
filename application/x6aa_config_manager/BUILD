@@ -433,7 +433,7 @@ cc_binary(
         "pthread",
         "socket",
     ],
-    includes = ["src/",],
+    includes = ["src/"],
     linkstatic = 1,
     deps = [
         ":socal_srcs_lib",

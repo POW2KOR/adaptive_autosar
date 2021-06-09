@@ -1,9 +1,9 @@
 /*****************************************************************************
  * \file   x6aa_dummy_swc_1_executable_error_domain.h
  *
- * \brief  VariantCodingService error domain 
+ * \brief  VariantCodingService error domain
  * \author MBition - Copyright (c) 2019-2020 Daimler AG
- * \date   
+ * \date
  * \note   TODO: additional notes
  ******************************************************************************/
 #ifndef X6AA_DUMMY_SWC_1_EXECUTABLE_ERROR_DOMAIN_H
@@ -116,16 +116,14 @@ inline constexpr ara::core::ErrorCode MakeErrorCode(
     ara::core::ErrorDomain::SupportDataType data,
     char const* message = nullptr)
 {
-    return {static_cast<ara::core::ErrorDomain::CodeType>(code),
-            GetStubErrorDomain(),
-            data,
-            message};
+    return {
+        static_cast<ara::core::ErrorDomain::CodeType>(code), GetStubErrorDomain(), data, message};
 }
 
 /*!
  * \brief Array of error domain message strings.
  */
-constexpr std::array<ara::core::ErrorDomain::StringType, 2> kMessages {
+constexpr std::array<ara::core::ErrorDomain::StringType, 2> kMessages{
     "Unknown error.", "Error during creation of a thread."};
 
 X6AADummySWC1ExecutableErrorDomain::StringType X6AADummySWC1ExecutableErrorDomain::Message(
@@ -137,6 +135,6 @@ X6AADummySWC1ExecutableErrorDomain::StringType X6AADummySWC1ExecutableErrorDomai
     return kMessages[static_cast<std::size_t>(error_code)];
 }
 
-} // namespace Application
+} // namespace application
 
 #endif /* end of include guard: X6AA_DUMMY_SWC_1_EXECUTABLE_ERROR_DOMAIN_H */

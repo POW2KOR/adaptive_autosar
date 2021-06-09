@@ -3,7 +3,7 @@
  *
  * \brief  VVcCnfgMngrServer application error domain
  * \author MBition - Copyright (c) 2019-2020 Daimler AG
- * \date   
+ * \date
  * \note   TODO: additional notes
  ******************************************************************************/
 
@@ -117,16 +117,14 @@ inline constexpr ara::core::ErrorCode MakeErrorCode(
     ara::core::ErrorDomain::SupportDataType data,
     char const* message = nullptr)
 {
-    return {static_cast<ara::core::ErrorDomain::CodeType>(code),
-            GetStubErrorDomain(),
-            data,
-            message};
+    return {
+        static_cast<ara::core::ErrorDomain::CodeType>(code), GetStubErrorDomain(), data, message};
 }
 
 /*!
  * \brief Array of error domain message strings.
  */
-constexpr std::array<ara::core::ErrorDomain::StringType, 2> kMessages {
+constexpr std::array<ara::core::ErrorDomain::StringType, 2> kMessages{
     "Unknown error.", "Error during creation of a thread."};
 
 X6AA_Cnfg_Mngr_ExecutableErrorDomain::StringType X6AA_Cnfg_Mngr_ExecutableErrorDomain::Message(
@@ -138,6 +136,6 @@ X6AA_Cnfg_Mngr_ExecutableErrorDomain::StringType X6AA_Cnfg_Mngr_ExecutableErrorD
     return kMessages[static_cast<std::size_t>(error_code)];
 }
 
-} // namespace Application
+} // namespace application
 
 #endif /* end of include guard: X6AA_CNFG_MNGR_EXECUTABLE_ERROR_DOMAIN_H */
