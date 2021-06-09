@@ -8,9 +8,7 @@ filegroup(
 filegroup(
     name = "complete_arxml",
     srcs = [
-        ":idc_ecu_extract_arxml",
+        "//arxmls:x6aa_idc_ecu_extract_arxml",
         "@amsr_xavier//:mex_arxml",
-        "@starter_kit_adaptive_xavier//:ncd_arxml",
-        "@starter_kit_adaptive_xavier//:standard_types_arxml",
     ],
 )

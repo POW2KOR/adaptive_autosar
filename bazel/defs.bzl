@@ -7,7 +7,7 @@ load("@rules_foreign_cc//foreign_cc:cmake.bzl", "cmake")
 
 def extend_and_select(select_dict, extension):
     """
-    Take a select dict, extend each option with another value and then select
+    Take a select dict, extend each option dict and then select.
 
     This function takes in a dictionary in the format required for the select
     Bazel function. It then extends each of the options of the dictionary with
@@ -21,6 +21,25 @@ def extend_and_select(select_dict, extension):
     """
     for _, value in select_dict.items():
         value.update(extension)
+
+    return select(select_dict)
+
+def append_and_select(select_dict, extension):
+    """
+    Take a select dict, append each to each option list and then select.
+
+    This function takes in a dictionary in the format required for the select
+    Bazel function. It then extends each of the options of the dictionary with
+    a given extension value. Finally, it does a select and returns it as the
+    final output.
+
+    Args:
+        select_dict: The dictionary in format.
+
+        extension: The value to use to extend each of the select options.
+    """
+    for _, value in select_dict.items():
+        value.extend(extension)
 
     return select(select_dict)
 
@@ -189,15 +208,15 @@ def minerva_aa_codegen_rule(
         # Don't stop immediately on error, so we can handle it gracefully
         set +e
         
-        # In case of generator failure, we retry up to five times as a temporary workaround
+        # In case of generator failure, we retry up to three times as a temporary workaround
         tries=0
-        until [ "$$tries" -ge 5 ]
+        until [ "$$tries" -ge 3 ]
         do
             rm -rf $$output_folder/*
             rm -f $$generator_log
             $(location @amsr_xavier//:amsrgen_sh) -v {generators_arg} -x $$arxml_srcs_folder -o $$output_folder --saveProject 1>$$generator_log 2>&1 && break
             tries=$$((tries+1)) 
-            sleep 15
+            sleep 1
         done
 
         # Process error messages from code generator
@@ -408,14 +427,8 @@ def minerva_aa_bsw_module(
                 "$EXT_BUILD_DEPS/amsr_vector_fs_msr4base/lib/cmake/amsr-vector-fs-msr4base/"
 
         elif dep == ":amsr_vector_fs_libiostream":
-            cache_entries["amsr-vector-fs-libiostream_libstream_vector_stl_DIR:PATH"] = \
-                "$EXT_BUILD_DEPS/amsr_vector_fs_libiostream/lib/cmake/amsr-vector-fs-libiostream_libstream_vector_stl/"
-            cache_entries["amsr-vector-fs-libiostream_libstream_DIR:PATH"] = \
-                "$EXT_BUILD_DEPS/amsr_vector_fs_libiostream/lib/cmake/amsr-vector-fs-libiostream_libstream/"
-            cache_entries["amsr-vector-fs-libiostream_libcharconv_vector_stl_DIR:PATH"] = \
-                "$EXT_BUILD_DEPS/amsr_vector_fs_libiostream/lib/cmake/amsr-vector-fs-libiostream_libcharconv_vector_stl/"
-            cache_entries["amsr-vector-fs-libiostream_libcharconv_common_DIR:PATH"] = \
-                "$EXT_BUILD_DEPS/amsr_vector_fs_libiostream/lib/cmake/amsr-vector-fs-libiostream_libcharconv_common/"
+            cache_entries["amsr-vector-fs-libiostream_DIR:PATH"] = \
+                "$EXT_BUILD_DEPS/amsr_vector_fs_libiostream/lib/cmake/amsr-vector-fs-libiostream/"
 
         elif dep == ":amsr_vector_fs_libosabstraction":
             cache_entries["osabstraction_DIR:PATH"] = \
@@ -462,6 +475,14 @@ def minerva_aa_bsw_module(
         elif dep == ":amsr_vector_fs_em_executionmanager":
             cache_entries["amsr-vector-fs-em-executionmanagement_application-client_DIR:PATH"] = \
                 "$EXT_BUILD_DEPS/amsr_vector_fs_em_executionmanager/lib/cmake/amsr-vector-fs-em-executionmanagement_application-client/"
+            cache_entries["amsr-vector-fs-em-executionmanagement_common-lib_DIR:PATH"] = \
+                "$EXT_BUILD_DEPS/amsr_vector_fs_em_executionmanager/lib/cmake/amsr-vector-fs-em-executionmanagement_common-lib/"
+            cache_entries["amsr-vector-fs-em-executionmanagement_failure-handler-client_DIR:PATH"] = \
+                "$EXT_BUILD_DEPS/amsr_vector_fs_em_executionmanager/lib/cmake/amsr-vector-fs-em-executionmanagement_failure-handler-client/"
+            cache_entries["amsr-vector-fs-em-executionmanagement_recovery-action-client_DIR:PATH"] = \
+                "$EXT_BUILD_DEPS/amsr_vector_fs_em_executionmanager/lib/cmake/amsr-vector-fs-em-executionmanagement_recovery-action-client/"
+            cache_entries["amsr-vector-fs-em-executionmanagement_state-client_DIR:PATH"] = \
+                "$EXT_BUILD_DEPS/amsr_vector_fs_em_executionmanager/lib/cmake/amsr-vector-fs-em-executionmanagement_state-client/"
 
         elif dep == ":amsr_vector_fs_someipprotocol":
             cache_entries["SomeIpProtocol_DIR:PATH"] = \
@@ -482,6 +503,8 @@ def minerva_aa_bsw_module(
                 "$EXT_BUILD_DEPS/amsr_vector_fs_sec_cryptostack/lib/cmake/amsr-vector-fs-sec-cryptostack_libdriverfactory/"
             cache_entries["amsr-vector-fs-sec-cryptostack_libsoftwareprovider_DIR:PATH"] = \
                 "$EXT_BUILD_DEPS/amsr_vector_fs_sec_cryptostack/lib/cmake/amsr-vector-fs-sec-cryptostack_libsoftwareprovider/"
+            cache_entries["amsr-vector-fs-sec-cryptostack_libipc_DIR:PATH"] = \
+                "$EXT_BUILD_DEPS/amsr_vector_fs_sec_cryptostack/lib/cmake/amsr-vector-fs-sec-cryptostack_libipc/"
 
         elif dep == ":amsr_vector_fs_sec_cryptostack_driver_lib_es":
             cache_entries["amsr-vector-fs-sec-cryptostack-driver-lib_es_DIR:PATH"] = \
@@ -515,6 +538,10 @@ def minerva_aa_bsw_module(
             cache_entries["Socal_DIR:PATH"] = \
                 "$EXT_BUILD_DEPS/amsr_vector_fs_socal_headers/lib/cmake/Socal/"
 
+        elif dep == ":amsr_vector_fs_socal":
+            cache_entries["Socal_DIR:PATH"] = \
+                "$EXT_BUILD_DEPS/amsr_vector_fs_socal/lib/cmake/Socal/"
+
         elif dep == ":amsr_vector_fs_someipbinding":
             cache_entries["SomeIpBinding_DIR:PATH"] = \
                 "$EXT_BUILD_DEPS/amsr_vector_fs_someipbinding/lib/cmake/SomeIpBinding/"
@@ -542,6 +569,56 @@ def minerva_aa_bsw_module(
                 "$EXT_BUILD_DEPS/amsr_vector_fs_per_libpersistency/lib/cmake/persistency-file-storage/"
             cache_entries["persistency-fs_DIR:PATH"] = \
                 "$EXT_BUILD_DEPS/amsr_vector_fs_per_libpersistency/lib/cmake/persistency-fs/"
+
+        elif dep == ":amsr_vector_fs_characterconversion":
+            cache_entries["amsr-vector-fs-characterconversion_DIR:PATH"] = \
+                "$EXT_BUILD_DEPS/amsr_vector_fs_characterconversion/lib/cmake/amsr-vector-fs-characterconversion/"
+            cache_entries["amsr-vector-fs-characterconversion_common_DIR:PATH"] = \
+                "$EXT_BUILD_DEPS/amsr_vector_fs_characterconversion/lib/cmake/amsr-vector-fs-characterconversion_common/"
+            cache_entries["amsr-vector-fs-characterconversion_vector_DIR:PATH"] = \
+                "$EXT_BUILD_DEPS/amsr_vector_fs_characterconversion/lib/cmake/amsr-vector-fs-characterconversion_vector/"
+
+        elif dep == ":amsr_vector_fs_udstransport":
+            cache_entries["LibUdsTransportApi_DIR:PATH"] = \
+                "$EXT_BUILD_DEPS/amsr_vector_fs_udstransport/lib/cmake/LibUdsTransportApi/"
+
+        elif dep == ":amsr_vector_fs_diagnosticutility":
+            cache_entries["LibDiagUtility_DIR:PATH"] = \
+                "$EXT_BUILD_DEPS/amsr_vector_fs_diagnosticutility/lib/cmake/LibDiagUtility/"
+
+        elif dep == ":amsr_vector_fs_pduhdrtpbinding":
+            cache_entries["LibPduHdrTpBinding_DIR:PATH"] = \
+                "$EXT_BUILD_DEPS/amsr_vector_fs_pduhdrtpbinding/lib/cmake/LibPduHdrTpBinding/"
+
+        elif dep == ":amsr_vector_fs_doipbinding":
+            cache_entries["LibDoIpBinding_DIR:PATH"] = \
+                "$EXT_BUILD_DEPS/amsr_vector_fs_doipbinding/lib/cmake/LibDoIpBinding/"
+
+        elif dep == ":amsr_vector_fs_diagnosticrpc":
+            cache_entries["LibDiagApiRpc_DIR:PATH"] = \
+                "$EXT_BUILD_DEPS/amsr_vector_fs_diagnosticrpc/lib/cmake/LibDiagApiRpc/"
+            cache_entries["LibDiagComCommon_DIR:PATH"] = \
+                "$EXT_BUILD_DEPS/amsr_vector_fs_diagnosticrpc/lib/cmake/LibDiagComCommon/"
+            cache_entries["LibDiagDaemonRpc_DIR:PATH"] = \
+                "$EXT_BUILD_DEPS/amsr_vector_fs_diagnosticrpc/lib/cmake/LibDiagDaemonRpc/"
+
+        elif dep == ":amsr_vector_fs_diagnosticrpccombinding":
+            cache_entries["LibDiagComApi_DIR:PATH"] = \
+                "$EXT_BUILD_DEPS/amsr_vector_fs_diagnosticrpccombinding/lib/cmake/LibDiagComApi/"
+            cache_entries["LibDiagComDaemon_DIR:PATH"] = \
+                "$EXT_BUILD_DEPS/amsr_vector_fs_diagnosticrpccombinding/lib/cmake/LibDiagComDaemon/"
+            cache_entries["LibDiagnosticRpcComBinding_DIR:PATH"] = \
+                "$EXT_BUILD_DEPS/amsr_vector_fs_diagnosticrpccombinding/lib/cmake/LibDiagnosticRpcComBinding/"
+
+        elif dep == ":amsr_vector_fs_aradiag":
+            cache_entries["LibAraDiag_DIR:PATH"] = \
+                "$EXT_BUILD_DEPS/amsr_vector_fs_aradiag/lib/cmake/LibAraDiag/"
+
+        elif dep == ":amsr_vector_fs_diagnosticmanager":
+            cache_entries["DiagDaemon_DIR:PATH"] = \
+                "$EXT_BUILD_DEPS/amsr_vector_fs_diagnosticmanager/lib/cmake/DiagDaemon/"
+            cache_entries["LibDiagDaemon_DIR:PATH"] = \
+                "$EXT_BUILD_DEPS/amsr_vector_fs_diagnosticmanager/lib/cmake/LibDiagDaemon/"
 
     cmake(
         name = name,

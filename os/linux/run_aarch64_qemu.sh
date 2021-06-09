@@ -85,8 +85,9 @@ qemu-img create -b driveos.ext4.qcow2 -f qcow2 adaptive_overlay.ext4.qcow2
 
 if [ "$BOOT_INTO_ADAPTIVE_STACK" = true ] ; then
     # Install systemd service for adaptive-stack
-    virt-copy-in -a adaptive_overlay.ext4.qcow2 ../configs/adaptive-stack.service /lib/systemd/system/
+    virt-copy-in -a adaptive_overlay.ext4.qcow2 ../configs/adaptive-stack.service ../configs/enable-ipv6-loopback.service /lib/systemd/system/
     guestfish -a adaptive_overlay.ext4.qcow2 -i ln-sf /lib/systemd/system/adaptive-stack.service /etc/systemd/system/multi-user.target.wants/adaptive-stack.service
+    guestfish -a adaptive_overlay.ext4.qcow2 -i ln-sf /lib/systemd/system/enable-ipv6-loopback.service /etc/systemd/system/network-online.target.wants/enable-ipv6-loopback.service
 fi
 
 # Configure the network interfaces
@@ -94,6 +95,7 @@ virt-copy-in -a adaptive_overlay.ext4.qcow2 ../configs/enp0s1.network /etc/syste
 virt-copy-in -a adaptive_overlay.ext4.qcow2 ../configs/enp0s2.network /etc/systemd/network
 virt-copy-in -a adaptive_overlay.ext4.qcow2 ../configs/enp0s3.network /etc/systemd/network
 virt-copy-in -a adaptive_overlay.ext4.qcow2 ../configs/enp0s4.network /etc/systemd/network
+virt-copy-in -a adaptive_overlay.ext4.qcow2 ../configs/enp0s5.network /etc/systemd/network
 
 # Add the adaptive stack to the filesystem
 virt-tar-in -a adaptive_overlay.ext4.qcow2 $PATH_TO_ADAPTIVE_TAR /
@@ -118,4 +120,6 @@ qemu-system-aarch64 \
 -device virtio-net-pci,netdev=net21 \
 -netdev user,id=net21,net=10.21.17.0/24 \
 -device virtio-net-pci,netdev=net127 \
--netdev user,id=net127,net=10.127.17.0/24
+-netdev user,id=net127,net=10.127.17.0/24 \
+-device virtio-net-pci,netdev=net113 \
+-netdev user,id=net113,net=10.20.1.0/24

@@ -2,41 +2,32 @@ set -ex
 
 compile_x86_64_linux_ubuntu()
 {
-    # Workaround for circular dependency
-    bazel build //bsw:amsr_vector_fs_socal_for_proxy --config=x86_64_linux --config=use_efs_build_cache --remote_upload_local_results=${isMaster}
-    bazel build //bsw:amsr_vector_fs_socal_for_skeleton --config=x86_64_linux --config=use_efs_build_cache --remote_upload_local_results=${isMaster}
-    # For now we are commenting out the references for sw_update_client application
-    # as we are not able to build the application with latest delivery
-    #bazel build //bsw:amsr_vector_fs_socal_for_software_update --config=x86_64_linux --config=use_efs_build_cache --remote_upload_local_results=${isMaster}
+    # Workaround for socal lib
+    bazel build //bsw:amsr_vector_fs_socal_for_x6aa_config_manager --config=x86_64_linux --config=use_efs_build_cache --remote_upload_local_results=${isMaster}
 
     # Actual build
     bazel build //:minerva_mpu_adaptive_filesystem --config=x86_64_linux --config=use_efs_build_cache --remote_upload_local_results=${isMaster}
+    bazel build //:minerva_mpu_adaptive_filesystem --//:mt --config=x86_64_linux --config=use_efs_build_cache --remote_upload_local_results=${isMaster}
 }
 
 compile_aarch64_linux_ubuntu()
 {
-    # Workaround for circular dependency
-    bazel build //bsw:amsr_vector_fs_socal_for_proxy --config=aarch64_linux_ubuntu --config=use_efs_build_cache --remote_upload_local_results=${isMaster}
-    bazel build //bsw:amsr_vector_fs_socal_for_skeleton --config=aarch64_linux_ubuntu --config=use_efs_build_cache --remote_upload_local_results=${isMaster}
-    # For now we are commenting out the references for sw_update_client application
-    # as we are not able to build the application with latest delivery
-    #bazel build //bsw:amsr_vector_fs_socal_for_software_update --config=aarch64_linux_ubuntu --config=use_efs_build_cache --remote_upload_local_results=${isMaster}
+    # Workaround for socal lib
+    bazel build //bsw:amsr_vector_fs_socal_for_x6aa_config_manager --config=aarch64_linux_ubuntu --config=use_efs_build_cache --remote_upload_local_results=${isMaster}
 
     # Actual build
     bazel build //:minerva_mpu_adaptive_filesystem --config=aarch64_linux_ubuntu --config=use_efs_build_cache --remote_upload_local_results=${isMaster}
+    bazel build //:minerva_mpu_adaptive_filesystem --//:mt --config=aarch64_linux_ubuntu --config=use_efs_build_cache --remote_upload_local_results=${isMaster}
 }
 
 compile_aarch64_linux_linaro()
 {
-    # Workaround for circular dependency
-    bazel build //bsw:amsr_vector_fs_socal_for_proxy --config=aarch64_linux_linaro --config=use_efs_build_cache --remote_upload_local_results=${isMaster}
-    bazel build //bsw:amsr_vector_fs_socal_for_skeleton --config=aarch64_linux_linaro --config=use_efs_build_cache --remote_upload_local_results=${isMaster}
-    # For now we are commenting out the references for sw_update_client application
-    # as we are not able to build the application with latest delivery
-    #bazel build //bsw:amsr_vector_fs_socal_for_software_update --config=aarch64_linux_linaro --config=use_efs_build_cache --remote_upload_local_results=${isMaster}
+    # Workaround for socal lib
+    bazel build //bsw:amsr_vector_fs_socal_for_x6aa_config_manager --config=aarch64_linux_linaro --config=use_efs_build_cache --remote_upload_local_results=${isMaster}
 
     # Actual build
     bazel build //:minerva_mpu_adaptive_filesystem --config=aarch64_linux_linaro --config=use_efs_build_cache --remote_upload_local_results=${isMaster}
+    bazel build //:minerva_mpu_adaptive_filesystem --//:mt --config=aarch64_linux_linaro --config=use_efs_build_cache --remote_upload_local_results=${isMaster}
 }
 
 

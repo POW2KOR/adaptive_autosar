@@ -1,26 +1,18 @@
-#include <csignal>
-#include <iostream>
-#include <string>
-#include <thread>
-#include <unordered_map>
-#include <unordered_set>
-
 #include "ara/core/abort.h"
 #include "ara/core/error_code.h"
 #include "ara/core/error_domain.h"
 #include "ara/core/exception.h"
 #include "ara/core/initialization.h"
 #include "ara/exec/application_client.h"
+#include "vac/language/throw_or_terminate.h"
 #include "ara/log/logging.h"
 #include "osabstraction/thread/thread.h"
 #include "osabstraction/process/process.h"
-#include "vac/language/throw_or_terminate.h"
+#include "scn_param_storage_error_domain.h"
 
-#include "accessor/variable.h"
-#include "accessor/memory_accessor_factory.h"
-#include "mtd/measurement_daemon.h"
-
-#include "idc6mt_error_domain.h"
+#include <iostream>
+#include <csignal>
+#include <thread>
 
 namespace {
 /*!
@@ -52,7 +44,9 @@ void InitializeSignalHandling() noexcept
 }
 } // namespace
 
-namespace idc6mtd {
+namespace Application {
+
+using vac::container::literals::operator""_sv;
 
 /*!
  * \brief Signal handler thread.
@@ -74,11 +68,6 @@ std::atomic_bool terminated_by_signal{false};
  */
 bool has_initialization_failed{false};
 
-/*!
- * \brief Default path to the configuration files
- */
-const std::string configuration_directory{"/opt/idc6mt/etc"};
-
 /**
  * \brief Report to execution manager the status of the application
  */
@@ -98,24 +87,27 @@ void ReportState(
     } else {
         /* #15 invalid application state detected */
         error_occurred = true;
-        logger.LogError() << "ReportState called with an invalid application state: "
-                          << application_state_string.c_str();
+        logger.LogError()
+            << "ReportState called with an invalid application state: "
+            << application_state_string.c_str();
     }
 
     /* #20 check if invalid application state was detected. */
     if (!error_occurred) {
-        logger.LogDebug() << "IDC6 MT daemon app is reporting Application state "
+        logger.LogDebug() << "scn_param_storage app is reporting Application state "
                           << application_state_string.c_str();
 
         /* #30 send application state */
         if (application_client.ReportApplicationState(application_state)
             == ara::exec::ApplicationReturnType::kSuccess) {
-            logger.LogDebug() << "IDC6 MT daemon reported Application state "
-                              << application_state_string.c_str() << " successfully";
+            logger.LogDebug()
+                << "scn_param_storage app reported Application state "
+                << application_state_string.c_str() << " successfully";
         } else {
             /* #35 application state could not be set. */
-            logger.LogError() << "IDC6 MT daemon could not report the Application state "
-                              << application_state_string.c_str();
+            logger.LogError()
+                << "scn_param_storage app could not report the Application state "
+                << application_state_string.c_str();
         }
     }
 }
@@ -181,25 +173,29 @@ ara::core::Result<osabstraction::process::ProcessId> StartSignalHandlerThread()
     using R = ara::core::Result<osabstraction::process::ProcessId>;
 
     /* #20 Create thread_name. */
-    vac::container::CStringView thread_name = vac::container::CStringView::FromLiteral("MtdSH", 5);
+    vac::container::CStringView thread_name = "SigH"_sv;
 
     /* #30 Start signal handler thread. */
     signal_handler_thread = std::thread(&SignalHandlerThread);
 
     /* #40 Create the thread native_handle object. */
-    std::thread::native_handle_type const thread_id{(signal_handler_thread).native_handle()};
+    std::thread::native_handle_type const thread_id{
+        signal_handler_thread.native_handle()};
 
     /* #50 Set thread name and return the ara::core::Result object. */
     return osabstraction::thread::SetNameOfThread(thread_id, thread_name)
-        .AndThen([]() -> R { return R{osabstraction::process::GetProcessId()}; })
+        .AndThen([]() -> R {
+            return R{osabstraction::process::GetProcessId()};
+        })
         .OrElse([thread_name](ara::core::ErrorCode) -> R {
-            return R::FromError(Idc6MtdErrc::kThreadCreationFailed, "Naming failed.");
+            return R::FromError(
+                ScnParamStorageErrc::kThreadCreationFailed, "Naming failed.");
         });
 }
 
 size_t heartbeat_counter = 0;
 
-} // namespace idc6mtd
+} // namespace Application
 
 int main()
 {
@@ -210,33 +206,34 @@ int main()
 
     if (!init_result.HasValue()) {
         char const* msg{"ara::core::Initialize() failed."};
-        std::cerr << msg << "\nResult contains: " << init_result.Error().Message() << ", "
-                  << init_result.Error().UserMessage() << "\n";
+        std::cerr
+            << msg << "\nResult contains: " << init_result.Error().Message()
+            << ", " << init_result.Error().UserMessage() << "\n";
 
         ara::core::Abort(msg);
     } else {
-        ara::log::Logger& log{ara::log::CreateLogger("MTD", "Measurement and trace daemon")};
+        ara::log::Logger& log{
+            ara::log::CreateLogger("APP", "Scn Param Storage")};
 
-        idc6mtd::StartSignalHandlerThread().InspectError(
-            [](ara::core::ErrorCode const& error) { idc6mtd::has_initialization_failed = true; });
+        Application::StartSignalHandlerThread()
+            .InspectError([](ara::core::ErrorCode const& error) {
+                Application::has_initialization_failed = true;
+            });
 
-        if (idc6mtd::has_initialization_failed) {
+        if (Application::has_initialization_failed) {
             return -1;
         }
 
         /* Create the application object and run it */
-        idc6mtd::ReportState(application_client, log, ara::exec::ApplicationState::kRunning);
+        Application::ReportState(
+            application_client, log, ara::exec::ApplicationState::kRunning);
 
-        try {
-            auto mtd = mt::MeasurementTraceDaemon(idc6mtd::configuration_directory);
-
-            while (!idc6mtd::exit_requested) {
-                log.LogInfo() << "MT daemon running, hearbeat: " << idc6mtd::heartbeat_counter++;
-                mtd.ReadVariables();
-                std::this_thread::sleep_for(std::chrono::seconds(5));
-            }
-        } catch (mt::MeasurementTraceDaemon::MtdException& e) {
-            log.LogFatal() << "Critical error in daemon: " << e.what();
+        while (!Application::exit_requested) {
+            /* Do nothing for now */
+            log.LogInfo()
+                << "Scn Param Storage Running, hearbeat: "
+                << Application::heartbeat_counter++;
+            std::this_thread::sleep_for(std::chrono::seconds(1));
         }
 
         /* Deinitialize ara::core */
@@ -244,11 +241,14 @@ int main()
 
         if (!deinit_result.HasValue()) {
             char const* msg{"ara::core::Deinitialize() failed."};
-            std::cerr << msg << "\nResult contains: " << deinit_result.Error().Message() << ", "
-                      << deinit_result.Error().UserMessage() << "\n";
+            std::cerr
+                << msg << "\nResult contains: "
+                << deinit_result.Error().Message() << ", "
+                << deinit_result.Error().UserMessage() << "\n";
             ara::core::Abort(msg);
         }
 
-        idc6mtd::ReportState(application_client, log, ara::exec::ApplicationState::kTerminating);
+        Application::ReportState(
+            application_client, log, ara::exec::ApplicationState::kTerminating);
     }
 }

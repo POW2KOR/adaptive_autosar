@@ -31,12 +31,7 @@ sudo apt-get install g++-aarch64-linux-gnu
 Build the filesystem like so:
 
 ```
-bazel build //bsw:amsr_vector_fs_socal_for_proxy --config=aarch64_linux_ubuntu
-bazel build //bsw:amsr_vector_fs_socal_for_skeleton --config=aarch64_linux_ubuntu
-
-# For now we are commenting out the references for socal_for_software_update as we are not able to build the target
-with latest delivery, but we're bringing it back in a future step.
-# bazel build //bsw:amsr_vector_fs_socal_for_software_update ---config=aarch64_linux_ubuntu
+bazel build //bsw:amsr_vector_fs_socal_for_x6aa_config_manager --config=aarch64_linux_ubuntu
 
 bazel build //:minerva_mpu_adaptive_filesystem --config=aarch64_linux_ubuntu
 ```
