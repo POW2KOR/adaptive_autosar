@@ -428,10 +428,11 @@ cc_binary(
         # :applicationbase_init_deinit_srcs. Furthermore :someip_binding_initializer
         # and :ipc_binding_life_cycle_manager are last because they provide symbols
         # asked by :socal_srcs_lib
-        "@minerva_mpu_adaptive//:socal_lib_for_x6aa_config_manager",
         ":applicationbase_init_deinit_srcs",
+        
+        "//bsw:amsr_vector_fs_socal_libsocal_a",
+
         ":ipc_binding_life_cycle_manager",
-        ":socal_srcs_lib",
         ":someip_binding_initializer",
     ],
     copts = [
@@ -443,11 +444,12 @@ cc_binary(
     ],
     linkstatic = 1,
     deps = [
+        ":socal_srcs_lib",
         "//bsw:amsr_vector_fs_applicationbase",
         "//bsw:amsr_vector_fs_em_executionmanager",
         "//bsw:amsr_vector_fs_libiostream",
         "//bsw:amsr_vector_fs_log_api",
-        "//bsw:amsr_vector_fs_socal_for_x6aa_config_manager",
+        "//bsw:amsr_vector_fs_socal",
     ],
 )
 
