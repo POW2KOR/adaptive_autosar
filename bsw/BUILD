@@ -14,7 +14,6 @@ minerva_aa_bsw_module(
         "CMAKE_VERBOSE_MAKEFILE": "ON",
         "BUILD_TESTS": "OFF",
         "ENABLE_EXEC_MANAGER": "ON",
-        "Socal_DIR:PATH": "$EXT_BUILD_DEPS/amsr_vector_fs_socal_headers/lib/cmake/Socal/",
     },
     out_include_dirs = [
         "include/Socal/",
@@ -323,35 +322,6 @@ minerva_aa_bsw_module(
 )
 
 minerva_aa_bsw_module(
-    name = "amsr_vector_fs_socal_headers",
-    cache_entries = {
-        "CMAKE_EXPORT_NO_PACKAGE_REGISTRY": "ON",
-        "CMAKE_FIND_PACKAGE_NO_PACKAGE_REGISTRY": "ON",
-        "CMAKE_VERBOSE_MAKEFILE": "ON",
-        "BUILD_TESTS": "OFF",
-        "ENABLE_EXEC_MANAGER": "ON",
-    },
-    out_headers_only = True,
-    out_include_dirs = [
-        "include/Socal/",
-    ],
-    srcs_filegroup = "@amsr_xavier//:amsr_vector_fs_socal_srcs",
-    deps = [
-        ":amsr_vector_fs_characterconversion",
-        ":amsr_vector_fs_crc",
-        ":amsr_vector_fs_e2e",
-        ":amsr_vector_fs_libiostream",
-        ":amsr_vector_fs_libosabstraction",
-        ":amsr_vector_fs_libvac",
-        ":amsr_vector_fs_log_api",
-        ":amsr_vector_fs_logutility",
-        ":amsr_vector_fs_msr4base",
-        ":amsr_vector_fs_thread",
-        ":amsr_vector_fs_vajson",
-    ],
-)
-
-minerva_aa_bsw_module(
     name = "amsr_vector_fs_log_daemon",
     cache_entries = {
         "CMAKE_EXPORT_NO_PACKAGE_REGISTRY": "ON",
@@ -405,9 +375,6 @@ minerva_aa_bsw_module(
 
 minerva_aa_bsw_module(
     name = "amsr_vector_fs_someipbinding",
-    cache_entries = {
-        "Socal_DIR:PATH": "$EXT_BUILD_DEPS/amsr_vector_fs_socal_headers/lib/cmake/Socal/",
-    },
     out_include_dirs = [
         "include/SomeIpBinding",
         "include/SomeIpBindingInternal",
@@ -429,7 +396,7 @@ minerva_aa_bsw_module(
         ":amsr_vector_fs_log_api",
         ":amsr_vector_fs_logutility",
         ":amsr_vector_fs_msr4base",
-        ":amsr_vector_fs_socal_headers",
+        ":amsr_vector_fs_socal",
         ":amsr_vector_fs_someipdaemonclient",
         ":amsr_vector_fs_someipprotocol",
         ":amsr_vector_fs_thread",
@@ -584,7 +551,6 @@ minerva_aa_bsw_module(
         ":amsr_vector_fs_logutility",
         ":amsr_vector_fs_msr4base",
         ":amsr_vector_fs_socal",
-        ":amsr_vector_fs_socal_headers",
         ":amsr_vector_fs_someipprotocol",
         ":amsr_vector_fs_thread",
         ":amsr_vector_fs_vajson",

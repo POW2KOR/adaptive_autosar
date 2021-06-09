@@ -407,7 +407,6 @@ cc_library(
         ":someipbinding_hdrs_lib",
         ":someipprotocol_hdrs_lib",
         "//bsw:amsr_vector_fs_ipcbinding",
-        "//bsw:amsr_vector_fs_socal_headers",
         "//bsw:amsr_vector_fs_someipbinding",
         "//bsw:amsr_vector_fs_vajson",
     ],

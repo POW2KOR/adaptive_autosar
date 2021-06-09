@@ -534,10 +534,6 @@ def minerva_aa_bsw_module(
             cache_entries["iointegritystream_DIR:PATH"] = \
                 "$EXT_BUILD_DEPS/amsr_vector_fs_iointegritystream/lib/cmake/iointegritystream/"
 
-        elif dep == ":amsr_vector_fs_socal_headers":
-            cache_entries["Socal_DIR:PATH"] = \
-                "$EXT_BUILD_DEPS/amsr_vector_fs_socal_headers/lib/cmake/Socal/"
-
         elif dep == ":amsr_vector_fs_socal":
             cache_entries["Socal_DIR:PATH"] = \
                 "$EXT_BUILD_DEPS/amsr_vector_fs_socal/lib/cmake/Socal/"
