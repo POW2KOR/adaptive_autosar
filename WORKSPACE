@@ -45,6 +45,7 @@ http_archive(
     patch_args = ["-p1"],
     patches = [
         "@//:bazel/patches/rules_foreign_cc_support_multiple_include_out_dirs.patch",
+        "@//:bazel/patches/rules_foreign_cc_output_groups_for_libraries.patch",
     ],
     sha256 = "44bfeb6566f74e4e6e36acc33ee166b428d31a6f01a4f1c14056dc7d0f68c9b6",
     strip_prefix = "rules_foreign_cc-eae19778d5fe8605f0f37332a712f05d4a17dc3b",
