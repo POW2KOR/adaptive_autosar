@@ -22,7 +22,7 @@
 #include "ara/log/logging.h"
 #include "osabstraction/process/process.h"
 #include "osabstraction/thread/thread.h"
-#include "persistency-interface/persistent_mem_accessor.h"
+#include "persistent-mem-accessor/persistent_mem_accessor.h"
 #include "services/ns_si_cnfg_mngr_to_dummyswc/si_x6aa_cnfg_mngr_service_reserved_skeleton.h"
 #include "vac/container/string_literals.h"
 #include "vac/language/throw_or_terminate.h"
@@ -135,7 +135,7 @@ private:
      */
     ara::core::Optional<
         services::ns_si_cnfg_mngr_to_dummyswc::skeleton::SI_X6AA_Cnfg_Mngr_Service_ReservedSkeleton>
-        siX6aaCnfgMngrServiceReservedSkeletonServer;
+        siX6aaCnfgMngrServiceReservedSkeleton;
 
     /*
      *  presistency integration

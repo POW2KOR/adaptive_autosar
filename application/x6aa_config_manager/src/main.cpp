@@ -81,6 +81,11 @@ int main()
         application::VcCnfgMngrServer vcServerApp;
         return_value = vcServerApp.Run();
 
+        if ( EXIT_FAILURE == return_value) {
+            char const* msg{"failed to run variant coding server for offering services."};
+            ara::core::Abort(msg);
+        }
+
         /* Deinitialize ara::core */
         ara::core::Result<void> deinit_result{ara::core::Deinitialize()};
 

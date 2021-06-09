@@ -56,10 +56,12 @@ bool VariantCodingConsumer::FindService()
         std::this_thread::sleep_for(std::chrono::milliseconds(100));
 
         static int counter = 0;
-        if (++counter % 10 == 0) {
+        if (counter % 10 == 0) {
+            counter++;
             GetLogger().LogInfo() << "Still searching for VariantCodingService";
         }
-        if (--max_try_count == 0) {
+        if (max_try_count == 0) {
+            max_try_count--;
             GetLogger().LogFatal() << "Failed to find VariantCodingService -- timeout occured";
             retval = false;
             break;
