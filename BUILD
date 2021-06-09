@@ -105,22 +105,3 @@ pkg_deb(
     package = "minerva_mpu_adaptive",
     version = "0.0.0",
 )
-
-# We need it as a temporary workaround to resolve cyclic dependency between code generator and
-# socal library. The issue reported and confirmed by Vector.
-# Desision to put it here is due to the bazel nature of the relative pates. So we left it in
-# the root. The file is used in bsw/BUILD file later.
-
-target_build_dir_for_socal_x6aa_config_manager = select({
-    ":k8": [
-        "bazel-out/k8-fastbuild/bin/bsw/amsr_vector_fs_socal_for_x6aa_config_manager/lib/libSocal.a",
-    ],
-    ":aarch64": [
-        "bazel-out/aarch64-fastbuild/bin/bsw/amsr_vector_fs_socal_for_x6aa_config_manager/lib/libSocal.a",
-    ],
-})
-
-filegroup(
-    name = "socal_lib_for_x6aa_config_manager",
-    srcs = target_build_dir_for_socal_x6aa_config_manager,
-)

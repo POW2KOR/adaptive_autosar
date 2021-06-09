@@ -23,8 +23,4 @@ sudo chown -R $UID:$UID /bazel_cache
 printf "\nAll done 👌\n\n"
 printf "👉 Build with something like:\n\n"
 
-printf "bazel build //bsw:amsr_vector_fs_socal_for_x6aa_config_manager --config=x86_64_linux && "
-# For now we are commenting out the references for socal_for_software_update as we are not able to build the target
-# with latest delivery, but we're bringing it back in a future step.
-# printf "bazel build //bsw:amsr_vector_fs_socal_for_software_update --config=x86_64_linux && "
 printf "bazel build //:minerva_mpu_adaptive_filesystem --config=x86_64_linux\n\n"
