@@ -6,6 +6,11 @@
 
 Note: **--test_output=streamed:** Output from each test is printed as the test runs.
 
+## Run all test targets
+All the test targets inside `test` folder can be executed with command:
+
+`bazel test //test/... --test_output=streamed`
+
 ## Example Output
 
 `$bazel test //test:calculator_test  --test_output=streamed

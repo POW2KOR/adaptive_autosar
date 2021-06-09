@@ -1,15 +1,5 @@
 package(default_visibility = ["//visibility:public"])
 
-cc_library(
-    name = "calculator",
-    srcs = [
-        "src/calc.cpp",
-    ],
-    hdrs = [
-        "src/calc.h",
-    ],
-)
-
 cc_test(
     name = "calculator_test",
     srcs = [
@@ -17,7 +7,7 @@ cc_test(
     ],
     includes = ["src/"],
     deps = [
-        ":calculator",
+        "//test/src:calculator",
         "@google//:gtest",
         "@google//:gtest_main",  # Only if hello_test.cc has no main()
     ],
