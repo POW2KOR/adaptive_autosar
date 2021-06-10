@@ -340,3 +340,56 @@ minerva_aa_codegen_declare(
     ],
     path_to_generators = "Generators",
 )
+
+cc_library(
+    name = "diag_daemon_impl",
+    srcs = glob(["BSW/amsr-vector-fs-diagnosticmanager/app/diagnostic_manager_daemon_impl/src/**"]),
+    hdrs = glob(["BSW/amsr-vector-fs-diagnosticmanager/app/diagnostic_manager_daemon_impl/include/**"]),
+    copts = [
+        "-std=c++14",
+    ],
+    linkstatic = 1,
+    local_defines = [
+        "VIRTUALMOCK=",
+        "ENABLE_EXEC_MANAGER=ON",
+    ],
+    strip_include_prefix = "BSW/amsr-vector-fs-diagnosticmanager/app/diagnostic_manager_daemon_impl/include",
+    deps = [
+        "@minerva_mpu_adaptive//bsw:amsr_vector_fs_applicationbase",
+        "@minerva_mpu_adaptive//bsw:amsr_vector_fs_diagnosticrpc",
+        "@minerva_mpu_adaptive//bsw:amsr_vector_fs_diagnosticrpccombinding",
+        "@minerva_mpu_adaptive//bsw:amsr_vector_fs_diagnosticutility",
+        "@minerva_mpu_adaptive//bsw:amsr_vector_fs_libiostream",
+        "@minerva_mpu_adaptive//bsw:amsr_vector_fs_libosabstraction",
+        "@minerva_mpu_adaptive//bsw:amsr_vector_fs_libvac",
+        "@minerva_mpu_adaptive//bsw:amsr_vector_fs_log_api",
+        "@minerva_mpu_adaptive//bsw:amsr_vector_fs_logutility",
+        "@minerva_mpu_adaptive//bsw:amsr_vector_fs_per_libpersistency",
+        "@minerva_mpu_adaptive//bsw:amsr_vector_fs_thread",
+        "@minerva_mpu_adaptive//bsw:amsr_vector_fs_udstransport",
+    ],
+)
+
+# NOTE : This binary currently doesn't compile and
+# throw linking errors as it is missing generated files.
+cc_binary(
+    name = "diagnostic_manager_deamon_executable",
+    srcs = [
+        "BSW/amsr-vector-fs-diagnosticmanager/app/diagnostic_manager_daemon/src/main.cpp",
+        #Add the generated srcs for DiagnosticManagerDaemonExecutable
+    ],
+    copts = [
+        "-std=c++14",
+    ],
+    features = [
+        "pthread",
+    ],
+    linkstatic = 1,
+    local_defines = [
+        "VIRTUALMOCK=",
+        "ENABLE_EXEC_MANAGER=ON",
+    ],
+    deps = [
+        ":diag_daemon_impl",
+    ],
+)
