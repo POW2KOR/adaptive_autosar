@@ -74,6 +74,31 @@
             "pattern": "https://files.pythonhosted.org/packages/00/83/b4a77d044e78ad1a45610eb88f745be2fd2c6d658f9798a15e384b7d57c9/wheel-0.33.6-py2.py3-none-any.whl",
             "target": "tools/bazel/wheel-0.33.6-py2.py3-none-any.whl.zip",
             "props": "hash=f4da1763d3becf2e2cd92a14a7c920f0f00eca30fdde9ea992c836685b9faf28"
+        },
+        {
+            "pattern": "https://github.com/google/googletest/archive/refs/heads/master.zip",
+            "target": "tools/bazel/googletest.zip",
+            "props": "hash=75cc22f83ce8a8f1fa2150423943760cb57f4c82b350fadc52efb287de8e6d98"
+        },
+        {
+            "pattern": "https://github.com/bazelbuild/buildtools/releases/download/4.0.1/buildozer-linux-amd64",
+            "target": "tools/bazel/buildifier",
+            "props": "hash=082aea1df38fe30ce41d955a2cbf309cae8ec386507e0c10cc16f0d9a93e151f"
+        },
+        {
+            "pattern": "https://github.com/bazelbuild/buildtools/releases/download/4.0.1/buildifier-linux-amd64",
+            "target": "tools/bazel/buildozer",
+            "props": "hash=069a03fc1fa46135e3f71e075696e09389344710ccee798b2722c50a2d92d55a"
+        },
+        {
+            "pattern": "https://github.com/bazelbuild/bazel/releases/download/4.0.0/bazel_4.0.0-linux-x86_64.deb",
+            "target": "tools/bazel/bazel_4.0.0-linux-x86_64.deb",
+            "props": "hash=1779ce76ebf449e55dfdd1318355335179eb85609042dfe5c1b4b34683dfd4b5"
+        },
+        {
+            "pattern": "https://github.com/Kitware/CMake/releases/download/v3.20.2/cmake-3.20.2-linux-x86_64.sh",
+            "target": "tools/cmake-3.20.2-linux-x86_64.sh",
+            "props": "hash=EA497B4658816010E5850A3ED53845E430654640AABBE10D93FE67DEF9503E4D"
         }
     ]
 }
