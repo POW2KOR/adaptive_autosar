@@ -1,4 +1,4 @@
-FROM artifact.swf.daimler.com/adasdai-docker/nvidia/drive/build_driveos_linux_pdk:common-5.2.3.0
+FROM ubuntu:18.04
 
 ARG BUILD_USER="root"
 ARG VECTOR_CAST_DIR="/usr/tools/vectorcast"
