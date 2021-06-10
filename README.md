@@ -40,8 +40,6 @@ The CI environment can be found [here](devops/docker/Dockerfile.build_env). The 
 pushes new version of the repository to
 [SWF Artifactory](https://artifact.swf.daimler.com/list/adasdai-docker/minerva_mpu_docker/minerva_mpu/) on merge. The
 image includes all the dependencies needed, including Bazel, Bazel plugins and toolchains (for both x86 and aarch64).
-The `devcontainer` adds [a few changes](.devcontainer/Dockerfile) on top of that but these are expected to be merged
-into a single file with the CI environment soon.
 
 ### Setup credentials for SWF Artifactory Docker registry
 
