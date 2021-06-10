@@ -5,7 +5,8 @@
     "--privileged",
     "--network=host"
   ],
-  "dockerFile": "Dockerfile",
+  "dockerFile": "../devops/docker/Dockerfile.build_env",
+  "context": "..",
   "containerUser": "dev",
   "containerEnv": {
     "HTTP_PROXY": "${localEnv:HTTP_PROXY}",
