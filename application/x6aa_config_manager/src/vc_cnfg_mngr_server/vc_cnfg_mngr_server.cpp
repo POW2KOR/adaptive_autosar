@@ -239,8 +239,7 @@ void VcCnfgMngrServer::ReportApplicationState(ara::exec::ApplicationState applic
     } else {
         /* #15 invalid application state detected */
         error_occurred = true;
-        log_.LogError() << "ReportApplicationState called with an invalid application state: "
-                        << application_state_string;
+        log_.LogError() << "ReportApplicationState called with an invalid application state: ";
     }
 
     /* #20 check if invalid application state was detected. */

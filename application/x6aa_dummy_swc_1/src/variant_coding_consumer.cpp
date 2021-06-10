@@ -42,6 +42,7 @@ VariantCodingConsumer::~VariantCodingConsumer()
 bool VariantCodingConsumer::FindService()
 {
     bool retval = true;
+    int counter = 0;
     uint32_t max_try_count
         = 1000; /* one while loop count is of nearly 10ms and timeout would be 100s (1000*10ms)*/
 
@@ -55,17 +56,16 @@ bool VariantCodingConsumer::FindService()
     while (!variant_coding_service_found.load()) {
         std::this_thread::sleep_for(std::chrono::milliseconds(100));
 
-        static int counter = 0;
         if (counter % 10 == 0) {
-            counter++;
             GetLogger().LogInfo() << "Still searching for VariantCodingService";
         }
         if (max_try_count == 0) {
-            max_try_count--;
             GetLogger().LogFatal() << "Failed to find VariantCodingService -- timeout occured";
             retval = false;
             break;
         }
+        counter++;
+        max_try_count--;
     }
 
     /* Stop searching for further services */

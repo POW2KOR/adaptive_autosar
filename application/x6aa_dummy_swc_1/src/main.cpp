@@ -87,8 +87,7 @@ void ReportState(
     } else {
         /* #15 invalid application state detected */
         error_occurred = true;
-        logger.LogError() << "ReportState called with an invalid application state: "
-                          << application_state_string.c_str();
+        logger.LogError() << "ReportState called with an invalid application state: ";
     }
 
     /* #20 check if invalid application state was detected. */
