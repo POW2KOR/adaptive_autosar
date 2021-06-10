@@ -1,18 +1,12 @@
 # Circular dependency workaround
 
 Currently, there is a circular linking dependency between `amsr_vector_fs_socal` and the generated source code for
-`ara::com`. Bazel does not support circular linking dependencies. Currently, the only way to get rid of this circular
-dependency is through some custom temporary target called `amsr_vector_fs_socal_for_x6aa_config_manager`.
-Whenever the generated sources for `ara::com` change (or on the first build), these targets have to be rebuilt manually.
-The manual rebuild is necessary these are not explicit build dependencies in the Bazel build system,
-but hard-coded path includes.
+`ara::com`. Bazel does not support circular linking dependencies, but allows `.a` files to be used in the `srcs`
+field of `cc_binary`. Therefore, we make use of `.a` libraries to order things around and resolve the dependencies
+without the need for the dependencies to be declared explicity in the Bazel DAG. `libSocal.a` is extracted using the
+output group into `//bsw:amsr_vector_fs_socal_libsocal_a`.
 
-These steps are necessary due to the circular dependency workaround. They will not be needed once Vector ships a fix in
-the SIP:
+This is better than the previous approach where we had a special target which had to be build ahead of time in a
+separate call to `bazel build.` This was inconvenient and didn't scale well with the increasing number of applications.
 
-```
-bazel build //bsw:amsr_vector_fs_socal_for_x6aa_config_manager --config=<CONFIGURATION>
-```
-
-After that, you can initiate your actual building, because the circular dependency is worked around with the
-`//bsw:amsr_vector_fs_socal_headers` target and both `\\:socal_lib_for_proxy` and `\\:socal_lib_for_socal` file groups.
+We expect that there will be similar circular dependencies within the persistency BSW module and diagnostics.
