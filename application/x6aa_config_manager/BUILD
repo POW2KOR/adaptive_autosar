@@ -415,12 +415,12 @@ cc_library(
 cc_binary(
     name = "app",
     srcs = [
+        "src/main.cpp",
+        "src/persistent_mem_accessor/persistent_mem_accessor.cpp",
+        "src/persistent_mem_accessor/persistent_mem_accessor.h",
+        "src/vc_cnfg_mngr_server/vc_cnfg_mngr_server.cpp",
         "src/vc_cnfg_mngr_server/vc_cnfg_mngr_server.h",
         "src/x6aa_cnfg_mngr_executable_error_domain.h",
-        "src/main.cpp",
-        "src/vc_cnfg_mngr_server/vc_cnfg_mngr_server.cpp",
-        "src/persistent_mem_accessor/persistent_mem_accessor.h",
-        "src/persistent_mem_accessor/persistent_mem_accessor.cpp",
         ":applicationbase_init_deinit_srcs",
         ":ipc_binding_life_cycle_manager",
         ":someip_binding_initializer",

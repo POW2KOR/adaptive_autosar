@@ -308,13 +308,12 @@ cc_library(
 cc_binary(
     name = "app",
     srcs = [
-        "src/x6aa_dummy_swc_1_executable_error_domain.h",
-        "src/variant_coding_consumer.h",
-        "src/variant_coding_consumer.cpp",
         "src/main.cpp",
+        "src/variant_coding_consumer.cpp",
+        "src/variant_coding_consumer.h",
+        "src/x6aa_dummy_swc_1_executable_error_domain.h",
         ":applicationbase_init_deinit_srcs",
         ":ipc_binding_life_cycle_manager",
-        ":socal_srcs_lib",
         "//bsw:amsr_vector_fs_socal_libsocal_a",
     ],
     copts = [
