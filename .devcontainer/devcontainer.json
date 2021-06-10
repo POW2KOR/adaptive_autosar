@@ -17,7 +17,6 @@
     "no_proxy": "${localEnv:no_proxy}"
   },
   "mounts": [
-    "type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock",
     "type=bind,source=/dev/bus/usb,target=/dev/bus/usb",
     "type=bind,source=${localEnv:HOME}/.gitconfig,target=/host/.gitconfig",
     "type=bind,source=${localEnv:HOME}/.ssh/gsep,target=/host/.ssh/gsep",
