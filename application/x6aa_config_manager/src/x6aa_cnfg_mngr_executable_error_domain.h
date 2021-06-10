@@ -1,17 +1,26 @@
-#ifndef SCN_PARAM_STORAGE_ERROR_DOMAIN_H
-#define SCN_PARAM_STORAGE_ERROR_DOMAIN_H
+/*****************************************************************************
+ * \file   x6aa_cnfg_mngr_executable_error_domain.h
+ *
+ * \brief  VVcCnfgMngrServer application error domain
+ * \author MBition - Copyright (c) 2019-2020 Daimler AG
+ * \date
+ * \note   TODO: additional notes
+ ******************************************************************************/
+
+#ifndef X6AA_CNFG_MNGR_EXECUTABLE_ERROR_DOMAIN_H
+#define X6AA_CNFG_MNGR_EXECUTABLE_ERROR_DOMAIN_H
 
 #include "ara/core/error_code.h"
 #include "ara/core/error_domain.h"
 #include "ara/core/exception.h"
 #include "vac/language/throw_or_terminate.h"
 
-namespace Application {
+namespace application {
 
 /*!
  * \brief Enumeration for all Error Code values of the Stub application.
  */
-enum class ScnParamStorageErrc : ara::core::ErrorDomain::CodeType {
+enum class X6AA_Cnfg_Mngr_ExecutableErrc : ara::core::ErrorDomain::CodeType {
     kUnknownError = 0,
     kThreadCreationFailed = 1
 };
@@ -19,7 +28,7 @@ enum class ScnParamStorageErrc : ara::core::ErrorDomain::CodeType {
 /*!
  * \brief An interface of the Stub Application Exception.
  */
-class ScnParamStorageException : public ara::core::Exception {
+class X6AA_Cnfg_Mngr_ExecutableException : public ara::core::Exception {
 public:
     using Exception::Exception;
 };
@@ -29,7 +38,7 @@ public:
  * \details This class represents an error domain responsible for all errors
  * occurring in the Stub application.
  */
-class ScnParamStorageErrorDomain final : public ara::core::ErrorDomain {
+class X6AA_Cnfg_Mngr_ExecutableErrorDomain final : public ara::core::ErrorDomain {
 public:
     /*!
      * \brief Error domain identifier (unique domain ID).
@@ -39,12 +48,12 @@ public:
     /*!
      * \brief Error code type definition.
      */
-    using Errc = ScnParamStorageErrc;
+    using Errc = X6AA_Cnfg_Mngr_ExecutableErrc;
 
     /*!
      * \brief Constructor for error domain.
      */
-    constexpr ScnParamStorageErrorDomain() noexcept
+    constexpr X6AA_Cnfg_Mngr_ExecutableErrorDomain() noexcept
         : ErrorDomain(kId)
     {
     }
@@ -55,7 +64,7 @@ public:
      */
     StringType Name() const noexcept final
     {
-        return "ScnParamStorage";
+        return "X6AA_Cnfg_Mngr_Executable";
     };
 
     /*!
@@ -73,7 +82,7 @@ public:
      */
     [[noreturn]] void ThrowAsException(const ara::core::ErrorCode& error_code) const noexcept(false)
     {
-        vac::language::ThrowOrTerminate<ScnParamStorageException>(error_code);
+        vac::language::ThrowOrTerminate<X6AA_Cnfg_Mngr_ExecutableException>(error_code);
     }
 };
 
@@ -84,7 +93,7 @@ namespace internal {
 /*!
  * \brief Global TemplateErrorDomain instance.
  */
-constexpr ScnParamStorageErrorDomain kStubErrorDomain;
+constexpr X6AA_Cnfg_Mngr_ExecutableErrorDomain kStubErrorDomain;
 } // namespace internal
 
 /*!
@@ -104,23 +113,21 @@ inline constexpr ara::core::ErrorDomain const& GetStubErrorDomain()
  * \return ErrorCode instance always references to StubErrorDomain.
  */
 inline constexpr ara::core::ErrorCode MakeErrorCode(
-    ScnParamStorageErrorDomain::Errc code,
+    X6AA_Cnfg_Mngr_ExecutableErrorDomain::Errc code,
     ara::core::ErrorDomain::SupportDataType data,
     char const* message = nullptr)
 {
-    return {static_cast<ara::core::ErrorDomain::CodeType>(code),
-            GetStubErrorDomain(),
-            data,
-            message};
+    return {
+        static_cast<ara::core::ErrorDomain::CodeType>(code), GetStubErrorDomain(), data, message};
 }
 
 /*!
  * \brief Array of error domain message strings.
  */
-constexpr std::array<ara::core::ErrorDomain::StringType, 2> kMessages {
+constexpr std::array<ara::core::ErrorDomain::StringType, 2> kMessages{
     "Unknown error.", "Error during creation of a thread."};
 
-ScnParamStorageErrorDomain::StringType ScnParamStorageErrorDomain::Message(
+X6AA_Cnfg_Mngr_ExecutableErrorDomain::StringType X6AA_Cnfg_Mngr_ExecutableErrorDomain::Message(
     ara::core::ErrorDomain::CodeType error_code) const noexcept
 {
     if (static_cast<std::size_t>(error_code) >= kMessages.size()) {
@@ -129,6 +136,6 @@ ScnParamStorageErrorDomain::StringType ScnParamStorageErrorDomain::Message(
     return kMessages[static_cast<std::size_t>(error_code)];
 }
 
-} // namespace Application
+} // namespace application
 
-#endif /* end of include guard: SCN_PARAM_STORAGE_ERROR_DOMAIN_H */
+#endif /* end of include guard: X6AA_CNFG_MNGR_EXECUTABLE_ERROR_DOMAIN_H */
