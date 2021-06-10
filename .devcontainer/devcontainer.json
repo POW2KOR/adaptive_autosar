@@ -24,6 +24,8 @@
     "type=volume,source=minerva_mpu_build_env_command_history,target=/command_history",
     "type=volume,source=minerva_mpu_build_env_bazel_cache,target=/bazel_cache"
   ],
+  "onCreateCommand":
+  "python3 devops/docker/scripts/collect_deps.py -a",
   "postStartCommand":
 	"/bin/bash ${containerWorkspaceFolder}/.devcontainer/post_start.sh ${localEnv:HOME}",
 	"extensions": [
