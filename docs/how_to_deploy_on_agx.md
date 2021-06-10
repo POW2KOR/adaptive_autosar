@@ -31,8 +31,6 @@ sudo apt-get install g++-aarch64-linux-gnu
 Build the filesystem like so:
 
 ```
-bazel build //bsw:amsr_vector_fs_socal_for_x6aa_dummy_swc_1 --config=aarch64_linux_ubuntu
-
 bazel build //:minerva_mpu_adaptive_filesystem --config=aarch64_linux_ubuntu
 ```
 
