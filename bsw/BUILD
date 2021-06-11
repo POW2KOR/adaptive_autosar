@@ -210,7 +210,7 @@ minerva_aa_bsw_module(
 minerva_aa_bsw_module(
     name = "amsr_vector_fs_sec_iam",
     cache_entries = {
-        "ADAPTIVE_MICROSAR_SIP_DIR": "$EXT_BUILD_ROOT/external/starter_kit_adaptive_xavier/mb_base_layer_adaptive_xavier/amsr_xavier",
+        "ADAPTIVE_MICROSAR_SIP_DIR": "$EXT_BUILD_ROOT/external/amsr_xavier/",
     },
     out_static_libs = [
         "libamsr-vector-fs-sec-iam_libserver.a",
@@ -238,7 +238,7 @@ minerva_aa_bsw_module(
         "CMAKE_VERBOSE_MAKEFILE": "ON",
         "ENABLE_DOXYGEN": "OFF",
         "ENABLE_EXEC_MANAGER": "ON",
-        "ADAPTIVE_MICROSAR_SIP_DIR": "$EXT_BUILD_ROOT/external/starter_kit_adaptive_xavier/mb_base_layer_adaptive_xavier/amsr_xavier",
+        "ADAPTIVE_MICROSAR_SIP_DIR": "$EXT_BUILD_ROOT/external/amsr_xavier/",
     },
     out_binaries = [
         "amsr_vector_fs_sec_cryptostack_daemon",
@@ -433,7 +433,7 @@ minerva_aa_bsw_module(
         "CMAKE_FIND_PACKAGE_NO_PACKAGE_REGISTRY": "ON",
         "ENABLE_ADDON": "OFF",
         "CMAKE_VERBOSE_MAKEFILE": "ON",
-        "ADAPTIVE_MICROSAR_SIP_DIR": "$EXT_BUILD_ROOT/external/starter_kit_adaptive_xavier/mb_base_layer_adaptive_xavier/amsr_xavier",
+        "ADAPTIVE_MICROSAR_SIP_DIR": "$EXT_BUILD_ROOT/external/amsr_xavier/",
         "BUILD_TESTS": "OFF",
         "ENABLE_DOXYGEN": "OFF",
         "ENABLE_EXEC_MANAGER": "ON",
@@ -562,7 +562,7 @@ minerva_aa_bsw_module(
     cache_entries = {
         "APPLICATION_PREFIX": "opt",
         "ENABLE_EXAMPLES": "OFF",
-        "ADAPTIVE_MICROSAR_SIP_DIR": "$EXT_BUILD_ROOT/external/starter_kit_adaptive_xavier/mb_base_layer_adaptive_xavier/amsr_xavier",
+        "ADAPTIVE_MICROSAR_SIP_DIR": "$EXT_BUILD_ROOT/external/amsr_xavier/",
     },
     out_binaries = [
         "tsyncd",
