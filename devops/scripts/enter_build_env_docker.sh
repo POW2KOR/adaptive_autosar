@@ -80,6 +80,7 @@ docker run -it \
    -e https_proxy=$https_proxy \
    -e NO_PROXY=$no_proxy \
    -e no_proxy=$no_proxy \
+   -e force_color_prompt=yes \
    --mount type=bind,source=$HOME/.gitconfig,target=/host/.gitconfig \
    --mount type=bind,source=$HOME/.ssh/gsep,target=/host/.ssh/gsep \
    --mount type=bind,source=$repo_root/.devcontainer/.bazelrc,target=/etc/bazel.bazelrc \
