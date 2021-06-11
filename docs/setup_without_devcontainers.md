@@ -26,8 +26,9 @@ manually.
 
 In order to build on your host machine, you will need the following tools:
 
-- compiler toolchains for the target platform of choice
-- Bazel
+* compiler toolchains for the target platform of choice
+* Bazel
+* up to date git LFS plugin
 
 Information on how to set these up is below.
 
@@ -93,3 +94,9 @@ sudo chmod +x /usr/local/bin/buildifier /usr/local/bin/buildozer
 
 pip3 install -r configuration/requirement.txt --ignore-installed
 ```
+
+### Git LFS
+
+The git LFS plugin that ships with Ubuntu has issues with the Gitlab OAuth tokens. Specifically, it converts them to
+all lower-case letters, which causes Gitlab to throw an "Invalid credentials" error. Please follow the steps described
+[here](https://github.com/git-lfs/git-lfs/wiki/Installation#debian-and-ubuntu) to update your git LFS plugin.
