@@ -61,7 +61,7 @@ We will only be discussing the VS Code method for now. Make sure you have the
 installed. Once this is done, open the repository with VS Code by running this command:
 
 ```
-cd minerva_mpu_adaptive
+cd adaptive_autosar
 code .
 ```
 
