@@ -12,6 +12,7 @@
 #include <iostream>
 #include <csignal>
 #include <thread>
+#include <unistd.h>
 
 namespace {
 
@@ -146,11 +147,11 @@ ara::core::Result<osabstraction::process::ProcessId> StartSignalHandlerThread()
 
     return osabstraction::thread::SetNameOfThread(thread_id, thread_name)
         .AndThen([]() -> R {
-            return R{osabstraction::process::GetProcessId()};
+            return R{getpid()};
         })
         .OrElse([thread_name](ara::core::ErrorCode) -> R {
             return R::FromError(
-                AvatarRouterApplicationErrc::kThreadCreationFailed,
+                AvatarRouterErrc::kThreadCreationFailed,
                 "Naming failed.");
         });
 }
