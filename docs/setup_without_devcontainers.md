@@ -16,9 +16,6 @@ The first start is expected to take a long time. This is because it will fetch t
 is currently around 25 GB. It might require your computer turned on overnight in order to finish the download.
 Subsequent starts will be much quicker.
 
-Currently the main drawback is that the UID of the user inside the container will not match the UID on the host
-machine. This part is handled transparently through VS Code. For most tasks, this is not needed.
-
 Bash command history and the bazel build cache will be persisted for you. However, you will have to do any clean-up
 manually.
 
