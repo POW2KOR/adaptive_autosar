@@ -39,44 +39,161 @@ PersistentMemAccessor::PersistentMemAccessor()
             key_value_storage.emplace(result_kvs.Value());
         }
     }
+    if (!InitializeVcMemoryWithDefaultValues()) {
+        logger_ctx.LogFatal() << "VcPersistentMemAccessor : unable to initialize persistent data."_sv;
+    }
 }
 
-void PersistentMemAccessor::StoreVariantCodingData(
-    uint32_t data_to_store, const std::string& key_to_store)
+bool PersistentMemAccessor::StoreVariantCodingData(
+    const std::string& key_to_store, uint32_t data_to_store)
 {
-    // try {
-    //   (*key_value_storage)->SetValue<std::uint32_t>(ara::core::StringView(key_to_store),
-    //   data_to_store);
+    bool retval = false;
+    try {
+        (*key_value_storage)
+            ->SetValue<std::uint32_t>(ara::core::StringView(key_to_store), data_to_store);
 
-    //   (*key_value_storage)->SyncToStorage();
+        (*key_value_storage)->SyncToStorage();
 
-    //   // read the data back
-    //   ara::per::Result<std::uint32_t> result_data =
-    //       (*key_value_storage)->GetValue<std::uint32_t>(ara::core::StringView(key_to_store));
+        // read the data back
+        ara::per::Result<std::uint32_t> result_data
+            = (*key_value_storage)->GetValue<std::uint32_t>(ara::core::StringView(key_to_store));
 
-    //   if (result_data.HasValue()) {
-    //     logger_ctx.LogInfo() << "VcPersistentMemAccessor : #INFO: Data is ready to read."_sv;
+        if (result_data.HasValue()) {
+            logger_ctx.LogInfo() << "VcPersistentMemAccessor : #INFO: Data is ready to read."_sv;
 
-    //     // We expect the data is an unsigned integer
-    //     uint32_t restored_value = result_data.Value();
+            // We expect the data is an unsigned integer
+            uint32_t restored_value = result_data.Value();
 
-    //     logger_ctx.LogInfo() << "VcPersistentMemAccessor : #INFO: The read value from: "_sv <<
-    //     key_to_store << " is: "_sv
-    //                           << restored_value;
-    //   } else {
-    //     logger_ctx.LogInfo() << "Data NOT ready"_sv;
-    //   }
-    // } catch (const std::exception& e) {
-    //   logger_ctx.LogError() << "Persistency caught std::exception! Message = "_sv << e.what();
-    // } catch (...) {
-    //   logger_ctx.LogError() << "Caught unknown exception!"_sv;
-    // }
+            // check the value??
+            retval = true;
+
+            logger_ctx.LogInfo() << "VcPersistentMemAccessor : #INFO: The read value from: "_sv
+                                 << key_to_store << " is: "_sv << restored_value;
+        } else {
+            logger_ctx.LogInfo() << "Data NOT ready"_sv;
+        }
+    } catch (const std::exception& e) {
+        logger_ctx.LogError() << "Persistency caught std::exception! Message = "_sv << e.what();
+    } catch (...) {
+        logger_ctx.LogError() << "Caught unknown exception!"_sv;
+    }
+    return retval;
 }
 
-void PersistentMemAccessor::InitializeVcMemoryWithDefaultValues()
+bool PersistentMemAccessor::StoreConfigureSarTriggerEvents0136VcEventData(
+    configureSarTriggerEvents0136VcEventDataType& configureSarTriggerEvents0136VcEventData)
 {
+    bool retval = true;
 
+    if (!StoreVariantCodingData(
+            "triggerEventActivationStatusByte1",
+            configureSarTriggerEvents0136VcEventData.triggerEventActivationStatusByte1)) {
+        retval = false;
+    }
+
+    if (!StoreVariantCodingData(
+            "triggerEventActivationStatusByte2",
+            configureSarTriggerEvents0136VcEventData.triggerEventActivationStatusByte2)) {
+        retval = false;
+    }
+
+    return retval;
+}
+
+bool PersistentMemAccessor::StoreActivateSarStorage0131VcEventData(
+    activateSarStorage0131VcEventDataType& activateSarStorage0131VcEventData)
+{
+    bool retval = true;
+
+    if (!StoreVariantCodingData(
+            "sarDataStorageStatus", activateSarStorage0131VcEventData.sarDataStorageStatus)) {
+        retval = false;
+    }
+
+    return retval;
+}
+
+bool PersistentMemAccessor::StoreVechicleInformation0400VcEventData(
+    vechicleInformation0400VcEventDataType& vechicleInformation0400VcEventData)
+{
+    bool retval = true;
+
+    if (!StoreVariantCodingData("body_style", vechicleInformation0400VcEventData.body_style)) {
+        retval = false;
+    }
+
+    if (!StoreVariantCodingData("veh_line", vechicleInformation0400VcEventData.veh_line)) {
+        retval = false;
+    }
+
+    if (!StoreVariantCodingData("amg_type", vechicleInformation0400VcEventData.amg_type)) {
+        retval = false;
+    }
+
+    if (!StoreVariantCodingData("guard_lvl_b4", vechicleInformation0400VcEventData.guard_lvl_b4)) {
+        retval = false;
+    }
+
+    if (!StoreVariantCodingData("reserved", vechicleInformation0400VcEventData.reserved)) {
+        retval = false;
+    }
+
+    if (!StoreVariantCodingData("guard_lvl_b7", vechicleInformation0400VcEventData.guard_lvl_b7)) {
+        retval = false;
+    }
+
+    if (!StoreVariantCodingData("hybrid_avl", vechicleInformation0400VcEventData.hybrid_avl)) {
+        retval = false;
+    }
+
+    if (!StoreVariantCodingData(
+            "plugin_hybrid_avl", vechicleInformation0400VcEventData.plugin_hybrid_avl)) {
+        retval = false;
+    }
+
+    if (!StoreVariantCodingData(
+            "veh_backdoors_avl", vechicleInformation0400VcEventData.veh_backdoors_avl)) {
+        retval = false;
+    }
+
+    return retval;
+}
+
+bool PersistentMemAccessor::InitializeVcMemoryWithDefaultValues()
+{
+    bool retval = true;
     /* initialize key value storage with default values */
+
+    /*##### configureSarTriggerEvents0136VcEventData #### */
+    configureSarTriggerEvents0136VcEventDataType configureSarTriggerEvents0136VcEventData;
+    configureSarTriggerEvents0136VcEventData.triggerEventActivationStatusByte1 = 0x0;
+    configureSarTriggerEvents0136VcEventData.triggerEventActivationStatusByte2 = 0x0;
+    if (!StoreConfigureSarTriggerEvents0136VcEventData(configureSarTriggerEvents0136VcEventData)) {
+        retval = false;
+    }
+
+    /*##### activateSarStorage0131VcEventData #### */
+    activateSarStorage0131VcEventDataType activateSarStorage0131VcEventData;
+    activateSarStorage0131VcEventData.sarDataStorageStatus = 0x1;
+    if (!StoreActivateSarStorage0131VcEventData(activateSarStorage0131VcEventData)) {
+        retval = false;
+    }
+    /*##### vechicleInformation0400VcEventData #### */
+    vechicleInformation0400VcEventDataType vechicleInformation0400VcEventData;
+    vechicleInformation0400VcEventData.body_style = 0x3F;
+    vechicleInformation0400VcEventData.veh_line = 0x3F;
+    vechicleInformation0400VcEventData.amg_type = 0xFF;
+    vechicleInformation0400VcEventData.guard_lvl_b4 = 0x0;
+    vechicleInformation0400VcEventData.reserved = 0x0;
+    vechicleInformation0400VcEventData.guard_lvl_b7 = 0x0;
+    vechicleInformation0400VcEventData.hybrid_avl = 0x0;
+    vechicleInformation0400VcEventData.plugin_hybrid_avl = 0x0;
+    vechicleInformation0400VcEventData.veh_backdoors_avl = 0x0;
+    if (!StoreVechicleInformation0400VcEventData(vechicleInformation0400VcEventData)) {
+        retval = false;
+    }
+
+    return retval;
 }
 
 bool PersistentMemAccessor::ReadVariantCodingData(

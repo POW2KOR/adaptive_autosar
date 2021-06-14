@@ -69,6 +69,29 @@ public:
         vechicleInformation0400VcEventDataType& vechicleInformation0400VcEventData);
 
     /**
+     * \brief Funktion to write configureSarTriggerEvents0136VcEventDataType in key value storage.
+     * \param configureSarTriggerEvents0136VcEventDataType Input data
+     * \return bool   success
+     */
+    bool StoreConfigureSarTriggerEvents0136VcEventData(
+        configureSarTriggerEvents0136VcEventDataType& configureSarTriggerEvents0136VcEventData);
+
+    /**
+     * \brief Funktion to write activateSarStorage0131VcEventDataType in key value storage.
+     * \param activateSarStorage0131VcEventDataType Input data
+     * \return bool   success
+     */
+    bool StoreActivateSarStorage0131VcEventData(
+        activateSarStorage0131VcEventDataType& activateSarStorage0131VcEventData);
+
+    /**
+     * \brief Funktion to write vechicleInformation0400VcEventDataType in key value storage.
+     * \param vechicleInformation0400VcEventDataType Input data
+     * \return bool   success
+     */
+    bool StoreVechicleInformation0400VcEventData(
+        vechicleInformation0400VcEventDataType& vechicleInformation0400VcEventData);
+    /**
      * \brief For checking if the initialization was successfull
      */
     bool initialization_kvs = false;
@@ -91,19 +114,20 @@ private:
      * \param uint32_t    read data
      * \return bool       success
      */
-    bool ReadVariantCodingData(const std::string& key_to_read, std::uint8_t& read_value);
+    bool ReadVariantCodingData(const std::string& key_to_read, std::uint32_t& read_value);
 
     /**
      * \brief Funktion to write data in key value storage.
      * \param data_to_store Input data which should be written in to the file
      * \param key_to_store Input data which defines the key be written in to the kvs
+     * \return bool       success
      */
-    void StoreVariantCodingData(uint32_t data_to_store, const std::string& key_to_store);
+    bool StoreVariantCodingData(const std::string& key_to_store, uint32_t data_to_store);
 
     /**
      * \brief Intialize key value storage with default values
      */
-    void InitializeVcMemoryWithDefaultValues();
+    bool InitializeVcMemoryWithDefaultValues();
 };
 
 } // namespace VariantCodingApp
