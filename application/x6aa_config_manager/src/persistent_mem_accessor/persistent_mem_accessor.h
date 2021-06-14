@@ -94,7 +94,7 @@ public:
     /**
      * \brief For checking if the initialization was successfull
      */
-    bool initialization_kvs = false;
+    bool has_kvs_initialization_failed = true;
 
 private:
     /**

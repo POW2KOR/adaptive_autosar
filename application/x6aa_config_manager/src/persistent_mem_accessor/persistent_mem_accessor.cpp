@@ -43,6 +43,7 @@ PersistentMemAccessor::PersistentMemAccessor()
         logger_ctx.LogFatal()
             << "VcPersistentMemAccessor : unable to initialize persistent data."_sv;
     }
+    has_kvs_initialization_failed = false;
 }
 
 bool PersistentMemAccessor::StoreVariantCodingData(
@@ -54,21 +55,22 @@ bool PersistentMemAccessor::StoreVariantCodingData(
             ->SetValue<std::uint32_t>(ara::core::StringView(key_to_store), data_to_store);
 
         (*key_value_storage)->SyncToStorage();
+        logger_ctx.LogInfo() << "VcPersistentMemAccessor : #Writing: store key: "_sv
+                             << key_to_store << " with value: "_sv << data_to_store;
 
         // read the data back
         ara::per::Result<std::uint32_t> result_data
             = (*key_value_storage)->GetValue<std::uint32_t>(ara::core::StringView(key_to_store));
 
         if (result_data.HasValue()) {
-            logger_ctx.LogInfo() << "VcPersistentMemAccessor : #INFO: Data is ready to read."_sv;
 
             // We expect the data is an unsigned integer
             uint32_t restored_value = result_data.Value();
 
             // check the value??
-            retval = true;
+            retval = (data_to_store == restored_value) ? true : false;
 
-            logger_ctx.LogInfo() << "VcPersistentMemAccessor : #INFO: The read value from: "_sv
+            logger_ctx.LogInfo() << "VcPersistentMemAccessor : #Writing: The written value for : "_sv
                                  << key_to_store << " is: "_sv << restored_value;
         } else {
             logger_ctx.LogInfo() << "Data NOT ready"_sv;
@@ -207,12 +209,12 @@ bool PersistentMemAccessor::ReadVariantCodingData(
             = (*key_value_storage)->GetValue<std::uint32_t>(ara::core::StringView(key_to_read));
 
         if (result_data.HasValue()) {
-            logger_ctx.LogInfo() << "VcPersistentMemAccessor : #INFO: Data is ready to read."_sv;
+            logger_ctx.LogInfo() << "VcPersistentMemAccessor : #Reading: Data is ready to read."_sv;
 
             // We expect the data is an unsigned integer
             read_value = result_data.Value();
             return_value = true;
-            logger_ctx.LogInfo() << "VcPersistentMemAccessor : #INFO: The read value from: "_sv
+            logger_ctx.LogInfo() << "VcPersistentMemAccessor : #Reading: The read value from: "_sv
                                  << key_to_read << " is: "_sv << result_data.Value();
         } else {
             logger_ctx.LogInfo() << "Data NOT ready"_sv;
