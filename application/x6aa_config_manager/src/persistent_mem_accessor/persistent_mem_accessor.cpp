@@ -40,7 +40,8 @@ PersistentMemAccessor::PersistentMemAccessor()
         }
     }
     if (!InitializeVcMemoryWithDefaultValues()) {
-        logger_ctx.LogFatal() << "VcPersistentMemAccessor : unable to initialize persistent data."_sv;
+        logger_ctx.LogFatal()
+            << "VcPersistentMemAccessor : unable to initialize persistent data."_sv;
     }
 }
 
@@ -229,17 +230,21 @@ bool PersistentMemAccessor::ReadConfigureSarTriggerEvents0136VcEventData(
     configureSarTriggerEvents0136VcEventDataType& configureSarTriggerEvents0136VcEventData)
 {
     bool retval = true;
-    if (!ReadVariantCodingData(
-            "triggerEventActivationStatusByte1",
-            configureSarTriggerEvents0136VcEventData.triggerEventActivationStatusByte1)) {
+    std::uint32_t read_value = 0;
+    if (ReadVariantCodingData("triggerEventActivationStatusByte1", read_value)) {
+        configureSarTriggerEvents0136VcEventData.triggerEventActivationStatusByte1
+            = static_cast<uint8_t>(read_value);
+    } else {
         retval = false;
     }
 
-    if (!ReadVariantCodingData(
-            "triggerEventActivationStatusByte2",
-            configureSarTriggerEvents0136VcEventData.triggerEventActivationStatusByte2)) {
+    if (ReadVariantCodingData("triggerEventActivationStatusByte2", read_value)) {
+        configureSarTriggerEvents0136VcEventData.triggerEventActivationStatusByte2
+            = static_cast<uint8_t>(read_value);
+    } else {
         retval = false;
     }
+
     return retval;
 }
 
@@ -247,52 +252,73 @@ bool PersistentMemAccessor::ReadActivateSarStorage0131VcEventData(
     activateSarStorage0131VcEventDataType& activateSarStorage0131VcEventData)
 {
     bool retval = true;
-    if (!ReadVariantCodingData(
-            "sarDataStorageStatus", activateSarStorage0131VcEventData.sarDataStorageStatus)) {
+    std::uint32_t read_value = 0;
+    if (ReadVariantCodingData("sarDataStorageStatus", read_value)) {
+        activateSarStorage0131VcEventData.sarDataStorageStatus = static_cast<uint8_t>(read_value);
+    } else {
         retval = false;
     }
+
     return retval;
 }
 
 bool PersistentMemAccessor::ReadVechicleInformation0400VcEventData(
     vechicleInformation0400VcEventDataType& vechicleInformation0400VcEventData)
 {
+    std::uint32_t read_value = 0;
     bool retval = true;
-    if (!ReadVariantCodingData("body_style", vechicleInformation0400VcEventData.body_style)) {
+
+    if (ReadVariantCodingData("body_style", read_value)) {
+        vechicleInformation0400VcEventData.body_style = static_cast<uint8_t>(read_value);
+    } else {
         retval = false;
     }
 
-    if (!ReadVariantCodingData("veh_line", vechicleInformation0400VcEventData.veh_line)) {
+    if (ReadVariantCodingData("veh_line", read_value)) {
+        vechicleInformation0400VcEventData.veh_line = static_cast<uint8_t>(read_value);
+    } else {
         retval = false;
     }
 
-    if (!ReadVariantCodingData("amg_type", vechicleInformation0400VcEventData.amg_type)) {
+    if (ReadVariantCodingData("amg_type", read_value)) {
+        vechicleInformation0400VcEventData.amg_type = static_cast<uint8_t>(read_value);
+    } else {
         retval = false;
     }
 
-    if (!ReadVariantCodingData("guard_lvl_b4", vechicleInformation0400VcEventData.guard_lvl_b4)) {
+    if (ReadVariantCodingData("guard_lvl_b4", read_value)) {
+        vechicleInformation0400VcEventData.guard_lvl_b4 = static_cast<uint8_t>(read_value);
+    } else {
         retval = false;
     }
 
-    if (!ReadVariantCodingData("reserved", vechicleInformation0400VcEventData.reserved)) {
+    if (ReadVariantCodingData("reserved", read_value)) {
+        vechicleInformation0400VcEventData.reserved = static_cast<uint8_t>(read_value);
+    } else {
         retval = false;
     }
 
-    if (!ReadVariantCodingData("guard_lvl_b7", vechicleInformation0400VcEventData.guard_lvl_b7)) {
+    if (ReadVariantCodingData("guard_lvl_b7", read_value)) {
+        vechicleInformation0400VcEventData.guard_lvl_b7 = static_cast<uint8_t>(read_value);
+    } else {
         retval = false;
     }
 
-    if (!ReadVariantCodingData("hybrid_avl", vechicleInformation0400VcEventData.hybrid_avl)) {
+    if (ReadVariantCodingData("hybrid_avl", read_value)) {
+        vechicleInformation0400VcEventData.hybrid_avl = static_cast<uint8_t>(read_value);
+    } else {
         retval = false;
     }
 
-    if (!ReadVariantCodingData(
-            "plugin_hybrid_avl", vechicleInformation0400VcEventData.plugin_hybrid_avl)) {
+    if (ReadVariantCodingData("plugin_hybrid_avl", read_value)) {
+        vechicleInformation0400VcEventData.plugin_hybrid_avl = static_cast<uint8_t>(read_value);
+    } else {
         retval = false;
     }
 
-    if (!ReadVariantCodingData(
-            "veh_backdoors_avl", vechicleInformation0400VcEventData.veh_backdoors_avl)) {
+    if (ReadVariantCodingData("veh_backdoors_avl", read_value)) {
+        vechicleInformation0400VcEventData.veh_backdoors_avl = static_cast<uint8_t>(read_value);
+    } else {
         retval = false;
     }
 
