@@ -27,23 +27,18 @@ using namespace vac::container::literals; // NOLINT(build/namespace
 
 PersistentMemAccessor::PersistentMemAccessor()
 {
+    ara::core::Result<ara::core::InstanceSpecifier> is_kvs_result
+        = ara::core::InstanceSpecifier::MakeInstanceSpecifier(
+            "X6AA_Cnfg_Mngr_Executable/X6AA_Cnfg_Mngr_ExecutableRootSwc/MyPersistencyKvsPrPortPrototype"_sv);
 
-    /**
-     * TODO: add correct value once persistency interface has been added in ECU extract
-     * enable this code later on, added for completion for now
-      ara::core::Result<ara::core::InstanceSpecifier> is_kvs_result =
-    ara::core::InstanceSpecifier::MakeInstanceSpecifier(
-          "/prPortPrototype_KeyValueStorage_1"_sv);
-
-      if (is_kvs_result.HasValue()) {
-        ara::per::Result<ara::per::SharedHandle<ara::per::KeyValueStorage>> result_kvs =
-            ara::per::OpenKeyValueStorage(is_kvs_result.Value());
+    if (is_kvs_result.HasValue()) {
+        ara::per::Result<ara::per::SharedHandle<ara::per::KeyValueStorage>> result_kvs
+            = ara::per::OpenKeyValueStorage(is_kvs_result.Value());
 
         if (result_kvs.HasValue()) {
-          key_value_storage.emplace(result_kvs.Value());
+            key_value_storage.emplace(result_kvs.Value());
         }
-      }
-    **/
+    }
 }
 
 void PersistentMemAccessor::StoreVariantCodingData(

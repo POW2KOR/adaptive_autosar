@@ -14,14 +14,13 @@
 #define PERSISTENT_MEM_ACCESSOR_H_
 
 #include "ara/log/logging.h"
+#include "ara/per/file_storage.h"
+#include "ara/per/key_value_storage.h"
+#include "ara/per/read_write_accessor.h"
+#include "ara/per/shared_handle.h"
 #include "services/ns_si_cnfg_mngr_to_dummyswc/si_x6aa_cnfg_mngr_service_reserved_skeleton.h"
 
 #include <string>
-
-// #include "ara/per/file_storage.h"
-// #include "ara/per/key_value_storage.h"
-// #include "ara/per/read_write_accessor.h"
-// #include "ara/per/shared_handle.h"
 
 namespace application {
 
@@ -60,14 +59,16 @@ public:
      */
     vechicleInformation0400VcEventDataType ReadVechicleInformation0400VcEventData();
 
+    /**
+     * \brief For checking if the initialization was successfull
+     */
+    bool initialization_kvs = false;
+
 private:
     /**
      * \brief KeyValueStorage.
      */
-    /**
-     * TODO: uncomment
-     */
-    // ara::core::Optional<ara::per::SharedHandle<ara::per::KeyValueStorage>> key_value_storage;
+    ara::core::Optional<ara::per::SharedHandle<ara::per::KeyValueStorage>> key_value_storage;
 
     /**
      * \brief Holds the logging context
