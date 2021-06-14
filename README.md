@@ -193,7 +193,9 @@ Consider the following content for your `.vscode/settings.json`:
     },
     "[markdown]": {
         "editor.rulers": [120]
-    }
+    },
+    "files.trimTrailingWhitespace": true,
+    "files.insertFinalNewline": true,
 }
 ```
 
