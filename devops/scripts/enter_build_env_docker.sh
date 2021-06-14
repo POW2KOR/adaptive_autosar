@@ -34,7 +34,7 @@ docker build \
    --build-arg REMOTE_USER=dev \
    --build-arg NEW_UID=$UID \
    --build-arg NEW_GID=`id -g $UID` \
-   --build-arg IMAGE_USER=dev - <<EOF
+   --build-arg IMAGE_USER=dev - <<"EOF"
 # This Dockerfile is used by enter_build_env_docker.sh to remap the dev user to the main user's ID.
 # VS Code does this automatically.
 
