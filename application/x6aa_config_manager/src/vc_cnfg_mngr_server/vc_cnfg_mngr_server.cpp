@@ -23,8 +23,7 @@ using vac::container::operator""_sv;
  */
 VcCnfgMngrServer::VcCnfgMngrServer()
 {
-    log_.LogInfo()
-        << "siX6aaCnfgMngrServiceReservedSkeleton Skeleton demo is initializing...";
+    log_.LogInfo() << "siX6aaCnfgMngrServiceReservedSkeleton Skeleton demo is initializing...";
 
     this->StartSignalHandlerThread().InspectError([this](ara::core::ErrorCode const& error) {
         has_initialization_failed_ = true;
@@ -55,8 +54,7 @@ VcCnfgMngrServer::~VcCnfgMngrServer()
     siX6aaCnfgMngrServiceReservedSkeleton->StopOfferService();
     siX6aaCnfgMngrServiceReservedSkeleton.reset();
 
-    log_.LogInfo()
-        << "siX6aaCnfgMngrServiceReservedSkeleton Skeleton demo shutdown initiated.";
+    log_.LogInfo() << "siX6aaCnfgMngrServiceReservedSkeleton Skeleton demo shutdown initiated.";
 
     if (signal_handler_thread.native_handle() != 0) {
         /* #10 Check if exit was requested by sending SIGTERM or SIGINT. */
@@ -64,7 +62,7 @@ VcCnfgMngrServer::~VcCnfgMngrServer()
             /* #15 Terminate the signal handler thread to shutdown. */
             if (0
                 != pthread_kill(
-                       static_cast<pthread_t>(signal_handler_thread.native_handle()), SIGTERM)) {
+                    static_cast<pthread_t>(signal_handler_thread.native_handle()), SIGTERM)) {
                 log_.LogError() << "Invalid signal!";
             }
         } else {
@@ -79,8 +77,7 @@ VcCnfgMngrServer::~VcCnfgMngrServer()
         signal_handler_thread.join();
     }
 
-    log_.LogInfo()
-        << "siX6aaCnfgMngrServiceReservedSkeleton Skeleton demo finished shutdown.";
+    log_.LogInfo() << "siX6aaCnfgMngrServiceReservedSkeleton Skeleton demo finished shutdown.";
 }
 
 /*!
@@ -125,19 +122,41 @@ std::int8_t VcCnfgMngrServer::Run()
     if (!has_initialization_failed_) {
         this->ReportApplicationState(ara::exec::ApplicationState::kRunning);
 
-        log_.LogInfo()
-            << "siX6aaCnfgMngrServiceReservedSkeleton skeleton demo application started";
+        log_.LogInfo() << "siX6aaCnfgMngrServiceReservedSkeleton skeleton demo application started";
+        /*##### send out data variant coding data #### */
+        ::DataTypes::NS_REC_activateSarStorage0131VcEventType_t::
+            REC_activateSarStorage0131VcEventType_t activateSarStorage0131VcEventData;
+        ::DataTypes::NS_REC_configureSarTriggerEvents0136VcEventType_t::
+            REC_configureSarTriggerEvents0136VcEventType_t configureSarTriggerEvents0136VcEventData;
+        ::DataTypes::NS_REC_vechicleInformation0400VcEventType_t::
+            REC_vechicleInformation0400VcEventType_t vechicleInformation0400VcEventData;
 
         while (!exit_requested) {
 
             std::this_thread::sleep_for(std::chrono::milliseconds(5000));
 
-            siX6aaCnfgMngrServiceReservedSkeleton->Ev_activateSarStorage0131VcEvent.Send(
-                memAccessor.ReadActivateSarStorage0131VcEventData());
-            siX6aaCnfgMngrServiceReservedSkeleton->Ev_configureSarTriggerEvents0136VcEvent
-                .Send(memAccessor.ReadConfigureSarTriggerEvents0136VcEventData());
-            siX6aaCnfgMngrServiceReservedSkeleton->Ev_vechicleInformation0400VcEvent.Send(
-                memAccessor.ReadVechicleInformation0400VcEventData());
+            if (memAccessor.ReadActivateSarStorage0131VcEventData(
+                    activateSarStorage0131VcEventData)) {
+                siX6aaCnfgMngrServiceReservedSkeleton->Ev_activateSarStorage0131VcEvent.Send(
+                    activateSarStorage0131VcEventData);
+            } else {
+                log_.LogError() << "Failed to read activateSarStorage0131VcEventData from storage";
+            }
+            if (memAccessor.ReadConfigureSarTriggerEvents0136VcEventData(
+                    configureSarTriggerEvents0136VcEventData)) {
+                siX6aaCnfgMngrServiceReservedSkeleton->Ev_configureSarTriggerEvents0136VcEvent.Send(
+                    configureSarTriggerEvents0136VcEventData);
+            } else {
+                log_.LogError()
+                    << "Failed to read configureSarTriggerEvents0136VcEventData from storage";
+            }
+            if (memAccessor.ReadVechicleInformation0400VcEventData(
+                    vechicleInformation0400VcEventData)) {
+                siX6aaCnfgMngrServiceReservedSkeleton->Ev_vechicleInformation0400VcEvent.Send(
+                    vechicleInformation0400VcEventData);
+            } else {
+                log_.LogError() << "Failed to read vechicleInformation0400VcEventData from storage";
+            }
         }
 
     } else {
@@ -199,8 +218,8 @@ void VcCnfgMngrServer::SignalHandlerThread()
             ara::core::Abort("Waiting for SIGTERM or SIGINT failed.");
         }
         log_.LogInfo([&sig](ara::log::LogStream& s) {
-            s << "siX6aaCnfgMngrServiceReservedSkeleton skeleton demo received signal: "
-              << sig << ".";
+            s << "siX6aaCnfgMngrServiceReservedSkeleton skeleton demo received signal: " << sig
+              << ".";
         });
 
         if ((sig == SIGTERM) || (sig == SIGINT)) {

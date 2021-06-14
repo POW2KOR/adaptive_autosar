@@ -79,93 +79,107 @@ void PersistentMemAccessor::InitializeVcMemoryWithDefaultValues()
     /* initialize key value storage with default values */
 }
 
-uint32_t PersistentMemAccessor::ReadVariantCodingData(const std::string& key_to_store)
+bool PersistentMemAccessor::ReadVariantCodingData(
+    const std::string& key_to_read, std::uint32_t& read_value)
 {
-    // try {
-    //   // read the data back
-    //   ara::per::Result<std::uint32_t> result_data =
-    //       (*key_value_storage)->GetValue<std::uint32_t>(ara::core::StringView(key_to_store));
+    bool return_value = false;
+    try {
+        // read the data back
+        ara::per::Result<std::uint32_t> result_data
+            = (*key_value_storage)->GetValue<std::uint32_t>(ara::core::StringView(key_to_read));
 
-    //   if (result_data.HasValue()) {
-    //     logger_ctx.LogInfo() << "VcPersistentMemAccessor : #INFO: Data is ready to read."_sv;
+        if (result_data.HasValue()) {
+            logger_ctx.LogInfo() << "VcPersistentMemAccessor : #INFO: Data is ready to read."_sv;
 
-    //     // We expect the data is an unsigned integer
-    //     uint32_t return_value = result_data.Value();
+            // We expect the data is an unsigned integer
+            read_value = result_data.Value();
+            return_value = true;
+            logger_ctx.LogInfo() << "VcPersistentMemAccessor : #INFO: The read value from: "_sv
+                                 << key_to_read << " is: "_sv << result_data.Value();
+        } else {
+            logger_ctx.LogInfo() << "Data NOT ready"_sv;
+        }
 
-    //     logger_ctx.LogInfo() << "VcPersistentMemAccessor : #INFO: The read value from: "_sv <<
-    //     key_to_store << " is: "_sv
-    //                           << return_value;
-    //   } else {
-    //     logger_ctx.LogInfo() << "Data NOT ready"_sv;
-    //   }
-
-    //   return return_value;
-
-    // } catch (const std::exception& e) {
-    //   logger_ctx.LogError() << "Persistency caught std::exception! Message = "_sv << e.what();
-    // } catch (...) {
-    //   logger_ctx.LogError() << "Caught unknown exception!"_sv;
-    // }
+    } catch (const std::exception& e) {
+        logger_ctx.LogError() << "Persistency caught std::exception! Message = "_sv << e.what();
+    } catch (...) {
+        logger_ctx.LogError() << "Caught unknown exception!"_sv;
+    }
+    return return_value;
 }
 
-configureSarTriggerEvents0136VcEventDataType PersistentMemAccessor::
-    ReadConfigureSarTriggerEvents0136VcEventData()
+bool PersistentMemAccessor::ReadConfigureSarTriggerEvents0136VcEventData(
+    configureSarTriggerEvents0136VcEventDataType& configureSarTriggerEvents0136VcEventData)
 {
+    bool retval = true;
+    if (!ReadVariantCodingData(
+            "triggerEventActivationStatusByte1",
+            configureSarTriggerEvents0136VcEventData.triggerEventActivationStatusByte1)) {
+        retval = false;
+    }
 
-    /**
-     * TODO: these values are hardcoded here. Currently there is no information on persistency
-     * interface in ECU extract. This code shall be updated once persistency interface has been
-     * added
-     */
-
-    configureSarTriggerEvents0136VcEventDataType configureSarTriggerEvents0136VcEventData;
-
-    /*##### configureSarTriggerEvents0136VcEventData #### */
-    configureSarTriggerEvents0136VcEventData.triggerEventActivationStatusByte1 = 0x0;
-    configureSarTriggerEvents0136VcEventData.triggerEventActivationStatusByte2 = 0x0;
-
-    return configureSarTriggerEvents0136VcEventData;
+    if (!ReadVariantCodingData(
+            "triggerEventActivationStatusByte2",
+            configureSarTriggerEvents0136VcEventData.triggerEventActivationStatusByte2)) {
+        retval = false;
+    }
+    return retval;
 }
 
-activateSarStorage0131VcEventDataType PersistentMemAccessor::ReadActivateSarStorage0131VcEventData()
+bool PersistentMemAccessor::ReadActivateSarStorage0131VcEventData(
+    activateSarStorage0131VcEventDataType& activateSarStorage0131VcEventData)
 {
-
-    /**
-     * TODO: these values are hardcoded here. Currently there is no information on persistency
-     * interface in ECU extract. This code shall be updated once persistency interface has been
-     * added
-     */
-
-    activateSarStorage0131VcEventDataType activateSarStorage0131VcEventData;
-
-    /*##### activateSarStorage0131VcEventData #### */
-    activateSarStorage0131VcEventData.sarDataStorageStatus = 0x1;
-
-    return activateSarStorage0131VcEventData;
+    bool retval = true;
+    if (!ReadVariantCodingData(
+            "sarDataStorageStatus", activateSarStorage0131VcEventData.sarDataStorageStatus)) {
+        retval = false;
+    }
+    return retval;
 }
 
-vechicleInformation0400VcEventDataType PersistentMemAccessor::
-    ReadVechicleInformation0400VcEventData()
+bool PersistentMemAccessor::ReadVechicleInformation0400VcEventData(
+    vechicleInformation0400VcEventDataType& vechicleInformation0400VcEventData)
 {
+    bool retval = true;
+    if (!ReadVariantCodingData("body_style", vechicleInformation0400VcEventData.body_style)) {
+        retval = false;
+    }
 
-    /**
-     * TODO: these values are hardcoded here. Currently there is no information on persistency
-     * interface in ECU extract. This code shall be updated once persistency interface has been
-     * added
-     */
+    if (!ReadVariantCodingData("veh_line", vechicleInformation0400VcEventData.veh_line)) {
+        retval = false;
+    }
 
-    vechicleInformation0400VcEventDataType vechicleInformation0400VcEventData;
-    vechicleInformation0400VcEventData.body_style = 0x3F;
-    vechicleInformation0400VcEventData.veh_line = 0x3F;
-    vechicleInformation0400VcEventData.amg_type = 0xFF;
-    vechicleInformation0400VcEventData.guard_lvl_b4 = 0x0;
-    vechicleInformation0400VcEventData.reserved = 0x0;
-    vechicleInformation0400VcEventData.guard_lvl_b7 = 0x0;
-    vechicleInformation0400VcEventData.hybrid_avl = 0x0;
-    vechicleInformation0400VcEventData.plugin_hybrid_avl = 0x0;
-    vechicleInformation0400VcEventData.veh_backdoors_avl = 0x0;
+    if (!ReadVariantCodingData("amg_type", vechicleInformation0400VcEventData.amg_type)) {
+        retval = false;
+    }
 
-    return vechicleInformation0400VcEventData;
+    if (!ReadVariantCodingData("guard_lvl_b4", vechicleInformation0400VcEventData.guard_lvl_b4)) {
+        retval = false;
+    }
+
+    if (!ReadVariantCodingData("reserved", vechicleInformation0400VcEventData.reserved)) {
+        retval = false;
+    }
+
+    if (!ReadVariantCodingData("guard_lvl_b7", vechicleInformation0400VcEventData.guard_lvl_b7)) {
+        retval = false;
+    }
+
+    if (!ReadVariantCodingData("hybrid_avl", vechicleInformation0400VcEventData.hybrid_avl)) {
+        retval = false;
+    }
+
+    if (!ReadVariantCodingData(
+            "plugin_hybrid_avl", vechicleInformation0400VcEventData.plugin_hybrid_avl)) {
+        retval = false;
+    }
+
+    if (!ReadVariantCodingData(
+            "veh_backdoors_avl", vechicleInformation0400VcEventData.veh_backdoors_avl)) {
+        retval = false;
+    }
+
+    return retval;
 }
 
 } // namespace VariantCodingApp

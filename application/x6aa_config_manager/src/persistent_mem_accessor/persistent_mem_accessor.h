@@ -43,21 +43,30 @@ public:
 
     /**
      * \brief Funktion to construct and read ReadConfigureSarTriggerEvents0136VcEventData in key
-     * value storage. \return configureSarTriggerEvents0136VcEventDataType Output data
+     * value storage.
+     * \param configureSarTriggerEvents0136VcEventDataType data
+     * \return bool   success
      */
-    configureSarTriggerEvents0136VcEventDataType ReadConfigureSarTriggerEvents0136VcEventData();
+    bool ReadConfigureSarTriggerEvents0136VcEventData(
+        configureSarTriggerEvents0136VcEventDataType& configureSarTriggerEvents0136VcEventData);
 
     /**
      * \brief Funktion to construct and read ReadActivateSarStorage0131VcEventData in key value
-     * storage. \return activateSarStorage0131VcEventDataType Output data
+     * storage.
+     * \param activateSarStorage0131VcEventDataType  data
+     * \return bool   success
      */
-    activateSarStorage0131VcEventDataType ReadActivateSarStorage0131VcEventData();
+    bool ReadActivateSarStorage0131VcEventData(
+        activateSarStorage0131VcEventDataType& activateSarStorage0131VcEventData);
 
     /**
      * \brief Funktion to construct and read ReadVechicleInformation0400VcEventData in key value
-     * storage. \return vechicleInformation0400VcEventDataType Output data
+     * storage.
+     * \param vechicleInformation0400VcEventDataType data
+     * \return bool   success
      */
-    vechicleInformation0400VcEventDataType ReadVechicleInformation0400VcEventData();
+    bool ReadVechicleInformation0400VcEventData(
+        vechicleInformation0400VcEventDataType& vechicleInformation0400VcEventData);
 
     /**
      * \brief For checking if the initialization was successfull
@@ -79,9 +88,10 @@ private:
     /**
      * \brief Funktion to read data in key value storage.
      * \param key_to_read Input data which defines the key be written in to the kvs
-     * \return uint32_t    Output data
+     * \param uint32_t    read data
+     * \return bool       success
      */
-    uint32_t ReadVariantCodingData(const std::string& key_to_read);
+    bool ReadVariantCodingData(const std::string& key_to_read, std::uint8_t& read_value);
 
     /**
      * \brief Funktion to write data in key value storage.
