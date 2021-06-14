@@ -341,6 +341,10 @@ minerva_aa_codegen_declare(
     path_to_generators = "Generators",
 )
 
+##########################################################################
+# These are file groups and libraries required for DiagnosticManagerDeamon
+##########################################################################
+
 cc_library(
     name = "diag_daemon_impl",
     srcs = glob(["BSW/amsr-vector-fs-diagnosticmanager/app/diagnostic_manager_daemon_impl/src/**"]),
@@ -354,6 +358,7 @@ cc_library(
         "ENABLE_EXEC_MANAGER=ON",
     ],
     strip_include_prefix = "BSW/amsr-vector-fs-diagnosticmanager/app/diagnostic_manager_daemon_impl/include",
+    visibility = ["//visibility:public"],
     deps = [
         "@minerva_mpu_adaptive//bsw:amsr_vector_fs_applicationbase",
         "@minerva_mpu_adaptive//bsw:amsr_vector_fs_diagnosticrpc",
@@ -370,26 +375,67 @@ cc_library(
     ],
 )
 
-# NOTE : This binary currently doesn't compile and
-# throw linking errors as it is missing generated files.
-cc_binary(
-    name = "diagnostic_manager_deamon_executable",
+filegroup(
+    name = "amsr_vector_fs_diagnosticmanager_main",
     srcs = [
         "BSW/amsr-vector-fs-diagnosticmanager/app/diagnostic_manager_daemon/src/main.cpp",
-        #Add the generated srcs for DiagnosticManagerDaemonExecutable
     ],
-    copts = [
-        "-std=c++14",
-    ],
-    features = [
-        "pthread",
-    ],
-    linkstatic = 1,
-    local_defines = [
-        "VIRTUALMOCK=",
-        "ENABLE_EXEC_MANAGER=ON",
-    ],
-    deps = [
-        ":diag_daemon_impl",
-    ],
+    visibility = ["//visibility:public"],
+)
+
+filegroup(
+    name = "lib_doip_binding_srcs",
+    srcs = glob(["BSW/amsr-vector-fs-doipbinding/lib/DoIpBinding/src/**/*.cpp"]),
+    visibility = ["//visibility:public"],
+)
+
+filegroup(
+    name = "diag_deamon_rpc_srcs",
+    srcs = glob(["BSW/amsr-vector-fs-diagnosticrpc/lib/DiagDaemonRpc/src/**/*.cpp"]),
+    visibility = ["//visibility:public"],
+)
+
+filegroup(
+    name = "diag_com_deamon_srcs",
+    srcs = glob(["BSW/amsr-vector-fs-diagnosticrpccombinding/lib/DiagComDaemon/src/**/*.cpp"]),
+    visibility = ["//visibility:public"],
+)
+
+# Headrds only library for headers inside src folder
+# [BSW/amsr-vector-fs-doipbinding/lib/DoIpBinding/src]
+# This is required so that the headers inside this folder
+# is visible to scrs
+cc_library(
+    name = "lib_doip_binding_hdrs_lib",
+    hdrs = glob(["BSW/amsr-vector-fs-doipbinding/lib/DoIpBinding/src/**/*.h"]),
+    strip_include_prefix = "BSW/amsr-vector-fs-doipbinding/lib/DoIpBinding/src",
+    visibility = ["//visibility:public"],
+)
+
+cc_library(
+    name = "diag_deamon_rpc_src_hdrs_lib",
+    hdrs = glob(["BSW/amsr-vector-fs-diagnosticrpc/lib/DiagDaemonRpc/src/**/*.h"]),
+    strip_include_prefix = "BSW/amsr-vector-fs-diagnosticrpc/lib/DiagDaemonRpc/src",
+    visibility = ["//visibility:public"],
+)
+
+cc_library(
+    name = "diag_deamon_rpc_hdrs_lib",
+    hdrs = glob(["BSW/amsr-vector-fs-diagnosticrpc/lib/DiagDaemonRpc/include/**/*.h"]),
+    strip_include_prefix = "BSW/amsr-vector-fs-diagnosticrpc/lib/DiagDaemonRpc/include",
+    visibility = ["//visibility:public"],
+)
+
+cc_library(
+    name = "diag_com_deamon_src_hdrs_lib",
+    hdrs = glob(["BSW/amsr-vector-fs-diagnosticrpccombinding/lib/DiagComDaemon/src/**/*.h"]),
+    strip_include_prefix = "BSW/amsr-vector-fs-diagnosticrpccombinding/lib/DiagComDaemon/src",
+    visibility = ["//visibility:public"],
+)
+
+cc_library(
+    name = "diag_com_deamon_hdrs_lib",
+    hdrs = glob(["BSW/amsr-vector-fs-diagnosticrpccombinding/lib/DiagComDaemon/include/**/*.h"]),
+    strip_include_prefix = "BSW/amsr-vector-fs-diagnosticrpccombinding/lib/DiagComDaemon/include",
+    visibility = ["//visibility:public"],
 )
