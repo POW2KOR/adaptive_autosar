@@ -139,11 +139,9 @@ minerva_aa_codegen_rule(
         "SelfDiagnosticAgentExecutable.*",
         "TransmissionManager_ROVExecutable.*",
         "DiagnosticManagerDeamonExecutable.*",
+        "X6AA_Cnfg_Mngr_Executable.*amsr-vector-fs-per-libpersistency.*",
     ],
     outs_list_dict = {
-        "persistency_cmake": [
-            "X6AA_Cnfg_Mngr_Executable/amsr-vector-fs-per-libpersistency.cmake",
-        ],
         "persistency_config_json": [
             "X6AA_Cnfg_Mngr_Executable/etc/per_key_value_storage_config.json",
         ],
