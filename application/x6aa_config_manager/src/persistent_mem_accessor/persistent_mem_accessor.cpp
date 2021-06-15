@@ -37,13 +37,9 @@ PersistentMemAccessor::PersistentMemAccessor()
 
         if (result_kvs.HasValue()) {
             key_value_storage.emplace(result_kvs.Value());
+            logger_ctx.LogFatal() << "VcPersistentMemAccessor : able to open key value storage."_sv;
         }
     }
-    if (!InitializeVcMemoryWithDefaultValues()) {
-        logger_ctx.LogFatal()
-            << "VcPersistentMemAccessor : unable to initialize persistent data."_sv;
-    }
-    has_kvs_initialization_failed = false;
 }
 
 bool PersistentMemAccessor::StoreVariantCodingData(
@@ -55,8 +51,8 @@ bool PersistentMemAccessor::StoreVariantCodingData(
             ->SetValue<std::uint32_t>(ara::core::StringView(key_to_store), data_to_store);
 
         (*key_value_storage)->SyncToStorage();
-        logger_ctx.LogInfo() << "VcPersistentMemAccessor : #Writing: store key: "_sv
-                             << key_to_store << " with value: "_sv << data_to_store;
+        logger_ctx.LogInfo() << "VcPersistentMemAccessor : #Writing: store key: " << key_to_store
+                             << " with value: " << data_to_store;
 
         // read the data back
         ara::per::Result<std::uint32_t> result_data
@@ -70,13 +66,13 @@ bool PersistentMemAccessor::StoreVariantCodingData(
             // check the value??
             retval = (data_to_store == restored_value) ? true : false;
 
-            logger_ctx.LogInfo() << "VcPersistentMemAccessor : #Writing: The written value for : "_sv
-                                 << key_to_store << " is: "_sv << restored_value;
+            logger_ctx.LogInfo() << "VcPersistentMemAccessor : #Writing: The written value for : "
+                                 << key_to_store << " is: " << restored_value;
         } else {
             logger_ctx.LogInfo() << "Data NOT ready"_sv;
         }
     } catch (const std::exception& e) {
-        logger_ctx.LogError() << "Persistency caught std::exception! Message = "_sv << e.what();
+        logger_ctx.LogError() << "Persistency caught std::exception! Message = " << e.what();
     } catch (...) {
         logger_ctx.LogError() << "Caught unknown exception!"_sv;
     }
@@ -199,29 +195,59 @@ bool PersistentMemAccessor::InitializeVcMemoryWithDefaultValues()
     return retval;
 }
 
+bool PersistentMemAccessor::tryReadingDataFromKvs(
+    const std::string& key_to_read, std::uint32_t& read_value)
+{
+    // read the data back
+    bool return_value = false;
+    ara::per::Result<std::uint32_t> result_data
+        = (*key_value_storage)->GetValue<std::uint32_t>(ara::core::StringView(key_to_read));
+
+    if (result_data.HasValue()) {
+        logger_ctx.LogInfo() << "VcPersistentMemAccessor : #Reading: Data is ready to read."_sv;
+
+        // We expect the data is an unsigned integer
+        read_value = result_data.Value();
+        return_value = true;
+        logger_ctx.LogInfo() << "VcPersistentMemAccessor : #Reading: The read value from: "_sv
+                             << key_to_read << " is: " << result_data.Value();
+        return_value = true;
+    } else {
+        logger_ctx.LogInfo() << "VcPersistentMemAccessor : #Reading: Data NOT ready"_sv;
+    }
+    return return_value;
+}
+
 bool PersistentMemAccessor::ReadVariantCodingData(
     const std::string& key_to_read, std::uint32_t& read_value)
 {
     bool return_value = false;
     try {
-        // read the data back
-        ara::per::Result<std::uint32_t> result_data
-            = (*key_value_storage)->GetValue<std::uint32_t>(ara::core::StringView(key_to_read));
-
-        if (result_data.HasValue()) {
-            logger_ctx.LogInfo() << "VcPersistentMemAccessor : #Reading: Data is ready to read."_sv;
-
-            // We expect the data is an unsigned integer
-            read_value = result_data.Value();
-            return_value = true;
-            logger_ctx.LogInfo() << "VcPersistentMemAccessor : #Reading: The read value from: "_sv
-                                 << key_to_read << " is: "_sv << result_data.Value();
-        } else {
-            logger_ctx.LogInfo() << "Data NOT ready"_sv;
+        /* we first need to store some data before reading it. If application tries to read a data
+         * which doesn't exist then GetValue API return an error.
+         * here we have implemented lazy swithcing approach. If the first read is not successful
+         * then its assumed that data might not be initilaized. So, initialize the kvs data base and
+         * try reading the same key again. If it still fails then it's due to an issue in accessing
+         * persistent memory.
+         */
+        return_value = tryReadingDataFromKvs(key_to_read, read_value);
+        if (!return_value && !has_kvs_initialized_with_default_values) {
+            // data not found in the database, try initializing the data
+            logger_ctx.LogInfo()
+                << "VcPersistentMemAccessor : #Initializing: data not found in the database, try initializing the database."_sv;
+            if (!InitializeVcMemoryWithDefaultValues()) {
+                logger_ctx.LogFatal()
+                    << "VcPersistentMemAccessor : #Initializing: unable to initialize persistent data."_sv;
+            } else {
+                logger_ctx.LogInfo()
+                    << "VcPersistentMemAccessor : #Initializing: kvs initialized with default values."_sv;
+                return_value
+                    = tryReadingDataFromKvs(key_to_read, read_value); // try reading once again
+            }
+            has_kvs_initialized_with_default_values = true; // set to true, don't try multiple times
         }
-
     } catch (const std::exception& e) {
-        logger_ctx.LogError() << "Persistency caught std::exception! Message = "_sv << e.what();
+        logger_ctx.LogError() << "Persistency caught std::exception! Message = " << e.what();
     } catch (...) {
         logger_ctx.LogError() << "Caught unknown exception!"_sv;
     }

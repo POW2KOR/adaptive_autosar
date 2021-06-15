@@ -94,7 +94,7 @@ public:
     /**
      * \brief For checking if the initialization was successfull
      */
-    bool has_kvs_initialization_failed = true;
+    bool has_kvs_initialized_with_default_values = false;
 
 private:
     /**
@@ -116,6 +116,13 @@ private:
      */
     bool ReadVariantCodingData(const std::string& key_to_read, std::uint32_t& read_value);
 
+    /**
+     * \brief A sub funktion to read data in key value storage.
+     * \param key_to_read Input data which defines the key be written in to the kvs
+     * \param uint32_t    read data
+     * \return bool       success
+     */
+    bool tryReadingDataFromKvs(const std::string& key_to_read, std::uint32_t& read_value);
     /**
      * \brief Funktion to write data in key value storage.
      * \param data_to_store Input data which should be written in to the file
