@@ -152,7 +152,7 @@ instance to drop to a login prompt once systemd has finished booting the system.
 ### Connecting to remote DLT
 
 All of the applications apart from the `log-daemon` are configured to output remote DLT over TCP at IP address
-`10.21.17.98` and port `49361`.
+`10.21.17.98` and port `49361`. Start dlt-viewer on host with ip=localhost and port=13490 to access it.
 
 ## Miscellaneous
 
