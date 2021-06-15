@@ -100,8 +100,6 @@ cc_binary(
         "src/application.h",
         "src/application_v1.cpp",
         "src/main.cpp",
-        "src/update_app_demo_error_domain.cpp",
-        "src/update_app_demo_error_domain.h",
         ":app_v1_applicationbase_init_deinit_srcs",
     ],
     copts = [
@@ -112,6 +110,7 @@ cc_binary(
     ],
     linkstatic = 1,
     deps = [
+        "//application/common:application_base",
         "//bsw:amsr_vector_fs_applicationbase",
         "//bsw:amsr_vector_fs_em_executionmanager",
         "//bsw:amsr_vector_fs_libvac",
@@ -125,8 +124,6 @@ cc_binary(
         "src/application.h",
         "src/application_v2.cpp",
         "src/main.cpp",
-        "src/update_app_demo_error_domain.cpp",
-        "src/update_app_demo_error_domain.h",
         ":app_v1_applicationbase_init_deinit_srcs",
     ],
     copts = [
@@ -137,6 +134,7 @@ cc_binary(
     ],
     linkstatic = 1,
     deps = [
+        "//application/common:application_base",
         "//bsw:amsr_vector_fs_applicationbase",
         "//bsw:amsr_vector_fs_em_executionmanager",
         "//bsw:amsr_vector_fs_libvac",

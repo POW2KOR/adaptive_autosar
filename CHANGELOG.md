@@ -12,3 +12,5 @@ files get built into the filesystem using this package.
 `bazel build` with `--//:mt`.
 * Implemented a cyclic dependency workaround for socal which doesn't require extra targets and extra commands to be
 run.
+* An application base library has been created to contain the common parts for Adaptive applications. Applications
+should add `//application/common:application_base` to their `deps` and derive from the base class.

@@ -1,3 +1,4 @@
+
 /*!********************************************************************************************************************
  *  COPYRIGHT
  *  -------------------------------------------------------------------------------------------------------------------
@@ -15,8 +16,8 @@
  *        \brief Defines the error domain for the Template Component.
  *
  *********************************************************************************************************************/
-#ifndef SRC_UPDATE_APP_DEMO_ERROR_DOMAIN_H_
-#define SRC_UPDATE_APP_DEMO_ERROR_DOMAIN_H_
+#ifndef ERROR_DOMAIN_H_
+#define ERROR_DOMAIN_H_
 
 /**********************************************************************************************************************
  *  INCLUDES
@@ -29,23 +30,23 @@
 namespace application {
 
 /*!
- * \brief Enumeration for all Error Code values of the Update_APP Demo.
+ * \brief Enumeration for all Error Code values of the ApplicationBase.
  */
-enum class UpdateAppDemoErrc : ara::core::ErrorDomain::CodeType { kUnknownError = 0, kThreadCreationFailed = 1 };
+enum class ApplicationBaseErrc : ara::core::ErrorDomain::CodeType { kUnknownError = 0, kThreadCreationFailed = 1 };
 
 /*!
  * \brief An interface of the Template Exception.
  */
-class UpdateAppDemoException : public ara::core::Exception {
+class ApplicationBaseException : public ara::core::Exception {
  public:
   using Exception::Exception;
 };
 
 /*!
  * \brief Template Error Domain class.
- * \details This class represents an error domain responsible for all errors occurring in the Update_APP Demo.
+ * \details This class represents an error domain responsible for all errors occurring in the ApplicationBase.
  */
-class UpdateAppDemoErrorDomain final : public ara::core::ErrorDomain {
+class ApplicationBaseErrorDomain : public ara::core::ErrorDomain {
  public:
   /*!
    * \brief Template error domain identifier (unique domain ID).
@@ -55,18 +56,18 @@ class UpdateAppDemoErrorDomain final : public ara::core::ErrorDomain {
   /*!
    * \brief Error code type definition.
    */
-  using Errc = UpdateAppDemoErrc;
+  using Errc = ApplicationBaseErrc;
 
   /*!
    * \brief Constructor for TemplateErrorDomain.
    */
-  constexpr UpdateAppDemoErrorDomain() noexcept : ErrorDomain(kId) {}
+  constexpr ApplicationBaseErrorDomain() noexcept : ErrorDomain(kId) {}
 
   /*!
    * \brief Return the name for this error domain.
    * \return The name as a null-terminated string, never nullptr.
    */
-  StringType Name() const noexcept final { return "UpdateAppDemo"; };
+  StringType Name() const noexcept final { return "ApplicationBase"; };
 
   /*!
    * \brief Return the textual description for the given error code.
@@ -81,7 +82,7 @@ class UpdateAppDemoErrorDomain final : public ara::core::ErrorDomain {
    * \param error_code The ErrorCode to be thrown.
    */
   [[noreturn]] void ThrowAsException(const ara::core::ErrorCode& error_code) const noexcept(false) {
-    vac::language::ThrowOrTerminate<UpdateAppDemoException>(error_code);
+    vac::language::ThrowOrTerminate<ApplicationBaseException>(error_code);
   }
 };
 
@@ -92,7 +93,7 @@ namespace internal {
 /*!
  * \brief Global TemplateErrorDomain instance.
  */
-constexpr UpdateAppDemoErrorDomain kTemplateErrorDomain;
+constexpr ApplicationBaseErrorDomain kTemplateErrorDomain;
 }  // namespace internal
 
 /*!
@@ -108,7 +109,7 @@ inline constexpr ara::core::ErrorDomain const& GetTemplateErrorDomain() { return
  * \param message Additional error message supplied by user code.
  * \return ErrorCode instance always references to TemplateErrorDomain.
  */
-inline constexpr ara::core::ErrorCode MakeErrorCode(UpdateAppDemoErrorDomain::Errc code,
+inline constexpr ara::core::ErrorCode MakeErrorCode(ApplicationBaseErrorDomain::Errc code,
                                                     ara::core::ErrorDomain::SupportDataType data,
                                                     char const* message = nullptr) {
   return {static_cast<ara::core::ErrorDomain::CodeType>(code), GetTemplateErrorDomain(), data, message};
@@ -116,4 +117,4 @@ inline constexpr ara::core::ErrorCode MakeErrorCode(UpdateAppDemoErrorDomain::Er
 
 }  // namespace application
 
-#endif  // SRC_UPDATE_APP_DEMO_ERROR_DOMAIN_H_
+#endif  // ERROR_DOMAIN_H_

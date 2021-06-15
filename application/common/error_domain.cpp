@@ -15,7 +15,7 @@
  *        \brief  Defines the error domain for the Template Component.
  *
  *********************************************************************************************************************/
-#include "update_app_demo_error_domain.h"
+#include "error_domain.h"
 
 namespace application {
 
@@ -25,7 +25,7 @@ namespace application {
 constexpr std::array<ara::core::ErrorDomain::StringType, 5> kMessages{
     {"Unknown error.", "Error during creation of a thread."}};
 
-UpdateAppDemoErrorDomain::StringType UpdateAppDemoErrorDomain::Message(ara::core::ErrorDomain::CodeType error_code)
+ApplicationBaseErrorDomain::StringType ApplicationBaseErrorDomain::Message(ara::core::ErrorDomain::CodeType error_code)
   const noexcept {
   if (static_cast<std::size_t>(error_code) >= kMessages.size()) {
     error_code = 0;
