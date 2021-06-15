@@ -4,6 +4,17 @@ load("@minerva_mpu_adaptive//:bazel/defs.bzl", "minerva_aa_codegen_rule")
 package(default_visibility = ["//visibility:public"])
 
 filegroup(
+    name = "app_arxml",
+    srcs = [
+        "arxml/X6AA_IDC_Config_Manager_PersistencyDeployment.arxml",
+        "arxml/X6AA_IDC_Config_Manager_PersistencyDesign.arxml",
+        "arxml/X6AA_IDC_Config_Manager_PersistencyPortPrototypeMapping.arxml",
+        "//arxmls:x6aa_idc_ecu_extract_arxml",
+        "@amsr_xavier//:mex_arxml",
+    ],
+)
+
+filegroup(
     name = "logging_config",
     srcs = ["configs/logging_config.json"],
 )
@@ -16,8 +27,7 @@ filegroup(
 minerva_aa_codegen_rule(
     name = "exec_config_gen_rule",
     arxml_srcs = [
-        "//arxmls:x6aa_idc_ecu_extract_arxml",
-        "@amsr_xavier//:mex_arxml",
+        ":app_arxml",
     ],
     generators = [
         "@amsr_xavier//:generator_amsr_em_exec_config",
@@ -41,8 +51,7 @@ minerva_aa_codegen_rule(
 minerva_aa_codegen_rule(
     name = "applicationbase_init_deinit_gen_rule",
     arxml_srcs = [
-        "//arxmls:x6aa_idc_ecu_extract_arxml",
-        "@amsr_xavier//:mex_arxml",
+        ":app_arxml",
     ],
     generators = [
         "@amsr_xavier//:generator_amsr_applicationbase_init_deinit",
@@ -66,8 +75,7 @@ minerva_aa_codegen_rule(
 minerva_aa_codegen_rule(
     name = "updatemanager_swcluster_meta_gen_rule",
     arxml_srcs = [
-        "//arxmls:x6aa_idc_ecu_extract_arxml",
-        "@amsr_xavier//:mex_arxml",
+        ":app_arxml",
     ],
     generators = [
         "@amsr_xavier//:generator_amsr_updatemanager_swcluster_meta",
@@ -91,8 +99,7 @@ minerva_aa_codegen_rule(
 minerva_aa_codegen_rule(
     name = "updatemanager_daemon_gen_rule",
     arxml_srcs = [
-        "//arxmls:x6aa_idc_ecu_extract_arxml",
-        "@amsr_xavier//:mex_arxml",
+        ":app_arxml",
     ],
     generators = [
         "@amsr_xavier//:generator_amsr_updatemanager_daemon",
@@ -119,8 +126,7 @@ minerva_aa_codegen_rule(
 minerva_aa_codegen_rule(
     name = "persistency_config_gen_rule",
     arxml_srcs = [
-        "//arxmls:x6aa_idc_ecu_extract_arxml",
-        "@amsr_xavier//:mex_arxml",
+        ":app_arxml",
     ],
     generators = [
         "@amsr_xavier//:generator_amsr_persistency_config",
@@ -133,17 +139,28 @@ minerva_aa_codegen_rule(
         "SelfDiagnosticAgentExecutable.*",
         "TransmissionManager_ROVExecutable.*",
         "DiagnosticManagerDeamonExecutable.*",
+        "X6AA_Cnfg_Mngr_Executable.*amsr-vector-fs-per-libpersistency.*",
     ],
     outs_list_dict = {
-        # Currently there are no ara::per interfaces
+        "persistency_config_json": [
+            "X6AA_Cnfg_Mngr_Executable/etc/per_key_value_storage_config.json",
+        ],
+        "persistency_hdrs": [
+            "X6AA_Cnfg_Mngr_Executable/include/ara/per/detail/dynamic_key_value_storage_decl.h",
+            "X6AA_Cnfg_Mngr_Executable/include/ara/per/internal/config_validation_keys.h",
+            "X6AA_Cnfg_Mngr_Executable/include/ara/per/key_value_storage_data_visitor.h",
+            "X6AA_Cnfg_Mngr_Executable/include/ara/per/key_value_storage_variant.h",
+        ],
+        "persistency_srcs": [
+            "X6AA_Cnfg_Mngr_Executable/src/ara/per/dynamic_object_parser.cpp",
+        ],
     },
 )
 
 minerva_aa_codegen_rule(
     name = "modeldatatypes_api_gen_rule",
     arxml_srcs = [
-        "//arxmls:x6aa_idc_ecu_extract_arxml",
-        "@amsr_xavier//:mex_arxml",
+        ":app_arxml",
     ],
     generators = [
         "@amsr_xavier//:generator_amsr_modelleddatatypes_api",
@@ -170,8 +187,7 @@ minerva_aa_codegen_rule(
 minerva_aa_codegen_rule(
     name = "someipbinding_gen_rule",
     arxml_srcs = [
-        "//arxmls:x6aa_idc_ecu_extract_arxml",
-        "@amsr_xavier//:mex_arxml",
+        ":app_arxml",
     ],
     generators = [
         "@amsr_xavier//:generator_amsr_someipbinding",
@@ -223,8 +239,7 @@ minerva_aa_codegen_rule(
 minerva_aa_codegen_rule(
     name = "someipprotocol_gen_rule",
     arxml_srcs = [
-        "//arxmls:x6aa_idc_ecu_extract_arxml",
-        "@amsr_xavier//:mex_arxml",
+        ":app_arxml",
     ],
     generators = [
         "@amsr_xavier//:generator_amsr_someipprotocol",
@@ -263,8 +278,7 @@ minerva_aa_codegen_rule(
 minerva_aa_codegen_rule(
     name = "socal_gen_rule",
     arxml_srcs = [
-        "//arxmls:x6aa_idc_ecu_extract_arxml",
-        "@amsr_xavier//:mex_arxml",
+        ":app_arxml",
     ],
     generators = [
         "@amsr_xavier//:generator_amsr_socal",
@@ -315,8 +329,7 @@ minerva_aa_codegen_rule(
 minerva_aa_codegen_rule(
     name = "ipcbinding_gen_rule",
     arxml_srcs = [
-        "//arxmls:x6aa_idc_ecu_extract_arxml",
-        "@amsr_xavier//:mex_arxml",
+        ":app_arxml",
     ],
     generators = [
         "@amsr_xavier//:generator_amsr_ipcbinding",
@@ -388,6 +401,14 @@ cc_library(
 )
 
 cc_library(
+    name = "persistency_hdrs_lib",
+    hdrs = [
+        ":persistency_hdrs",
+    ],
+    strip_include_prefix = "persistency_hdrs/output/X6AA_Cnfg_Mngr_Executable/include",
+)
+
+cc_library(
     name = "socal_srcs_lib",
     srcs = [
         ":ipcbinding_srcs",
@@ -423,8 +444,12 @@ cc_binary(
         "src/x6aa_cnfg_mngr_executable_error_domain.h",
         ":applicationbase_init_deinit_srcs",
         ":ipc_binding_life_cycle_manager",
+        ":persistency_srcs",
         ":someip_binding_initializer",
         "//bsw:amsr_vector_fs_socal_libsocal_a",
+        "@amsr_xavier//:amsr_vector_fs_per_libpersistency_persistency_file_storage_srcs",
+        "@amsr_xavier//:amsr_vector_fs_per_libpersistency_persistency_key_value_storage_srcs",
+        "@amsr_xavier//:amsr_vector_fs_per_libpersistency_persistency_srcs",
     ],
     copts = [
         "-std=c++14",
@@ -436,11 +461,14 @@ cc_binary(
     includes = ["src/"],
     linkstatic = 1,
     deps = [
+        ":persistency_hdrs_lib",
         ":socal_srcs_lib",
         "//bsw:amsr_vector_fs_applicationbase",
+        "//bsw:amsr_vector_fs_characterconversion",
         "//bsw:amsr_vector_fs_em_executionmanager",
         "//bsw:amsr_vector_fs_libiostream",
         "//bsw:amsr_vector_fs_log_api",
+        "//bsw:amsr_vector_fs_per_libpersistency",
         "//bsw:amsr_vector_fs_socal",
     ],
 )
@@ -457,6 +485,7 @@ pkg_tar(
         ":static_sd_config": "etc/static_sd_config.json",
         ":someip_config": "etc/someip_config.json",
         ":updatemanager_daemon": "etc/updatemanager.json",
+        ":persistency_config_json": "etc/per_key_value_storage_config.json",
     },
     mode = "0755",
     package_dir = "opt/X6AA_Cnfg_Mngr_Executable",

@@ -4,6 +4,14 @@ load("@minerva_mpu_adaptive//:bazel/defs.bzl", "minerva_aa_codegen_rule")
 package(default_visibility = ["//visibility:public"])
 
 filegroup(
+    name = "app_arxml",
+    srcs = [
+        "//arxmls:x6aa_idc_ecu_extract_arxml",
+        "@amsr_xavier//:mex_arxml",
+    ],
+)
+
+filegroup(
     name = "logging_config",
     srcs = ["configs/logging_config.json"],
 )
@@ -16,8 +24,7 @@ filegroup(
 minerva_aa_codegen_rule(
     name = "exec_config_gen_rule",
     arxml_srcs = [
-        "//arxmls:x6aa_idc_ecu_extract_arxml",
-        "@amsr_xavier//:mex_arxml",
+        ":app_arxml",
     ],
     generators = [
         "@amsr_xavier//:generator_amsr_em_exec_config",
@@ -41,8 +48,12 @@ minerva_aa_codegen_rule(
 minerva_aa_codegen_rule(
     name = "applicationbase_init_deinit_gen_rule",
     arxml_srcs = [
-        "//arxmls:x6aa_idc_ecu_extract_arxml",
-        "@amsr_xavier//:mex_arxml",
+        ":app_arxml",
+        # The generator seems unable to generate the required files without
+        # the symbols /design/IF_Persistency_KVS from the x6aa_config_manager,
+        # even though they are not required for x6aa_dummy_swc_1.
+        # We will pursue this with Vector
+        "//application/x6aa_config_manager:app_arxml",
     ],
     generators = [
         "@amsr_xavier//:generator_amsr_applicationbase_init_deinit",
@@ -66,8 +77,7 @@ minerva_aa_codegen_rule(
 minerva_aa_codegen_rule(
     name = "updatemanager_swcluster_meta_gen_rule",
     arxml_srcs = [
-        "//arxmls:x6aa_idc_ecu_extract_arxml",
-        "@amsr_xavier//:mex_arxml",
+        ":app_arxml",
     ],
     generators = [
         "@amsr_xavier//:generator_amsr_updatemanager_swcluster_meta",
@@ -91,8 +101,7 @@ minerva_aa_codegen_rule(
 minerva_aa_codegen_rule(
     name = "updatemanager_daemon_gen_rule",
     arxml_srcs = [
-        "//arxmls:x6aa_idc_ecu_extract_arxml",
-        "@amsr_xavier//:mex_arxml",
+        ":app_arxml",
     ],
     generators = [
         "@amsr_xavier//:generator_amsr_updatemanager_daemon",
@@ -119,8 +128,12 @@ minerva_aa_codegen_rule(
 minerva_aa_codegen_rule(
     name = "modeldatatypes_api_gen_rule",
     arxml_srcs = [
-        "//arxmls:x6aa_idc_ecu_extract_arxml",
-        "@amsr_xavier//:mex_arxml",
+        ":app_arxml",
+        # The generator seems unable to generate the required files without
+        # the symbols /design/IF_Persistency_KVS from the x6aa_config_manager,
+        # even though they are not required for x6aa_dummy_swc_1.
+        # We will pursue this with Vector
+        "//application/x6aa_config_manager:app_arxml",
     ],
     generators = [
         "@amsr_xavier//:generator_amsr_modelleddatatypes_api",
@@ -146,8 +159,7 @@ minerva_aa_codegen_rule(
 minerva_aa_codegen_rule(
     name = "someipprotocol_gen_rule",
     arxml_srcs = [
-        "//arxmls:x6aa_idc_ecu_extract_arxml",
-        "@amsr_xavier//:mex_arxml",
+        ":app_arxml",
     ],
     generators = [
         "@amsr_xavier//:generator_amsr_someipprotocol",
@@ -181,8 +193,7 @@ minerva_aa_codegen_rule(
 minerva_aa_codegen_rule(
     name = "socal_gen_rule",
     arxml_srcs = [
-        "//arxmls:x6aa_idc_ecu_extract_arxml",
-        "@amsr_xavier//:mex_arxml",
+        ":app_arxml",
     ],
     generators = [
         "@amsr_xavier//:generator_amsr_socal",
@@ -218,8 +229,7 @@ minerva_aa_codegen_rule(
 minerva_aa_codegen_rule(
     name = "ipcbinding_gen_rule",
     arxml_srcs = [
-        "//arxmls:x6aa_idc_ecu_extract_arxml",
-        "@amsr_xavier//:mex_arxml",
+        ":app_arxml",
     ],
     generators = [
         "@amsr_xavier//:generator_amsr_ipcbinding",
