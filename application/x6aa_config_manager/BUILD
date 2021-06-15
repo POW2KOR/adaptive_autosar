@@ -9,6 +9,8 @@ filegroup(
         "arxml/X6AA_IDC_Config_Manager_PersistencyDeployment.arxml",
         "arxml/X6AA_IDC_Config_Manager_PersistencyDesign.arxml",
         "arxml/X6AA_IDC_Config_Manager_PersistencyPortPrototypeMapping.arxml",
+        "//arxmls:x6aa_idc_ecu_extract_arxml",
+        "@amsr_xavier//:mex_arxml",
     ],
 )
 
@@ -25,8 +27,7 @@ filegroup(
 minerva_aa_codegen_rule(
     name = "exec_config_gen_rule",
     arxml_srcs = [
-        "//arxmls:x6aa_idc_ecu_extract_arxml",
-        "@amsr_xavier//:mex_arxml",
+        ":app_arxml",
     ],
     generators = [
         "@amsr_xavier//:generator_amsr_em_exec_config",
@@ -50,8 +51,6 @@ minerva_aa_codegen_rule(
 minerva_aa_codegen_rule(
     name = "applicationbase_init_deinit_gen_rule",
     arxml_srcs = [
-        "//arxmls:x6aa_idc_ecu_extract_arxml",
-        "@amsr_xavier//:mex_arxml",
         ":app_arxml",
     ],
     generators = [
@@ -76,8 +75,7 @@ minerva_aa_codegen_rule(
 minerva_aa_codegen_rule(
     name = "updatemanager_swcluster_meta_gen_rule",
     arxml_srcs = [
-        "//arxmls:x6aa_idc_ecu_extract_arxml",
-        "@amsr_xavier//:mex_arxml",
+        ":app_arxml",
     ],
     generators = [
         "@amsr_xavier//:generator_amsr_updatemanager_swcluster_meta",
@@ -101,8 +99,7 @@ minerva_aa_codegen_rule(
 minerva_aa_codegen_rule(
     name = "updatemanager_daemon_gen_rule",
     arxml_srcs = [
-        "//arxmls:x6aa_idc_ecu_extract_arxml",
-        "@amsr_xavier//:mex_arxml",
+        ":app_arxml",
     ],
     generators = [
         "@amsr_xavier//:generator_amsr_updatemanager_daemon",
@@ -129,8 +126,6 @@ minerva_aa_codegen_rule(
 minerva_aa_codegen_rule(
     name = "persistency_config_gen_rule",
     arxml_srcs = [
-        "//arxmls:x6aa_idc_ecu_extract_arxml",
-        "@amsr_xavier//:mex_arxml",
         ":app_arxml",
     ],
     generators = [
@@ -167,8 +162,6 @@ minerva_aa_codegen_rule(
 minerva_aa_codegen_rule(
     name = "modeldatatypes_api_gen_rule",
     arxml_srcs = [
-        "//arxmls:x6aa_idc_ecu_extract_arxml",
-        "@amsr_xavier//:mex_arxml",
         ":app_arxml",
     ],
     generators = [
@@ -196,8 +189,7 @@ minerva_aa_codegen_rule(
 minerva_aa_codegen_rule(
     name = "someipbinding_gen_rule",
     arxml_srcs = [
-        "//arxmls:x6aa_idc_ecu_extract_arxml",
-        "@amsr_xavier//:mex_arxml",
+        ":app_arxml",
     ],
     generators = [
         "@amsr_xavier//:generator_amsr_someipbinding",
@@ -249,8 +241,7 @@ minerva_aa_codegen_rule(
 minerva_aa_codegen_rule(
     name = "someipprotocol_gen_rule",
     arxml_srcs = [
-        "//arxmls:x6aa_idc_ecu_extract_arxml",
-        "@amsr_xavier//:mex_arxml",
+        ":app_arxml",
     ],
     generators = [
         "@amsr_xavier//:generator_amsr_someipprotocol",
@@ -289,8 +280,7 @@ minerva_aa_codegen_rule(
 minerva_aa_codegen_rule(
     name = "socal_gen_rule",
     arxml_srcs = [
-        "//arxmls:x6aa_idc_ecu_extract_arxml",
-        "@amsr_xavier//:mex_arxml",
+        ":app_arxml",
     ],
     generators = [
         "@amsr_xavier//:generator_amsr_socal",
@@ -341,8 +331,7 @@ minerva_aa_codegen_rule(
 minerva_aa_codegen_rule(
     name = "ipcbinding_gen_rule",
     arxml_srcs = [
-        "//arxmls:x6aa_idc_ecu_extract_arxml",
-        "@amsr_xavier//:mex_arxml",
+        ":app_arxml",
     ],
     generators = [
         "@amsr_xavier//:generator_amsr_ipcbinding",
