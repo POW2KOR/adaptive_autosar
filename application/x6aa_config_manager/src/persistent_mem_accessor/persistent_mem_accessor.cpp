@@ -72,7 +72,7 @@ bool PersistentMemAccessor::StoreVariantCodingData(
             // check the value??
             return_value = (data_to_store == restored_value) ? true : false;
 
-            logger_ctx.LogInfo() << " The value written for : "
+            logger_ctx.LogInfo() << "The value written for : "
                                  << kvs_enum_to_string_key(key_to_store)
                                  << " is: " << restored_value;
             // Persist the database.
@@ -95,13 +95,13 @@ bool PersistentMemAccessor::StoreConfigureSarTriggerEvents0136VcEventData(
 {
     bool return_value = true;
 
-    if (!StoreVariantCodingData<uint32_t>(
+    if (!StoreVariantCodingData<uint8_t>(
             variantCodingKeys::triggerEventActivationStatusByte1,
             configureSarTriggerEvents0136VcEventData.triggerEventActivationStatusByte1)) {
         return_value = false;
     }
 
-    if (!StoreVariantCodingData<uint32_t>(
+    if (!StoreVariantCodingData<uint8_t>(
             variantCodingKeys::triggerEventActivationStatusByte2,
             configureSarTriggerEvents0136VcEventData.triggerEventActivationStatusByte2)) {
         return_value = false;
@@ -115,7 +115,7 @@ bool PersistentMemAccessor::StoreActivateSarStorage0131VcEventData(
 {
     bool return_value = true;
 
-    if (!StoreVariantCodingData<uint32_t>(
+    if (!StoreVariantCodingData<uint8_t>(
             variantCodingKeys::sarDataStorageStatus,
             activateSarStorage0131VcEventData.sarDataStorageStatus)) {
         return_value = false;
@@ -129,48 +129,48 @@ bool PersistentMemAccessor::StoreVechicleInformation0400VcEventData(
 {
     bool return_value = true;
 
-    if (!StoreVariantCodingData<uint32_t>(
+    if (!StoreVariantCodingData<uint8_t>(
             variantCodingKeys::bodyStyle, vechicleInformation0400VcEventData.body_style)) {
         return_value = false;
     }
 
-    if (!StoreVariantCodingData<uint32_t>(
+    if (!StoreVariantCodingData<uint8_t>(
             variantCodingKeys::vehLine, vechicleInformation0400VcEventData.veh_line)) {
         return_value = false;
     }
 
-    if (!StoreVariantCodingData<uint32_t>(
+    if (!StoreVariantCodingData<uint8_t>(
             variantCodingKeys::amgType, vechicleInformation0400VcEventData.amg_type)) {
         return_value = false;
     }
 
-    if (!StoreVariantCodingData<uint32_t>(
+    if (!StoreVariantCodingData<uint8_t>(
             variantCodingKeys::guardLvlB4, vechicleInformation0400VcEventData.guard_lvl_b4)) {
         return_value = false;
     }
 
-    if (!StoreVariantCodingData<uint32_t>(
+    if (!StoreVariantCodingData<uint8_t>(
             variantCodingKeys::guardLvlB7, vechicleInformation0400VcEventData.guard_lvl_b7)) {
         return_value = false;
     }
 
-    if (!StoreVariantCodingData<uint32_t>(
+    if (!StoreVariantCodingData<uint8_t>(
             variantCodingKeys::reserved400, vechicleInformation0400VcEventData.reserved)) {
         return_value = false;
     }
 
-    if (!StoreVariantCodingData<uint32_t>(
+    if (!StoreVariantCodingData<uint8_t>(
             variantCodingKeys::hybridAvl, vechicleInformation0400VcEventData.hybrid_avl)) {
         return_value = false;
     }
 
-    if (!StoreVariantCodingData<uint32_t>(
+    if (!StoreVariantCodingData<uint8_t>(
             variantCodingKeys::pluginHybridAvl,
             vechicleInformation0400VcEventData.plugin_hybrid_avl)) {
         return_value = false;
     }
 
-    if (!StoreVariantCodingData<uint32_t>(
+    if (!StoreVariantCodingData<uint8_t>(
             variantCodingKeys::vehBackdoorsAvl,
             vechicleInformation0400VcEventData.veh_backdoors_avl)) {
         return_value = false;
@@ -256,7 +256,7 @@ bool PersistentMemAccessor::ReadVariantCodingData(
          * try reading the same key again. If it still fails then it's due to an issue in accessing
          * persistent memory.
          */
-        return_value = TryReadingDataFromKvs<uint32_t>(key, read_value);
+        return_value = PersistentMemAccessor::TryReadingDataFromKvs<uint8_t>(key, read_value);
         if (!return_value && !has_kvs_initialized_with_default_values) {
             // data not found in the database, try initializing the data
             logger_ctx.LogInfo()
@@ -268,7 +268,7 @@ bool PersistentMemAccessor::ReadVariantCodingData(
                 logger_ctx.LogInfo()
                     << "Initializing: kvs initialized with default values."_sv;
                 return_value
-                    = TryReadingDataFromKvs<uint32_t>(key, read_value); // try reading once again
+                    = PersistentMemAccessor::TryReadingDataFromKvs<uint8_t>(key, read_value); // try reading once again
             }
             has_kvs_initialized_with_default_values = true; // set to true, don't try multiple times
         }
@@ -286,19 +286,19 @@ bool PersistentMemAccessor::ReadConfigureSarTriggerEvents0136VcEventData(
     configureSarTriggerEvents0136VcEventDataType& configureSarTriggerEvents0136VcEventData)
 {
     bool return_value = true;
-    std::uint32_t read_value = 0;
-    if (ReadVariantCodingData<uint32_t>(
+    std::uint8_t read_value = 0;
+    if (ReadVariantCodingData<uint8_t>(
             variantCodingKeys::triggerEventActivationStatusByte1, read_value)) {
         configureSarTriggerEvents0136VcEventData.triggerEventActivationStatusByte1
-            = static_cast<uint8_t>(read_value);
+            = read_value;
     } else {
         return_value = false;
     }
 
-    if (ReadVariantCodingData<uint32_t>(
+    if (ReadVariantCodingData<uint8_t>(
             variantCodingKeys::triggerEventActivationStatusByte2, read_value)) {
         configureSarTriggerEvents0136VcEventData.triggerEventActivationStatusByte2
-            = static_cast<uint8_t>(read_value);
+            = read_value;
     } else {
         return_value = false;
     }
@@ -310,9 +310,9 @@ bool PersistentMemAccessor::ReadActivateSarStorage0131VcEventData(
     activateSarStorage0131VcEventDataType& activateSarStorage0131VcEventData)
 {
     bool return_value = true;
-    std::uint32_t read_value = 0;
-    if (ReadVariantCodingData<uint32_t>(variantCodingKeys::sarDataStorageStatus, read_value)) {
-        activateSarStorage0131VcEventData.sarDataStorageStatus = static_cast<uint8_t>(read_value);
+    std::uint8_t read_value = 0;
+    if (ReadVariantCodingData<uint8_t>(variantCodingKeys::sarDataStorageStatus, read_value)) {
+        activateSarStorage0131VcEventData.sarDataStorageStatus = read_value;
     } else {
         return_value = false;
     }
@@ -323,59 +323,59 @@ bool PersistentMemAccessor::ReadActivateSarStorage0131VcEventData(
 bool PersistentMemAccessor::ReadVechicleInformation0400VcEventData(
     vechicleInformation0400VcEventDataType& vechicleInformation0400VcEventData)
 {
-    std::uint32_t read_value = 0;
+    std::uint8_t read_value = 0;
     bool return_value = true;
 
-    if (ReadVariantCodingData<uint32_t>(variantCodingKeys::bodyStyle, read_value)) {
-        vechicleInformation0400VcEventData.body_style = static_cast<uint8_t>(read_value);
+    if (ReadVariantCodingData<uint8_t>(variantCodingKeys::bodyStyle, read_value)) {
+        vechicleInformation0400VcEventData.body_style = read_value;
     } else {
         return_value = false;
     }
 
-    if (ReadVariantCodingData<uint32_t>(variantCodingKeys::vehLine, read_value)) {
-        vechicleInformation0400VcEventData.veh_line = static_cast<uint8_t>(read_value);
+    if (ReadVariantCodingData<uint8_t>(variantCodingKeys::vehLine, read_value)) {
+        vechicleInformation0400VcEventData.veh_line = read_value;
     } else {
         return_value = false;
     }
 
-    if (ReadVariantCodingData<uint32_t>(variantCodingKeys::amgType, read_value)) {
-        vechicleInformation0400VcEventData.amg_type = static_cast<uint8_t>(read_value);
+    if (ReadVariantCodingData<uint8_t>(variantCodingKeys::amgType, read_value)) {
+        vechicleInformation0400VcEventData.amg_type = read_value;
     } else {
         return_value = false;
     }
 
-    if (ReadVariantCodingData<uint32_t>(variantCodingKeys::guardLvlB4, read_value)) {
-        vechicleInformation0400VcEventData.guard_lvl_b4 = static_cast<uint8_t>(read_value);
+    if (ReadVariantCodingData<uint8_t>(variantCodingKeys::guardLvlB4, read_value)) {
+        vechicleInformation0400VcEventData.guard_lvl_b4 = read_value;
     } else {
         return_value = false;
     }
 
-    if (ReadVariantCodingData<uint32_t>(variantCodingKeys::reserved400, read_value)) {
-        vechicleInformation0400VcEventData.reserved = static_cast<uint8_t>(read_value);
+    if (ReadVariantCodingData<uint8_t>(variantCodingKeys::reserved400, read_value)) {
+        vechicleInformation0400VcEventData.reserved = read_value;
     } else {
         return_value = false;
     }
 
-    if (ReadVariantCodingData<uint32_t>(variantCodingKeys::guardLvlB7, read_value)) {
-        vechicleInformation0400VcEventData.guard_lvl_b7 = static_cast<uint8_t>(read_value);
+    if (ReadVariantCodingData<uint8_t>(variantCodingKeys::guardLvlB7, read_value)) {
+        vechicleInformation0400VcEventData.guard_lvl_b7 = read_value;
     } else {
         return_value = false;
     }
 
-    if (ReadVariantCodingData<uint32_t>(variantCodingKeys::hybridAvl, read_value)) {
-        vechicleInformation0400VcEventData.hybrid_avl = static_cast<uint8_t>(read_value);
+    if (ReadVariantCodingData<uint8_t>(variantCodingKeys::hybridAvl, read_value)) {
+        vechicleInformation0400VcEventData.hybrid_avl = read_value;
     } else {
         return_value = false;
     }
 
-    if (ReadVariantCodingData<uint32_t>(variantCodingKeys::pluginHybridAvl, read_value)) {
-        vechicleInformation0400VcEventData.plugin_hybrid_avl = static_cast<uint8_t>(read_value);
+    if (ReadVariantCodingData<uint8_t>(variantCodingKeys::pluginHybridAvl, read_value)) {
+        vechicleInformation0400VcEventData.plugin_hybrid_avl = read_value;
     } else {
         return_value = false;
     }
 
-    if (ReadVariantCodingData<uint32_t>(variantCodingKeys::vehBackdoorsAvl, read_value)) {
-        vechicleInformation0400VcEventData.veh_backdoors_avl = static_cast<uint8_t>(read_value);
+    if (ReadVariantCodingData<uint8_t>(variantCodingKeys::vehBackdoorsAvl, read_value)) {
+        vechicleInformation0400VcEventData.veh_backdoors_avl = read_value;
     } else {
         return_value = false;
     }

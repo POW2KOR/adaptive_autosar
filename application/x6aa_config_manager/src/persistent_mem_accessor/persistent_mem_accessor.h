@@ -132,7 +132,7 @@ private:
      * \return bool       success
      */
     template<typename dataType>
-    bool tryReadingDataFromKvs(const ara::core::String& key_to_read, dataType& read_value);
+    bool TryReadingDataFromKvs(const ara::core::String& key_to_read, dataType& read_value);
 
     /**
      * \brief Function to write data in key value storage.
