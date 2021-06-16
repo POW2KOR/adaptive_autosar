@@ -19,6 +19,7 @@
 #include "ara/per/read_write_accessor.h"
 #include "ara/per/shared_handle.h"
 #include "services/ns_si_cnfg_mngr_to_dummyswc/si_x6aa_cnfg_mngr_service_reserved_skeleton.h"
+#include "x6aa_cnfg_mngr_kvs_keys.h"
 
 #include <string>
 
@@ -34,6 +35,8 @@ using configureSarTriggerEvents0136VcEventDataType
 using vechicleInformation0400VcEventDataType = ::DataTypes::
     NS_REC_vechicleInformation0400VcEventType_t::REC_vechicleInformation0400VcEventType_t;
 
+using variantCodingKeys = application::VariantCodingApp::X6aaConfigManagerKvsKeys;
+
 class PersistentMemAccessor {
 public:
     /*!
@@ -42,8 +45,8 @@ public:
     PersistentMemAccessor();
 
     /**
-     * \brief Funktion to construct and read ReadConfigureSarTriggerEvents0136VcEventData in key
-     * value storage.
+     * \brief Function to construct and read data associated with ara::com event
+     * `configureSarTriggerEvents0136VcEvent` from key value storage.
      * \param configureSarTriggerEvents0136VcEventDataType data
      * \return bool   success
      */
@@ -51,8 +54,8 @@ public:
         configureSarTriggerEvents0136VcEventDataType& configureSarTriggerEvents0136VcEventData);
 
     /**
-     * \brief Funktion to construct and read ReadActivateSarStorage0131VcEventData in key value
-     * storage.
+     * \brief Function to construct and read data associated with ara::com event
+     * `activateSarStorage0131VcEvent` from key value storage.
      * \param activateSarStorage0131VcEventDataType  data
      * \return bool   success
      */
@@ -60,8 +63,8 @@ public:
         activateSarStorage0131VcEventDataType& activateSarStorage0131VcEventData);
 
     /**
-     * \brief Funktion to construct and read ReadVechicleInformation0400VcEventData in key value
-     * storage.
+     * \brief Function to construct and read data associated with ara::com event
+     * `vechicleInformation0400VcEvent` from key value storage.
      * \param vechicleInformation0400VcEventDataType data
      * \return bool   success
      */
@@ -69,7 +72,9 @@ public:
         vechicleInformation0400VcEventDataType& vechicleInformation0400VcEventData);
 
     /**
-     * \brief Funktion to write configureSarTriggerEvents0136VcEventDataType in key value storage.
+     * \brief Function to retrive data of each individual element of struct
+     * `configureSarTriggerEvents0136VcEventDataType` passed as an argument and to store
+     * each individual struct element as a key-value pair to kvs data base.
      * \param configureSarTriggerEvents0136VcEventDataType Input data
      * \return bool   success
      */
@@ -77,7 +82,9 @@ public:
         configureSarTriggerEvents0136VcEventDataType& configureSarTriggerEvents0136VcEventData);
 
     /**
-     * \brief Funktion to write activateSarStorage0131VcEventDataType in key value storage.
+     * \brief Function to retrive data of each individual element of struct
+     * `activateSarStorage0131VcEventDataType` passed as an argument and to store
+     * each individual struct element as a key-value pair to kvs data base.
      * \param activateSarStorage0131VcEventDataType Input data
      * \return bool   success
      */
@@ -85,7 +92,9 @@ public:
         activateSarStorage0131VcEventDataType& activateSarStorage0131VcEventData);
 
     /**
-     * \brief Funktion to write vechicleInformation0400VcEventDataType in key value storage.
+     * \brief Function to retrive data of each individual element of struct
+     * `vechicleInformation0400VcEventDataType` passed as an argument and to store
+     * each individual struct element as a key-value pair to kvs data base.
      * \param vechicleInformation0400VcEventDataType Input data
      * \return bool   success
      */
@@ -105,31 +114,34 @@ private:
     /**
      * \brief Holds the logging context
      */
-    ara::log::Logger& logger_ctx{
-        ara::log::CreateLogger("VPER", "Context for variant coding persistency")};
+    ara::log::Logger& logger_ctx{ara::log::CreateLogger("VPER", "VcPersistentMemAccessor")};
 
     /**
-     * \brief Funktion to read data in key value storage.
-     * \param key_to_read Input data which defines the key be written in to the kvs
-     * \param uint32_t    read data
+     * \brief Function to read data in key value storage
+     * \param key_to_read enum key to be read from kvs
+     * \param dataType    read data
      * \return bool       success
      */
-    bool ReadVariantCodingData(const std::string& key_to_read, std::uint32_t& read_value);
+    template<typename dataType>
+    bool ReadVariantCodingData(const variantCodingKeys key_to_read, dataType& read_value);
 
     /**
-     * \brief A sub funktion to read data in key value storage.
-     * \param key_to_read Input data which defines the key be written in to the kvs
-     * \param uint32_t    read data
+     * \brief A sub Function to read data in key value storage.
+     * \param key_to_read string key to be read from kvs
+     * \param dataType    read data
      * \return bool       success
      */
-    bool tryReadingDataFromKvs(const std::string& key_to_read, std::uint32_t& read_value);
+    template<typename dataType>
+    bool tryReadingDataFromKvs(const ara::core::String& key_to_read, dataType& read_value);
+
     /**
-     * \brief Funktion to write data in key value storage.
+     * \brief Function to write data in key value storage.
      * \param data_to_store Input data which should be written in to the file
      * \param key_to_store Input data which defines the key be written in to the kvs
      * \return bool       success
      */
-    bool StoreVariantCodingData(const std::string& key_to_store, uint32_t data_to_store);
+    template<typename dataType>
+    bool StoreVariantCodingData(const variantCodingKeys key_to_store, dataType data_to_store);
 
     /**
      * \brief Intialize key value storage with default values

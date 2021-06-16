@@ -442,6 +442,7 @@ cc_binary(
         "src/vc_cnfg_mngr_server/vc_cnfg_mngr_server.cpp",
         "src/vc_cnfg_mngr_server/vc_cnfg_mngr_server.h",
         "src/x6aa_cnfg_mngr_executable_error_domain.h",
+        "src/x6aa_cnfg_mngr_kvs_keys.h",
         ":applicationbase_init_deinit_srcs",
         ":ipc_binding_life_cycle_manager",
         ":persistency_srcs",
