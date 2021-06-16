@@ -14,7 +14,7 @@
             <CONTEXT-ROOT-SW-COMPONENT-PROTOTYPE-REF DEST="ROOT-SW-COMPONENT-PROTOTYPE">/Application/Executables/X6AA_Cnfg_Mngr_Executable/X6AA_Cnfg_Mngr_ExecutableRootSwc</CONTEXT-ROOT-SW-COMPONENT-PROTOTYPE-REF>
             <TARGET-PORT-PROTOTYPE-REF DEST="PR-PORT-PROTOTYPE">/Application/AdaptiveApplicationSwComponentTypes/X6AA_Cnfg_Mngr_SWC/MyPersistencyKvsPrPortPrototype</TARGET-PORT-PROTOTYPE-REF>
           </PORT-PROTOTYPE-IREF>
-          <PROCESS-REF DEST="PROCESS">/ApplicationDeployment/Processes/BaseApplication</PROCESS-REF>
+          <PROCESS-REF DEST="PROCESS">/ApplicationDeployment/Processes/Process_X6AA_Cnfg_Mngr_SWC</PROCESS-REF>
         </PERSISTENCY-PORT-PROTOTYPE-TO-KEY-VALUE-DATABASE-MAPPING>
       </ELEMENTS>
     </AR-PACKAGE>
