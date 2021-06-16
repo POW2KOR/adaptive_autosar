@@ -1,0 +1,1645 @@
+
+{
+  "TargetAddress" : 1,
+  "NumberConversations" : 2,
+  "UdsMessageLength" : 1500,
+  "MaxNumberOfPeriodicMessages" : 0,
+  "MaxPeriodicMessageLength" : 0,
+  "MaxNumberOfResponsePending" : 20,
+  "ResponseOnAllRequestSids" : false,
+  "P2ServerAdjustTime" : 0,
+  "P2StarServerAdjustTime" : 0,
+  "S3ServerTimeoutEnabled" : true,
+  "NumberOfApplications" : 1,
+  "AraDiagApiPort" : "diag_example_daemon/diag_example_daemon_RootSwc/DiagComApiDaemonPort",
+  "TransferData" : {
+    "Upload" : {
+      "Handler" : {
+        "Type" : "None",
+        "Instance" : "don't care"
+      }
+    },
+    "Download" : {
+      "Handler" : {
+        "Type" : "None",
+        "Instance" : "don't care"
+      }
+    }
+  },
+  "PeriodicData" : {
+    "SchedulerRate" : 0,
+    "SlowRatePeriod" : 0,
+    "MediumRatePeriod" : 0,
+    "FastRatePeriod" : 0,
+    "SchedulerSize" : 0,
+    "StopOnStateChange" : false,
+    "ReadMode" : "Any"
+  },
+  "ManufacturerRequestValidators" : [
+    0
+  ],
+  "SupplierRequestValidators" : [
+    1,
+    {
+      "AppHandle" : 1562938272,
+      "InstanceHandle" : 3122039782
+    }
+  ],
+  "Sessions" : [
+    3,
+    {
+      "Id" : 1,
+      "Name" : "Default",
+      "P2Time" : 50,
+      "P2StarTime" : 5000,
+      "JumpToBootLoader" : "NO_BOOT"
+    },
+    {
+      "Id" : 2,
+      "Name" : "Programming",
+      "P2Time" : 50,
+      "P2StarTime" : 5000,
+      "JumpToBootLoader" : "OEM_BOOT"
+    },
+    {
+      "Id" : 3,
+      "Name" : "Extended",
+      "P2Time" : 50,
+      "P2StarTime" : 5000,
+      "JumpToBootLoader" : "NO_BOOT"
+    }
+  ],
+  "SecurityAccessLevels" : [
+    1,
+    {
+      "Id" : 1,
+      "Name" : "UnlockedL1",
+      "NumAttempts" : 4,
+      "DelayTime" : 10000,
+      "AccessDataRecordSize" : 0,
+      "SeedSize" : 4,
+      "KeySize" : 4,
+      "Instance" : {
+        "AppHandle" : 1562938272,
+        "InstanceHandle" : 1180670667
+      }
+    }
+  ],
+  "ServiceTable" : [
+    11,
+    {
+      "Id" : 16,
+      "Handler" : {
+        "Type" : "Internal",
+        "Instance" : "DEFAULT"
+      },
+      "Preconditions" : {
+        "Sessions" : [
+          0
+        ],
+        "SecurityAccessLevels" : [
+          0
+        ],
+        "EnvironmentalCondition" : [
+          0
+        ]
+      },
+      "ServiceSpecificParameters" : {
+      },
+      "HasSubFunctions" : true,
+      "SubService" : [
+        3,
+        {
+          "Id" : 1,
+          "Preconditions" : {
+            "Sessions" : [
+              0
+            ],
+            "SecurityAccessLevels" : [
+              0
+            ],
+            "EnvironmentalCondition" : [
+              0
+            ]
+          },
+          "Handler" : {
+            "Type" : "Internal",
+            "Instance" : "DEFAULT"
+          }
+        },
+        {
+          "Id" : 2,
+          "Preconditions" : {
+            "Sessions" : [
+              0
+            ],
+            "SecurityAccessLevels" : [
+              0
+            ],
+            "EnvironmentalCondition" : [
+              0
+            ]
+          },
+          "Handler" : {
+            "Type" : "Internal",
+            "Instance" : "DEFAULT"
+          }
+        },
+        {
+          "Id" : 3,
+          "Preconditions" : {
+            "Sessions" : [
+              0
+            ],
+            "SecurityAccessLevels" : [
+              0
+            ],
+            "EnvironmentalCondition" : [
+              0
+            ]
+          },
+          "Handler" : {
+            "Type" : "Internal",
+            "Instance" : "DEFAULT"
+          }
+        }
+      ]
+    },
+    {
+      "Id" : 17,
+      "Handler" : {
+        "Type" : "ExternalWithSubServices",
+        "Instance" : {
+          "AppHandle" : 1562938272,
+          "InstanceHandle" : 807404276
+        }
+      },
+      "Preconditions" : {
+        "Sessions" : [
+          0
+        ],
+        "SecurityAccessLevels" : [
+          0
+        ],
+        "EnvironmentalCondition" : [
+          0
+        ]
+      },
+      "ServiceSpecificParameters" : {
+        "ResponseToEcuReset" : "RESPOND_AFTER_RESET"
+      },
+      "HasSubFunctions" : true,
+      "SubService" : [
+        2,
+        {
+          "Id" : 1,
+          "Preconditions" : {
+            "Sessions" : [
+              0
+            ],
+            "SecurityAccessLevels" : [
+              0
+            ],
+            "EnvironmentalCondition" : [
+              0
+            ]
+          },
+          "Handler" : {
+            "Type" : "None",
+            "Instance" : "don't care"
+          }
+        },
+        {
+          "Id" : 3,
+          "Preconditions" : {
+            "Sessions" : [
+              0
+            ],
+            "SecurityAccessLevels" : [
+              0
+            ],
+            "EnvironmentalCondition" : [
+              0
+            ]
+          },
+          "Handler" : {
+            "Type" : "None",
+            "Instance" : "don't care"
+          }
+        }
+      ]
+    },
+    {
+      "Id" : 20,
+      "Handler" : {
+        "Type" : "Internal",
+        "Instance" : "DEFAULT"
+      },
+      "Preconditions" : {
+        "Sessions" : [
+          3,
+          1,
+          2,
+          3
+        ],
+        "SecurityAccessLevels" : [
+          0
+        ],
+        "EnvironmentalCondition" : [
+          0
+        ]
+      },
+      "ServiceSpecificParameters" : {
+        "UseMemoryIdentifier" : false
+      },
+      "HasSubFunctions" : false,
+      "SubService" : [
+        0
+      ]
+    },
+    {
+      "Id" : 25,
+      "Handler" : {
+        "Type" : "Internal",
+        "Instance" : "DEFAULT"
+      },
+      "Preconditions" : {
+        "Sessions" : [
+          3,
+          1,
+          2,
+          3
+        ],
+        "SecurityAccessLevels" : [
+          0
+        ],
+        "EnvironmentalCondition" : [
+          0
+        ]
+      },
+      "ServiceSpecificParameters" : {
+      },
+      "HasSubFunctions" : true,
+      "SubService" : [
+        8,
+        {
+          "Id" : 1,
+          "Preconditions" : {
+            "Sessions" : [
+              3,
+              1,
+              2,
+              3
+            ],
+            "SecurityAccessLevels" : [
+              0
+            ],
+            "EnvironmentalCondition" : [
+              0
+            ]
+          },
+          "Handler" : {
+            "Type" : "Internal",
+            "Instance" : "DEFAULT"
+          }
+        },
+        {
+          "Id" : 2,
+          "Preconditions" : {
+            "Sessions" : [
+              3,
+              1,
+              2,
+              3
+            ],
+            "SecurityAccessLevels" : [
+              0
+            ],
+            "EnvironmentalCondition" : [
+              0
+            ]
+          },
+          "Handler" : {
+            "Type" : "Internal",
+            "Instance" : "DEFAULT"
+          }
+        },
+        {
+          "Id" : 4,
+          "Preconditions" : {
+            "Sessions" : [
+              3,
+              1,
+              2,
+              3
+            ],
+            "SecurityAccessLevels" : [
+              0
+            ],
+            "EnvironmentalCondition" : [
+              0
+            ]
+          },
+          "Handler" : {
+            "Type" : "Internal",
+            "Instance" : "DEFAULT"
+          }
+        },
+        {
+          "Id" : 6,
+          "Preconditions" : {
+            "Sessions" : [
+              3,
+              1,
+              2,
+              3
+            ],
+            "SecurityAccessLevels" : [
+              0
+            ],
+            "EnvironmentalCondition" : [
+              0
+            ]
+          },
+          "Handler" : {
+            "Type" : "Internal",
+            "Instance" : "DEFAULT"
+          }
+        },
+        {
+          "Id" : 10,
+          "Preconditions" : {
+            "Sessions" : [
+              3,
+              1,
+              2,
+              3
+            ],
+            "SecurityAccessLevels" : [
+              0
+            ],
+            "EnvironmentalCondition" : [
+              0
+            ]
+          },
+          "Handler" : {
+            "Type" : "Internal",
+            "Instance" : "DEFAULT"
+          }
+        },
+        {
+          "Id" : 23,
+          "Preconditions" : {
+            "Sessions" : [
+              3,
+              1,
+              2,
+              3
+            ],
+            "SecurityAccessLevels" : [
+              0
+            ],
+            "EnvironmentalCondition" : [
+              0
+            ]
+          },
+          "Handler" : {
+            "Type" : "Internal",
+            "Instance" : "DEFAULT"
+          }
+        },
+        {
+          "Id" : 24,
+          "Preconditions" : {
+            "Sessions" : [
+              3,
+              1,
+              2,
+              3
+            ],
+            "SecurityAccessLevels" : [
+              0
+            ],
+            "EnvironmentalCondition" : [
+              0
+            ]
+          },
+          "Handler" : {
+            "Type" : "Internal",
+            "Instance" : "DEFAULT"
+          }
+        },
+        {
+          "Id" : 25,
+          "Preconditions" : {
+            "Sessions" : [
+              3,
+              1,
+              2,
+              3
+            ],
+            "SecurityAccessLevels" : [
+              0
+            ],
+            "EnvironmentalCondition" : [
+              0
+            ]
+          },
+          "Handler" : {
+            "Type" : "Internal",
+            "Instance" : "DEFAULT"
+          }
+        }
+      ]
+    },
+    {
+      "Id" : 34,
+      "Handler" : {
+        "Type" : "Internal",
+        "Instance" : "DEFAULT"
+      },
+      "Preconditions" : {
+        "Sessions" : [
+          0
+        ],
+        "SecurityAccessLevels" : [
+          0
+        ],
+        "EnvironmentalCondition" : [
+          0
+        ]
+      },
+      "ServiceSpecificParameters" : {
+        "MaxNumberOfDidsToRead" : 5
+      },
+      "HasSubFunctions" : false,
+      "SubService" : [
+        0
+      ]
+    },
+    {
+      "Id" : 39,
+      "Handler" : {
+        "Type" : "Internal",
+        "Instance" : "DEFAULT"
+      },
+      "Preconditions" : {
+        "Sessions" : [
+          2,
+          2,
+          3
+        ],
+        "SecurityAccessLevels" : [
+          0
+        ],
+        "EnvironmentalCondition" : [
+          0
+        ]
+      },
+      "ServiceSpecificParameters" : {
+        "UseSharedAttemptCounter" : false,
+        "UseSharedTimer" : true,
+        "DelayTimeOnFailedNvDataRecovery" : "LEVEL_SPECIFIC"
+      },
+      "HasSubFunctions" : true,
+      "SubService" : [
+        2,
+        {
+          "Id" : 1,
+          "Preconditions" : {
+            "Sessions" : [
+              2,
+              2,
+              3
+            ],
+            "SecurityAccessLevels" : [
+              0
+            ],
+            "EnvironmentalCondition" : [
+              0
+            ]
+          },
+          "Handler" : {
+            "Type" : "Internal",
+            "Instance" : "DEFAULT"
+          }
+        },
+        {
+          "Id" : 2,
+          "Preconditions" : {
+            "Sessions" : [
+              2,
+              2,
+              3
+            ],
+            "SecurityAccessLevels" : [
+              0
+            ],
+            "EnvironmentalCondition" : [
+              0
+            ]
+          },
+          "Handler" : {
+            "Type" : "Internal",
+            "Instance" : "DEFAULT"
+          }
+        }
+      ]
+    },
+    {
+      "Id" : 40,
+      "Handler" : {
+        "Type" : "ExternalWithSubServices",
+        "Instance" : {
+          "AppHandle" : 1562938272,
+          "InstanceHandle" : 807404276
+        }
+      },
+      "Preconditions" : {
+        "Sessions" : [
+          1,
+          3
+        ],
+        "SecurityAccessLevels" : [
+          0
+        ],
+        "EnvironmentalCondition" : [
+          0
+        ]
+      },
+      "ServiceSpecificParameters" : {
+      },
+      "HasSubFunctions" : true,
+      "SubService" : [
+        4,
+        {
+          "Id" : 0,
+          "Preconditions" : {
+            "Sessions" : [
+              1,
+              3
+            ],
+            "SecurityAccessLevels" : [
+              0
+            ],
+            "EnvironmentalCondition" : [
+              1,
+              0
+            ]
+          },
+          "Handler" : {
+            "Type" : "None",
+            "Instance" : "don't care"
+          }
+        },
+        {
+          "Id" : 1,
+          "Preconditions" : {
+            "Sessions" : [
+              1,
+              3
+            ],
+            "SecurityAccessLevels" : [
+              0
+            ],
+            "EnvironmentalCondition" : [
+              1,
+              0
+            ]
+          },
+          "Handler" : {
+            "Type" : "None",
+            "Instance" : "don't care"
+          }
+        },
+        {
+          "Id" : 2,
+          "Preconditions" : {
+            "Sessions" : [
+              1,
+              3
+            ],
+            "SecurityAccessLevels" : [
+              0
+            ],
+            "EnvironmentalCondition" : [
+              1,
+              0
+            ]
+          },
+          "Handler" : {
+            "Type" : "None",
+            "Instance" : "don't care"
+          }
+        },
+        {
+          "Id" : 3,
+          "Preconditions" : {
+            "Sessions" : [
+              1,
+              3
+            ],
+            "SecurityAccessLevels" : [
+              0
+            ],
+            "EnvironmentalCondition" : [
+              1,
+              0
+            ]
+          },
+          "Handler" : {
+            "Type" : "None",
+            "Instance" : "don't care"
+          }
+        }
+      ]
+    },
+    {
+      "Id" : 46,
+      "Handler" : {
+        "Type" : "Internal",
+        "Instance" : "DEFAULT"
+      },
+      "Preconditions" : {
+        "Sessions" : [
+          0
+        ],
+        "SecurityAccessLevels" : [
+          0
+        ],
+        "EnvironmentalCondition" : [
+          0
+        ]
+      },
+      "ServiceSpecificParameters" : {
+      },
+      "HasSubFunctions" : false,
+      "SubService" : [
+        0
+      ]
+    },
+    {
+      "Id" : 49,
+      "Handler" : {
+        "Type" : "Internal",
+        "Instance" : "DEFAULT"
+      },
+      "Preconditions" : {
+        "Sessions" : [
+          2,
+          2,
+          3
+        ],
+        "SecurityAccessLevels" : [
+          0
+        ],
+        "EnvironmentalCondition" : [
+          0
+        ]
+      },
+      "ServiceSpecificParameters" : {
+      },
+      "HasSubFunctions" : true,
+      "SubService" : [
+        0
+      ]
+    },
+    {
+      "Id" : 62,
+      "Handler" : {
+        "Type" : "Internal",
+        "Instance" : "DEFAULT"
+      },
+      "Preconditions" : {
+        "Sessions" : [
+          0
+        ],
+        "SecurityAccessLevels" : [
+          0
+        ],
+        "EnvironmentalCondition" : [
+          0
+        ]
+      },
+      "ServiceSpecificParameters" : {
+      },
+      "HasSubFunctions" : true,
+      "SubService" : [
+        1,
+        {
+          "Id" : 0,
+          "Preconditions" : {
+            "Sessions" : [
+              0
+            ],
+            "SecurityAccessLevels" : [
+              0
+            ],
+            "EnvironmentalCondition" : [
+              0
+            ]
+          },
+          "Handler" : {
+            "Type" : "Internal",
+            "Instance" : "DEFAULT"
+          }
+        }
+      ]
+    },
+    {
+      "Id" : 133,
+      "Handler" : {
+        "Type" : "Internal",
+        "Instance" : "DEFAULT"
+      },
+      "Preconditions" : {
+        "Sessions" : [
+          2,
+          2,
+          3
+        ],
+        "SecurityAccessLevels" : [
+          0
+        ],
+        "EnvironmentalCondition" : [
+          0
+        ]
+      },
+      "ServiceSpecificParameters" : {
+        "OptionRecordPresent" : false
+      },
+      "HasSubFunctions" : true,
+      "SubService" : [
+        2,
+        {
+          "Id" : 1,
+          "Preconditions" : {
+            "Sessions" : [
+              2,
+              2,
+              3
+            ],
+            "SecurityAccessLevels" : [
+              0
+            ],
+            "EnvironmentalCondition" : [
+              0
+            ]
+          },
+          "Handler" : {
+            "Type" : "Internal",
+            "Instance" : "DEFAULT"
+          }
+        },
+        {
+          "Id" : 2,
+          "Preconditions" : {
+            "Sessions" : [
+              2,
+              2,
+              3
+            ],
+            "SecurityAccessLevels" : [
+              0
+            ],
+            "EnvironmentalCondition" : [
+              0
+            ]
+          },
+          "Handler" : {
+            "Type" : "Internal",
+            "Instance" : "DEFAULT"
+          }
+        }
+      ]
+    }
+  ],
+  "DataInfoTable" : [
+    12,
+    {
+      "Id" : 0,
+      "MinLength" : 1,
+      "MaxLength" : 1,
+      "Handler" : {
+        "Type" : "Internal",
+        "Instance" : "ActiveSession"
+      }
+    },
+    {
+      "Id" : 1,
+      "MinLength" : 1,
+      "MaxLength" : 1,
+      "Handler" : {
+        "Type" : "Internal",
+        "Instance" : "AgingCounterDownCount"
+      }
+    },
+    {
+      "Id" : 2,
+      "MinLength" : 1,
+      "MaxLength" : 1,
+      "Handler" : {
+        "Type" : "Internal",
+        "Instance" : "AgingCounterUpCount"
+      }
+    },
+    {
+      "Id" : 3,
+      "MinLength" : 4,
+      "MaxLength" : 4,
+      "Handler" : {
+        "Type" : "External",
+        "Instance" : {
+          "AppHandle" : 1562938272,
+          "InstanceHandle" : 3722615941
+        }
+      }
+    },
+    {
+      "Id" : 4,
+      "MinLength" : 1,
+      "MaxLength" : 1,
+      "Handler" : {
+        "Type" : "Internal",
+        "Instance" : "OccurrenceCount"
+      }
+    },
+    {
+      "Id" : 5,
+      "MinLength" : 1,
+      "MaxLength" : 1,
+      "Handler" : {
+        "Type" : "Internal",
+        "Instance" : "OccurrenceCount"
+      }
+    },
+    {
+      "Id" : 6,
+      "MinLength" : 1,
+      "MaxLength" : 1,
+      "Handler" : {
+        "Type" : "Internal",
+        "Instance" : "Priority"
+      }
+    },
+    {
+      "Id" : 7,
+      "MinLength" : 4,
+      "MaxLength" : 4,
+      "Handler" : {
+        "Type" : "External",
+        "Instance" : {
+          "AppHandle" : 1562938272,
+          "InstanceHandle" : 1316561583
+        }
+      }
+    },
+    {
+      "Id" : 8,
+      "MinLength" : 17,
+      "MaxLength" : 17,
+      "Handler" : {
+        "Type" : "External",
+        "Instance" : {
+          "AppHandle" : 1562938272,
+          "InstanceHandle" : 971305285
+        }
+      }
+    },
+    {
+      "Id" : 9,
+      "MinLength" : 3,
+      "MaxLength" : 3,
+      "Handler" : {
+        "Type" : "External",
+        "Instance" : {
+          "AppHandle" : 1562938272,
+          "InstanceHandle" : 149652892
+        }
+      }
+    },
+    {
+      "Id" : 10,
+      "MinLength" : 3,
+      "MaxLength" : 3,
+      "Handler" : {
+        "Type" : "External",
+        "Instance" : {
+          "AppHandle" : 1562938272,
+          "InstanceHandle" : 3722615941
+        }
+      }
+    },
+    {
+      "Id" : 11,
+      "MinLength" : 2,
+      "MaxLength" : 2,
+      "Handler" : {
+        "Type" : "External",
+        "Instance" : {
+          "AppHandle" : 1562938272,
+          "InstanceHandle" : 1316561583
+        }
+      }
+    }
+  ],
+  "DataCollectionTable" : [
+    9,
+    {
+      "Id" : 0,
+      "DataInfoRefs" : [
+        1,
+        4
+      ]
+    },
+    {
+      "Id" : 1,
+      "DataInfoRefs" : [
+        1,
+        7
+      ]
+    },
+    {
+      "Id" : 2,
+      "DataInfoRefs" : [
+        4,
+        5,
+        6,
+        1,
+        2
+      ]
+    },
+    {
+      "Id" : 3,
+      "DataInfoRefs" : [
+        1,
+        0
+      ]
+    },
+    {
+      "Id" : 4,
+      "DataInfoRefs" : [
+        1,
+        9
+      ]
+    },
+    {
+      "Id" : 5,
+      "DataInfoRefs" : [
+        1,
+        11
+      ]
+    },
+    {
+      "Id" : 6,
+      "DataInfoRefs" : [
+        1,
+        10
+      ]
+    },
+    {
+      "Id" : 7,
+      "DataInfoRefs" : [
+        1,
+        3
+      ]
+    },
+    {
+      "Id" : 8,
+      "DataInfoRefs" : [
+        1,
+        8
+      ]
+    }
+  ],
+  "DidConfiguration" : {
+    "VinDid" : 61840,
+    "DidTable" : [
+      6,
+      {
+        "Id" : 18193,
+        "DataCollectionRef" : 4,
+        "Operations" : [
+          2,
+          {
+            "Action" : "Read",
+            "Preconditions" : {
+              "Sessions" : [
+                0
+              ],
+              "SecurityAccessLevels" : [
+                0
+              ],
+              "EnvironmentalCondition" : [
+                0
+              ]
+            }
+          },
+          {
+            "Action" : "Write",
+            "Preconditions" : {
+              "Sessions" : [
+                0
+              ],
+              "SecurityAccessLevels" : [
+                0
+              ],
+              "EnvironmentalCondition" : [
+                0
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "Id" : 18194,
+        "DataCollectionRef" : 6,
+        "Operations" : [
+          2,
+          {
+            "Action" : "Read",
+            "Preconditions" : {
+              "Sessions" : [
+                0
+              ],
+              "SecurityAccessLevels" : [
+                0
+              ],
+              "EnvironmentalCondition" : [
+                0
+              ]
+            }
+          },
+          {
+            "Action" : "Write",
+            "Preconditions" : {
+              "Sessions" : [
+                0
+              ],
+              "SecurityAccessLevels" : [
+                0
+              ],
+              "EnvironmentalCondition" : [
+                0
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "Id" : 18247,
+        "DataCollectionRef" : 5,
+        "Operations" : [
+          1,
+          {
+            "Action" : "Read",
+            "Preconditions" : {
+              "Sessions" : [
+                0
+              ],
+              "SecurityAccessLevels" : [
+                0
+              ],
+              "EnvironmentalCondition" : [
+                0
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "Id" : 61830,
+        "DataCollectionRef" : 3,
+        "Operations" : [
+          1,
+          {
+            "Action" : "Read",
+            "Preconditions" : {
+              "Sessions" : [
+                0
+              ],
+              "SecurityAccessLevels" : [
+                0
+              ],
+              "EnvironmentalCondition" : [
+                0
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "Id" : 61840,
+        "DataCollectionRef" : 8,
+        "Operations" : [
+          2,
+          {
+            "Action" : "Read",
+            "Preconditions" : {
+              "Sessions" : [
+                0
+              ],
+              "SecurityAccessLevels" : [
+                0
+              ],
+              "EnvironmentalCondition" : [
+                0
+              ]
+            }
+          },
+          {
+            "Action" : "Write",
+            "Preconditions" : {
+              "Sessions" : [
+                2,
+                2,
+                3
+              ],
+              "SecurityAccessLevels" : [
+                0
+              ],
+              "EnvironmentalCondition" : [
+                0
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "Id" : 61843,
+        "DataCollectionRef" : 7,
+        "Operations" : [
+          1,
+          {
+            "Action" : "Read",
+            "Preconditions" : {
+              "Sessions" : [
+                0
+              ],
+              "SecurityAccessLevels" : [
+                0
+              ],
+              "EnvironmentalCondition" : [
+                0
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "RidTable" : [
+    2,
+    {
+      "Id" : 513,
+      "Preconditions" : {
+        "Sessions" : [
+          2,
+          2,
+          3
+        ],
+        "SecurityAccessLevels" : [
+          0
+        ],
+        "EnvironmentalCondition" : [
+          0
+        ]
+      },
+      "Operations" : [
+        2,
+        {
+          "Action" : "Start",
+          "RidRequestData" : {
+            "MinLength" : 2,
+            "MaxLength" : 2
+          },
+          "RidResponseData" : {
+            "MinLength" : 4,
+            "MaxLength" : 4
+          },
+          "Preconditions" : {
+            "Sessions" : [
+              2,
+              2,
+              3
+            ],
+            "SecurityAccessLevels" : [
+              0
+            ],
+            "EnvironmentalCondition" : [
+              0
+            ]
+          }
+        },
+        {
+          "Action" : "Stop",
+          "RidRequestData" : {
+            "MinLength" : 2,
+            "MaxLength" : 2
+          },
+          "RidResponseData" : {
+            "MinLength" : 0,
+            "MaxLength" : 0
+          },
+          "Preconditions" : {
+            "Sessions" : [
+              2,
+              2,
+              3
+            ],
+            "SecurityAccessLevels" : [
+              0
+            ],
+            "EnvironmentalCondition" : [
+              0
+            ]
+          }
+        }
+      ],
+      "Handler" : {
+        "Type" : "External",
+        "Instance" : {
+          "AppHandle" : 1562938272,
+          "InstanceHandle" : 1889543762
+        }
+      }
+    },
+    {
+      "Id" : 514,
+      "Preconditions" : {
+        "Sessions" : [
+          2,
+          2,
+          3
+        ],
+        "SecurityAccessLevels" : [
+          0
+        ],
+        "EnvironmentalCondition" : [
+          0
+        ]
+      },
+      "Operations" : [
+        3,
+        {
+          "Action" : "Start",
+          "RidRequestData" : {
+            "MinLength" : 2,
+            "MaxLength" : 2
+          },
+          "RidResponseData" : {
+            "MinLength" : 3,
+            "MaxLength" : 3
+          },
+          "Preconditions" : {
+            "Sessions" : [
+              2,
+              2,
+              3
+            ],
+            "SecurityAccessLevels" : [
+              0
+            ],
+            "EnvironmentalCondition" : [
+              0
+            ]
+          }
+        },
+        {
+          "Action" : "Stop",
+          "RidRequestData" : {
+            "MinLength" : 12,
+            "MaxLength" : 20
+          },
+          "RidResponseData" : {
+            "MinLength" : 0,
+            "MaxLength" : 0
+          },
+          "Preconditions" : {
+            "Sessions" : [
+              2,
+              2,
+              3
+            ],
+            "SecurityAccessLevels" : [
+              0
+            ],
+            "EnvironmentalCondition" : [
+              0
+            ]
+          }
+        },
+        {
+          "Action" : "RequestResults",
+          "RidRequestData" : {
+            "MinLength" : 0,
+            "MaxLength" : 0
+          },
+          "RidResponseData" : {
+            "MinLength" : 11,
+            "MaxLength" : 19
+          },
+          "Preconditions" : {
+            "Sessions" : [
+              2,
+              2,
+              3
+            ],
+            "SecurityAccessLevels" : [
+              0
+            ],
+            "EnvironmentalCondition" : [
+              0
+            ]
+          }
+        }
+      ],
+      "Handler" : {
+        "Type" : "External",
+        "Instance" : {
+          "AppHandle" : 1562938272,
+          "InstanceHandle" : 2024295511
+        }
+      }
+    }
+  ],
+  "DataElements" : [
+    1,
+    {
+      "Id" : 0,
+      "Did" : 18247,
+      "IsSigned" : false
+    }
+  ],
+  "DiagEnvironmentalConditionTable" : {
+    "NumberRootRules" : 1,
+    "Items" : [
+      5,
+      {
+        "Id" : 0,
+        "OwnerId" : -1,
+        "NodeType" : "EnvRule",
+        "Nrc" : "16",
+        "Operator" : "Or",
+        "NumberExpressions" : 2
+      },
+      {
+        "Id" : 1,
+        "OwnerId" : 0,
+        "NodeType" : "EnvRule",
+        "Nrc" : "33",
+        "Operator" : "And",
+        "NumberExpressions" : 2
+      },
+      {
+        "Id" : 2,
+        "OwnerId" : 1,
+        "NodeType" : "EnvCondition",
+        "Operator" : "GreaterThan",
+        "DataElementRef" : 0,
+        "Value" : 12
+      },
+      {
+        "Id" : 3,
+        "OwnerId" : 1,
+        "NodeType" : "EnvCondition",
+        "Operator" : "LessThan",
+        "DataElementRef" : 0,
+        "Value" : 36
+      },
+      {
+        "Id" : 4,
+        "OwnerId" : 0,
+        "NodeType" : "EnvCondition",
+        "Operator" : "Equal",
+        "DataElementRef" : 0,
+        "Value" : 45
+      }
+    ]
+  },
+  "FaultMemory" : {
+    "SnapshotRecordNumerationType" : "CALCULATED",
+    "NumberOfReadoutBuffers" : 2,
+    "DataCollectingTimeout" : 5000,
+    "PersistencyUpdateTimeout" : 10,
+    "GlobalEventCount" : 1,
+    "GlobalDtcInformationPortInstanceCount" : 1,
+    "GlobalClearConditionsPortInstanceCount" : 0,
+    "GlobalEnableConditionsPortsInstanceCount" : 1,
+    "GlobalCyclesPortInstanceCount" : 1,
+    "GlobalIndicatorsPortInstanceCount" : 1,
+    "GlobalEventsPortInstanceCount" : 1,
+    "AgingRequiresTestedCycle" : true,
+    "ExtendedDataRecords" : [
+      3,
+      {
+        "Id" : 0,
+        "Name" : "ExtendedDataRecord0x01",
+        "RecordNumber" : 1,
+        "DiagnosticRecordTrigger" : "NOT_USED",
+        "Update" : "NOT_USED",
+        "RetrievalType" : "AVAILABLE_WHEN_STORED",
+        "DataCollectionRef" : 0
+      },
+      {
+        "Id" : 1,
+        "Name" : "ExtendedDataRecord0x02",
+        "RecordNumber" : 2,
+        "DiagnosticRecordTrigger" : "TEST_FAILED",
+        "Update" : "EVERY_TIME",
+        "RetrievalType" : "AVAILABLE_WHEN_TEST_FAILED",
+        "DataCollectionRef" : 1
+      },
+      {
+        "Id" : 2,
+        "Name" : "ExtendedDataRecord0x03",
+        "RecordNumber" : 3,
+        "DiagnosticRecordTrigger" : "NOT_USED",
+        "Update" : "NOT_USED",
+        "RetrievalType" : "AVAILABLE_WHEN_STORED",
+        "DataCollectionRef" : 2
+      }
+    ],
+    "DTCPropsTable" : [
+      1,
+      {
+        "Id" : 0,
+        "Name" : "Dtc_0xc71000_Properties",
+        "Priority" : 1,
+        "AgingThreshold" : 40,
+        "IsAgingAllowed" : true,
+        "MaxNumberSnapshotRecords" : 2,
+        "SnapshotContent" : [
+          2,
+          18193,
+          18194
+        ],
+        "ExtendedDataRecordRefs" : [
+          2,
+          0,
+          2
+        ]
+      }
+    ],
+    "IndicatorTable" : [
+      1,
+      {
+        "Id" : 0,
+        "Name" : "WarningIndicator",
+        "Instances" : [
+          1,
+          {
+            "AppHandle" : 1562938272,
+            "InstanceHandle" : 333191991
+          }
+        ]
+      }
+    ],
+    "EventMemoryTable" : [
+      2,
+      {
+        "Name" : "PrimaryMemory",
+        "MemoryKind" : "PRIMARY",
+        "MemoryInfo" : "ISO_14229__1",
+        "DtcStatusAvailabilityMask" : 255,
+        "NumberOfDataCollectingThreads" : 2,
+        "DtcInformationInstances" : [
+          1,
+          {
+            "AppHandle" : 1562938272,
+            "InstanceHandle" : 2001653312
+          }
+        ],
+        "EventTable" : [
+          1,
+          {
+            "Id" : 0,
+            "Name" : "Dtc_0xc71000_Event",
+            "MonitorInstance" : {
+              "AppHandle" : 1562938272,
+              "InstanceHandle" : 2330723916
+            },
+            "EventInstances" : [
+              1,
+              {
+                "AppHandle" : 1562938272,
+                "InstanceHandle" : 2275772351
+              }
+            ]
+          }
+        ],
+        "DTCTable" : [
+          1,
+          {
+            "Id" : 0,
+            "Name" : "Dtc_0xc71000",
+            "UDSDTCNumber" : 13045760,
+            "DTCPropsRef" : 0,
+            "EventRefs" : [
+              1,
+              0
+            ],
+            "Indicators" : [
+              1,
+              {
+                "ActivationThreshold" : 0,
+                "DeactivationThreshold" : 10,
+                "ActivationType" : "NOT_USED",
+                "IndicatorRef" : 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "Name" : "UserMemory",
+        "MemoryKind" : "USER_DEFINED",
+        "MemoryInfo" : "17",
+        "DtcStatusAvailabilityMask" : 255,
+        "NumberOfDataCollectingThreads" : 2,
+        "DtcInformationInstances" : [
+          0
+        ],
+        "EventTable" : [
+          0
+        ],
+        "DTCTable" : [
+          0
+        ]
+      }
+    ],
+    "ClearConditionGroupTable" : [
+      0
+    ],
+    "ClearConditionTable" : [
+      0
+    ],
+    "EnableConditionGroupTable" : [
+      2,
+      {
+        "Id" : 0,
+        "Name" : "EnableConditionGroup_2f9cc720",
+        "Events" : [
+          1,
+          0
+        ]
+      },
+      {
+        "Id" : 1,
+        "Name" : "EnableConditionGroup_Example_EnableCondition1",
+        "Events" : [
+          0
+        ]
+      }
+    ],
+    "EnableConditionTable" : [
+      1,
+      {
+        "Id" : 0,
+        "Name" : "Example_EnableCondition1",
+        "EnableConditionGroups" : [
+          2,
+          0,
+          1
+        ],
+        "Instances" : [
+          1,
+          {
+            "AppHandle" : 1562938272,
+            "InstanceHandle" : 3087278548
+          }
+        ]
+      }
+    ],
+    "Cycles" : [
+      1,
+      {
+        "Id" : 0,
+        "Name" : "DEM_POWER",
+        "Instances" : [
+          1,
+          {
+            "AppHandle" : 1562938272,
+            "InstanceHandle" : 4200925128
+          }
+        ],
+        "OperationCycleFor" : {
+          "Events" : [
+            1,
+            0
+          ],
+          "Dtcs" : [
+            1,
+            0
+          ]
+        },
+        "AgingCycleFor" : {
+          "Dtcs" : [
+            1,
+            0
+          ]
+        }
+      }
+    ]
+  }
+}

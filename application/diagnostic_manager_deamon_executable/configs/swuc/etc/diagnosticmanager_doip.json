@@ -1,0 +1,25 @@
+{
+  "DoIPChannel": {
+    "UDPChannel": {
+      "IPAddress": "192.168.7.2",
+      "BroadcastAddress": "192.168.7.255",
+      "TTL": 0
+    },
+    "TCPChannel": {
+      "IPAddress": "192.168.7.2",
+      "MaxChannels": 5,
+      "TTL": 0
+    },
+    "StartAnnouncementMessageDelay": 500,
+    "NodeType": 1,
+    "EID": "MAC",
+    "MaxMessageLength": 1500,
+    "MaxLengthInEntityStatusResponse": true,
+    "PrimaryTargetAddress": 1,
+    "TargetAddressArray": [
+      2,
+      1,
+      58368
+    ]
+  }
+}

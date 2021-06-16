@@ -1,0 +1,13 @@
+{
+  "name": "VDMd",
+  "description": "The Adaptive AUTOSAR DiagnosticManager",
+  "dlt_id": "VDMd",
+  "log_mode": [
+    "kConsole"
+  ],
+  "log_level": "kVerbose",
+  "log_dir_path": "tmp",
+  "ipc_port": 33,
+  "reconnection_retry_offset": 0,
+  "msg_buf_size": 1000
+}
