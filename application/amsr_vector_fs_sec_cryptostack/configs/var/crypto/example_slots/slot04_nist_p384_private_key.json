@@ -1,0 +1,49 @@
+{
+  "content": {
+    "content": {
+      "d": "77E319844C018BF26992201E12D6A0ECD572613DEC92ED7E8AF3901B38B58CCE3CCC4CD5A5FE861FF415C898DA1FCB7A",
+      "x": "B3372CA257C868DA0A07BCB1131CA225F60389D5CABC12BBF7F3814E8AF6EFF82BE190CA4EC6F619036FD62D3BB6A0DC",
+      "y": "9222D184C8A72B56CB054065A89FE4C126448C86BBF62B9F8E0DB84F0A3E8683DFA79E8E2CC1905E4AB19BCAF0DCE589"
+    },
+    "meta": {
+      "bitSize": 384,
+      "algId": "PRIVATE_KEY_ECC\/NIST_P-384",
+      "type": "PrivateKey",
+      "couid": {
+        "version": 1588671402498235,
+        "generator": {
+          "uuid": "d8bf7455-d995-41ac-86f3-bdfaf4f7f038"
+        }
+      },
+      "allowedUsage": [
+        "AllowSignature"
+      ]
+    }
+  },
+  "meta": {
+    "capacity": 8192,
+    "uuid": "e22201c7-3f80-462e-babd-9bef34fec7ea",
+    "contentRestriction": {
+      "isExportable": false,
+      "algId": "PRIVATE_KEY_ECC\/NIST_P-384",
+      "type": "PrivateKey"
+    },
+    "owner": {
+      "uuid": "00000000-0000-0000-0000-000000000000"
+    },
+    "provider": {
+      "uuid": "00000000-0000-0000-0000-000000000000"
+    },
+    "versionControl": {
+      "type": 0,
+      "prevContent": {
+        "couid": {
+          "version": 0,
+          "generator": {
+            "uuid": "00000000-0000-0000-0000-000000000000"
+          }
+        }
+      }
+    }
+  }
+}

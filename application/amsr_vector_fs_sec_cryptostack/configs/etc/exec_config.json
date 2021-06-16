@@ -1,0 +1,35 @@
+{
+  "category": "PLATFORM_LEVEL",
+  "name": "amsr_vector_fs_sec_cryptostack_daemon",
+  "isAdaptiveApplication": 1,
+  "processes": [
+    {
+      "name": "cryptostack-daemon-process",
+      "shortNamePath" : "/vector/cryptostack/cryptostack-daemon-process",
+      "startupConfigs": [
+        {
+          "schedulingPolicy": "SCHEDULING-POLICY-FIFO",
+          "schedulingPriority": 80,
+          "options": [
+            "-vvvvv"
+          ],
+          "executionDependency": {
+          },
+          "functionGroups": [
+            {
+              "name": "MachineState",
+              "states": [
+                "Startup",
+                "Running"
+              ]
+            }
+          ],
+          "cores": {
+            "shallRunOn": [
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
