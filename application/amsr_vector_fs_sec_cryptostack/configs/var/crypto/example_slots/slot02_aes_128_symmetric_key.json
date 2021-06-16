@@ -1,0 +1,34 @@
+{
+  "meta": {
+    "uuid": "b2adc146-eefa-11e8-8eb2-f2801f1b9fd1",
+    "type": "application",
+    "provider": {
+      "uuid": "00000000-0000-0000-0000-000000000000"
+    },
+    "contentRestriction": {
+      "type": "SymmetricKey",
+      "algId": "AES-128"
+    },
+    "capacity": 8192,
+    "owner": {
+      "uuid": "00000000-0000-0000-0000-000000000000"
+    }
+  },
+  "content": {
+    "meta": {
+      "couid": {
+        "generator": {
+          "uuid": "00000000-0000-0000-0000-000000000000"
+        },
+        "version": 0
+      },
+      "type": "SymmetricKey",
+      "algId": "AES-128",
+      "bitSize": 128,
+      "allowedUsage": ["AllowKeyExporting"]
+    },
+    "content": {
+      "keyData": "feffe9928665731c6d6a8f9467308308"
+    }
+  }
+}

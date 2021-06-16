@@ -1,0 +1,33 @@
+{
+  "meta": {
+    "uuid": "96c19ab4-bf58-11e9-9cb5-2a2ae2dbcce4",
+    "type": "application",
+    "provider": {
+      "uuid": "00000000-0000-0000-0000-000000000000"
+    },
+    "contentRestriction": {
+      "isExportable": false
+    },
+    "capacity": 8192,
+    "owner": {
+      "uuid": "00000000-0000-0000-0000-000000000000"
+    }
+  },
+  "content": {
+    "meta": {
+      "couid": {
+        "generator": {
+          "uuid": "d8bf7455-d995-41ac-86f3-bdfaf4f7f038"
+        },
+        "version": 10002
+      },
+      "type": "PrivateKey",
+      "algId": "PRIVATE_KEY_ECC/NIST_P-256",
+      "bitSize": 256,
+      "allowedUsage": 0
+    },
+    "content": {
+      "d": "11687C065153078808E346D9A062FE60C13E49DE8AB70FDF04977A159D5A2E12"
+    }
+  }
+}

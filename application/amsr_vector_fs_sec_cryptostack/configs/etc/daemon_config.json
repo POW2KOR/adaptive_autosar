@@ -1,0 +1,14 @@
+{
+  "Server": {
+    "maxConnectionNum": 10
+  },
+  "X.509": {
+    "storage": {
+      "root": "./var/crypto"
+    },
+    "access": {
+      "caConnectorId": 1,
+      "trustmasterId": 2
+    }
+  }
+}

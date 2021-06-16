@@ -1,0 +1,109 @@
+{
+  "generatePath": "slots",
+  "slots": [
+    {
+      "number": 1,
+      "path": "../var/crypto/example_slots\/slot01_rsa_2048_public_key.json",
+      "uuid": "9abe2c74-eefa-11e8-8eb2-f2801f1b9fd1",
+      "provider": {
+        "uuid": "00000000-0000-0000-0000-000000000000"
+      }
+    },
+    {
+      "number": 2,
+      "path": "../var/crypto/example_slots\/slot02_aes_128_symmetric_key.json",
+      "uuid": "b2adc146-eefa-11e8-8eb2-f2801f1b9fd1",
+      "provider": {
+        "uuid": "00000000-0000-0000-0000-000000000000"
+      }
+    },
+    {
+      "number": 3,
+      "path": "../var/crypto/example_slots\/slot03_nist_p256_private_key.json",
+      "uuid": "4f147b6d-dab3-46ae-b733-e5a6cfed599c",
+      "provider": {
+        "uuid": "00000000-0000-0000-0000-000000000000"
+      }
+    },
+    {
+      "number": 4,
+      "path": "../var/crypto/example_slots\/slot04_nist_p384_private_key.json",
+      "uuid": "e22201c7-3f80-462e-babd-9bef34fec7ea",
+      "provider": {
+        "uuid": "00000000-0000-0000-0000-000000000000"
+      }
+    },
+    {
+      "number": 5,
+      "path": "../var/crypto/example_slots\/slot05_nist_p521_private_key.json",
+      "uuid": "1e49a99b-e77d-4c6f-b614-9329cb8a22ab",
+      "provider": {
+        "uuid": "00000000-0000-0000-0000-000000000000"
+      }
+    },
+    {
+      "number": 6,
+      "path": "../var/crypto/example_slots\/slot06_nist_p256_public_key.json",
+      "uuid": "01b6aa03-0038-4bcc-909d-fbcc019a906e",
+      "provider": {
+        "uuid": "00000000-0000-0000-0000-000000000000"
+      }
+    },
+    {
+      "number": 7,
+      "path": "../var/crypto/example_slots\/slot07_nist_p384_public_key.json",
+      "uuid": "5e61f0aa-d45c-42c0-a720-d166ec34256e",
+      "provider": {
+        "uuid": "00000000-0000-0000-0000-000000000000"
+      }
+    },
+    {
+      "number": 8,
+      "path": "../var/crypto/example_slots\/slot08_nist_p521_public_key.json",
+      "uuid": "96db44dd-d27a-411c-8aca-efd6a20a74dd",
+      "provider": {
+        "uuid": "00000000-0000-0000-0000-000000000000"
+      }
+    },
+    {
+      "number": 9,
+      "path": "../var/crypto/example_slots\/slot09_nist_p256_private_key_end_certificate.json",
+      "uuid": "96c19ab4-bf58-11e9-9cb5-2a2ae2dbcce4",
+      "provider": {
+        "uuid": "00000000-0000-0000-0000-000000000000"
+      }
+    },
+    {
+      "number": 10,
+      "path": "../var/crypto/example_slots\/slot10_empty.json",
+      "uuid": "1e49a99b-bf58-11e9-8aca-2a2ae2dbcce4",
+      "provider": {
+        "uuid": "00000000-0000-0000-0000-000000000000"
+      }
+    },
+    {
+      "number": 1000000,
+      "path": "predefined_slots\/slot1000000_nist_p256_domain_parameters.json",
+      "uuid": "3492a9c7-6282-4207-bb23-0af1ab6c68fe",
+      "provider": {
+        "uuid": "00000000-0000-0000-0000-000000000000"
+      }
+    },
+    {
+      "number": 1000001,
+      "path": "predefined_slots\/slot1000001_nist_p384_domain_parameters.json",
+      "uuid": "e8040507-acdf-4034-94c4-b3005fc96fb7",
+      "provider": {
+        "uuid": "00000000-0000-0000-0000-000000000000"
+      }
+    },
+    {
+      "number": 1000002,
+      "path": "predefined_slots\/slot1000002_nist_p521_domain_parameters.json",
+      "uuid": "7ff8acfd-6d49-47d5-9900-8f79f0068601",
+      "provider": {
+        "uuid": "00000000-0000-0000-0000-000000000000"
+      }
+    }
+  ]
+}

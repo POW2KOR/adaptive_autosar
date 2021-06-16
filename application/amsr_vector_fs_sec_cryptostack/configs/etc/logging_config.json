@@ -1,0 +1,11 @@
+{
+  "name": "VCry",
+  "description": "AdaptivePlatformComponent for cryptographic algorithms.",
+  "dlt_id": "VCry",
+  "log_mode": ["kConsole"],
+  "log_level": "kVerbose",
+  "log_dir_path": "",
+  "ipc_port": 33,
+  "reconnection_retry_offset": 0,
+  "msg_buf_size": 1000
+}

@@ -1,0 +1,35 @@
+{
+  "meta": {
+    "uuid": "1e49a99b-e77d-4c6f-b614-9329cb8a22ab",
+    "type": "application",
+    "provider": {
+      "uuid": "00000000-0000-0000-0000-000000000000"
+    },
+    "contentRestriction": {
+      "type": "PrivateKey",
+      "algId": "PRIVATE_KEY_ECC/NIST_P-521",
+      "isExportable": false
+    },
+    "capacity": 8192,
+    "owner": {
+      "uuid": "00000000-0000-0000-0000-000000000000"
+    }
+  },
+  "content": {
+    "meta": {
+      "couid": {
+        "generator": {
+          "uuid": "d8bf7455-d995-41ac-86f3-bdfaf4f7f038"
+        },
+        "version": 424238335
+      },
+      "type": "PrivateKey",
+      "algId": "PRIVATE_KEY_ECC/NIST_P-521",
+      "bitSize": 521,
+      "allowedUsage": 0
+    },
+    "content": {
+      "d": "00330dde128d3fe08aa6d4caf260d801e5f697c8be00284fa735751428b707f4720af41afa52d6c93dbc1f3697d988cac00fed61853572673873fc89ae5e9b384c87"
+    }
+  }
+}

@@ -84,6 +84,7 @@ pkg_tar(
             },
             [
                 "//application/amsr_vector_fs_em_executionmanager:package",
+                "//application/amsr_vector_fs_sec_cryptostack:package",
                 "//application/x6aa_update_dummy_app:package",
                 "//application/someipd_posix:package",
                 "//application/x6aa_config_manager:package",

@@ -1,0 +1,36 @@
+{
+  "meta": {
+    "uuid": "5e61f0aa-d45c-42c0-a720-d166ec34256e",
+    "type": "application",
+    "provider": {
+      "uuid": "00000000-0000-0000-0000-000000000000"
+    },
+    "contentRestriction": {
+      "type": "PublicKey",
+      "algId": "PUBLIC_KEY_ECC/NIST_P-384",
+      "isExportable": false
+    },
+    "capacity": 8192,
+    "owner": {
+      "uuid": "00000000-0000-0000-0000-000000000000"
+    }
+  },
+  "content": {
+    "meta": {
+      "couid": {
+        "generator": {
+          "uuid": "d8bf7455-d995-41ac-86f3-bdfaf4f7f037"
+        },
+        "version": 1681692777
+      },
+      "type": "PublicKey",
+      "algId": "PUBLIC_KEY_ECC/NIST_P-384",
+      "bitSize": 384,
+      "allowedUsage": 0
+    },
+    "content": {
+      "x": "222bb51b887a78d760ed3dd17479b2b08e7c9e0107e9d476910df273363689ad5d3a5a69e5b9daaed28f91d21503774b",
+      "y": "e47e6de6cec430de7953b4a9735425728ff9cc7380087ea293f6ae988cb5628c058dc25a1d4328250a354f8088a33417"
+    }
+  }
+}

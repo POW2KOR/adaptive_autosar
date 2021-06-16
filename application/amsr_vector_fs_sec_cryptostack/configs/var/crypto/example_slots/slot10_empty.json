@@ -1,0 +1,23 @@
+{
+  "meta": {
+    "capacity": 8192,
+    "uuid": "1e49a99b-bf58-11e9-8aca-2a2ae2dbcce4",
+    "owner": {
+      "uuid": "00000000-0000-0000-0000-000000000000"
+    },
+    "provider": {
+      "uuid": "00000000-0000-0000-0000-000000000000"
+    },
+    "versionControl": {
+      "type": 0,
+      "prevContent": {
+        "couid": {
+          "version": 0,
+          "generator": {
+            "uuid": "00000000-0000-0000-0000-000000000000"
+          }
+        }
+      }
+    }
+  }
+}
