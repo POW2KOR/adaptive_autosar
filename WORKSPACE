@@ -130,6 +130,19 @@ new_git_repository(
 )'''
 
 new_git_repository(
+    name = "sda_xavier",  # bazel will create under its own cache folder in the external folder package with the specified name(e.g. external/sda_xavier)
+    build_file = "@//application/sda:sda_xavier.BUILD",
+    commit = "74a1aa11c606d3798bffbbccb00c3958ec95844b",
+    remote = "ssh://git@git.swf.daimler.com:7999/adasdai/sda_xavier.git",
+)
+
+'''new_local_repository(
+    name = "sda_xavier",
+    build_file = "@//application/sda:sda_xavier.BUILD",
+    path = "<local_path_to_reposittory>",
+)'''
+
+new_git_repository(
     name = "collectd_mbient",  # bazel will create under its own cache folder in the external folder package with the specified name(e.g. external/collectd_mbient)
     build_file = "@//tools:collectd_mbient.BUILD",
     commit = "2575bc86875d8f681fbdabeac3b2ac61b7c91ffc",  # the commit ID that bazel will use to fetch the external repository
