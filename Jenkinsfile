@@ -1,46 +1,32 @@
-import groovy.io.FileType
-@Library('adas-jenkins-shared-lib@master') _
+/**
+* This executes a pipeline based on Pipeliner.
+* The pipeline can be found in the mbient-pipeliner-depot at
+* https://git.swf.daimler.com/mbient/mbient-pipeliner-depot
+*
+* For more information about Pipeliner and pipelines, refer to the documentation
+* in https://github.com/Daimler/pipeliner
+*
+* See documentation for input parameters of all pipelines:
+* https://artifact.swf.daimler.com/mbient/docs/mbient-pipeliner-depot/release-latest/groovydoc/index.html
+*/
 
-initGatekeeper()
+// Specify the manifest and branch
+// Change these if your repo is not part of the main QNX build
+env.PIP_MANIFEST_URL = "ssh://git@git.swf.daimler.com:7999/apricot/adaptive_autosar_manifest.git"
+env.PIP_MANIFEST_BRANCH = "master"
+env.PIP_MANIFEST_FILE="default.xml"
 
-// timeout in minutes
-max_time = 60
-SW_VERSION = "latest_version"
+// This enables checkout for the component
+// This must be specified unless you want to run with default manifest file
+env.PIP_COMPONENT_DIR = "adaptive_autosar"
 
-assign_node_labels()
+env.PIP_DOCKERIMAGE="artifact.swf.daimler.com/apricot-docker/xpf/xpf_adaptive_build_image:latest"
 
+env.PIP_BUILD_CMD = "./build.sh"
 
-lib_jenkins_steps = swf_load_script('devops/cicd/jenkins/jenkins_steps.groovy')
-lib_code_gatekeeper = swf_load_script('devops/ci-depot/jenkins/gatekeeper.groovy')
-lib_depot_utilities = swf_load_script('devops/ci-depot/jenkins/utilities.groovy')
+// Archive
+env.PIP_ARCHIVE = "true"
+env.PIP_ARCHIVE_IMAGE_FOLDERS = "artifacts/"
 
-lib_depot_utilities.main_wrapper(
-  core_logic: {
-    lib_depot_utilities.parallel_stage('Initialize', [
-        lib_jenkins_steps.initialize()
-    ])
-
-    lib_depot_utilities.parallel_stage('Sanity', [
-        lib_code_gatekeeper.inspect()
-    ])
-
-    lib_depot_utilities.parallel_stage('Builds', [
-        lib_jenkins_steps.compile_x86_64_linux_ubuntu('x86_64_linux_ubuntu'),
-        lib_jenkins_steps.compile_aarch64_linux_ubuntu('aarch64_linux_ubuntu'),
-        lib_jenkins_steps.compile_aarch64_linux_linaro('aarch64_linux_linaro')
-    ])
-
-    lib_depot_utilities.parallel_stage('Tests', [
-        lib_jenkins_steps.test_x86_64_linux_ubuntu('x86_64_linux_ubuntu'),
-    ])
-
-     lib_depot_utilities.parallel_stage('Deploy', [
-       lib_jenkins_steps.deploy_docker()
-    ])
-
-  }
-,
-failure_handler: {
-
-}
-)
+@Library('mbient-pipeliner-depot@release-latest') _
+execQnxPipeline()
