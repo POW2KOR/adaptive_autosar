@@ -133,7 +133,7 @@ new_git_repository(
     name = "sda_xavier",  # bazel will create under its own cache folder in the external folder package with the specified name(e.g. external/sda_xavier)
     build_file = "@//application/sda:sda_xavier.BUILD",
     commit = "74a1aa11c606d3798bffbbccb00c3958ec95844b",
-    remote = "ssh://git@git.swf.daimler.com:7999/autosarbas/mb-base-layer-ap3-projekthaus/ap3-baselayer/sda_xavier.git",
+    remote = "ssh://git@git.swf.daimler.com:7999/adasdai/sda_xavier.git",
 )
 
 '''new_local_repository(
