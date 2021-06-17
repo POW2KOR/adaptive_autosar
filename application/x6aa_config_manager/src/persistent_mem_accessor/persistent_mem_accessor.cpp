@@ -49,7 +49,8 @@ template<typename dataType>
 ara::core::Result<void> PersistentMemAccessor::StoreVariantCodingData(
     const variantCodingKeys key_to_store, dataType data_to_store)
 {
-    ara::core::Result<void> write_result;
+    ara::core::Result<void> write_result{
+        X6aa_Config_Manager_Errc::kWritingToPersistentMemoryFailed};
     ara::core::String key = kvs_enum_to_string_key(key_to_store);
     try {
         if (key.empty()) {
@@ -90,7 +91,7 @@ ara::core::Result<void> PersistentMemAccessor::StoreVariantCodingData(
 ara::core::Result<void> PersistentMemAccessor::StoreDataForConfigureSarTriggerEvents0136VcEvent(
     configureSarTriggerEvents0136VcEventDataType& configureSarTriggerEvents0136VcEventData)
 {
-    ara::core::Result<void> result;
+    ara::core::Result<void> result{X6aa_Config_Manager_Errc::kWritingToPersistentMemoryFailed};
 
     result = StoreVariantCodingData<uint8_t>(
         variantCodingKeys::triggerEventActivationStatusByte1,
@@ -131,7 +132,7 @@ ara::core::Result<void> PersistentMemAccessor::StoreDataForActivateSarStorage013
 ara::core::Result<void> PersistentMemAccessor::StoreDataForVechicleInformation0400VcEvent(
     vechicleInformation0400VcEventDataType& vechicleInformation0400VcEventData)
 {
-    ara::core::Result<void> result;
+    ara::core::Result<void> result{X6aa_Config_Manager_Errc::kWritingToPersistentMemoryFailed};
 
     result = StoreVariantCodingData<uint8_t>(
         variantCodingKeys::bodyStyle, vechicleInformation0400VcEventData.body_style);
@@ -207,7 +208,7 @@ ara::core::Result<void> PersistentMemAccessor::StoreDataForVechicleInformation04
 
 ara::core::Result<void> PersistentMemAccessor::InitializeVcMemoryWithDefaultValues()
 {
-    ara::core::Result<void> result;
+    ara::core::Result<void> result{X6aa_Config_Manager_Errc::kWritingToPersistentMemoryFailed};
     // initialize key value storage with default values
 
     // ##### configureSarTriggerEvents0136VcEventData ####
@@ -254,33 +255,34 @@ ara::core::Result<void> PersistentMemAccessor::InitializeVcMemoryWithDefaultValu
 }
 
 template<typename dataType>
-bool PersistentMemAccessor::TryReadingDataFromKvs(
-    const ara::core::String& key_to_read, dataType& read_value)
+ara::core::Result<dataType> PersistentMemAccessor::TryReadingDataFromKvs(
+    const ara::core::String& key_to_read)
 {
-    bool return_value = false;
+    ara::core::Result<dataType> result{
+        X6aa_Config_Manager_Errc::kReadingFromPersistentMemoryFailed};
+
     ara::per::Result<dataType> result_data
         = (*key_value_storage)->GetValue<dataType>(ara::core::StringView(key_to_read));
 
     if (result_data.HasValue()) {
         logger_ctx.LogInfo() << "Reading: Data is ready to read."_sv;
 
-        // We expect the data is an unsigned integer
-        read_value = result_data.Value();
-
+        // result shall either contain value or error
+        result = result_data.Value();
         logger_ctx.LogInfo() << "Reading: The read value from: "_sv << key_to_read
                              << " is: " << result_data.Value();
-        return_value = true;
     } else {
         logger_ctx.LogInfo() << "Reading: Data NOT ready"_sv;
     }
-    return return_value;
+    return result;
 }
 
 template<typename dataType>
-bool PersistentMemAccessor::ReadVariantCodingData(
-    const variantCodingKeys key_to_read, dataType& read_value)
+ara::core::Result<dataType> PersistentMemAccessor::ReadVariantCodingData(
+    const variantCodingKeys key_to_read)
 {
-    bool return_value = false;
+    ara::core::Result<dataType> result{
+        X6aa_Config_Manager_Errc::kReadingFromPersistentMemoryFailed};
     ara::core::String key = kvs_enum_to_string_key(key_to_read);
     try {
         if (key.empty()) {
@@ -293,8 +295,8 @@ bool PersistentMemAccessor::ReadVariantCodingData(
          * try reading the same key again. If it still fails then it's due to an issue in accessing
          * persistent memory.
          */
-        return_value = PersistentMemAccessor::TryReadingDataFromKvs<uint8_t>(key, read_value);
-        if (!return_value && !has_kvs_initialized_with_default_values) {
+        result = PersistentMemAccessor::TryReadingDataFromKvs<uint8_t>(key);
+        if (!result.HasValue() && !has_kvs_initialized_with_default_values) {
             // data not found in the database, try initializing the data
             logger_ctx.LogInfo()
                 << "Initializing: data not found in the database, try initializing the database."_sv;
@@ -302,8 +304,8 @@ bool PersistentMemAccessor::ReadVariantCodingData(
                 logger_ctx.LogFatal() << "Initializing: unable to initialize persistent data."_sv;
             } else {
                 logger_ctx.LogInfo() << "Initializing: kvs initialized with default values."_sv;
-                return_value = PersistentMemAccessor::TryReadingDataFromKvs<uint8_t>(
-                    key, read_value); // try reading once again
+                result = PersistentMemAccessor::TryReadingDataFromKvs<uint8_t>(
+                    key); // try reading once again
             }
             has_kvs_initialized_with_default_values = true; // set to true, don't try multiple times
         }
@@ -314,106 +316,157 @@ bool PersistentMemAccessor::ReadVariantCodingData(
     } catch (...) {
         logger_ctx.LogError() << "Caught unknown exception!"_sv;
     }
-    return return_value;
+    return result;
 }
 
-bool PersistentMemAccessor::ReadDataForConfigureSarTriggerEvents0136VcEvent(
-    configureSarTriggerEvents0136VcEventDataType& configureSarTriggerEvents0136VcEventData)
+ara::core::Result<configureSarTriggerEvents0136VcEventDataType> PersistentMemAccessor::
+    ReadDataForConfigureSarTriggerEvents0136VcEvent()
 {
-    bool return_value = true;
-    std::uint8_t read_value = 0;
-    if (ReadVariantCodingData<uint8_t>(
-            variantCodingKeys::triggerEventActivationStatusByte1, read_value)) {
-        configureSarTriggerEvents0136VcEventData.triggerEventActivationStatusByte1 = read_value;
+    ara::core::Result<configureSarTriggerEvents0136VcEventDataType> result{
+        X6aa_Config_Manager_Errc::kReadingFromPersistentMemoryFailed};
+    ara::core::Result<uint8_t> read_value{
+        X6aa_Config_Manager_Errc::kReadingFromPersistentMemoryFailed};
+    configureSarTriggerEvents0136VcEventDataType configureSarTriggerEvents0136VcEventData;
+    read_value
+        = ReadVariantCodingData<uint8_t>(variantCodingKeys::triggerEventActivationStatusByte1);
+    if (read_value.HasValue()) {
+        configureSarTriggerEvents0136VcEventData.triggerEventActivationStatusByte1
+            = read_value.Value();
     } else {
-        return_value = false;
+        return result.FromError(
+            X6aa_Config_Manager_Errc::kReadingFromPersistentMemoryFailed,
+            "triggerEventActivationStatusByte1 Reading Failed");
     }
 
-    if (ReadVariantCodingData<uint8_t>(
-            variantCodingKeys::triggerEventActivationStatusByte2, read_value)) {
-        configureSarTriggerEvents0136VcEventData.triggerEventActivationStatusByte2 = read_value;
+    read_value
+        = ReadVariantCodingData<uint8_t>(variantCodingKeys::triggerEventActivationStatusByte2);
+    if (read_value.HasValue()) {
+        configureSarTriggerEvents0136VcEventData.triggerEventActivationStatusByte2
+            = read_value.Value();
     } else {
-        return_value = false;
+        return result.FromError(
+            X6aa_Config_Manager_Errc::kReadingFromPersistentMemoryFailed,
+            "triggerEventActivationStatusByte2 Reading Failed");
     }
 
-    return return_value;
+    result = configureSarTriggerEvents0136VcEventData;
+
+    return result;
 }
 
-bool PersistentMemAccessor::ReadDataForActivateSarStorage0131VcEvent(
-    activateSarStorage0131VcEventDataType& activateSarStorage0131VcEventData)
+ara::core::Result<activateSarStorage0131VcEventDataType> PersistentMemAccessor::
+    ReadDataForActivateSarStorage0131VcEvent()
 {
-    bool return_value = true;
-    std::uint8_t read_value = 0;
-    if (ReadVariantCodingData<uint8_t>(variantCodingKeys::sarDataStorageStatus, read_value)) {
-        activateSarStorage0131VcEventData.sarDataStorageStatus = read_value;
+    ara::core::Result<activateSarStorage0131VcEventDataType> result{
+        X6aa_Config_Manager_Errc::kReadingFromPersistentMemoryFailed};
+    activateSarStorage0131VcEventDataType activateSarStorage0131VcEventData;
+    ara::core::Result<uint8_t> read_value
+        = ReadVariantCodingData<uint8_t>(variantCodingKeys::sarDataStorageStatus);
+    if (read_value.HasValue()) {
+        activateSarStorage0131VcEventData.sarDataStorageStatus = read_value.Value();
     } else {
-        return_value = false;
+        return result.FromError(
+            X6aa_Config_Manager_Errc::kReadingFromPersistentMemoryFailed,
+            "sarDataStorageStatus Reading Failed");
     }
+    result = activateSarStorage0131VcEventData;
 
-    return return_value;
+    return result;
 }
 
-bool PersistentMemAccessor::ReadDataForVechicleInformation0400VcEvent(
-    vechicleInformation0400VcEventDataType& vechicleInformation0400VcEventData)
+ara::core::Result<vechicleInformation0400VcEventDataType> PersistentMemAccessor::
+    ReadDataForVechicleInformation0400VcEvent()
 {
-    std::uint8_t read_value = 0;
-    bool return_value = true;
+    ara::core::Result<vechicleInformation0400VcEventDataType> result{
+        X6aa_Config_Manager_Errc::kReadingFromPersistentMemoryFailed};
+    ara::core::Result<uint8_t> read_value{
+        X6aa_Config_Manager_Errc::kReadingFromPersistentMemoryFailed};
+    vechicleInformation0400VcEventDataType vechicleInformation0400VcEventData;
 
-    if (ReadVariantCodingData<uint8_t>(variantCodingKeys::bodyStyle, read_value)) {
-        vechicleInformation0400VcEventData.body_style = read_value;
+    read_value = ReadVariantCodingData<uint8_t>(variantCodingKeys::bodyStyle);
+    if (read_value.HasValue()) {
+        vechicleInformation0400VcEventData.body_style = read_value.Value();
     } else {
-        return_value = false;
+        return result.FromError(
+            X6aa_Config_Manager_Errc::kReadingFromPersistentMemoryFailed,
+            "body_style Reading Failed");
     }
 
-    if (ReadVariantCodingData<uint8_t>(variantCodingKeys::vehLine, read_value)) {
-        vechicleInformation0400VcEventData.veh_line = read_value;
+    read_value = ReadVariantCodingData<uint8_t>(variantCodingKeys::vehLine);
+    if (read_value.HasValue()) {
+        vechicleInformation0400VcEventData.veh_line = read_value.Value();
     } else {
-        return_value = false;
+        return result.FromError(
+            X6aa_Config_Manager_Errc::kReadingFromPersistentMemoryFailed,
+            "veh_line Reading Failed");
     }
 
-    if (ReadVariantCodingData<uint8_t>(variantCodingKeys::amgType, read_value)) {
-        vechicleInformation0400VcEventData.amg_type = read_value;
+    read_value = ReadVariantCodingData<uint8_t>(variantCodingKeys::amgType);
+    if (read_value.HasValue()) {
+        vechicleInformation0400VcEventData.amg_type = read_value.Value();
     } else {
-        return_value = false;
+        return result.FromError(
+            X6aa_Config_Manager_Errc::kReadingFromPersistentMemoryFailed,
+            "amg_type Reading Failed");
     }
 
-    if (ReadVariantCodingData<uint8_t>(variantCodingKeys::guardLvlB4, read_value)) {
-        vechicleInformation0400VcEventData.guard_lvl_b4 = read_value;
+    read_value = ReadVariantCodingData<uint8_t>(variantCodingKeys::guardLvlB4);
+    if (read_value.HasValue()) {
+        vechicleInformation0400VcEventData.guard_lvl_b4 = read_value.Value();
     } else {
-        return_value = false;
+        return result.FromError(
+            X6aa_Config_Manager_Errc::kReadingFromPersistentMemoryFailed,
+            "guard_lvl_b4 Reading Failed");
     }
 
-    if (ReadVariantCodingData<uint8_t>(variantCodingKeys::reserved400, read_value)) {
-        vechicleInformation0400VcEventData.reserved = read_value;
+    read_value = ReadVariantCodingData<uint8_t>(variantCodingKeys::reserved400);
+    if (read_value.HasValue()) {
+        vechicleInformation0400VcEventData.reserved = read_value.Value();
     } else {
-        return_value = false;
+        return result.FromError(
+            X6aa_Config_Manager_Errc::kReadingFromPersistentMemoryFailed,
+            "reserved Reading Failed");
     }
 
-    if (ReadVariantCodingData<uint8_t>(variantCodingKeys::guardLvlB7, read_value)) {
-        vechicleInformation0400VcEventData.guard_lvl_b7 = read_value;
+    read_value = ReadVariantCodingData<uint8_t>(variantCodingKeys::guardLvlB7);
+    if (read_value.HasValue()) {
+        vechicleInformation0400VcEventData.guard_lvl_b7 = read_value.Value();
     } else {
-        return_value = false;
+        return result.FromError(
+            X6aa_Config_Manager_Errc::kReadingFromPersistentMemoryFailed,
+            "guardLvlB7 Reading Failed");
     }
 
-    if (ReadVariantCodingData<uint8_t>(variantCodingKeys::hybridAvl, read_value)) {
-        vechicleInformation0400VcEventData.hybrid_avl = read_value;
+    read_value = ReadVariantCodingData<uint8_t>(variantCodingKeys::hybridAvl);
+    if (read_value.HasValue()) {
+        vechicleInformation0400VcEventData.hybrid_avl = read_value.Value();
     } else {
-        return_value = false;
+        return result.FromError(
+            X6aa_Config_Manager_Errc::kReadingFromPersistentMemoryFailed,
+            "hybridAvl Reading Failed");
     }
 
-    if (ReadVariantCodingData<uint8_t>(variantCodingKeys::pluginHybridAvl, read_value)) {
-        vechicleInformation0400VcEventData.plugin_hybrid_avl = read_value;
+    read_value = ReadVariantCodingData<uint8_t>(variantCodingKeys::pluginHybridAvl);
+    if (read_value.HasValue()) {
+        vechicleInformation0400VcEventData.plugin_hybrid_avl = read_value.Value();
     } else {
-        return_value = false;
+        return result.FromError(
+            X6aa_Config_Manager_Errc::kReadingFromPersistentMemoryFailed,
+            "pluginHybridAvl Reading Failed");
     }
 
-    if (ReadVariantCodingData<uint8_t>(variantCodingKeys::vehBackdoorsAvl, read_value)) {
-        vechicleInformation0400VcEventData.veh_backdoors_avl = read_value;
+    read_value = ReadVariantCodingData<uint8_t>(variantCodingKeys::vehBackdoorsAvl);
+    if (read_value.HasValue()) {
+        vechicleInformation0400VcEventData.veh_backdoors_avl = read_value.Value();
     } else {
-        return_value = false;
+        return result.FromError(
+            X6aa_Config_Manager_Errc::kReadingFromPersistentMemoryFailed,
+            "vehBackdoorsAvl Reading Failed");
     }
 
-    return return_value;
+    result = vechicleInformation0400VcEventData;
+
+    return result;
 }
 
 } // namespace VariantCodingApp

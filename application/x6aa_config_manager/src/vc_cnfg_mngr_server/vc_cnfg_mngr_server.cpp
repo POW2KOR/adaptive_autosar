@@ -110,8 +110,7 @@ ara::core::Result<osabstraction::process::ProcessId> VcCnfgMngrServer::StartSign
         .AndThen([]() -> R { return R{osabstraction::process::GetProcessId()}; })
         .OrElse([thread_name, this](ara::core::ErrorCode) -> R {
             log_.LogFatal() << "Naming of thread '" << thread_name << "' failed";
-            return R::FromError(
-                X6aa_Config_Manager_Errc::kThreadCreationFailed, "Naming failed.");
+            return R::FromError(X6aa_Config_Manager_Errc::kThreadCreationFailed, "Naming failed.");
         });
 }
 
@@ -124,38 +123,36 @@ std::int8_t VcCnfgMngrServer::Run()
 
         log_.LogInfo() << "siX6aaCnfgMngrServiceReservedSkeleton skeleton demo application started";
         /*##### send out data variant coding data #### */
-        ::DataTypes::NS_REC_activateSarStorage0131VcEventType_t::
-            REC_activateSarStorage0131VcEventType_t activateSarStorage0131VcEventData;
-        ::DataTypes::NS_REC_configureSarTriggerEvents0136VcEventType_t::
-            REC_configureSarTriggerEvents0136VcEventType_t configureSarTriggerEvents0136VcEventData;
-        ::DataTypes::NS_REC_vechicleInformation0400VcEventType_t::
-            REC_vechicleInformation0400VcEventType_t vechicleInformation0400VcEventData;
 
         while (!exit_requested) {
 
             std::this_thread::sleep_for(std::chrono::milliseconds(5000));
 
-            if (memAccessor.ReadDataForActivateSarStorage0131VcEvent(
-                    activateSarStorage0131VcEventData)) {
+            ara::core::Result<activateSarStorage0131VcEventDataType> resultFor131Vc{
+                memAccessor.ReadDataForActivateSarStorage0131VcEvent()};
+            ara::core::Result<configureSarTriggerEvents0136VcEventDataType> resultFor136Vc{
+                memAccessor.ReadDataForConfigureSarTriggerEvents0136VcEvent()};
+            ara::core::Result<vechicleInformation0400VcEventDataType> resultFor400Vc{
+                memAccessor.ReadDataForVechicleInformation0400VcEvent()};
+
+            if (resultFor131Vc.HasValue()) {
                 siX6aaCnfgMngrServiceReservedSkeleton->Ev_activateSarStorage0131VcEvent.Send(
-                    activateSarStorage0131VcEventData);
+                    resultFor131Vc.Value());
             } else {
-                log_.LogError() << "Failed to read activateSarStorage0131VcEventData from storage";
+                log_.LogError() << resultFor131Vc.Error().Message();
             }
-            if (memAccessor.ReadDataForConfigureSarTriggerEvents0136VcEvent(
-                    configureSarTriggerEvents0136VcEventData)) {
+            if (resultFor136Vc.HasValue()) {
                 siX6aaCnfgMngrServiceReservedSkeleton->Ev_configureSarTriggerEvents0136VcEvent.Send(
-                    configureSarTriggerEvents0136VcEventData);
+                    resultFor136Vc.Value());
             } else {
                 log_.LogError()
-                    << "Failed to read configureSarTriggerEvents0136VcEventData from storage";
+                    << resultFor136Vc.Error().Message();
             }
-            if (memAccessor.ReadDataForVechicleInformation0400VcEvent(
-                    vechicleInformation0400VcEventData)) {
+            if (resultFor400Vc.HasValue()) {
                 siX6aaCnfgMngrServiceReservedSkeleton->Ev_vechicleInformation0400VcEvent.Send(
-                    vechicleInformation0400VcEventData);
+                    resultFor400Vc.Value());
             } else {
-                log_.LogError() << "Failed to read vechicleInformation0400VcEventData from storage";
+                log_.LogError() << resultFor400Vc.Error().Message();
             }
         }
 

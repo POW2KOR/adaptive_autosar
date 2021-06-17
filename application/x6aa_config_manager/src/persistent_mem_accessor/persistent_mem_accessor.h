@@ -51,8 +51,8 @@ public:
      * \param configureSarTriggerEvents0136VcEventDataType data
      * \return bool   success
      */
-    bool ReadDataForConfigureSarTriggerEvents0136VcEvent(
-        configureSarTriggerEvents0136VcEventDataType& configureSarTriggerEvents0136VcEventData);
+    ara::core::Result<configureSarTriggerEvents0136VcEventDataType>
+    ReadDataForConfigureSarTriggerEvents0136VcEvent();
 
     /**
      * \brief Function to read all information required for sending out ara::com event
@@ -60,8 +60,7 @@ public:
      * \param activateSarStorage0131VcEventDataType  data
      * \return bool   success
      */
-    bool ReadDataForActivateSarStorage0131VcEvent(
-        activateSarStorage0131VcEventDataType& activateSarStorage0131VcEventData);
+    ara::core::Result<activateSarStorage0131VcEventDataType> ReadDataForActivateSarStorage0131VcEvent();
 
     /**
      * \brief Function to read all information required for sending out ara::com event
@@ -69,8 +68,7 @@ public:
      * \param vechicleInformation0400VcEventDataType data
      * \return bool   success
      */
-    bool ReadDataForVechicleInformation0400VcEvent(
-        vechicleInformation0400VcEventDataType& vechicleInformation0400VcEventData);
+    ara::core::Result<vechicleInformation0400VcEventDataType> ReadDataForVechicleInformation0400VcEvent();
 
     /**
      * \brief Function to retrive data of each individual element of struct
@@ -124,7 +122,7 @@ private:
      * \return bool       success
      */
     template<typename dataType>
-    bool ReadVariantCodingData(const variantCodingKeys key_to_read, dataType& read_value);
+    ara::core::Result<dataType> ReadVariantCodingData(const variantCodingKeys key_to_read);
 
     /**
      * \brief A sub Function to read data in key value storage.
@@ -133,7 +131,7 @@ private:
      * \return bool       success
      */
     template<typename dataType>
-    bool TryReadingDataFromKvs(const ara::core::String& key_to_read, dataType& read_value);
+    ara::core::Result<dataType> TryReadingDataFromKvs(const ara::core::String& key_to_read);
 
     /**
      * \brief Function to write data in key value storage.
