@@ -3,25 +3,37 @@ load("@minerva_mpu_adaptive//:bazel/defs.bzl", "minerva_aa_codegen_rule")
 
 package(default_visibility = ["//visibility:public"])
 
+filegroup(
+    name = "app_arxml",
+    srcs = [
+        "@sda_xavier//:sda_model",
+        # Workaround to overcome the issue for the missing reference for
+        # /design/IF_Persistency_KVS from the x6aa_config_manager,
+        "//application/x6aa_config_manager:app_arxml",
+        #"//arxmls:x6aa_idc_ecu_extract_arxml",
+        #"@amsr_xavier//:mex_arxml",
+    ],
+)
+
+genr_ignore_patterns = [
+    "X6AA_DLT_Executable.*",
+    "X6AA_Dummy_SWC_1_Executable.*",
+    "X6AA_Dummy_SWC_2_Executable.*",
+    "X6AA_Ressource_Executable.*",
+    "X6AA_Cnfg_Mngr_Executable.*",
+    "TransmissionManager_ROVExecutable.*",
+    "DiagnosticManagerDeamonExecutable.*",
+]
+
 minerva_aa_codegen_rule(
     name = "exec_config_gen_rule",
     arxml_srcs = [
-        "//arxmls:x6aa_idc_ecu_extract_arxml",
-        "@amsr_xavier//:mex_arxml",
-        "@sda_xavier//:sda_model",
+        ":app_arxml",
     ],
     generators = [
         "@amsr_xavier//:generator_amsr_em_exec_config",
     ],
-    ignore_matches = [
-        "X6AA_DLT_Executable.*",
-        "X6AA_Dummy_SWC_1_Executable.*",
-        "X6AA_Dummy_SWC_2_Executable.*",
-        "X6AA_Ressource_Executable.*",
-        "TransmissionManager_ROVExecutable.*",
-        "X6AA_Cnfg_Mngr_Executable.*",
-        "DiagnosticManagerDeamonExecutable.*",
-    ],
+    ignore_matches = genr_ignore_patterns,
     outs_list_dict = {
         "exec_config": [
             "SelfDiagnosticAgent_Executable/configuration/exec_config.json",
@@ -32,22 +44,12 @@ minerva_aa_codegen_rule(
 minerva_aa_codegen_rule(
     name = "applicationbase_init_deinit_gen_rule",
     arxml_srcs = [
-        "//arxmls:x6aa_idc_ecu_extract_arxml",
-        "@amsr_xavier//:mex_arxml",
-        "@sda_xavier//:sda_model",
+        ":app_arxml",
     ],
     generators = [
         "@amsr_xavier//:generator_amsr_applicationbase_init_deinit",
     ],
-    ignore_matches = [
-        "X6AA_DLT_Executable.*",
-        "X6AA_Dummy_SWC_1_Executable.*",
-        "X6AA_Dummy_SWC_2_Executable.*",
-        "X6AA_Ressource_Executable.*",
-        "X6AA_Cnfg_Mngr_Executable.*",
-        "TransmissionManager_ROVExecutable.*",
-        "DiagnosticManagerDeamonExecutable.*",
-    ],
+    ignore_matches = genr_ignore_patterns,
     outs_list_dict = {
         "applicationbase_init_deinit_srcs": [
             "SelfDiagnosticAgent_Executable/src/ara/core/initialization.cpp",
@@ -58,22 +60,12 @@ minerva_aa_codegen_rule(
 minerva_aa_codegen_rule(
     name = "updatemanager_swcluster_meta_gen_rule",
     arxml_srcs = [
-        "//arxmls:x6aa_idc_ecu_extract_arxml",
-        "@amsr_xavier//:mex_arxml",
-        "@sda_xavier//:sda_model",
+        ":app_arxml",
     ],
     generators = [
         "@amsr_xavier//:generator_amsr_updatemanager_swcluster_meta",
     ],
-    ignore_matches = [
-        "X6AA_DLT_Executable.*",
-        "X6AA_Dummy_SWC_1_Executable.*",
-        "X6AA_Dummy_SWC_2_Executable.*",
-        "X6AA_Ressource_Executable.*",
-        "X6AA_Cnfg_Mngr_Executable.*",
-        "TransmissionManager_ROVExecutable.*",
-        "DiagnosticManagerDeamonExecutable.*",
-    ],
+    ignore_matches = genr_ignore_patterns,
     outs_list_dict = {
         "swcluster_meta": [
             "SelfDiagnosticAgent_Executable/swcl_package_metadata.json",
@@ -84,22 +76,12 @@ minerva_aa_codegen_rule(
 minerva_aa_codegen_rule(
     name = "updatemanager_daemon_gen_rule",
     arxml_srcs = [
-        "//arxmls:x6aa_idc_ecu_extract_arxml",
-        "@amsr_xavier//:mex_arxml",
-        "@sda_xavier//:sda_model",
+        ":app_arxml",
     ],
     generators = [
         "@amsr_xavier//:generator_amsr_updatemanager_daemon",
     ],
-    ignore_matches = [
-        "X6AA_DLT_Executable.*",
-        "X6AA_Dummy_SWC_1_Executable.*",
-        "X6AA_Dummy_SWC_2_Executable.*",
-        "X6AA_Ressource_Executable.*",
-        "X6AA_Cnfg_Mngr_Executable.*",
-        "TransmissionManager_ROVExecutable.*",
-        "DiagnosticManagerDeamonExecutable.*",
-    ],
+    ignore_matches = genr_ignore_patterns,
     outs_list_dict = {
         "swcl_db": [
             "SelfDiagnosticAgent_Executable/etc/swcl_db.json",
@@ -113,22 +95,12 @@ minerva_aa_codegen_rule(
 minerva_aa_codegen_rule(
     name = "persistency_config_gen_rule",
     arxml_srcs = [
-        "//arxmls:x6aa_idc_ecu_extract_arxml",
-        "@amsr_xavier//:mex_arxml",
-        "@sda_xavier//:sda_model",
+        ":app_arxml",
     ],
     generators = [
         "@amsr_xavier//:generator_amsr_persistency_config",
     ],
-    ignore_matches = [
-        "X6AA_DLT_Executable.*",
-        "X6AA_Dummy_SWC_1_Executable.*",
-        "X6AA_Dummy_SWC_2_Executable.*",
-        "X6AA_Ressource_Executable.*",
-        "X6AA_Cnfg_Mngr_Executable.*",
-        "TransmissionManager_ROVExecutable.*",
-        "DiagnosticManagerDeamonExecutable.*",
-    ],
+    ignore_matches = genr_ignore_patterns,
     outs_list_dict = {
         "persistency_config_gen_rule_hdrs": [
             "SelfDiagnosticAgent_Executable/include/ara/per/detail/dynamic_key_value_storage_decl.h",
@@ -152,22 +124,12 @@ minerva_aa_codegen_rule(
 minerva_aa_codegen_rule(
     name = "modeldatatypes_api_gen_rule",
     arxml_srcs = [
-        "//arxmls:x6aa_idc_ecu_extract_arxml",
-        "@amsr_xavier//:mex_arxml",
-        "@sda_xavier//:sda_model",
+        ":app_arxml",
     ],
     generators = [
         "@amsr_xavier//:generator_amsr_modelleddatatypes_api",
     ],
-    ignore_matches = [
-        "X6AA_DLT_Executable.*",
-        "X6AA_Dummy_SWC_1_Executable.*",
-        "X6AA_Dummy_SWC_2_Executable.*",
-        "X6AA_Ressource_Executable.*",
-        "X6AA_Cnfg_Mngr_Executable.*",
-        "TransmissionManager_ROVExecutable.*",
-        "DiagnosticManagerDeamonExecutable.*",
-    ],
+    ignore_matches = genr_ignore_patterns,
     outs_list_dict = {
         "modeldatatypes_hdrs": [
             "SelfDiagnosticAgent_Executable/include/DataTypes/REC_DI_Odo_Pr5_ST3_9t50popkpz30is106xpis1iyh/impl_type_rec_di_odo_pr5_st3_9t50popkpz30is106xpis1iyh.h",
@@ -196,22 +158,12 @@ minerva_aa_codegen_rule(
 minerva_aa_codegen_rule(
     name = "someipbinding_gen_rule",
     arxml_srcs = [
-        "//arxmls:x6aa_idc_ecu_extract_arxml",
-        "@amsr_xavier//:mex_arxml",
-        "@sda_xavier//:sda_model",
+        ":app_arxml",
     ],
     generators = [
         "@amsr_xavier//:generator_amsr_someipbinding",
     ],
-    ignore_matches = [
-        "X6AA_DLT_Executable.*",
-        "X6AA_Dummy_SWC_1_Executable.*",
-        "X6AA_Dummy_SWC_2_Executable.*",
-        "X6AA_Ressource_Executable.*",
-        "X6AA_Cnfg_Mngr_Executable.*",
-        "TransmissionManager_ROVExecutable.*",
-        "DiagnosticManagerDeamonExecutable.*",
-    ],
+    ignore_matches = genr_ignore_patterns,
     outs_list_dict = {
         "someip_binding_initializer": [
             "SelfDiagnosticAgent_Executable/src/amsr/someip_binding_transformation_layer/internal/someip_binding_initializer.cpp",
@@ -247,30 +199,6 @@ minerva_aa_codegen_rule(
             "SelfDiagnosticAgent_Executable/include/amsr/someip_binding_transformation_layer/internal/services/ns_pt4_ptcoor_service_st3/SI_PT4_PTCoor_Service_ST3_proxy_someip_event_manager.h",
             "SelfDiagnosticAgent_Executable/include/amsr/someip_binding_transformation_layer/internal/services/ns_pt4_ptcoor_service_st3/SI_PT4_PTCoor_Service_ST3_proxy_someip_methods.h",
             "SelfDiagnosticAgent_Executable/include/amsr/someip_binding_transformation_layer/internal/services/ns_pt4_ptcoor_service_st3/SI_PT4_PTCoor_Service_ST3_someip_proxy_factory.h",
-            "SelfDiagnosticAgent_Executable/include/amsr/someip_protocol/internal/dataprototype_deserialization/amsr_swuc/methods/deserializer_GetBootSoftwareVersionInformationversion_information.h",
-            "SelfDiagnosticAgent_Executable/include/amsr/someip_protocol/internal/dataprototype_deserialization/amsr_swuc/methods/deserializer_GetHCPSoftwareInformationhpc_software_information.h",
-            "SelfDiagnosticAgent_Executable/include/amsr/someip_protocol/internal/dataprototype_deserialization/amsr_swuc/methods/deserializer_GetSoftwarePartNumbersSoftwarePartNumbers.h",
-            "SelfDiagnosticAgent_Executable/include/amsr/someip_protocol/internal/dataprototype_deserialization/amsr_swuc/methods/deserializer_GetSoftwareVersionInformationShadowversion_information_list.h",
-            "SelfDiagnosticAgent_Executable/include/amsr/someip_protocol/internal/dataprototype_deserialization/amsr_swuc/methods/deserializer_GetSoftwareVersionInformationversion_information_list.h",
-            "SelfDiagnosticAgent_Executable/include/amsr/someip_protocol/internal/dataprototype_deserialization/services_ns_immobilizer_master_service_st3/events/deserializer_Ev_Ign_Stat_Pr5_ST3.h",
-            "SelfDiagnosticAgent_Executable/include/amsr/someip_protocol/internal/dataprototype_deserialization/services_ns_odospeedometer_service_st3/events/deserializer_Ev_DI_Odo_Pr5_ST3.h",
-            "SelfDiagnosticAgent_Executable/include/amsr/someip_protocol/internal/dataprototype_deserialization/services_ns_pn14_master_service_st3/events/deserializer_Ev_PN14_DDP_SwStat_ST3.h",
-            "SelfDiagnosticAgent_Executable/include/amsr/someip_protocol/internal/dataprototype_deserialization/services_ns_pt4_ptcoor_service_st3/events/deserializer_Ev_PT4_PTCoor4_Pr5_ST3.h",
-            "SelfDiagnosticAgent_Executable/include/amsr/someip_protocol/internal/datatype_deserialization/DataTypes/REC_DI_Odo_Pr5_ST3_9t50popkpz30is106xpis1iyh/deserializer_REC_DI_Odo_Pr5_ST3_9t50popkpz30is106xpis1iyh.h",
-            "SelfDiagnosticAgent_Executable/include/amsr/someip_protocol/internal/datatype_deserialization/DataTypes/REC_Ign_Stat_Pr5_ST3_b0ko81o0x5jgvwtduf99gvzi0/deserializer_REC_Ign_Stat_Pr5_ST3_b0ko81o0x5jgvwtduf99gvzi0.h",
-            "SelfDiagnosticAgent_Executable/include/amsr/someip_protocol/internal/datatype_deserialization/DataTypes/REC_PT4_PTCoor4_Pr5_ST3_a1o7mhv0xy8ny0vccjf09ttgc/deserializer_REC_PT4_PTCoor4_Pr5_ST3_a1o7mhv0xy8ny0vccjf09ttgc.h",
-            "SelfDiagnosticAgent_Executable/include/amsr/someip_protocol/internal/datatype_deserialization/amsr/swuc/deserializer_HPCSoftwareInformation.h",
-            "SelfDiagnosticAgent_Executable/include/amsr/someip_protocol/internal/datatype_deserialization/amsr/swuc/deserializer_VersionInformation.h",
-            "SelfDiagnosticAgent_Executable/include/amsr/someip_protocol/internal/method_deserialization/amsr_swuc/methods/deserializer_Response_GetBootSoftwareVersionInformation.h",
-            "SelfDiagnosticAgent_Executable/include/amsr/someip_protocol/internal/method_deserialization/amsr_swuc/methods/deserializer_Response_GetHCPSoftwareInformation.h",
-            "SelfDiagnosticAgent_Executable/include/amsr/someip_protocol/internal/method_deserialization/amsr_swuc/methods/deserializer_Response_GetSoftwarePartNumbers.h",
-            "SelfDiagnosticAgent_Executable/include/amsr/someip_protocol/internal/method_deserialization/amsr_swuc/methods/deserializer_Response_GetSoftwareVersionInformation.h",
-            "SelfDiagnosticAgent_Executable/include/amsr/someip_protocol/internal/method_deserialization/amsr_swuc/methods/deserializer_Response_GetSoftwareVersionInformationShadow.h",
-            "SelfDiagnosticAgent_Executable/include/amsr/someip_protocol/internal/method_serialization/amsr_swuc/methods/serializer_Request_GetBootSoftwareVersionInformation.h",
-            "SelfDiagnosticAgent_Executable/include/amsr/someip_protocol/internal/method_serialization/amsr_swuc/methods/serializer_Request_GetHCPSoftwareInformation.h",
-            "SelfDiagnosticAgent_Executable/include/amsr/someip_protocol/internal/method_serialization/amsr_swuc/methods/serializer_Request_GetSoftwarePartNumbers.h",
-            "SelfDiagnosticAgent_Executable/include/amsr/someip_protocol/internal/method_serialization/amsr_swuc/methods/serializer_Request_GetSoftwareVersionInformation.h",
-            "SelfDiagnosticAgent_Executable/include/amsr/someip_protocol/internal/method_serialization/amsr_swuc/methods/serializer_Request_GetSoftwareVersionInformationShadow.h",
         ],
         "someipbinding_srcs": [
             "SelfDiagnosticAgent_Executable/src/amsr/someip_binding_transformation_layer/internal/DataTypes/REC_DI_Odo_Pr5_ST3_9t50popkpz30is106xpis1iyh/deserializer_REC_DI_Odo_Pr5_ST3_9t50popkpz30is106xpis1iyh_1.cpp",
@@ -289,15 +217,6 @@ minerva_aa_codegen_rule(
             "SelfDiagnosticAgent_Executable/src/amsr/someip_binding_transformation_layer/internal/services/ns_pt4_ptcoor_service_st3/SI_PT4_PTCoor_Service_ST3_proxy_someip_binding.cpp",
             "SelfDiagnosticAgent_Executable/src/amsr/someip_binding_transformation_layer/internal/services/ns_pt4_ptcoor_service_st3/SI_PT4_PTCoor_Service_ST3_proxy_someip_binding_init.cpp",
             "SelfDiagnosticAgent_Executable/src/amsr/someip_binding_transformation_layer/internal/services/ns_pt4_ptcoor_service_st3/SI_PT4_PTCoor_Service_ST3_proxy_someip_event_manager.cpp",
-            "SelfDiagnosticAgent_Executable/src/amsr/someip_protocol/internal/dataprototype_deserialization/amsr_swuc/methods/deserializer_GetBootSoftwareVersionInformationversion_information.cpp",
-            "SelfDiagnosticAgent_Executable/src/amsr/someip_protocol/internal/dataprototype_deserialization/amsr_swuc/methods/deserializer_GetHCPSoftwareInformationhpc_software_information.cpp",
-            "SelfDiagnosticAgent_Executable/src/amsr/someip_protocol/internal/dataprototype_deserialization/amsr_swuc/methods/deserializer_GetSoftwarePartNumbersSoftwarePartNumbers.cpp",
-            "SelfDiagnosticAgent_Executable/src/amsr/someip_protocol/internal/dataprototype_deserialization/amsr_swuc/methods/deserializer_GetSoftwareVersionInformationShadowversion_information_list.cpp",
-            "SelfDiagnosticAgent_Executable/src/amsr/someip_protocol/internal/dataprototype_deserialization/amsr_swuc/methods/deserializer_GetSoftwareVersionInformationversion_information_list.cpp",
-            "SelfDiagnosticAgent_Executable/src/amsr/someip_protocol/internal/dataprototype_deserialization/services_ns_immobilizer_master_service_st3/events/deserializer_Ev_Ign_Stat_Pr5_ST3.cpp",
-            "SelfDiagnosticAgent_Executable/src/amsr/someip_protocol/internal/dataprototype_deserialization/services_ns_odospeedometer_service_st3/events/deserializer_Ev_DI_Odo_Pr5_ST3.cpp",
-            "SelfDiagnosticAgent_Executable/src/amsr/someip_protocol/internal/dataprototype_deserialization/services_ns_pn14_master_service_st3/events/deserializer_Ev_PN14_DDP_SwStat_ST3.cpp",
-            "SelfDiagnosticAgent_Executable/src/amsr/someip_protocol/internal/dataprototype_deserialization/services_ns_pt4_ptcoor_service_st3/events/deserializer_Ev_PT4_PTCoor4_Pr5_ST3.cpp",
         ],
     },
 )
@@ -305,22 +224,12 @@ minerva_aa_codegen_rule(
 minerva_aa_codegen_rule(
     name = "someipprotocol_gen_rule",
     arxml_srcs = [
-        "//arxmls:x6aa_idc_ecu_extract_arxml",
-        "@amsr_xavier//:mex_arxml",
-        "@sda_xavier//:sda_model",
+        ":app_arxml",
     ],
     generators = [
         "@amsr_xavier//:generator_amsr_someipprotocol",
     ],
-    ignore_matches = [
-        "X6AA_DLT_Executable.*",
-        "X6AA_Dummy_SWC_1_Executable.*",
-        "X6AA_Dummy_SWC_2_Executable.*",
-        "X6AA_Ressource_Executable.*",
-        "X6AA_Cnfg_Mngr_Executable.*",
-        "TransmissionManager_ROVExecutable.*",
-        "DiagnosticManagerDeamonExecutable.*",
-    ],
+    ignore_matches = genr_ignore_patterns,
     outs_list_dict = {
         "someipprotocol_hdrs": [
             "SelfDiagnosticAgent_Executable/include/amsr/someip_protocol/internal/dataprototype_deserialization/amsr_swuc/methods/deserializer_GetBootSoftwareVersionInformationversion_information.h",
@@ -347,6 +256,28 @@ minerva_aa_codegen_rule(
             "SelfDiagnosticAgent_Executable/include/amsr/someip_protocol/internal/method_serialization/amsr_swuc/methods/serializer_Request_GetSoftwarePartNumbers.h",
             "SelfDiagnosticAgent_Executable/include/amsr/someip_protocol/internal/method_serialization/amsr_swuc/methods/serializer_Request_GetSoftwareVersionInformation.h",
             "SelfDiagnosticAgent_Executable/include/amsr/someip_protocol/internal/method_serialization/amsr_swuc/methods/serializer_Request_GetSoftwareVersionInformationShadow.h",
+            "SelfDiagnosticAgent_Executable/include/amsr/someip_protocol/internal/dataprototype_deserialization/amsr_diag_service_interfaces_diag_com_api/methods/deserializer_Canceljob_identifier.h",
+            "SelfDiagnosticAgent_Executable/include/amsr/someip_protocol/internal/dataprototype_deserialization/amsr_diag_service_interfaces_diag_com_api/methods/deserializer_NotifyResponsebyte_vector.h",
+            "SelfDiagnosticAgent_Executable/include/amsr/someip_protocol/internal/dataprototype_deserialization/amsr_diag_service_interfaces_diag_com_api/methods/deserializer_NotifyResponsejob_identifier.h",
+            "SelfDiagnosticAgent_Executable/include/amsr/someip_protocol/internal/dataprototype_deserialization/amsr_diag_service_interfaces_diag_com_api/methods/deserializer_NotifyResponseresponse_type.h",
+            "SelfDiagnosticAgent_Executable/include/amsr/someip_protocol/internal/dataprototype_deserialization/amsr_diag_service_interfaces_diag_com_api/methods/deserializer_NotifyValuebyte_vector.h",
+            "SelfDiagnosticAgent_Executable/include/amsr/someip_protocol/internal/dataprototype_deserialization/amsr_diag_service_interfaces_diag_com_api/methods/deserializer_NotifyValueconversation_handle.h",
+            "SelfDiagnosticAgent_Executable/include/amsr/someip_protocol/internal/dataprototype_deserialization/amsr_diag_service_interfaces_diag_com_api/methods/deserializer_NotifyValuehandle.h",
+            "SelfDiagnosticAgent_Executable/include/amsr/someip_protocol/internal/dataprototype_deserialization/amsr_diag_service_interfaces_diag_com_api/methods/deserializer_NotifyValueinstance_handle.h",
+            "SelfDiagnosticAgent_Executable/include/amsr/someip_protocol/internal/dataprototype_deserialization/amsr_diag_service_interfaces_diag_com_api/methods/deserializer_RequestDataconversation_handle.h",
+            "SelfDiagnosticAgent_Executable/include/amsr/someip_protocol/internal/dataprototype_deserialization/amsr_diag_service_interfaces_diag_com_api/methods/deserializer_RequestDatahandle.h",
+            "SelfDiagnosticAgent_Executable/include/amsr/someip_protocol/internal/dataprototype_deserialization/amsr_diag_service_interfaces_diag_com_api/methods/deserializer_RequestDatainstance_handle.h",
+            "SelfDiagnosticAgent_Executable/include/amsr/someip_protocol/internal/dataprototype_deserialization/amsr_diag_service_interfaces_diag_com_api/methods/deserializer_RequestDatajob_identifier.h",
+            "SelfDiagnosticAgent_Executable/include/amsr/someip_protocol/internal/dataprototype_deserialization/amsr_diag_service_interfaces_diag_com_api/methods/deserializer_RequestDatameta_info.h",
+            "SelfDiagnosticAgent_Executable/include/amsr/someip_protocol/internal/dataprototype_deserialization/amsr_diag_service_interfaces_diag_com_api/methods/deserializer_RequestDatarequest_data.h",
+            "SelfDiagnosticAgent_Executable/include/amsr/someip_protocol/internal/dataprototype_serialization/amsr_diag_service_interfaces_diag_com_api/events/serializer_DaemonRequestResponse.h",
+            "SelfDiagnosticAgent_Executable/include/amsr/someip_protocol/internal/dataprototype_serialization/amsr_diag_service_interfaces_diag_com_api/events/serializer_DiagRequest.h",
+            "SelfDiagnosticAgent_Executable/include/amsr/someip_protocol/internal/datatype_serialization/amsr/diag/com_api/serializer_DaemonRequestResponseType.h",
+            "SelfDiagnosticAgent_Executable/include/amsr/someip_protocol/internal/datatype_serialization/amsr/diag/com_api/serializer_DiagRequestType.h",
+            "SelfDiagnosticAgent_Executable/include/amsr/someip_protocol/internal/method_deserialization/amsr_diag_service_interfaces_diag_com_api/methods/deserializer_Request_Cancel.h",
+            "SelfDiagnosticAgent_Executable/include/amsr/someip_protocol/internal/method_deserialization/amsr_diag_service_interfaces_diag_com_api/methods/deserializer_Request_NotifyResponse.h",
+            "SelfDiagnosticAgent_Executable/include/amsr/someip_protocol/internal/method_deserialization/amsr_diag_service_interfaces_diag_com_api/methods/deserializer_Request_NotifyValue.h",
+            "SelfDiagnosticAgent_Executable/include/amsr/someip_protocol/internal/method_deserialization/amsr_diag_service_interfaces_diag_com_api/methods/deserializer_Request_RequestData.h",
         ],
         "someipprotocol_srcs": [
             "SelfDiagnosticAgent_Executable/src/amsr/someip_protocol/internal/dataprototype_deserialization/amsr_swuc/methods/deserializer_GetBootSoftwareVersionInformationversion_information.cpp",
@@ -358,6 +289,22 @@ minerva_aa_codegen_rule(
             "SelfDiagnosticAgent_Executable/src/amsr/someip_protocol/internal/dataprototype_deserialization/services_ns_odospeedometer_service_st3/events/deserializer_Ev_DI_Odo_Pr5_ST3.cpp",
             "SelfDiagnosticAgent_Executable/src/amsr/someip_protocol/internal/dataprototype_deserialization/services_ns_pn14_master_service_st3/events/deserializer_Ev_PN14_DDP_SwStat_ST3.cpp",
             "SelfDiagnosticAgent_Executable/src/amsr/someip_protocol/internal/dataprototype_deserialization/services_ns_pt4_ptcoor_service_st3/events/deserializer_Ev_PT4_PTCoor4_Pr5_ST3.cpp",
+            "SelfDiagnosticAgent_Executable/src/amsr/someip_protocol/internal/dataprototype_deserialization/amsr_diag_service_interfaces_diag_com_api/methods/deserializer_Canceljob_identifier.cpp",
+            "SelfDiagnosticAgent_Executable/src/amsr/someip_protocol/internal/dataprototype_deserialization/amsr_diag_service_interfaces_diag_com_api/methods/deserializer_NotifyResponsebyte_vector.cpp",
+            "SelfDiagnosticAgent_Executable/src/amsr/someip_protocol/internal/dataprototype_deserialization/amsr_diag_service_interfaces_diag_com_api/methods/deserializer_NotifyResponsejob_identifier.cpp",
+            "SelfDiagnosticAgent_Executable/src/amsr/someip_protocol/internal/dataprototype_deserialization/amsr_diag_service_interfaces_diag_com_api/methods/deserializer_NotifyResponseresponse_type.cpp",
+            "SelfDiagnosticAgent_Executable/src/amsr/someip_protocol/internal/dataprototype_deserialization/amsr_diag_service_interfaces_diag_com_api/methods/deserializer_NotifyValuebyte_vector.cpp",
+            "SelfDiagnosticAgent_Executable/src/amsr/someip_protocol/internal/dataprototype_deserialization/amsr_diag_service_interfaces_diag_com_api/methods/deserializer_NotifyValueconversation_handle.cpp",
+            "SelfDiagnosticAgent_Executable/src/amsr/someip_protocol/internal/dataprototype_deserialization/amsr_diag_service_interfaces_diag_com_api/methods/deserializer_NotifyValuehandle.cpp",
+            "SelfDiagnosticAgent_Executable/src/amsr/someip_protocol/internal/dataprototype_deserialization/amsr_diag_service_interfaces_diag_com_api/methods/deserializer_NotifyValueinstance_handle.cpp",
+            "SelfDiagnosticAgent_Executable/src/amsr/someip_protocol/internal/dataprototype_deserialization/amsr_diag_service_interfaces_diag_com_api/methods/deserializer_RequestDataconversation_handle.cpp",
+            "SelfDiagnosticAgent_Executable/src/amsr/someip_protocol/internal/dataprototype_deserialization/amsr_diag_service_interfaces_diag_com_api/methods/deserializer_RequestDatahandle.cpp",
+            "SelfDiagnosticAgent_Executable/src/amsr/someip_protocol/internal/dataprototype_deserialization/amsr_diag_service_interfaces_diag_com_api/methods/deserializer_RequestDatainstance_handle.cpp",
+            "SelfDiagnosticAgent_Executable/src/amsr/someip_protocol/internal/dataprototype_deserialization/amsr_diag_service_interfaces_diag_com_api/methods/deserializer_RequestDatajob_identifier.cpp",
+            "SelfDiagnosticAgent_Executable/src/amsr/someip_protocol/internal/dataprototype_deserialization/amsr_diag_service_interfaces_diag_com_api/methods/deserializer_RequestDatameta_info.cpp",
+            "SelfDiagnosticAgent_Executable/src/amsr/someip_protocol/internal/dataprototype_deserialization/amsr_diag_service_interfaces_diag_com_api/methods/deserializer_RequestDatarequest_data.cpp",
+            "SelfDiagnosticAgent_Executable/src/amsr/someip_protocol/internal/dataprototype_serialization/amsr_diag_service_interfaces_diag_com_api/events/serializer_DaemonRequestResponse.cpp",
+            "SelfDiagnosticAgent_Executable/src/amsr/someip_protocol/internal/dataprototype_serialization/amsr_diag_service_interfaces_diag_com_api/events/serializer_DiagRequest.cpp",
         ],
     },
 )
@@ -365,22 +312,12 @@ minerva_aa_codegen_rule(
 minerva_aa_codegen_rule(
     name = "socal_gen_rule",
     arxml_srcs = [
-        "//arxmls:x6aa_idc_ecu_extract_arxml",
-        "@amsr_xavier//:mex_arxml",
-        "@sda_xavier//:sda_model",
+        ":app_arxml",
     ],
     generators = [
         "@amsr_xavier//:generator_amsr_socal",
     ],
-    ignore_matches = [
-        "X6AA_DLT_Executable.*",
-        "X6AA_Dummy_SWC_1_Executable.*",
-        "X6AA_Dummy_SWC_2_Executable.*",
-        "X6AA_Ressource_Executable.*",
-        "X6AA_Cnfg_Mngr_Executable.*",
-        "TransmissionManager_ROVExecutable.*",
-        "DiagnosticManagerDeamonExecutable.*",
-    ],
+    ignore_matches = genr_ignore_patterns,
     outs_list_dict = {
         "socal_hdrs": [
             "SelfDiagnosticAgent_Executable/include/amsr/diag/service_interfaces/diag_com_api/DiagComApi.h",
@@ -440,22 +377,12 @@ minerva_aa_codegen_rule(
 minerva_aa_codegen_rule(
     name = "ipcbinding_gen_rule",
     arxml_srcs = [
-        "//arxmls:x6aa_idc_ecu_extract_arxml",
-        "@amsr_xavier//:mex_arxml",
-        "@sda_xavier//:sda_model",
+        ":app_arxml",
     ],
     generators = [
         "@amsr_xavier//:generator_amsr_ipcbinding",
     ],
-    ignore_matches = [
-        "X6AA_DLT_Executable.*",
-        "X6AA_Dummy_SWC_1_Executable.*",
-        "X6AA_Dummy_SWC_2_Executable.*",
-        "X6AA_Ressource_Executable.*",
-        "SelfDiagnosticAgent_Executable.*",
-        "TransmissionManager_ROVExecutable.*",
-        "DiagnosticManagerDeamonExecutable.*",
-    ],
+    ignore_matches = genr_ignore_patterns,
     outs_list_dict = {
         "ipc_binding_life_cycle_manager": [
             "SelfDiagnosticAgent_Executable/src/amsr/ipc_binding_transformation_layer/internal/ipc_binding_life_cycle_manager.cpp",
@@ -464,11 +391,17 @@ minerva_aa_codegen_rule(
             "SelfDiagnosticAgent_Executable/include/amsr/ipc_binding_transformation_layer/internal/amsr/swuc/SWUC_SDA_ServiceInterface_proxy_ipc_binding.h",
             "SelfDiagnosticAgent_Executable/include/amsr/ipc_binding_transformation_layer/internal/amsr/swuc/SWUC_SDA_ServiceInterface_proxy_ipc_event_manager.h",
             "SelfDiagnosticAgent_Executable/include/amsr/ipc_binding_transformation_layer/internal/amsr/swuc/SWUC_SDA_ServiceInterface_proxy_ipc_methods.h",
+            "SelfDiagnosticAgent_Executable/include/amsr/ipc_binding_transformation_layer/internal/amsr/diag/service_interfaces/diag_com_api/DiagComApi_skeleton_ipc_binding.h",
+            "SelfDiagnosticAgent_Executable/include/amsr/ipc_binding_transformation_layer/internal/amsr/diag/service_interfaces/diag_com_api/DiagComApi_skeleton_ipc_event_manager.h",
+            "SelfDiagnosticAgent_Executable/include/amsr/ipc_binding_transformation_layer/internal/amsr/diag/service_interfaces/diag_com_api/DiagComApi_skeleton_ipc_method_manager.h",
         ],
         "ipcbinding_srcs": [
             "SelfDiagnosticAgent_Executable/src/amsr/ipc_binding_transformation_layer/internal/amsr/swuc/SWUC_SDA_ServiceInterface_proxy_ipc_binding.cpp",
             "SelfDiagnosticAgent_Executable/src/amsr/ipc_binding_transformation_layer/internal/amsr/swuc/SWUC_SDA_ServiceInterface_proxy_ipc_event_manager.cpp",
             "SelfDiagnosticAgent_Executable/src/amsr/ipc_binding_transformation_layer/internal/amsr/swuc/SWUC_SDA_ServiceInterface_proxy_ipc_methods.cpp",
+            "SelfDiagnosticAgent_Executable/src/amsr/ipc_binding_transformation_layer/internal/amsr/diag/service_interfaces/diag_com_api/DiagComApi_skeleton_ipc_binding.cpp",
+            "SelfDiagnosticAgent_Executable/src/amsr/ipc_binding_transformation_layer/internal/amsr/diag/service_interfaces/diag_com_api/DiagComApi_skeleton_ipc_event_manager.cpp",
+            "SelfDiagnosticAgent_Executable/src/amsr/ipc_binding_transformation_layer/internal/amsr/diag/service_interfaces/diag_com_api/DiagComApi_skeleton_ipc_method_manager.cpp",
         ],
     },
 )
