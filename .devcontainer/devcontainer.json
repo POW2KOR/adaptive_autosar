@@ -5,8 +5,7 @@
     "--privileged",
     "--network=host"
   ],
-  "dockerFile": "../devops/docker/Dockerfile.build_env",
-  "context": "..",
+  "image": "artifact.swf.daimler.com/apricot-docker/xpf/xpf_adaptive_build_image:latest",
   "containerUser": "dev",
   "containerEnv": {
     "HTTP_PROXY": "${localEnv:HTTP_PROXY}",
@@ -24,8 +23,6 @@
     "type=volume,source=mbos_adaptive_build_env_command_history,target=/command_history",
     "type=volume,source=mbos_adaptive_build_env_bazel_cache,target=/bazel_cache"
   ],
-  "initializeCommand":
-  "python3 devops/docker/scripts/collect_deps.py -a",
   "postStartCommand":
 	"/bin/bash ${containerWorkspaceFolder}/.devcontainer/post_start.sh ${localEnv:HOME}",
 	"extensions": [
