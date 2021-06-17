@@ -130,9 +130,9 @@ minerva_aa_codegen_rule(
 cc_binary(
     name = "app",
     srcs = [
-        "src/main.cpp",
         "src/application.cpp",
         "src/application.h",
+        "src/main.cpp",
         ":app_init_deinit_srcs",
     ],
     copts = [
