@@ -144,15 +144,15 @@ new_git_repository(
 
 new_git_repository(
     name = "collectd_mbient",  # bazel will create under its own cache folder in the external folder package with the specified name(e.g. external/collectd_mbient)
-    build_file = "@//tools:collectd_mbient.BUILD",
+    build_file = "@//application/x6aa_resource_monitor:collectd_mbient.BUILD",
     commit = "2575bc86875d8f681fbdabeac3b2ac61b7c91ffc",  # the commit ID that bazel will use to fetch the external repository
     init_submodules = True,
     patch_args = [
         "-p1",
     ],
     patches = [
-        "@//tools:remove-srcdir-prefix.patch",
+        "@//application/x6aa_resource_monitor:remove-srcdir-prefix.patch",
     ],
     remote = "ssh://git@git.swf.daimler.com:7999/mbient/collectd.git",
-    shallow_since = "1607616957 +0100",
+    shallow_since = "1612651651 +0100",
 )
