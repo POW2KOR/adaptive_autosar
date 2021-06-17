@@ -29,14 +29,14 @@ filegroup(
 )
 
 filegroup(
-    name = "dm_server_config_SoftwareClusterPlatform_config",
-    srcs = ["configs/sda/dm_server_config_SoftwareClusterPlatform.json"],
-)
-
-filegroup(
     name = "updatemanager_config",
     srcs = ["configs/sda/updatemanager.json"],
 )
+
+# The files Inside the nv_data folder are created manually for
+# DiagnosticManager. If DM doesn't find these files, It reports
+# error and and create the files. As We are ruuning from
+# filesystem.tar the created file were not getting stored.
 
 filegroup(
     name = "diagnostic_manager_nv_data",
@@ -511,7 +511,7 @@ pkg_tar(
         ":diagnosticmanager_doip_config": "etc/diagnosticmanager_doip.json",
         ":diagnosticmanager_config": "etc/diagnosticmanager.json",
         ":dm_global_settings_config": "etc/dm_global_settings.json",
-        ":dm_server_config_SoftwareClusterPlatform_config": "etc/dm_server_config_SoftwareClusterPlatform.json",
+        ":dm_server_config_json": "etc/dm_server_config_SoftwareClusterPlatform.json",
         ":persistency_file_storage_config_json": "etc/per_file_storage_config.json",
         ":updatemanager_config": "etc/updatemanager.json",
         ":diagnostic_manager_nv_data": "etc/nv_data",
