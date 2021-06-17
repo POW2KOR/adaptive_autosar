@@ -40,6 +40,10 @@ RUN apt-get --assume-yes  update && \
     # from bazel genrules, libxml2-utils contains xmllint
     libxml2-utils=2.9.4+dfsg1-6.1ubuntu1.3 \
     xdot=0.9-1 \
+    # collectd build dependencies
+    bison \
+    flex \
+    libtool \
     zlib1g-dev=1:1.2.11.dfsg-0ubuntu2 && \
     apt-get clean && \
     dpkg -i /usr/tools/bazel/bazel_4.0.0-linux-x86_64.deb && \

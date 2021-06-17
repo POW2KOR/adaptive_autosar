@@ -91,6 +91,7 @@ pkg_tar(
                 "//application/x6aa_dummy_swc_1:package",
                 "//application/x6aa_em_state_client_app:package",
                 "//application/amsr_vector_fs_log_daemon:package",
+                "//application/x6aa_resource_monitor:package",
             ],
         ),
 )
