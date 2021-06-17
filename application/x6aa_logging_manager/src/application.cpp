@@ -26,8 +26,6 @@
 
 namespace application {
 
-using vac::container::operator""_sv;
-
 /*!
  * \brief Initialize application.
  */
