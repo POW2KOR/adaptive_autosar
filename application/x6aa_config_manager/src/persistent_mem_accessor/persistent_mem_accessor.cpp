@@ -90,7 +90,7 @@ bool PersistentMemAccessor::StoreVariantCodingData(
     return return_value;
 }
 
-bool PersistentMemAccessor::StoreConfigureSarTriggerEvents0136VcEventData(
+bool PersistentMemAccessor::StoreDataForConfigureSarTriggerEvents0136VcEvent(
     configureSarTriggerEvents0136VcEventDataType& configureSarTriggerEvents0136VcEventData)
 {
     bool return_value = true;
@@ -110,7 +110,7 @@ bool PersistentMemAccessor::StoreConfigureSarTriggerEvents0136VcEventData(
     return return_value;
 }
 
-bool PersistentMemAccessor::StoreActivateSarStorage0131VcEventData(
+bool PersistentMemAccessor::StoreDataForActivateSarStorage0131VcEvent(
     activateSarStorage0131VcEventDataType& activateSarStorage0131VcEventData)
 {
     bool return_value = true;
@@ -124,7 +124,7 @@ bool PersistentMemAccessor::StoreActivateSarStorage0131VcEventData(
     return return_value;
 }
 
-bool PersistentMemAccessor::StoreVechicleInformation0400VcEventData(
+bool PersistentMemAccessor::StoreDataForVechicleInformation0400VcEvent(
     vechicleInformation0400VcEventDataType& vechicleInformation0400VcEventData)
 {
     bool return_value = true;
@@ -188,14 +188,14 @@ bool PersistentMemAccessor::InitializeVcMemoryWithDefaultValues()
     configureSarTriggerEvents0136VcEventDataType configureSarTriggerEvents0136VcEventData;
     configureSarTriggerEvents0136VcEventData.triggerEventActivationStatusByte1 = 0x0;
     configureSarTriggerEvents0136VcEventData.triggerEventActivationStatusByte2 = 0x0;
-    if (!StoreConfigureSarTriggerEvents0136VcEventData(configureSarTriggerEvents0136VcEventData)) {
+    if (!StoreDataForConfigureSarTriggerEvents0136VcEvent(configureSarTriggerEvents0136VcEventData)) {
         return_value = false;
     }
 
     // ##### activateSarStorage0131VcEventData ####
     activateSarStorage0131VcEventDataType activateSarStorage0131VcEventData;
     activateSarStorage0131VcEventData.sarDataStorageStatus = 0x1;
-    if (!StoreActivateSarStorage0131VcEventData(activateSarStorage0131VcEventData)) {
+    if (!StoreDataForActivateSarStorage0131VcEvent(activateSarStorage0131VcEventData)) {
         return_value = false;
     }
     // ##### vechicleInformation0400VcEventData ####
@@ -209,7 +209,7 @@ bool PersistentMemAccessor::InitializeVcMemoryWithDefaultValues()
     vechicleInformation0400VcEventData.hybrid_avl = 0x0;
     vechicleInformation0400VcEventData.plugin_hybrid_avl = 0x0;
     vechicleInformation0400VcEventData.veh_backdoors_avl = 0x0;
-    if (!StoreVechicleInformation0400VcEventData(vechicleInformation0400VcEventData)) {
+    if (!StoreDataForVechicleInformation0400VcEvent(vechicleInformation0400VcEventData)) {
         return_value = false;
     }
 
@@ -229,7 +229,7 @@ bool PersistentMemAccessor::TryReadingDataFromKvs(
 
         // We expect the data is an unsigned integer
         read_value = result_data.Value();
-        return_value = true;
+
         logger_ctx.LogInfo() << "Reading: The read value from: "_sv
                              << key_to_read << " is: " << result_data.Value();
         return_value = true;
@@ -249,9 +249,9 @@ bool PersistentMemAccessor::ReadVariantCodingData(
         if (key.empty()) {
             throw std::invalid_argument("invalid key");
         }
-        /* we first need to store some data before reading it. If application tries to read a data
+        /* We first need to store some data before reading it. If application tries to read a data
          * which doesn't exist then GetValue API return an error.
-         * here we have implemented lazy switching approach. If the first read is not successful
+         * Here we have implemented lazy switching approach. If the first read is not successful
          * then its assumed that data might not be initialized. So, initialize the kvs data base and
          * try reading the same key again. If it still fails then it's due to an issue in accessing
          * persistent memory.
@@ -282,7 +282,7 @@ bool PersistentMemAccessor::ReadVariantCodingData(
     return return_value;
 }
 
-bool PersistentMemAccessor::ReadConfigureSarTriggerEvents0136VcEventData(
+bool PersistentMemAccessor::ReadDataForConfigureSarTriggerEvents0136VcEvent(
     configureSarTriggerEvents0136VcEventDataType& configureSarTriggerEvents0136VcEventData)
 {
     bool return_value = true;
@@ -306,7 +306,7 @@ bool PersistentMemAccessor::ReadConfigureSarTriggerEvents0136VcEventData(
     return return_value;
 }
 
-bool PersistentMemAccessor::ReadActivateSarStorage0131VcEventData(
+bool PersistentMemAccessor::ReadDataForActivateSarStorage0131VcEvent(
     activateSarStorage0131VcEventDataType& activateSarStorage0131VcEventData)
 {
     bool return_value = true;
@@ -320,7 +320,7 @@ bool PersistentMemAccessor::ReadActivateSarStorage0131VcEventData(
     return return_value;
 }
 
-bool PersistentMemAccessor::ReadVechicleInformation0400VcEventData(
+bool PersistentMemAccessor::ReadDataForVechicleInformation0400VcEvent(
     vechicleInformation0400VcEventDataType& vechicleInformation0400VcEventData)
 {
     std::uint8_t read_value = 0;

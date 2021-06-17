@@ -45,30 +45,30 @@ public:
     PersistentMemAccessor();
 
     /**
-     * \brief Function to construct and read data associated with ara::com event
-     * `configureSarTriggerEvents0136VcEvent` from key value storage.
+     * \brief Function to read all information required for sending out ara::com event
+     * `configureSarTriggerEvents0136VcEvent`.
      * \param configureSarTriggerEvents0136VcEventDataType data
      * \return bool   success
      */
-    bool ReadConfigureSarTriggerEvents0136VcEventData(
+    bool ReadDataForConfigureSarTriggerEvents0136VcEvent(
         configureSarTriggerEvents0136VcEventDataType& configureSarTriggerEvents0136VcEventData);
 
     /**
-     * \brief Function to construct and read data associated with ara::com event
-     * `activateSarStorage0131VcEvent` from key value storage.
+     * \brief Function to read all information required for sending out ara::com event
+     * `activateSarStorage0131VcEvent`.
      * \param activateSarStorage0131VcEventDataType  data
      * \return bool   success
      */
-    bool ReadActivateSarStorage0131VcEventData(
+    bool ReadDataForActivateSarStorage0131VcEvent(
         activateSarStorage0131VcEventDataType& activateSarStorage0131VcEventData);
 
     /**
-     * \brief Function to construct and read data associated with ara::com event
-     * `vechicleInformation0400VcEvent` from key value storage.
+     * \brief Function to read all information required for sending out ara::com event
+     * `vechicleInformation0400VcEvent`.
      * \param vechicleInformation0400VcEventDataType data
      * \return bool   success
      */
-    bool ReadVechicleInformation0400VcEventData(
+    bool ReadDataForVechicleInformation0400VcEvent(
         vechicleInformation0400VcEventDataType& vechicleInformation0400VcEventData);
 
     /**
@@ -78,7 +78,7 @@ public:
      * \param configureSarTriggerEvents0136VcEventDataType Input data
      * \return bool   success
      */
-    bool StoreConfigureSarTriggerEvents0136VcEventData(
+    bool StoreDataForConfigureSarTriggerEvents0136VcEvent(
         configureSarTriggerEvents0136VcEventDataType& configureSarTriggerEvents0136VcEventData);
 
     /**
@@ -88,7 +88,7 @@ public:
      * \param activateSarStorage0131VcEventDataType Input data
      * \return bool   success
      */
-    bool StoreActivateSarStorage0131VcEventData(
+    bool StoreDataForActivateSarStorage0131VcEvent(
         activateSarStorage0131VcEventDataType& activateSarStorage0131VcEventData);
 
     /**
@@ -98,7 +98,7 @@ public:
      * \param vechicleInformation0400VcEventDataType Input data
      * \return bool   success
      */
-    bool StoreVechicleInformation0400VcEventData(
+    bool StoreDataForVechicleInformation0400VcEvent(
         vechicleInformation0400VcEventDataType& vechicleInformation0400VcEventData);
     /**
      * \brief For checking if the initialization was successfull

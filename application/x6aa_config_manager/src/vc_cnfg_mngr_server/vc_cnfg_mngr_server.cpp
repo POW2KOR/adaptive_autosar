@@ -12,7 +12,7 @@
  *********************************************************************************************************************/
 #include "vc_cnfg_mngr_server.h"
 
-#include "x6aa_cnfg_mngr_executable_error_domain.h"
+#include "x6aa_config_manager_error_domain.h"
 
 namespace application {
 
@@ -111,7 +111,7 @@ ara::core::Result<osabstraction::process::ProcessId> VcCnfgMngrServer::StartSign
         .OrElse([thread_name, this](ara::core::ErrorCode) -> R {
             log_.LogFatal() << "Naming of thread '" << thread_name << "' failed";
             return R::FromError(
-                X6AA_Cnfg_Mngr_ExecutableErrc::kThreadCreationFailed, "Naming failed.");
+                X6aa_Config_Manager_Errc::kThreadCreationFailed, "Naming failed.");
         });
 }
 
@@ -135,14 +135,14 @@ std::int8_t VcCnfgMngrServer::Run()
 
             std::this_thread::sleep_for(std::chrono::milliseconds(5000));
 
-            if (memAccessor.ReadActivateSarStorage0131VcEventData(
+            if (memAccessor.ReadDataForActivateSarStorage0131VcEvent(
                     activateSarStorage0131VcEventData)) {
                 siX6aaCnfgMngrServiceReservedSkeleton->Ev_activateSarStorage0131VcEvent.Send(
                     activateSarStorage0131VcEventData);
             } else {
                 log_.LogError() << "Failed to read activateSarStorage0131VcEventData from storage";
             }
-            if (memAccessor.ReadConfigureSarTriggerEvents0136VcEventData(
+            if (memAccessor.ReadDataForConfigureSarTriggerEvents0136VcEvent(
                     configureSarTriggerEvents0136VcEventData)) {
                 siX6aaCnfgMngrServiceReservedSkeleton->Ev_configureSarTriggerEvents0136VcEvent.Send(
                     configureSarTriggerEvents0136VcEventData);
@@ -150,7 +150,7 @@ std::int8_t VcCnfgMngrServer::Run()
                 log_.LogError()
                     << "Failed to read configureSarTriggerEvents0136VcEventData from storage";
             }
-            if (memAccessor.ReadVechicleInformation0400VcEventData(
+            if (memAccessor.ReadDataForVechicleInformation0400VcEvent(
                     vechicleInformation0400VcEventData)) {
                 siX6aaCnfgMngrServiceReservedSkeleton->Ev_vechicleInformation0400VcEvent.Send(
                     vechicleInformation0400VcEventData);
