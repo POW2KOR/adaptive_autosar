@@ -132,7 +132,7 @@ constexpr std::array<ara::core::ErrorDomain::StringType, 4> kMessages{
     "Error during reading from persistent memory",
     "Error during writing to persistent memory"};
 
-X6aa_Config_Manager_ErrorDomain::StringType X6aa_Config_Manager_ErrorDomain::Message(
+inline X6aa_Config_Manager_ErrorDomain::StringType X6aa_Config_Manager_ErrorDomain::Message(
     ara::core::ErrorDomain::CodeType error_code) const noexcept
 {
     if (static_cast<std::size_t>(error_code) >= kMessages.size()) {

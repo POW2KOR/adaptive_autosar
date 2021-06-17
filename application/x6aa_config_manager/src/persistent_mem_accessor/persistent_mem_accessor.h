@@ -14,6 +14,7 @@
 #define PERSISTENT_MEM_ACCESSOR_H_
 
 #include "ara/log/logging.h"
+#include "ara/core/result.h"
 #include "ara/per/file_storage.h"
 #include "ara/per/key_value_storage.h"
 #include "ara/per/read_write_accessor.h"
@@ -78,7 +79,7 @@ public:
      * \param configureSarTriggerEvents0136VcEventDataType Input data
      * \return bool   success
      */
-    bool StoreDataForConfigureSarTriggerEvents0136VcEvent(
+    ara::core::Result<void> StoreDataForConfigureSarTriggerEvents0136VcEvent(
         configureSarTriggerEvents0136VcEventDataType& configureSarTriggerEvents0136VcEventData);
 
     /**
@@ -88,7 +89,7 @@ public:
      * \param activateSarStorage0131VcEventDataType Input data
      * \return bool   success
      */
-    bool StoreDataForActivateSarStorage0131VcEvent(
+    ara::core::Result<void> StoreDataForActivateSarStorage0131VcEvent(
         activateSarStorage0131VcEventDataType& activateSarStorage0131VcEventData);
 
     /**
@@ -98,7 +99,7 @@ public:
      * \param vechicleInformation0400VcEventDataType Input data
      * \return bool   success
      */
-    bool StoreDataForVechicleInformation0400VcEvent(
+    ara::core::Result<void> StoreDataForVechicleInformation0400VcEvent(
         vechicleInformation0400VcEventDataType& vechicleInformation0400VcEventData);
     /**
      * \brief For checking if the initialization was successfull
@@ -141,12 +142,12 @@ private:
      * \return bool       success
      */
     template<typename dataType>
-    bool StoreVariantCodingData(const variantCodingKeys key_to_store, dataType data_to_store);
+    ara::core::Result<void> StoreVariantCodingData(const variantCodingKeys key_to_store, dataType data_to_store);
 
     /**
-     * \brief Intialize key value storage with default values
+     * \brief Initialize key value storage with default values
      */
-    bool InitializeVcMemoryWithDefaultValues();
+    ara::core::Result<void> InitializeVcMemoryWithDefaultValues();
 };
 
 } // namespace VariantCodingApp
