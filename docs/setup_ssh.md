@@ -1,4 +1,6 @@
-On Guest -
+#Connecting over SSH to the QEMU virtual ECU"
+
+## On Guest -
 
 Check below files needed for ssh exist.
 
@@ -25,7 +27,7 @@ ssh-keygen -t ecdsa -f /etc/ssh/ssh_host_ecdsa_key
 ssh-keygen -t ed25519 -f /etc/ssh/ssh_host_ed25519_key
 ```
 
-On Host -
+## On Host -
 ```
 saksinh@cmtcleu60844879:~/minerva_mpu_adaptive$ ssh -p 10022 nvidia@localhost
 nvidia@localhost's password:
@@ -33,10 +35,7 @@ Welcome to Ubuntu 18.04.5 LTS (GNU/Linux 5.12.0-tegra aarch64)
 
 nvidia@tegra-ubuntu:~$
 ```
-
 To transfer files between Host and Qemu VM instance, sshfs is recommended to create a shared directory.
 ```
 $ sshfs  -p 10022 nvidia@localhost:/tmp/host /tmp/guest
 ```
-
-
