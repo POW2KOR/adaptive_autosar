@@ -2,5 +2,4 @@
 Name=enp0s2
 
 [Network]
-Address=10.20.1.113/24
-Gateway=10.20.17.1
+Address=10.20.1.113/16

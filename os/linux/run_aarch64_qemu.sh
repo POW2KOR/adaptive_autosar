@@ -114,12 +114,12 @@ qemu-system-aarch64 \
 -drive file=adaptive_overlay.ext4.qcow2,format=qcow2,if=none,id=drive0 \
 -device virtio-blk-device,drive=drive0 \
 -device virtio-net-pci,netdev=net1 \
--netdev user,id=net1,net=10.1.17.0/24 \
+-netdev user,id=net1,net=10.1.17.0/16 \
 -device virtio-net-pci,netdev=net20 \
--netdev user,id=net20,net=10.20.17.0/24 \
+-netdev user,id=net20,net=10.20.17.0/16 \
 -device virtio-net-pci,netdev=net21 \
--netdev user,id=net21,net=10.21.17.0/24,hostfwd=tcp::13490-10.21.17.98:49361 \
+-netdev user,id=net21,net=10.21.17.0/16,hostfwd=tcp::13490-10.21.17.98:49361 \
 -device virtio-net-pci,netdev=net127 \
--netdev user,id=net127,net=10.127.17.0/24 \
+-netdev user,id=net127,net=10.127.17.0/16 \
 -device virtio-net-pci,netdev=net254 \
--netdev user,id=net254,net=169.254.18.0/24
+-netdev user,id=net254,net=169.254.18.0/16
