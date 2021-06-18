@@ -38,7 +38,7 @@ minerva_aa_codegen_rule(
         "X6AA_DLT_Executable.*",
         "X6AA_Dummy_SWC_1_Executable.*",
         "X6AA_Ressource_Executable.*",
-        "SelfDiagnosticAgentExecutable.*",
+        "SelfDiagnosticAgent_Executable.*",
         "DiagnosticManagerDeamonExecutable.*",
         "TransmissionManager_ROVExecutable.*",
     ],
@@ -65,7 +65,7 @@ minerva_aa_codegen_rule(
         "X6AA_DLT_Executable.*",
         "X6AA_Dummy_SWC_1_Executable.*",
         "X6AA_Ressource_Executable.*",
-        "SelfDiagnosticAgentExecutable.*",
+        "SelfDiagnosticAgent_Executable.*",
         "DiagnosticManagerDeamonExecutable.*",
         "TransmissionManager_ROVExecutable.*",
     ],
@@ -89,7 +89,7 @@ minerva_aa_codegen_rule(
         "X6AA_DLT_Executable.*",
         "X6AA_Dummy_SWC_1_Executable.*",
         "X6AA_Ressource_Executable.*",
-        "SelfDiagnosticAgentExecutable.*",
+        "SelfDiagnosticAgent_Executable.*",
         "DiagnosticManagerDeamonExecutable.*",
         "TransmissionManager_ROVExecutable.*",
     ],
@@ -113,7 +113,7 @@ minerva_aa_codegen_rule(
         "X6AA_DLT_Executable.*",
         "X6AA_Dummy_SWC_1_Executable.*",
         "X6AA_Ressource_Executable.*",
-        "SelfDiagnosticAgentExecutable.*",
+        "SelfDiagnosticAgent_Executable.*",
         "DiagnosticManagerDeamonExecutable.*",
         "TransmissionManager_ROVExecutable.*",
     ],
@@ -124,28 +124,6 @@ minerva_aa_codegen_rule(
         "updatemanager_daemon": [
             "X6AA_Dummy_SWC_2_Executable/etc/updatemanager.json",
         ],
-    },
-)
-
-minerva_aa_codegen_rule(
-    name = "modeldatatypes_api_gen_rule",
-    arxml_srcs = [
-        ":app_arxml",
-    ],
-    generators = [
-        "@amsr_xavier//:generator_amsr_modelleddatatypes_api",
-    ],
-    ignore_matches = [
-        "X6AA_Cnfg_Mngr_Executable.*",
-        "X6AA_DLT_Executable.*",
-        "X6AA_Dummy_SWC_1_Executable.*",
-        "X6AA_Ressource_Executable.*",
-        "SelfDiagnosticAgentExecutable.*",
-        "DiagnosticManagerDeamonExecutable.*",
-        "TransmissionManager_ROVExecutable.*",
-    ],
-    outs_list_dict = {
-        # There are no datatypes defined for this app
     },
 )
 
@@ -162,7 +140,7 @@ minerva_aa_codegen_rule(
         "X6AA_DLT_Executable.*",
         "X6AA_Dummy_SWC_1_Executable.*",
         "X6AA_Ressource_Executable.*",
-        "SelfDiagnosticAgentExecutable.*",
+        "SelfDiagnosticAgent_Executable.*",
         "DiagnosticManagerDeamonExecutable.*",
         "TransmissionManager_ROVExecutable.*",
     ],
@@ -201,7 +179,7 @@ minerva_aa_codegen_rule(
         "X6AA_DLT_Executable.*",
         "X6AA_Dummy_SWC_1_Executable.*",
         "X6AA_Ressource_Executable.*",
-        "SelfDiagnosticAgentExecutable.*",
+        "SelfDiagnosticAgent_Executable.*",
         "DiagnosticManagerDeamonExecutable.*",
         "TransmissionManager_ROVExecutable.*",
     ],
@@ -228,7 +206,7 @@ minerva_aa_codegen_rule(
         "X6AA_DLT_Executable.*",
         "X6AA_Dummy_SWC_1_Executable.*",
         "X6AA_Ressource_Executable.*",
-        "SelfDiagnosticAgentExecutable.*",
+        "SelfDiagnosticAgent_Executable.*",
         "DiagnosticManagerDeamonExecutable.*",
         "TransmissionManager_ROVExecutable.*",
     ],
@@ -257,14 +235,6 @@ cc_library(
     ],
     strip_include_prefix = "socal_hdrs/output/X6AA_Dummy_SWC_2_Executable/include",
 )
-
-# cc_library(
-#     name = "modeldatatypes_hdrs_lib",
-#     hdrs = [
-#         ":modeldatatypes_hdrs",
-#     ],
-#     strip_include_prefix = "modeldatatypes_hdrs/output/X6AA_Dummy_SWC_2_Executable/include",
-# )
 
 cc_library(
     name = "someipbinding_hdrs_lib",
@@ -295,7 +265,6 @@ cc_library(
     ],
     linkstatic = 1,
     deps = [
-        #":modeldatatypes_hdrs_lib",
         ":socal_hdrs_lib",
         ":someipbinding_hdrs_lib",
         ":someipprotocol_hdrs_lib",
