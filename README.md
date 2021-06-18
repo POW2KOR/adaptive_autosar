@@ -151,12 +151,12 @@ instance to drop to a login prompt once systemd has finished booting the system.
 
 ### Connecting to remote DLT
 
-All of the applications apart from the `log-daemon` are configured to output remote DLT over TCP at IP address
-`10.21.17.98` and port `49361`.
+All of the applications apart from the `log-daemon` are configured to output remote DLT. The connection is available
+over TCP at IP address `10.21.17.98` and port `49361`.
 
-We forward host port 13490 to Qemu VM instance 49361 so remote DLT can be accessed on host.
-Start dlt-viewer(https://github.com/GENIVI/dlt-viewer) on host.
-Select IP as localhost and host forwarded port=13490 to access it.
+When running a virtual ECU inside QEMU, the QEMU configuration will forward the remote DLT port to port `13490` on the
+host machine. Configure the [dlt-viewer](https://github.com/GENIVI/dlt-viewer) running on your host to connect to
+`127.0.0.1` port `13490` over TCP.
 
 ## Miscellaneous
 
