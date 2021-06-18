@@ -18,8 +18,8 @@
  *
  *********************************************************************************************************************/
 
-#ifndef SRC_ROV_APPLICATION_H_
-#define SRC_ROV_APPLICATION_H_
+#ifndef SRC_DUMMY_2_APPLICATION_H_
+#define SRC_DUMMY_2_APPLICATION_H_
 
 
 
@@ -37,14 +37,14 @@ namespace application {
  * \brief Main class representing the application.
  * \vprivate Example class for component internal use.
  */
-class RovApplication : public ApplicationBase {
+class Dummy2Application : public ApplicationBase {
  public:
   /*!
-   * \brief Constructor of class ROV Application.
+   * \brief Constructor of class Dummy 2 Application.
    */
-   RovApplication();
+   Dummy2Application();
 };
 
 }  // namespace application
 
-#endif  // SRC_ROV_APPLICATION_H_
+#endif  // SRC_DUMMY_2_APPLICATION_H_

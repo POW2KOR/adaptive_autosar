@@ -29,7 +29,6 @@
 
 #include "dummy_2_application.h"
 
-using vac::container::operator""_sv;
 
 namespace {
 /*!
@@ -80,7 +79,7 @@ int main() {
     ara::core::Abort(msg);
   } else {
     /* Create the application object and run it */
-    application::RovApplication app;
+    application::Dummy2Application app;
     return_value = app.Run();
 
     /* Deinitialize ara::core */

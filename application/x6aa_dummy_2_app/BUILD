@@ -70,7 +70,7 @@ minerva_aa_codegen_rule(
         "TransmissionManager_ROVExecutable.*",
     ],
     outs_list_dict = {
-        "rov_init_deinit_srcs": [
+        "init_deinit_srcs": [
             "X6AA_Dummy_SWC_2_Executable/src/ara/core/initialization.cpp",
         ],
     },
@@ -311,7 +311,7 @@ cc_binary(
         "src/dummy_2_application.cpp",
         "src/dummy_2_application.h",
         "src/main.cpp",
-        ":rov_init_deinit_srcs",
+        ":init_deinit_srcs",
         ":someip_binding_initializer",
         "//bsw:amsr_vector_fs_socal_libsocal_a",
     ],

@@ -31,7 +31,7 @@ using vac::container::operator""_sv;
 /*!
  * \brief Initialize application.
  */
-RovApplication::RovApplication() : ApplicationBase("Dummy_2_app") {
+Dummy2Application::Dummy2Application() : ApplicationBase("dummy_2_app") {
 
 }
 
