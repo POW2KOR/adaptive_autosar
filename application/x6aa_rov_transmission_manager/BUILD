@@ -42,7 +42,7 @@ minerva_aa_codegen_rule(
         "X6AA_Dummy_SWC_1_Executable.*",
         "X6AA_Dummy_SWC_2_Executable.*",
         "X6AA_Ressource_Executable.*",
-        "SelfDiagnosticAgentExecutable.*",
+        "SelfDiagnosticAgent_Executable.*",
         "DiagnosticManagerDeamonExecutable.*",
     ],
     outs_list_dict = {
@@ -66,7 +66,7 @@ minerva_aa_codegen_rule(
         "X6AA_Dummy_SWC_1_Executable.*",
         "X6AA_Dummy_SWC_2_Executable.*",
         "X6AA_Ressource_Executable.*",
-        "SelfDiagnosticAgentExecutable.*",
+        "SelfDiagnosticAgent_Executable.*",
         "DiagnosticManagerDeamonExecutable.*",
     ],
     outs_list_dict = {
@@ -90,7 +90,7 @@ minerva_aa_codegen_rule(
         "X6AA_Dummy_SWC_1_Executable.*",
         "X6AA_Dummy_SWC_2_Executable.*",
         "X6AA_Ressource_Executable.*",
-        "SelfDiagnosticAgentExecutable.*",
+        "SelfDiagnosticAgent_Executable.*",
         "DiagnosticManagerDeamonExecutable.*",
     ],
     outs_list_dict = {
@@ -114,7 +114,7 @@ minerva_aa_codegen_rule(
         "X6AA_Dummy_SWC_1_Executable.*",
         "X6AA_Dummy_SWC_2_Executable.*",
         "X6AA_Ressource_Executable.*",
-        "SelfDiagnosticAgentExecutable.*",
+        "SelfDiagnosticAgent_Executable.*",
         "DiagnosticManagerDeamonExecutable.*",
     ],
     outs_list_dict = {
@@ -141,7 +141,7 @@ minerva_aa_codegen_rule(
         "X6AA_Dummy_SWC_1_Executable.*",
         "X6AA_Dummy_SWC_2_Executable.*",
         "X6AA_Ressource_Executable.*",
-        "SelfDiagnosticAgentExecutable.*",
+        "SelfDiagnosticAgent_Executable.*",
         "DiagnosticManagerDeamonExecutable.*",
     ],
     outs_list_dict = {
@@ -170,7 +170,7 @@ minerva_aa_codegen_rule(
         "X6AA_Dummy_SWC_1_Executable.*",
         "X6AA_Dummy_SWC_2_Executable.*",
         "X6AA_Ressource_Executable.*",
-        "SelfDiagnosticAgentExecutable.*",
+        "SelfDiagnosticAgent_Executable.*",
         "DiagnosticManagerDeamonExecutable.*",
     ],
     outs_list_dict = {
@@ -219,7 +219,7 @@ minerva_aa_codegen_rule(
         "X6AA_Dummy_SWC_1_Executable.*",
         "X6AA_Dummy_SWC_2_Executable.*",
         "X6AA_Ressource_Executable.*",
-        "SelfDiagnosticAgentExecutable.*",
+        "SelfDiagnosticAgent_Executable.*",
         "DiagnosticManagerDeamonExecutable.*",
     ],
     outs_list_dict = {
@@ -265,7 +265,7 @@ minerva_aa_codegen_rule(
         "X6AA_Dummy_SWC_1_Executable.*",
         "X6AA_Dummy_SWC_2_Executable.*",
         "X6AA_Ressource_Executable.*",
-        "SelfDiagnosticAgentExecutable.*",
+        "SelfDiagnosticAgent_Executable.*",
         "DiagnosticManagerDeamonExecutable.*",
     ],
     outs_list_dict = {
