@@ -226,55 +226,55 @@ filegroup(
 
 filegroup(
     name = "amsr_vector_fs_diagnosticrpc",
-    srcs = glob(["mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-diagnosticrpc/**"]),
+    srcs = glob(["BSW/amsr-vector-fs-diagnosticrpc/**"]),
     visibility = ["//visibility:public"],
 )
 
 filegroup(
     name = "amsr_vector_fs_diagnosticrpccombinding",
-    srcs = glob(["mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-diagnosticrpccombinding/**"]),
+    srcs = glob(["BSW/amsr-vector-fs-diagnosticrpccombinding/**"]),
     visibility = ["//visibility:public"],
 )
 
 filegroup(
     name = "amsr_vector_fs_aradiag",
-    srcs = glob(["mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-aradiag/**"]),
+    srcs = glob(["BSW/amsr-vector-fs-aradiag/**"]),
     visibility = ["//visibility:public"],
 )
 
 filegroup(
     name = "amsr_vector_fs_doipbinding",
-    srcs = glob(["mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-doipbinding/**"]),
+    srcs = glob(["BSW/amsr-vector-fs-doipbinding/**"]),
     visibility = ["//visibility:public"],
 )
 
 filegroup(
     name = "amsr_vector_fs_udstransport",
-    srcs = glob(["mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-udstransport/**"]),
+    srcs = glob(["BSW/amsr-vector-fs-udstransport/**"]),
     visibility = ["//visibility:public"],
 )
 
 filegroup(
     name = "amsr_vector_fs_pduhdrtpbinding",
-    srcs = glob(["mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-pduhdrtpbinding/**"]),
+    srcs = glob(["BSW/amsr-vector-fs-pduhdrtpbinding/**"]),
     visibility = ["//visibility:public"],
 )
 
 filegroup(
     name = "amsr_vector_fs_diagnosticutility",
-    srcs = glob(["mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-diagnosticutility/**"]),
+    srcs = glob(["BSW/amsr-vector-fs-diagnosticutility/**"]),
     visibility = ["//visibility:public"],
 )
 
 filegroup(
     name = "amsr_vector_fs_diagnosticmanager",
-    srcs = glob(["mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-diagnosticmanager/**"]),
+    srcs = glob(["BSW/amsr-vector-fs-diagnosticmanager/**"]),
     visibility = ["//visibility:public"],
 )
 
 filegroup(
     name = "amsr_vector_fs_swupdateclient",
-    srcs = glob(["mb_base_layer_adaptive_xavier/amsr_xavier/BSW/amsr-vector-fs-swupdateclient/**"]),
+    srcs = glob(["BSW/amsr-vector-fs-swupdateclient/**"]),
     visibility = ["//visibility:public"],
 )
 
