@@ -4,6 +4,28 @@ load("@minerva_mpu_adaptive//:bazel/defs.bzl", "minerva_aa_codegen_rule")
 package(default_visibility = ["//visibility:public"])
 
 filegroup(
+    name = "app_arxml",
+    srcs = [
+        "@sda_xavier//:sda_model",
+        # Workaround to overcome the issue for the missing reference for
+        # /design/IF_Persistency_KVS from the x6aa_config_manager,
+        "//application/x6aa_config_manager:app_arxml",
+        #"//arxmls:x6aa_idc_ecu_extract_arxml",
+        #"@amsr_xavier//:mex_arxml",
+    ],
+)
+
+genr_ignore_patterns = [
+    "X6AA_DLT_Executable.*",
+    "X6AA_Dummy_SWC_1_Executable.*",
+    "X6AA_Dummy_SWC_2_Executable.*",
+    "X6AA_Ressource_Executable.*",
+    "X6AA_Cnfg_Mngr_Executable.*",
+    "TransmissionManager_ROVExecutable.*",
+    "SelfDiagnosticAgent_Executable.*",
+]
+
+filegroup(
     name = "logging_config",
     srcs = ["configs/sda/logging_config.json"],
 )
@@ -46,22 +68,12 @@ filegroup(
 minerva_aa_codegen_rule(
     name = "exec_config_gen_rule",
     arxml_srcs = [
-        "//arxmls:x6aa_idc_ecu_extract_arxml",
-        "@amsr_xavier//:mex_arxml",
-        "@sda_xavier//:sda_model",
+        ":app_arxml",
     ],
     generators = [
         "@amsr_xavier//:generator_amsr_em_exec_config",
     ],
-    ignore_matches = [
-        "X6AA_DLT_Executable.*",
-        "X6AA_Dummy_SWC_1_Executable.*",
-        "X6AA_Dummy_SWC_2_Executable.*",
-        "X6AA_Ressource_Executable.*",
-        "SelfDiagnosticAgent_Executable.*",
-        "TransmissionManager_ROVExecutable.*",
-        "X6AA_Cnfg_Mngr_Executable.*",
-    ],
+    ignore_matches = genr_ignore_patterns,
     outs_list_dict = {
         "exec_config": [
             "DiagnosticManagerDeamonExecutable/configuration/exec_config.json",
@@ -72,22 +84,12 @@ minerva_aa_codegen_rule(
 minerva_aa_codegen_rule(
     name = "applicationbase_init_deinit_gen_rule",
     arxml_srcs = [
-        "//arxmls:x6aa_idc_ecu_extract_arxml",
-        "@sda_xavier//:sda_model",
-        "@amsr_xavier//:mex_arxml",
+        ":app_arxml",
     ],
     generators = [
         "@amsr_xavier//:generator_amsr_applicationbase_init_deinit",
     ],
-    ignore_matches = [
-        "X6AA_DLT_Executable.*",
-        "X6AA_Dummy_SWC_1_Executable.*",
-        "X6AA_Dummy_SWC_2_Executable.*",
-        "X6AA_Ressource_Executable.*",
-        "SelfDiagnosticAgent_Executable.*",
-        "TransmissionManager_ROVExecutable.*",
-        "X6AA_Cnfg_Mngr_Executable.*",
-    ],
+    ignore_matches = genr_ignore_patterns,
     outs_list_dict = {
         "applicationbase_init_deinit_srcs": [
             "DiagnosticManagerDeamonExecutable/src/ara/core/initialization.cpp",
@@ -98,22 +100,12 @@ minerva_aa_codegen_rule(
 minerva_aa_codegen_rule(
     name = "updatemanager_swcluster_meta_gen_rule",
     arxml_srcs = [
-        "//arxmls:x6aa_idc_ecu_extract_arxml",
-        "@amsr_xavier//:mex_arxml",
-        "@sda_xavier//:sda_model",
+        ":app_arxml",
     ],
     generators = [
         "@amsr_xavier//:generator_amsr_updatemanager_swcluster_meta",
     ],
-    ignore_matches = [
-        "X6AA_DLT_Executable.*",
-        "X6AA_Dummy_SWC_1_Executable.*",
-        "X6AA_Dummy_SWC_2_Executable.*",
-        "X6AA_Ressource_Executable.*",
-        "SelfDiagnosticAgent_Executable.*",
-        "TransmissionManager_ROVExecutable.*",
-        "X6AA_Cnfg_Mngr_Executable.*",
-    ],
+    ignore_matches = genr_ignore_patterns,
     outs_list_dict = {
         "swcluster_meta": [
             "DiagnosticManagerDeamonExecutable/swcl_package_metadata.json",
@@ -124,22 +116,12 @@ minerva_aa_codegen_rule(
 minerva_aa_codegen_rule(
     name = "updatemanager_daemon_gen_rule",
     arxml_srcs = [
-        "//arxmls:x6aa_idc_ecu_extract_arxml",
-        "@amsr_xavier//:mex_arxml",
-        "@sda_xavier//:sda_model",
+        ":app_arxml",
     ],
     generators = [
         "@amsr_xavier//:generator_amsr_updatemanager_daemon",
     ],
-    ignore_matches = [
-        "X6AA_DLT_Executable.*",
-        "X6AA_Dummy_SWC_1_Executable.*",
-        "X6AA_Dummy_SWC_2_Executable.*",
-        "X6AA_Ressource_Executable.*",
-        "SelfDiagnosticAgent_Executable.*",
-        "TransmissionManager_ROVExecutable.*",
-        "X6AA_Cnfg_Mngr_Executable.*",
-    ],
+    ignore_matches = genr_ignore_patterns,
     outs_list_dict = {
         "swcl_db": [
             "DiagnosticManagerDeamonExecutable/etc/swcl_db.json",
@@ -150,22 +132,12 @@ minerva_aa_codegen_rule(
 minerva_aa_codegen_rule(
     name = "persistency_config_gen_rule",
     arxml_srcs = [
-        "//arxmls:x6aa_idc_ecu_extract_arxml",
-        "@amsr_xavier//:mex_arxml",
-        "@sda_xavier//:sda_model",
+        ":app_arxml",
     ],
     generators = [
         "@amsr_xavier//:generator_amsr_persistency_config",
     ],
-    ignore_matches = [
-        "X6AA_DLT_Executable.*",
-        "X6AA_Dummy_SWC_1_Executable.*",
-        "X6AA_Dummy_SWC_2_Executable.*",
-        "X6AA_Ressource_Executable.*",
-        "SelfDiagnosticAgent_Executable.*",
-        "TransmissionManager_ROVExecutable.*",
-        "X6AA_Cnfg_Mngr_Executable.*",
-    ],
+    ignore_matches = genr_ignore_patterns,
     outs_list_dict = {
         "persistency_config_cmake": [
             "DiagnosticManagerDeamonExecutable/amsr-vector-fs-per-libpersistency.cmake",
@@ -188,22 +160,12 @@ minerva_aa_codegen_rule(
 minerva_aa_codegen_rule(
     name = "modeldatatypes_api_gen_rule",
     arxml_srcs = [
-        "//arxmls:x6aa_idc_ecu_extract_arxml",
-        "@amsr_xavier//:mex_arxml",
-        "@sda_xavier//:sda_model",
+        ":app_arxml",
     ],
     generators = [
         "@amsr_xavier//:generator_amsr_modelleddatatypes_api",
     ],
-    ignore_matches = [
-        "X6AA_DLT_Executable.*",
-        "X6AA_Dummy_SWC_1_Executable.*",
-        "X6AA_Dummy_SWC_2_Executable.*",
-        "X6AA_Ressource_Executable.*",
-        "SelfDiagnosticAgent_Executable.*",
-        "TransmissionManager_ROVExecutable.*",
-        "X6AA_Cnfg_Mngr_Executable.*",
-    ],
+    ignore_matches = genr_ignore_patterns,
     outs_list_dict = {
         "modeldatatypes_hdrs": [
             "DiagnosticManagerDeamonExecutable/include/amsr/diag/com_api/impl_type_bytevectortype.h",
@@ -222,22 +184,12 @@ minerva_aa_codegen_rule(
 minerva_aa_codegen_rule(
     name = "someipbinding_gen_rule",
     arxml_srcs = [
-        "//arxmls:x6aa_idc_ecu_extract_arxml",
-        "@amsr_xavier//:mex_arxml",
-        "@sda_xavier//:sda_model",
+        ":app_arxml",
     ],
     generators = [
         "@amsr_xavier//:generator_amsr_someipbinding",
     ],
-    ignore_matches = [
-        "X6AA_DLT_Executable.*",
-        "X6AA_Dummy_SWC_1_Executable.*",
-        "X6AA_Dummy_SWC_2_Executable.*",
-        "X6AA_Ressource_Executable.*",
-        "SelfDiagnosticAgent_Executable.*",
-        "TransmissionManager_ROVExecutable.*",
-        "X6AA_Cnfg_Mngr_Executable.*",
-    ],
+    ignore_matches = genr_ignore_patterns,
     outs_list_dict = {
         # Currently there are no files generated for diagmanager
     },
@@ -246,22 +198,12 @@ minerva_aa_codegen_rule(
 minerva_aa_codegen_rule(
     name = "someipprotocol_gen_rule",
     arxml_srcs = [
-        "//arxmls:x6aa_idc_ecu_extract_arxml",
-        "@amsr_xavier//:mex_arxml",
-        "@sda_xavier//:sda_model",
+        ":app_arxml",
     ],
     generators = [
         "@amsr_xavier//:generator_amsr_someipprotocol",
     ],
-    ignore_matches = [
-        "X6AA_DLT_Executable.*",
-        "X6AA_Dummy_SWC_1_Executable.*",
-        "X6AA_Dummy_SWC_2_Executable.*",
-        "X6AA_Ressource_Executable.*",
-        "SelfDiagnosticAgent_Executable.*",
-        "TransmissionManager_ROVExecutable.*",
-        "X6AA_Cnfg_Mngr_Executable.*",
-    ],
+    ignore_matches = genr_ignore_patterns,
     outs_list_dict = {
         "someipprotocol_config_hdrs": [
             "DiagnosticManagerDeamonExecutable/include/amsr/someip_protocol/internal/dataprototype_deserialization/amsr_diag_service_interfaces_diag_com_api/events/deserializer_DaemonRequestResponse.h",
@@ -311,22 +253,12 @@ minerva_aa_codegen_rule(
 minerva_aa_codegen_rule(
     name = "socal_gen_rule",
     arxml_srcs = [
-        "//arxmls:x6aa_idc_ecu_extract_arxml",
-        "@amsr_xavier//:mex_arxml",
-        "@sda_xavier//:sda_model",
+        ":app_arxml",
     ],
     generators = [
         "@amsr_xavier//:generator_amsr_socal",
     ],
-    ignore_matches = [
-        "X6AA_DLT_Executable.*",
-        "X6AA_Dummy_SWC_1_Executable.*",
-        "X6AA_Dummy_SWC_2_Executable.*",
-        "X6AA_Ressource_Executable.*",
-        "SelfDiagnosticAgent_Executable.*",
-        "TransmissionManager_ROVExecutable.*",
-        "X6AA_Cnfg_Mngr_Executable.*",
-    ],
+    ignore_matches = genr_ignore_patterns,
     outs_list_dict = {
         "socla_scrs": [
             "DiagnosticManagerDeamonExecutable/src/amsr/diag/service_interfaces/diag_com_api/diagcomapi.cpp",
@@ -347,22 +279,12 @@ minerva_aa_codegen_rule(
 minerva_aa_codegen_rule(
     name = "ipcbinding_gen_rule",
     arxml_srcs = [
-        "//arxmls:x6aa_idc_ecu_extract_arxml",
-        "@amsr_xavier//:mex_arxml",
-        "@sda_xavier//:sda_model",
+        ":app_arxml",
     ],
     generators = [
         "@amsr_xavier//:generator_amsr_ipcbinding",
     ],
-    ignore_matches = [
-        "X6AA_DLT_Executable.*",
-        "X6AA_Dummy_SWC_1_Executable.*",
-        "X6AA_Dummy_SWC_2_Executable.*",
-        "X6AA_Ressource_Executable.*",
-        "SelfDiagnosticAgent_Executable.*",
-        "TransmissionManager_ROVExecutable.*",
-        "X6AA_Cnfg_Mngr_Executable.*",
-    ],
+    ignore_matches = genr_ignore_patterns,
     outs_list_dict = {
         "ipcbinding_hdrs": [
             "DiagnosticManagerDeamonExecutable/include/amsr/ipc_binding_transformation_layer/internal/amsr/diag/service_interfaces/diag_com_api/DiagComApi_proxy_ipc_binding.h",
@@ -381,9 +303,7 @@ minerva_aa_codegen_rule(
 minerva_aa_codegen_rule(
     name = "diag_api_gen_rule",
     arxml_srcs = [
-        "//arxmls:x6aa_idc_ecu_extract_arxml",
-        "@amsr_xavier//:mex_arxml",
-        "@sda_xavier//:sda_model",
+        ":app_arxml",
     ],
     generators = [
         "@amsr_xavier//:generator_amsr_diag_api",
@@ -391,15 +311,7 @@ minerva_aa_codegen_rule(
         "@amsr_xavier//:generator_amsr_em_daemon",
         "@amsr_xavier//:generator_amsr_logapi_config",
     ],
-    ignore_matches = [
-        "X6AA_DLT_Executable.*",
-        "X6AA_Dummy_SWC_1_Executable.*",
-        "X6AA_Dummy_SWC_2_Executable.*",
-        "X6AA_Ressource_Executable.*",
-        "SelfDiagnosticAgent_Executable.*",
-        "TransmissionManager_ROVExecutable.*",
-        "X6AA_Cnfg_Mngr_Executable.*",
-    ],
+    ignore_matches = genr_ignore_patterns,
     outs_list_dict = {
         "diag_uds_srcs": [
             "DiagnosticManagerDeamonExecutable/src/amsr/dm/uds_transport/uds_transport_protocol_creator.cpp",
