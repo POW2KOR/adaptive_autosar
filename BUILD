@@ -93,6 +93,7 @@ pkg_tar(
                 "//application/x6aa_logging_manager:package",
                 "//application/amsr_vector_fs_log_daemon:package",
                 "//application/x6aa_resource_monitor:package",
+                "//application/x6aa_rov_transmission_manager:package",
             ],
         ),
 )
