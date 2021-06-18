@@ -54,7 +54,7 @@ ara::core::Result<void> PersistentMemAccessor::StoreVariantCodingData(
     ara::core::String key = kvs_enum_to_string_key(key_to_store);
     try {
         if (key.empty()) {
-            throw std::invalid_argument("invalid key");
+            throw std::invalid_argument("invalid key for storing data");
         }
         // Insert values into the database.
         write_result
@@ -62,24 +62,20 @@ ara::core::Result<void> PersistentMemAccessor::StoreVariantCodingData(
 
         logger_ctx.LogInfo() << "Writing to store key: " << key << " with value: " << data_to_store;
 
-        // Test if data was stored and print the value.
-        // read the data back
-        ara::per::Result<dataType> result_data
-            = (*key_value_storage)->GetValue<dataType>(ara::core::StringView(key));
-
-        if (result_data.HasValue() && write_result.HasValue()) {
+        if (write_result.HasValue()) {
             logger_ctx.LogInfo() << "The value written for : "
                                  << kvs_enum_to_string_key(key_to_store)
-                                 << " is: " << result_data.Value();
+                                 << " is: " << data_to_store;
             // Persist the database.
             (*key_value_storage)->SyncToStorage();
         } else {
             logger_ctx.LogInfo() << "Data NOT ready"_sv;
+            logger_ctx.LogError() << write_result.Error().Message();
             write_result.FromError(
                 X6aa_Config_Manager_Errc::kWritingToPersistentMemoryFailed, "Writing Failed");
         }
     } catch (const std::invalid_argument& e) {
-        logger_ctx.LogError() << "Caught std::exception! Message = " << e.what();
+        logger_ctx.LogError() << "Caught std::invalid_argument! Message = " << e.what();
     } catch (const std::exception& e) {
         logger_ctx.LogError() << "Caught std::exception! Message = " << e.what();
     } catch (...) {
@@ -258,23 +254,17 @@ template<typename dataType>
 ara::core::Result<dataType> PersistentMemAccessor::TryReadingDataFromKvs(
     const ara::core::String& key_to_read)
 {
-    ara::core::Result<dataType> result{
-        X6aa_Config_Manager_Errc::kReadingFromPersistentMemoryFailed};
-
     ara::per::Result<dataType> result_data
         = (*key_value_storage)->GetValue<dataType>(ara::core::StringView(key_to_read));
 
     if (result_data.HasValue()) {
-        logger_ctx.LogInfo() << "Reading: Data is ready to read."_sv;
-
-        // result shall either contain value or error
-        result = result_data.Value();
+        logger_ctx.LogInfo() << "Reading: Data is ready to be read."_sv;
         logger_ctx.LogInfo() << "Reading: The read value from: "_sv << key_to_read
                              << " is: " << result_data.Value();
     } else {
-        logger_ctx.LogInfo() << "Reading: Data NOT ready"_sv;
+        logger_ctx.LogError() << result_data.Error().Message();
     }
-    return result;
+    return result_data;
 }
 
 template<typename dataType>
@@ -286,7 +276,7 @@ ara::core::Result<dataType> PersistentMemAccessor::ReadVariantCodingData(
     ara::core::String key = kvs_enum_to_string_key(key_to_read);
     try {
         if (key.empty()) {
-            throw std::invalid_argument("invalid key");
+            throw std::invalid_argument("invalid key while reading data");
         }
         /* We first need to store some data before reading it. If application tries to read a data
          * which doesn't exist then GetValue API return an error.
@@ -301,16 +291,15 @@ ara::core::Result<dataType> PersistentMemAccessor::ReadVariantCodingData(
             logger_ctx.LogInfo()
                 << "Initializing: data not found in the database, try initializing the database."_sv;
             if (!InitializeVcMemoryWithDefaultValues()) {
-                logger_ctx.LogFatal() << "Initializing: unable to initialize persistent data."_sv;
+                throw "Unable to initialize persistent data.";
             } else {
                 logger_ctx.LogInfo() << "Initializing: kvs initialized with default values."_sv;
-                result = PersistentMemAccessor::TryReadingDataFromKvs<uint8_t>(
-                    key); // try reading once again
+                result = PersistentMemAccessor::TryReadingDataFromKvs<uint8_t>(key); // try reading once again
             }
             has_kvs_initialized_with_default_values = true; // set to true, don't try multiple times
         }
     } catch (const std::invalid_argument& e) {
-        logger_ctx.LogError() << "Caught std::exception! Message = " << e.what();
+        logger_ctx.LogError() << "Caught std::invalid_argument! Message = " << e.what();
     } catch (const std::exception& e) {
         logger_ctx.LogError() << "Caught std::exception! Message = " << e.what();
     } catch (...) {

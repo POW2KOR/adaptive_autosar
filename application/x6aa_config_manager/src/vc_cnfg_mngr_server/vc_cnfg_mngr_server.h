@@ -111,7 +111,7 @@ private:
     /*!
      * \brief Logger instance.
      */
-    ara::log::Logger& log_{ara::log::CreateLogger("Skeleton", "Skeleton demo")};
+    ara::log::Logger& log_{ara::log::CreateLogger("Skeleton", "Config Manager Skeleton ")};
 
     /*!
      * \brief ApplicationClient instance
