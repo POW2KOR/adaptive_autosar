@@ -401,13 +401,16 @@ filegroup(
     visibility = ["//visibility:public"],
 )
 
-# Because of the use of "strip_include_prefix " We can't have this If we do it in
-# bsw/BUILD.
-# To explain why we do this in bazel and not cmake We already have
-# Cmake_External rule for example for amsr-vector-fs-doipbinding but that
-# doesn't do anything. It only generates a couple of header file in the share
-# directory We need those headers and doing this way in Bazel is clean and
-# propagates dependencies more easily
+# We need to use "strip_include_prefix" with cc_library to match the
+# include paths expected by the C++ code, but "strip_include_prefix" can't be
+# used easily if we place the rule do it in bsw/BUILD. So we place it here,
+# instead.
+#
+# We do this in bazel and not cmake, becuase the CMake files for
+# amsr-vector-fs-doipbindingthis don't actually build the libraries, but only
+# export the C++ files. With the current implementation of rules_foreign_cc,
+# we cannot use these C++ files to build our final binary, so we build the
+# cc_library using those sources instead.
 
 cc_library(
     name = "lib_doip_binding_hdrs_lib",
