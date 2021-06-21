@@ -46,18 +46,13 @@ filegroup(
 )
 
 filegroup(
-    name = "dm_global_settings_config",
-    srcs = ["configs/sda/dm_global_settings.json"],
-)
-
-filegroup(
     name = "updatemanager_config",
     srcs = ["configs/sda/updatemanager.json"],
 )
 
-# The files Inside the nv_data folder are created manually for
-# DiagnosticManager. If DM doesn't find these files, It reports
-# error and and create the files. As We are ruuning from
+# The files inside the nv_data folder are created manually for
+# DiagnosticManager. If DM doesn't find these files, it reports
+# error and and create the files. As we are ruuning from
 # filesystem.tar the created file were not getting stored.
 
 filegroup(
@@ -260,7 +255,7 @@ minerva_aa_codegen_rule(
     ],
     ignore_matches = genr_ignore_patterns,
     outs_list_dict = {
-        "socla_scrs": [
+        "socal_scrs": [
             "DiagnosticManagerDeamonExecutable/src/amsr/diag/service_interfaces/diag_com_api/diagcomapi.cpp",
             "DiagnosticManagerDeamonExecutable/src/amsr/diag/service_interfaces/diag_com_api/diagcomapi_proxy.cpp",
             "DiagnosticManagerDeamonExecutable/src/ara/com/runtime_gen.cpp",
@@ -372,7 +367,7 @@ cc_binary(
         ":diag_uds_srcs",
         ":ipcbinding_srcs",
         ":persistency_config_srcs",
-        ":socla_scrs",
+        ":socal_scrs",
         ":someipprotocol_config_srcs",
         "@amsr_xavier//:amsr_vector_fs_diagnosticmanager_main",
         "@amsr_xavier//:amsr_vector_fs_per_libpersistency_persistency_file_storage_srcs",
@@ -422,7 +417,7 @@ pkg_tar(
         ":swcluster_meta": "etc/swcl_package_metadata.json",
         ":diagnosticmanager_doip_config": "etc/diagnosticmanager_doip.json",
         ":diagnosticmanager_config": "etc/diagnosticmanager.json",
-        ":dm_global_settings_config": "etc/dm_global_settings.json",
+        ":dm_global_settings_json": "etc/dm_global_settings.json",
         ":dm_server_config_json": "etc/dm_server_config_SoftwareClusterPlatform.json",
         ":persistency_file_storage_config_json": "etc/per_file_storage_config.json",
         ":updatemanager_config": "etc/updatemanager.json",

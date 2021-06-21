@@ -401,7 +401,7 @@ filegroup(
     visibility = ["//visibility:public"],
 )
 
-# Headrds only library for headers inside src folder
+# Headers only library for headers inside src folder
 # [BSW/amsr-vector-fs-doipbinding/lib/DoIpBinding/src]
 # This is required so that the headers inside this folder
 # is visible to scrs
