@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM artifact.swf.daimler.com/apricot-docker/xpf/ubuntu:18.04
 
 ARG BUILD_USER="root"
 ARG VECTOR_CAST_DIR="/usr/tools/vectorcast"
