@@ -61,7 +61,7 @@
               <EXECUTABLE-REF DEST="EXECUTABLE">/Application/Executables/amsr_vector_fs_log_daemon</EXECUTABLE-REF>
               <LOG-TRACE-DEFAULT-LOG-LEVEL>INFO</LOG-TRACE-DEFAULT-LOG-LEVEL>
               <LOG-TRACE-LOG-MODE>CONSOLE</LOG-TRACE-LOG-MODE>
-              <LOG-TRACE-PROCESS-DESC>Vector Log Daemon</LOG-TRACE-PROCESS-DESC>
+              <LOG-TRACE-PROCESS-DESC>The Adaptive AUTOSAR Log Daemon</LOG-TRACE-PROCESS-DESC>
               <LOG-TRACE-PROCESS-ID>LOGD</LOG-TRACE-PROCESS-ID>
               <PROCESS-STATE-MACHINE>
                 <SHORT-NAME>amsr_vector_fs_log_daemon_process_mode</SHORT-NAME>
