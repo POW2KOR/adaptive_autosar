@@ -10,13 +10,6 @@ filegroup(
     ],
 )
 
-filegroup(
-    name = "logd_config",
-    srcs = [
-        "config/logd_config.json",
-    ],
-)
-
 minerva_aa_codegen_rule(
     name = "log_daemon_config_gen_rule",
     arxml_srcs = [
@@ -31,6 +24,9 @@ minerva_aa_codegen_rule(
     outs_list_dict = {
         "logging_config": [
             "amsr_vector_fs_log_daemon/etc/logging_config.json",
+        ],
+        "logd_config": [
+            "amsr_vector_fs_log_daemon/etc/logd_config.json",
         ],
     },
 )
