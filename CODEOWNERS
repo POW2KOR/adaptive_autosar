@@ -8,6 +8,7 @@
 # Protect folders and their default reviewers
 /bsw/ @andzisu @sathire @dkurbak @atmehra @atpanig @saksinh @twilmer
 /application/ @andzisu @sathire @dkurbak @atmehra @atpanig @saksinh @twilmer
+/application/swc/ @heimess @joaepp
 
 # CI/CD and devops team
 /devops/ @mcherlo @ftrevin
