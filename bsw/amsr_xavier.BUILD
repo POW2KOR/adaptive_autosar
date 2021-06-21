@@ -340,3 +340,109 @@ minerva_aa_codegen_declare(
     ],
     path_to_generators = "Generators",
 )
+
+##########################################################################
+# These are file groups and libraries required for DiagnosticManagerDeamon
+##########################################################################
+
+cc_library(
+    name = "diag_daemon_impl",
+    srcs = glob(["BSW/amsr-vector-fs-diagnosticmanager/app/diagnostic_manager_daemon_impl/src/**"]),
+    hdrs = glob(["BSW/amsr-vector-fs-diagnosticmanager/app/diagnostic_manager_daemon_impl/include/**"]),
+    copts = [
+        "-std=c++14",
+    ],
+    linkstatic = 1,
+    local_defines = [
+        "VIRTUALMOCK=",
+        "ENABLE_EXEC_MANAGER=ON",
+    ],
+    strip_include_prefix = "BSW/amsr-vector-fs-diagnosticmanager/app/diagnostic_manager_daemon_impl/include",
+    visibility = ["//visibility:public"],
+    deps = [
+        "@minerva_mpu_adaptive//bsw:amsr_vector_fs_applicationbase",
+        "@minerva_mpu_adaptive//bsw:amsr_vector_fs_diagnosticrpc",
+        "@minerva_mpu_adaptive//bsw:amsr_vector_fs_diagnosticrpccombinding",
+        "@minerva_mpu_adaptive//bsw:amsr_vector_fs_diagnosticutility",
+        "@minerva_mpu_adaptive//bsw:amsr_vector_fs_libiostream",
+        "@minerva_mpu_adaptive//bsw:amsr_vector_fs_libosabstraction",
+        "@minerva_mpu_adaptive//bsw:amsr_vector_fs_libvac",
+        "@minerva_mpu_adaptive//bsw:amsr_vector_fs_log_api",
+        "@minerva_mpu_adaptive//bsw:amsr_vector_fs_logutility",
+        "@minerva_mpu_adaptive//bsw:amsr_vector_fs_per_libpersistency",
+        "@minerva_mpu_adaptive//bsw:amsr_vector_fs_thread",
+        "@minerva_mpu_adaptive//bsw:amsr_vector_fs_udstransport",
+    ],
+)
+
+filegroup(
+    name = "amsr_vector_fs_diagnosticmanager_main",
+    srcs = [
+        "BSW/amsr-vector-fs-diagnosticmanager/app/diagnostic_manager_daemon/src/main.cpp",
+    ],
+    visibility = ["//visibility:public"],
+)
+
+filegroup(
+    name = "lib_doip_binding_srcs",
+    srcs = glob(["BSW/amsr-vector-fs-doipbinding/lib/DoIpBinding/src/**/*.cpp"]),
+    visibility = ["//visibility:public"],
+)
+
+filegroup(
+    name = "diag_deamon_rpc_srcs",
+    srcs = glob(["BSW/amsr-vector-fs-diagnosticrpc/lib/DiagDaemonRpc/src/**/*.cpp"]),
+    visibility = ["//visibility:public"],
+)
+
+filegroup(
+    name = "diag_com_deamon_srcs",
+    srcs = glob(["BSW/amsr-vector-fs-diagnosticrpccombinding/lib/DiagComDaemon/src/**/*.cpp"]),
+    visibility = ["//visibility:public"],
+)
+
+# We need to use "strip_include_prefix" with cc_library to match the
+# include paths expected by the C++ code, but "strip_include_prefix" can't be
+# used easily if we place the rule do it in bsw/BUILD. So we place it here,
+# instead.
+#
+# We do this in bazel and not cmake, becuase the CMake files for
+# amsr-vector-fs-doipbindingthis don't actually build the libraries, but only
+# export the C++ files. With the current implementation of rules_foreign_cc,
+# we cannot use these C++ files to build our final binary, so we build the
+# cc_library using those sources instead.
+
+cc_library(
+    name = "lib_doip_binding_hdrs_lib",
+    hdrs = glob(["BSW/amsr-vector-fs-doipbinding/lib/DoIpBinding/src/**/*.h"]),
+    strip_include_prefix = "BSW/amsr-vector-fs-doipbinding/lib/DoIpBinding/src",
+    visibility = ["//visibility:public"],
+)
+
+cc_library(
+    name = "diag_deamon_rpc_src_hdrs_lib",
+    hdrs = glob(["BSW/amsr-vector-fs-diagnosticrpc/lib/DiagDaemonRpc/src/**/*.h"]),
+    strip_include_prefix = "BSW/amsr-vector-fs-diagnosticrpc/lib/DiagDaemonRpc/src",
+    visibility = ["//visibility:public"],
+)
+
+cc_library(
+    name = "diag_deamon_rpc_hdrs_lib",
+    hdrs = glob(["BSW/amsr-vector-fs-diagnosticrpc/lib/DiagDaemonRpc/include/**/*.h"]),
+    strip_include_prefix = "BSW/amsr-vector-fs-diagnosticrpc/lib/DiagDaemonRpc/include",
+    visibility = ["//visibility:public"],
+)
+
+cc_library(
+    name = "diag_com_deamon_src_hdrs_lib",
+    hdrs = glob(["BSW/amsr-vector-fs-diagnosticrpccombinding/lib/DiagComDaemon/src/**/*.h"]),
+    strip_include_prefix = "BSW/amsr-vector-fs-diagnosticrpccombinding/lib/DiagComDaemon/src",
+    visibility = ["//visibility:public"],
+)
+
+cc_library(
+    name = "diag_com_deamon_hdrs_lib",
+    hdrs = glob(["BSW/amsr-vector-fs-diagnosticrpccombinding/lib/DiagComDaemon/include/**/*.h"]),
+    strip_include_prefix = "BSW/amsr-vector-fs-diagnosticrpccombinding/lib/DiagComDaemon/include",
+    visibility = ["//visibility:public"],
+)
