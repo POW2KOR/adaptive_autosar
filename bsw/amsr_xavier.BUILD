@@ -401,10 +401,14 @@ filegroup(
     visibility = ["//visibility:public"],
 )
 
-# Headers only library for headers inside src folder
-# [BSW/amsr-vector-fs-doipbinding/lib/DoIpBinding/src]
-# This is required so that the headers inside this folder
-# is visible to scrs
+# Because of the use of "strip_include_prefix " We can't have this If we do it in
+# bsw/BUILD.
+# To explain why we do this in bazel and not cmake We already have
+# Cmake_External rule for example for amsr-vector-fs-doipbinding but that
+# doesn't do anything. It only generates a couple of header file in the share
+# directory We need those headers and doing this way in Bazel is clean and
+# propagates dependencies more easily
+
 cc_library(
     name = "lib_doip_binding_hdrs_lib",
     hdrs = glob(["BSW/amsr-vector-fs-doipbinding/lib/DoIpBinding/src/**/*.h"]),

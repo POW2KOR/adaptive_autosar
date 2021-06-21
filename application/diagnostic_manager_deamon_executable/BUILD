@@ -50,11 +50,17 @@ filegroup(
     srcs = ["configs/sda/updatemanager.json"],
 )
 
-# The files inside the nv_data folder are created manually for
-# DiagnosticManager. If DM doesn't find these files, it reports
-# error and and create the files. As we are ruuning from
-# filesystem.tar the created file were not getting stored.
+# When we run our file system it runs the DiagnosticManager. It then checks for
+# the files inside the nv_data folder. On the first run it doesn't find the
+# files. So it throws some error and continue running. Than it create these
+# files with particular Header and body for each of them. So that in the
+# subsequent run it can use those files. Now As we run our stack from
+# minerva_filesystem.tar each time and the file getting generated are not being
+# saved as part of fie system, we will see these errors every time we run the
+# stack.
 
+# So the solution was to copy the generated files and provide it statically in
+# our file system, so that DiagnosticManager finds it.
 filegroup(
     name = "diagnostic_manager_nv_data",
     srcs = ["configs/sda/nv_data"],
@@ -420,7 +426,7 @@ pkg_tar(
         ":dm_global_settings_json": "etc/dm_global_settings.json",
         ":dm_server_config_json": "etc/dm_server_config_SoftwareClusterPlatform.json",
         ":persistency_file_storage_config_json": "etc/per_file_storage_config.json",
-        ":updatemanager_config": "etc/updatemanager.json",
+        "//application/sda:updatemanager": "etc/updatemanager.json",
         ":diagnostic_manager_nv_data": "etc/nv_data",
     },
     mode = "0755",
