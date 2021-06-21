@@ -2,6 +2,4 @@
 Name=enp0s3
 
 [Network]
-Address=10.21.17.97/24
-Address=10.21.17.98/24
-Gateway=10.21.17.1
+Address=10.21.17.98/16
