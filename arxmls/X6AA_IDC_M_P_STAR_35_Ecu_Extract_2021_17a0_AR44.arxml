@@ -13629,6 +13629,15 @@ Use 02_False_True instead.</L-2>
 				<!-- /Machine/IDC6_M_P1_XAVIER -->
 				<MACHINE UUID="O356e0a3917978d702b737866xO356e0a3917978d702b73897600">
 					<SHORT-NAME>IDC6_M_P1_XAVIER</SHORT-NAME>
+					<ADMIN-DATA>
+						<SDGS>
+							<SDG GID="DvMex:MachineExtensions">
+								<SDG GID="DvMex:EcuId">
+									<SD>ECU1</SD>
+								</SDG>
+							</SDG>
+						</SDGS>
+					</ADMIN-DATA>
 					<FUNCTION-GROUPS>
 						<!-- /Machine/IDC6_M_P1_XAVIER/IDC6_M_ModeDeclarationGroup -->
 						<MODE-DECLARATION-GROUP-PROTOTYPE UUID="O356e0a3917978d702b7389bdXO356e0a3917978d702b7389bc00">
