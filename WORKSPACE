@@ -100,21 +100,7 @@ rules_foreign_cc_dependencies(register_default_tools = True)
 load("@bazel_tools//tools/build_defs/repo:git.bzl", "new_git_repository")
 
 # If you want to make frequent changes to the starter_kit or amsr_xavier read more in docs/bazel_tips_and_tricks.md,
-# under "Try out modifications to the amsr_xavier or starter_kit".
-new_git_repository(
-    name = "starter_kit_adaptive_xavier",  # bazel will create under its own cache folder in the external folder package with the specified name(e.g. external/starter_kit_adaptive_xavier)
-    build_file = "@//:application/starter_kit_adaptive_xavier.BUILD",
-    commit = "cc3a30df5b6505c10904fa8ab602593115c79960",
-    remote = "ssh://git@git.swf.daimler.com:7999/adasdai/starter_kit_adaptive_xavier.git",
-    shallow_since = "1621327161 +0200",
-)
-
-'''new_local_repository(
-    name = "starter_kit_adaptive_xavier",
-    build_file = "@//bsw:starter_kit_adaptive_xavier.BUILD",
-    path = "<local_path_to_reposittory>",
-)'''
-
+# under "Try out modifications to the amsr_xavier or sda_xavier".
 new_git_repository(
     name = "amsr_xavier",  # bazel will create under its own cache folder in the external folder package with the specified name(e.g. external/amsr_xavier)
     build_file = "@//bsw:amsr_xavier.BUILD",
