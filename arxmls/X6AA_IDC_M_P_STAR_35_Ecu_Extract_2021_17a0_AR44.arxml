@@ -18708,6 +18708,21 @@ LONG: PT4_PTCoor4_Pr5_ST3 (degraded)</L-2>
 								<ETHERNET-COMMUNICATION-CONNECTOR UUID="O356e0a3917978d702b7351b9xO356e0a3917978d702b7351d000">
 									<SHORT-NAME>IDC_M_P_MAIN_21</SHORT-NAME>
 									<CATEGORY>WIRED</CATEGORY>
+									<ADMIN-DATA>
+										<SDGS>
+											<SDG GID="DvMex:EthernetCommunicationConnectorExtensions">
+												<SDG GID="DvMex:KeepAlive">
+													<SD>true</SD>
+												</SDG>
+												<SDG GID="DvMex:NoDelay">
+													<SD>false</SD>
+												</SDG>
+												<SDG GID="DvMex:NumConnections">
+													<SD>1</SD>
+												</SDG>
+											</SDG>
+										</SDGS>
+									</ADMIN-DATA>
 									<UNICAST-NETWORK-ENDPOINT-REF DEST="NETWORK-ENDPOINT">/Topology/Clusters/MAIN/MAIN_21/NE_Base_ADAS6</UNICAST-NETWORK-ENDPOINT-REF>
 								</ETHERNET-COMMUNICATION-CONNECTOR>
 							</COMMUNICATION-CONNECTORS>
