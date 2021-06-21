@@ -1,13 +1,11 @@
 filegroup(
     name = "sda_model",
     srcs = [
-        "self_diag_agent/model/SelfDiagnosticAgent.arxml",
-        "self_diag_agent/model/SWUC_Types.arxml",
-        "self_diag_agent/model/SWUC_SDA_Interface_Design.arxml",
+        "self_diag_agent/model/IDC_GEN6_P._20210609.arxml",
         "self_diag_agent/model/SWUC_SDA_Interface_Deployment.arxml",
-        "self_diag_agent/model/SWUC_SDA_Ipc_Required.arxml",
-        "self_diag_agent/model/starter_kit_adaptive_xavier.arxml",
-        #"self_diag_agent/model/IDC_GEN6_P_000102_20210602.arxml",
+        "self_diag_agent/model/SWUC_SDA_Interface_Design.arxml",
+        "self_diag_agent/model/SWUC_Types.arxml",
+        "self_diag_agent/model/SelfDiagnosticAgent.arxml",
     ],
     visibility = ["//visibility:public"],
 )
