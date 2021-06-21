@@ -38,7 +38,7 @@ RUN apt-get --assume-yes  update && \
     python3-wheel=0.30.0-0.2 \
     # xmllint is necessary for pretty-printing generator messages
     # from bazel genrules, libxml2-utils contains xmllint
-    libxml2-utils=2.9.4+dfsg1-6.1ubuntu1.3 \
+    libxml2-utils=2.9.4+dfsg1-6.1ubuntu1 \
     xdot=0.9-1 \
     # collectd build dependencies
     bison \
