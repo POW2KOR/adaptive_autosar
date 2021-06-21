@@ -37,9 +37,14 @@ PersistentMemAccessor::PersistentMemAccessor()
             = ara::per::OpenKeyValueStorage(kvs_instance_specifier.Value());
 
         if (opened_kvs.HasValue()) {
-            key_value_storage.emplace(opened_kvs.Value());
-            logger_ctx.LogFatal() << "config manager is able to open key value storage."_sv;
+            key_value_storage = std::make_unique<ara::per::SharedHandle<ara::per::KeyValueStorage>>(
+                opened_kvs.Value());
+            logger_ctx.LogInfo() << "config manager is able to open key value storage."_sv;
+        } else {
+            throw "Failed to create instance specifier for persistency port.";
         }
+    } else {
+        throw "Failed to open key value storage DB.";
     }
     has_kvs_initialized_with_default_values = false;
     logger_ctx.SetPrefix("VcPersistentMemAccessor : "_sv);

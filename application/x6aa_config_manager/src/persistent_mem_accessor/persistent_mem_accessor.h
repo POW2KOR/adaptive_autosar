@@ -108,7 +108,7 @@ private:
     /**
      * \brief KeyValueStorage.
      */
-    ara::core::Optional<ara::per::SharedHandle<ara::per::KeyValueStorage>> key_value_storage;
+    std::unique_ptr<ara::per::SharedHandle<ara::per::KeyValueStorage>> key_value_storage;
 
     /**
      * \brief Holds the logging context
