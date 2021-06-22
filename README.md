@@ -151,10 +151,18 @@ instance to drop to a login prompt once systemd has finished booting the system.
 
 ### Connecting to remote DLT
 
-All of the applications apart from the `log-daemon` are configured to output remote DLT over TCP at IP address
-`10.21.17.98` and port `49361`. Start dlt-viewer on host with ip=localhost and port=13490 to access it.
+All of the applications apart from the `log-daemon` are configured to output remote DLT. The connection is available
+over TCP at IP address `10.21.17.98` and port `49361`.
+
+When running a virtual ECU inside QEMU, the QEMU configuration will forward the remote DLT port to port `13490` on the
+host machine. Configure the [dlt-viewer](https://github.com/GENIVI/dlt-viewer) running on your host to connect to
+`127.0.0.1` port `13490` over TCP.
 
 ## Miscellaneous
+
+You can use ssh to connect to the virtual ECU.
+To connect to Qemu VM instance over ssh from host, we forward host port 10022 to guest port 22.
+More information on how to set this up is [here](https://git.swf.daimler.com/adasdai/minerva_mpu_adaptive/-/blob/master/docs/setup_ssh.md)
 
 ### Build collectd and its plugins through bazel
 
