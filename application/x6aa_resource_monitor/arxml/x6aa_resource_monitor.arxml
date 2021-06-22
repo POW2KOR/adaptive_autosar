@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<AUTOSAR xmlns="http://autosar.org/schema/r4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" S="51C2F664788005D9B556FED106E0BA60D6D1F26E" T="2020-11-11T10:33:01+01:00" xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_00047.xsd">
+  <ADMIN-DATA/>
+  <AR-PACKAGES>
+    <AR-PACKAGE UUID="3aa58fa9-26d7-452a-bead-dfdb7bf9ccc8">
+      <SHORT-NAME>mb</SHORT-NAME>
+      <AR-PACKAGES>
+        <AR-PACKAGE UUID="555b6d7b-f06e-43d1-8e39-c41eac84d525">
+          <SHORT-NAME>Design</SHORT-NAME>
+          <ELEMENTS>
+            <ADAPTIVE-APPLICATION-SW-COMPONENT-TYPE UUID="9cbbe2be-459d-44b1-bda0-eadef74803bc">
+              <SHORT-NAME>x6aa_resource_monitor_sample</SHORT-NAME>
+            </ADAPTIVE-APPLICATION-SW-COMPONENT-TYPE>
+            <EXECUTABLE UUID="1906d016-4c30-4440-9ff2-d85f59ca86b8">
+              <SHORT-NAME>x6aa_resource_monitor</SHORT-NAME>
+              <CATEGORY>APPLICATION_LEVEL</CATEGORY>
+              <ROOT-SW-COMPONENT-PROTOTYPE UUID="a0babcb0-61ff-4f6e-8393-25ecac39afc1">
+                <SHORT-NAME>x6aa_resource_monitor_sample_root_swc</SHORT-NAME>
+                <APPLICATION-TYPE-TREF DEST="ADAPTIVE-APPLICATION-SW-COMPONENT-TYPE">/mb/Design/x6aa_resource_monitor_sample</APPLICATION-TYPE-TREF>
+              </ROOT-SW-COMPONENT-PROTOTYPE>
+            </EXECUTABLE>
+          </ELEMENTS>
+        </AR-PACKAGE>
+      </AR-PACKAGES>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>

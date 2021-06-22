@@ -1,7 +1,39 @@
 load("@rules_pkg//:pkg.bzl", "pkg_tar")
 load("@rules_foreign_cc//tools/build_defs:configure.bzl", "configure_make")
+load("@minerva_mpu_adaptive//:bazel/defs.bzl", "minerva_aa_codegen_rule")
 
 package(default_visibility = ["//visibility:public"])
+
+filegroup(
+    name = "app_arxml",
+    srcs = [
+        "arxml/x6aa_resource_monitor.arxml",
+        "@amsr_xavier//:mex_arxml",
+    ],
+)
+
+minerva_aa_codegen_rule(
+    name = "x6aa_resource_monitor_gen_rule",
+    arxml_srcs = [
+        ":app_arxml",
+    ],
+    generators = [
+        "@amsr_xavier//:generator_amsr_applicationbase_init_deinit",
+    ],
+    outs_list_dict = {
+        "x6aa_resource_monitor_applicationbase_init_deinit_srcs": [
+            "x6aa_resource_monitor/src/ara/core/initialization.cpp",
+        ],
+    },
+)
+
+filegroup(
+    name = "collectd_extended_sources",
+    srcs = [
+        "@collectd_mbient//:all_files",
+        ":x6aa_resource_monitor_applicationbase_init_deinit_srcs",
+    ],
+)
 
 configure_make(
     name = "build_collectd",
@@ -24,8 +56,9 @@ configure_make(
             "--without-java",
             "--enable-cpu",
             "--enable-csv",
+            "--enable-write_dlt",
         ],
-    lib_source = "@collectd_mbient//:all_files",
+    lib_source = ":collectd_extended_sources",
     out_bin_dir = "sbin",
     out_binaries = [
         "collectd",
@@ -37,6 +70,11 @@ configure_make(
         "libcollectdclient.so.1.1.0",
         "collectd/cpu.so",
         "collectd/csv.so",
+        "collectd/write_dlt.so",
+    ],
+    deps = [
+        "//bsw:amsr_vector_fs_applicationbase",
+        "//bsw:amsr_vector_fs_log_api",
     ],
 )
 
