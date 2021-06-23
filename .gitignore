@@ -8,3 +8,5 @@ tools/*.sh
 __pycache__
 .pytest_cache
 .coverage
+os/qnx/qemu_x86_64/runtime
+os/qnx/qemu_x86_64/adaptive
