@@ -401,6 +401,24 @@ filegroup(
     visibility = ["//visibility:public"],
 )
 
+filegroup(
+    name = "diag_com_api_srcs",
+    srcs = glob(["BSW/amsr-vector-fs-diagnosticrpccombinding/lib/DiagComApi/src/**/*.cpp"]),
+    visibility = ["//visibility:public"],
+)
+
+filegroup(
+    name = "diag_rpc_com_binding_srcs",
+    srcs = glob(["BSW/amsr-vector-fs-diagnosticrpccombinding/lib/DiagnosticRpcComBinding/src/**/*.cpp"]),
+    visibility = ["//visibility:public"],
+)
+
+filegroup(
+    name = "ara_diag_src",
+    srcs = glob(["BSW/amsr-vector-fs-aradiag/lib/AraDiag/src/**/*.cpp"]),
+    visibility = ["//visibility:public"],
+)
+
 # We need to use "strip_include_prefix" with cc_library to match the
 # include paths expected by the C++ code, but "strip_include_prefix" can't be
 # used easily if we place the rule do it in bsw/BUILD. So we place it here,
@@ -444,5 +462,33 @@ cc_library(
     name = "diag_com_deamon_hdrs_lib",
     hdrs = glob(["BSW/amsr-vector-fs-diagnosticrpccombinding/lib/DiagComDaemon/include/**/*.h"]),
     strip_include_prefix = "BSW/amsr-vector-fs-diagnosticrpccombinding/lib/DiagComDaemon/include",
+    visibility = ["//visibility:public"],
+)
+
+cc_library(
+    name = "diag_com_api_hdrs_lib",
+    hdrs = glob(["BSW/amsr-vector-fs-diagnosticrpccombinding/lib/DiagComApi/include/**/*.h"]),
+    strip_include_prefix = "BSW/amsr-vector-fs-diagnosticrpccombinding/lib/DiagComApi/include",
+    visibility = ["//visibility:public"],
+)
+
+cc_library(
+    name = "diag_rpc_com_binding_srcs_lib",
+    hdrs = glob(["BSW/amsr-vector-fs-diagnosticrpccombinding/lib/DiagnosticRpcComBinding/include/**/*.h"]),
+    strip_include_prefix = "BSW/amsr-vector-fs-diagnosticrpccombinding/lib/DiagnosticRpcComBinding/include",
+    visibility = ["//visibility:public"],
+)
+
+cc_library(
+    name = "ara_diag_src_hdrs_lib",
+    hdrs = glob(["BSW/amsr-vector-fs-aradiag/lib/AraDiag/src/**/*.h"]),
+    strip_include_prefix = "BSW/amsr-vector-fs-aradiag/lib/AraDiag/src",
+    visibility = ["//visibility:public"],
+)
+
+cc_library(
+    name = "ara_diag_hdrs_lib",
+    hdrs = glob(["BSW/amsr-vector-fs-aradiag/lib/AraDiag/include/**/*.h"]),
+    strip_include_prefix = "BSW/amsr-vector-fs-aradiag/lib/AraDiag/include",
     visibility = ["//visibility:public"],
 )
