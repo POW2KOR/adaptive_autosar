@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<AUTOSAR xmlns="http://autosar.org/schema/r4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_00047.xsd">
+  <AR-PACKAGES>
+    <AR-PACKAGE UUID="06c547aa-fe98-4a19-89a4-0a67a2afb22c">
+      <SHORT-NAME>SWUC</SHORT-NAME>
+      <ELEMENTS>
+        <PROCESS UUID="7c9e17be-71bd-4d33-9b08-bb56d17e6c8a">
+          <SHORT-NAME>amsr_swupdateclient_process</SHORT-NAME>
+          <ADMIN-DATA>
+            <SDGS>
+              <SDG GID="DvMex:LogTraceProcessExtensions">
+                <SDG GID="DvMex:ConfigDirPath">
+                  <SD>not used</SD>
+                </SDG>
+                <SDG GID="DvMex:MaxNumberOfLogSinks">
+                  <SD>6</SD>
+                </SDG>
+                <SDG GID="DvMex:MaxSupportedLogLevel">
+                  <SD>VERBOSE</SD>
+                </SDG>
+                <SDG GID="DvMex:EnableLogMode">
+                  <SD>CONSOLE</SD>
+                </SDG>
+                <!-- TODO(visshj): Remove once this is truly optional in logging generator. -->
+                <SDG GID="DvMex:MaxLoggers">
+                  <SD>0</SD>
+                </SDG>
+              </SDG>
+            </SDGS>
+          </ADMIN-DATA>
+          <DESIGN-REF DEST="PROCESS-DESIGN">/SWUC/amsr_swupdateclient_process_design</DESIGN-REF>
+          <EXECUTABLE-REF DEST="EXECUTABLE">/SWUC/amsr_swupdateclient</EXECUTABLE-REF>
+          <LOG-TRACE-DEFAULT-LOG-LEVEL>INFO</LOG-TRACE-DEFAULT-LOG-LEVEL>
+          <LOG-TRACE-FILE-PATH></LOG-TRACE-FILE-PATH>
+          <LOG-TRACE-PROCESS-DESC>Software Update Client</LOG-TRACE-PROCESS-DESC>
+          <LOG-TRACE-PROCESS-ID>SWUC</LOG-TRACE-PROCESS-ID>
+          <STATE-DEPENDENT-STARTUP-CONFIGS>
+            <STATE-DEPENDENT-STARTUP-CONFIG>
+              <FUNCTION-GROUP-STATE-IREFS>
+                <FUNCTION-GROUP-STATE-IREF>
+                  <CONTEXT-MODE-DECLARATION-GROUP-PROTOTYPE-REF DEST="MODE-DECLARATION-GROUP-PROTOTYPE">/Machine/IDC6_M_P1_XAVIER/MachineState</CONTEXT-MODE-DECLARATION-GROUP-PROTOTYPE-REF>
+                  <TARGET-MODE-DECLARATION-REF DEST="MODE-DECLARATION">/DataTypes/ModelManagement/MachineStates/Running</TARGET-MODE-DECLARATION-REF>
+                </FUNCTION-GROUP-STATE-IREF>
+              </FUNCTION-GROUP-STATE-IREFS>
+              <STARTUP-CONFIG-REF DEST="STARTUP-CONFIG">/SWUC/StartupConfigs/StartupModeIndependent</STARTUP-CONFIG-REF>
+            </STATE-DEPENDENT-STARTUP-CONFIG>
+          </STATE-DEPENDENT-STARTUP-CONFIGS>
+        </PROCESS>
+        <STARTUP-CONFIG-SET>
+          <SHORT-NAME>StartupConfigs</SHORT-NAME>
+          <STARTUP-CONFIGS>
+            <STARTUP-CONFIG>
+              <SHORT-NAME>StartupModeIndependent</SHORT-NAME>
+              <SCHEDULING-POLICY>SCHEDULING-POLICY-ROUND-ROBIN</SCHEDULING-POLICY>
+              <SCHEDULING-PRIORITY>15</SCHEDULING-PRIORITY>
+            </STARTUP-CONFIG>
+          </STARTUP-CONFIGS>
+        </STARTUP-CONFIG-SET>
+        <PROCESS-TO-MACHINE-MAPPING-SET>
+          <SHORT-NAME>Process_MachineMappingSet</SHORT-NAME>
+          <PROCESS-TO-MACHINE-MAPPINGS>
+            <PROCESS-TO-MACHINE-MAPPING>
+              <SHORT-NAME>Process_MachineMapping</SHORT-NAME>
+              <MACHINE-REF DEST="MACHINE">/Machine/IDC6_M_P1_XAVIER</MACHINE-REF>
+              <PROCESS-REF DEST="PROCESS">/SWUC/amsr_swupdateclient_process</PROCESS-REF>
+            </PROCESS-TO-MACHINE-MAPPING>
+          </PROCESS-TO-MACHINE-MAPPINGS>
+        </PROCESS-TO-MACHINE-MAPPING-SET>
+        <EXECUTABLE UUID="0bf0ada4-a050-4935-a8c0-dcd9b31c1d62">
+          <SHORT-NAME>amsr_swupdateclient</SHORT-NAME>
+          <CATEGORY>APPLICATION_LEVEL</CATEGORY>
+          <ROOT-SW-COMPONENT-PROTOTYPE UUID="fa8a9b3a-3183-40e3-9cfa-f9603971b708">
+            <SHORT-NAME>RootSwc</SHORT-NAME>
+            <APPLICATION-TYPE-TREF DEST="ADAPTIVE-APPLICATION-SW-COMPONENT-TYPE">/SWUC/SoftwareUpdateClientSwcType</APPLICATION-TYPE-TREF>
+          </ROOT-SW-COMPONENT-PROTOTYPE>
+          <VERSION>1.00.00.0000</VERSION>
+        </EXECUTABLE>
+      </ELEMENTS>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>

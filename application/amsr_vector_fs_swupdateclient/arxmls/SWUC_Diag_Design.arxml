@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<AUTOSAR xmlns="http://autosar.org/schema/r4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_00047.xsd">
+  <AR-PACKAGES>
+    <AR-PACKAGE UUID="06c547aa-fe98-4a19-89a4-0a67a2afb22c">
+      <SHORT-NAME>SWUC</SHORT-NAME>
+      <AR-PACKAGES>
+        <AR-PACKAGE UUID="06c547aa-fe98-4a19-89a4-0a67a2afb33c">
+          <SHORT-NAME>DiagCore</SHORT-NAME>
+          <AR-PACKAGES>
+            <AR-PACKAGE UUID="3bfa81b1-68e3-4017-a2de-4732f12776f9">
+              <SHORT-NAME>Diag_Deployment</SHORT-NAME>
+              <ELEMENTS>
+                <DIAGNOSTIC-SERVICE-DATA-IDENTIFIER-PORT-MAPPING UUID="8c8db39e-9e1e-473a-b8c9-291d597dd6d9">
+                  <SHORT-NAME>Diag_ServiceDataIdentifierPortMapping_ReprogrammingResumeInformation</SHORT-NAME>
+                  <DIAGNOSTIC-DATA-IDENTIFIER-REF DEST="DIAGNOSTIC-DATA-IDENTIFIER">/Diagnostics/Common/Reprogramming_Resume_Information</DIAGNOSTIC-DATA-IDENTIFIER-REF>
+                  <PROCESS-REF DEST="PROCESS-DESIGN">/SWUC/amsr_swupdateclient_process_design</PROCESS-REF>
+                  <SWC-SERVICE-DEPENDENCY-IN-EXECUTABLE-IREF>
+                    <TARGET-SWC-SERVICE-DEPENDENCY-REF DEST="SWC-SERVICE-DEPENDENCY">/SWUC/SoftwareUpdateClientSwcType/AdaptiveSwcInternalBehavior/SwcServiceDependency_DID_GenericInterface</TARGET-SWC-SERVICE-DEPENDENCY-REF>
+                  </SWC-SERVICE-DEPENDENCY-IN-EXECUTABLE-IREF>
+                </DIAGNOSTIC-SERVICE-DATA-IDENTIFIER-PORT-MAPPING>
+              </ELEMENTS>
+            </AR-PACKAGE>
+            <AR-PACKAGE UUID="51acbd87-b2a7-42a5-99de-b1096cd4b843">
+              <SHORT-NAME>Diag_Design</SHORT-NAME>
+              <AR-PACKAGES>
+                <AR-PACKAGE UUID="65e5baf3-bddb-43b2-8832-861f59c658df">
+                  <SHORT-NAME>Port_Interfaces</SHORT-NAME>
+                  <ELEMENTS>
+                    <DIAGNOSTIC-DOWNLOAD-INTERFACE UUID="48680984-af8b-4c10-9b83-6d6054996bfc">
+                      <SHORT-NAME>Diag_DownloadInterface</SHORT-NAME>
+                      <NAMESPACES>
+                        <SYMBOL-PROPS>
+                          <SHORT-NAME>amsr</SHORT-NAME>
+                          <SYMBOL>amsr</SYMBOL>
+                        </SYMBOL-PROPS>
+                        <SYMBOL-PROPS>
+                          <SHORT-NAME>swuc</SHORT-NAME>
+                          <SYMBOL>swuc</SYMBOL>
+                        </SYMBOL-PROPS>
+                      </NAMESPACES>
+                    </DIAGNOSTIC-DOWNLOAD-INTERFACE>
+                    <DIAGNOSTIC-ROUTINE-INTERFACE UUID="852488d4-74a8-423a-8ed0-ea27d1243e4f">
+                      <SHORT-NAME>Diag_RoutineInterface_EraseMemory</SHORT-NAME>
+                      <NAMESPACES>
+                        <SYMBOL-PROPS>
+                          <SHORT-NAME>amsr</SHORT-NAME>
+                          <SYMBOL>amsr</SYMBOL>
+                        </SYMBOL-PROPS>
+                        <SYMBOL-PROPS>
+                          <SHORT-NAME>swuc</SHORT-NAME>
+                          <SYMBOL>swuc</SYMBOL>
+                        </SYMBOL-PROPS>
+                      </NAMESPACES>
+                      <START UUID="9fd5cfd5-c4a5-4c90-8389-0ab5b61c918c">
+                        <SHORT-NAME>Start</SHORT-NAME>
+                        <ARGUMENTS>
+                          <ARGUMENT-DATA-PROTOTYPE UUID="01ef9234-68f4-4d63-a4b5-5db49082454b">
+                            <SHORT-NAME>address_format_identifier</SHORT-NAME>
+                            <TYPE-TREF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/DataTypes/ImplementationDataTypes/uint8_t</TYPE-TREF>
+                            <DIRECTION>IN</DIRECTION>
+                          </ARGUMENT-DATA-PROTOTYPE>
+                          <ARGUMENT-DATA-PROTOTYPE UUID="702da749-29c3-4ed7-95a3-b27d42fb1ef2">
+                            <SHORT-NAME>logical_block_information</SHORT-NAME>
+                            <TYPE-TREF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/DataTypes/ImplementationDataTypes/uint8_t</TYPE-TREF>
+                            <DIRECTION>IN</DIRECTION>
+                          </ARGUMENT-DATA-PROTOTYPE>
+                          <ARGUMENT-DATA-PROTOTYPE UUID="fdbf5bce-470f-49fc-a6a1-8c02b938dbe5">
+                            <SHORT-NAME>routine_information</SHORT-NAME>
+                            <TYPE-TREF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/DataTypes/ImplementationDataTypes/uint8_t</TYPE-TREF>
+                            <DIRECTION>OUT</DIRECTION>
+                          </ARGUMENT-DATA-PROTOTYPE>
+                          <ARGUMENT-DATA-PROTOTYPE UUID="c7af1b69-1e85-449e-b10f-f854a2832b27">
+                            <SHORT-NAME>erase_verification</SHORT-NAME>
+                            <TYPE-TREF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/DataTypes/ImplementationDataTypes/uint8_t</TYPE-TREF>
+                            <DIRECTION>OUT</DIRECTION>
+                          </ARGUMENT-DATA-PROTOTYPE>
+                        </ARGUMENTS>
+                      </START>
+                    </DIAGNOSTIC-ROUTINE-INTERFACE>
+                    <DIAGNOSTIC-ROUTINE-INTERFACE UUID="5db809c8-13cc-4d39-acb3-248ab3ef3af7">
+                      <SHORT-NAME>Diag_RoutineInterface_CheckMemory</SHORT-NAME>
+                      <NAMESPACES>
+                        <SYMBOL-PROPS>
+                          <SHORT-NAME>amsr</SHORT-NAME>
+                          <SYMBOL>amsr</SYMBOL>
+                        </SYMBOL-PROPS>
+                        <SYMBOL-PROPS>
+                          <SHORT-NAME>swuc</SHORT-NAME>
+                          <SYMBOL>swuc</SYMBOL>
+                        </SYMBOL-PROPS>
+                      </NAMESPACES>
+                      <START UUID="80ed2c0d-7be4-46e7-9e6b-cdad3997f5f9">
+                        <SHORT-NAME>Start</SHORT-NAME>
+                        <ARGUMENTS>
+                          <ARGUMENT-DATA-PROTOTYPE UUID="799771ce-666b-4a75-840b-851b451b07e5">
+                            <SHORT-NAME>signature</SHORT-NAME>
+                            <TYPE-TREF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/SWUC/DiagCore/Types/RoutineCheckMemorySignature</TYPE-TREF>
+                            <DIRECTION>IN</DIRECTION>
+                          </ARGUMENT-DATA-PROTOTYPE>
+                          <ARGUMENT-DATA-PROTOTYPE UUID="e79f85b5-6881-42e1-83ee-cac98c65c7fc">
+                            <SHORT-NAME>crc</SHORT-NAME>
+                            <TYPE-TREF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/DataTypes/ImplementationDataTypes/uint8_t</TYPE-TREF>
+                            <DIRECTION>IN</DIRECTION>
+                          </ARGUMENT-DATA-PROTOTYPE>
+                          <ARGUMENT-DATA-PROTOTYPE UUID="ed46c7df-3666-46ff-abed-1e831787a9bb">
+                            <SHORT-NAME>routine_information</SHORT-NAME>
+                            <TYPE-TREF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/DataTypes/ImplementationDataTypes/uint8_t</TYPE-TREF>
+                            <DIRECTION>OUT</DIRECTION>
+                          </ARGUMENT-DATA-PROTOTYPE>
+                          <ARGUMENT-DATA-PROTOTYPE UUID="56a5c7eb-2f94-458f-a643-479d2987fe4d">
+                            <SHORT-NAME>verification_result</SHORT-NAME>
+                            <TYPE-TREF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/DataTypes/ImplementationDataTypes/uint8_t</TYPE-TREF>
+                            <DIRECTION>OUT</DIRECTION>
+                          </ARGUMENT-DATA-PROTOTYPE>
+                        </ARGUMENTS>
+                      </START>
+                    </DIAGNOSTIC-ROUTINE-INTERFACE>
+                    <DIAGNOSTIC-ROUTINE-INTERFACE UUID="c9f33e38-009b-4f6e-8458-8c07cd5a98d4">
+                      <SHORT-NAME>Diag_RoutineInterface_CheckProgrammingDependencies</SHORT-NAME>
+                      <NAMESPACES>
+                        <SYMBOL-PROPS>
+                          <SHORT-NAME>amsr</SHORT-NAME>
+                          <SYMBOL>amsr</SYMBOL>
+                        </SYMBOL-PROPS>
+                        <SYMBOL-PROPS>
+                          <SHORT-NAME>swuc</SHORT-NAME>
+                          <SYMBOL>swuc</SYMBOL>
+                        </SYMBOL-PROPS>
+                      </NAMESPACES>
+                      <START UUID="27ed09ca-e5ee-47ca-b714-3e7249a36d4e">
+                        <SHORT-NAME>Start</SHORT-NAME>
+                        <ARGUMENTS>
+                          <ARGUMENT-DATA-PROTOTYPE UUID="2d67c582-2310-43f4-9363-ebf401737861">
+                            <SHORT-NAME>routine_information</SHORT-NAME>
+                            <TYPE-TREF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/DataTypes/ImplementationDataTypes/uint8_t</TYPE-TREF>
+                            <DIRECTION>OUT</DIRECTION>
+                          </ARGUMENT-DATA-PROTOTYPE>
+                          <ARGUMENT-DATA-PROTOTYPE UUID="1cb1fbbe-1cff-427d-b788-aec5db4fa5db">
+                            <SHORT-NAME>check_verification_result</SHORT-NAME>
+                            <TYPE-TREF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/DataTypes/ImplementationDataTypes/uint8_t</TYPE-TREF>
+                            <DIRECTION>OUT</DIRECTION>
+                          </ARGUMENT-DATA-PROTOTYPE>
+                        </ARGUMENTS>
+                      </START>
+                    </DIAGNOSTIC-ROUTINE-INTERFACE>
+                    <DIAGNOSTIC-ROUTINE-INTERFACE UUID="d5cacf25-4998-4c8c-ae22-c3d768c9904c">
+                      <SHORT-NAME>Diag_RoutineInterface_VerifyMemoryContent</SHORT-NAME>
+                      <NAMESPACES>
+                        <SYMBOL-PROPS>
+                          <SHORT-NAME>amsr</SHORT-NAME>
+                          <SYMBOL>amsr</SYMBOL>
+                        </SYMBOL-PROPS>
+                        <SYMBOL-PROPS>
+                          <SHORT-NAME>swuc</SHORT-NAME>
+                          <SYMBOL>swuc</SYMBOL>
+                        </SYMBOL-PROPS>
+                      </NAMESPACES>
+                      <START UUID="41a0dc10-b808-40d0-b571-351b771f2c70">
+                        <SHORT-NAME>Start</SHORT-NAME>
+                        <ARGUMENTS>
+                          <ARGUMENT-DATA-PROTOTYPE UUID="c2ba5e58-8e77-4da8-a203-6bba2061bc5a">
+                            <SHORT-NAME>logical_block_number</SHORT-NAME>
+                            <TYPE-TREF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/DataTypes/ImplementationDataTypes/uint8_t</TYPE-TREF>
+                            <DIRECTION>IN</DIRECTION>
+                          </ARGUMENT-DATA-PROTOTYPE>
+                          <ARGUMENT-DATA-PROTOTYPE UUID="2a56fad7-2a56-4348-bd48-def2b610cafa">
+                            <SHORT-NAME>num_of_crc_bytes_n</SHORT-NAME>
+                            <TYPE-TREF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/DataTypes/ImplementationDataTypes/uint16_t</TYPE-TREF>
+                            <DIRECTION>IN</DIRECTION>
+                          </ARGUMENT-DATA-PROTOTYPE>
+                          <ARGUMENT-DATA-PROTOTYPE UUID="9c75b091-f6ac-4825-9961-4eacbbc2ff99">
+                            <SHORT-NAME>crc_values</SHORT-NAME>
+                            <TYPE-TREF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/DataTypes/ImplementationDataTypes/uint32_t</TYPE-TREF>
+                            <DIRECTION>IN</DIRECTION>
+                          </ARGUMENT-DATA-PROTOTYPE>
+                          <ARGUMENT-DATA-PROTOTYPE UUID="95a64c23-41f9-4ec9-95d6-ef1102d3e358">
+                            <SHORT-NAME>routine_information</SHORT-NAME>
+                            <TYPE-TREF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/DataTypes/ImplementationDataTypes/uint8_t</TYPE-TREF>
+                            <DIRECTION>OUT</DIRECTION>
+                          </ARGUMENT-DATA-PROTOTYPE>
+                          <ARGUMENT-DATA-PROTOTYPE UUID="5ddc279d-4e5e-4300-9bf9-03e5fc4321f8">
+                            <SHORT-NAME>check_verification_result</SHORT-NAME>
+                            <TYPE-TREF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/DataTypes/ImplementationDataTypes/uint8_t</TYPE-TREF>
+                            <DIRECTION>OUT</DIRECTION>
+                          </ARGUMENT-DATA-PROTOTYPE>
+                        </ARGUMENTS>
+                      </START>
+                    </DIAGNOSTIC-ROUTINE-INTERFACE>
+                    <DIAGNOSTIC-DATA-IDENTIFIER-GENERIC-INTERFACE UUID="b3dde6d8-b67a-4b6f-8efd-0f8f17e00928">
+                      <SHORT-NAME>Diag_DataIdentifierGenericInterface</SHORT-NAME>
+                      <NAMESPACES>
+                        <SYMBOL-PROPS>
+                          <SHORT-NAME>amsr</SHORT-NAME>
+                          <SYMBOL>amsr</SYMBOL>
+                        </SYMBOL-PROPS>
+                        <SYMBOL-PROPS>
+                          <SHORT-NAME>swuc</SHORT-NAME>
+                          <SYMBOL>swuc</SYMBOL>
+                        </SYMBOL-PROPS>
+                      </NAMESPACES>
+                    </DIAGNOSTIC-DATA-IDENTIFIER-GENERIC-INTERFACE>
+                  </ELEMENTS>
+                </AR-PACKAGE>
+              </AR-PACKAGES>
+            </AR-PACKAGE>
+          </AR-PACKAGES>
+        </AR-PACKAGE>
+      </AR-PACKAGES>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>

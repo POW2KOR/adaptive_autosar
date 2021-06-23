@@ -431,9 +431,16 @@ filegroup(
 # cc_library using those sources instead.
 
 cc_library(
-    name = "lib_doip_binding_hdrs_lib",
+    name = "lib_doip_binding_src_hdrs_lib",
     hdrs = glob(["BSW/amsr-vector-fs-doipbinding/lib/DoIpBinding/src/**/*.h"]),
     strip_include_prefix = "BSW/amsr-vector-fs-doipbinding/lib/DoIpBinding/src",
+    visibility = ["//visibility:public"],
+)
+
+cc_library(
+    name = "lib_doip_binding_hdrs_lib",
+    hdrs = glob(["BSW/amsr-vector-fs-doipbinding/lib/DoIpBinding/include/**/*.h"]),
+    strip_include_prefix = "BSW/amsr-vector-fs-doipbinding/lib/DoIpBinding/include",
     visibility = ["//visibility:public"],
 )
 
@@ -491,4 +498,93 @@ cc_library(
     hdrs = glob(["BSW/amsr-vector-fs-aradiag/lib/AraDiag/include/**/*.h"]),
     strip_include_prefix = "BSW/amsr-vector-fs-aradiag/lib/AraDiag/include",
     visibility = ["//visibility:public"],
+)
+
+##########################################################################
+# These are file groups and libraries required for SWUC
+##########################################################################
+
+filegroup(
+    name = "amsr_vector_fs_swupdateclient_main",
+    srcs = glob(["BSW/amsr-vector-fs-swupdateclient/app/swupdateclient/src/**/*.cpp"]),
+    visibility = ["//visibility:public"],
+)
+
+cc_library(
+    name = "amsr_swupdate_common",
+    srcs = glob(["BSW/amsr-vector-fs-swupdateclient/lib/common/src/**"]),
+    hdrs = glob(["BSW/amsr-vector-fs-swupdateclient/lib/common/include/**"]),
+    copts = [
+        "-std=c++14",
+    ],
+    linkstatic = 1,
+    strip_include_prefix = "BSW/amsr-vector-fs-swupdateclient/lib/common/include",
+    visibility = ["//visibility:public"],
+    deps = [
+        "@minerva_mpu_adaptive//bsw:amsr_vector_fs_applicationbase",
+        "@minerva_mpu_adaptive//bsw:amsr_vector_fs_diagnosticrpc",
+        "@minerva_mpu_adaptive//bsw:amsr_vector_fs_diagnosticrpccombinding",
+        "@minerva_mpu_adaptive//bsw:amsr_vector_fs_diagnosticutility",
+        "@minerva_mpu_adaptive//bsw:amsr_vector_fs_libiostream",
+        "@minerva_mpu_adaptive//bsw:amsr_vector_fs_libosabstraction",
+        "@minerva_mpu_adaptive//bsw:amsr_vector_fs_libvac",
+        "@minerva_mpu_adaptive//bsw:amsr_vector_fs_log_api",
+        "@minerva_mpu_adaptive//bsw:amsr_vector_fs_logutility",
+        "@minerva_mpu_adaptive//bsw:amsr_vector_fs_per_libpersistency",
+        "@minerva_mpu_adaptive//bsw:amsr_vector_fs_thread",
+        "@minerva_mpu_adaptive//bsw:amsr_vector_fs_udstransport",
+    ],
+)
+
+cc_library(
+    name = "amsr_swupdate_interface",
+    srcs = glob(["BSW/amsr-vector-fs-swupdateclient/lib/update_interface/src/**"]),
+    hdrs = glob(["BSW/amsr-vector-fs-swupdateclient/lib/update_interface/include/**"]),
+    copts = [
+        "-std=c++14",
+    ],
+    linkstatic = 1,
+    strip_include_prefix = "BSW/amsr-vector-fs-swupdateclient/lib/update_interface/include",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":amsr_swupdate_common",
+        "@minerva_mpu_adaptive//application/amsr_vector_fs_swupdateclient:modeldatatypes_hdrs_lib",
+        "@minerva_mpu_adaptive//application/amsr_vector_fs_swupdateclient:persistency_config_hdrs_lib",
+    ],
+)
+
+cc_library(
+    name = "amsr_swupdate_ucm_client",
+    srcs = glob(["BSW/amsr-vector-fs-swupdateclient/lib/ucm_client/src/**"]),
+    hdrs = glob(["BSW/amsr-vector-fs-swupdateclient/lib/ucm_client/include/**"]),
+    copts = [
+        "-std=c++14",
+    ],
+    linkstatic = 1,
+    strip_include_prefix = "BSW/amsr-vector-fs-swupdateclient/lib/ucm_client/include",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":amsr_swupdate_common",
+        ":amsr_swupdate_interface",
+    ],
+)
+
+cc_library(
+    name = "amsr_swupdate_diag_core",
+    srcs = glob(["BSW/amsr-vector-fs-swupdateclient/lib/diag_core/src/**"]),
+    hdrs = glob(["BSW/amsr-vector-fs-swupdateclient/lib/diag_core/include/**"]),
+    copts = [
+        "-std=c++14",
+    ],
+    linkstatic = 1,
+    strip_include_prefix = "BSW/amsr-vector-fs-swupdateclient/lib/diag_core/include",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":amsr_swupdate_common",
+        ":amsr_swupdate_ucm_client",
+        ":ara_diag_hdrs_lib",
+        ":ara_diag_src_hdrs_lib",
+        "@minerva_mpu_adaptive//application/amsr_vector_fs_swupdateclient:diag_hdrs_lib",
+        "@minerva_mpu_adaptive//application/amsr_vector_fs_swupdateclient:socal_hdrs_lib",
+    ],
 )

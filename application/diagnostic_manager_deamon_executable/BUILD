@@ -402,7 +402,7 @@ cc_binary(
         "@amsr_xavier//:diag_daemon_impl",
         "@amsr_xavier//:diag_deamon_rpc_hdrs_lib",
         "@amsr_xavier//:diag_deamon_rpc_src_hdrs_lib",
-        "@amsr_xavier//:lib_doip_binding_hdrs_lib",
+        "@amsr_xavier//:lib_doip_binding_src_hdrs_lib",
         "@minerva_mpu_adaptive//bsw:amsr_vector_fs_doipbinding",
     ],
 )
