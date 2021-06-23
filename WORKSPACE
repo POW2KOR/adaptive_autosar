@@ -104,7 +104,7 @@ load("@bazel_tools//tools/build_defs/repo:git.bzl", "new_git_repository")
 new_git_repository(
     name = "amsr_xavier",  # bazel will create under its own cache folder in the external folder package with the specified name(e.g. external/amsr_xavier)
     build_file = "@//bsw:amsr_xavier.BUILD",
-    commit = "50141a6b9bb256c10ded2eff41f2d13eed4ac97a",
+    commit = "f950c89d4edf138add8bdee80c58085cfc9900e4",
     remote = "ssh://git@git.swf.daimler.com:7999/adasdai/amsr_xavier.git",
     shallow_since = "1623147756 +0000",
 )
