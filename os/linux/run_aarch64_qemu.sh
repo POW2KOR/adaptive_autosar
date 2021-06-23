@@ -102,6 +102,12 @@ virt-tar-in -a adaptive_overlay.ext4.qcow2 $PATH_TO_ADAPTIVE_TAR /
 
 printf "Booting...\n"
 
+# The following command set up several virtual network interfaces for QEMU, but
+# it also has the following port-forwarding to guest:
+# - host port 10022 to guest port 22 on IP 10.21.17.98 for SSH
+# - host port 13490 to guest port 49361 on IP 10.21.17.98 for remote DLT
+# - host port 10023 to guest port 23 on IP 10.21.17.98 for telnet
+
 qemu-system-aarch64 \
 -nographic \
 -machine virt \
@@ -118,7 +124,6 @@ qemu-system-aarch64 \
 -device virtio-net-pci,netdev=net20 \
 -netdev user,id=net20,net=10.20.17.0/16 \
 -device virtio-net-pci,netdev=net21 \
-/* host port-forwarding to guest - 10022 to 22 for ssh, 49361 to 13490 for DLT, 10023 to 23 for telnet */
 -netdev user,id=net21,net=10.21.17.0/24,hostfwd=tcp::13490-10.21.17.98:49361,hostfwd=tcp::10022-10.21.17.98:22,hostfwd=tcp::10023-10.21.17.98:23 \
 -device virtio-net-pci,netdev=net127 \
 -netdev user,id=net127,net=10.127.17.0/16 \
