@@ -9,7 +9,29 @@ Module will follow same structure as that of IDC5:
 
 Layer is nothing but the `autocode_module`.
 
-## Naming Conventions
-1. Use ONLY lowercase letters with underscore for module name.
-
-_Note: As per IDC5 architecture, layer name mostly contains only one word (without any underscore)._
+# Autocode Module Folder Structure
+```
+autocode_module
+└── sub_module
+    └── sub_module_model
+        ├── model
+        │   ├── frame
+        │   │   └── MODEL.slx
+        │   ├── modules
+        │   │   └── MODEL_SUB_NAME_SHELL.slx
+        ├── para
+        │   ├── MODEL_init.m
+        ├── testsetup
+        │   ├── tpttesting
+        │   │   ├── MODEL_SUB_NAME_SHELL
+        │   │   │   ├── MODEL_SUB_NAME_SHELL.tpt
+        │   │   │   ├── MODEL_SUB_NAME_SHELL_TPT_testframe.slx
+        │   │   │   └── MODEL_SUB_NAME_SHELL_TPT_tpt_io.m
+        ├── toolchain
+        │   ├── datadictionary
+        │   │   └── MODEL.dd
+        │   └── MODEL_prj_info.m
+        ├── .a2l file
+        └── auto-generated C++ files
+```
+_Please follow the aforementioned folder strucutre._
