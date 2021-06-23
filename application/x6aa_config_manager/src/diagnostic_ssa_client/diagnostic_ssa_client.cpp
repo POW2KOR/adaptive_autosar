@@ -32,7 +32,8 @@ ara::core::InstanceSpecifier const DiagnosticSsaClient::ssa_variant_coding_insta
     "X6AA_Cnfg_Mngr_Executable/"
     "X6AA_Cnfg_Mngr_ExecutableRootSwc/"
     "AdaptiveRequiredPortType108"_sv};
-ara::log::Logger& DiagnosticSsaClient::GetLogger()
+
+ara::log::Logger& DiagnosticSsaClient::GetLoggerForSsaClient()
 {
     static ara::log::Logger& logger{ara::log::CreateLogger("SSAP", "SSA Proxy")};
     return logger;
@@ -51,25 +52,26 @@ bool DiagnosticSsaClient::FindService()
     bool retval = true;
     int counter = 0;
     uint32_t max_try_count
-        = 10000; /* one while loop count is of nearly 10ms and timeout would be 100s (1000*10ms)*/
+        = 1000; /* one while loop count is of nearly 100ms and timeout would be 100s (1000*100ms)*/
 
     /* Start searching for variant coding services offered by SSA module */
-    GetLogger().LogInfo() << "Start searching for variant coding services offered by SSA module";
+    GetLoggerForSsaClient().LogInfo() << "Start searching for variant coding services offered by SSA module";
     ara::com::FindServiceHandle find_service_handle
         = services::ns_si_dummyswc_2_to_cnfg_mngr::proxy::SI_X6AA_Dummy_B2_Service_ReservedProxy::
-            StartFindService(FindServiceHandler, ssa_variant_coding_instance_specifier);
+            StartFindService(FindSsaServiceHandler, ssa_variant_coding_instance_specifier);
 
     /* Wait until variant coding services offered by SSA module is found */
     while (!ssa_variant_coding_service_found.load()) {
         std::this_thread::sleep_for(std::chrono::milliseconds(100));
 
-        if (counter % 10 == 0) {
-            GetLogger().LogInfo()
+        if (counter % 100 == 0) {
+            GetLoggerForSsaClient().LogInfo()
                 << "Still searching for variant coding services offered by SSA module";
         }
         if (max_try_count == 0) {
-            GetLogger().LogFatal() << "Failed to find variant coding services offered by SSA module "
-                                     "-- timeout occured";
+            GetLoggerForSsaClient().LogFatal()
+                << "Failed to find variant coding services offered by SSA module "
+                   "-- timeout occured";
             retval = false;
             break;
         }
@@ -80,7 +82,7 @@ bool DiagnosticSsaClient::FindService()
     /* Stop searching for further services */
     services::ns_si_dummyswc_2_to_cnfg_mngr::proxy::SI_X6AA_Dummy_B2_Service_ReservedProxy::
         StopFindService(find_service_handle);
-    GetLogger().LogInfo() << "Stopped searching for variant coding services offered by SSA module";
+    GetLoggerForSsaClient().LogInfo() << "Stopped searching for variant coding services offered by SSA module";
 
     return retval;
 }
@@ -127,24 +129,24 @@ bool DiagnosticSsaClient::UnsubscribeFromEvents()
     return retval;
 }
 
-void DiagnosticSsaClient::FindServiceHandler(
+void DiagnosticSsaClient::FindSsaServiceHandler(
     ara::com::ServiceHandleContainer<services::ns_si_dummyswc_2_to_cnfg_mngr::proxy::
                                          SI_X6AA_Dummy_B2_Service_ReservedProxy::HandleType>
         ssa_variant_coding_services)
 {
     /* If there was no service found */
     if (ssa_variant_coding_services.size() == 0) {
-        GetLogger().LogInfo()
+        GetLoggerForSsaClient().LogInfo()
             << "No instance of variant coding services offered by SSA module found";
         return;
     } else if (ssa_variant_coding_services.size() == 1) {
         /* If there is exactly one service found */
-        GetLogger().LogInfo()
+        GetLoggerForSsaClient().LogInfo()
             << "Found one instance of variant coding services offered by SSA module";
     } else {
         /* If there are multiple services found */
-        GetLogger().LogInfo() << "Found multiple instances of variant coding services offered by "
-                                "SSA module, use the first one";
+        GetLoggerForSsaClient().LogInfo() << "Found multiple instances of variant coding services offered by "
+                                 "SSA module, use the first one";
     }
     /* Get proxy instance */
     ssa_variant_coding_service_proxy = std::make_shared<
@@ -157,17 +159,17 @@ void DiagnosticSsaClient::FindServiceHandler(
 
 void DiagnosticSsaClient::EventHandlerForSsaVariantCodingData()
 {
-    GetLogger().LogInfo() << "EventHandlerForSsaVariantCodingData got called.";
+    GetLoggerForSsaClient().LogInfo() << "EventHandlerForSsaVariantCodingData got called.";
 
     /* If there are events available */
     if (ssa_variant_coding_service_proxy->Ev_CalculationResult.Update()) {
         auto samples = ssa_variant_coding_service_proxy->Ev_CalculationResult.GetCachedSamples();
 
-        GetLogger().LogInfo() << "Received " << samples.size() << " samples";
+        GetLoggerForSsaClient().LogInfo() << "Received " << samples.size() << " samples";
 
         for (auto& sample : samples) {
-            GetLogger().LogInfo() << "Variant Coding: Received event with: "
-                                 << "Ev_CalculationResult        = '" << (*sample) << "' ";
+            GetLoggerForSsaClient().LogInfo() << "Variant Coding: Received event with: "
+                                  << "Ev_CalculationResult        = '" << (*sample) << "' ";
         }
     }
 }

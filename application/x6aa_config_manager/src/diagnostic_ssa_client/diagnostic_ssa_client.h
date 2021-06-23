@@ -69,7 +69,7 @@ private:
      *
      * \param[in]  ssa_variant_coding_services  Container of found service handles.
      ******************************************************************************/
-    static void FindServiceHandler(
+    static void FindSsaServiceHandler(
         ara::com::ServiceHandleContainer<services::ns_si_dummyswc_2_to_cnfg_mngr::proxy::
                                              SI_X6AA_Dummy_B2_Service_ReservedProxy::HandleType>
             ssa_variant_coding_services);
@@ -82,7 +82,7 @@ private:
     /**
      * \brief Holds the logging context
      */
-    static ara::log::Logger& GetLogger();
+    static ara::log::Logger& GetLoggerForSsaClient();
 
     /** Flag that a service has been found */
     static std::atomic<bool> ssa_variant_coding_service_found;

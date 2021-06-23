@@ -57,10 +57,10 @@ bool VariantCodingConsumer::FindService()
         std::this_thread::sleep_for(std::chrono::milliseconds(100));
 
         if (counter % 10 == 0) {
-            GetLogger().LogInfo() << "Still searching for VariantCodingService";
+            GetLogger().LogInfo() << "Still searching for VariantCodingService offered by config manager";
         }
         if (max_try_count == 0) {
-            GetLogger().LogFatal() << "Failed to find VariantCodingService -- timeout occured";
+            GetLogger().LogFatal() << "Failed to find VariantCodingService offered by config manager -- timeout occured";
             retval = false;
             break;
         }
@@ -71,7 +71,7 @@ bool VariantCodingConsumer::FindService()
     /* Stop searching for further services */
     services::ns_si_cnfg_mngr_to_dummyswc::proxy::SI_X6AA_Cnfg_Mngr_Service_ReservedProxy::
         StopFindService(find_service_handle);
-    GetLogger().LogInfo() << "Stopped searching for VariantCodingService";
+    GetLogger().LogInfo() << "Stopped searching for VariantCodingService offered by config manager";
 
     return retval;
 }
@@ -125,11 +125,11 @@ void VariantCodingConsumer::FindServiceHandler(
 {
     /* If there was no service found */
     if (variant_coding_services.size() == 0) {
-        GetLogger().LogInfo() << "No VariantCodingService instance found";
+        GetLogger().LogInfo() << "Didn't find Instance for VariantCodingService offered by config manager";
         return;
     } else if (variant_coding_services.size() == 1) {
         /* If there is exactly one service found */
-        GetLogger().LogInfo() << "Found one VariantCodingService instance";
+        GetLogger().LogInfo() << "Found one VariantCodingService instance offered by config manager";
     } else {
         /* If there are multiple services found */
         GetLogger().LogInfo()
@@ -173,7 +173,7 @@ void VariantCodingConsumer::VechicleInformation0400VcEventHandler()
 
 ara::log::Logger& VariantCodingConsumer::GetLogger()
 {
-    static ara::log::Logger& logger{ara::log::CreateLogger("VcCnsm", "Variant Coding Consumer")};
+    static ara::log::Logger& logger{ara::log::CreateLogger("APP", "Variant Coding Consumer")};
     return logger;
 }
 
