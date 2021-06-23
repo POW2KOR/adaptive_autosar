@@ -5,6 +5,7 @@ index 4bdba07..bde8332 100644
 @@ -422,7 +422,10 @@ def cc_external_rule_impl(ctx, attrs):
          lib_dir_name = attrs.out_lib_dir,
          include_dir_name = attrs.out_include_dir,
+         include_dir_names = attrs.out_include_dirs,
      )
 -    output_groups = _declare_output_groups(installdir_copy.file, outputs.out_binary_files)
 +

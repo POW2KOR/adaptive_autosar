@@ -145,7 +145,7 @@ new_git_repository(
 new_git_repository(
     name = "collectd_mbient",  # bazel will create under its own cache folder in the external folder package with the specified name(e.g. external/collectd_mbient)
     build_file = "@//application/x6aa_resource_monitor:collectd_mbient.BUILD",
-    commit = "555ab1622f73d31d567cb7b12106f7464a480248",  # the commit ID that bazel will use to fetch the external repository
+    commit = "d2a586d60159d4fef372557c41893daa0239ab15",  # the commit ID that bazel will use to fetch the external repository
     init_submodules = True,
     patch_args = [
         "-p1",

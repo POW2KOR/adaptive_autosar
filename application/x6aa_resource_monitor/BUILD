@@ -75,6 +75,7 @@ configure_make(
     deps = [
         "//bsw:amsr_vector_fs_applicationbase",
         "//bsw:amsr_vector_fs_log_api",
+        "//bsw:amsr_vector_fs_libiostream",
     ],
 )
 
