@@ -3,10 +3,12 @@ package(default_visibility = ["//visibility:public"])
 cc_library(
     name = "application_base",
     srcs = [
+        "activation_manager.cpp",
         "application_base.cpp",
         "error_domain.cpp",
     ],
     hdrs = [
+        "activation_manager.h",
         "application_base.h",
         "error_domain.h",
     ],

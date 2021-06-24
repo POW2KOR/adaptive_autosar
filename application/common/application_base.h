@@ -22,6 +22,8 @@
 #ifndef APPLICATION_BASE_H_
 #define APPLICATION_BASE_H_
 
+#include <csignal>
+
 /**********************************************************************************************************************
  *  INCLUDES
  *********************************************************************************************************************/
@@ -29,6 +31,8 @@
 #include "ara/log/logging.h"
 #include "osabstraction/process/process.h"
 #include "vac/container/string_literals.h"
+
+#include "activation_manager.h"
 
 /*!
  * \brief Namespace for the example application.
@@ -44,10 +48,13 @@ class ApplicationBase {
   /*!
    * \brief Constructor of class ApplicationBase.
    *
-   * \param[in]  name  Name of the application.
-   *                   It is also used as logger and thread names.
+   * \param[in] name        Name of the application.
+   *                        It is also used as logger and thread names.
+   * \param[in] cycle_time, cycle time in milliseconds passed to the
+   *                        activation manager, used during run phase.
+   *                        Default: 500 msec.
    */
-  ApplicationBase(std::string name = "Default app name");
+  ApplicationBase(std::string name = "Default app name", int cycle_time = 500);
 
   /*!
    * \brief Deleted copy constructor
@@ -144,6 +151,17 @@ class ApplicationBase {
    * \brief Name of the application.
    */
   std::string name_;
+
+  /*!
+   * \brief Cycle time for the activation manager
+   */
+  int cycle_time_;
+
+  /*!
+   * \brief Activation manager instance.
+   */
+  // TODO: Enable class member
+  //std::shared_ptr<ActivationManagerBase> am_;
 
 };
 

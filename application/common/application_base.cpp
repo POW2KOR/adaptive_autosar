@@ -25,7 +25,6 @@
  *********************************************************************************************************************/
 #include "application_base.h"
 
-#include <csignal>
 #include <cstdio>
 #include <string>
 #include <thread>
@@ -41,7 +40,8 @@ using vac::container::operator""_sv;
 /*!
  * \brief Initialize application.
  */
-ApplicationBase::ApplicationBase(std::string name) : name_(name) {
+ApplicationBase::ApplicationBase(std::string name, int cycle_time)
+  : name_(name), cycle_time_(cycle_time) {
 
   log_.LogInfo() << name_ << " is initializing...";
 
@@ -127,6 +127,14 @@ std::int8_t ApplicationBase::Run() {
     this->ReportApplicationState(ara::exec::ApplicationState::kRunning);
 
     log_.LogInfo() << name_ << " application started";
+
+    // TODO: Make the activation manager a class member
+    std::shared_ptr<ActivationManagerBase> am_(new ActivationManagerTimer(std::chrono::milliseconds(cycle_time_)));
+
+    while (!exit_requested_) {
+      am_->wait();
+      log_.LogDebug() << "Running in cycle " << am_->getCycle();
+    }
 
   } else {
     ret = EXIT_FAILURE;
