@@ -12,7 +12,7 @@
  *********************************************************************************************************************/
 #include "vc_cnfg_mngr_server.h"
 
-#include "x6aa_cnfg_mngr_executable_error_domain.h"
+#include "x6aa_config_manager_error_domain.h"
 
 namespace application {
 
@@ -23,8 +23,7 @@ using vac::container::operator""_sv;
  */
 VcCnfgMngrServer::VcCnfgMngrServer()
 {
-    log_.LogInfo()
-        << "siX6aaCnfgMngrServiceReservedSkeleton Skeleton demo is initializing...";
+    log_.LogInfo() << "siX6aaCnfgMngrServiceReservedSkeleton skeleton is initializing...";
 
     this->StartSignalHandlerThread().InspectError([this](ara::core::ErrorCode const& error) {
         has_initialization_failed_ = true;
@@ -55,8 +54,7 @@ VcCnfgMngrServer::~VcCnfgMngrServer()
     siX6aaCnfgMngrServiceReservedSkeleton->StopOfferService();
     siX6aaCnfgMngrServiceReservedSkeleton.reset();
 
-    log_.LogInfo()
-        << "siX6aaCnfgMngrServiceReservedSkeleton Skeleton demo shutdown initiated.";
+    log_.LogInfo() << "siX6aaCnfgMngrServiceReservedSkeleton Skeleton shutdown initialized.";
 
     if (signal_handler_thread.native_handle() != 0) {
         /* #10 Check if exit was requested by sending SIGTERM or SIGINT. */
@@ -64,7 +62,7 @@ VcCnfgMngrServer::~VcCnfgMngrServer()
             /* #15 Terminate the signal handler thread to shutdown. */
             if (0
                 != pthread_kill(
-                       static_cast<pthread_t>(signal_handler_thread.native_handle()), SIGTERM)) {
+                    static_cast<pthread_t>(signal_handler_thread.native_handle()), SIGTERM)) {
                 log_.LogError() << "Invalid signal!";
             }
         } else {
@@ -79,8 +77,7 @@ VcCnfgMngrServer::~VcCnfgMngrServer()
         signal_handler_thread.join();
     }
 
-    log_.LogInfo()
-        << "siX6aaCnfgMngrServiceReservedSkeleton Skeleton demo finished shutdown.";
+    log_.LogInfo() << "siX6aaCnfgMngrServiceReservedSkeleton skeleton finished shutdown.";
 }
 
 /*!
@@ -113,8 +110,7 @@ ara::core::Result<osabstraction::process::ProcessId> VcCnfgMngrServer::StartSign
         .AndThen([]() -> R { return R{osabstraction::process::GetProcessId()}; })
         .OrElse([thread_name, this](ara::core::ErrorCode) -> R {
             log_.LogFatal() << "Naming of thread '" << thread_name << "' failed";
-            return R::FromError(
-                X6AA_Cnfg_Mngr_ExecutableErrc::kThreadCreationFailed, "Naming failed.");
+            return R::FromError(X6aa_Config_Manager_Errc::kThreadCreationFailed, "Naming failed.");
         });
 }
 
@@ -125,19 +121,39 @@ std::int8_t VcCnfgMngrServer::Run()
     if (!has_initialization_failed_) {
         this->ReportApplicationState(ara::exec::ApplicationState::kRunning);
 
-        log_.LogInfo()
-            << "siX6aaCnfgMngrServiceReservedSkeleton skeleton demo application started";
+        log_.LogInfo() << "siX6aaCnfgMngrServiceReservedSkeleton skeleton application started";
+        // send out variant coding data
 
         while (!exit_requested) {
 
             std::this_thread::sleep_for(std::chrono::milliseconds(5000));
 
-            siX6aaCnfgMngrServiceReservedSkeleton->Ev_activateSarStorage0131VcEvent.Send(
-                memAccessor.ReadActivateSarStorage0131VcEventData());
-            siX6aaCnfgMngrServiceReservedSkeleton->Ev_configureSarTriggerEvents0136VcEvent
-                .Send(memAccessor.ReadConfigureSarTriggerEvents0136VcEventData());
-            siX6aaCnfgMngrServiceReservedSkeleton->Ev_vechicleInformation0400VcEvent.Send(
-                memAccessor.ReadVechicleInformation0400VcEventData());
+            ara::core::Result<activateSarStorage0131VcEventDataType> resultFor131Vc{
+                memAccessor.ReadDataForActivateSarStorage0131VcEvent()};
+            ara::core::Result<configureSarTriggerEvents0136VcEventDataType> resultFor136Vc{
+                memAccessor.ReadDataForConfigureSarTriggerEvents0136VcEvent()};
+            ara::core::Result<vechicleInformation0400VcEventDataType> resultFor400Vc{
+                memAccessor.ReadDataForVechicleInformation0400VcEvent()};
+
+            if (resultFor131Vc.HasValue()) {
+                siX6aaCnfgMngrServiceReservedSkeleton->Ev_activateSarStorage0131VcEvent.Send(
+                    resultFor131Vc.Value());
+            } else {
+                log_.LogError() << resultFor131Vc.Error().Message();
+            }
+            if (resultFor136Vc.HasValue()) {
+                siX6aaCnfgMngrServiceReservedSkeleton->Ev_configureSarTriggerEvents0136VcEvent.Send(
+                    resultFor136Vc.Value());
+            } else {
+                log_.LogError()
+                    << resultFor136Vc.Error().Message();
+            }
+            if (resultFor400Vc.HasValue()) {
+                siX6aaCnfgMngrServiceReservedSkeleton->Ev_vechicleInformation0400VcEvent.Send(
+                    resultFor400Vc.Value());
+            } else {
+                log_.LogError() << resultFor400Vc.Error().Message();
+            }
         }
 
     } else {
@@ -165,7 +181,7 @@ void VcCnfgMngrServer::SignalHandlerThread()
     /* #10 empty the set of signals. */
     if (0 != sigemptyset(&signal_set)) {
         log_.LogFatal([](ara::log::LogStream& s) {
-            s << "siX6aaCnfgMngrServiceReservedSkeleton skeleton demo could not empty signal "
+            s << "siX6aaCnfgMngrServiceReservedSkeleton skeleton could not empty signal "
                  "set.";
         });
         ara::core::Abort("Empty signal set failed.");
@@ -173,7 +189,7 @@ void VcCnfgMngrServer::SignalHandlerThread()
     /* #20 add SIGTERM to signal set. */
     if (0 != sigaddset(&signal_set, SIGTERM)) {
         log_.LogFatal([](ara::log::LogStream& s) {
-            s << "siX6aaCnfgMngrServiceReservedSkeleton skeleton demo cannot add signal to "
+            s << "siX6aaCnfgMngrServiceReservedSkeleton skeleton cannot add signal to "
                  "signalset: SIGTERM";
         });
         ara::core::Abort("Adding SIGTERM failed.");
@@ -181,7 +197,7 @@ void VcCnfgMngrServer::SignalHandlerThread()
     /* #21 add SIGINT to signal set. */
     if (0 != sigaddset(&signal_set, SIGINT)) {
         log_.LogFatal([](ara::log::LogStream& s) {
-            s << "siX6aaCnfgMngrServiceReservedSkeleton skeleton demo cannot add signal to "
+            s << "siX6aaCnfgMngrServiceReservedSkeleton skeleton cannot add signal to "
                  "signalset: SIGINT";
         });
         ara::core::Abort("Adding SIGINT failed.");
@@ -193,19 +209,19 @@ void VcCnfgMngrServer::SignalHandlerThread()
     do {
         if (0 != sigwait(&signal_set, &sig)) {
             log_.LogFatal([](ara::log::LogStream& s) {
-                s << "siX6aaCnfgMngrServiceReservedSkeleton skeleton demo called sigwait() "
+                s << "siX6aaCnfgMngrServiceReservedSkeleton skeleton called sigwait() "
                      "with invalid signalset";
             });
             ara::core::Abort("Waiting for SIGTERM or SIGINT failed.");
         }
         log_.LogInfo([&sig](ara::log::LogStream& s) {
-            s << "siX6aaCnfgMngrServiceReservedSkeleton skeleton demo received signal: "
-              << sig << ".";
+            s << "siX6aaCnfgMngrServiceReservedSkeleton skeleton received signal: " << sig
+              << ".";
         });
 
         if ((sig == SIGTERM) || (sig == SIGINT)) {
             log_.LogInfo([](ara::log::LogStream& s) {
-                s << "siX6aaCnfgMngrServiceReservedSkeleton skeleton demo received SIGTERM "
+                s << "siX6aaCnfgMngrServiceReservedSkeleton skeleton received SIGTERM "
                      "or SIGINT, requesting application shutdown.";
             });
             if (!exit_requested) {
@@ -244,19 +260,19 @@ void VcCnfgMngrServer::ReportApplicationState(ara::exec::ApplicationState applic
 
     /* #20 check if invalid application state was detected. */
     if (!error_occurred) {
-        log_.LogDebug() << "siX6aaCnfgMngrServiceReservedSkeleton skeleton demo is reporting "
+        log_.LogDebug() << "siX6aaCnfgMngrServiceReservedSkeleton skeleton is reporting "
                            "Application state "
                         << application_state_string;
 
         /* #30 send application state */
         if (application_client.ReportApplicationState(application_state)
             == ara::exec::ApplicationReturnType::kSuccess) {
-            log_.LogDebug() << "siX6aaCnfgMngrServiceReservedSkeleton skeleton demo reported "
+            log_.LogDebug() << "siX6aaCnfgMngrServiceReservedSkeleton skeleton reported "
                                "Application state "
                             << application_state_string << " successfully";
         } else {
             /* #35 application state could not be set. */
-            log_.LogError() << "siX6aaCnfgMngrServiceReservedSkeleton skeleton demo could "
+            log_.LogError() << "siX6aaCnfgMngrServiceReservedSkeleton skeleton could "
                                "not report the Application state "
                             << application_state_string;
         }
