@@ -28,6 +28,8 @@
  *********************************************************************************************************************/
 #include "application/common/application_base.h"
 
+#include "si_speed_limiter.h"
+
 /*!
  * \brief Namespace for the example application.
  */
@@ -43,6 +45,23 @@ class RovApplication : public ApplicationBase {
    * \brief Constructor of class ROV Application.
    */
    RovApplication();
+
+  /*!
+   * \brief Constructor of class ROV Application.
+   */
+   ~RovApplication() override;
+
+  /*!
+   * \brief Lifecycle method for run mode.
+   * \return Error (Exit) code of application.
+   */
+   virtual std::int8_t Run() override;
+
+ private:
+   /*!
+   * \brief SI SpeedLimiter service instance
+   */
+   idc6::rovservices::SISpeedlimiter si_speedlimiter_;
 };
 
 }  // namespace application

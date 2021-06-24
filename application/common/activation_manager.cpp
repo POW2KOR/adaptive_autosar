@@ -153,4 +153,3 @@ void ActivationManagerTimer::wait() {
 uint64_t ActivationManagerTimer::getCycle() {
   return cycle_count_;
 }
-
