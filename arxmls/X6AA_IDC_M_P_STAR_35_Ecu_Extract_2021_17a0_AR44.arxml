@@ -13629,6 +13629,15 @@ Use 02_False_True instead.</L-2>
 				<!-- /Machine/IDC6_M_P1_XAVIER -->
 				<MACHINE UUID="O356e0a3917978d702b737866xO356e0a3917978d702b73897600">
 					<SHORT-NAME>IDC6_M_P1_XAVIER</SHORT-NAME>
+					<ADMIN-DATA>
+						<SDGS>
+							<SDG GID="DvMex:MachineExtensions">
+								<SDG GID="DvMex:EcuId">
+									<SD>X6AA</SD>
+								</SDG>
+							</SDG>
+						</SDGS>
+					</ADMIN-DATA>
 					<FUNCTION-GROUPS>
 						<!-- /Machine/IDC6_M_P1_XAVIER/IDC6_M_ModeDeclarationGroup -->
 						<MODE-DECLARATION-GROUP-PROTOTYPE UUID="O356e0a3917978d702b7389bdXO356e0a3917978d702b7389bc00">
@@ -13642,6 +13651,43 @@ Use 02_False_True instead.</L-2>
 						</MODE-DECLARATION-GROUP-PROTOTYPE>
 					</FUNCTION-GROUPS>
 					<MACHINE-DESIGN-REF DEST="MACHINE-DESIGN">/Topology/HardwareComponents/IDC_Adpative</MACHINE-DESIGN-REF>
+					<MODULE-INSTANTIATIONS>
+						<LOG-AND-TRACE-INSTANTIATION>
+							<SHORT-NAME>LogAndTraceInstantiation</SHORT-NAME>
+							<ADMIN-DATA>
+								<SDGS>
+									<SDG GID="DvMex:LogAndTraceInstantiationExtensions">
+										<SDG GID="DvMex:IpcPort">
+											<SD>33</SD>
+										</SDG>
+										<SDG GID="DvMex:OutputConfiguration">
+											<SDG GID="DvMex:OutputConfigurationClass">
+												<SDG-CAPTION>
+													<SHORT-NAME>tcp0</SHORT-NAME>
+												</SDG-CAPTION>
+												<SDG GID="DvMex:MessageBufferSize">
+													<SD>1000</SD>
+												</SDG>
+												<SDG GID="DvMex:BufferStrategy">
+													<SD>DROP-NEW</SD>
+												</SDG>
+												<SDG GID="DvMex:NetworkConfiguration">
+													<SDX-REF DEST="ETHERNET-NETWORK-CONFIGURATION">/Machine/IDC6_M_P1_XAVIER/LogAndTraceInstantiation/EthernetNetworkConfiguration</SDX-REF>
+												</SDG>
+											</SDG>
+										</SDG>
+									</SDG>
+								</SDGS>
+							</ADMIN-DATA>
+							<NETWORK-CONFIGURATIONS>
+								<ETHERNET-NETWORK-CONFIGURATION>
+									<SHORT-NAME>EthernetNetworkConfiguration</SHORT-NAME>
+									<COMMUNICATION-CONNECTOR-REF DEST="ETHERNET-COMMUNICATION-CONNECTOR">/Topology/HardwareComponents/IDC_Adpative/IDC_M_P_MAIN_21</COMMUNICATION-CONNECTOR-REF>
+									<TCP-PORT>49361</TCP-PORT>
+								</ETHERNET-NETWORK-CONFIGURATION>
+							</NETWORK-CONFIGURATIONS>
+						</LOG-AND-TRACE-INSTANTIATION>
+					</MODULE-INSTANTIATIONS>
 				</MACHINE>
 			</ELEMENTS>
 			<AR-PACKAGES>
@@ -18662,6 +18708,21 @@ LONG: PT4_PTCoor4_Pr5_ST3 (degraded)</L-2>
 								<ETHERNET-COMMUNICATION-CONNECTOR UUID="O356e0a3917978d702b7351b9xO356e0a3917978d702b7351d000">
 									<SHORT-NAME>IDC_M_P_MAIN_21</SHORT-NAME>
 									<CATEGORY>WIRED</CATEGORY>
+									<ADMIN-DATA>
+										<SDGS>
+											<SDG GID="DvMex:EthernetCommunicationConnectorExtensions">
+												<SDG GID="DvMex:KeepAlive">
+													<SD>true</SD>
+												</SDG>
+												<SDG GID="DvMex:NoDelay">
+													<SD>false</SD>
+												</SDG>
+												<SDG GID="DvMex:NumConnections">
+													<SD>1</SD>
+												</SDG>
+											</SDG>
+										</SDGS>
+									</ADMIN-DATA>
 									<UNICAST-NETWORK-ENDPOINT-REF DEST="NETWORK-ENDPOINT">/Topology/Clusters/MAIN/MAIN_21/NE_Base_ADAS6</UNICAST-NETWORK-ENDPOINT-REF>
 								</ETHERNET-COMMUNICATION-CONNECTOR>
 							</COMMUNICATION-CONNECTORS>
