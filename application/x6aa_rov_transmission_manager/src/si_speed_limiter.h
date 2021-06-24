@@ -65,9 +65,16 @@ class SISpeedlimiter {
     /*!
      * \brief Get if the service has been found.
      *
-     * \return  true   when service found, false otherwise.
+     * \return true when service found, false otherwise.
      */
     static bool IsServiceFound();
+
+    /*!
+     * \brief Get if it subscribed successfully to the service.
+     *
+     * \return true when subscribed, false otherwise.
+     */
+    static bool IsSubscribed();
 
     /*!
      * \brief Implementation of 'Meth_GetCapabilities' method.

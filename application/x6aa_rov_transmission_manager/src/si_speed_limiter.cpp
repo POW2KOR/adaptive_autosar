@@ -115,6 +115,10 @@ bool SISpeedlimiter::IsServiceFound() {
   return si_speedlimiter_service_found_.load();
 }
 
+bool SISpeedlimiter::IsSubscribed() {
+  return si_speedlimiter_events_subscribed_.load();
+}
+
 ara::core::Future<services::ns_speedlimiter::proxy::methods::Meth_GetCapabilities::
   Output> SISpeedlimiter::Meth_GetCapabilities(void) {
   ara::core::Future<services::ns_speedlimiter::proxy::methods::Meth_GetCapabilities::
@@ -160,7 +164,7 @@ void SISpeedlimiter::FindServiceHandler(
 }
 
 void SISpeedlimiter::Ev_CapabilitiesHandler() {
-  GetLogger().LogDebug() << "Handler got called.";
+  GetLogger().LogDebug() << "Ev_CapabilitiesHandler got called.";
 
   /* If there are events available */
   if (si_speedlimiter_service_proxy_->Ev_Capabilities.Update()) {
@@ -176,7 +180,7 @@ void SISpeedlimiter::Ev_CapabilitiesHandler() {
 }
 
 void SISpeedlimiter::Ev_SpeedLimiterStateHandler() {
-  GetLogger().LogDebug() << "Handler got called.";
+  GetLogger().LogDebug() << "Ev_SpeedLimiterStateHandler got called.";
 
   /* If there are events available */
   if (si_speedlimiter_service_proxy_->Ev_SpeedLimiterState.Update()) {
@@ -186,12 +190,18 @@ void SISpeedlimiter::Ev_SpeedLimiterStateHandler() {
 
     for (auto &sample : samples) {
       GetLogger().LogInfo() << "SI_Speedlimiter service: Received event 'Ev_SpeedLimiterState' with: "
-        << "variable.speed_limit = '" << sample->variable.speed_limit << "' "
-        << "variable.no_speed_limit = '" << sample->variable.no_speed_limit << "' "
-        << "variable.limiter_activity = '" << sample->variable.limiter_activity << "' "
-        << "permanent.speed_limit = '" << sample->permanent.speed_limit << "' "
-        << "permanent.no_speed_limit = '" << sample->permanent.no_speed_limit << "' "
-        << "permanent.limiter_activity = '" << sample->permanent.limiter_activity << "' ";
+        << "var.uni_unique_cat.main = '" << sample->variable.universally_unique_category.main << "' "
+        << "var.uni_unique_cat.sub = '" << sample->variable.universally_unique_category.sub << "' "
+        << "var.uni_unique_cat.sp = '" << sample->variable.universally_unique_category.specific << "' "
+        << "var.speed_limit = '" << sample->variable.speed_limit << "' "
+        << "var.no_speed_limit = '" << sample->variable.no_speed_limit << "' "
+        << "var.limiter_activity = '" << sample->variable.limiter_activity << "' "
+        << "per.uni_unique_cat.main = '" << sample->permanent.universally_unique_category.main << "' "
+        << "per.uni_unique_cat.sub = '" << sample->permanent.universally_unique_category.sub << "' "
+        << "per.uni_unique_cat.sp = '" << sample->permanent.universally_unique_category.specific << "' "
+        << "per.speed_limit = '" << sample->permanent.speed_limit << "' "
+        << "per.no_speed_limit = '" << sample->permanent.no_speed_limit << "' "
+        << "per.limiter_activity = '" << sample->permanent.limiter_activity << "' ";
     }
   }
 }

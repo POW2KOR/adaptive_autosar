@@ -34,10 +34,11 @@ RovApplication::RovApplication() : ApplicationBase("rov_tx_manager") {
 
   /* Find SI SpeedLimiter service */
   log_.LogInfo() << "Start searching for SI_Speedlimiter service";
-  if(si_speedlimiter_.FindService()) {
-    /* Subscribe to SI SpeedLimiter events */
-    si_speedlimiter_.SubscribeToEvents();
-  }
+  si_speedlimiter_.FindService();
+
+  /* Subscribe to SI SpeedLimiter events */
+  si_speedlimiter_.SubscribeToEvents();
+
 }
 
 RovApplication::~RovApplication() {
@@ -85,14 +86,18 @@ std::int8_t RovApplication::Run() {
       log_.LogDebug() << "Running in cycle " << am_->getCycle();
       ara::core::Future<services::ns_speedlimiter::proxy::methods::Meth_GetCapabilities::Output> min_speed_limit;
       /* Verify service has been found */
-      if(si_speedlimiter_.IsServiceFound()) {
+      if(si_speedlimiter_.IsServiceFound() && si_speedlimiter_.IsSubscribed()) {
 
         // TODO write code for methods for SI_SpeedLimiter service
 
       } else {
         /* Keep searching for service without blocking the application */
-        if(si_speedlimiter_.FindService()) {
-          /* Subscribe to SI SpeedLimiter events */
+        if(!si_speedlimiter_.IsServiceFound()) {
+          si_speedlimiter_.FindService();
+        }
+
+        /* Subscribe to SI SpeedLimiter events */
+        if(!si_speedlimiter_.IsSubscribed()) {
           si_speedlimiter_.SubscribeToEvents();
         }
       }
