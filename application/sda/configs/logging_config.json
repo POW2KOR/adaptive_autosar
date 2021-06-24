@@ -1,0 +1,13 @@
+{
+  "name": "self_diag_agent",
+  "description": "AdaptiveApplication to support IDC platform to do self diagnostics",
+  "dlt_id": "SDA",
+  "log_mode": [
+    "kConsole"
+  ],
+  "log_level": "kInfo",
+  "log_dir_path": "tmp",
+  "ipc_port": 33,
+  "reconnection_retry_offset": 0,
+  "msg_buf_size": 1000
+}
