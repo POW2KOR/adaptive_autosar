@@ -30,8 +30,8 @@ minerva_aa_codegen_rule(
 filegroup(
     name = "collectd_extended_sources",
     srcs = [
-        "@collectd_mbient//:all_files",
         ":x6aa_resource_monitor_applicationbase_init_deinit_srcs",
+        "@collectd_mbient//:all_files",
     ],
 )
 
@@ -74,8 +74,8 @@ configure_make(
     ],
     deps = [
         "//bsw:amsr_vector_fs_applicationbase",
-        "//bsw:amsr_vector_fs_log_api",
         "//bsw:amsr_vector_fs_libiostream",
+        "//bsw:amsr_vector_fs_log_api",
     ],
 )
 
