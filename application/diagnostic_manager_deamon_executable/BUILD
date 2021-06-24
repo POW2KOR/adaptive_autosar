@@ -27,27 +27,22 @@ genr_ignore_patterns = [
 
 filegroup(
     name = "logging_config",
-    srcs = ["configs/sda/logging_config.json"],
+    srcs = ["configs/logging_config.json"],
 )
 
 filegroup(
     name = "com_application",
-    srcs = ["configs/sda/com_application.json"],
+    srcs = ["configs/com_application.json"],
 )
 
 filegroup(
     name = "diagnosticmanager_doip_config",
-    srcs = ["configs/sda/diagnosticmanager_doip.json"],
+    srcs = ["configs/diagnosticmanager_doip.json"],
 )
 
 filegroup(
     name = "diagnosticmanager_config",
-    srcs = ["configs/sda/diagnosticmanager.json"],
-)
-
-filegroup(
-    name = "updatemanager_config",
-    srcs = ["configs/sda/updatemanager.json"],
+    srcs = ["configs/diagnosticmanager.json"],
 )
 
 # When we run our file system it runs the DiagnosticManager. It then checks for
@@ -63,7 +58,7 @@ filegroup(
 # our file system, so that DiagnosticManager finds it.
 filegroup(
     name = "diagnostic_manager_nv_data",
-    srcs = ["configs/sda/nv_data"],
+    srcs = ["configs/nv_data"],
 )
 
 minerva_aa_codegen_rule(
