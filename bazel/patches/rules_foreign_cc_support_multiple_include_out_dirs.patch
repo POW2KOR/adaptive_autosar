@@ -94,7 +94,7 @@ index c39661d..9a05845 100644
 --- a/foreign_cc/private/make_script.bzl
 +++ b/foreign_cc/private/make_script.bzl
 @@ -97,6 +97,10 @@ def _define_deps_flags(deps, inputs):
-
+ 
                      dir_name = artifact.gen_dir.basename
                      include_dirs.append("-I$$EXT_BUILD_DEPS$$/{}/{}".format(dir_name, artifact.include_dir_name))
 +
@@ -102,7 +102,7 @@ index c39661d..9a05845 100644
 +                        include_dirs.append("-I$$EXT_BUILD_DEPS$$/{}/{}".format(dir_name, include_dir_name))
 +
                      lib_dirs.append("-L$$EXT_BUILD_DEPS$$/{}/{}".format(dir_name, artifact.lib_dir_name))
-
+ 
      return struct(
 diff --git a/foreign_cc/providers.bzl b/foreign_cc/providers.bzl
 index 695f9a0..73e54bd 100644
