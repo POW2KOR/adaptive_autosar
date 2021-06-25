@@ -198,6 +198,7 @@ lib/libsecpol.so.1
 
 [prefix=lib/dll]
 lib/dll/devnp-e1000.so
+lib/dll/devnp-virtio.so
 
 [prefix=sbin]
 sbin/devc-pty

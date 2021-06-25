@@ -85,15 +85,8 @@
 # http://www.qnx.com/developers/docs/7.0.0/index.html#com.qnx.doc.neutrino.utilities/topic/m/mkifs.html#mkifs__optional
 [-optional]
 
-network-start.sh={
-#!/bin/sh
-io-pkt-v6-hc -de1000
-if_up -p wm0
-# Set IP address
-ifconfig wm0 10.21.17.98
-ifconfig wm0 ip4csum tcp4csum udp4csum tcp6csum-tx udp6csum-tx tso4
-route add default 10.21.17.1
-}
+# Network startup script
+configs/network-start.sh
 
 # Adaptive AUTOSAR startup script
 configs/start_adaptive.sh
