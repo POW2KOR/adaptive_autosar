@@ -124,16 +124,19 @@ std::int8_t VcCnfgMngrServer::Run()
         log_.LogInfo() << "siX6aaCnfgMngrServiceReservedSkeleton skeleton application started";
         // send out variant coding data
 
+        application::VariantCodingApp::SingletonPersistentMemAccessor* memAccessor
+            = application::VariantCodingApp::SingletonPersistentMemAccessor::getInstance();
+
         while (!exit_requested) {
 
             std::this_thread::sleep_for(std::chrono::milliseconds(5000));
 
             ara::core::Result<activateSarStorage0131VcEventDataType> resultFor131Vc{
-                memAccessor.ReadDataForActivateSarStorage0131VcEvent()};
+                memAccessor->ReadDataForActivateSarStorage0131VcEvent()};
             ara::core::Result<configureSarTriggerEvents0136VcEventDataType> resultFor136Vc{
-                memAccessor.ReadDataForConfigureSarTriggerEvents0136VcEvent()};
+                memAccessor->ReadDataForConfigureSarTriggerEvents0136VcEvent()};
             ara::core::Result<vechicleInformation0400VcEventDataType> resultFor400Vc{
-                memAccessor.ReadDataForVechicleInformation0400VcEvent()};
+                memAccessor->ReadDataForVechicleInformation0400VcEvent()};
 
             if (resultFor131Vc.HasValue()) {
                 siX6aaCnfgMngrServiceReservedSkeleton->Ev_activateSarStorage0131VcEvent.Send(
@@ -145,8 +148,7 @@ std::int8_t VcCnfgMngrServer::Run()
                 siX6aaCnfgMngrServiceReservedSkeleton->Ev_configureSarTriggerEvents0136VcEvent.Send(
                     resultFor136Vc.Value());
             } else {
-                log_.LogError()
-                    << resultFor136Vc.Error().Message();
+                log_.LogError() << resultFor136Vc.Error().Message();
             }
             if (resultFor400Vc.HasValue()) {
                 siX6aaCnfgMngrServiceReservedSkeleton->Ev_vechicleInformation0400VcEvent.Send(
@@ -215,8 +217,7 @@ void VcCnfgMngrServer::SignalHandlerThread()
             ara::core::Abort("Waiting for SIGTERM or SIGINT failed.");
         }
         log_.LogInfo([&sig](ara::log::LogStream& s) {
-            s << "siX6aaCnfgMngrServiceReservedSkeleton skeleton received signal: " << sig
-              << ".";
+            s << "siX6aaCnfgMngrServiceReservedSkeleton skeleton received signal: " << sig << ".";
         });
 
         if ((sig == SIGTERM) || (sig == SIGINT)) {

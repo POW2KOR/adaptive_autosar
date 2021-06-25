@@ -26,7 +26,17 @@ namespace VariantCodingApp {
 
 using namespace vac::container::literals; // NOLINT(build/namespace
 
-PersistentMemAccessor::PersistentMemAccessor()
+// Define the static SingletonPersistentMemAccessor pointer
+SingletonPersistentMemAccessor* SingletonPersistentMemAccessor::persistentMemAccessorInstance = nullptr;
+
+SingletonPersistentMemAccessor* SingletonPersistentMemAccessor::getInstance() {
+   if (persistentMemAccessorInstance == nullptr) {
+      persistentMemAccessorInstance = new SingletonPersistentMemAccessor();
+   }
+   return(persistentMemAccessorInstance);
+}
+
+SingletonPersistentMemAccessor::SingletonPersistentMemAccessor()
 {
     ara::core::Result<ara::core::InstanceSpecifier> kvs_instance_specifier
         = ara::core::InstanceSpecifier::MakeInstanceSpecifier(
@@ -51,7 +61,7 @@ PersistentMemAccessor::PersistentMemAccessor()
 }
 
 template<typename dataType>
-ara::core::Result<void> PersistentMemAccessor::StoreVariantCodingData(
+ara::core::Result<void> SingletonPersistentMemAccessor::StoreVariantCodingData(
     const variantCodingKeys key_to_store, dataType data_to_store)
 {
     ara::core::Result<void> write_result{
@@ -89,7 +99,7 @@ ara::core::Result<void> PersistentMemAccessor::StoreVariantCodingData(
     return write_result;
 }
 
-ara::core::Result<void> PersistentMemAccessor::StoreDataForConfigureSarTriggerEvents0136VcEvent(
+ara::core::Result<void> SingletonPersistentMemAccessor::StoreDataForConfigureSarTriggerEvents0136VcEvent(
     configureSarTriggerEvents0136VcEventDataType& configureSarTriggerEvents0136VcEventData)
 {
     ara::core::Result<void> result{X6aa_Config_Manager_Errc::kWritingToPersistentMemoryFailed};
@@ -116,7 +126,7 @@ ara::core::Result<void> PersistentMemAccessor::StoreDataForConfigureSarTriggerEv
     return result;
 }
 
-ara::core::Result<void> PersistentMemAccessor::StoreDataForActivateSarStorage0131VcEvent(
+ara::core::Result<void> SingletonPersistentMemAccessor::StoreDataForActivateSarStorage0131VcEvent(
     activateSarStorage0131VcEventDataType& activateSarStorage0131VcEventData)
 {
     ara::core::Result<void> result = StoreVariantCodingData<uint8_t>(
@@ -130,7 +140,7 @@ ara::core::Result<void> PersistentMemAccessor::StoreDataForActivateSarStorage013
     return result;
 }
 
-ara::core::Result<void> PersistentMemAccessor::StoreDataForVechicleInformation0400VcEvent(
+ara::core::Result<void> SingletonPersistentMemAccessor::StoreDataForVechicleInformation0400VcEvent(
     vechicleInformation0400VcEventDataType& vechicleInformation0400VcEventData)
 {
     ara::core::Result<void> result{X6aa_Config_Manager_Errc::kWritingToPersistentMemoryFailed};
@@ -207,7 +217,7 @@ ara::core::Result<void> PersistentMemAccessor::StoreDataForVechicleInformation04
     return result;
 }
 
-ara::core::Result<void> PersistentMemAccessor::InitializeVcMemoryWithDefaultValues()
+ara::core::Result<void> SingletonPersistentMemAccessor::InitializeVcMemoryWithDefaultValues()
 {
     ara::core::Result<void> result{X6aa_Config_Manager_Errc::kWritingToPersistentMemoryFailed};
     // initialize key value storage with default values
@@ -256,7 +266,7 @@ ara::core::Result<void> PersistentMemAccessor::InitializeVcMemoryWithDefaultValu
 }
 
 template<typename dataType>
-ara::core::Result<dataType> PersistentMemAccessor::TryReadingDataFromKvs(
+ara::core::Result<dataType> SingletonPersistentMemAccessor::TryReadingDataFromKvs(
     const ara::core::String& key_to_read)
 {
     ara::per::Result<dataType> result_data
@@ -273,7 +283,7 @@ ara::core::Result<dataType> PersistentMemAccessor::TryReadingDataFromKvs(
 }
 
 template<typename dataType>
-ara::core::Result<dataType> PersistentMemAccessor::ReadVariantCodingData(
+ara::core::Result<dataType> SingletonPersistentMemAccessor::ReadVariantCodingData(
     const variantCodingKeys key_to_read)
 {
     ara::core::Result<dataType> result{
@@ -290,7 +300,7 @@ ara::core::Result<dataType> PersistentMemAccessor::ReadVariantCodingData(
          * try reading the same key again. If it still fails then it's due to an issue in accessing
          * persistent memory.
          */
-        result = PersistentMemAccessor::TryReadingDataFromKvs<uint8_t>(key);
+        result = SingletonPersistentMemAccessor::TryReadingDataFromKvs<uint8_t>(key);
         if (!result.HasValue() && !has_kvs_initialized_with_default_values) {
             // data not found in the database, try initializing the data
             logger_ctx.LogInfo()
@@ -299,7 +309,7 @@ ara::core::Result<dataType> PersistentMemAccessor::ReadVariantCodingData(
                 throw "Unable to initialize persistent data.";
             } else {
                 logger_ctx.LogInfo() << "Initializing: kvs initialized with default values."_sv;
-                result = PersistentMemAccessor::TryReadingDataFromKvs<uint8_t>(key); // try reading once again
+                result = SingletonPersistentMemAccessor::TryReadingDataFromKvs<uint8_t>(key); // try reading once again
             }
             has_kvs_initialized_with_default_values = true; // set to true, don't try multiple times
         }
@@ -313,7 +323,7 @@ ara::core::Result<dataType> PersistentMemAccessor::ReadVariantCodingData(
     return result;
 }
 
-ara::core::Result<configureSarTriggerEvents0136VcEventDataType> PersistentMemAccessor::
+ara::core::Result<configureSarTriggerEvents0136VcEventDataType> SingletonPersistentMemAccessor::
     ReadDataForConfigureSarTriggerEvents0136VcEvent()
 {
     ara::core::Result<configureSarTriggerEvents0136VcEventDataType> result{
@@ -348,7 +358,7 @@ ara::core::Result<configureSarTriggerEvents0136VcEventDataType> PersistentMemAcc
     return result;
 }
 
-ara::core::Result<activateSarStorage0131VcEventDataType> PersistentMemAccessor::
+ara::core::Result<activateSarStorage0131VcEventDataType> SingletonPersistentMemAccessor::
     ReadDataForActivateSarStorage0131VcEvent()
 {
     ara::core::Result<activateSarStorage0131VcEventDataType> result{
@@ -368,7 +378,7 @@ ara::core::Result<activateSarStorage0131VcEventDataType> PersistentMemAccessor::
     return result;
 }
 
-ara::core::Result<vechicleInformation0400VcEventDataType> PersistentMemAccessor::
+ara::core::Result<vechicleInformation0400VcEventDataType> SingletonPersistentMemAccessor::
     ReadDataForVechicleInformation0400VcEvent()
 {
     ara::core::Result<vechicleInformation0400VcEventDataType> result{

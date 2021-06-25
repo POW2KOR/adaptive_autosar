@@ -17,6 +17,7 @@
 /* Autosar includes */
 #include "ara/core/instance_specifier.h"
 #include "ara/log/logging.h"
+#include "persistent_mem_accessor/persistent_mem_accessor.h"
 
 /* Project specific includes */
 #include "services/ns_si_dummyswc_2_to_cnfg_mngr/si_x6aa_dummy_b2_service_reserved_proxy.h"

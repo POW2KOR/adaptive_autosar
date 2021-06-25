@@ -55,7 +55,8 @@ bool DiagnosticSsaClient::FindService()
         = 1000; /* one while loop count is of nearly 100ms and timeout would be 100s (1000*100ms)*/
 
     /* Start searching for variant coding services offered by SSA module */
-    GetLoggerForSsaClient().LogInfo() << "Start searching for variant coding services offered by SSA module";
+    GetLoggerForSsaClient().LogInfo()
+        << "Start searching for variant coding services offered by SSA module";
     ara::com::FindServiceHandle find_service_handle
         = services::ns_si_dummyswc_2_to_cnfg_mngr::proxy::SI_X6AA_Dummy_B2_Service_ReservedProxy::
             StartFindService(FindSsaServiceHandler, ssa_variant_coding_instance_specifier);
@@ -82,7 +83,8 @@ bool DiagnosticSsaClient::FindService()
     /* Stop searching for further services */
     services::ns_si_dummyswc_2_to_cnfg_mngr::proxy::SI_X6AA_Dummy_B2_Service_ReservedProxy::
         StopFindService(find_service_handle);
-    GetLoggerForSsaClient().LogInfo() << "Stopped searching for variant coding services offered by SSA module";
+    GetLoggerForSsaClient().LogInfo()
+        << "Stopped searching for variant coding services offered by SSA module";
 
     return retval;
 }
@@ -145,8 +147,9 @@ void DiagnosticSsaClient::FindSsaServiceHandler(
             << "Found one instance of variant coding services offered by SSA module";
     } else {
         /* If there are multiple services found */
-        GetLoggerForSsaClient().LogInfo() << "Found multiple instances of variant coding services offered by "
-                                 "SSA module, use the first one";
+        GetLoggerForSsaClient().LogInfo()
+            << "Found multiple instances of variant coding services offered by "
+               "SSA module, use the first one";
     }
     /* Get proxy instance */
     ssa_variant_coding_service_proxy = std::make_shared<
@@ -167,9 +170,47 @@ void DiagnosticSsaClient::EventHandlerForSsaVariantCodingData()
 
         GetLoggerForSsaClient().LogInfo() << "Received " << samples.size() << " samples";
 
+        /* FIXME: Currently, we don't have concrete information on ara::com interfaces provided by
+         * SSA and dummy SSA server is only providing one Ev_CalculationResult event which sends
+         * integer type data, therfore, to keep initial implementation simple it's assumed that
+         * event of dummy SSA server is providing vehicleInformation_body_style variant coding
+         * data. This code will change significantly once we have information on SSA ara::com
+         * intefaces and event handlers will also be revisited at that time.
+         * */
         for (auto& sample : samples) {
-            GetLoggerForSsaClient().LogInfo() << "Variant Coding: Received event with: "
-                                  << "Ev_CalculationResult        = '" << (*sample) << "' ";
+            GetLoggerForSsaClient().LogInfo()
+                << "SSA Client: Received event with: "
+                << "vehicleInformation_body_style        = '" << (*sample) << "' ";
+            application::VariantCodingApp::SingletonPersistentMemAccessor* memAccessor
+                = application::VariantCodingApp::SingletonPersistentMemAccessor::getInstance();
+            /* FIXME: SSA client will not invoke memAccessor functions directly. Instead it
+             * will use intefaces provided by diagnostic transformer element. Since, we don't have
+             * diagnostic transformer implemented therefore Read function are used here directly for
+             * verifying complete functionality of config manager application.
+             * */
+            auto read_result = memAccessor->ReadDataForVechicleInformation0400VcEvent();
+            ara::core::Result<void> write_result;
+            if (read_result.HasValue()) {
+                auto val = read_result.Value();
+                if (val.body_style != (*sample)) {
+                    val.body_style = (*sample);
+                    /* FIXME: SSA client will pass variant coding information to param validator and
+                     * param validator shall cross validate this data with EVC signals coming from
+                     * BUS. Upon successful verification, param validator shall store data to
+                     * persistent memory. Since, param validator isn't implemented yet therefore we
+                     * are using memAccessor instance directly here.
+                     * */
+                    write_result = memAccessor->StoreDataForVechicleInformation0400VcEvent(val);
+                }
+            }
+            if (write_result.HasValue()) {
+                GetLoggerForSsaClient().LogInfo()
+                    << "SSA client received body_style =" << (*sample)
+                    << "variant coding data and store it to persistent memory";
+            } else {
+                GetLoggerForSsaClient().LogError() << "SSA client couldn't store newly received "
+                                                      "variant coding data in persistent memory";
+            }
         }
     }
 }

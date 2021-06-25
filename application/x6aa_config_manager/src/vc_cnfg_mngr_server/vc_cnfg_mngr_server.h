@@ -144,11 +144,6 @@ private:
     ara::core::Optional<
         services::ns_si_cnfg_mngr_to_dummyswc::skeleton::SI_X6AA_Cnfg_Mngr_Service_ReservedSkeleton>
         siX6aaCnfgMngrServiceReservedSkeleton;
-
-    /*
-     *  presistency integration
-     */
-    application::VariantCodingApp::PersistentMemAccessor memAccessor;
 };
 
 } // namespace application

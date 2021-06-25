@@ -13,8 +13,8 @@
 #ifndef PERSISTENT_MEM_ACCESSOR_H_
 #define PERSISTENT_MEM_ACCESSOR_H_
 
-#include "ara/log/logging.h"
 #include "ara/core/result.h"
+#include "ara/log/logging.h"
 #include "ara/per/file_storage.h"
 #include "ara/per/key_value_storage.h"
 #include "ara/per/read_write_accessor.h"
@@ -38,12 +38,21 @@ using vechicleInformation0400VcEventDataType = ::DataTypes::
 
 using variantCodingKeys = application::VariantCodingApp::X6aaConfigManagerKvsKeys;
 
-class PersistentMemAccessor {
+class SingletonPersistentMemAccessor {
 public:
-    /*!
-     * \brief Constructor.
+    /**
+     * \brief Funtion for getting SingletonPersistentMemAccessor instance.
      */
-    PersistentMemAccessor();
+    static SingletonPersistentMemAccessor* getInstance();
+    /**
+     * \brief SingletonPersistentMemAccessor should not be cloneable.
+     */
+    SingletonPersistentMemAccessor(SingletonPersistentMemAccessor& other) = delete;
+
+    /**
+     * \brief SingletonPersistentMemAccessor should not be assignable.
+     */
+    void operator=(const SingletonPersistentMemAccessor&) = delete;
 
     /**
      * \brief Function to read all information required for sending out ara::com event
@@ -60,7 +69,8 @@ public:
      * \param activateSarStorage0131VcEventDataType  data
      * \return bool   success
      */
-    ara::core::Result<activateSarStorage0131VcEventDataType> ReadDataForActivateSarStorage0131VcEvent();
+    ara::core::Result<activateSarStorage0131VcEventDataType>
+    ReadDataForActivateSarStorage0131VcEvent();
 
     /**
      * \brief Function to read all information required for sending out ara::com event
@@ -68,7 +78,8 @@ public:
      * \param vechicleInformation0400VcEventDataType data
      * \return bool   success
      */
-    ara::core::Result<vechicleInformation0400VcEventDataType> ReadDataForVechicleInformation0400VcEvent();
+    ara::core::Result<vechicleInformation0400VcEventDataType>
+    ReadDataForVechicleInformation0400VcEvent();
 
     /**
      * \brief Function to retrive data of each individual element of struct
@@ -106,6 +117,17 @@ public:
 
 private:
     /**
+     * \brief Make the SingletonPersistentMemAccessor constructor private to prevent direct
+     * construction calls with the `new` operator.
+     */
+    SingletonPersistentMemAccessor();
+
+    /**
+     * \brief The one, single instance.
+     */
+    static SingletonPersistentMemAccessor* persistentMemAccessorInstance;
+
+    /**
      * \brief KeyValueStorage.
      */
     std::unique_ptr<ara::per::SharedHandle<ara::per::KeyValueStorage>> key_value_storage;
@@ -140,7 +162,8 @@ private:
      * \return bool       success
      */
     template<typename dataType>
-    ara::core::Result<void> StoreVariantCodingData(const variantCodingKeys key_to_store, dataType data_to_store);
+    ara::core::Result<void> StoreVariantCodingData(
+        const variantCodingKeys key_to_store, dataType data_to_store);
 
     /**
      * \brief Initialize key value storage with default values
