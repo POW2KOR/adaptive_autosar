@@ -11,7 +11,6 @@ filegroup(
         "@amsr_xavier//:mex_arxml",
         # Workaround to overcome the issue for the missing reference
         "//application/x6aa_config_manager:app_arxml",
-
     ],
 )
 
@@ -23,11 +22,6 @@ minerva_aa_codegen_rule(
     generators = [
         "@amsr_xavier//:generator_amsr_applicationbase_init_deinit",
     ],
-    outs_list_dict = {
-        "x6aa_resource_monitor_applicationbase_init_deinit_srcs": [
-            "X6AA_Ressource_Executable/src/ara/core/initialization.cpp",
-        ],
-    },
     ignore_matches = [
         "DiagnosticManagerDeamonExecutable.*",
         "SelfDiagnosticAgentExecutable.*",
@@ -37,6 +31,11 @@ minerva_aa_codegen_rule(
         "X6AA_Dummy_SWC_1_Executable.*",
         "X6AA_Dummy_SWC_2_Executable.*",
     ],
+    outs_list_dict = {
+        "x6aa_resource_monitor_applicationbase_init_deinit_srcs": [
+            "X6AA_Ressource_Executable/src/ara/core/initialization.cpp",
+        ],
+    },
 )
 
 filegroup(
