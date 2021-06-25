@@ -51,6 +51,9 @@ configure_make(
     autogen = True,
     autogen_command = "build.sh",
     configure_command = "configure",
+    configure_env_vars = {
+        "CXXFLAGS": "-std=c++14",
+    },
     configure_in_place = True,
     configure_options =
         select({
