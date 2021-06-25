@@ -22,6 +22,7 @@ configure_make(
             "--with-fp-layout=nothing",
             "--disable-werror",
             "--without-java",
+            "--enable-memory",
             "--enable-cpu",
             "--enable-csv",
         ],
@@ -35,6 +36,7 @@ configure_make(
         "libcollectdclient.so",
         "libcollectdclient.so.1",
         "libcollectdclient.so.1.1.0",
+        "collectd/memory.so",
         "collectd/cpu.so",
         "collectd/csv.so",
     ],
@@ -95,6 +97,14 @@ filegroup(
 )
 
 filegroup(
+    name = "collectd_lib_collectd_memory_so",
+    srcs = [
+        ":build_collectd",
+    ],
+    output_group = "memory.so",
+)
+
+filegroup(
     name = "collectd_lib_collectd_cpu_so",
     srcs = [
         ":build_collectd",
@@ -128,6 +138,7 @@ pkg_tar(
         ":collectd_lib_libcollectdclient_so": "lib/libcollectdclient.so",
         ":collectd_lib_libcollectdclient_so_1": "lib/libcollectdclient.so.1",
         ":collectd_lib_libcollectdclient_so_1_1_0": "lib/libcollectdclient.so.1.1.0",
+        ":collectd_lib_collectd_memory_so": "lib/collectd/memory.so",
         ":collectd_lib_collectd_cpu_so": "lib/collectd/cpu.so",
         ":collectd_lib_collectd_csv_so": "lib/collectd/csv.so",
     },
