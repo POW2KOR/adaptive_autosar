@@ -61,12 +61,8 @@
               <EXECUTABLE-REF DEST="EXECUTABLE">/Application/Executables/amsr_vector_fs_log_daemon</EXECUTABLE-REF>
               <LOG-TRACE-DEFAULT-LOG-LEVEL>INFO</LOG-TRACE-DEFAULT-LOG-LEVEL>
               <LOG-TRACE-LOG-MODE>CONSOLE</LOG-TRACE-LOG-MODE>
-              <LOG-TRACE-PROCESS-DESC>Vector Log Daemon</LOG-TRACE-PROCESS-DESC>
+              <LOG-TRACE-PROCESS-DESC>The Adaptive AUTOSAR Log Daemon</LOG-TRACE-PROCESS-DESC>
               <LOG-TRACE-PROCESS-ID>LOGD</LOG-TRACE-PROCESS-ID>
-              <PROCESS-STATE-MACHINE>
-                <SHORT-NAME>amsr_vector_fs_log_daemon_process_mode</SHORT-NAME>
-                <TYPE-TREF DEST="MODE-DECLARATION-GROUP">/DataTypes/ModelManagement/ApplicationSatates</TYPE-TREF>
-              </PROCESS-STATE-MACHINE>
               <STATE-DEPENDENT-STARTUP-CONFIGS>
                 <STATE-DEPENDENT-STARTUP-CONFIG>
                   <FUNCTION-GROUP-STATE-IREFS>
@@ -120,29 +116,6 @@
               </STARTUP-CONFIGS>
             </STARTUP-CONFIG-SET>
           </ELEMENTS>
-        </AR-PACKAGE>
-      </AR-PACKAGES>
-    </AR-PACKAGE>
-    <AR-PACKAGE>
-    <SHORT-NAME>DataTypes</SHORT-NAME>
-      <AR-PACKAGES>
-        <AR-PACKAGE>
-        <SHORT-NAME>ModelManagement</SHORT-NAME>
-        <ELEMENTS>
-        <MODE-DECLARATION-GROUP>
-              <SHORT-NAME>ApplicationStates</SHORT-NAME>
-              <MODE-DECLARATIONS>
-                <MODE-DECLARATION>
-                  <SHORT-NAME>Running</SHORT-NAME>
-                  <VALUE>0</VALUE>
-                </MODE-DECLARATION>
-                <MODE-DECLARATION>
-                  <SHORT-NAME>Terminating</SHORT-NAME>
-                  <VALUE>1</VALUE>
-                </MODE-DECLARATION>
-              </MODE-DECLARATIONS>
-            </MODE-DECLARATION-GROUP>
-        </ELEMENTS>
         </AR-PACKAGE>
       </AR-PACKAGES>
     </AR-PACKAGE>

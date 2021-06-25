@@ -36,6 +36,14 @@
  */
 namespace application {
 
+using activateSarStorage0131VcEventDataType = ::DataTypes::
+    NS_REC_activateSarStorage0131VcEventType_t::REC_activateSarStorage0131VcEventType_t;
+using configureSarTriggerEvents0136VcEventDataType
+    = ::DataTypes::NS_REC_configureSarTriggerEvents0136VcEventType_t::
+        REC_configureSarTriggerEvents0136VcEventType_t;
+using vechicleInformation0400VcEventDataType = ::DataTypes::
+    NS_REC_vechicleInformation0400VcEventType_t::REC_vechicleInformation0400VcEventType_t;
+
 /*!
  * \brief Main class representing the VcCnfgMngrServer.
  * \vprivate Example class for component internal use.
@@ -103,7 +111,7 @@ private:
     /*!
      * \brief Logger instance.
      */
-    ara::log::Logger& log_{ara::log::CreateLogger("Skeleton", "Skeleton demo")};
+    ara::log::Logger& log_{ara::log::CreateLogger("Skeleton", "Config Manager Skeleton ")};
 
     /*!
      * \brief ApplicationClient instance

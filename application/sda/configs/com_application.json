@@ -1,0 +1,14 @@
+{
+  "thread_pools":
+  [
+    {
+      "pool_id": 1,
+      "num_threads": 5,
+      "max_tasks": 1024,
+      "assign_to":
+      [
+        "SelfDiagnosticAgent_Executable/SelfDiagnosticAgent_ExecutableRootSwc/amsr_DiagComApi"
+      ]
+    }
+  ]
+}

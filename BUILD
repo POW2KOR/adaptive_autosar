@@ -90,8 +90,13 @@ pkg_tar(
                 "//application/x6aa_config_manager:package",
                 "//application/x6aa_dummy_swc_1:package",
                 "//application/x6aa_em_state_client_app:package",
+                "//application/x6aa_logging_manager:package",
                 "//application/amsr_vector_fs_log_daemon:package",
                 "//application/x6aa_resource_monitor:package",
+                "//application/x6aa_rov_transmission_manager:package",
+                "//application/x6aa_dummy_2_app:package",
+                "//application/diagnostic_manager_deamon_executable:package",
+                "//application/sda:package",
             ],
         ),
 )

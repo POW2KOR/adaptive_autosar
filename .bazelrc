@@ -34,4 +34,4 @@ build:use_efs_build_cache   --disk_cache="/home/jenkins_agent/efs_cache/mpu"
 # this like this and moved it in the toolchain file, but because we don't have a toolchain fuile for this platform
 # yet, we are adding it here. In the future we need to add a toolchain for this file and handle this via toolchain
 # features, like in the current toolchain files.
-build:x86_64_linux          --linkopt="-lpthread"
+build:x86_64_linux          --linkopt="-lpthread" --linkopt="-Wl,--gc-sections" --copt="-ffunction-sections" --copt="-fdata-sections"
