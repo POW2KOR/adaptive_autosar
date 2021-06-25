@@ -7,8 +7,11 @@ package(default_visibility = ["//visibility:public"])
 filegroup(
     name = "app_arxml",
     srcs = [
-        "arxml/x6aa_resource_monitor.arxml",
+        "//arxmls:x6aa_idc_ecu_extract_arxml",
         "@amsr_xavier//:mex_arxml",
+        # Workaround to overcome the issue for the missing reference
+        "//application/x6aa_config_manager:app_arxml",
+
     ],
 )
 
@@ -22,9 +25,18 @@ minerva_aa_codegen_rule(
     ],
     outs_list_dict = {
         "x6aa_resource_monitor_applicationbase_init_deinit_srcs": [
-            "x6aa_resource_monitor/src/ara/core/initialization.cpp",
+            "X6AA_Ressource_Executable/src/ara/core/initialization.cpp",
         ],
     },
+    ignore_matches = [
+        "DiagnosticManagerDeamonExecutable.*",
+        "SelfDiagnosticAgentExecutable.*",
+        "TransmissionManager_ROVExecutable.*",
+        "X6AA_Cnfg_Mngr_Executable.*",
+        "X6AA_DLT_Executable.*",
+        "X6AA_Dummy_SWC_1_Executable.*",
+        "X6AA_Dummy_SWC_2_Executable.*",
+    ],
 )
 
 filegroup(
