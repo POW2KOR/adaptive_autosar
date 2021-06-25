@@ -129,6 +129,15 @@ new_git_repository(
     path = "<local_path_to_reposittory>",
 )'''
 
+new_local_repository(
+    name = "drive",
+    # The syntax in below line is different as we have a ":"
+    # before application,  this is because we don't have a
+    # BUILD file inside the application/drive folder.
+    build_file = "@//:application/drive/drive.BUILD",
+    path = "/drive",
+)
+
 new_git_repository(
     name = "collectd_mbient",  # bazel will create under its own cache folder in the external folder package with the specified name(e.g. external/collectd_mbient)
     build_file = "@//application/x6aa_resource_monitor:collectd_mbient.BUILD",

@@ -492,6 +492,7 @@ cc_binary(
     ],
     linkstatic = 1,
     local_defines = [
+        "ENABLE_NVIDIA_UPDATE_STRATEGY=ON",
         "VIRTUALMOCK=",
         "ENABLE_EXEC_MANAGER=ON",
     ],
@@ -514,6 +515,7 @@ cc_binary(
         "@amsr_xavier//:diag_rpc_com_binding_srcs_lib",
         "@amsr_xavier//:lib_doip_binding_hdrs_lib",
         "@amsr_xavier//:lib_doip_binding_src_hdrs_lib",
+        "@amsr_xavier//:nvidia_update_strategy",
         "@minerva_mpu_adaptive//application/diagnostic_manager_deamon_executable:socal_hdrs_lib",
     ],
 )

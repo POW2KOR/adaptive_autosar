@@ -588,3 +588,24 @@ cc_library(
         "@minerva_mpu_adaptive//application/amsr_vector_fs_swupdateclient:socal_hdrs_lib",
     ],
 )
+
+cc_library(
+    name = "nvidia_update_strategy",
+    srcs = glob(["Examples/nvidia-update-strategy/src/**"]),
+    hdrs = glob(["Examples/nvidia-update-strategy/include/**/*.h"]),
+    copts = [
+        "-std=c++14",
+    ],
+    linkstatic = 1,
+    strip_include_prefix = "Examples/nvidia-update-strategy/include/",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":amsr_swupdate_interface",
+        "@drive//:drive_include_lib",
+        "@drive//:libnvducc",
+        "@drive//:libnvdulink",
+        "@minerva_mpu_adaptive//bsw:amsr_vector_fs_libosabstraction",
+        "@minerva_mpu_adaptive//bsw:amsr_vector_fs_libvac",
+        "@minerva_mpu_adaptive//bsw:amsr_vector_fs_log_api",
+    ],
+)
