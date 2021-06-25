@@ -24,7 +24,7 @@ minerva_aa_codegen_rule(
     ],
     ignore_matches = [
         "DiagnosticManagerDeamonExecutable.*",
-        "SelfDiagnosticAgentExecutable.*",
+        "SelfDiagnosticAgent_Executable.*",
         "TransmissionManager_ROVExecutable.*",
         "X6AA_Cnfg_Mngr_Executable.*",
         "X6AA_DLT_Executable.*",
