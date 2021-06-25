@@ -357,6 +357,8 @@ cc_binary(
         "src/rov_application.h",
         "src/si_speed_limiter.cpp",
         "src/si_speed_limiter.h",
+        "src/si_suppfunctions_mpc.cpp",
+        "src/si_suppfunctions_mpc.h",
         ":rov_init_deinit_srcs",
         ":someip_binding_initializer",
         "//bsw:amsr_vector_fs_socal_libsocal_a",

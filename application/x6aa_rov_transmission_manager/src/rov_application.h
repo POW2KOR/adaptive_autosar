@@ -29,6 +29,7 @@
 #include "application/common/application_base.h"
 
 #include "si_speed_limiter.h"
+#include "si_suppfunctions_mpc.h"
 
 /*!
  * \brief Namespace for the example application.
@@ -62,6 +63,11 @@ class RovApplication : public ApplicationBase {
    * \brief SI SpeedLimiter service instance
    */
    idc6::rovservices::SISpeedlimiter si_speedlimiter_;
+
+  /*!
+   * \brief SI SuppFunctions service instance
+   */
+  idc6::rovservices::SISuppFunctionsServer si_suppfunctions_server_;
 };
 
 }  // namespace application

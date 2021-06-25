@@ -39,6 +39,10 @@ RovApplication::RovApplication() : ApplicationBase("rov_tx_manager") {
   /* Subscribe to SI SpeedLimiter events */
   si_speedlimiter_.SubscribeToEvents();
 
+  /* Offer SI SuppFunctions service */
+  si_suppfunctions_server_.OfferService();
+  log_.LogInfo() << "SI_SuppFunctions_MPC_Service_ST3 service offered";
+
 }
 
 RovApplication::~RovApplication() {
@@ -46,6 +50,9 @@ RovApplication::~RovApplication() {
 
   /* Unsubscribe from service events */
   si_speedlimiter_.UnsubscribeFromEvents();
+
+  /* Stop offered service */
+  si_suppfunctions_server_.StopOfferService();
 
   log_.LogInfo() << "rov_tx_manager shutdown initiated.";
 
@@ -73,6 +80,9 @@ RovApplication::~RovApplication() {
 
 std::int8_t RovApplication::Run() {
   std::int8_t ret{EXIT_SUCCESS};
+  int counter = 0;
+  ::DataTypes::NS_REC_CamSensSoil_MPC_ST3_cp6wyrd9cg7ec7y2w3khz1gyt::
+    REC_CamSensSoil_MPC_ST3_cp6wyrd9cg7ec7y2w3khz1gyt cam_sensor_data;
 
   if (!has_initialization_failed_) {
     this->ReportApplicationState(ara::exec::ApplicationState::kRunning);
@@ -102,6 +112,17 @@ std::int8_t RovApplication::Run() {
         }
       }
 
+      if (++counter % 10 == 0) {
+        /* Send out data for  SI_SuppFunctions_MPC_Service_ST3 */
+        cam_sensor_data.CamSensSoil_CMS_IconDisp_Rq_MPC_ST3 = true;
+        cam_sensor_data.CamSensSoil_IHC_IconDisp_Rq_MPC_ST3 = true;
+        cam_sensor_data.CamSensSoil_LDP_IconDisp_Rq_MPC_ST3 = true;
+        cam_sensor_data.CamSensSoil_MsgDisp_Rq_MPC_ST3 = true;
+        cam_sensor_data.CamSensSoil_TSA_IconDisp_Rq_MPC_ST3 = true;
+
+        si_suppfunctions_server_.Ev_CamSensSoil_MPC_ST3.Send(cam_sensor_data);
+        log_.LogInfo() << "Ev_CamSensSoil_MPC_ST3 data sent ...";
+      }
     }
 
   } else {
