@@ -43,11 +43,11 @@ using vac::container::operator""_sv;
 ApplicationBase::ApplicationBase(std::string name, int cycle_time)
   : name_(name), cycle_time_(cycle_time) {
 
-  log_.LogInfo() << name_ << " is initializing...";
+  GetLogger().LogInfo() << name_ << " is initializing...";
 
   this->StartSignalHandlerThread().InspectError([this](ara::core::ErrorCode const& error) {
     has_initialization_failed_ = true;
-    log_.LogFatal() << error.Message() << ". " << error.UserMessage();
+    GetLogger().LogFatal() << error.Message() << ". " << error.UserMessage();
   });
 }
 
@@ -62,20 +62,20 @@ ApplicationBase::ApplicationBase(std::string name, int cycle_time)
 ApplicationBase::~ApplicationBase() {
   exit_requested_ = true;
 
-  log_.LogInfo() << name_ << " initiated. Calling destructor.";
+  GetLogger().LogInfo() << name_ << " initiated. Calling destructor.";
 
   if (signal_handler_thread_.native_handle() != 0) {
     /* #10 Check if exit was requested by sending SIGTERM or SIGINT. */
     if (!terminated_by_signal_) {
       /* #15 Terminate the signal handler thread to Update. */
       if (0 != pthread_kill(static_cast<pthread_t>(signal_handler_thread_.native_handle()), SIGTERM)) {
-        log_.LogError() << "Invalid signal!";
+        GetLogger().LogError() << "Invalid signal!";
       }
     } else {
-      log_.LogDebug() << "SIGINT or SIGTERM had been received and had been handled";
+      GetLogger().LogDebug() << "SIGINT or SIGTERM had been received and had been handled";
     }
   } else {
-    log_.LogError() << "Thread ID = 0";
+    GetLogger().LogError() << "Thread ID = 0";
   }
 
   /* #20 Wait till all threads have joined. */
@@ -83,7 +83,7 @@ ApplicationBase::~ApplicationBase() {
     signal_handler_thread_.join();
   }
 
-  log_.LogInfo() << name_ << " finished.";
+  GetLogger().LogInfo() << name_ << " finished.";
 }
 
 /*!
@@ -115,7 +115,7 @@ ara::core::Result<osabstraction::process::ProcessId> ApplicationBase::StartSigna
   return osabstraction::thread::SetNameOfThread(thread_id, thread_name)
       .AndThen([]() -> R { return R{osabstraction::process::GetProcessId()}; })
       .OrElse([thread_name, this](ara::core::ErrorCode) -> R {
-        log_.LogFatal() << "Naming of thread '" << thread_name << "' failed";
+        GetLogger().LogFatal() << "Naming of thread '" << thread_name << "' failed";
         return R::FromError(ApplicationBaseErrc::kThreadCreationFailed, "Naming failed.");
       });
 }
@@ -126,14 +126,14 @@ std::int8_t ApplicationBase::Run() {
   if (!has_initialization_failed_) {
     this->ReportApplicationState(ara::exec::ApplicationState::kRunning);
 
-    log_.LogInfo() << name_ << " application started";
+    GetLogger().LogInfo() << name_ << " application started";
 
     // TODO: Make the activation manager a class member
     std::shared_ptr<ActivationManagerBase> am_(new ActivationManagerTimer(std::chrono::milliseconds(cycle_time_)));
 
     while (!exit_requested_) {
       am_->wait();
-      log_.LogDebug() << "Running in cycle " << am_->getCycle();
+      GetLogger().LogDebug() << "Running in cycle " << am_->getCycle();
     }
 
   } else {
@@ -159,17 +159,17 @@ void ApplicationBase::SignalHandlerThread() {
 
   /* #10 empty the set of signals. */
   if (0 != sigemptyset(&signal_set)) {
-    log_.LogFatal([this](ara::log::LogStream& s) { s << name_ << " could not empty signal set."; });
+    GetLogger().LogFatal([this](ara::log::LogStream& s) { s << name_ << " could not empty signal set."; });
     ara::core::Abort("Empty signal set failed.");
   }
   /* #20 add SIGTERM to signal set. */
   if (0 != sigaddset(&signal_set, SIGTERM)) {
-    log_.LogFatal([this](ara::log::LogStream& s) { s << name_ << " cannot add signal to signalset: SIGTERM"; });
+    GetLogger().LogFatal([this](ara::log::LogStream& s) { s << name_ << " cannot add signal to signalset: SIGTERM"; });
     ara::core::Abort("Adding SIGTERM failed.");
   }
   /* #21 add SIGINT to signal set. */
   if (0 != sigaddset(&signal_set, SIGINT)) {
-    log_.LogFatal([this](ara::log::LogStream& s) { s << name_ << " cannot add signal to signalset: SIGINT"; });
+    GetLogger().LogFatal([this](ara::log::LogStream& s) { s << name_ << " cannot add signal to signalset: SIGINT"; });
     ara::core::Abort("Adding SIGINT failed.");
   }
 
@@ -178,13 +178,13 @@ void ApplicationBase::SignalHandlerThread() {
 
   do {
     if (0 != sigwait(&signal_set, &sig)) {
-      log_.LogFatal([this](ara::log::LogStream& s) { s << name_ << " called sigwait() with invalid signalset"; });
+      GetLogger().LogFatal([this](ara::log::LogStream& s) { s << name_ << " called sigwait() with invalid signalset"; });
       ara::core::Abort("Waiting for SIGTERM or SIGINT failed.");
     }
-    log_.LogInfo([this,&sig](ara::log::LogStream& s) { s << name_ << " received signal: " << sig << "."; });
+    GetLogger().LogInfo([this,&sig](ara::log::LogStream& s) { s << name_ << " received signal: " << sig << "."; });
 
     if ((sig == SIGTERM) || (sig == SIGINT)) {
-      log_.LogInfo([this](ara::log::LogStream& s) {
+      GetLogger().LogInfo([this](ara::log::LogStream& s) {
         s << name_ << " received SIGTERM or SIGINT, requesting application Update.";
       });
       if (!exit_requested_) {
@@ -217,22 +217,22 @@ void ApplicationBase::ReportApplicationState(ara::exec::ApplicationState applica
   } else {
     /* #15 invalid application state detected */
     error_occurred = true;
-    log_.LogError() << "ReportApplicationState called with an invalid application state: "
+    GetLogger().LogError() << "ReportApplicationState called with an invalid application state: "
                     << ara::core::StringView{application_state_string};
   }
 
   /* #20 check if invalid application state was detected. */
   if (!error_occurred) {
-    log_.LogDebug() << name_ << " is reporting Application state "
+    GetLogger().LogDebug() << name_ << " is reporting Application state "
                     << ara::core::StringView{application_state_string};
 
     /* #30 send application state */
     if (application_client_.ReportApplicationState(application_state) == ara::exec::ApplicationReturnType::kSuccess) {
-      log_.LogDebug() << name_ << " reported Application state "
+      GetLogger().LogDebug() << name_ << " reported Application state "
                       << ara::core::StringView{application_state_string} << " successfully";
     } else {
       /* #35 application state could not be set. */
-      log_.LogError() << name_ << " could not report the Application state "
+      GetLogger().LogError() << name_ << " could not report the Application state "
                       << ara::core::StringView{application_state_string};
     }
   }
@@ -240,6 +240,12 @@ void ApplicationBase::ReportApplicationState(ara::exec::ApplicationState applica
 
 std::string ApplicationBase::getName(void) const {
   return name_;
+}
+
+ara::log::Logger& ApplicationBase::GetLogger()
+{
+    ara::log::Logger& logger{ara::log::CreateLogger("APP", name_)};
+    return logger;
 }
 
 }  // namespace application

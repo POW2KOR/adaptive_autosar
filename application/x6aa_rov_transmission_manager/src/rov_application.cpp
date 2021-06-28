@@ -33,7 +33,7 @@ namespace application {
 RovApplication::RovApplication() : ApplicationBase("rov_tx_manager") {
 
   /* Find SI SpeedLimiter service */
-  log_.LogInfo() << "Start searching for SI_Speedlimiter service";
+  GetLogger().LogInfo() << "Start searching for SI_Speedlimiter service";
   si_speedlimiter_.FindService();
 
   /* Subscribe to SI SpeedLimiter events */
@@ -41,7 +41,7 @@ RovApplication::RovApplication() : ApplicationBase("rov_tx_manager") {
 
   /* Offer SI SuppFunctions service */
   si_suppfunctions_server_.OfferService();
-  log_.LogInfo() << "SI_SuppFunctions_MPC_Service_ST3 service offered";
+  GetLogger().LogInfo() << "SI_SuppFunctions_MPC_Service_ST3 service offered";
 
 }
 
@@ -54,20 +54,20 @@ RovApplication::~RovApplication() {
   /* Stop offered service */
   si_suppfunctions_server_.StopOfferService();
 
-  log_.LogInfo() << "rov_tx_manager shutdown initiated.";
+  GetLogger().LogInfo() << "rov_tx_manager shutdown initiated.";
 
   if (signal_handler_thread_.native_handle() != 0) {
     /* #10 Check if exit was requested by sending SIGTERM or SIGINT. */
     if (!terminated_by_signal_) {
       /* #15 Terminate the signal handler thread to shutdown. */
       if (0 != pthread_kill(static_cast<pthread_t>(signal_handler_thread_.native_handle()), SIGTERM)) {
-        log_.LogError() << "Invalid signal!";
+        GetLogger().LogError() << "Invalid signal!";
       }
     } else {
-      log_.LogDebug() << "SIGINT or SIGTERM had been received and had been handled";
+      GetLogger().LogDebug() << "SIGINT or SIGTERM had been received and had been handled";
     }
   } else {
-    log_.LogError() << "Thread ID = 0";
+    GetLogger().LogError() << "Thread ID = 0";
   }
 
   /* #20 Wait till all threads have joined. */
@@ -75,7 +75,7 @@ RovApplication::~RovApplication() {
     signal_handler_thread_.join();
   }
 
-  log_.LogInfo() << "rov_tx_manager finished shutdown.";
+  GetLogger().LogInfo() << "rov_tx_manager finished shutdown.";
 }
 
 std::int8_t RovApplication::Run() {
@@ -87,13 +87,13 @@ std::int8_t RovApplication::Run() {
   if (!has_initialization_failed_) {
     this->ReportApplicationState(ara::exec::ApplicationState::kRunning);
 
-    log_.LogInfo() << "rov_tx_manager application started";
+    GetLogger().LogInfo() << "rov_tx_manager application started";
 
     std::shared_ptr<ActivationManagerBase> am_(new ActivationManagerTimer(std::chrono::milliseconds(500)));
 
     while (!exit_requested_) {
       am_->wait();
-      log_.LogDebug() << "Running in cycle " << am_->getCycle();
+      GetLogger().LogDebug() << "Running in cycle " << am_->getCycle();
       ara::core::Future<services::ns_speedlimiter::proxy::methods::Meth_GetCapabilities::Output> min_speed_limit;
       /* Verify service has been found */
       if(si_speedlimiter_.IsServiceFound() && si_speedlimiter_.IsSubscribed()) {
@@ -121,7 +121,7 @@ std::int8_t RovApplication::Run() {
         cam_sensor_data.CamSensSoil_TSA_IconDisp_Rq_MPC_ST3 = true;
 
         si_suppfunctions_server_.Ev_CamSensSoil_MPC_ST3.Send(cam_sensor_data);
-        log_.LogInfo() << "Ev_CamSensSoil_MPC_ST3 data sent ...";
+        GetLogger().LogInfo() << "Ev_CamSensSoil_MPC_ST3 data sent ...";
       }
     }
 
