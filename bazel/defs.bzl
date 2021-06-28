@@ -655,3 +655,136 @@ def minerva_aa_bsw_module(
             "make install",
         ],
     )
+
+def minerva_aa_update_package_rule(
+        name,
+        filesystem_src,
+        version,
+        sw_part_number):
+    """
+    A macro to create update packages for the Minerva update strategy.
+
+    This macro creates targets to generate the NVIDIA Drive Update package and
+    then wrap this up in an AMSR update package for the Adaptive AUTOSAR SWUC.
+
+    Args:
+        name: A unique name for this update package rule.
+
+        filesystem_src: A target representing a single tar file containing
+            the filesystem to be used for the update package.
+
+        version: A string representing only the semver 2.0 version core string,
+            ie. "0.1.2". Pre-release tags like in "0.1.2-alpha" are not
+            supported by the Vector script yet.
+
+        sw_part_number: A 10 byte string representing the sw part number that
+            this package updates.
+    """
+
+    outs_folder = "{}/output".format(name)
+    dupkg_target_name = "{}_dupkg".format(name)
+    img_file_name = "{}.img".format(name)
+    dupkg_file_name = "{}.dupkg".format(name)
+
+    native.genrule(
+        name = dupkg_target_name,
+        srcs = [
+            filesystem_src,
+            "@amsr_xavier//:dupkg_template",
+            "@amsr_xavier//:dupkg_template_tii_a",
+        ],
+        cmd = """
+            dupkg_dir="dupkg"
+            dupkg_config_dir="$$dupkg_dir/tii-a"
+            img_file_path="$(RULEDIR)/{img_file_name}"
+            dupkg_file_path="$(RULEDIR)/{dupkg_file_name}"
+            tar_file_path="$$(pwd)/$(location {filesystem_tar_target})"
+            drive_size="512M"
+            owner_uid=0
+            owner_gid=0
+            
+            partition_root_dir="root_dir"
+
+            mkdir -p $$dupkg_dir    
+
+            mkdir $$partition_root_dir
+
+            tar -xvf $$tar_file_path -C $$partition_root_dir \
+                &> /dev/null
+
+            # Own everything by root. This is because the execution manager
+            # always runs as root so it's good practice to avoid priviledge
+            # escalation like this.
+            chown -R $$owner_uid:$$owner_gid $$partition_root_dir
+
+            mkfs.ext4 \
+                -q \
+                -b 4096 \
+                -O none,has_journal,ext_attr,resize_inode,dir_index,filetype,\
+extent,flex_bg,sparse_super,large_file,huge_file,uninit_bg,dir_nlink,\
+extra_isize \
+                -d $$partition_root_dir \
+                $$img_file_path \
+                $$drive_size \
+                &> /dev/null
+
+            tune2fs -c 10 -i 6m -o ^user_xattr,^acl $$img_file_path \
+                &> /dev/null           
+
+            e2fsck -f -y $$img_file_path &> /dev/null
+            resize2fs -M $$img_file_path &> /dev/null
+
+            mkdir -p $$dupkg_dir
+            cp $(locations @amsr_xavier//:dupkg_template) $$dupkg_dir
+
+            mkdir -p $$dupkg_config_dir
+            cp $$img_file_path $$dupkg_config_dir/1_gos1-amsr.img
+    
+            cp $(locations @amsr_xavier//:dupkg_template_tii_a) \
+                $$dupkg_config_dir
+
+            hash=$$(sha256sum $$img_file_path | awk '{{print $$1}}')
+            size=$$(stat -c '%s' $$img_file_path)
+
+            sed -i "s/\"data_size\":0,$$/\"data_size\":$$size,/g" \
+                "$$dupkg_config_dir/install.json"
+            sed -i "s/\"hash\":\"\"$$/\"hash\":\"$$hash\"/g" \
+                "$$dupkg_config_dir/install.json"
+
+            tar -czf $$dupkg_file_path -C $$dupkg_dir .
+        """.format(
+            filesystem_tar_target = filesystem_src,
+            dupkg_file_name = dupkg_file_name,
+            img_file_name = img_file_name,
+        ),
+        outs = [
+            dupkg_file_name,
+            img_file_name,
+        ],
+        tags = ["requires-fakeroot"],
+    )
+
+    version_major = version.split(".")[0]
+    version_minor = version.split(".")[1]
+    version_patch = version.split(".")[2]
+
+    native.genrule(
+        name = "{}".format(name),
+        srcs = [dupkg_target_name],
+        cmd = """
+            python3 $(location //bsw:amsrswpkg_generator) \
+                $(RULEDIR)/{dupkg_file_name} \
+                {major} {minor} {patch} \
+                {sw_part_number} \
+                -o $(RULEDIR) \
+                &> /dev/null
+        """.format(
+            dupkg_file_name = dupkg_file_name,
+            major = version_major,
+            minor = version_minor,
+            patch = version_patch,
+            sw_part_number = sw_part_number,
+        ),
+        outs = ["SoftwareClusterPlatform_{}.amsrswpkg".format(version)],
+        tools = ["//bsw:amsrswpkg_generator"],
+    )
