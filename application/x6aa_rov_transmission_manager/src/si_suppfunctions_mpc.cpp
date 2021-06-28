@@ -3,9 +3,9 @@
  * \file   si_speedlimiter.cpp
  *
  * \brief  ns_speedlimiter proxy implementation
- * \author 
- * \date   
- * \note   
+ * \author Monica Delgado
+ * \date   25-06-2021
+ * \note   Based on BROP B1 release
  ******************************************************************************/
 
 #include "si_suppfunctions_mpc.h"
@@ -37,4 +37,4 @@ SISuppFunctionsServer::~SISuppFunctionsServer() {
 }
 
 }  // namespace rovservices
-}  // namespace idc6    
+}  // namespace idc6

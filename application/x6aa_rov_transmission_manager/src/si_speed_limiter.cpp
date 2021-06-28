@@ -2,9 +2,9 @@
  * \file   si_speedlimiter.cpp
  *
  * \brief  ns_speedlimiter proxy implementation
- * \author
- * \date
- * \note
+ * \author Monica Delgado
+ * \date   24-06-2021
+ * \note   Based on BROP B1 release
  ******************************************************************************/
 
 #include "si_speed_limiter.h"

@@ -2,9 +2,9 @@
  * \file   si_suppfunctions_mpc.h
  *
  * \brief  ns_suppfunctions_mpc_service_st3 skeleton implementation
- * \author 
- * \date   
- * \note   
+ * \author Monica Delgado
+ * \date   25-06-2021
+ * \note   Based on BROP B1 release
  ******************************************************************************/
 #ifndef SRC_SI_SUPPFUNCTIONS_MPC_H_
 #define SRC_SI_SUPPFUNCTIONS_MPC_H_
@@ -41,11 +41,6 @@ class SISuppFunctionsServer : public services::ns_suppfunctions_mpc_service_st3:
     ~SISuppFunctionsServer();
 
  private:
-    /*!
-     * \brief Create logger
-     */
-    ara::log::Logger& log_{ara::log::CreateLogger("SupF", "Supp Func")};
-
     /*!
      * \brief Service instance identifier.
      */
