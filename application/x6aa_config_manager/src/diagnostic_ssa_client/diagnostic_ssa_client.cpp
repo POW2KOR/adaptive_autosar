@@ -9,8 +9,6 @@
 /* include own header first to ensure that is self contained */
 #include "diagnostic_ssa_client.h"
 
-/* C system includes */
-
 /* C++ system includes */
 #include <memory>
 #include <string>
@@ -103,10 +101,16 @@ bool DiagnosticSsaClient::SubscribeToEvents()
             ssa_variant_coding_service_proxy->Ev_CalculationResult.Subscribe(
                 ara::com::EventCacheUpdatePolicy::kLastN, 1);
 
+            ara::com::SubscriptionState subscriptionState
+                = ssa_variant_coding_service_proxy->Ev_CalculationResult.GetSubscriptionState();
             /* Remember that the events are subscribed */
-            ssa_variant_coding_events_subscribed.store(true);
-
-            retval = true;
+            if (subscriptionState == ara::com::SubscriptionState::kSubscribed) {
+                ssa_variant_coding_events_subscribed.store(true);
+                retval = true;
+            } else {
+                GetLoggerForSsaClient().LogInfo()
+                    << "Couldn't subscribe to SSA variant coding events.";
+            }
         }
     }
 
