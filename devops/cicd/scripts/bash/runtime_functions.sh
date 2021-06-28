@@ -4,18 +4,30 @@ compile_x86_64_linux_ubuntu()
 {
     bazel build //:minerva_mpu_adaptive_filesystem --config=x86_64_linux --config=use_efs_build_cache --remote_upload_local_results=${isMaster}
     bazel build //:minerva_mpu_adaptive_filesystem --//:mt --config=x86_64_linux --config=use_efs_build_cache --remote_upload_local_results=${isMaster}
+
+    # For now we need config stripped because the parition size is limited to
+    # 512MB and our binaries have more than that.
+    bazel build //deployment/minerva_mpu_adaptive:filesystem_update_package --config=stripped --config=x86_64_linux --config=use_efs_build_cache --remote_upload_local_results=${isMaster}
 }
 
 compile_aarch64_linux_ubuntu()
 {
     bazel build //:minerva_mpu_adaptive_filesystem --config=aarch64_linux_ubuntu --config=use_efs_build_cache --remote_upload_local_results=${isMaster}
     bazel build //:minerva_mpu_adaptive_filesystem --//:mt --config=aarch64_linux_ubuntu --config=use_efs_build_cache --remote_upload_local_results=${isMaster}
+
+    # For now we need config stripped because the parition size is limited to
+    # 512MB and our binaries have more than that.
+    bazel build //deployment/minerva_mpu_adaptive:filesystem_update_package --config=stripped --config=aarch64_linux_ubuntu --config=use_efs_build_cache --remote_upload_local_results=${isMaster}
 }
 
 compile_aarch64_linux_linaro()
 {
     bazel build //:minerva_mpu_adaptive_filesystem --config=aarch64_linux_linaro --config=use_efs_build_cache --remote_upload_local_results=${isMaster}
     bazel build //:minerva_mpu_adaptive_filesystem --//:mt --config=aarch64_linux_linaro --config=use_efs_build_cache --remote_upload_local_results=${isMaster}
+
+    # For now we need config stripped because the parition size is limited to
+    # 512MB and our binaries have more than that.
+    bazel build //deployment/minerva_mpu_adaptive:filesystem_update_package --config=stripped --config=aarch64_linux_linaro --config=use_efs_build_cache --remote_upload_local_results=${isMaster}
 }
 
 
