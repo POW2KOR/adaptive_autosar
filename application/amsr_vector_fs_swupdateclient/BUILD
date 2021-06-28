@@ -491,12 +491,23 @@ cc_binary(
         "pthread",
     ],
     linkstatic = 1,
-    local_defines = [
-        "ENABLE_NVIDIA_UPDATE_STRATEGY=ON",
+    local_defines = select({
+        "//:aarch64": [
+            "ENABLE_NVIDIA_UPDATE_STRATEGY=ON",
+        ],
+        "//:k8": [
+            "ENABLE_NVIDIA_UPDATE_STRATEGY=OFF",
+        ],
+    }) + [
         "VIRTUALMOCK=",
         "ENABLE_EXEC_MANAGER=ON",
     ],
-    deps = [
+    deps = select({
+        "//:aarch64": [
+            "@amsr_xavier//:nvidia_update_strategy",
+        ],
+        "//conditions:default": [],
+    }) + [
         ":ipcbinding_hdrs_lib",
         ":socal_hdrs_lib",
         ":someipprotocol_config_hdrs_lib",
@@ -515,7 +526,6 @@ cc_binary(
         "@amsr_xavier//:diag_rpc_com_binding_srcs_lib",
         "@amsr_xavier//:lib_doip_binding_hdrs_lib",
         "@amsr_xavier//:lib_doip_binding_src_hdrs_lib",
-        "@amsr_xavier//:nvidia_update_strategy",
         "@minerva_mpu_adaptive//application/diagnostic_manager_deamon_executable:socal_hdrs_lib",
     ],
 )
