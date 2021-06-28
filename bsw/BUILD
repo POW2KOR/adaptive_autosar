@@ -800,3 +800,11 @@ minerva_aa_bsw_module(
         ":amsr_vector_fs_vajson",
     ],
 )
+
+py_binary(
+    name = "amsrswpkg_generator",
+    srcs = ["@amsr_xavier//:amsrswpkg_generator"],
+    main = "Examples/nvidia-update-strategy/addon/amsrswpkg_generator/generate.py",
+    python_version = "PY3",
+    srcs_version = "PY3",
+)
