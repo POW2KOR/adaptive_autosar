@@ -41,7 +41,8 @@ using vac::container::operator""_sv;
  * \brief Initialize application.
  */
 ApplicationBase::ApplicationBase(std::string name, int cycle_time)
-  : name_(name), cycle_time_(cycle_time) {
+  : name_(name), cycle_time_(cycle_time),
+  am_(std::make_shared<ActivationManagerTimer>(std::chrono::milliseconds(cycle_time_))) {
 
   GetLogger().LogInfo() << name_ << " is initializing...";
 
@@ -127,9 +128,6 @@ std::int8_t ApplicationBase::Run() {
     this->ReportApplicationState(ara::exec::ApplicationState::kRunning);
 
     GetLogger().LogInfo() << name_ << " application started";
-
-    // TODO: Make the activation manager a class member
-    std::shared_ptr<ActivationManagerBase> am_(new ActivationManagerTimer(std::chrono::milliseconds(cycle_time_)));
 
     while (!exit_requested_) {
       am_->wait();

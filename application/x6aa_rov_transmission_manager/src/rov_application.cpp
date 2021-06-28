@@ -89,8 +89,6 @@ std::int8_t RovApplication::Run() {
 
     GetLogger().LogInfo() << "rov_tx_manager application started";
 
-    std::shared_ptr<ActivationManagerBase> am_(new ActivationManagerTimer(std::chrono::milliseconds(500)));
-
     while (!exit_requested_) {
       am_->wait();
       GetLogger().LogDebug() << "Running in cycle " << am_->getCycle();

@@ -160,8 +160,7 @@ class ApplicationBase {
   /*!
    * \brief Activation manager instance.
    */
-  // TODO: Enable class member
-  //std::shared_ptr<ActivationManagerBase> am_;
+  std::shared_ptr<ActivationManagerBase> am_;
 
 };
 
