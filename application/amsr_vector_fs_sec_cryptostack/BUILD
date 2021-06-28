@@ -18,27 +18,27 @@ filegroup(
 
 filegroup(
     name = "logging_config",
-    srcs = ["configs/etc/logging_config.json"],
+    srcs = ["configs/logging_config.json"],
 )
 
 filegroup(
     name = "exec_config",
-    srcs = ["configs/etc/exec_config.json"],
+    srcs = ["configs/exec_config.json"],
 )
 
 filegroup(
     name = "daemon_config",
-    srcs = ["configs/etc/daemon_config.json"],
+    srcs = ["configs/daemon_config.json"],
 )
 
 filegroup(
     name = "ksp_config",
-    srcs = ["configs/etc/daemon_config.json"],
+    srcs = ["configs/ksp.json"],
 )
 
 filegroup(
     name = "predefined_slots",
-    srcs = ["configs/etc/predefined_slots"],
+    srcs = ["configs/predefined_slots"],
 )
 
 filegroup(
@@ -66,6 +66,11 @@ filegroup(
     srcs = ["configs/var/crypto/example_slots"],
 )
 
+filegroup(
+    name = "per_slots",
+    srcs = ["configs/etc"],
+)
+
 pkg_tar(
     name = "package",
     files = {
@@ -80,6 +85,10 @@ pkg_tar(
         ":new_csrs": "var/crypto/csrs/new/.empty",
         ":pending_csrs": "var/crypto/csrs/pending/.empty",
         ":example_slots": "var/crypto/example_slots",
+        # In the latest delivery the persistency related folders are created
+        # outside the etc directory. It is created at the same level of sbin
+        # directory. For achiving that the use of "../../" is needed.
+        ":per_slots": "../../per/amsr_vector_fs_sec_cryptostack_daemon/etc",
     },
     mode = "0755",
     package_dir = "opt/amsr_vector_fs_sec_cryptostack_daemon",

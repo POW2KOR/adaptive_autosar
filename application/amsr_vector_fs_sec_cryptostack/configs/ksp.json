@@ -1,5 +1,5 @@
 {
-  "generatePath": "slots",
+  "generatePath": "./../../../per/amsr_vector_fs_sec_cryptostack_daemon/etc/slots",
   "slots": [
     {
       "number": 1,

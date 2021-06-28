@@ -19,20 +19,18 @@ filegroup(
 filegroup(
     name = "software_update_arxml",
     srcs = [
-        "arxmls/SWUC_DiagCore_Deployment.arxml",
-        "arxmls/SWUC_TPUM_Design.arxml",
-        "arxmls/SWUC_DiagCore_Design.arxml",
-        "arxmls/SWUC_TPUM_Types.arxml",
-        "arxmls/SWUC_TPUM_Deployment.arxml",
-        #"arxmls/example_em_app.arxml",
         "arxmls/SWUC_Deployment.arxml",
         "arxmls/SWUC_Design.arxml",
+        "arxmls/SWUC_DiagCore_Deployment.arxml",
+        "arxmls/SWUC_DiagCore_Design.arxml",
         "arxmls/SWUC_DiagCore_SDA_Interface_Deployment.arxml",
-        "arxmls/SWUC_Diag_Design.arxml",
         "arxmls/SWUC_DiagCore_Types.arxml",
         "arxmls/SWUC_Diag_Deployment.arxml",
+        "arxmls/SWUC_Diag_Design.arxml",
+        "arxmls/SWUC_TPUM_Deployment.arxml",
+        "arxmls/SWUC_TPUM_Design.arxml",
+        "arxmls/SWUC_TPUM_Types.arxml",
         "arxmls/softwarecluster_extensions.arxml",
-        #"arxmls/SWUC_Types.arxml",
     ],
     visibility = ["//visibility:public"],
 )
@@ -228,20 +226,8 @@ minerva_aa_codegen_rule(
     },
 )
 
-minerva_aa_codegen_rule(
-    name = "someipbinding_gen_rule",
-    arxml_srcs = [
-        ":app_arxml",
-        ":software_update_arxml",
-    ],
-    generators = [
-        "@amsr_xavier//:generator_amsr_someipbinding",
-    ],
-    ignore_matches = genr_ignore_patterns,
-    outs_list_dict = {
-        # Currently there are no files generated for diagmanager
-    },
-)
+# Currently there are no files generated for SWUC for
+# SomeipBuinding Genrule. That's why that genrule is not added.
 
 minerva_aa_codegen_rule(
     name = "someipprotocol_gen_rule",
@@ -495,9 +481,7 @@ cc_binary(
         "//:aarch64": [
             "ENABLE_NVIDIA_UPDATE_STRATEGY=ON",
         ],
-        "//:k8": [
-            "ENABLE_NVIDIA_UPDATE_STRATEGY=OFF",
-        ],
+        "//conditions:default": [],
     }) + [
         "VIRTUALMOCK=",
         "ENABLE_EXEC_MANAGER=ON",

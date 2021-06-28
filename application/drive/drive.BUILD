@@ -5,7 +5,6 @@ package(default_visibility = ["//visibility:public"])
 filegroup(
     name = "drive_includes",
     srcs = glob(["drive-t186ref-linux/include/**/*.h"]),
-    visibility = ["//visibility:public"],
 )
 
 cc_library(

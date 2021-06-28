@@ -19577,7 +19577,7 @@ LONG: PT4_PTCoor4_Pr5_ST3 (degraded)</L-2>
 						<PERSISTENCY-FILE-ARRAY>
 							<SHORT-NAME>Deamon_PersistencyFileArray</SHORT-NAME>
 							<UPDATE-STRATEGY>KEEP-EXISTING</UPDATE-STRATEGY>
-							<URI>./etc/nv_data</URI>
+							<URI>../../per/DiagnosticManagerDeamonExecutable/etc/nv_data</URI>
 						</PERSISTENCY-FILE-ARRAY>
 						<!-- /Diagnostics/Persistency/PersistencyInterface -->
 						<PERSISTENCY-FILE-PROXY-INTERFACE>
