@@ -150,5 +150,5 @@ new_git_repository(
         "@//application/x6aa_resource_monitor:remove-srcdir-prefix.patch",
     ],
     remote = "ssh://git@git.swf.daimler.com:7999/dkurbak/collectd.git",
-    # shallow_since = "1612651651 +0100",
+    shallow_since = "1624528179 +0200",
 )

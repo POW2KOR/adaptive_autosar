@@ -220,6 +220,14 @@ filegroup(
 )
 
 filegroup(
+    name = "collectd_lib_collectd_write_dlt_so",
+    srcs = [
+        ":build_collectd",
+    ],
+    output_group = "write_dlt.so",
+)
+
+filegroup(
     name = "collectd_logs_collectd_pid",
     srcs = [
         "collectd.pid",
@@ -241,6 +249,7 @@ pkg_tar(
         ":collectd_lib_collectd_memory_so": "lib/collectd/memory.so",
         ":collectd_lib_collectd_cpu_so": "lib/collectd/cpu.so",
         ":collectd_lib_collectd_csv_so": "lib/collectd/csv.so",
+        ":collectd_lib_collectd_write_dlt_so": "lib/collectd/write_dlt.so",
     },
     mode = "0755",
     package_dir = "/opt/X6AA_Ressource_Executable",
