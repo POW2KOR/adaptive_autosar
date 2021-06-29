@@ -23,4 +23,4 @@ sudo chown -R $UID:$UID /bazel_cache
 printf "\nAll done 👌\n\n"
 printf "👉 Build with something like:\n\n"
 
-printf "bazel build //:minerva_mpu_adaptive_filesystem --config=x86_64_linux\n\n"
+printf "bazel build //deployment/minerva_mpu_adaptive:filesystem_tar --config=x86_64_linux\n\n"
