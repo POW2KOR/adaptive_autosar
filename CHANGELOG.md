@@ -4,7 +4,7 @@
 
 ### Changed
 
-* Release step 1B4 of AMSR is used.
+* Release step 1B5.1 of AMSR is used.
 * The IDC ECU extract replaces the Starter Kit ECU extract that was used until now.
 * Applications each now have its own `package` target implemented using Bazel `pkg_tar`. The application and the config
 files get built into the filesystem using this package.
@@ -14,3 +14,8 @@ files get built into the filesystem using this package.
 run.
 * An application base library has been created to contain the common parts for Adaptive applications. Applications
 should add `//application/common:application_base` to their `deps` and derive from the base class.
+
+### Deprecated
+
+* The `//:minerva_mpu_adaptive_filesystem` is deprecated. Please use the
+`//deployment/minerva_mpu_adaptive:filesystem_tar` target instead.
