@@ -9,8 +9,6 @@
 #ifndef SRC_SI_SUPPFUNCTIONS_MPC_H_
 #define SRC_SI_SUPPFUNCTIONS_MPC_H_
 
-/* C system includes */
-
 
 /* C++ system includes */
 #include <memory>

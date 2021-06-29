@@ -10,8 +10,6 @@
 /* include own header first to make sure it is self contained */
 #include "activation_manager.h"
 
-/* C system includes */
-
 
 /* C++ system includes */
 #include <cerrno>
@@ -23,9 +21,7 @@
 
 
 ActivationManagerBase::ActivationManagerBase(std::chrono::nanoseconds cycle_time, const std::string name)
-  :
-    name_(name),
-    cycle_time_(cycle_time) {
+  : name_(name), cycle_time_(cycle_time) {
 #ifdef SPDLOG
   logger_ = spdlog::stdout_color_mt(name_);
 #endif /* SPDLOG */

@@ -10,8 +10,6 @@
 
 #include "si_suppfunctions_mpc.h"
 
-/* C system includes */
-
 /* C++ system includes */
 #include <memory>
 #include <string>

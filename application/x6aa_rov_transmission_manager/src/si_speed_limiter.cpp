@@ -9,8 +9,6 @@
 
 #include "si_speed_limiter.h"
 
-/* C system includes */
-
 /* C++ system includes */
 #include <memory>
 #include <string>
@@ -142,25 +140,18 @@ void SISpeedlimiter::FindServiceHandler(
   } else if (si_speedlimiter_services.size() == 1) {
     /* If there is exactly one service found */
     GetLogger().LogInfo() << "Found one SI_Speedlimiter service instance";
-
-    /* Get proxy instance */
-    si_speedlimiter_service_proxy_ =
-      std::make_shared<services::ns_speedlimiter::proxy::
-    SI_SpeedLimiterProxy>(si_speedlimiter_services[0]);
-
-    /* Remember that a service is found */
-    si_speedlimiter_service_found_.store(true);
   } else {
     /* If there are multiple services found */
     GetLogger().LogInfo() << "Found multiple instances of SI_Speedlimiter service, use the first one";
-
-    /* Get proxy instance */
-    si_speedlimiter_service_proxy_ =
-      std::make_shared<services::ns_speedlimiter::proxy::SI_SpeedLimiterProxy>(si_speedlimiter_services[0]);
-
-    /* Remember that a service is found */
-    si_speedlimiter_service_found_.store(true);
   }
+
+  /* Get proxy instance */
+  si_speedlimiter_service_proxy_ =
+    std::make_shared<services::ns_speedlimiter::proxy::
+    SI_SpeedLimiterProxy>(si_speedlimiter_services[0]);
+
+  /* Remember that a service is found */
+  si_speedlimiter_service_found_.store(true);
 }
 
 void SISpeedlimiter::Ev_CapabilitiesHandler() {
