@@ -436,6 +436,8 @@ cc_library(
 cc_binary(
     name = "app",
     srcs = [
+        "src/diagnostic_ssa_client/diagnostic_ssa_client.cpp",
+        "src/diagnostic_ssa_client/diagnostic_ssa_client.h",
         "src/main.cpp",
         "src/persistent_mem_accessor/persistent_mem_accessor.cpp",
         "src/persistent_mem_accessor/persistent_mem_accessor.h",

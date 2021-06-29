@@ -277,8 +277,8 @@ cc_library(
 cc_binary(
     name = "app",
     srcs = [
-        "src/dummy_2_application.cpp",
-        "src/dummy_2_application.h",
+        "src/dummy_ssa_server.cpp",
+        "src/dummy_ssa_server.h",
         "src/main.cpp",
         ":init_deinit_srcs",
         ":someip_binding_initializer",
