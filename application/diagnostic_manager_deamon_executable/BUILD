@@ -402,7 +402,7 @@ cc_binary(
         "@amsr_xavier//:diag_daemon_impl",
         "@amsr_xavier//:diag_deamon_rpc_hdrs_lib",
         "@amsr_xavier//:diag_deamon_rpc_src_hdrs_lib",
-        "@amsr_xavier//:lib_doip_binding_hdrs_lib",
+        "@amsr_xavier//:lib_doip_binding_src_hdrs_lib",
         "@minerva_mpu_adaptive//bsw:amsr_vector_fs_doipbinding",
     ],
 )
@@ -422,7 +422,10 @@ pkg_tar(
         ":dm_server_config_json": "etc/dm_server_config_SoftwareClusterPlatform.json",
         ":persistency_file_storage_config_json": "etc/per_file_storage_config.json",
         "//application/sda:updatemanager": "etc/updatemanager.json",
-        ":diagnostic_manager_nv_data": "etc/nv_data",
+        # In the latest delivery the persistency related folders are created
+        # outside the etc directory. It is created at the same level of sbin
+        # directory. For achiving that the use of "../../" is needed.
+        ":diagnostic_manager_nv_data": "../../per/DiagnosticManagerDeamonExecutable/etc/nv_data",
     },
     mode = "0755",
     package_dir = "opt/DiagnosticManagerDeamonExecutable",

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<AUTOSAR xmlns="http://autosar.org/schema/r4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" S="1462A103CCA27332D9C0C78D10207B2C779415DA" T="2020-11-11T10:33:01+01:00" xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_00047.xsd">
+  <ADMIN-DATA>
+    <LANGUAGE>EN</LANGUAGE>
+  </ADMIN-DATA>
+  <AR-PACKAGES>
+    <AR-PACKAGE T="2020-11-19T10:40:32+01:00" UUID="3ABE66C62EBB4C86B8FAEC01ACC9920D">
+      <SHORT-NAME>SoftwareDistribution</SHORT-NAME>
+      <AR-PACKAGES>
+        <AR-PACKAGE UUID="2dfd01c3-b203-463c-a251-7b46f9517764">
+          <SHORT-NAME>SoftwareCluster</SHORT-NAME>
+          <ELEMENTS>
+            <SOFTWARE-CLUSTER T="2020-11-19T10:40:32+01:00" UUID="1CE450EBC5AC49DFBF5CE204513C7A51">
+              <SHORT-NAME>SoftwareClusterPlatform</SHORT-NAME>
+              <CONTAINED-PROCESS-REFS>
+                <CONTAINED-PROCESS-REF DEST="PROCESS">/SWUC/amsr_swupdateclient_process</CONTAINED-PROCESS-REF>
+              </CONTAINED-PROCESS-REFS>
+              <VENDOR-ID>4660</VENDOR-ID>
+              <VERSION>1.0.0.0000</VERSION>
+            </SOFTWARE-CLUSTER>
+          </ELEMENTS>
+        </AR-PACKAGE>
+        <AR-PACKAGE>
+          <SHORT-NAME>SoftwareClusterDesign</SHORT-NAME>
+          <ELEMENTS>
+            <!-- /SoftwareDistribution/SoftwareClusterDesign/temporarySoftwareClusterDesignPer -->
+            <SOFTWARE-CLUSTER-DESIGN>
+              <SHORT-NAME>temporarySoftwareClusterDesignPer</SHORT-NAME>
+              <CONTAINED-PROCESS-REFS>
+                <CONTAINED-PROCESS-REF DEST="PROCESS-DESIGN">/SWUC/amsr_swupdateclient_process_design</CONTAINED-PROCESS-REF>
+              </CONTAINED-PROCESS-REFS>
+              <INTENDED-TARGET-MACHINE-REF DEST="MACHINE-DESIGN">/Topology/HardwareComponents/IDC_Adpative</INTENDED-TARGET-MACHINE-REF>
+            </SOFTWARE-CLUSTER-DESIGN>
+          </ELEMENTS>
+        </AR-PACKAGE>
+      </AR-PACKAGES>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>

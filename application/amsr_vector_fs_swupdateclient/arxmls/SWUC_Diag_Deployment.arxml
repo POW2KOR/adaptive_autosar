@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<AUTOSAR xmlns="http://autosar.org/schema/r4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_00047.xsd">
+  <AR-PACKAGES>
+    <AR-PACKAGE UUID="06c547aa-fe98-4a19-89a4-0a67a2afb22c">
+      <SHORT-NAME>SWUC</SHORT-NAME>
+      <AR-PACKAGES>
+        <AR-PACKAGE UUID="06c547aa-fe98-4a19-89a4-0a67a2afb33c">
+          <SHORT-NAME>DiagCore</SHORT-NAME>
+          <AR-PACKAGES>
+            <AR-PACKAGE UUID="3bfa81b1-68e3-4017-a2de-4732f12776f9">
+              <SHORT-NAME>Diag_Deployment</SHORT-NAME>
+              <ELEMENTS>
+                <SERVICE-INSTANCE-TO-PORT-PROTOTYPE-MAPPING UUID="df756439-46b4-47a9-a3b5-84056fe6f6f5">
+                  <SHORT-NAME>Diag_ProvidedBindingServiceInstance_DiagComApi_toPort</SHORT-NAME>
+                  <PORT-PROTOTYPE-IREF>
+                    <CONTEXT-ROOT-SW-COMPONENT-PROTOTYPE-REF DEST="ROOT-SW-COMPONENT-PROTOTYPE">/SWUC/amsr_swupdateclient/RootSwc</CONTEXT-ROOT-SW-COMPONENT-PROTOTYPE-REF>
+                    <TARGET-PORT-PROTOTYPE-REF DEST="P-PORT-PROTOTYPE">/SWUC/SoftwareUpdateClientSwcType/amsr_DiagComApi</TARGET-PORT-PROTOTYPE-REF>
+                  </PORT-PROTOTYPE-IREF>
+                  <PROCESS-REF DEST="PROCESS">/SWUC/amsr_swupdateclient_process</PROCESS-REF>
+                  <SERVICE-INSTANCE-REF DEST="PROVIDED-USER-DEFINED-SERVICE-INSTANCE">/SWUC/DiagCore/Diag_Deployment/Diag_ProvidedBindingServiceInstance_DiagComApi</SERVICE-INSTANCE-REF>
+                </SERVICE-INSTANCE-TO-PORT-PROTOTYPE-MAPPING>
+                <PROVIDED-USER-DEFINED-SERVICE-INSTANCE UUID="1e6fc6e0-ccb2-44ad-a2b9-d0d29e60ece4">
+                  <SHORT-NAME>Diag_ProvidedBindingServiceInstance_DiagComApi</SHORT-NAME>
+                  <ADMIN-DATA>
+                    <SDGS>
+                      <SDG GID="DV:IPC">
+                        <SD GID="DV:SERVICE-INSTANCE-ID">1001</SD>
+                        <SDG GID="DV:SERVICE-DISCOVERY">
+                          <SD GID="DV:DOMAIN">14230</SD>
+                          <SD GID="DV:PORT">31403</SD>
+                          <SD GID="DV:SERVICE-OFFER-TIME-TO-LIVE">2</SD>
+                        </SDG>
+                      </SDG>
+                    </SDGS>
+                  </ADMIN-DATA>
+                  <SERVICE-INTERFACE-REF DEST="USER-DEFINED-SERVICE-INTERFACE-DEPLOYMENT">/ServiceInterfaces/ServiceInterfaceDeployments/DiagComApi_Binding</SERVICE-INTERFACE-REF>
+                </PROVIDED-USER-DEFINED-SERVICE-INSTANCE>
+                <DIAGNOSTIC-SERVICE-SW-MAPPING UUID="1f6333b1-6941-4220-8996-a1dd37408077">
+                  <SHORT-NAME>Diag_ServiceSwMapping_Routine_EraseMemory</SHORT-NAME>
+                  <MAPPED-SWC-SERVICE-DEPENDENCY-IN-EXECUTABLE-IREF>
+                    <TARGET-SWC-SERVICE-DEPENDENCY-REF DEST="SWC-SERVICE-DEPENDENCY">/SWUC/SoftwareUpdateClientSwcType/AdaptiveSwcInternalBehavior/SwcServiceDependency_EraseMemory</TARGET-SWC-SERVICE-DEPENDENCY-REF>
+                  </MAPPED-SWC-SERVICE-DEPENDENCY-IN-EXECUTABLE-IREF>
+                  <PROCESS-REF DEST="PROCESS-DESIGN">/SWUC/amsr_swupdateclient_process_design</PROCESS-REF>
+                  <SERVICE-INSTANCE-REF DEST="DIAGNOSTIC-ROUTINE-CONTROL">/Diagnostics/Dcm/ServiceInstances/Erase_Memory</SERVICE-INSTANCE-REF>
+                </DIAGNOSTIC-SERVICE-SW-MAPPING>
+                <DIAGNOSTIC-SERVICE-SW-MAPPING UUID="bf7e2dc4-2352-4cf4-9df8-b76d83c6e5cb">
+                  <SHORT-NAME>Diag_ServiceSwMapping_Routine_CheckMemory</SHORT-NAME>
+                  <MAPPED-SWC-SERVICE-DEPENDENCY-IN-EXECUTABLE-IREF>
+                    <TARGET-SWC-SERVICE-DEPENDENCY-REF DEST="SWC-SERVICE-DEPENDENCY">/SWUC/SoftwareUpdateClientSwcType/AdaptiveSwcInternalBehavior/SwcServiceDependency_CheckMemory</TARGET-SWC-SERVICE-DEPENDENCY-REF>
+                  </MAPPED-SWC-SERVICE-DEPENDENCY-IN-EXECUTABLE-IREF>
+                  <PROCESS-REF DEST="PROCESS-DESIGN">/SWUC/amsr_swupdateclient_process_design</PROCESS-REF>
+                  <SERVICE-INSTANCE-REF DEST="DIAGNOSTIC-ROUTINE-CONTROL">/Diagnostics/Dcm/ServiceInstances/Check_memory</SERVICE-INSTANCE-REF>
+                </DIAGNOSTIC-SERVICE-SW-MAPPING>
+                <DIAGNOSTIC-SERVICE-SW-MAPPING UUID="34d24453-63c7-4b39-9e49-c97e85ac2261">
+                  <SHORT-NAME>Diag_ServiceSwMapping_Routine_CheckProgrammingDependencies</SHORT-NAME>
+                  <MAPPED-SWC-SERVICE-DEPENDENCY-IN-EXECUTABLE-IREF>
+                    <TARGET-SWC-SERVICE-DEPENDENCY-REF DEST="SWC-SERVICE-DEPENDENCY">/SWUC/SoftwareUpdateClientSwcType/AdaptiveSwcInternalBehavior/SwcServiceDependency_CheckProgrammingDependencies</TARGET-SWC-SERVICE-DEPENDENCY-REF>
+                  </MAPPED-SWC-SERVICE-DEPENDENCY-IN-EXECUTABLE-IREF>
+                  <PROCESS-REF DEST="PROCESS-DESIGN">/SWUC/amsr_swupdateclient_process_design</PROCESS-REF>
+                  <SERVICE-INSTANCE-REF DEST="DIAGNOSTIC-ROUTINE-CONTROL">/Diagnostics/Dcm/ServiceInstances/CheckProgrammingDependencies</SERVICE-INSTANCE-REF>
+                </DIAGNOSTIC-SERVICE-SW-MAPPING>
+                <DIAGNOSTIC-SERVICE-SW-MAPPING UUID="7c0db587-8b37-4f68-8489-ad81ba00d6c3">
+                  <SHORT-NAME>Diag_ServiceSwMapping_Routine_CerifyMemoryContent</SHORT-NAME>
+                  <MAPPED-SWC-SERVICE-DEPENDENCY-IN-EXECUTABLE-IREF>
+                    <TARGET-SWC-SERVICE-DEPENDENCY-REF DEST="SWC-SERVICE-DEPENDENCY">/SWUC/SoftwareUpdateClientSwcType/AdaptiveSwcInternalBehavior/SwcServiceDependency_VerifyMemoryContent</TARGET-SWC-SERVICE-DEPENDENCY-REF>
+                  </MAPPED-SWC-SERVICE-DEPENDENCY-IN-EXECUTABLE-IREF>
+                  <PROCESS-REF DEST="PROCESS-DESIGN">/SWUC/amsr_swupdateclient_process_design</PROCESS-REF>
+                  <SERVICE-INSTANCE-REF DEST="DIAGNOSTIC-ROUTINE-CONTROL">/Diagnostics/Dcm/ServiceInstances/Verify_Memory_Content</SERVICE-INSTANCE-REF>
+                </DIAGNOSTIC-SERVICE-SW-MAPPING>
+                <DIAGNOSTIC-SERVICE-DATA-IDENTIFIER-PORT-MAPPING UUID="488ce9e4-1840-4126-88eb-e24638dde2f3">
+                  <SHORT-NAME>Diag_ServiceDataIdentifierPortMapping_ReadFingerPrints</SHORT-NAME>
+                  <DIAGNOSTIC-DATA-IDENTIFIER-REF DEST="DIAGNOSTIC-DATA-IDENTIFIER">/Diagnostics/Common/Read_Software_Fingerprint_s</DIAGNOSTIC-DATA-IDENTIFIER-REF>
+                  <PROCESS-REF DEST="PROCESS-DESIGN">/SWUC/amsr_swupdateclient_process_design</PROCESS-REF>
+                  <SWC-SERVICE-DEPENDENCY-IN-EXECUTABLE-IREF>
+                    <TARGET-SWC-SERVICE-DEPENDENCY-REF DEST="SWC-SERVICE-DEPENDENCY">/SWUC/SoftwareUpdateClientSwcType/AdaptiveSwcInternalBehavior/SwcServiceDependency_DID_GenericInterface</TARGET-SWC-SERVICE-DEPENDENCY-REF>
+                  </SWC-SERVICE-DEPENDENCY-IN-EXECUTABLE-IREF>
+                </DIAGNOSTIC-SERVICE-DATA-IDENTIFIER-PORT-MAPPING>
+                <DIAGNOSTIC-SERVICE-DATA-IDENTIFIER-PORT-MAPPING UUID="1189fddf-27b8-4b85-ba83-718878544546">
+                  <SHORT-NAME>Diag_ServiceDataIdentifierPortMapping_ReprogrammingAttemptCounter</SHORT-NAME>
+                  <DIAGNOSTIC-DATA-IDENTIFIER-REF DEST="DIAGNOSTIC-DATA-IDENTIFIER">/Diagnostics/Common/Reprogramming_Attempt_Counter</DIAGNOSTIC-DATA-IDENTIFIER-REF>
+                  <PROCESS-REF DEST="PROCESS-DESIGN">/SWUC/amsr_swupdateclient_process_design</PROCESS-REF>
+                  <SWC-SERVICE-DEPENDENCY-IN-EXECUTABLE-IREF>
+                    <TARGET-SWC-SERVICE-DEPENDENCY-REF DEST="SWC-SERVICE-DEPENDENCY">/SWUC/SoftwareUpdateClientSwcType/AdaptiveSwcInternalBehavior/SwcServiceDependency_DID_GenericInterface</TARGET-SWC-SERVICE-DEPENDENCY-REF>
+                  </SWC-SERVICE-DEPENDENCY-IN-EXECUTABLE-IREF>
+                </DIAGNOSTIC-SERVICE-DATA-IDENTIFIER-PORT-MAPPING>
+                <DIAGNOSTIC-SERVICE-DATA-IDENTIFIER-PORT-MAPPING UUID="dbd14ab0-741f-4a84-9094-94182a6b76c0">
+                  <SHORT-NAME>Diag_ServiceDataIdentifierPortMapping_WrintFingerPrint</SHORT-NAME>
+                  <DIAGNOSTIC-DATA-IDENTIFIER-REF DEST="DIAGNOSTIC-DATA-IDENTIFIER">/Diagnostics/Common/Write_Software_Fingerprint</DIAGNOSTIC-DATA-IDENTIFIER-REF>
+                  <PROCESS-REF DEST="PROCESS-DESIGN">/SWUC/amsr_swupdateclient_process_design</PROCESS-REF>
+                  <SWC-SERVICE-DEPENDENCY-IN-EXECUTABLE-IREF>
+                    <TARGET-SWC-SERVICE-DEPENDENCY-REF DEST="SWC-SERVICE-DEPENDENCY">/SWUC/SoftwareUpdateClientSwcType/AdaptiveSwcInternalBehavior/SwcServiceDependency_DID_GenericInterface</TARGET-SWC-SERVICE-DEPENDENCY-REF>
+                  </SWC-SERVICE-DEPENDENCY-IN-EXECUTABLE-IREF>
+                </DIAGNOSTIC-SERVICE-DATA-IDENTIFIER-PORT-MAPPING>
+              </ELEMENTS>
+            </AR-PACKAGE>
+          </AR-PACKAGES>
+        </AR-PACKAGE>
+      </AR-PACKAGES>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>

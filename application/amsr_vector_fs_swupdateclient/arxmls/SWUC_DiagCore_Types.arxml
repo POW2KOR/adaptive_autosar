@@ -1,0 +1,711 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<AUTOSAR xmlns="http://autosar.org/schema/r4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_00047.xsd">
+  <AR-PACKAGES>
+    <AR-PACKAGE UUID="06c547aa-fe98-4a19-89a4-0a67a2afb22c">
+      <SHORT-NAME>SWUC</SHORT-NAME>
+      <AR-PACKAGES>
+        <AR-PACKAGE UUID="06c547aa-fe98-4a19-89a4-0a67a2afb33c">
+          <SHORT-NAME>DiagCore</SHORT-NAME>
+          <AR-PACKAGES>
+            <AR-PACKAGE UUID="b1a3a864-422d-42b6-8725-085fd6f83613">
+              <SHORT-NAME>Types</SHORT-NAME>
+              <ELEMENTS>
+                <STD-CPP-IMPLEMENTATION-DATA-TYPE UUID="a75b7bd6-69a6-491d-ba06-b172bdb96eb3">
+                  <SHORT-NAME>RegulationSoftwareIdentification</SHORT-NAME>
+                  <CATEGORY>STRUCTURE</CATEGORY>
+                  <NAMESPACES>
+                    <SYMBOL-PROPS>
+                      <SHORT-NAME>ns0</SHORT-NAME>
+                      <SYMBOL>amsr</SYMBOL>
+                    </SYMBOL-PROPS>
+                    <SYMBOL-PROPS>
+                      <SHORT-NAME>ns1</SHORT-NAME>
+                      <SYMBOL>swuc</SYMBOL>
+                    </SYMBOL-PROPS>
+                  </NAMESPACES>
+                  <SUB-ELEMENTS>
+                    <CPP-IMPLEMENTATION-DATA-TYPE-ELEMENT UUID="6a750c74-4f82-40b1-b78d-ab715c3522e8">
+                      <SHORT-NAME>regulation_identification</SHORT-NAME>
+                      <TYPE-REFERENCE>
+                        <TYPE-REFERENCE-REF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/SWUC/Types/StringType</TYPE-REFERENCE-REF>
+                      </TYPE-REFERENCE>
+                    </CPP-IMPLEMENTATION-DATA-TYPE-ELEMENT>
+                    <CPP-IMPLEMENTATION-DATA-TYPE-ELEMENT UUID="78bf82d1-0740-482a-b64f-0e2e44ae71f6">
+                      <SHORT-NAME>software_identification</SHORT-NAME>
+                      <TYPE-REFERENCE>
+                        <TYPE-REFERENCE-REF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/SWUC/Types/StringType</TYPE-REFERENCE-REF>
+                      </TYPE-REFERENCE>
+                    </CPP-IMPLEMENTATION-DATA-TYPE-ELEMENT>
+                  </SUB-ELEMENTS>
+                  <TYPE-EMITTER>TYPE_EMITTER_ARA</TYPE-EMITTER>
+                </STD-CPP-IMPLEMENTATION-DATA-TYPE>
+                <STD-CPP-IMPLEMENTATION-DATA-TYPE UUID="36a08334-a9a9-40f1-8499-81261737fc79">
+                  <SHORT-NAME>RoutineCheckMemorySignature</SHORT-NAME>
+                  <CATEGORY>ARRAY</CATEGORY>
+                  <ARRAY-SIZE>64</ARRAY-SIZE>
+                  <NAMESPACES>
+                    <SYMBOL-PROPS>
+                      <SHORT-NAME>ns0</SHORT-NAME>
+                      <SYMBOL>amsr</SYMBOL>
+                    </SYMBOL-PROPS>
+                    <SYMBOL-PROPS>
+                      <SHORT-NAME>ns1</SHORT-NAME>
+                      <SYMBOL>swuc</SYMBOL>
+                    </SYMBOL-PROPS>
+                  </NAMESPACES>
+                  <TEMPLATE-ARGUMENTS>
+                    <CPP-TEMPLATE-ARGUMENT>
+                      <TEMPLATE-TYPE-REF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/DataTypes/ImplementationDataTypes/uint8_t</TEMPLATE-TYPE-REF>
+                    </CPP-TEMPLATE-ARGUMENT>
+                  </TEMPLATE-ARGUMENTS>
+                  <TYPE-EMITTER>TYPE_EMITTER_ARA</TYPE-EMITTER>
+                </STD-CPP-IMPLEMENTATION-DATA-TYPE>
+                <STD-CPP-IMPLEMENTATION-DATA-TYPE UUID="fbbecb0a-cffd-4c76-9636-6b311be1c2ab">
+                  <SHORT-NAME>Signature_Value</SHORT-NAME>
+                  <CATEGORY>ARRAY</CATEGORY>
+                  <ARRAY-SIZE>64</ARRAY-SIZE>
+                  <NAMESPACES>
+                    <SYMBOL-PROPS>
+                      <SHORT-NAME>ns0</SHORT-NAME>
+                      <SYMBOL>amsr</SYMBOL>
+                    </SYMBOL-PROPS>
+                    <SYMBOL-PROPS>
+                      <SHORT-NAME>ns1</SHORT-NAME>
+                      <SYMBOL>swuc</SYMBOL>
+                    </SYMBOL-PROPS>
+                  </NAMESPACES>
+                  <TEMPLATE-ARGUMENTS>
+                    <CPP-TEMPLATE-ARGUMENT>
+                      <TEMPLATE-TYPE-REF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/DataTypes/ImplementationDataTypes/uint8_t</TEMPLATE-TYPE-REF>
+                    </CPP-TEMPLATE-ARGUMENT>
+                  </TEMPLATE-ARGUMENTS>
+                  <TYPE-EMITTER>TYPE_EMITTER_ARA</TYPE-EMITTER>
+                </STD-CPP-IMPLEMENTATION-DATA-TYPE>
+                <STD-CPP-IMPLEMENTATION-DATA-TYPE UUID="685395c8-e30f-445e-af30-d51158b995ca">
+                  <SHORT-NAME>ControllerID</SHORT-NAME>
+                  <CATEGORY>ARRAY</CATEGORY>
+                  <ARRAY-SIZE>10</ARRAY-SIZE>
+                  <NAMESPACES>
+                    <SYMBOL-PROPS>
+                      <SHORT-NAME>ns0</SHORT-NAME>
+                      <SYMBOL>amsr</SYMBOL>
+                    </SYMBOL-PROPS>
+                    <SYMBOL-PROPS>
+                      <SHORT-NAME>ns1</SHORT-NAME>
+                      <SYMBOL>swuc</SYMBOL>
+                    </SYMBOL-PROPS>
+                  </NAMESPACES>
+                  <TEMPLATE-ARGUMENTS>
+                    <CPP-TEMPLATE-ARGUMENT>
+                      <TEMPLATE-TYPE-REF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/DataTypes/ImplementationDataTypes/uint8_t</TEMPLATE-TYPE-REF>
+                    </CPP-TEMPLATE-ARGUMENT>
+                  </TEMPLATE-ARGUMENTS>
+                  <TYPE-EMITTER>TYPE_EMITTER_ARA</TYPE-EMITTER>
+                </STD-CPP-IMPLEMENTATION-DATA-TYPE>
+                <STD-CPP-IMPLEMENTATION-DATA-TYPE UUID="61952a08-c586-4951-9f71-9f33e348d284">
+                  <SHORT-NAME>ReprogrammingAttemptCounter</SHORT-NAME>
+                  <CATEGORY>STRUCTURE</CATEGORY>
+                  <NAMESPACES>
+                    <SYMBOL-PROPS>
+                      <SHORT-NAME>ns0</SHORT-NAME>
+                      <SYMBOL>amsr</SYMBOL>
+                    </SYMBOL-PROPS>
+                    <SYMBOL-PROPS>
+                      <SHORT-NAME>ns1</SHORT-NAME>
+                      <SYMBOL>swuc</SYMBOL>
+                    </SYMBOL-PROPS>
+                  </NAMESPACES>
+                  <SUB-ELEMENTS>
+                    <CPP-IMPLEMENTATION-DATA-TYPE-ELEMENT UUID="6f0c0887-b213-445f-9a41-eed606523492">
+                      <SHORT-NAME>number_reprogramming_attempts</SHORT-NAME>
+                      <TYPE-REFERENCE>
+                        <TYPE-REFERENCE-REF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/DataTypes/ImplementationDataTypes/uint16_t</TYPE-REFERENCE-REF>
+                      </TYPE-REFERENCE>
+                    </CPP-IMPLEMENTATION-DATA-TYPE-ELEMENT>
+                    <CPP-IMPLEMENTATION-DATA-TYPE-ELEMENT UUID="4bb74432-d3f2-4a13-bf98-1e641b5d5550">
+                      <SHORT-NAME>max_number_reprogramming_attempts</SHORT-NAME>
+                      <TYPE-REFERENCE>
+                        <TYPE-REFERENCE-REF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/DataTypes/ImplementationDataTypes/uint16_t</TYPE-REFERENCE-REF>
+                      </TYPE-REFERENCE>
+                    </CPP-IMPLEMENTATION-DATA-TYPE-ELEMENT>
+                  </SUB-ELEMENTS>
+                  <TYPE-EMITTER>TYPE_EMITTER_ARA</TYPE-EMITTER>
+                </STD-CPP-IMPLEMENTATION-DATA-TYPE>
+                <STD-CPP-IMPLEMENTATION-DATA-TYPE UUID="002b69bc-4baf-4fb6-81c8-728e27aade70">
+                  <SHORT-NAME>ReprogrammingAttemptCounterList</SHORT-NAME>
+                  <CATEGORY>VECTOR</CATEGORY>
+                  <NAMESPACES>
+                    <SYMBOL-PROPS>
+                      <SHORT-NAME>ns0</SHORT-NAME>
+                      <SYMBOL>amsr</SYMBOL>
+                    </SYMBOL-PROPS>
+                    <SYMBOL-PROPS>
+                      <SHORT-NAME>ns1</SHORT-NAME>
+                      <SYMBOL>swuc</SYMBOL>
+                    </SYMBOL-PROPS>
+                  </NAMESPACES>
+                  <TEMPLATE-ARGUMENTS>
+                    <CPP-TEMPLATE-ARGUMENT>
+                      <TEMPLATE-TYPE-REF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/SWUC/DiagCore/Types/ReprogrammingAttemptCounter</TEMPLATE-TYPE-REF>
+                    </CPP-TEMPLATE-ARGUMENT>
+                  </TEMPLATE-ARGUMENTS>
+                  <TYPE-EMITTER>TYPE_EMITTER_ARA</TYPE-EMITTER>
+                </STD-CPP-IMPLEMENTATION-DATA-TYPE>
+                <STD-CPP-IMPLEMENTATION-DATA-TYPE UUID="cfa31208-3b29-4fa9-96f7-ea5cf59bde3e">
+                  <SHORT-NAME>FingerPrint</SHORT-NAME>
+                  <CATEGORY>STRUCTURE</CATEGORY>
+                  <NAMESPACES>
+                    <SYMBOL-PROPS>
+                      <SHORT-NAME>ns0</SHORT-NAME>
+                      <SYMBOL>amsr</SYMBOL>
+                    </SYMBOL-PROPS>
+                    <SYMBOL-PROPS>
+                      <SHORT-NAME>ns1</SHORT-NAME>
+                      <SYMBOL>swuc</SYMBOL>
+                    </SYMBOL-PROPS>
+                  </NAMESPACES>
+                  <SUB-ELEMENTS>
+                    <CPP-IMPLEMENTATION-DATA-TYPE-ELEMENT UUID="89b8dde4-3fc7-4525-9c22-5f9b49a21a63">
+                      <SHORT-NAME>programming_user_id</SHORT-NAME>
+                      <TYPE-REFERENCE>
+                        <TYPE-REFERENCE-REF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/SWUC/DiagCore/Types/FingerPrintId</TYPE-REFERENCE-REF>
+                      </TYPE-REFERENCE>
+                    </CPP-IMPLEMENTATION-DATA-TYPE-ELEMENT>
+                    <CPP-IMPLEMENTATION-DATA-TYPE-ELEMENT UUID="41c4d165-c87a-4582-a69a-5d60d70055ff">
+                      <SHORT-NAME>year</SHORT-NAME>
+                      <TYPE-REFERENCE>
+                        <TYPE-REFERENCE-REF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/DataTypes/ImplementationDataTypes/uint8_t</TYPE-REFERENCE-REF>
+                      </TYPE-REFERENCE>
+                    </CPP-IMPLEMENTATION-DATA-TYPE-ELEMENT>
+                    <CPP-IMPLEMENTATION-DATA-TYPE-ELEMENT UUID="78299c1c-152f-4b7a-9173-9dcabeba1092">
+                      <SHORT-NAME>month</SHORT-NAME>
+                      <TYPE-REFERENCE>
+                        <TYPE-REFERENCE-REF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/DataTypes/ImplementationDataTypes/uint8_t</TYPE-REFERENCE-REF>
+                      </TYPE-REFERENCE>
+                    </CPP-IMPLEMENTATION-DATA-TYPE-ELEMENT>
+                    <CPP-IMPLEMENTATION-DATA-TYPE-ELEMENT UUID="583d6d13-0e39-4a83-80b7-c0c9e41c4986">
+                      <SHORT-NAME>day</SHORT-NAME>
+                      <TYPE-REFERENCE>
+                        <TYPE-REFERENCE-REF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/DataTypes/ImplementationDataTypes/uint8_t</TYPE-REFERENCE-REF>
+                      </TYPE-REFERENCE>
+                    </CPP-IMPLEMENTATION-DATA-TYPE-ELEMENT>
+                    <CPP-IMPLEMENTATION-DATA-TYPE-ELEMENT UUID="2c0c68f4-316f-461d-a01d-b03cfc49000e">
+                      <SHORT-NAME>software_programmed_valid</SHORT-NAME>
+                      <TYPE-REFERENCE>
+                        <TYPE-REFERENCE-REF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/DataTypes/ImplementationDataTypes/bool</TYPE-REFERENCE-REF>
+                      </TYPE-REFERENCE>
+                    </CPP-IMPLEMENTATION-DATA-TYPE-ELEMENT>
+                    <CPP-IMPLEMENTATION-DATA-TYPE-ELEMENT UUID="49ee7441-0269-45b8-af71-019b572f18ad">
+                      <SHORT-NAME>software_mismatch</SHORT-NAME>
+                      <TYPE-REFERENCE>
+                        <TYPE-REFERENCE-REF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/DataTypes/ImplementationDataTypes/bool</TYPE-REFERENCE-REF>
+                      </TYPE-REFERENCE>
+                    </CPP-IMPLEMENTATION-DATA-TYPE-ELEMENT>
+                    <CPP-IMPLEMENTATION-DATA-TYPE-ELEMENT UUID="95725f73-b377-4c0d-81f0-d9e16458045c">
+                      <SHORT-NAME>hardware_mismatch</SHORT-NAME>
+                      <TYPE-REFERENCE>
+                        <TYPE-REFERENCE-REF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/DataTypes/ImplementationDataTypes/bool</TYPE-REFERENCE-REF>
+                      </TYPE-REFERENCE>
+                    </CPP-IMPLEMENTATION-DATA-TYPE-ELEMENT>
+                    <CPP-IMPLEMENTATION-DATA-TYPE-ELEMENT UUID="375681ab-df37-46b1-9a82-a2dab90056b4">
+                      <SHORT-NAME>memory_status_information</SHORT-NAME>
+                      <TYPE-REFERENCE>
+                        <TYPE-REFERENCE-REF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/DataTypes/ImplementationDataTypes/bool</TYPE-REFERENCE-REF>
+                      </TYPE-REFERENCE>
+                    </CPP-IMPLEMENTATION-DATA-TYPE-ELEMENT>
+                    <CPP-IMPLEMENTATION-DATA-TYPE-ELEMENT UUID="427eac69-c311-49cc-b7aa-227a2195ac1c">
+                      <SHORT-NAME>reprogramming_process_state</SHORT-NAME>
+                      <TYPE-REFERENCE>
+                        <TYPE-REFERENCE-REF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/SWUC/DiagCore/Types/ReprogrammingProcessState</TYPE-REFERENCE-REF>
+                      </TYPE-REFERENCE>
+                    </CPP-IMPLEMENTATION-DATA-TYPE-ELEMENT>
+                  </SUB-ELEMENTS>
+                  <TYPE-EMITTER>TYPE_EMITTER_ARA</TYPE-EMITTER>
+                </STD-CPP-IMPLEMENTATION-DATA-TYPE>
+                <STD-CPP-IMPLEMENTATION-DATA-TYPE UUID="cfa31208-3b29-4fa9-96f7-ea5cf59bde3e">
+                  <SHORT-NAME>CurrentTransferSession</SHORT-NAME>
+                  <CATEGORY>STRUCTURE</CATEGORY>
+                  <NAMESPACES>
+                    <SYMBOL-PROPS>
+                      <SHORT-NAME>ns0</SHORT-NAME>
+                      <SYMBOL>amsr</SYMBOL>
+                    </SYMBOL-PROPS>
+                    <SYMBOL-PROPS>
+                      <SHORT-NAME>ns1</SHORT-NAME>
+                      <SYMBOL>swuc</SYMBOL>
+                    </SYMBOL-PROPS>
+                  </NAMESPACES>
+                  <SUB-ELEMENTS>
+                    <CPP-IMPLEMENTATION-DATA-TYPE-ELEMENT UUID="41c4d165-c87a-4582-a69a-5d60d70055ff">
+                      <SHORT-NAME>transfer_id</SHORT-NAME>
+                      <TYPE-REFERENCE>
+                        <TYPE-REFERENCE-REF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/SWUC/DiagCore/Types/TransferId</TYPE-REFERENCE-REF>
+                      </TYPE-REFERENCE>
+                    </CPP-IMPLEMENTATION-DATA-TYPE-ELEMENT>
+                    <CPP-IMPLEMENTATION-DATA-TYPE-ELEMENT UUID="668bb753-032b-4a8f-8749-4612c4b3d462">
+                      <SHORT-NAME>max_block_size</SHORT-NAME>
+                      <TYPE-REFERENCE>
+                        <TYPE-REFERENCE-REF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/DataTypes/ImplementationDataTypes/uint32_t</TYPE-REFERENCE-REF>
+                      </TYPE-REFERENCE>
+                    </CPP-IMPLEMENTATION-DATA-TYPE-ELEMENT>
+                    <CPP-IMPLEMENTATION-DATA-TYPE-ELEMENT UUID="df406058-5ce8-46be-a2f0-9719db5113e5">
+                      <SHORT-NAME>logical_block_id</SHORT-NAME>
+                      <TYPE-REFERENCE>
+                        <TYPE-REFERENCE-REF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/DataTypes/ImplementationDataTypes/uint64_t</TYPE-REFERENCE-REF>
+                      </TYPE-REFERENCE>
+                    </CPP-IMPLEMENTATION-DATA-TYPE-ELEMENT>
+                    <CPP-IMPLEMENTATION-DATA-TYPE-ELEMENT UUID="1ea4d94a-a6e6-43c1-825a-ddbd7b414bd3">
+                      <SHORT-NAME>current_memory_address</SHORT-NAME>
+                      <TYPE-REFERENCE>
+                        <TYPE-REFERENCE-REF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/DataTypes/ImplementationDataTypes/uint64_t</TYPE-REFERENCE-REF>
+                      </TYPE-REFERENCE>
+                    </CPP-IMPLEMENTATION-DATA-TYPE-ELEMENT>
+                    <CPP-IMPLEMENTATION-DATA-TYPE-ELEMENT UUID="1ea4d94a-a6e6-43c1-825a-ddbd7b414bd3">
+                      <SHORT-NAME>current_block_number</SHORT-NAME>
+                      <TYPE-REFERENCE>
+                        <TYPE-REFERENCE-REF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/DataTypes/ImplementationDataTypes/uint64_t</TYPE-REFERENCE-REF>
+                      </TYPE-REFERENCE>
+                    </CPP-IMPLEMENTATION-DATA-TYPE-ELEMENT>
+                  </SUB-ELEMENTS>
+                  <TYPE-EMITTER>TYPE_EMITTER_ARA</TYPE-EMITTER>
+                </STD-CPP-IMPLEMENTATION-DATA-TYPE>
+                <STD-CPP-IMPLEMENTATION-DATA-TYPE UUID="c27e93a9-3573-417e-a0de-a3d030c45d67">
+                  <SHORT-NAME>TransferId</SHORT-NAME>
+                  <CATEGORY>ARRAY</CATEGORY>
+                  <ARRAY-SIZE>16</ARRAY-SIZE>
+                  <NAMESPACES>
+                    <SYMBOL-PROPS>
+                      <SHORT-NAME>ns0</SHORT-NAME>
+                      <SYMBOL>amsr</SYMBOL>
+                    </SYMBOL-PROPS>
+                    <SYMBOL-PROPS>
+                      <SHORT-NAME>ns1</SHORT-NAME>
+                      <SYMBOL>swuc</SYMBOL>
+                    </SYMBOL-PROPS>
+                  </NAMESPACES>
+                  <TEMPLATE-ARGUMENTS>
+                    <CPP-TEMPLATE-ARGUMENT>
+                      <TEMPLATE-TYPE-REF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/DataTypes/ImplementationDataTypes/uint8_t</TEMPLATE-TYPE-REF>
+                    </CPP-TEMPLATE-ARGUMENT>
+                  </TEMPLATE-ARGUMENTS>
+                  <TYPE-EMITTER>TYPE_EMITTER_ARA</TYPE-EMITTER>
+                </STD-CPP-IMPLEMENTATION-DATA-TYPE>
+                <STD-CPP-IMPLEMENTATION-DATA-TYPE UUID="21963434-cba1-4c42-be44-8af46736aa14">
+                  <SHORT-NAME>FingerPrints</SHORT-NAME>
+                  <CATEGORY>VECTOR</CATEGORY>
+                  <NAMESPACES>
+                    <SYMBOL-PROPS>
+                      <SHORT-NAME>ns0</SHORT-NAME>
+                      <SYMBOL>amsr</SYMBOL>
+                    </SYMBOL-PROPS>
+                    <SYMBOL-PROPS>
+                      <SHORT-NAME>ns1</SHORT-NAME>
+                      <SYMBOL>swuc</SYMBOL>
+                    </SYMBOL-PROPS>
+                  </NAMESPACES>
+                  <TEMPLATE-ARGUMENTS>
+                    <CPP-TEMPLATE-ARGUMENT>
+                      <TEMPLATE-TYPE-REF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/SWUC/DiagCore/Types/FingerPrint</TEMPLATE-TYPE-REF>
+                    </CPP-TEMPLATE-ARGUMENT>
+                  </TEMPLATE-ARGUMENTS>
+                  <TYPE-EMITTER>TYPE_EMITTER_ARA</TYPE-EMITTER>
+                </STD-CPP-IMPLEMENTATION-DATA-TYPE>
+                <STD-CPP-IMPLEMENTATION-DATA-TYPE UUID="15722594-92fc-4785-ae76-768714e68484">
+                  <SHORT-NAME>FingerPrintId</SHORT-NAME>
+                  <CATEGORY>ARRAY</CATEGORY>
+                  <ARRAY-SIZE>16</ARRAY-SIZE>
+                  <NAMESPACES>
+                    <SYMBOL-PROPS>
+                      <SHORT-NAME>ns0</SHORT-NAME>
+                      <SYMBOL>amsr</SYMBOL>
+                    </SYMBOL-PROPS>
+                    <SYMBOL-PROPS>
+                      <SHORT-NAME>ns1</SHORT-NAME>
+                      <SYMBOL>swuc</SYMBOL>
+                    </SYMBOL-PROPS>
+                  </NAMESPACES>
+                  <TEMPLATE-ARGUMENTS>
+                    <CPP-TEMPLATE-ARGUMENT>
+                      <TEMPLATE-TYPE-REF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/DataTypes/ImplementationDataTypes/uint8_t</TEMPLATE-TYPE-REF>
+                    </CPP-TEMPLATE-ARGUMENT>
+                  </TEMPLATE-ARGUMENTS>
+                  <TYPE-EMITTER>TYPE_EMITTER_ARA</TYPE-EMITTER>
+                </STD-CPP-IMPLEMENTATION-DATA-TYPE>
+                <STD-CPP-IMPLEMENTATION-DATA-TYPE UUID="7e3f7656-76d4-4a84-b93a-1259c2c53c47">
+                  <SHORT-NAME>ReprogrammingProcessState</SHORT-NAME>
+                  <CATEGORY>TYPE_REFERENCE</CATEGORY>
+                  <SW-DATA-DEF-PROPS>
+                    <SW-DATA-DEF-PROPS-VARIANTS>
+                      <SW-DATA-DEF-PROPS-CONDITIONAL>
+                        <COMPU-METHOD-REF DEST="COMPU-METHOD">/SWUC/DiagCore/Types/Re_CompuMethod</COMPU-METHOD-REF>
+                      </SW-DATA-DEF-PROPS-CONDITIONAL>
+                    </SW-DATA-DEF-PROPS-VARIANTS>
+                  </SW-DATA-DEF-PROPS>
+                  <NAMESPACES>
+                    <SYMBOL-PROPS>
+                      <SHORT-NAME>ns0</SHORT-NAME>
+                      <SYMBOL>amsr</SYMBOL>
+                    </SYMBOL-PROPS>
+                    <SYMBOL-PROPS>
+                      <SHORT-NAME>ns1</SHORT-NAME>
+                      <SYMBOL>swuc</SYMBOL>
+                    </SYMBOL-PROPS>
+                  </NAMESPACES>
+                  <TYPE-EMITTER>TYPE_EMITTER_ARA</TYPE-EMITTER>
+                  <TYPE-REFERENCE-REF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/DataTypes/ImplementationDataTypes/uint8_t</TYPE-REFERENCE-REF>
+                </STD-CPP-IMPLEMENTATION-DATA-TYPE>
+                <COMPU-METHOD UUID="16ab46a4-cbe0-4c47-93ef-97608a4ffd19">
+                  <SHORT-NAME>Re_CompuMethod</SHORT-NAME>
+                  <CATEGORY>TEXTTABLE</CATEGORY>
+                  <COMPU-INTERNAL-TO-PHYS>
+                    <COMPU-SCALES>
+                      <COMPU-SCALE>
+                        <SYMBOL>block_valid</SYMBOL>
+                        <LOWER-LIMIT>0</LOWER-LIMIT>
+                        <UPPER-LIMIT>0</UPPER-LIMIT>
+                      </COMPU-SCALE>
+                      <COMPU-SCALE>
+                        <SYMBOL>memory_erase_started</SYMBOL>
+                        <LOWER-LIMIT>1</LOWER-LIMIT>
+                        <UPPER-LIMIT>1</UPPER-LIMIT>
+                      </COMPU-SCALE>
+                      <COMPU-SCALE>
+                        <SYMBOL>memory_erase_finished</SYMBOL>
+                        <LOWER-LIMIT>2</LOWER-LIMIT>
+                        <UPPER-LIMIT>2</UPPER-LIMIT>
+                      </COMPU-SCALE>
+                      <COMPU-SCALE>
+                        <SYMBOL>reprogramming_started</SYMBOL>
+                        <LOWER-LIMIT>3</LOWER-LIMIT>
+                        <UPPER-LIMIT>3</UPPER-LIMIT>
+                      </COMPU-SCALE>
+                      <COMPU-SCALE>
+                        <SYMBOL>memory_check_successful</SYMBOL>
+                        <LOWER-LIMIT>4</LOWER-LIMIT>
+                        <UPPER-LIMIT>4</UPPER-LIMIT>
+                      </COMPU-SCALE>
+                      <COMPU-SCALE>
+                        <SYMBOL>memory_check_unsuccessful</SYMBOL>
+                        <LOWER-LIMIT>5</LOWER-LIMIT>
+                        <UPPER-LIMIT>5</UPPER-LIMIT>
+                      </COMPU-SCALE>
+                      <COMPU-SCALE>
+                        <SYMBOL>sw_hw_check_unsuccessful</SYMBOL>
+                        <LOWER-LIMIT>6</LOWER-LIMIT>
+                        <UPPER-LIMIT>6</UPPER-LIMIT>
+                      </COMPU-SCALE>
+                    </COMPU-SCALES>
+                  </COMPU-INTERNAL-TO-PHYS>
+                </COMPU-METHOD>
+                <STD-CPP-IMPLEMENTATION-DATA-TYPE UUID="361241c5-37fe-4753-9a15-d07073f0f2d7">
+                  <SHORT-NAME>SoftwareCluster</SHORT-NAME>
+                  <CATEGORY>STRUCTURE</CATEGORY>
+                  <NAMESPACES>
+                    <SYMBOL-PROPS>
+                      <SHORT-NAME>ns0</SHORT-NAME>
+                      <SYMBOL>amsr</SYMBOL>
+                    </SYMBOL-PROPS>
+                    <SYMBOL-PROPS>
+                      <SHORT-NAME>ns1</SHORT-NAME>
+                      <SYMBOL>swuc</SYMBOL>
+                    </SYMBOL-PROPS>
+                  </NAMESPACES>
+                  <SUB-ELEMENTS>
+                    <CPP-IMPLEMENTATION-DATA-TYPE-ELEMENT UUID="18b47147-0c24-4b08-84d4-71341dda2e07">
+                      <SHORT-NAME>finger_print</SHORT-NAME>
+                      <TYPE-REFERENCE>
+                        <TYPE-REFERENCE-REF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/SWUC/DiagCore/Types/FingerPrint</TYPE-REFERENCE-REF>
+                      </TYPE-REFERENCE>
+                    </CPP-IMPLEMENTATION-DATA-TYPE-ELEMENT>
+                    <CPP-IMPLEMENTATION-DATA-TYPE-ELEMENT UUID="b343aa2c-885b-4364-b404-58b6bc02cbd4">
+                      <SHORT-NAME>reprogramming_attempt_counter</SHORT-NAME>
+                      <TYPE-REFERENCE>
+                        <TYPE-REFERENCE-REF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/SWUC/DiagCore/Types/ReprogrammingAttemptCounter</TYPE-REFERENCE-REF>
+                      </TYPE-REFERENCE>
+                    </CPP-IMPLEMENTATION-DATA-TYPE-ELEMENT>
+                    <CPP-IMPLEMENTATION-DATA-TYPE-ELEMENT UUID="5a3a3b72-ff23-4ede-9f58-a39c254a6712">
+                      <SHORT-NAME>software_cluster_name</SHORT-NAME>
+                      <TYPE-REFERENCE>
+                        <TYPE-REFERENCE-REF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/SWUC/Types/StringType</TYPE-REFERENCE-REF>
+                      </TYPE-REFERENCE>
+                    </CPP-IMPLEMENTATION-DATA-TYPE-ELEMENT>
+                    <CPP-IMPLEMENTATION-DATA-TYPE-ELEMENT UUID="df406058-5ce8-46be-a2f0-9719db5113e5">
+                      <SHORT-NAME>logical_block_id</SHORT-NAME>
+                      <TYPE-REFERENCE>
+                        <TYPE-REFERENCE-REF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/DataTypes/ImplementationDataTypes/uint64_t</TYPE-REFERENCE-REF>
+                      </TYPE-REFERENCE>
+                    </CPP-IMPLEMENTATION-DATA-TYPE-ELEMENT>
+                    <CPP-IMPLEMENTATION-DATA-TYPE-ELEMENT UUID="1ea4d94a-a6e6-43c1-825a-ddbd7b414bd3">
+                      <SHORT-NAME>memory_start_address</SHORT-NAME>
+                      <TYPE-REFERENCE>
+                        <TYPE-REFERENCE-REF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/DataTypes/ImplementationDataTypes/uint64_t</TYPE-REFERENCE-REF>
+                      </TYPE-REFERENCE>
+                    </CPP-IMPLEMENTATION-DATA-TYPE-ELEMENT>
+                    <CPP-IMPLEMENTATION-DATA-TYPE-ELEMENT UUID="d6e05ba6-d78a-40fc-9067-7dde0e336b53">
+                      <SHORT-NAME>memory_end_address</SHORT-NAME>
+                      <TYPE-REFERENCE>
+                        <TYPE-REFERENCE-REF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/DataTypes/ImplementationDataTypes/uint64_t</TYPE-REFERENCE-REF>
+                      </TYPE-REFERENCE>
+                    </CPP-IMPLEMENTATION-DATA-TYPE-ELEMENT>
+                    <CPP-IMPLEMENTATION-DATA-TYPE-ELEMENT UUID="1ea4d94a-a6e6-43c1-825a-ddbd7b414bd3">
+                      <SHORT-NAME>current_memory_address</SHORT-NAME>
+                      <TYPE-REFERENCE>
+                        <TYPE-REFERENCE-REF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/DataTypes/ImplementationDataTypes/uint64_t</TYPE-REFERENCE-REF>
+                      </TYPE-REFERENCE>
+                    </CPP-IMPLEMENTATION-DATA-TYPE-ELEMENT>
+                    <CPP-IMPLEMENTATION-DATA-TYPE-ELEMENT UUID="8506c762-c3ac-42dd-854d-6745e04897cf">
+                      <SHORT-NAME>sw_part_number</SHORT-NAME>
+                      <TYPE-REFERENCE>
+                        <TYPE-REFERENCE-REF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/SWUC/Types/StringType</TYPE-REFERENCE-REF>
+                      </TYPE-REFERENCE>
+                    </CPP-IMPLEMENTATION-DATA-TYPE-ELEMENT>
+                  </SUB-ELEMENTS>
+                  <TYPE-EMITTER>TYPE_EMITTER_ARA</TYPE-EMITTER>
+                </STD-CPP-IMPLEMENTATION-DATA-TYPE>
+                <STD-CPP-IMPLEMENTATION-DATA-TYPE UUID="5694db60-2a88-4d33-99fb-17da3a5266c0">
+                  <SHORT-NAME>SoftwareClusterList</SHORT-NAME>
+                  <CATEGORY>VECTOR</CATEGORY>
+                  <NAMESPACES>
+                    <SYMBOL-PROPS>
+                      <SHORT-NAME>ns0</SHORT-NAME>
+                      <SYMBOL>amsr</SYMBOL>
+                    </SYMBOL-PROPS>
+                    <SYMBOL-PROPS>
+                      <SHORT-NAME>ns1</SHORT-NAME>
+                      <SYMBOL>swuc</SYMBOL>
+                    </SYMBOL-PROPS>
+                  </NAMESPACES>
+                  <TEMPLATE-ARGUMENTS>
+                    <CPP-TEMPLATE-ARGUMENT>
+                      <TEMPLATE-TYPE-REF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/SWUC/DiagCore/Types/SoftwareCluster</TEMPLATE-TYPE-REF>
+                    </CPP-TEMPLATE-ARGUMENT>
+                  </TEMPLATE-ARGUMENTS>
+                  <TYPE-EMITTER>TYPE_EMITTER_ARA</TYPE-EMITTER>
+                </STD-CPP-IMPLEMENTATION-DATA-TYPE>
+              </ELEMENTS>
+              <AR-PACKAGES>
+                <AR-PACKAGE UUID="8027bcf5-7d96-4c43-8f84-7f15fb0e9fbc">
+                  <SHORT-NAME>Diag</SHORT-NAME>
+                  <ELEMENTS>
+                    <STD-CPP-IMPLEMENTATION-DATA-TYPE UUID="9a53fe91-d76c-466a-b19a-00e2df65b2f7">
+                      <SHORT-NAME>InstanceHandle</SHORT-NAME>
+                      <CATEGORY>TYPE_REFERENCE</CATEGORY>
+                      <NAMESPACES>
+                        <SYMBOL-PROPS>
+                          <SHORT-NAME>ns0</SHORT-NAME>
+                          <SYMBOL>amsr</SYMBOL>
+                        </SYMBOL-PROPS>
+                        <SYMBOL-PROPS>
+                          <SHORT-NAME>ns1</SHORT-NAME>
+                          <SYMBOL>diag</SYMBOL>
+                        </SYMBOL-PROPS>
+                        <SYMBOL-PROPS>
+                          <SHORT-NAME>ns2</SHORT-NAME>
+                          <SYMBOL>com_api</SYMBOL>
+                        </SYMBOL-PROPS>
+                      </NAMESPACES>
+                      <TYPE-EMITTER>TYPE_EMITTER_ARA</TYPE-EMITTER>
+                      <TYPE-REFERENCE-REF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/DataTypes/ImplementationDataTypes/uint32_t</TYPE-REFERENCE-REF>
+                    </STD-CPP-IMPLEMENTATION-DATA-TYPE>
+                    <STD-CPP-IMPLEMENTATION-DATA-TYPE UUID="30a63d94-8107-4c05-a5a8-f565a62cd702">
+                      <SHORT-NAME>DiagRequestType</SHORT-NAME>
+                      <CATEGORY>STRUCTURE</CATEGORY>
+                      <NAMESPACES>
+                        <SYMBOL-PROPS>
+                          <SHORT-NAME>ns0</SHORT-NAME>
+                          <SYMBOL>amsr</SYMBOL>
+                        </SYMBOL-PROPS>
+                        <SYMBOL-PROPS>
+                          <SHORT-NAME>ns1</SHORT-NAME>
+                          <SYMBOL>diag</SYMBOL>
+                        </SYMBOL-PROPS>
+                        <SYMBOL-PROPS>
+                          <SHORT-NAME>ns2</SHORT-NAME>
+                          <SYMBOL>com_api</SYMBOL>
+                        </SYMBOL-PROPS>
+                      </NAMESPACES>
+                      <SUB-ELEMENTS>
+                        <CPP-IMPLEMENTATION-DATA-TYPE-ELEMENT UUID="a9d8dfdd-0344-4cd3-926f-79c0972ee155">
+                          <SHORT-NAME>handle</SHORT-NAME>
+                          <TYPE-REFERENCE>
+                            <TYPE-REFERENCE-REF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/SWUC/DiagCore/Types/Diag/HandleType</TYPE-REFERENCE-REF>
+                          </TYPE-REFERENCE>
+                        </CPP-IMPLEMENTATION-DATA-TYPE-ELEMENT>
+                        <CPP-IMPLEMENTATION-DATA-TYPE-ELEMENT UUID="322df571-356e-4336-aa2c-ea35df790572">
+                          <SHORT-NAME>instance_handle</SHORT-NAME>
+                          <TYPE-REFERENCE>
+                            <TYPE-REFERENCE-REF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/SWUC/DiagCore/Types/Diag/InstanceHandle</TYPE-REFERENCE-REF>
+                          </TYPE-REFERENCE>
+                        </CPP-IMPLEMENTATION-DATA-TYPE-ELEMENT>
+                        <CPP-IMPLEMENTATION-DATA-TYPE-ELEMENT UUID="a3833d27-c676-4e64-bd4e-a7b72c81bdb2">
+                          <SHORT-NAME>conversation_handle</SHORT-NAME>
+                          <TYPE-REFERENCE>
+                            <TYPE-REFERENCE-REF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/SWUC/DiagCore/Types/Diag/ConversationHandle</TYPE-REFERENCE-REF>
+                          </TYPE-REFERENCE>
+                        </CPP-IMPLEMENTATION-DATA-TYPE-ELEMENT>
+                        <CPP-IMPLEMENTATION-DATA-TYPE-ELEMENT UUID="4247525b-d427-4606-90b2-b8773346d6ce">
+                          <SHORT-NAME>job_identifier</SHORT-NAME>
+                          <TYPE-REFERENCE>
+                            <TYPE-REFERENCE-REF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/SWUC/DiagCore/Types/Diag/JobIdentifier</TYPE-REFERENCE-REF>
+                          </TYPE-REFERENCE>
+                        </CPP-IMPLEMENTATION-DATA-TYPE-ELEMENT>
+                        <CPP-IMPLEMENTATION-DATA-TYPE-ELEMENT UUID="2cb5bbb6-2d5c-4521-a114-ceefafad38f2">
+                          <SHORT-NAME>value</SHORT-NAME>
+                          <TYPE-REFERENCE>
+                            <TYPE-REFERENCE-REF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/SWUC/Types/ByteVectorType</TYPE-REFERENCE-REF>
+                          </TYPE-REFERENCE>
+                        </CPP-IMPLEMENTATION-DATA-TYPE-ELEMENT>
+                      </SUB-ELEMENTS>
+                      <TYPE-EMITTER>TYPE_EMITTER_ARA</TYPE-EMITTER>
+                    </STD-CPP-IMPLEMENTATION-DATA-TYPE>
+                    <STD-CPP-IMPLEMENTATION-DATA-TYPE UUID="ebca24bf-064b-4394-854a-b161e1173687">
+                      <SHORT-NAME>ConversationHandle</SHORT-NAME>
+                      <CATEGORY>TYPE_REFERENCE</CATEGORY>
+                      <NAMESPACES>
+                        <SYMBOL-PROPS>
+                          <SHORT-NAME>ns0</SHORT-NAME>
+                          <SYMBOL>amsr</SYMBOL>
+                        </SYMBOL-PROPS>
+                        <SYMBOL-PROPS>
+                          <SHORT-NAME>ns1</SHORT-NAME>
+                          <SYMBOL>diag</SYMBOL>
+                        </SYMBOL-PROPS>
+                        <SYMBOL-PROPS>
+                          <SHORT-NAME>ns2</SHORT-NAME>
+                          <SYMBOL>com_api</SYMBOL>
+                        </SYMBOL-PROPS>
+                      </NAMESPACES>
+                      <TYPE-EMITTER>TYPE_EMITTER_ARA</TYPE-EMITTER>
+                      <TYPE-REFERENCE-REF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/DataTypes/ImplementationDataTypes/uint16_t</TYPE-REFERENCE-REF>
+                    </STD-CPP-IMPLEMENTATION-DATA-TYPE>
+                    <STD-CPP-IMPLEMENTATION-DATA-TYPE UUID="500b18e9-a3ff-42cf-b55e-7b616d627d28">
+                      <SHORT-NAME>HandleType</SHORT-NAME>
+                      <CATEGORY>TYPE_REFERENCE</CATEGORY>
+                      <NAMESPACES>
+                        <SYMBOL-PROPS>
+                          <SHORT-NAME>ns0</SHORT-NAME>
+                          <SYMBOL>amsr</SYMBOL>
+                        </SYMBOL-PROPS>
+                        <SYMBOL-PROPS>
+                          <SHORT-NAME>ns1</SHORT-NAME>
+                          <SYMBOL>diag</SYMBOL>
+                        </SYMBOL-PROPS>
+                        <SYMBOL-PROPS>
+                          <SHORT-NAME>ns2</SHORT-NAME>
+                          <SYMBOL>com_api</SYMBOL>
+                        </SYMBOL-PROPS>
+                      </NAMESPACES>
+                      <TYPE-EMITTER>TYPE_EMITTER_ARA</TYPE-EMITTER>
+                      <TYPE-REFERENCE-REF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/DataTypes/ImplementationDataTypes/uint16_t</TYPE-REFERENCE-REF>
+                    </STD-CPP-IMPLEMENTATION-DATA-TYPE>
+                    <STD-CPP-IMPLEMENTATION-DATA-TYPE UUID="9283d756-6a87-404b-b01c-1e6855aee0d6">
+                      <SHORT-NAME>MetaInfoType</SHORT-NAME>
+                      <CATEGORY>ASSOCIATIVE_MAP</CATEGORY>
+                      <NAMESPACES>
+                        <SYMBOL-PROPS>
+                          <SHORT-NAME>ns0</SHORT-NAME>
+                          <SYMBOL>amsr</SYMBOL>
+                        </SYMBOL-PROPS>
+                        <SYMBOL-PROPS>
+                          <SHORT-NAME>ns1</SHORT-NAME>
+                          <SYMBOL>diag</SYMBOL>
+                        </SYMBOL-PROPS>
+                        <SYMBOL-PROPS>
+                          <SHORT-NAME>ns2</SHORT-NAME>
+                          <SYMBOL>com_api</SYMBOL>
+                        </SYMBOL-PROPS>
+                      </NAMESPACES>
+                      <TEMPLATE-ARGUMENTS>
+                        <CPP-TEMPLATE-ARGUMENT>
+                          <TEMPLATE-TYPE-REF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/SWUC/DiagCore/Types/Diag/string</TEMPLATE-TYPE-REF>
+                        </CPP-TEMPLATE-ARGUMENT>
+                        <CPP-TEMPLATE-ARGUMENT>
+                          <TEMPLATE-TYPE-REF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/SWUC/DiagCore/Types/Diag/string</TEMPLATE-TYPE-REF>
+                        </CPP-TEMPLATE-ARGUMENT>
+                      </TEMPLATE-ARGUMENTS>
+                      <TYPE-EMITTER>TYPE_EMITTER_ARA</TYPE-EMITTER>
+                    </STD-CPP-IMPLEMENTATION-DATA-TYPE>
+                    <STD-CPP-IMPLEMENTATION-DATA-TYPE UUID="712f5481-929c-40f6-b352-d38df5cd57db">
+                      <SHORT-NAME>JobIdentifier</SHORT-NAME>
+                      <CATEGORY>TYPE_REFERENCE</CATEGORY>
+                      <NAMESPACES>
+                        <SYMBOL-PROPS>
+                          <SHORT-NAME>ns0</SHORT-NAME>
+                          <SYMBOL>amsr</SYMBOL>
+                        </SYMBOL-PROPS>
+                        <SYMBOL-PROPS>
+                          <SHORT-NAME>ns1</SHORT-NAME>
+                          <SYMBOL>diag</SYMBOL>
+                        </SYMBOL-PROPS>
+                        <SYMBOL-PROPS>
+                          <SHORT-NAME>ns2</SHORT-NAME>
+                          <SYMBOL>com_api</SYMBOL>
+                        </SYMBOL-PROPS>
+                      </NAMESPACES>
+                      <TYPE-EMITTER>TYPE_EMITTER_ARA</TYPE-EMITTER>
+                      <TYPE-REFERENCE-REF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/DataTypes/ImplementationDataTypes/uint32_t</TYPE-REFERENCE-REF>
+                    </STD-CPP-IMPLEMENTATION-DATA-TYPE>
+                    <STD-CPP-IMPLEMENTATION-DATA-TYPE UUID="ee1414eb-f52a-4956-9b66-1bdb7f137d17">
+                      <SHORT-NAME>DaemonRequestResponseType</SHORT-NAME>
+                      <CATEGORY>STRUCTURE</CATEGORY>
+                      <NAMESPACES>
+                        <SYMBOL-PROPS>
+                          <SHORT-NAME>ns0</SHORT-NAME>
+                          <SYMBOL>amsr</SYMBOL>
+                        </SYMBOL-PROPS>
+                        <SYMBOL-PROPS>
+                          <SHORT-NAME>ns1</SHORT-NAME>
+                          <SYMBOL>diag</SYMBOL>
+                        </SYMBOL-PROPS>
+                        <SYMBOL-PROPS>
+                          <SHORT-NAME>ns2</SHORT-NAME>
+                          <SYMBOL>com_api</SYMBOL>
+                        </SYMBOL-PROPS>
+                      </NAMESPACES>
+                      <SUB-ELEMENTS>
+                        <CPP-IMPLEMENTATION-DATA-TYPE-ELEMENT UUID="13757829-ce3a-44e1-be0d-057f80fcb3ca">
+                          <SHORT-NAME>response_type</SHORT-NAME>
+                          <TYPE-REFERENCE>
+                            <TYPE-REFERENCE-REF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/SWUC/DiagCore/Types/Diag/HandleType</TYPE-REFERENCE-REF>
+                          </TYPE-REFERENCE>
+                        </CPP-IMPLEMENTATION-DATA-TYPE-ELEMENT>
+                        <CPP-IMPLEMENTATION-DATA-TYPE-ELEMENT UUID="d9d13325-9841-422e-8a75-f5c9dc3dc7a3">
+                          <SHORT-NAME>job_identifier</SHORT-NAME>
+                          <TYPE-REFERENCE>
+                            <TYPE-REFERENCE-REF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/SWUC/DiagCore/Types/Diag/JobIdentifier</TYPE-REFERENCE-REF>
+                          </TYPE-REFERENCE>
+                        </CPP-IMPLEMENTATION-DATA-TYPE-ELEMENT>
+                        <CPP-IMPLEMENTATION-DATA-TYPE-ELEMENT UUID="fedc1cee-7329-438e-8cbb-3df7eadd5648">
+                          <SHORT-NAME>value</SHORT-NAME>
+                          <TYPE-REFERENCE>
+                            <TYPE-REFERENCE-REF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/SWUC/Types/ByteVectorType</TYPE-REFERENCE-REF>
+                          </TYPE-REFERENCE>
+                        </CPP-IMPLEMENTATION-DATA-TYPE-ELEMENT>
+                      </SUB-ELEMENTS>
+                      <TYPE-EMITTER>TYPE_EMITTER_ARA</TYPE-EMITTER>
+                    </STD-CPP-IMPLEMENTATION-DATA-TYPE>
+                    <STD-CPP-IMPLEMENTATION-DATA-TYPE UUID="090f90f2-e81e-48b5-b288-5402e2966b1e">
+                      <SHORT-NAME>string</SHORT-NAME>
+                      <CATEGORY>STRING</CATEGORY>
+                      <NAMESPACES>
+                        <SYMBOL-PROPS>
+                          <SHORT-NAME>ns0</SHORT-NAME>
+                          <SYMBOL>ara</SYMBOL>
+                        </SYMBOL-PROPS>
+                        <SYMBOL-PROPS>
+                          <SHORT-NAME>ns1</SHORT-NAME>
+                          <SYMBOL>diag</SYMBOL>
+                        </SYMBOL-PROPS>
+                      </NAMESPACES>
+                      <TYPE-EMITTER>TYPE_EMITTER_ARA</TYPE-EMITTER>
+                    </STD-CPP-IMPLEMENTATION-DATA-TYPE>
+                  </ELEMENTS>
+                </AR-PACKAGE>
+              </AR-PACKAGES>
+            </AR-PACKAGE>
+          </AR-PACKAGES>
+        </AR-PACKAGE>
+      </AR-PACKAGES>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>

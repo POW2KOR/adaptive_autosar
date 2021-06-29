@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<AUTOSAR xmlns="http://autosar.org/schema/r4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_00047.xsd">
+  <AR-PACKAGES>
+    <AR-PACKAGE UUID="06c547aa-fe98-4a19-89a4-0a67a2afb22c">
+      <SHORT-NAME>SWUC</SHORT-NAME>
+      <AR-PACKAGES>
+        <AR-PACKAGE UUID="06c547aa-fe98-4a19-89a4-0a67a2afbfc">
+          <SHORT-NAME>TPUM</SHORT-NAME>
+          <AR-PACKAGES>
+            <AR-PACKAGE UUID="cebc3d63-18f1-4678-b5d6-6f68136a57db">
+              <SHORT-NAME>Persistency_Deployment</SHORT-NAME>
+              <ELEMENTS>
+                <PERSISTENCY-PORT-PROTOTYPE-TO-FILE-ARRAY-MAPPING UUID="790e8cba-8709-4555-b50b-24db50345387">
+                  <SHORT-NAME>TPUM_PersistencyPortProtToFileArrayMapping</SHORT-NAME>
+                  <PERSISTENCY-FILE-ARRAY-REF DEST="PERSISTENCY-FILE-ARRAY">/SWUC/TPUM/Persistency_Deployment/TPUM_FileStorage</PERSISTENCY-FILE-ARRAY-REF>
+                  <PORT-PROTOTYPE-IREF>
+                    <TARGET-PORT-PROTOTYPE-REF DEST="PR-PORT-PROTOTYPE">/SWUC/SoftwareUpdateClientSwcType/TPUM_FileStorage</TARGET-PORT-PROTOTYPE-REF>
+                  </PORT-PROTOTYPE-IREF>
+                  <PROCESS-REF DEST="PROCESS">/SWUC/amsr_swupdateclient_process</PROCESS-REF>
+                </PERSISTENCY-PORT-PROTOTYPE-TO-FILE-ARRAY-MAPPING>
+                <PERSISTENCY-FILE-ARRAY UUID="f451af0f-b9d1-4ca3-81a4-abfc15b60ca5">
+                  <SHORT-NAME>TPUM_FileStorage</SHORT-NAME>
+                  <MAXIMUM-ALLOWED-SIZE>16384</MAXIMUM-ALLOWED-SIZE>
+                  <MINIMUM-SUSTAINED-SIZE>512</MINIMUM-SUSTAINED-SIZE>
+                  <UPDATE-STRATEGY>KEEP-EXISTING</UPDATE-STRATEGY>
+                  <URI>../../per/amsr_swupdateclient/var/sw_packages</URI>
+                </PERSISTENCY-FILE-ARRAY>
+                <PERSISTENCY-PORT-PROTOTYPE-TO-KEY-VALUE-DATABASE-MAPPING UUID="55b7a2a1-ad8e-45c9-8cb5-684b69e978f5">
+                  <SHORT-NAME>TPUM_SwPackage_PersistencyPortPrototypeToKeyValueDatabaseMapping</SHORT-NAME>
+                  <KEY-VALUE-STORAGE-REF DEST="PERSISTENCY-KEY-VALUE-DATABASE">/SWUC/TPUM/Persistency_Deployment/TPUM_SwPackage_KeyValueStorage</KEY-VALUE-STORAGE-REF>
+                  <PORT-PROTOTYPE-IREF>
+                    <TARGET-PORT-PROTOTYPE-REF DEST="PR-PORT-PROTOTYPE">
+                      /SWUC/SoftwareUpdateClientSwcType/TPUM_SwPackage_KeyValueStorage
+                    </TARGET-PORT-PROTOTYPE-REF>
+                  </PORT-PROTOTYPE-IREF>
+                  <PROCESS-REF DEST="PROCESS">/SWUC/amsr_swupdateclient_process</PROCESS-REF>
+                </PERSISTENCY-PORT-PROTOTYPE-TO-KEY-VALUE-DATABASE-MAPPING>
+                <PERSISTENCY-KEY-VALUE-DATABASE UUID="65189a61-0ea9-4d65-9f0a-5b66082a7158">
+                  <SHORT-NAME>TPUM_SwPackage_KeyValueStorage</SHORT-NAME>
+                  <MAXIMUM-ALLOWED-SIZE>0</MAXIMUM-ALLOWED-SIZE>
+                  <MINIMUM-SUSTAINED-SIZE>0</MINIMUM-SUSTAINED-SIZE>
+                  <UPDATE-STRATEGY>KEEP-EXISTING</UPDATE-STRATEGY>
+                  <KEY-VALUE-PAIRS>
+                    <PERSISTENCY-KEY-VALUE-PAIR>
+                      <SHORT-NAME>database_dir_path</SHORT-NAME>
+                      <INIT-VALUE>
+                        <TEXT-VALUE-SPECIFICATION>
+                          <VALUE>../../per/amsr_swupdateclient/var/sw_packages/</VALUE>
+                        </TEXT-VALUE-SPECIFICATION>
+                      </INIT-VALUE>
+                      <VALUE-DATA-TYPE-REF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/SWUC/TPUM/Types/String</VALUE-DATA-TYPE-REF>
+                    </PERSISTENCY-KEY-VALUE-PAIR>
+                    <PERSISTENCY-KEY-VALUE-PAIR>
+                      <SHORT-NAME>post_restart_verification</SHORT-NAME>
+                      <INIT-VALUE>
+                        <NUMERICAL-VALUE-SPECIFICATION>
+                          <VALUE>false</VALUE>
+                        </NUMERICAL-VALUE-SPECIFICATION>
+                      </INIT-VALUE>
+                      <VALUE-DATA-TYPE-REF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/DataTypes/ImplementationDataTypes/bool</VALUE-DATA-TYPE-REF>
+                    </PERSISTENCY-KEY-VALUE-PAIR>
+                  </KEY-VALUE-PAIRS>
+                  <URI>../../per/amsr_swupdateclient/var/sw_package_db</URI>
+                </PERSISTENCY-KEY-VALUE-DATABASE>
+                <PERSISTENCY-KEY-VALUE-DATABASE UUID="ded1b5e4-34e5-4702-a499-0099c083286b">
+                  <SHORT-NAME>TPUM_SwCluster_KeyValueStorage</SHORT-NAME>
+                  <UPDATE-STRATEGY>KEEP-EXISTING</UPDATE-STRATEGY>
+                  <KEY-VALUE-PAIRS>
+                    <PERSISTENCY-KEY-VALUE-PAIR>
+                      <SHORT-NAME>SoftwareClusterPlatform</SHORT-NAME>
+                      <INIT-VALUE>
+                        <RECORD-VALUE-SPECIFICATION>
+                          <FIELDS>
+                            <TEXT-VALUE-SPECIFICATION>
+                              <SHORT-LABEL>name</SHORT-LABEL>
+                              <VALUE>SoftwareClusterPlatform</VALUE>
+                            </TEXT-VALUE-SPECIFICATION>
+                            <TEXT-VALUE-SPECIFICATION>
+                              <SHORT-LABEL>version</SHORT-LABEL>
+                              <VALUE>21.24.0</VALUE>
+                            </TEXT-VALUE-SPECIFICATION>
+                            <NUMERICAL-VALUE-SPECIFICATION>
+                              <SHORT-LABEL>state</SHORT-LABEL>
+                              <VALUE>0</VALUE>
+                            </NUMERICAL-VALUE-SPECIFICATION>
+                          </FIELDS>
+                        </RECORD-VALUE-SPECIFICATION>
+                      </INIT-VALUE>
+                      <VALUE-DATA-TYPE-REF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/SWUC/TPUM/Types/SwClusterInfoType</VALUE-DATA-TYPE-REF>
+                    </PERSISTENCY-KEY-VALUE-PAIR>
+                  </KEY-VALUE-PAIRS>
+                  <URI>../../per/amsr_swupdateclient/var/sw_cluster_db</URI>
+                </PERSISTENCY-KEY-VALUE-DATABASE>
+                <PERSISTENCY-PORT-PROTOTYPE-TO-KEY-VALUE-DATABASE-MAPPING UUID="3a6a4204-76e6-431d-877d-4d838604e7a7">
+                  <SHORT-NAME>PersistencyPortPrototypeToKeyValueDatabaseMapping</SHORT-NAME>
+                  <KEY-VALUE-STORAGE-REF DEST="PERSISTENCY-KEY-VALUE-DATABASE">/SWUC/TPUM/Persistency_Deployment/TPUM_SwCluster_KeyValueStorage</KEY-VALUE-STORAGE-REF>
+                  <PORT-PROTOTYPE-IREF>
+                    <TARGET-PORT-PROTOTYPE-REF DEST="PR-PORT-PROTOTYPE">
+                      /SWUC/SoftwareUpdateClientSwcType/TPUM_SwCluster_KeyValueStorage
+                    </TARGET-PORT-PROTOTYPE-REF>
+                  </PORT-PROTOTYPE-IREF>
+                  <PROCESS-REF DEST="PROCESS">/SWUC/amsr_swupdateclient_process</PROCESS-REF>
+                </PERSISTENCY-PORT-PROTOTYPE-TO-KEY-VALUE-DATABASE-MAPPING>
+              </ELEMENTS>
+            </AR-PACKAGE>
+          </AR-PACKAGES>
+        </AR-PACKAGE>
+      </AR-PACKAGES>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>

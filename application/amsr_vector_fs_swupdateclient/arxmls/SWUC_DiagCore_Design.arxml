@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<AUTOSAR xmlns="http://autosar.org/schema/r4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_00047.xsd">
+  <AR-PACKAGES>
+    <AR-PACKAGE UUID="06c547aa-fe98-4a19-89a4-0a67a2afb22c">
+      <SHORT-NAME>SWUC</SHORT-NAME>
+      <AR-PACKAGES>
+        <AR-PACKAGE UUID="06c547aa-fe98-4a19-89a4-0a67a2afb33c">
+          <SHORT-NAME>DiagCore</SHORT-NAME>
+          <AR-PACKAGES>
+            <AR-PACKAGE UUID="44a8f664-4980-40e8-86e9-ee4869fdc6ba">
+              <SHORT-NAME>Persistency_Design</SHORT-NAME>
+              <AR-PACKAGES>
+                <AR-PACKAGE UUID="2937cf9f-59e3-4196-8921-8bc24b17e2ba">
+                  <SHORT-NAME>Port_Interfaces</SHORT-NAME>
+                  <ELEMENTS>
+                    <PERSISTENCY-KEY-VALUE-DATABASE-INTERFACE UUID="beb9b1e4-5f74-43e5-993f-643ea7faca6f">
+                      <SHORT-NAME>PersistencyInterface_DiagCore_KeyValueStorage</SHORT-NAME>
+                      <DATA-TYPE-FOR-SERIALIZATION-REFS>
+                        <DATA-TYPE-FOR-SERIALIZATION-REF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/SWUC/Types/HCPSoftwareInformation</DATA-TYPE-FOR-SERIALIZATION-REF>
+                        <DATA-TYPE-FOR-SERIALIZATION-REF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/SWUC/DiagCore/Types/RegulationSoftwareIdentification</DATA-TYPE-FOR-SERIALIZATION-REF>
+                        <DATA-TYPE-FOR-SERIALIZATION-REF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/SWUC/Types/StringVector</DATA-TYPE-FOR-SERIALIZATION-REF>
+                        <DATA-TYPE-FOR-SERIALIZATION-REF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/SWUC/Types/Uint16Vector</DATA-TYPE-FOR-SERIALIZATION-REF>
+                        <DATA-TYPE-FOR-SERIALIZATION-REF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/SWUC/Types/VersionInformation</DATA-TYPE-FOR-SERIALIZATION-REF>
+                        <DATA-TYPE-FOR-SERIALIZATION-REF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/SWUC/Types/VersionInformationList</DATA-TYPE-FOR-SERIALIZATION-REF>
+                        <DATA-TYPE-FOR-SERIALIZATION-REF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/SWUC/DiagCore/Types/SoftwareCluster</DATA-TYPE-FOR-SERIALIZATION-REF>
+                        <DATA-TYPE-FOR-SERIALIZATION-REF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/SWUC/DiagCore/Types/SoftwareClusterList</DATA-TYPE-FOR-SERIALIZATION-REF>
+                        <DATA-TYPE-FOR-SERIALIZATION-REF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/SWUC/DiagCore/Types/FingerPrint</DATA-TYPE-FOR-SERIALIZATION-REF>
+                        <DATA-TYPE-FOR-SERIALIZATION-REF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/SWUC/DiagCore/Types/TransferId</DATA-TYPE-FOR-SERIALIZATION-REF>
+                        <DATA-TYPE-FOR-SERIALIZATION-REF DEST="STD-CPP-IMPLEMENTATION-DATA-TYPE">/SWUC/DiagCore/Types/CurrentTransferSession</DATA-TYPE-FOR-SERIALIZATION-REF>
+                      </DATA-TYPE-FOR-SERIALIZATION-REFS>
+                    </PERSISTENCY-KEY-VALUE-DATABASE-INTERFACE>
+                  </ELEMENTS>
+                </AR-PACKAGE>
+              </AR-PACKAGES>
+            </AR-PACKAGE>
+          </AR-PACKAGES>
+        </AR-PACKAGE>
+      </AR-PACKAGES>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>

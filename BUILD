@@ -97,6 +97,7 @@ pkg_tar(
                 "//application/x6aa_dummy_2_app:package",
                 "//application/diagnostic_manager_deamon_executable:package",
                 "//application/sda:package",
+                "//application/amsr_vector_fs_swupdateclient:package",
             ],
         ),
 )

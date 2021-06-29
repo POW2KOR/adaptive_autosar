@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<AUTOSAR xmlns="http://autosar.org/schema/r4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_00047.xsd">
+  <AR-PACKAGES>
+    <AR-PACKAGE UUID="06c547aa-fe98-4a19-89a4-0a67a2afb22c">
+      <SHORT-NAME>SWUC</SHORT-NAME>
+      <ELEMENTS>
+        <PROCESS-DESIGN UUID="da60643a-0ef7-4667-a497-031c778ffb87">
+          <SHORT-NAME>amsr_swupdateclient_process_design</SHORT-NAME>
+          <EXECUTABLE-REF DEST="EXECUTABLE">/SWUC/amsr_swupdateclient</EXECUTABLE-REF>
+        </PROCESS-DESIGN>
+        <ADAPTIVE-APPLICATION-SW-COMPONENT-TYPE UUID="d7a8e13c-ef2b-4cd6-98eb-d8351d4610e8">
+          <SHORT-NAME>SoftwareUpdateClientSwcType</SHORT-NAME>
+          <PORTS>
+            <PR-PORT-PROTOTYPE UUID="5b1b4874-3530-4946-bb91-44ab3a547749">
+              <SHORT-NAME>DiagCore_KeyValueStorage</SHORT-NAME>
+              <PROVIDED-REQUIRED-INTERFACE-TREF DEST="PERSISTENCY-KEY-VALUE-DATABASE-INTERFACE">/SWUC/DiagCore/Persistency_Design/Port_Interfaces/PersistencyInterface_DiagCore_KeyValueStorage</PROVIDED-REQUIRED-INTERFACE-TREF>
+            </PR-PORT-PROTOTYPE>
+            <PR-PORT-PROTOTYPE UUID="288f5939-7741-4ffd-81c9-73eb2264a7b4">
+              <SHORT-NAME>TPUM_SwPackage_KeyValueStorage</SHORT-NAME>
+              <PROVIDED-REQUIRED-INTERFACE-TREF DEST="PERSISTENCY-KEY-VALUE-DATABASE-INTERFACE">/SWUC/TPUM/Persistency_Design/Port_Interfaces/PersistencyInterface_TPUM_SwPackage_KeyValueStorage</PROVIDED-REQUIRED-INTERFACE-TREF>
+            </PR-PORT-PROTOTYPE>
+            <PR-PORT-PROTOTYPE UUID="dbbfd116-1c8d-4a85-8fce-e657d238c71e">
+              <SHORT-NAME>TPUM_SwCluster_KeyValueStorage</SHORT-NAME>
+              <PROVIDED-REQUIRED-INTERFACE-TREF DEST="PERSISTENCY-KEY-VALUE-DATABASE-INTERFACE">/SWUC/TPUM/Persistency_Design/Port_Interfaces/PersistencyInterface_TPUM_SwCluster_KeyValueStorage</PROVIDED-REQUIRED-INTERFACE-TREF>
+            </PR-PORT-PROTOTYPE>
+            <PR-PORT-PROTOTYPE UUID="4995469a-dcbf-48cc-b5ea-38983217d148">
+              <SHORT-NAME>TPUM_FileStorage</SHORT-NAME>
+              <PROVIDED-REQUIRED-INTERFACE-TREF DEST="PERSISTENCY-FILE-PROXY-INTERFACE">/SWUC/TPUM/Persistency_Design/Port_Interfaces/PersistencyInterface_TPUM_FileStorage</PROVIDED-REQUIRED-INTERFACE-TREF>
+            </PR-PORT-PROTOTYPE>
+            <P-PORT-PROTOTYPE UUID="6dc178ad-0a13-43e2-821d-8316b5a14d68">
+              <SHORT-NAME>Diag_Download</SHORT-NAME>
+              <PROVIDED-INTERFACE-TREF DEST="DIAGNOSTIC-DOWNLOAD-INTERFACE">/SWUC/DiagCore/Diag_Design/Port_Interfaces/Diag_DownloadInterface</PROVIDED-INTERFACE-TREF>
+            </P-PORT-PROTOTYPE>
+            <P-PORT-PROTOTYPE UUID="4c19e644-1c8d-4269-8660-f4e56c37838b">
+              <SHORT-NAME>amsr_DiagComApi</SHORT-NAME>
+              <PROVIDED-INTERFACE-TREF DEST="SERVICE-INTERFACE">/amsr/diag/DiagComApi</PROVIDED-INTERFACE-TREF>
+            </P-PORT-PROTOTYPE>
+            <P-PORT-PROTOTYPE UUID="07160008-6ace-40fa-b980-3be37c6e50bb">
+              <SHORT-NAME>SDA_Interface</SHORT-NAME>
+              <PROVIDED-INTERFACE-TREF DEST="SERVICE-INTERFACE">/SWUC_SDA_Interface/Design/SWUC_SDA_ServiceInterface</PROVIDED-INTERFACE-TREF>
+            </P-PORT-PROTOTYPE>
+            <P-PORT-PROTOTYPE UUID="b937d300-5564-4c46-b881-9b557a136b40">
+              <SHORT-NAME>Diag_Routine_EraseMemory</SHORT-NAME>
+              <PROVIDED-INTERFACE-TREF DEST="DIAGNOSTIC-ROUTINE-INTERFACE">/SWUC/DiagCore/Diag_Design/Port_Interfaces/Diag_RoutineInterface_EraseMemory</PROVIDED-INTERFACE-TREF>
+            </P-PORT-PROTOTYPE>
+            <P-PORT-PROTOTYPE UUID="f0794b17-61c9-44fb-859a-2488d0138e73">
+              <SHORT-NAME>Diag_Routine_CheckMemory</SHORT-NAME>
+              <PROVIDED-INTERFACE-TREF DEST="DIAGNOSTIC-ROUTINE-INTERFACE">/SWUC/DiagCore/Diag_Design/Port_Interfaces/Diag_RoutineInterface_CheckMemory</PROVIDED-INTERFACE-TREF>
+            </P-PORT-PROTOTYPE>
+            <P-PORT-PROTOTYPE UUID="d5c254df-ba31-482f-ad98-82f4c8798c98">
+              <SHORT-NAME>Diag_Routine_CheckProgrammingDependencies</SHORT-NAME>
+              <PROVIDED-INTERFACE-TREF DEST="DIAGNOSTIC-ROUTINE-INTERFACE">/SWUC/DiagCore/Diag_Design/Port_Interfaces/Diag_RoutineInterface_CheckProgrammingDependencies</PROVIDED-INTERFACE-TREF>
+            </P-PORT-PROTOTYPE>
+            <P-PORT-PROTOTYPE UUID="b660bafd-c7ac-4950-8d3d-2264167fa53a">
+              <SHORT-NAME>Diag_Routine_VerifyMemoryContent</SHORT-NAME>
+              <PROVIDED-INTERFACE-TREF DEST="DIAGNOSTIC-ROUTINE-INTERFACE">/SWUC/DiagCore/Diag_Design/Port_Interfaces/Diag_RoutineInterface_VerifyMemoryContent</PROVIDED-INTERFACE-TREF>
+            </P-PORT-PROTOTYPE>
+            <P-PORT-PROTOTYPE UUID="d3d1cf49-788b-4900-9e39-936bf26b8c3c">
+              <SHORT-NAME>Diag_DID_GenericInterface</SHORT-NAME>
+              <PROVIDED-INTERFACE-TREF DEST="DIAGNOSTIC-DATA-IDENTIFIER-GENERIC-INTERFACE">/Diagnostics/port_interfaces/DataIdentifierGeneric_Interface</PROVIDED-INTERFACE-TREF>
+            </P-PORT-PROTOTYPE>
+          </PORTS>
+          <INTERNAL-BEHAVIORS>
+            <ADAPTIVE-SWC-INTERNAL-BEHAVIOR UUID="1d33faa8-1724-4f89-9694-098b2dcbfaad">
+              <SHORT-NAME>AdaptiveSwcInternalBehavior</SHORT-NAME>
+              <SERVICE-DEPENDENCYS>
+                <SWC-SERVICE-DEPENDENCY UUID="bb72488d-1e41-4999-a46c-6ce1d274fe3e">
+                  <SHORT-NAME>SwcServiceDependency_Download</SHORT-NAME>
+                  <ASSIGNED-PORTS>
+                    <ROLE-BASED-PORT-ASSIGNMENT>
+                      <PORT-PROTOTYPE-REF DEST="P-PORT-PROTOTYPE">/SWUC/SoftwareUpdateClientSwcType/Diag_Download</PORT-PROTOTYPE-REF>
+                    </ROLE-BASED-PORT-ASSIGNMENT>
+                  </ASSIGNED-PORTS>
+                </SWC-SERVICE-DEPENDENCY>
+                <SWC-SERVICE-DEPENDENCY UUID="57dd93a7-add2-40cf-a0e3-afa2d6122c04">
+                  <SHORT-NAME>SwcServiceDependency_EraseMemory</SHORT-NAME>
+                  <ASSIGNED-PORTS>
+                    <ROLE-BASED-PORT-ASSIGNMENT>
+                      <PORT-PROTOTYPE-REF DEST="P-PORT-PROTOTYPE">/SWUC/SoftwareUpdateClientSwcType/Diag_Routine_EraseMemory</PORT-PROTOTYPE-REF>
+                    </ROLE-BASED-PORT-ASSIGNMENT>
+                  </ASSIGNED-PORTS>
+                </SWC-SERVICE-DEPENDENCY>
+                <SWC-SERVICE-DEPENDENCY UUID="1527c475-3a00-428e-a9d5-7f3c991b4d82">
+                  <SHORT-NAME>SwcServiceDependency_CheckMemory</SHORT-NAME>
+                  <ASSIGNED-PORTS>
+                    <ROLE-BASED-PORT-ASSIGNMENT>
+                      <PORT-PROTOTYPE-REF DEST="P-PORT-PROTOTYPE">/SWUC/SoftwareUpdateClientSwcType/Diag_Routine_CheckMemory</PORT-PROTOTYPE-REF>
+                    </ROLE-BASED-PORT-ASSIGNMENT>
+                  </ASSIGNED-PORTS>
+                </SWC-SERVICE-DEPENDENCY>
+                <SWC-SERVICE-DEPENDENCY UUID="cb4a6166-2d51-4329-a664-1fa96801ae76">
+                  <SHORT-NAME>SwcServiceDependency_CheckProgrammingDependencies</SHORT-NAME>
+                  <ASSIGNED-PORTS>
+                    <ROLE-BASED-PORT-ASSIGNMENT>
+                      <PORT-PROTOTYPE-REF DEST="P-PORT-PROTOTYPE">/SWUC/SoftwareUpdateClientSwcType/Diag_Routine_CheckProgrammingDependencies</PORT-PROTOTYPE-REF>
+                    </ROLE-BASED-PORT-ASSIGNMENT>
+                  </ASSIGNED-PORTS>
+                </SWC-SERVICE-DEPENDENCY>
+                <SWC-SERVICE-DEPENDENCY UUID="efa13882-f5be-4ce0-9620-ea0730a2b4e9">
+                  <SHORT-NAME>SwcServiceDependency_VerifyMemoryContent</SHORT-NAME>
+                  <ASSIGNED-PORTS>
+                    <ROLE-BASED-PORT-ASSIGNMENT>
+                      <PORT-PROTOTYPE-REF DEST="P-PORT-PROTOTYPE">/SWUC/SoftwareUpdateClientSwcType/Diag_Routine_VerifyMemoryContent</PORT-PROTOTYPE-REF>
+                    </ROLE-BASED-PORT-ASSIGNMENT>
+                  </ASSIGNED-PORTS>
+                </SWC-SERVICE-DEPENDENCY>
+                <SWC-SERVICE-DEPENDENCY UUID="cf94de65-2773-4f4a-970c-acad2c91962a">
+                  <SHORT-NAME>SwcServiceDependency_DID_GenericInterface</SHORT-NAME>
+                  <ASSIGNED-PORTS>
+                    <ROLE-BASED-PORT-ASSIGNMENT>
+                      <PORT-PROTOTYPE-REF DEST="P-PORT-PROTOTYPE">/SWUC/SoftwareUpdateClientSwcType/Diag_DID_GenericInterface</PORT-PROTOTYPE-REF>
+                    </ROLE-BASED-PORT-ASSIGNMENT>
+                  </ASSIGNED-PORTS>
+                </SWC-SERVICE-DEPENDENCY>
+              </SERVICE-DEPENDENCYS>
+            </ADAPTIVE-SWC-INTERNAL-BEHAVIOR>
+          </INTERNAL-BEHAVIORS>
+        </ADAPTIVE-APPLICATION-SW-COMPONENT-TYPE>
+      </ELEMENTS>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>
