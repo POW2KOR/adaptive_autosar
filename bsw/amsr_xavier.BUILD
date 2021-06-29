@@ -419,6 +419,30 @@ filegroup(
     visibility = ["//visibility:public"],
 )
 
+filegroup(
+    name = "dupkg_template",
+    srcs = glob(["Examples/nvidia-update-strategy/addon/dupkg_generator/dupkg_template/*"]),
+    visibility = ["//visibility:public"],
+)
+
+filegroup(
+    name = "dupkg_template_tii_a",
+    srcs = glob(["Examples/nvidia-update-strategy/addon/dupkg_generator/dupkg_template/tii-a/*"]),
+    visibility = ["//visibility:public"],
+)
+
+filegroup(
+    name = "amsrswpkg_generator",
+    srcs = ["Examples/nvidia-update-strategy/addon/amsrswpkg_generator/generate.py"],
+    visibility = ["//visibility:public"],
+)
+
+filegroup(
+    name = "amsrswpkg_template",
+    srcs = ["Examples/nvidia-update-strategy/addon/amsrswpkg_generator/software_package_manifest_template.json"],
+    visibility = ["//visibility:public"],
+)
+
 # We need to use "strip_include_prefix" with cc_library to match the
 # include paths expected by the C++ code, but "strip_include_prefix" can't be
 # used easily if we place the rule do it in bsw/BUILD. So we place it here,

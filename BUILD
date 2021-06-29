@@ -1,6 +1,4 @@
 load("@bazel_skylib//rules:common_settings.bzl", "bool_flag", "string_flag")
-load("@minerva_mpu_adaptive//:bazel/defs.bzl", "append_and_select")
-load("@rules_pkg//:pkg.bzl", "pkg_deb", "pkg_tar")
 
 package(default_visibility = ["//visibility:public"])
 
@@ -68,49 +66,22 @@ config_setting(
     },
 )
 
-pkg_tar(
+# Temporary targets kept around for backward compatibility
+
+genrule(
     name = "minerva_mpu_adaptive_filesystem",
-    files = {
-        "//machine/idc6_m_p1_xavier:machine_exec_config": "/etc/machine_exec_config.json",
-    },
-    deps =
-        append_and_select(
-            {
-                ":mt_present": [
-                    "//application/idc6mt:package",
-                    "//application/stub_application:package",
-                ],
-                "//conditions:default": [],
-            },
-            [
-                "//application/amsr_vector_fs_em_executionmanager:package",
-                "//application/amsr_vector_fs_sec_cryptostack:package",
-                "//application/x6aa_update_dummy_app:package",
-                "//application/someipd_posix:package",
-                "//application/x6aa_config_manager:package",
-                "//application/x6aa_dummy_swc_1:package",
-                "//application/x6aa_em_state_client_app:package",
-                "//application/x6aa_logging_manager:package",
-                "//application/amsr_vector_fs_log_daemon:package",
-                "//application/x6aa_resource_monitor:package",
-                "//application/x6aa_rov_transmission_manager:package",
-                "//application/x6aa_dummy_2_app:package",
-                "//application/diagnostic_manager_deamon_executable:package",
-                "//application/sda:package",
-                "//application/amsr_vector_fs_swupdateclient:package",
-            ],
-        ),
+    srcs = ["//deployment/minerva_mpu_adaptive:filesystem_tar"],
+    outs = ["minerva_mpu_adaptive_filesystem.tar"],
+    cmd = "cp $(location //deployment/minerva_mpu_adaptive:filesystem_tar) $@",
+    deprecation = "Please use the " +
+                  "//deployment/minerva_mpu_adaptive:filesystem_tar target instead.",
 )
 
-pkg_deb(
+genrule(
     name = "minerva_mpu_adaptive_deb",
-    # We are using architecture = "all" since it seems `select` doesn't work well with this parameter and we weren't
-    # able to find a quick fix.
-    architecture = "all",
-    data = ":minerva_mpu_adaptive_filesystem",
-    description = "Distribution of the Minerva Adaptive AUTOSAR stack",
-    homepage = "http://swf.daimler.com",
-    maintainer = "Minerva Platform",
-    package = "minerva_mpu_adaptive",
-    version = "0.0.0",
+    srcs = ["//deployment/minerva_mpu_adaptive:filesystem_deb"],
+    outs = ["minerva_mpu_adaptive_deb.deb"],
+    cmd = "cp $(location //deployment/minerva_mpu_adaptive:filesystem_deb) $@",
+    deprecation = "Please use the " +
+                  "//deployment/minerva_mpu_adaptive:filesystem_deb target instead.",
 )
