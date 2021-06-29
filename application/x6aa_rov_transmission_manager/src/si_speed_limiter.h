@@ -44,7 +44,7 @@ class SISpeedlimiter {
      *
      * \return  true   when success, false otherwise.
      */
-    static bool FindService();
+    bool FindService();
 
     /*!
      * \brief Subscribe to service events and register handler for events.
@@ -136,6 +136,11 @@ class SISpeedlimiter {
      * \brief Service instance identifier.
      */
     static ara::core::InstanceSpecifier const si_speedlimiter_instance_specifier_;
+
+    /*!
+     * \brief Find service handler instance.
+     */
+    ara::com::FindServiceHandle find_service_handle_;
 
 };
 

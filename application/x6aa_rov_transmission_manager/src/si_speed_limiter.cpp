@@ -31,7 +31,9 @@ ara::core::InstanceSpecifier const SISpeedlimiter::
 
 
 SISpeedlimiter::SISpeedlimiter() {
-  // Empty constructor
+  /* Set Find Service Handler */
+  find_service_handle_ = services::ns_speedlimiter::proxy::SI_SpeedLimiterProxy::
+    StartFindService(FindServiceHandler, si_speedlimiter_instance_specifier_);
 }
 
 SISpeedlimiter::~SISpeedlimiter() {
@@ -40,9 +42,6 @@ SISpeedlimiter::~SISpeedlimiter() {
 
 bool SISpeedlimiter::FindService() {
   bool retval = false;
-  static ara::com::FindServiceHandle find_service_handle =
-  services::ns_speedlimiter::proxy::SI_SpeedLimiterProxy::
-    StartFindService(FindServiceHandler, si_speedlimiter_instance_specifier_);
 
   /* Wait until SI_Speedlimiter service is found */
   if (!si_speedlimiter_service_found_.load()) {
@@ -54,7 +53,7 @@ bool SISpeedlimiter::FindService() {
 
     /* Stop searching for further services */
     services::ns_speedlimiter::proxy::SI_SpeedLimiterProxy::
-    StopFindService(find_service_handle);
+    StopFindService(find_service_handle_);
     GetLogger().LogInfo() << "Stopped searching for SI_Speedlimiter service";
     retval = true;
   }
