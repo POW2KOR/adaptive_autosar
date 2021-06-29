@@ -65,7 +65,7 @@ ara::core::Result<void> PersistentMemAccessor::StoreVariantCodingData(
         write_result
             = (*key_value_storage)->SetValue<dataType>(ara::core::StringView(key), data_to_store);
 
-        logger_ctx.LogInfo() << "Writing to store key: " << key << " with value: " << data_to_store;
+        logger_ctx.LogDebug() << "Writing to store key: " << key << " with value: " << data_to_store;
 
         if (write_result.HasValue()) {
             logger_ctx.LogInfo() << "The value written for : "
@@ -263,7 +263,7 @@ ara::core::Result<dataType> PersistentMemAccessor::TryReadingDataFromKvs(
         = (*key_value_storage)->GetValue<dataType>(ara::core::StringView(key_to_read));
 
     if (result_data.HasValue()) {
-        logger_ctx.LogInfo() << "Reading: Data is ready to be read."_sv;
+        logger_ctx.LogDebug() << "Reading: Data is ready to be read."_sv;
         logger_ctx.LogInfo() << "Reading: The read value from: "_sv << key_to_read
                              << " is: " << result_data.Value();
     } else {
