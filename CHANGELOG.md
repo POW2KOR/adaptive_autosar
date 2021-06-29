@@ -14,6 +14,8 @@ files get built into the filesystem using this package.
 run.
 * An application base library has been created to contain the common parts for Adaptive applications. Applications
 should add `//application/common:application_base` to their `deps` and derive from the base class.
+* In `run_aarch64_qemu.sh`, `BOOT_INTO_ADAPTIVE_STACK` was changed into `BOOT_ADAPTIVE_STACK_TO_FOREGROUND`. When this
+is set to false, it will boot the stack in the background instead of not booting at all.
 
 ### Deprecated
 
