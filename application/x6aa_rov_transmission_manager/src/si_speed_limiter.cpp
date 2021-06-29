@@ -40,10 +40,10 @@ SISpeedlimiter::~SISpeedlimiter() {
   // Empty destructor
 }
 
-bool SISpeedlimiter::FindService() {
+bool SISpeedlimiter::CheckAndStopFindService() {
   bool retval = false;
 
-  /* Wait until SI_Speedlimiter service is found */
+  /* Check if SI_Speedlimiter service is found */
   if (!si_speedlimiter_service_found_.load()) {
     static int counter = 0;
     if (++counter % 2 == 0) {

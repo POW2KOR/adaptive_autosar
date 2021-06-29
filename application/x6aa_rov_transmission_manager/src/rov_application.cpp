@@ -34,7 +34,7 @@ RovApplication::RovApplication() : ApplicationBase("rov_tx_manager") {
 
   /* Find SI SpeedLimiter service */
   GetLogger().LogInfo() << "Start searching for SI_Speedlimiter service";
-  si_speedlimiter_.FindService();
+  si_speedlimiter_.CheckAndStopFindService();
 
   /* Subscribe to SI SpeedLimiter events */
   si_speedlimiter_.SubscribeToEvents();
@@ -101,7 +101,7 @@ std::int8_t RovApplication::Run() {
       } else {
         /* Keep searching for service without blocking the application */
         if(!si_speedlimiter_.IsServiceFound()) {
-          si_speedlimiter_.FindService();
+          si_speedlimiter_.CheckAndStopFindService();
         }
 
         /* Subscribe to SI SpeedLimiter events */

@@ -38,13 +38,13 @@ class SISpeedlimiter {
     ~SISpeedlimiter();
 
     /*!
-     * \brief Find ns_speedlimiter service.
+     * \brief Check if ns_speedlimiter service has been found.
      *
-     * This method is blocking until the first service provider is discovered.
+     * This method will stop the FindService if this has been found.
      *
      * \return  true   when success, false otherwise.
      */
-    bool FindService();
+    bool CheckAndStopFindService();
 
     /*!
      * \brief Subscribe to service events and register handler for events.
