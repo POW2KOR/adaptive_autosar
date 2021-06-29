@@ -746,9 +746,9 @@ extra_isize \
             hash=$$(sha256sum $$img_file_path | awk '{{print $$1}}')
             size=$$(stat -c '%s' $$img_file_path)
 
-            sed -i "s/\"data_size\":0,$$/\"data_size\":$$size,/g" \
+            sed -i "s/\\"data_size\\":0,$$/\\"data_size\\":$$size,/g" \
                 "$$dupkg_config_dir/install.json"
-            sed -i "s/\"hash\":\"\"$$/\"hash\":\"$$hash\"/g" \
+            sed -i "s/\\"hash\\":\\"\\"$$/\\"hash\\":\\"$$hash\\"/g" \
                 "$$dupkg_config_dir/install.json"
 
             tar -czf $$dupkg_file_path -C $$dupkg_dir .
