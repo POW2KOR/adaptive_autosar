@@ -102,6 +102,11 @@ configure_make(
         "//bsw:amsr_vector_fs_applicationbase",
         "//bsw:amsr_vector_fs_libiostream",
         "//bsw:amsr_vector_fs_log_api",
+        "//bsw:amsr_vector_fs_thread",
+        "//bsw:amsr_vector_fs_libosabstraction",
+        "//bsw:amsr_vector_fs_libvac",
+        "//bsw:amsr_vector_fs_vajson",
+        "//bsw:amsr_vector_fs_per_libpersistency",
     ],
 )
 
