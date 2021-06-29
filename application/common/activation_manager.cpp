@@ -111,8 +111,7 @@ void ActivationManagerBase::calculateJitter() {
 }
 
 ActivationManagerTimer::ActivationManagerTimer(std::chrono::nanoseconds cycle_time, const std::string name)
-  :
-    ActivationManagerBase(cycle_time, name) {
+  : ActivationManagerBase(cycle_time, name) {
 }
 
 
