@@ -134,9 +134,9 @@ genrule(
     srcs = [":generated_exec_config"],
     outs = ["patched_exec_config.json"],
     cmd = """
-        sed -E -e's#\"isAdaptiveApplication\" : 1,#\"isAdaptiveApplication\" : 0,#' \
-            -e's#\"-c\", #\"-C\",#' \
-            -e's#./etc/application.json #/opt/X6AA_Ressource_Executable/etc/collectd.conf#' \
+        sed -E -e's#\"isAdaptiveApplication\" : 1,#\"isAdaptiveApplication\" : 0,#'# \
+            -e's#\"-c\",#\"-C\",#'# \
+            -e's#./etc/application.json#/opt/X6AA_Ressource_Executable/etc/collectd.conf#' \
             $(location :generated_exec_config) > $@
     """,
 )
