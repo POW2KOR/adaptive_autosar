@@ -154,6 +154,7 @@ def _impl(ctx):
                             flags = [
                                 "-U_FORTIFY_SOURCE",
                                 "-D_FORTIFY_SOURCE=1",
+                                "-fPIC",
 
                                 "-Wall",
                                 "-Wextra",
