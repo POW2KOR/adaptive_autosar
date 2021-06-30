@@ -12,7 +12,7 @@ PATH_TO_ADAPTIVE_TAR="../../../bazel-bin/minerva_mpu_adaptive_filesystem.tar"
 
 # Extra space to add on the disk. Should be big enough to fit the unpacked tar
 # from above.
-EXTRA_SPACE_ON_DISK="1G"
+EXTRA_SPACE_ON_DISK="4G"
 
 # How much memory should the emulator have.
 EMULATOR_MEMORY_SIZE="1024M"
