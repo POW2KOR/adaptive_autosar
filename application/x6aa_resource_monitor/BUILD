@@ -51,8 +51,24 @@ minerva_aa_codegen_rule(
 filegroup(
     name = "collectd_extended_sources",
     srcs = [
-        ":x6aa_resource_monitor_applicationbase_init_deinit_srcs",
         "@collectd_mbient//:all_files",
+    ],
+)
+
+cc_library(
+    name = "extended_libs",
+    srcs = [
+        ":x6aa_resource_monitor_applicationbase_init_deinit_srcs",
+    ],
+    copts = [
+        "-std=c++14",
+    ],
+    linkstatic = 1,
+    deps = [
+        "//bsw:amsr_vector_fs_applicationbase",
+        "//bsw:amsr_vector_fs_em_executionmanager",
+        "//bsw:amsr_vector_fs_libvac",
+        "//bsw:amsr_vector_fs_log_api",
     ],
 )
 
@@ -99,14 +115,15 @@ configure_make(
         "collectd/write_dlt.so",
     ],
     deps = [
+        ":extended_libs",
         "//bsw:amsr_vector_fs_applicationbase",
+        "//bsw:amsr_vector_fs_characterconversion",
         "//bsw:amsr_vector_fs_libiostream",
-        "//bsw:amsr_vector_fs_log_api",
-        "//bsw:amsr_vector_fs_thread",
         "//bsw:amsr_vector_fs_libosabstraction",
         "//bsw:amsr_vector_fs_libvac",
+        "//bsw:amsr_vector_fs_log_api",
+        "//bsw:amsr_vector_fs_thread",
         "//bsw:amsr_vector_fs_vajson",
-        "//bsw:amsr_vector_fs_per_libpersistency",
     ],
 )
 
@@ -140,7 +157,7 @@ genrule(
     outs = ["patched_exec_config.json"],
     cmd = """
         sed -E -e's#\"isAdaptiveApplication\" : 1,#\"isAdaptiveApplication\" : 0,#'# \
-            -e's#\"-c\",#\"-C\",#'# \
+            -e's#\"-c\",#\"-f\",\\n\"-C\",#'# \
             -e's#./etc/application.json#/opt/X6AA_Ressource_Executable/etc/collectd.conf#' \
             $(location :generated_exec_config) > $@
     """,
@@ -255,6 +272,7 @@ pkg_tar(
         ":collectd_lib_collectd_cpu_so": "lib/collectd/cpu.so",
         ":collectd_lib_collectd_csv_so": "lib/collectd/csv.so",
         ":collectd_lib_collectd_write_dlt_so": "lib/collectd/write_dlt.so",
+        ":logging_config": "etc/logging_config.json",
     },
     mode = "0755",
     package_dir = "/opt/X6AA_Ressource_Executable",
