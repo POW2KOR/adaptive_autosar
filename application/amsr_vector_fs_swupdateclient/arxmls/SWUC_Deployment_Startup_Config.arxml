@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<AUTOSAR xmlns="http://autosar.org/schema/r4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_00047.xsd">
+  <AR-PACKAGES>
+    <AR-PACKAGE UUID="06c547aa-fe98-4a19-89a4-0a67a2afb22c">
+      <SHORT-NAME>SWUC</SHORT-NAME>
+      <ELEMENTS>
+        <STARTUP-CONFIG-SET>
+          <SHORT-NAME>StartupConfigs</SHORT-NAME>
+          <STARTUP-CONFIGS>
+            <STARTUP-CONFIG>
+              <SHORT-NAME>StartupModeIndependent</SHORT-NAME>
+              <SCHEDULING-POLICY>SCHEDULING-POLICY-ROUND-ROBIN</SCHEDULING-POLICY>
+              <SCHEDULING-PRIORITY>15</SCHEDULING-PRIORITY>
+            </STARTUP-CONFIG>
+          </STARTUP-CONFIGS>
+        </STARTUP-CONFIG-SET>
+      </ELEMENTS>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>

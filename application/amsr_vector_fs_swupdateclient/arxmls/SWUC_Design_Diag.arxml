@@ -7,19 +7,6 @@
         <AR-PACKAGE UUID="06c547aa-fe98-4a19-89a4-0a67a2afb33c">
           <SHORT-NAME>DiagCore</SHORT-NAME>
           <AR-PACKAGES>
-            <AR-PACKAGE UUID="3bfa81b1-68e3-4017-a2de-4732f12776f9">
-              <SHORT-NAME>Diag_Deployment</SHORT-NAME>
-              <ELEMENTS>
-                <DIAGNOSTIC-SERVICE-DATA-IDENTIFIER-PORT-MAPPING UUID="8c8db39e-9e1e-473a-b8c9-291d597dd6d9">
-                  <SHORT-NAME>Diag_ServiceDataIdentifierPortMapping_ReprogrammingResumeInformation</SHORT-NAME>
-                  <DIAGNOSTIC-DATA-IDENTIFIER-REF DEST="DIAGNOSTIC-DATA-IDENTIFIER">/Diagnostics/Common/Reprogramming_Resume_Information</DIAGNOSTIC-DATA-IDENTIFIER-REF>
-                  <PROCESS-REF DEST="PROCESS-DESIGN">/SWUC/amsr_swupdateclient_process_design</PROCESS-REF>
-                  <SWC-SERVICE-DEPENDENCY-IN-EXECUTABLE-IREF>
-                    <TARGET-SWC-SERVICE-DEPENDENCY-REF DEST="SWC-SERVICE-DEPENDENCY">/SWUC/SoftwareUpdateClientSwcType/AdaptiveSwcInternalBehavior/SwcServiceDependency_DID_GenericInterface</TARGET-SWC-SERVICE-DEPENDENCY-REF>
-                  </SWC-SERVICE-DEPENDENCY-IN-EXECUTABLE-IREF>
-                </DIAGNOSTIC-SERVICE-DATA-IDENTIFIER-PORT-MAPPING>
-              </ELEMENTS>
-            </AR-PACKAGE>
             <AR-PACKAGE UUID="51acbd87-b2a7-42a5-99de-b1096cd4b843">
               <SHORT-NAME>Diag_Design</SHORT-NAME>
               <AR-PACKAGES>

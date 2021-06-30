@@ -31,39 +31,39 @@
                           <FIELDS>
                             <TEXT-VALUE-SPECIFICATION>
                               <SHORT-LABEL>software_id</SHORT-LABEL>
-                              <VALUE>IDxxxxxxxxxxxxx</VALUE>
+                              <VALUE>id_XXXXXXXXXXXX</VALUE>
                             </TEXT-VALUE-SPECIFICATION>
                             <TEXT-VALUE-SPECIFICATION>
                               <SHORT-LABEL>software_name</SHORT-LABEL>
-                              <VALUE>NAMExxxxxxxxxxxxxxxx</VALUE>
+                              <VALUE>name_XXXXXXXXXXXXXXX</VALUE>
                             </TEXT-VALUE-SPECIFICATION>
                             <TEXT-VALUE-SPECIFICATION>
                               <SHORT-LABEL>software_version</SHORT-LABEL>
-                              <VALUE>VERSIONx</VALUE>
+                              <VALUE>version_</VALUE>
                             </TEXT-VALUE-SPECIFICATION>
                             <TEXT-VALUE-SPECIFICATION>
                               <SHORT-LABEL>software_type</SHORT-LABEL>
-                              <VALUE>TYPExxxxxxxxxxxxxxxx</VALUE>
+                              <VALUE>type_XXXXXXXXXXXXXXX</VALUE>
                             </TEXT-VALUE-SPECIFICATION>
                             <TEXT-VALUE-SPECIFICATION>
                               <SHORT-LABEL>current_ram_consumption</SHORT-LABEL>
-                              <VALUE>RAMxxxxxxxxxxxx</VALUE>
+                              <VALUE>ram_XXXXXXXXXXX</VALUE>
                             </TEXT-VALUE-SPECIFICATION>
                             <TEXT-VALUE-SPECIFICATION>
                               <SHORT-LABEL>rom_consumption</SHORT-LABEL>
-                              <VALUE>ROMxxxxxxxxxxxx</VALUE>
+                              <VALUE>rom_XXXXXXXXXXX</VALUE>
                             </TEXT-VALUE-SPECIFICATION>
                             <TEXT-VALUE-SPECIFICATION>
                               <SHORT-LABEL>cpu_load</SHORT-LABEL>
-                              <VALUE>CPUx</VALUE>
+                              <VALUE>cpu_</VALUE>
                             </TEXT-VALUE-SPECIFICATION>
                             <TEXT-VALUE-SPECIFICATION>
                               <SHORT-LABEL>running_state</SHORT-LABEL>
-                              <VALUE>STATExxxxx</VALUE>
+                              <VALUE>state_XXXX</VALUE>
                             </TEXT-VALUE-SPECIFICATION>
                             <TEXT-VALUE-SPECIFICATION>
                               <SHORT-LABEL>origin</SHORT-LABEL>
-                              <VALUE>ORIGINxxxxxxxxxxxxxx</VALUE>
+                              <VALUE>origin_XXXXXXXXXXXXX</VALUE>
                             </TEXT-VALUE-SPECIFICATION>
                           </FIELDS>
                         </RECORD-VALUE-SPECIFICATION>

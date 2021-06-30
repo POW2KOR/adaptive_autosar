@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<AUTOSAR xmlns="http://autosar.org/schema/r4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_00047.xsd">
+  <AR-PACKAGES>
+    <AR-PACKAGE UUID="06c547aa-fe98-4a19-89a4-0a67a2afb22c">
+      <SHORT-NAME>SWUC</SHORT-NAME>
+      <ELEMENTS>
+        <PROCESS-DESIGN UUID="f007a60f-c5a1-4a50-a286-2acd0d851f40">
+          <SHORT-NAME>amsr_swupdateclient_process_design</SHORT-NAME>
+          <EXECUTABLE-REF DEST="EXECUTABLE">/SWUC/amsr_swupdateclient</EXECUTABLE-REF>
+        </PROCESS-DESIGN>
+      </ELEMENTS>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>
