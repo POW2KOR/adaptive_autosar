@@ -118,7 +118,7 @@ requires `--config=stripped`. This limitation will be removed in the future.
 
 ## Running
 
-### Running aarch64 virtual ECU with DRIVE OS with QEMU
+### Running a virtual ECU with QEMU
 
 This method is currently known to only work with the `build_env`. This is because it needs the NVIDIA DRIVE OS Linux
 files which come as part of the `build_env` container. If you would want to make this work without the
@@ -144,6 +144,7 @@ cd os/linux # Important!
 ./run_aarch64_qemu.sh
 
 ```
+
 On first run, the script will download and build the Linux kernel and it will also put together the DRIVE OS
 Linux filesystem. Depending on your machine, this might be enough time for you to have lunch, a cake and a couple of
 coffees. Luckily, subsequent runs will re-use the results from the first run, so you will only have to do this once.
@@ -195,7 +196,16 @@ When running a virtual ECU inside QEMU, the QEMU configuration will forward the 
 host machine. Configure the [dlt-viewer](https://github.com/GENIVI/dlt-viewer) running on your host to connect to
 `127.0.0.1` port `13490` over TCP.
 
-More information on how to build `dlt-viewer` from source can be found [here](docs/setting_up_dlt_viewer.md)
+## Releasing
+
+To release a package to Artifactory, use the following
+[pipeline](https://sfci.swf.daimler.com/job/apricotbscqal/view/Component/job/component.adaptive-autosar.master.manual/).
+
+You need to specify a `RELEASE_LABEL` before starting the job. This parameter is the tag/version of the new release.
+A good value would be an increment of the previous release.
+
+Releases are stored
+[here](https://artifact.swf.daimler.com/webapp/#/artifacts/browse/tree/General/apricot-bin-delivery/xpf/adaptive-autosar).
 
 ## Miscellaneous
 
