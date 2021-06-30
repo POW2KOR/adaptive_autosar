@@ -2,7 +2,7 @@
     "name": "X6AA_Dummy_SWC_2_Executable",
     "description": "IDC6 Dummy SWC 2 application",
     "dlt_id": "SWC2",
-    "log_mode": ["kConsole"],
+    "log_mode": ["kConsole", "kRemote"],
     "log_level": "kInfo",
     "log_dir_path": "",
     "ipc_port": 33,
