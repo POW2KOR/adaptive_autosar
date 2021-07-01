@@ -12,6 +12,7 @@ filegroup(
         "//application/x6aa_config_manager:app_arxml",
         #"//arxmls:x6aa_idc_ecu_extract_arxml",
         #"@amsr_xavier//:mex_arxml",
+        "//application/amsr_vector_fs_swupdateclient:software_update_arxml",
     ],
 )
 
@@ -23,6 +24,7 @@ genr_ignore_patterns = [
     "X6AA_Cnfg_Mngr_Executable.*",
     "TransmissionManager_ROVExecutable.*",
     "SelfDiagnosticAgent_Executable.*",
+    "amsr_swupdateclient.*",
 ]
 
 filegroup(

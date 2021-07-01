@@ -4,10 +4,6 @@
     <AR-PACKAGE UUID="06c547aa-fe98-4a19-89a4-0a67a2afb22c">
       <SHORT-NAME>SWUC</SHORT-NAME>
       <ELEMENTS>
-        <PROCESS-DESIGN UUID="da60643a-0ef7-4667-a497-031c778ffb87">
-          <SHORT-NAME>amsr_swupdateclient_process_design</SHORT-NAME>
-          <EXECUTABLE-REF DEST="EXECUTABLE">/SWUC/amsr_swupdateclient</EXECUTABLE-REF>
-        </PROCESS-DESIGN>
         <ADAPTIVE-APPLICATION-SW-COMPONENT-TYPE UUID="d7a8e13c-ef2b-4cd6-98eb-d8351d4610e8">
           <SHORT-NAME>SoftwareUpdateClientSwcType</SHORT-NAME>
           <PORTS>
@@ -57,7 +53,7 @@
             </P-PORT-PROTOTYPE>
             <P-PORT-PROTOTYPE UUID="d3d1cf49-788b-4900-9e39-936bf26b8c3c">
               <SHORT-NAME>Diag_DID_GenericInterface</SHORT-NAME>
-              <PROVIDED-INTERFACE-TREF DEST="DIAGNOSTIC-DATA-IDENTIFIER-GENERIC-INTERFACE">/Diagnostics/port_interfaces/DataIdentifierGeneric_Interface</PROVIDED-INTERFACE-TREF>
+              <PROVIDED-INTERFACE-TREF DEST="DIAGNOSTIC-DATA-IDENTIFIER-GENERIC-INTERFACE">/SWUC/DiagCore/Diag_Design/Port_Interfaces/Diag_DataIdentifierGenericInterface</PROVIDED-INTERFACE-TREF>
             </P-PORT-PROTOTYPE>
           </PORTS>
           <INTERNAL-BEHAVIORS>
