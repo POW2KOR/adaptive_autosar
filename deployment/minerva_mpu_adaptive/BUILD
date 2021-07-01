@@ -8,6 +8,8 @@ pkg_tar(
     name = "filesystem_tar",
     files = {
         "//machine/idc6_m_p1_xavier:machine_exec_config": "/etc/machine_exec_config.json",
+        "//deployment/minerva_mpu_adaptive:post_install.sh": "/usr/share/minerva/post_install.sh",
+        "//deployment/minerva_mpu_adaptive:pre_removal.sh": "/usr/share/minerva/pre_removal.sh",
     },
     deps =
         append_and_select(
@@ -34,6 +36,7 @@ pkg_tar(
                 "//application/diagnostic_manager_deamon_executable:package",
                 "//application/sda:package",
                 "//application/amsr_vector_fs_swupdateclient:package",
+                "//os/linux:package",
             ],
         ),
 )
@@ -48,6 +51,8 @@ pkg_deb(
     homepage = "http://swf.daimler.com",
     maintainer = "Minerva Platform",
     package = "minerva_mpu_adaptive",
+    postinst = "post_install.sh",
+    prerm = "pre_removal.sh",
     version = VERSION,
 )
 
