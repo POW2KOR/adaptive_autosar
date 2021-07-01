@@ -1,5 +1,5 @@
 load("@rules_pkg//:pkg.bzl", "pkg_tar")
-load("@rules_foreign_cc//tools/build_defs:configure.bzl", "configure_make")
+load("@rules_foreign_cc//foreign_cc:configure.bzl", "configure_make")
 load("@minerva_mpu_adaptive//:bazel/defs.bzl", "minerva_aa_codegen_rule")
 
 package(default_visibility = ["//visibility:public"])
