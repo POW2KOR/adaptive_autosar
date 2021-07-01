@@ -132,6 +132,7 @@ def _impl(ctx):
                                 "-Wno-free-nonheap-object",
                                 "-fno-omit-frame-pointer",
                                 "-D_FORTIFY_SOURCE=1",
+                                "-fPIC",
                             ],
                         ),
                     ]),

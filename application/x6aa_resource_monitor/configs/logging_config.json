@@ -1,7 +1,7 @@
 {
     "name": "X6AA_Ressource_Executable",
     "description": "A sample resource monitor consumer",
-    "dlt_id": "RsMn",
+    "dlt_id": "CLTD",
     "log_mode": ["kConsole", "kRemote"],
     "log_level": "kInfo",
     "log_dir_path": "./log",
