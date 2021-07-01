@@ -2,9 +2,9 @@
 
 set -e
 
-# If this flag is set to true it will boot directly into the adaptive stack, if
-# set to false, it will boot into a login prompt.
-BOOT_INTO_ADAPTIVE_STACK=true
+# If this flag is set to true the adaptive stack will bind directly to the main
+# tty. If set to false, it will boot in the background.
+BOOT_ADAPTIVE_STACK_TO_FOREGROUND=true
 
 # Path to tar to include at the root of the filesystem, usually to the adaptive
 # stack tar.
@@ -83,12 +83,18 @@ fi
 rm -f adaptive_overlay.ext4.qcow2
 qemu-img create -b driveos.ext4.qcow2 -f qcow2 adaptive_overlay.ext4.qcow2
 
-if [ "$BOOT_INTO_ADAPTIVE_STACK" = true ] ; then
-    # Install systemd service for adaptive-stack
-    virt-copy-in -a adaptive_overlay.ext4.qcow2 ../configs/adaptive-stack.service ../configs/enable-ipv6-loopback.service /lib/systemd/system/
-    guestfish -a adaptive_overlay.ext4.qcow2 -i ln-sf /lib/systemd/system/adaptive-stack.service /etc/systemd/system/multi-user.target.wants/adaptive-stack.service
-    guestfish -a adaptive_overlay.ext4.qcow2 -i ln-sf /lib/systemd/system/enable-ipv6-loopback.service /etc/systemd/system/network-online.target.wants/enable-ipv6-loopback.service
+# Install systemd service for adaptive-stack
+SERVICE_PATHS_TO_COPY="../configs/services/adaptive-stack.service ../configs/services/enable-ipv6-loopback.service"
+
+if [ "$BOOT_ADAPTIVE_STACK_TO_FOREGROUND" = true ] ; then
+    # If we boot to foreground, we also copy the drop-in configuration
+    SERVICE_PATHS_TO_COPY="${SERVICE_PATHS_TO_COPY} ../configs/services/adaptive-stack.service.d"
 fi
+
+virt-copy-in -a adaptive_overlay.ext4.qcow2 $SERVICE_PATHS_TO_COPY /lib/systemd/system/
+
+guestfish -a adaptive_overlay.ext4.qcow2 -i ln-sf /lib/systemd/system/adaptive-stack.service /etc/systemd/system/multi-user.target.wants/adaptive-stack.service
+guestfish -a adaptive_overlay.ext4.qcow2 -i ln-sf /lib/systemd/system/enable-ipv6-loopback.service /etc/systemd/system/network-online.target.wants/enable-ipv6-loopback.service
 
 # Configure the network interfaces
 virt-copy-in -a adaptive_overlay.ext4.qcow2 ../configs/enp0s1.network /etc/systemd/network

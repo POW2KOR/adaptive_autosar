@@ -5,7 +5,7 @@ package(default_visibility = ["//visibility:public"])
 pkg_tar(
     name = "package",
     srcs = glob([
-        "configs/*.service",
+        "configs/services/**/*",
     ]),
     mode = "0644",
     package_dir = "/usr/share/minerva",
