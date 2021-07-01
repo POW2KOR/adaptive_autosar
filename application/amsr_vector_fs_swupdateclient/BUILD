@@ -19,11 +19,10 @@ filegroup(
 filegroup(
     name = "software_update_arxml",
     srcs = [
-        "arxmls/softwarecluster_extensions.arxml",
         "arxmls/SWUC_Deployment_Diag.arxml",
-        "arxmls/SWUC_Deployment_Diag_ComApi.arxml",
         "arxmls/SWUC_Deployment_DiagCore.arxml",
         "arxmls/SWUC_Deployment_DiagCore_SDA_Interface.arxml",
+        "arxmls/SWUC_Deployment_Diag_ComApi.arxml",
         "arxmls/SWUC_Deployment_Executable.arxml",
         "arxmls/SWUC_Deployment_Process.arxml",
         "arxmls/SWUC_Deployment_Process_Machine_Mapping.arxml",
@@ -36,6 +35,7 @@ filegroup(
         "arxmls/SWUC_SWCType.arxml",
         "arxmls/SWUC_Types_DiagCore.arxml",
         "arxmls/SWUC_Types_TPUM.arxml",
+        "arxmls/softwarecluster_extensions.arxml",
     ],
     visibility = ["//visibility:public"],
 )
