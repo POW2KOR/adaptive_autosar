@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<AUTOSAR xmlns="http://autosar.org/schema/r4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_00047.xsd" S="8A14E868624BB6CEAA4AA28142AB250C4CD9D467">
+<AUTOSAR xmlns="http://autosar.org/schema/r4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_00047.xsd" S="C3FC4BC2A5834F4E1A849B1E7B76E9F5F5E10AEA">
 	<ADMIN-DATA>
 		<LANGUAGE>EN</LANGUAGE>
 		<USED-LANGUAGES>
@@ -59,6 +59,10 @@
 				<SDG GID="SaveAction" T="2021-06-25T13:35:48+02:00">
 					<SD GID="BuildNumber">1.066</SD>
 					<SD GID="User">KUTOEZT</SD>
+				</SDG>
+				<SDG GID="SaveAction" T="2021-07-01T10:54:52+02:00">
+					<SD GID="BuildNumber">1.066</SD>
+					<SD GID="User">CBASAVA</SD>
 				</SDG>
 			</SDG>
 		</SDGS>
@@ -14021,6 +14025,24 @@ Use 02_False_True instead.</L-2>
 					</ADMIN-DATA>
 					<SERVICE-INTERFACE-REF DEST="USER-DEFINED-SERVICE-INTERFACE-DEPLOYMENT">/ServiceInterfaces/ServiceInterfaceDeployments/DiagComApi_Binding</SERVICE-INTERFACE-REF>
 				</REQUIRED-USER-DEFINED-SERVICE-INSTANCE>
+				<!-- /ServiceInstances/DiagnosticManager_SWUC_RequiredBindingServiceInstance_DiagComApi -->
+				<REQUIRED-USER-DEFINED-SERVICE-INSTANCE>
+					<SHORT-NAME>DiagnosticManager_SWUC_RequiredBindingServiceInstance_DiagComApi</SHORT-NAME>
+					<ADMIN-DATA>
+						<SDGS>
+							<SDG GID="DV:IPC">
+								<SD GID="DV:SERVICE-INSTANCE-ID">1001</SD>
+								<SDG GID="DV:SERVICE-VERSION">
+									<SD GID="DV:MAJOR-VERSION">1</SD>
+									<SD GID="DV:MINOR-VERSION">ANY</SD>
+									<SD GID="DV:DOMAIN">14230</SD>
+									<SD GID="DV:PORT">30404</SD>
+								</SDG>
+							</SDG>
+						</SDGS>
+					</ADMIN-DATA>
+					<SERVICE-INTERFACE-REF DEST="USER-DEFINED-SERVICE-INTERFACE-DEPLOYMENT">/ServiceInterfaces/ServiceInterfaceDeployments/DiagComApi_Binding</SERVICE-INTERFACE-REF>
+				</REQUIRED-USER-DEFINED-SERVICE-INSTANCE>
 			</ELEMENTS>
 			<AR-PACKAGES>
 				<!-- /ServiceInstances/ServiceInstanceToMachineMappings -->
@@ -14243,6 +14265,16 @@ Use 02_False_True instead.</L-2>
 							</PORT-PROTOTYPE-IREF>
 							<PROCESS-REF DEST="PROCESS">/ApplicationDeployment/Processes/DiagnosticManagerDeamon</PROCESS-REF>
 							<SERVICE-INSTANCE-REF DEST="REQUIRED-USER-DEFINED-SERVICE-INSTANCE">/ServiceInstances/DiagnosticManager_RequiredBindingServiceInstance_DiagComApi</SERVICE-INSTANCE-REF>
+						</SERVICE-INSTANCE-TO-PORT-PROTOTYPE-MAPPING>
+						<!-- /ServiceInstances/ServiceInstanceToPortPrototypeMappings/SWUC_RequiredBindingServiceInstance_DiagComApi_toPort -->
+						<SERVICE-INSTANCE-TO-PORT-PROTOTYPE-MAPPING>
+							<SHORT-NAME>SWUC_RequiredBindingServiceInstance_DiagComApi_toPort</SHORT-NAME>
+							<PORT-PROTOTYPE-IREF>
+								<CONTEXT-ROOT-SW-COMPONENT-PROTOTYPE-REF DEST="ROOT-SW-COMPONENT-PROTOTYPE">/Application/Executables/DiagnosticManagerDeamonExecutable/DiagnosticManagerDeamonExecutableRootSwc</CONTEXT-ROOT-SW-COMPONENT-PROTOTYPE-REF>
+								<TARGET-PORT-PROTOTYPE-REF DEST="R-PORT-PROTOTYPE">/ara/diag/DiagnosticManagerSwc/DiagComApiDeamonPort</TARGET-PORT-PROTOTYPE-REF>
+							</PORT-PROTOTYPE-IREF>
+							<PROCESS-REF DEST="PROCESS">/ApplicationDeployment/Processes/DiagnosticManagerDeamon</PROCESS-REF>
+							<SERVICE-INSTANCE-REF DEST="REQUIRED-USER-DEFINED-SERVICE-INSTANCE">/ServiceInstances/DiagnosticManager_SWUC_RequiredBindingServiceInstance_DiagComApi</SERVICE-INSTANCE-REF>
 						</SERVICE-INSTANCE-TO-PORT-PROTOTYPE-MAPPING>
 					</ELEMENTS>
 				</AR-PACKAGE>
@@ -19081,6 +19113,7 @@ LONG: PT4_PTCoor4_Pr5_ST3 (degraded)</L-2>
 								<CONTAINED-PROCESS-REF DEST="PROCESS">/ApplicationDeployment/Processes/Process_X6AA_Ressource_SWC</CONTAINED-PROCESS-REF>
 								<CONTAINED-PROCESS-REF DEST="PROCESS">/ApplicationDeployment/Processes/SelfDiagnosticAgent</CONTAINED-PROCESS-REF>
 								<CONTAINED-PROCESS-REF DEST="PROCESS">/ApplicationDeployment/Processes/TransmissionManager_ROV</CONTAINED-PROCESS-REF>
+								<CONTAINED-PROCESS-REF DEST="PROCESS">/ApplicationDeployment/Processes/DiagnosticManagerDeamon</CONTAINED-PROCESS-REF>
 							</CONTAINED-PROCESS-REFS>
 							<DESIGN-REFS>
 								<DESIGN-REF DEST="SOFTWARE-CLUSTER-DESIGN">/SoftwareDistribution/SoftwareClusterDesign/temporarySoftwareClusterDesignPer</DESIGN-REF>
