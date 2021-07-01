@@ -1,5 +1,5 @@
 [Unit]
-Description=Enable IPv6 loopback for the Adaptive stack
+Description=Enable IPv6 loopback for the AUTOSAR Adaptive stack
 
 [Service]
 Type=oneshot
@@ -7,4 +7,4 @@ RemainAfterExit=yes
 ExecStart=/bin/bash -lc 'ip link set lo multicast on && ip route add ff01::0/16 dev lo'
 
 [Install]
-WantedBy=getty.target
+WantedBy=network-online.target

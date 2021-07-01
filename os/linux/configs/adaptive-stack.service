@@ -1,25 +1,13 @@
 [Unit]
-Description=Run the adaptive stack
-BindsTo=dev-ttyAMA0.device
-After=dev-ttyAMA0.device systemd-user-sessions.service
+Description=Run the AUTOSAR Adaptive stack
+After=systemd-user-sessions.service
 After=network-online.target
 Wants=network-online.target
 After=enable-ipv6-loopback.service
-Conflicts=serial-getty@ttyAMA0.service
 
 [Service]
-Type=idle
-RemainAfterExit=yes
-ExecStart=/sbin/amsr_vector_fs_em_executionmanager -a /opt -m /etc/machine_exec_config.json
-StandardInput=tty
-StandardOutput=tty
-StandardError=tty
-TTYPath=/dev/ttyAMA0
-UtmpIdentifier=ttyAMA0
-TTYReset=yes
-TTYVHangup=yes
-IgnoreSIGPIPE=no
-SendSIGHUP=yes
+Type=simple
+ExecStart=/sbin/amsr_vector_fs_em_executionmanager -a /opt -m /etc/machine_exec_config.json -l /etc/logging_config.json
 
 [Install]
-WantedBy=getty.target
+WantedBy=multi-user.target
