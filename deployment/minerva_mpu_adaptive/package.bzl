@@ -10,6 +10,5 @@ VERSION_MAJOR = VERSION.split(".")[0]
 VERSION_MINOR = VERSION.split(".")[1]
 VERSION_PATCH = VERSION.split(".")[2]
 
-# The correct SW partnumber is A10000000001
-# Since currently is limited to 10 characters, as workaround two 0 are cut
-SW_PARTNUMBER = "A100000001"
+# SW partnumber for AUTOSAR Adaptive: A0009020376
+SW_PARTNUMBER = "0009020376"
