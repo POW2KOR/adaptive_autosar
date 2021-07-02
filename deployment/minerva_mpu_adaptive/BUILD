@@ -10,6 +10,7 @@ pkg_tar(
         "//machine/idc6_m_p1_xavier:machine_exec_config": "/etc/machine_exec_config.json",
         "//deployment/minerva_mpu_adaptive:post_install.sh": "/usr/share/minerva/post_install.sh",
         "//deployment/minerva_mpu_adaptive:pre_removal.sh": "/usr/share/minerva/pre_removal.sh",
+        "//deployment/minerva_mpu_adaptive:network_setup.sh": "/usr/share/minerva/network_setup.sh",
     },
     deps =
         append_and_select(
