@@ -106,7 +106,7 @@ new_git_repository(
     build_file = "@//bsw:amsr_xavier.BUILD",
     commit = "f950c89d4edf138add8bdee80c58085cfc9900e4",
     remote = "ssh://git@git.swf.daimler.com:7999/adasdai/amsr_xavier.git",
-    shallow_since = "1624442689 +0000",
+    shallow_since = "1624442689 +0200",
 )
 
 '''new_local_repository(

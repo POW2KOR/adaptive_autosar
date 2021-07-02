@@ -3,25 +3,6 @@ load("@bazel_skylib//rules:common_settings.bzl", "bool_flag", "string_flag")
 package(default_visibility = ["//visibility:public"])
 
 string_flag(
-    name = "docker_entrypoint",
-    build_setting_default = "execution_manager",
-)
-
-config_setting(
-    name = "docker_entrypoint_shell",
-    flag_values = {
-        ":docker_entrypoint": "shell",
-    },
-)
-
-config_setting(
-    name = "docker_entrypoint_execution_manager",
-    flag_values = {
-        ":docker_entrypoint": "execution_manager",
-    },
-)
-
-string_flag(
     name = "os",
     build_setting_default = "linux",
 )
