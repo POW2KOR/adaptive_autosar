@@ -8,7 +8,7 @@ BOOT_ADAPTIVE_STACK_TO_FOREGROUND=true
 
 # Path to tar to include at the root of the filesystem, usually to the adaptive
 # stack tar.
-PATH_TO_ADAPTIVE_TAR="../../../bazel-bin/minerva_mpu_adaptive_filesystem.tar"
+PATH_TO_ADAPTIVE_TAR="../../../bazel-bin/deployment/minerva_mpu_adaptive/filesystem_tar.tar"
 
 # Extra space to add on the disk. Should be big enough to fit the unpacked tar
 # from above.
