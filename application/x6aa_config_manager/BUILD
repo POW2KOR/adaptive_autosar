@@ -436,6 +436,8 @@ cc_library(
 cc_binary(
     name = "app",
     srcs = [
+        "src/config_manager_application.cpp",
+        "src/config_manager_application.h",
         "src/diagnostic_ssa_client/diagnostic_ssa_client.cpp",
         "src/diagnostic_ssa_client/diagnostic_ssa_client.h",
         "src/main.cpp",
@@ -466,6 +468,7 @@ cc_binary(
     deps = [
         ":persistency_hdrs_lib",
         ":socal_srcs_lib",
+        "//application/common:application_base",
         "//bsw:amsr_vector_fs_applicationbase",
         "//bsw:amsr_vector_fs_characterconversion",
         "//bsw:amsr_vector_fs_em_executionmanager",
