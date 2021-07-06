@@ -13,22 +13,8 @@
 /**********************************************************************************************************************
  *  INCLUDES
  *********************************************************************************************************************/
-#include "ara/core/abort.h"
-#include "ara/core/error_code.h"
-#include "ara/core/error_domain.h"
-#include "ara/core/exception.h"
-#include "ara/core/initialization.h"
-#include "ara/exec/application_client.h"
-#include "ara/log/logging.h"
-#include "osabstraction/process/process.h"
-#include "osabstraction/thread/thread.h"
 #include "services/ns_si_cnfg_mngr_to_dummyswc/si_x6aa_cnfg_mngr_service_reserved_skeleton.h"
-#include "vac/container/string_literals.h"
-#include "vac/language/throw_or_terminate.h"
 
-#include <csignal>
-#include <iostream>
-#include <thread>
 
 /*!
  * \brief Namespace for the example application.

@@ -12,8 +12,6 @@
  *********************************************************************************************************************/
 #include "vc_cnfg_mngr_server.h"
 
-#include "x6aa_config_manager_error_domain.h"
-
 namespace application {
 
 namespace ConfigManagerApp {
