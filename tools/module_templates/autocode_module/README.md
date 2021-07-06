@@ -1,5 +1,5 @@
 # Auto-code Module Template
-If you intend to create any `autocode_module` inside `application`, use this folder as a template to create new module.
+If you intend to create any `autocode_module`, then use this folder as a template to create new module.
 
 ## Module Structure
 Module will follow same structure as that of IDC5:
