@@ -105,13 +105,6 @@
                   <SHORT-NAME>STARTUP_CONFIG_RUNNING</SHORT-NAME>
                   <SCHEDULING-POLICY>SCHEDULING-POLICY-FIFO</SCHEDULING-POLICY>
                   <SCHEDULING-PRIORITY>80</SCHEDULING-PRIORITY>
-                  <STARTUP-OPTIONS>
-                    <STARTUP-OPTION>
-                      <OPTION-ARGUMENT>./etc/logging_config.json</OPTION-ARGUMENT>
-                      <OPTION-KIND>COMMAND-LINE-SHORT-FORM</OPTION-KIND>
-                      <OPTION-NAME>l</OPTION-NAME>
-                    </STARTUP-OPTION>
-                  </STARTUP-OPTIONS>
                 </STARTUP-CONFIG>
               </STARTUP-CONFIGS>
             </STARTUP-CONFIG-SET>
