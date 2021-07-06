@@ -440,6 +440,8 @@ cc_binary(
         "src/config_manager_application.h",
         "src/diagnostic_ssa_client/diagnostic_ssa_client.cpp",
         "src/diagnostic_ssa_client/diagnostic_ssa_client.h",
+        "src/ext_vehicle_config_client/ext_vehicle_config_client.cpp",
+        "src/ext_vehicle_config_client/ext_vehicle_config_client.h",
         "src/main.cpp",
         "src/persistent_mem_accessor/persistent_mem_accessor.cpp",
         "src/persistent_mem_accessor/persistent_mem_accessor.h",

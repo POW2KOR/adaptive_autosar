@@ -26,8 +26,6 @@
 
 #include "config_manager_application.h"
 
-using vac::container::operator""_sv;
-
 namespace {
 /*!
  * \brief Initializes the signal handling.
@@ -55,7 +53,6 @@ void InitializeSignalHandling() noexcept
         ara::core::Abort("InitializeSignalHandling failed.");
     }
 }
-
 } // namespace
 
 /*!

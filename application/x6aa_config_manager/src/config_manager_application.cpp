@@ -47,6 +47,12 @@ CnfgMngrApplication::CnfgMngrApplication() : ApplicationBase("ConfigManager",500
     /* TODO: take action */
   }
 
+  /* Find SI ExtVehicleConfig service */
+  GetLogger().LogInfo() << "Start searching for ExtVehicleConfig service";
+  ext_vehicle_config_client_.CheckAndStopFindService();
+
+  /* Subscribe to SI ExtVehicleConfig events */
+  ext_vehicle_config_client_.SubscribeToEvents();
 }
 
 CnfgMngrApplication::~CnfgMngrApplication() {
@@ -57,6 +63,7 @@ CnfgMngrApplication::~CnfgMngrApplication() {
 
   /* Unsubscribe from service events */
   ssa_client_.UnsubscribeFromEvents();
+  ext_vehicle_config_client_.UnsubscribeFromEvents();
 
   GetLogger().LogInfo() << "ConfigManager shutdown initiated.";
 
@@ -96,6 +103,19 @@ std::int8_t CnfgMngrApplication::Run() {
     while (!exit_requested_) {
       am_->wait();
       GetLogger().LogDebug() << "Running in cycle " << am_->getCycle();
+
+      /**************************************************/
+      /* Verify ExtVehicleConfig service has been found */
+      /**************************************************/
+      if(!ext_vehicle_config_client_.IsServiceFound()) {
+        /* Keep searching for service without blocking the application */
+        ext_vehicle_config_client_.CheckAndStopFindService();
+      } else {
+        /* Subscribe to SI ExtVehicleConfig events */
+        if(!ext_vehicle_config_client_.IsSubscribed()) {
+          ext_vehicle_config_client_.SubscribeToEvents();
+        }
+      }
 
       /********************************/
       /* Send out variant coding data */

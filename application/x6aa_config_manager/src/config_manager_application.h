@@ -31,6 +31,7 @@
 #include "persistent_mem_accessor/persistent_mem_accessor.h"
 #include "vc_cnfg_mngr_server/vc_cnfg_mngr_server.h"
 #include "diagnostic_ssa_client/diagnostic_ssa_client.h"
+#include "ext_vehicle_config_client/ext_vehicle_config_client.h"
 
 /*!
  * \brief Namespace for the example application.
@@ -77,6 +78,11 @@ class CnfgMngrApplication : public ApplicationBase {
    * \brief SSA Client service instance
    */
    application::ConfigManagerApp::DiagnosticSsaClient ssa_client_;
+
+   /*!
+   * \brief SI ExtVehicleConfig service instance
+   */
+   application::ConfigManagerApp::ExtVehicleConfigClient ext_vehicle_config_client_;
 
 };
 
