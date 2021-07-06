@@ -30,28 +30,24 @@ namespace application {
  * \brief Initialize application.
  */
 CnfgMngrApplication::CnfgMngrApplication() : ApplicationBase("ConfigManager",5000) {
-  int ret_value = 0;
 
   /* Offer Config Manager Service Reserved */
   GetLogger().LogInfo() << "Skeleton siX6aaCnfgMngrServiceReservedSkeleton service offered!!";
   service_reserved_server_.OfferService();
 
   /* Find SSA Client service and subscribe */
-  ret_value = ssa_client_.FindService();
-
-  if (EXIT_FAILURE == ret_value) {
+  if (!ssa_client_.FindService()) {
     /* TODO: take action */
   }
-  ret_value = ssa_client_.SubscribeToEvents();
-  if (EXIT_FAILURE == ret_value) {
+  if (!ssa_client_.SubscribeToEvents()) {
     /* TODO: take action */
   }
 
-  /* Find SI ExtVehicleConfig service */
+  /* Find ExtVehicleConfig service */
   GetLogger().LogInfo() << "Start searching for ExtVehicleConfig service";
   ext_vehicle_config_client_.CheckAndStopFindService();
 
-  /* Subscribe to SI ExtVehicleConfig events */
+  /* Subscribe to ExtVehicleConfig events */
   ext_vehicle_config_client_.SubscribeToEvents();
 }
 
