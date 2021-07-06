@@ -7,13 +7,14 @@
 
 # Protect folders and their default reviewers
 /bsw/ @andzisu @sathire @dkurbak @atmehra @atpanig @saksinh @twilmer
-/application/ @andzisu @sathire @dkurbak @atmehra @atpanig @saksinh @twilmer
-/application/swc/ @heimess @joaepp
-/application/swc/module_templates/autocode_module/ @sonyap @pkandha
+/application/ @andzisu @sathire @dkurbak @atmehra @atpanig @saksinh @twilmer @heimess @joaepp
 
 # CI/CD and devops team
 /devops/ @mcherlo @ftrevin
 Jenkinsfile @mcherlo @ftrevin
+
+# Tools folders and their default reviewers
+/tools/module_templates/autocode_module/ @sonyap @pkandha
 
 # All the bazel related files shall need an approval by the ECU SW Integration team
 /build_env/ @dabalan @jjochen @vargrob @imierlu @sshopov
