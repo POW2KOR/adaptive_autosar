@@ -141,7 +141,7 @@ new_local_repository(
 new_git_repository(
     name = "collectd_mbient",  # bazel will create under its own cache folder in the external folder package with the specified name(e.g. external/collectd_mbient)
     build_file = "@//application/x6aa_resource_monitor:collectd_mbient.BUILD",
-    commit = "dd105eac83f36421cb81c91531da3dda0b4ef4e2",  # the commit ID that bazel will use to fetch the external repository
+    commit = "98b0f4b6283398815ee3165d68aa731717fd77b6",  # the commit ID that bazel will use to fetch the external repository
     init_submodules = True,
     patch_args = [
         "-p1",
@@ -150,7 +150,7 @@ new_git_repository(
         "@//application/x6aa_resource_monitor:remove-srcdir-prefix.patch",
     ],
     remote = "ssh://git@git.swf.daimler.com:7999/mbient/collectd.git",
-    shallow_since = "1624528179 +0200",
+    shallow_since = "1625654024 +0200",
 )
 
 '''new_local_repository(
