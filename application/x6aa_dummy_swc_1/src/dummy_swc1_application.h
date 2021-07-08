@@ -48,7 +48,7 @@ class DummySwc1Application : public ApplicationBase {
   /*!
    * \brief Constructor of class Dummy SWC1 Application.
    */
-   ~DummySwc1Application() override;
+   ~DummySwc1Application();
 
   /*!
    * \brief Lifecycle method for run mode.

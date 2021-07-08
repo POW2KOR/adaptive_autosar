@@ -46,36 +46,11 @@ RovApplication::RovApplication() : ApplicationBase("rov_tx_manager") {
 }
 
 RovApplication::~RovApplication() {
-  exit_requested_ = true;
-
   /* Unsubscribe from service events */
   si_speedlimiter_.UnsubscribeFromEvents();
 
   /* Stop offered service */
   si_suppfunctions_server_.StopOfferService();
-
-  GetLogger().LogInfo() << "rov_tx_manager shutdown initiated.";
-
-  if (signal_handler_thread_.native_handle() != 0) {
-    /* #10 Check if exit was requested by sending SIGTERM or SIGINT. */
-    if (!terminated_by_signal_) {
-      /* #15 Terminate the signal handler thread to shutdown. */
-      if (0 != pthread_kill(static_cast<pthread_t>(signal_handler_thread_.native_handle()), SIGTERM)) {
-        GetLogger().LogError() << "Invalid signal!";
-      }
-    } else {
-      GetLogger().LogDebug() << "SIGINT or SIGTERM had been received and had been handled";
-    }
-  } else {
-    GetLogger().LogError() << "Thread ID = 0";
-  }
-
-  /* #20 Wait till all threads have joined. */
-  if (signal_handler_thread_.joinable()) {
-    signal_handler_thread_.join();
-  }
-
-  GetLogger().LogInfo() << "rov_tx_manager finished shutdown.";
 }
 
 std::int8_t RovApplication::Run() {

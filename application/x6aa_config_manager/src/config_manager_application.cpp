@@ -52,37 +52,12 @@ CnfgMngrApplication::CnfgMngrApplication() : ApplicationBase("ConfigManager",500
 }
 
 CnfgMngrApplication::~CnfgMngrApplication() {
-  exit_requested_ = true;
-
   /* Stop offering services */
   service_reserved_server_.StopOfferService();
 
   /* Unsubscribe from service events */
   ssa_client_.UnsubscribeFromEvents();
   ext_vehicle_config_client_.UnsubscribeFromEvents();
-
-  GetLogger().LogInfo() << "ConfigManager shutdown initiated.";
-
-  if (signal_handler_thread_.native_handle() != 0) {
-    /* #10 Check if exit was requested by sending SIGTERM or SIGINT. */
-    if (!terminated_by_signal_) {
-      /* #15 Terminate the signal handler thread to shutdown. */
-      if (0 != pthread_kill(static_cast<pthread_t>(signal_handler_thread_.native_handle()), SIGTERM)) {
-        GetLogger().LogError() << "Invalid signal!";
-      }
-    } else {
-      GetLogger().LogDebug() << "SIGINT or SIGTERM had been received and had been handled";
-    }
-  } else {
-    GetLogger().LogError() << "Thread ID = 0";
-  }
-
-  /* #20 Wait till all threads have joined. */
-  if (signal_handler_thread_.joinable()) {
-    signal_handler_thread_.join();
-  }
-
-  GetLogger().LogInfo() << "ConfigManager finished shutdown.";
 }
 
 std::int8_t CnfgMngrApplication::Run() {

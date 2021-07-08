@@ -77,10 +77,13 @@ bool ExtVehicleConfigClient::SubscribeToEvents() {
       ext_vehicle_config_service_proxy_->Ev_EVC_CfgBit_01_26_Pr5_ST3.Subscribe(
         ara::com::EventCacheUpdatePolicy::kLastN, 1);
 
-      /* Remember that the events are subscribed */
-      ext_vehicle_config_events_subscribed_.store(true);
-
-      retval = true;
+      if(ara::com::SubscriptionState::kSubscribed == ext_vehicle_config_service_proxy_->Ev_EVC_CfgBit_01_26_Pr5_ST3.GetSubscriptionState()) {
+        /* Remember that the events are subscribed */
+        ext_vehicle_config_events_subscribed_.store(true);
+        retval = true;
+      } else {
+        GetLogger().LogInfo() << "Couldn't subscribe to Ev_EVC_CfgBit_01_26_Pr5_ST3";
+      }
     }
   }
 

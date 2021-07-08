@@ -50,7 +50,7 @@ class RovApplication : public ApplicationBase {
   /*!
    * \brief Constructor of class ROV Application.
    */
-   ~RovApplication() override;
+   ~RovApplication();
 
   /*!
    * \brief Lifecycle method for run mode.

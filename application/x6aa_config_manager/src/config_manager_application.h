@@ -60,7 +60,7 @@ class CnfgMngrApplication : public ApplicationBase {
   /*!
    * \brief Constructor of class Config Manager Application.
    */
-   ~CnfgMngrApplication() override;
+   ~CnfgMngrApplication();
 
   /*!
    * \brief Lifecycle method for run mode.
