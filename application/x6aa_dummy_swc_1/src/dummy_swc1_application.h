@@ -18,8 +18,8 @@
  *
  *********************************************************************************************************************/
 
-#ifndef SRC_ROV_APPLICATION_H_
-#define SRC_ROV_APPLICATION_H_
+#ifndef SRC_DUMMY_SWC1_APPLICATION_H_
+#define SRC_DUMMY_SWC1_APPLICATION_H_
 
 
 
@@ -27,9 +27,7 @@
  *  INCLUDES
  *********************************************************************************************************************/
 #include "application/common/application_base.h"
-
-#include "si_speed_limiter.h"
-#include "si_suppfunctions_mpc.h"
+#include "variant_coding_consumer.h"
 
 /*!
  * \brief Namespace for the example application.
@@ -40,17 +38,17 @@ namespace application {
  * \brief Main class representing the application.
  * \vprivate Example class for component internal use.
  */
-class RovApplication : public ApplicationBase {
+class DummySwc1Application : public ApplicationBase {
  public:
   /*!
-   * \brief Constructor of class ROV Application.
+   * \brief Constructor of class Dummy SWC1 Application.
    */
-   RovApplication();
+   DummySwc1Application();
 
   /*!
-   * \brief Constructor of class ROV Application.
+   * \brief Constructor of class Dummy SWC1 Application.
    */
-   ~RovApplication();
+   ~DummySwc1Application();
 
   /*!
    * \brief Lifecycle method for run mode.
@@ -60,16 +58,11 @@ class RovApplication : public ApplicationBase {
 
  private:
    /*!
-   * \brief SI SpeedLimiter service instance
-   */
-   idc6::rovservices::SISpeedlimiter si_speedlimiter_;
-
-  /*!
-   * \brief SI SuppFunctions service instance
-   */
-  idc6::rovservices::SISuppFunctionsServer si_suppfunctions_server_;
+     * \brief Variant coding consumer instance
+     */
+   application::VariantCodingConsumer vc_consumer_;
 };
 
 }  // namespace application
 
-#endif  // SRC_ROV_APPLICATION_H_
+#endif  // SRC_DUMMY_SWC1_APPLICATION_H_

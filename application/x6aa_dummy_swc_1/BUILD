@@ -318,10 +318,11 @@ cc_library(
 cc_binary(
     name = "app",
     srcs = [
+        "src/dummy_swc1_application.cpp",
+        "src/dummy_swc1_application.h",
         "src/main.cpp",
         "src/variant_coding_consumer.cpp",
         "src/variant_coding_consumer.h",
-        "src/x6aa_dummy_swc_1_executable_error_domain.h",
         ":applicationbase_init_deinit_srcs",
         ":ipc_binding_life_cycle_manager",
         "//bsw:amsr_vector_fs_socal_libsocal_a",
@@ -336,6 +337,7 @@ cc_binary(
     linkstatic = 1,
     deps = [
         ":socal_srcs_lib",
+        "//application/common:application_base",
         "//bsw:amsr_vector_fs_applicationbase",
         "//bsw:amsr_vector_fs_em_executionmanager",
         "//bsw:amsr_vector_fs_libiostream",

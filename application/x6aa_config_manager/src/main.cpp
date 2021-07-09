@@ -21,12 +21,10 @@
 #include "ara/core/abort.h"
 #include "ara/core/initialization.h"
 #include "ara/core/result.h"
-#include "diagnostic_ssa_client/diagnostic_ssa_client.h"
-#include "vc_cnfg_mngr_server/vc_cnfg_mngr_server.h"
 
 #include <csignal>
 
-using vac::container::operator""_sv;
+#include "config_manager_application.h"
 
 namespace {
 /*!
@@ -55,7 +53,6 @@ void InitializeSignalHandling() noexcept
         ara::core::Abort("InitializeSignalHandling failed.");
     }
 }
-
 } // namespace
 
 /*!
@@ -78,23 +75,9 @@ int main()
                   << init_result.Error().UserMessage() << "\n";
         ara::core::Abort(msg);
     } else {
-
-        application::ConfigManagerApp::DiagnosticSsaClient ssa_client;
-
-        return_value = ssa_client.FindService();
-
-        if (EXIT_FAILURE == return_value) {
-            /* TODO: take action */
-        }
-
-        return_value = ssa_client.SubscribeToEvents();
-        if (EXIT_FAILURE == return_value) {
-            /* TODO: take action */
-        }
-
         /* Create the application object and run it */
-        application::VcCnfgMngrServer vcServerApp;
-        return_value = vcServerApp.Run();
+        application::CnfgMngrApplication ConfigManagerApp;
+        return_value = ConfigManagerApp.Run();
 
         if (EXIT_FAILURE == return_value) {
             char const* msg{"failed to run variant coding server for offering services."};

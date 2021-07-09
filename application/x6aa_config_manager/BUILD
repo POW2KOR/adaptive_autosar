@@ -436,8 +436,12 @@ cc_library(
 cc_binary(
     name = "app",
     srcs = [
+        "src/config_manager_application.cpp",
+        "src/config_manager_application.h",
         "src/diagnostic_ssa_client/diagnostic_ssa_client.cpp",
         "src/diagnostic_ssa_client/diagnostic_ssa_client.h",
+        "src/ext_vehicle_config_client/ext_vehicle_config_client.cpp",
+        "src/ext_vehicle_config_client/ext_vehicle_config_client.h",
         "src/main.cpp",
         "src/persistent_mem_accessor/persistent_mem_accessor.cpp",
         "src/persistent_mem_accessor/persistent_mem_accessor.h",
@@ -466,6 +470,7 @@ cc_binary(
     deps = [
         ":persistency_hdrs_lib",
         ":socal_srcs_lib",
+        "//application/common:application_base",
         "//bsw:amsr_vector_fs_applicationbase",
         "//bsw:amsr_vector_fs_characterconversion",
         "//bsw:amsr_vector_fs_em_executionmanager",

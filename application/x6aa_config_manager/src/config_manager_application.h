@@ -18,8 +18,8 @@
  *
  *********************************************************************************************************************/
 
-#ifndef SRC_ROV_APPLICATION_H_
-#define SRC_ROV_APPLICATION_H_
+#ifndef SRC_CONFIG_MANAGER_APPLICATION_H_
+#define SRC_CONFIG_MANAGER_APPLICATION_H_
 
 
 
@@ -28,29 +28,39 @@
  *********************************************************************************************************************/
 #include "application/common/application_base.h"
 
-#include "si_speed_limiter.h"
-#include "si_suppfunctions_mpc.h"
+#include "persistent_mem_accessor/persistent_mem_accessor.h"
+#include "vc_cnfg_mngr_server/vc_cnfg_mngr_server.h"
+#include "diagnostic_ssa_client/diagnostic_ssa_client.h"
+#include "ext_vehicle_config_client/ext_vehicle_config_client.h"
 
 /*!
  * \brief Namespace for the example application.
  */
 namespace application {
 
+using activateSarStorage0131VcEventDataType = ::DataTypes::
+    NS_REC_activateSarStorage0131VcEventType_t::REC_activateSarStorage0131VcEventType_t;
+using configureSarTriggerEvents0136VcEventDataType
+    = ::DataTypes::NS_REC_configureSarTriggerEvents0136VcEventType_t::
+        REC_configureSarTriggerEvents0136VcEventType_t;
+using vechicleInformation0400VcEventDataType = ::DataTypes::
+    NS_REC_vechicleInformation0400VcEventType_t::REC_vechicleInformation0400VcEventType_t;
+
 /*!
  * \brief Main class representing the application.
  * \vprivate Example class for component internal use.
  */
-class RovApplication : public ApplicationBase {
+class CnfgMngrApplication : public ApplicationBase {
  public:
   /*!
-   * \brief Constructor of class ROV Application.
+   * \brief Constructor of class Config Manager Application.
    */
-   RovApplication();
+   CnfgMngrApplication();
 
   /*!
-   * \brief Constructor of class ROV Application.
+   * \brief Constructor of class Config Manager Application.
    */
-   ~RovApplication();
+   ~CnfgMngrApplication();
 
   /*!
    * \brief Lifecycle method for run mode.
@@ -60,16 +70,22 @@ class RovApplication : public ApplicationBase {
 
  private:
    /*!
-   * \brief SI SpeedLimiter service instance
-   */
-   idc6::rovservices::SISpeedlimiter si_speedlimiter_;
+     * \brief SI_X6AA_Cnfg_Mngr_Service_ReservedSkeleton service instance
+     */
+   application::ConfigManagerApp::VcCnfgMngrServer service_reserved_server_;
 
-  /*!
-   * \brief SI SuppFunctions service instance
+   /*!
+   * \brief SSA Client service instance
    */
-  idc6::rovservices::SISuppFunctionsServer si_suppfunctions_server_;
+   application::ConfigManagerApp::DiagnosticSsaClient ssa_client_;
+
+   /*!
+   * \brief SI ExtVehicleConfig service instance
+   */
+   application::ConfigManagerApp::ExtVehicleConfigClient ext_vehicle_config_client_;
+
 };
 
 }  // namespace application
 
-#endif  // SRC_ROV_APPLICATION_H_
+#endif  // SRC_CONFIG_MANAGER_APPLICATION_H_
