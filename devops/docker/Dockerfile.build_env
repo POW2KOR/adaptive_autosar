@@ -11,6 +11,12 @@ COPY devops/docker/scripts/package_in_html.py /usr/packageList/
 RUN mkdir -p /opt/cmake
 COPY ./tools/cmake-3.20.2-linux-x86_64.sh /opt/cmake/
 
+#Vectorcast QA env variables and path
+COPY ./tools/vectorcast/ /usr/tools/vectorcast/
+ENV VECTORCAST_DIR=/usr/tools/vcast
+ENV PATH="/usr/tools/vcast:$PATH"
+# Need to add environment variable to the license file, once it is available
+#ENV VECTOR_LICENSE_FILE=/usr/tools/vcast/vector-IP-10-101-1-166.lic
 
 USER root
 
@@ -61,6 +67,14 @@ RUN apt-get --assume-yes  update && \
     sh /opt/cmake/cmake-3.20.2-linux-x86_64.sh --skip-license --prefix=/opt/cmake/ --exclude-subdir && \
     rm /opt/cmake/cmake-3.20.2-linux-x86_64.sh && \
     apt autoremove --assume-yes
+
+# Extracting vector cast QA .
+# Need to add license file once we have valid license file
+WORKDIR /usr/tools
+RUN echo "8BpQuomeGDUYL72" | gpg --batch --ignore-mdc-error --passphrase-fd 0 -d /usr/tools/vectorcast/vcast.linux64.2021.tar.gz.gpg | tar -xzvf -
+#COPY devops/cicd/vectorcast/vector-IP-10-101-1-166.lic /usr/tools/vcast/vector-IP-10-101-1-166.lic
+COPY devops/cicd/scripts/bash/start-vcast.sh /usr/tools/vectorcast/start-vcast.sh
+RUN rm /usr/tools/vectorcast/vcast.linux64.2021.tar.gz.gpg
 
 ENV PATH="/opt/cmake/bin:$PATH"
 
