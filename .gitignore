@@ -5,3 +5,6 @@ application/SWUpdateClientNVAdapter/SwucNvAdapter_app/.adpa/log/
 tools/bazel/*
 tools/*.sh
 *.kdev4
+__pycache__
+.pytest_cache
+.coverage
