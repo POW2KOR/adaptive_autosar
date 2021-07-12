@@ -1,0 +1,29 @@
+exec ${PAGER:-/usr/bin/less} "$0" || exit 1
+Executing tests from //test:bubblesort_test
+-----------------------------------------------------------------------------
+Running main() from gmock_main.cc
+[==========] Running 2 tests from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 2 tests from BubbleSortTest
+[ RUN      ] BubbleSortTest.AllPositive
+2000a1 1 1
+2000 3
+2000b0 3 3
+2000b1 3 3
+2000b2 3 3
+2000 4
+2000a0 1 1
+2000 0
+2000 1
+2000 2
+2000b2 0 3
+2000b1 0 3
+2000b0 0 3
+[       OK ] BubbleSortTest.AllPositive (0 ms)
+[ RUN      ] BubbleSortTest.AllPositiveRandomNumbersBetween0and100
+[       OK ] BubbleSortTest.AllPositiveRandomNumbersBetween0and100 (1 ms)
+[----------] 2 tests from BubbleSortTest (1 ms total)
+
+[----------] Global test environment tear-down
+[==========] 2 tests from 1 test suite ran. (1 ms total)
+[  PASSED  ] 2 tests.
