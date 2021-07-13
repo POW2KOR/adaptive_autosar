@@ -2,7 +2,7 @@ import sys
 import argparse
 import logging
 from pathlib import Path
-from typing import List
+from typing import List, Optional
 import re
 
 from vcast.utils import setup_logging
@@ -52,7 +52,7 @@ def get_merged_coverage(tests_logs_folder: str) -> List:
     return merged_cov_lines
 
 
-def main() -> None:
+def main() -> Optional[int]:
     """Creates a file with aggregated Vcast coverage results from Bazel test logs"""
     setup_logging()
     args = _make_parser().parse_args()
