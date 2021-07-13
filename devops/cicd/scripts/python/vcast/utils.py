@@ -1,12 +1,14 @@
 import logging
-from typing import List
+from typing import List, Optional
 
 
-def write_list_to_text(out_filename: str, target: List[str]) -> None:
+def write_list_to_text(
+    out_filename: str, target: List[str], end_char: str = ""
+) -> None:
     """Writes a given target list to the provided text file path"""
     with open(out_filename, "w") as f:
         for element in target:
-            f.write(element)
+            f.write(f"{element}{end_char}")
 
 
 def setup_logging() -> None:
