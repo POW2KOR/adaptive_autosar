@@ -8,10 +8,8 @@ The following steps shall be executed after launching of `./run_aarch64_qemu.sh`
 saksinh@cmtcleu60844879:~/minerva_mpu_adaptive$ ssh -p 10022 nvidia@localhost
 ```
 
-After you successfully log in, you should see the following message:
+After you successfully log in in QEMU, you should see the following command line prompt:
 ```
-Welcome to Ubuntu 18.04.5 LTS (GNU/Linux 5.12.0-tegra aarch64)
-
 nvidia@tegra-ubuntu:~$
 ```
 
