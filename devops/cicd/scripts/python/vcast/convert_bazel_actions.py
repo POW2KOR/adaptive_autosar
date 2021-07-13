@@ -4,7 +4,7 @@ import logging
 import argparse
 import json
 import itertools
-from typing import List, Dict
+from typing import List, Dict, Optional
 
 from vcast.utils import setup_logging
 from vcast.utils import write_list_to_text
@@ -72,7 +72,7 @@ def get_commands_filename(actions_file: str) -> str:
     return f"{name}.vcshell.putcommand.txt"
 
 
-def main() -> None:
+def main() -> Optional[int]:
     """Creates a commands file expected by Vcast as part of intrsumentationfor code coverage"""
     setup_logging()
     args = _make_parser().parse_args()
