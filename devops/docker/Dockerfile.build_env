@@ -1,6 +1,8 @@
 FROM artifact.swf.daimler.com/adasdai-docker/nvidia/drive/build_driveos_linux_pdk:common-5.2.3.0
 
 ARG BUILD_USER="root"
+ARG VECTOR_CAST_DIR="/usr/tools/vectorcast"
+ARG VCAST_INSTALL_DIR="/usr/tools/vcast"
 
 RUN  mkdir -p /usr/tools/bazel/
 COPY devops/docker/configuration/requirement.txt /${BUILD_USER}/
@@ -11,6 +13,12 @@ COPY devops/docker/scripts/package_in_html.py /usr/packageList/
 RUN mkdir -p /opt/cmake
 COPY ./tools/cmake-3.20.2-linux-x86_64.sh /opt/cmake/
 
+#Vectorcast QA env variables and path
+COPY ./tools/vectorcast/ ${VECTOR_CAST_DIR}/
+ENV VECTORCAST_DIR=${VCAST_INSTALL_DIR}/
+ENV PATH="${VCAST_INSTALL_DIR}:$PATH"
+# TODO : Need to add environment variable to the license file, once it is available
+#ENV VECTOR_LICENSE_FILE=${VCAST_DIR}/vector-IP-10-101-1-166.lic
 
 USER root
 
@@ -61,6 +69,14 @@ RUN apt-get --assume-yes  update && \
     sh /opt/cmake/cmake-3.20.2-linux-x86_64.sh --skip-license --prefix=/opt/cmake/ --exclude-subdir && \
     rm /opt/cmake/cmake-3.20.2-linux-x86_64.sh && \
     apt autoremove --assume-yes
+
+# Extracting vector cast QA .
+WORKDIR /usr/tools
+RUN echo "8BpQuomeGDUYL72" | gpg --batch --ignore-mdc-error --passphrase-fd 0 -d ${VECTOR_CAST_DIR}/vcast.linux64.2021.tar.gz.gpg | tar -xzvf -
+# TODO :update the license file once we have valid license file according to its location.
+#COPY devops/cicd/vectorcast/vector-IP-10-101-1-166.lic ${VCAST_INSTALL_DIR}/vector-IP-10-101-1-166.lic
+COPY devops/cicd/scripts/bash/start-vcast.sh ${VECTOR_CAST_DIR}/start-vcast.sh
+RUN rm ${VECTOR_CAST_DIR}/vcast.linux64.2021.tar.gz.gpg
 
 ENV PATH="/opt/cmake/bin:$PATH"
 

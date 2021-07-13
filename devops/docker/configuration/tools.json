@@ -24,6 +24,11 @@
             "pattern": "adasdai/tools/linux/cmake-3.20.2-linux-x86_64.sh",
             "target": "tools/cmake-3.20.2-linux-x86_64.sh",
             "flat": "true"
+        },
+        {
+            "pattern": "adasdai/tools/linux/vcast.linux64.2021.tar.gz.gpg",
+            "target": "tools/vectorcast/vcast.linux64.2021.tar.gz.gpg",
+            "flat": "true"
         }
     ]
 }
