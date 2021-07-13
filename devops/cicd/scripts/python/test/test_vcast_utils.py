@@ -38,7 +38,7 @@ def test_write_list_to_text(target_file_out, vcast_commands):
 
 
 def test_write_list_to_text_with_char(target_file_out, vcast_commands):
-    """Tests the creation of a text file from a provided list"""
+    """Tests the creation of a text file from a provided list adding newline character"""
     append_char = "\n"
     utils.write_list_to_text(target_file_out, vcast_commands, end_char="\n")
     written_commands = _read_lines(target_file_out)
