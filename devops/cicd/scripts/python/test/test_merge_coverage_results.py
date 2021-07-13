@@ -27,6 +27,7 @@ def test_is_not_vcast_coverage():
     )
     assert not merge_coverage_results.is_vcast_coverage("[ RUN      ] CalcTest.Add")
     assert not merge_coverage_results.is_vcast_coverage("[  PASSED  ] 2 tests.")
+    assert not merge_coverage_results.is_vcast_coverage("0 3 2000b0")
 
 
 def test_get_merged_coverage(tests_folder):
