@@ -126,8 +126,9 @@ This method is currently known to only work with the `build_env`. This is becaus
 files which come as part of the `build_env` container. If you would want to make this work without the
 `build_env`, you would have to make sure you have the correct DRIVE OS SDK dependencies placed at `/drive`.
 
-Our QEMU execution environment currently only support aarch64 executables. This is because it uses DRIVE OS Linux as a
-base, which NVIDIA provides only for aarch64.
+Our QEMU execution environment currently supports aarch64 executables which uses Drive OS Linux  as a base, which
+NVIDIA provides only for aarch64. Alternatively, x86_64 QEMU enviroment can be brought up for tasks that are not dependable
+on Nvidia Drive OS and benifit for native virtualization and KVM accleration.
 
 The execution is currently done through a script, although this will be moved back to be done through bazel in the
 future.
@@ -139,9 +140,13 @@ Then run like so:
 
 ```
 cd os/linux # Important!
-./run_aarch64_qemu.sh
 ```
 
+For aarch64 build -
+```
+sudo ./run_aarch64_qemu.sh
+
+```
 On first run, the script will download and build the Linux kernel and it will also put together the DRIVE OS
 Linux filesystem. Depending on your machine, this might be enough time for you to have lunch, a cake and a couple of
 coffees. Luckily, subsequent runs will re-use the results from the first run, so you will only have to do this once.
@@ -151,6 +156,14 @@ important is `BOOT_ADAPTIVE_STACK_TO_FOREGROUND`. When it is set to true, this w
 the Adaptive AUTOSAR stack to the main tty as soon as systemd has finished booting the system. When it is set to false,
 this will cause the QEMU instance when finished bootin to drop to a login prompt and boot the Adaptive stack in the
 background. The username is `nvidia` and password `nvidia`.
+
+For x64_64 build -
+
+```
+./run_x86_64_qemu.sh
+
+```
+On first run, the script will download Ubuntu cloud image and then bazel x86_64 build for Adaptive stack is extracted into it.
 
 ### Connecting to remote DLT
 
