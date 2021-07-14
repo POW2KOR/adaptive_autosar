@@ -140,12 +140,9 @@ SDK toolchain.
 
 Then run like so:
 
-```
-cd os/linux # Important!
-```
-
 For aarch64 build -
 ```
+cd os/linux # Important!
 ./run_aarch64_qemu.sh
 
 ```
@@ -165,8 +162,8 @@ Alternatively, x86_64 QEMU enviroment can be brought up for tasks that are not d
 from native virtualization and KVM accleration.
 
 For x64_64 build -
-
 ```
+cd os/linux # Important!
 ./run_x86_64_qemu.sh
 
 ```
