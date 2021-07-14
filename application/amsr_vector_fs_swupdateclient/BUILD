@@ -478,16 +478,17 @@ cc_binary(
     copts = [
         "-std=c++14",
     ],
+    defines = select({
+        "//:aarch64": [
+            "ENABLE_NVIDIA_UPDATE_STRATEGY",
+        ],
+        "//conditions:default": [],
+    }),
     features = [
         "pthread",
     ],
     linkstatic = 1,
-    local_defines = select({
-        "//:aarch64": [
-            "ENABLE_NVIDIA_UPDATE_STRATEGY=ON",
-        ],
-        "//conditions:default": [],
-    }) + [
+    local_defines = [
         "VIRTUALMOCK=",
         "ENABLE_EXEC_MANAGER=ON",
     ],
