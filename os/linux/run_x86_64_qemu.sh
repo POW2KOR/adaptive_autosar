@@ -26,34 +26,25 @@ fi
 
 cd runtime
 
-if [ ! -f "cloud.img" ]; then
-    printf "Downloading image...\n"
-
-    img_url="https://cloud-images.ubuntu.com/releases/bionic/release/"
-    img_url="${img_url}/ubuntu-18.04-server-cloudimg-amd64.img"
-
-    wget $img_url -O cloud.img
+if [ -e "ubuntu-cloud.img" ]; then
+echo "already got ubuntu-cloud.img"
+else wget "https://cloud-images.ubuntu.com/releases/bionic/release/ubuntu-18.04-server-cloudimg-amd64.img" -O ubuntu-cloud.img
 fi
 
-cat >user-data <<EOF
-#cloud-config
-password: asdfqwer
-chpasswd: { expire: False }
-ssh_pwauth: True
-EOF
-
 if [ ! -f "user.img" ]; then
-    # create the disk with NoCloud data on it.
+
+    # The cloud systems are normally limited to key based authentication over SSH.
+    # We will either need to inject SSH keys or set the password for the default user
+    printf '%s\n' '#cloud-config' 'password: ubuntu' \
+    'chpasswd: { expire: False }' \
+    'ssh_pwauth: True' >user-data
+
     cloud-localds user.img user-data
 fi
 
 if [ ! -f "ubuntu.img" ]; then
-    # Convert the compressed qcow file downloaded to a uncompressed qcow2
-    qemu-img convert -O qcow2 cloud.img cloud.img.orig
-
-    # Create a delta disk to keep our .orig file pristine backed by 'cloud.img.orig'. All writes in the kvm instance will go to the ubuntu.img file.
-    qemu-img create -f qcow2 -b cloud.img.orig ubuntu.img 20G
-
+    # Create a clean image with original image as backup like qemu-img create -f qcow2 -b clean-disk.qcow2 snapshot.qcow2
+    qemu-img create -f qcow2 -b ubuntu-cloud.img ubuntu.img 20G
 
     printf "Preparing filesystem...\n"
 
