@@ -4,6 +4,7 @@ set -e
 
 # If this flag is set to true the adaptive stack will bind directly to the main
 # tty. If set to false, it will boot in the background.
+# Currently, setting this to true is broken for x86_64 virtual Image and works only for aarch64.
 BOOT_ADAPTIVE_STACK_TO_FOREGROUND=false
 
 # Path to tar to include at the root of the filesystem, usually to the adaptive
