@@ -76,7 +76,8 @@ def compile_x86_64_linux_ubuntu(lib_name) {
                     def builderImg = docker.build(imgNameVer, '-f ./devops/docker/Dockerfile.build_env  --build-arg BUILDKIT_INLINE_CACHE=1 .')
                     builderImg.inside("-u 0:0 --entrypoint='' ${env.diskCache} ${remoteUpload}") {
                         sshagent([env.sshJenkinsCredentials]) {
-                            sh 'devops/cicd/scripts/bash/runtime_functions.sh compile_x86_64_linux_ubuntu'
+                            sh 'devops/cicd/scripts/bash/runtime_functions.sh compile_x86_64_linux_ubuntu bin_x86_64_linux_ubuntu'
+                            upload_artifacts('x86_64_linux_ubuntu')
                         }
                         //TODO: Don't invoke Docker with 0:0 but fix the permissions properly than doing this hack
                         //This will explode as soon as issues during the build arise as files will be left as root and undeletable
@@ -102,7 +103,8 @@ def compile_aarch64_linux_ubuntu(lib_name) {
                     def builderImg = docker.build(imgNameVer, '-f ./devops/docker/Dockerfile.build_env  --build-arg BUILDKIT_INLINE_CACHE=1 .')
                     builderImg.inside("-u 0:0 --entrypoint='' ${env.diskCache} ${remoteUpload}") {
                         sshagent([env.sshJenkinsCredentials]) {
-                            sh 'devops/cicd/scripts/bash/runtime_functions.sh compile_aarch64_linux_ubuntu'
+                            sh 'devops/cicd/scripts/bash/runtime_functions.sh compile_aarch64_linux_ubuntu bin_aarch64_linux_ubuntu'
+                            upload_artifacts('aarch64_linux_ubuntu')
                         }
                         //TODO: Don't invoke Docker with 0:0 but fix the permissions properly than doing this hack
                         //This will explode as soon as issues during the build arise as files will be left as root
@@ -128,7 +130,8 @@ def compile_aarch64_linux_linaro(lib_name) {
                     def builderImg = docker.build(imgNameVer, '-f ./devops/docker/Dockerfile.build_env  --build-arg BUILDKIT_INLINE_CACHE=1 .')
                     builderImg.inside("-u 0:0 --entrypoint='' ${env.diskCache} ${remoteUpload}") {
                         sshagent([env.sshJenkinsCredentials]) {
-                            sh 'devops/cicd/scripts/bash/runtime_functions.sh compile_aarch64_linux_linaro'
+                            sh 'devops/cicd/scripts/bash/runtime_functions.sh compile_aarch64_linux_linaro bin_aarch64_linux_linaro'
+                            upload_artifacts('aarch64_linux_linaro')
                         }
                         //TODO: Don't invoke Docker with 0:0 but fix the permissions properly than doing this hack
                         //This will explode as soon as issues during the build arise as files will be left as root
@@ -173,3 +176,27 @@ def deploy_docker() {
     }]
 }
 return this
+
+def upload_artifacts(String target_path) {
+    sh "tar czf ${target_path}.tar.gz bin_${target_path}/"
+    if (env.BRANCH_NAME == 'feature/upload_sw') {
+        def uploadSpec = """
+          {
+          "files": [
+                {
+                    "pattern": "*.tar.gz",
+                    "target": "adasdai/releases/minerva_mpu/${SW_VERSION}/",
+                    "recursive": "false"
+                }
+            ]
+          }"""
+          def server = Artifactory.server 'default-artifactory-server-id'
+          server.credentialsId = registryCredentials
+          echo 'Uploading SW to the artifactory'
+          server.upload(uploadSpec)
+        }
+    else{
+          println 'Publishing the Artifacts to Artifactory is skipped.'
+          archiveArtifacts artifacts: "*.tar.gz", onlyIfSuccessful: true
+      }
+}
