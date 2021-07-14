@@ -168,7 +168,7 @@ On first run, the script will download Ubuntu cloud image and then bazel x86_64 
 Once Image boots up, you can login to the image by below credentials -
 ```
 ubuntu login: ubuntu
-Password: asdfqwer
+Password: ubuntu
 
 ```
 
