@@ -4,7 +4,7 @@ set -e
 
 # If this flag is set to true the adaptive stack will bind directly to the main
 # tty. If set to false, it will boot in the background.
-BOOT_ADAPTIVE_STACK_TO_FOREGROUND=true
+BOOT_ADAPTIVE_STACK_TO_FOREGROUND=false
 
 # Path to tar to include at the root of the filesystem, usually to the adaptive
 # stack tar.
@@ -98,4 +98,4 @@ printf "Booting...\n"
 # - host port 13490 to guest port 49361 on IP 10.21.17.98 for remote DLT
 # - host port 10023 to guest port 23 on IP 10.21.17.98 for telnet
 
-sudo qemu-system-x86_64 -nographic -cpu host -machine accel=kvm,type=q35 -smp 4 -m 2G -drive if=virtio,format=qcow2,file=ubuntu.img -drive if=virtio,format=raw,file=user.img -net nic,model=virtio -net user -device virtio-net-pci,netdev=net1 -netdev user,id=net1,net=10.1.17.0/16 -device virtio-net-pci,netdev=net20 -netdev user,id=net20,net=10.20.17.0/16 -device virtio-net-pci,netdev=net21 -netdev user,id=net21,net=10.21.17.0/24,hostfwd=tcp::13490-10.21.17.98:49361,hostfwd=tcp::10022-10.21.17.98:22,hostfwd=tcp::10023-10.21.17.98:23 -device virtio-net-pci,netdev=net127 -netdev user,id=net127,net=10.127.17.0/16 -device virtio-net-pci,netdev=net254 -netdev user,id=net254,net=169.254.18.0/16
+qemu-system-x86_64 -nographic -cpu host -machine accel=kvm,type=q35 -smp 4 -m 2G -drive if=virtio,format=qcow2,file=ubuntu.img -drive if=virtio,format=raw,file=user.img -net nic,model=virtio -net user -device virtio-net-pci,netdev=net1 -netdev user,id=net1,net=10.1.17.0/16 -device virtio-net-pci,netdev=net20 -netdev user,id=net20,net=10.20.17.0/16 -device virtio-net-pci,netdev=net21 -netdev user,id=net21,net=10.21.17.0/24,hostfwd=tcp::13490-10.21.17.98:49361,hostfwd=tcp::10022-10.21.17.98:22,hostfwd=tcp::10023-10.21.17.98:23 -device virtio-net-pci,netdev=net127 -netdev user,id=net127,net=10.127.17.0/16 -device virtio-net-pci,netdev=net254 -netdev user,id=net254,net=169.254.18.0/16

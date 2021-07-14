@@ -144,7 +144,7 @@ cd os/linux # Important!
 
 For aarch64 build -
 ```
-sudo ./run_aarch64_qemu.sh
+./run_aarch64_qemu.sh
 
 ```
 On first run, the script will download and build the Linux kernel and it will also put together the DRIVE OS
@@ -179,11 +179,9 @@ ssh -p 10022 ubuntu@localhost
 
 ```
 
-Adaptive stack currently has to be started manually by below comamnd -
+Adaptive stack is started in the background, check with below command -
 ```
-sudo ip link set lo multicast on
-sudo ip route add ff01::0/16 dev lo
-sudo /sbin/amsr_vector_fs_em_executionmanager -a /opt -m /etc/machine_exec_config.json
+sudo systemctl status adaptive-stack.service
 ```
 
 ### Connecting to remote DLT
