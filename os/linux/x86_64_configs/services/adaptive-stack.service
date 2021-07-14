@@ -1,0 +1,13 @@
+[Unit]
+Description=Run the AUTOSAR Adaptive stack
+After=systemd-user-sessions.service
+After=network-online.target
+Wants=network-online.target
+After=enable-ipv6-loopback.service
+
+[Service]
+Type=simple
+ExecStart=/sbin/amsr_vector_fs_em_executionmanager -a /opt -m /etc/machine_exec_config.json -l /etc/logging_config.json
+
+[Install]
+WantedBy=multi-user.target

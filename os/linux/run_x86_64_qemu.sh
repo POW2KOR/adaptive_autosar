@@ -42,7 +42,7 @@ chpasswd: { expire: False }
 ssh_pwauth: True
 EOF
 
-if [ ! -f "cloud.img" ]; then
+if [ ! -f "user.img" ]; then
     # create the disk with NoCloud data on it.
     cloud-localds user.img user-data
 fi
@@ -67,11 +67,11 @@ if [ ! -f "ubuntu.img" ]; then
     guestfish -a ubuntu.img -i ln-sf /lib/systemd/system/multi-user.target /lib/systemd/system/default.target
 
     # Install systemd service for adaptive-stack
-    SERVICE_PATHS_TO_COPY="../configs/services/adaptive-stack.service ../configs/services/enable-ipv6-loopback.service"
+    SERVICE_PATHS_TO_COPY="../x86_64_configs/services/adaptive-stack.service ../x86_64_configs/services/enable-ipv6-loopback.service"
 
     if [ "$BOOT_ADAPTIVE_STACK_TO_FOREGROUND" = true ] ; then
         # If we boot to foreground, we also copy the drop-in configuration
-        SERVICE_PATHS_TO_COPY="${SERVICE_PATHS_TO_COPY} ../configs/services/adaptive-stack.service.d"
+        SERVICE_PATHS_TO_COPY="${SERVICE_PATHS_TO_COPY} ../x86_64_configs/services/adaptive-stack.service.d"
     fi
 
     virt-copy-in -a ubuntu.img $SERVICE_PATHS_TO_COPY /lib/systemd/system/
@@ -80,11 +80,11 @@ if [ ! -f "ubuntu.img" ]; then
     guestfish -a ubuntu.img -i ln-sf /lib/systemd/system/enable-ipv6-loopback.service /etc/systemd/system/network-online.target.wants/enable-ipv6-loopback.service
 
     # Configure the network interfaces
-    virt-copy-in -a ubuntu.img ../configs/enp0s1.network /etc/systemd/network
-    virt-copy-in -a ubuntu.img ../configs/enp0s2.network /etc/systemd/network
-    virt-copy-in -a ubuntu.img ../configs/enp0s3.network /etc/systemd/network
-    virt-copy-in -a ubuntu.img ../configs/enp0s4.network /etc/systemd/network
-    virt-copy-in -a ubuntu.img ../configs/enp0s5.network /etc/systemd/network
+    virt-copy-in -a ubuntu.img ../x86_64_configs/enp0s3.network /etc/systemd/network/
+    virt-copy-in -a ubuntu.img ../x86_64_configs/enp0s4.network /etc/systemd/network/
+    virt-copy-in -a ubuntu.img ../x86_64_configs/enp0s5.network /etc/systemd/network/
+    virt-copy-in -a ubuntu.img ../x86_64_configs/enp0s6.network /etc/systemd/network/
+    virt-copy-in -a ubuntu.img ../x86_64_configs/enp0s7.network /etc/systemd/network/
 
     # Add the adaptive stack to the filesystem
     virt-tar-in -a ubuntu.img $PATH_TO_ADAPTIVE_TAR /
@@ -98,4 +98,4 @@ printf "Booting...\n"
 # - host port 13490 to guest port 49361 on IP 10.21.17.98 for remote DLT
 # - host port 10023 to guest port 23 on IP 10.21.17.98 for telnet
 
-sudo qemu-system-x86_64 -nographic -cpu host -machine accel=kvm,type=q35 -smp 4 -m 2G -drive if=virtio,format=qcow2,file=ubuntu.img -drive if=virtio,format=raw,file=user.img -device virtio-net-pci,netdev=net1 -netdev user,id=net1,net=10.1.17.0/16 -device virtio-net-pci,netdev=net20 -netdev user,id=net20,net=10.20.17.0/16 -device virtio-net-pci,netdev=net21 -netdev user,id=net21,net=10.21.17.0/24,hostfwd=tcp::13490-10.21.17.98:49361,hostfwd=tcp::10022-10.21.17.98:22,hostfwd=tcp::10023-10.21.17.98:23 -device virtio-net-pci,netdev=net127 -netdev user,id=net127,net=10.127.17.0/16 -device virtio-net-pci,netdev=net254 -netdev user,id=net254,net=169.254.18.0/16
+sudo qemu-system-x86_64 -nographic -cpu host -machine accel=kvm,type=q35 -smp 4 -m 2G -drive if=virtio,format=qcow2,file=ubuntu.img -drive if=virtio,format=raw,file=user.img -net nic,model=virtio -net user -device virtio-net-pci,netdev=net1 -netdev user,id=net1,net=10.1.17.0/16 -device virtio-net-pci,netdev=net20 -netdev user,id=net20,net=10.20.17.0/16 -device virtio-net-pci,netdev=net21 -netdev user,id=net21,net=10.21.17.0/24,hostfwd=tcp::13490-10.21.17.98:49361,hostfwd=tcp::10022-10.21.17.98:22,hostfwd=tcp::10023-10.21.17.98:23 -device virtio-net-pci,netdev=net127 -netdev user,id=net127,net=10.127.17.0/16 -device virtio-net-pci,netdev=net254 -netdev user,id=net254,net=169.254.18.0/16

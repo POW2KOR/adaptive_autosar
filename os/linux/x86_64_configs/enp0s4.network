@@ -1,0 +1,5 @@
+[Match]
+Name=enp0s4
+
+[Network]
+Address=10.20.1.113/16
