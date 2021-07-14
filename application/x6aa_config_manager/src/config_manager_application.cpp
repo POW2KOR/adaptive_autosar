@@ -32,7 +32,7 @@ namespace application {
 CnfgMngrApplication::CnfgMngrApplication() : ApplicationBase("ConfigManager",5000) {
 
   /* Offer Config Manager Service Reserved */
-  GetLogger().LogInfo() << "Skeleton siX6aaCnfgMngrServiceReservedSkeleton service offered!!";
+  log_.LogInfo() << "Skeleton siX6aaCnfgMngrServiceReservedSkeleton service offered!!";
   service_reserved_server_.OfferService();
 
   /* Find SSA Client service and subscribe */
@@ -44,7 +44,7 @@ CnfgMngrApplication::CnfgMngrApplication() : ApplicationBase("ConfigManager",500
   }
 
   /* Find ExtVehicleConfig service */
-  GetLogger().LogInfo() << "Start searching for ExtVehicleConfig service";
+  log_.LogInfo() << "Start searching for ExtVehicleConfig service";
   ext_vehicle_config_client_.CheckAndStopFindService();
 
   /* Subscribe to ExtVehicleConfig events */
@@ -66,14 +66,14 @@ std::int8_t CnfgMngrApplication::Run() {
   if (!has_initialization_failed_) {
     this->ReportApplicationState(ara::exec::ApplicationState::kRunning);
 
-    GetLogger().LogInfo() << "ConfigManager application started";
+    log_.LogInfo() << "ConfigManager application started";
 
     application::VariantCodingApp::SingletonPersistentMemAccessor* memAccessor
       = application::VariantCodingApp::SingletonPersistentMemAccessor::getInstance();
 
     while (!exit_requested_) {
       am_->wait();
-      GetLogger().LogDebug() << "Running in cycle " << am_->getCycle();
+      log_.LogDebug() << "Running in cycle " << am_->getCycle();
 
       /**************************************************/
       /* Verify ExtVehicleConfig service has been found */
@@ -102,19 +102,19 @@ std::int8_t CnfgMngrApplication::Run() {
         service_reserved_server_.Ev_activateSarStorage0131VcEvent.Send(
             resultFor131Vc.Value());
       } else {
-        GetLogger().LogError() << resultFor131Vc.Error().Message();
+        log_.LogError() << resultFor131Vc.Error().Message();
       }
       if (resultFor136Vc.HasValue()) {
         service_reserved_server_.Ev_configureSarTriggerEvents0136VcEvent.Send(
             resultFor136Vc.Value());
       } else {
-        GetLogger().LogError() << resultFor136Vc.Error().Message();
+        log_.LogError() << resultFor136Vc.Error().Message();
       }
       if (resultFor400Vc.HasValue()) {
         service_reserved_server_.Ev_vechicleInformation0400VcEvent.Send(
             resultFor400Vc.Value());
       } else {
-        GetLogger().LogError() << resultFor400Vc.Error().Message();
+        log_.LogError() << resultFor400Vc.Error().Message();
       }
 
     }

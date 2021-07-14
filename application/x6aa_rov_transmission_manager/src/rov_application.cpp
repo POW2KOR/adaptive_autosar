@@ -33,7 +33,7 @@ namespace application {
 RovApplication::RovApplication() : ApplicationBase("rov_tx_manager") {
 
   /* Find SI SpeedLimiter service */
-  GetLogger().LogInfo() << "Start searching for SI_Speedlimiter service";
+  log_.LogInfo() << "Start searching for SI_Speedlimiter service";
   si_speedlimiter_.CheckAndStopFindService();
 
   /* Subscribe to SI SpeedLimiter events */
@@ -41,7 +41,7 @@ RovApplication::RovApplication() : ApplicationBase("rov_tx_manager") {
 
   /* Offer SI SuppFunctions service */
   si_suppfunctions_server_.OfferService();
-  GetLogger().LogInfo() << "SI_SuppFunctions_MPC_Service_ST3 service offered";
+  log_.LogInfo() << "SI_SuppFunctions_MPC_Service_ST3 service offered";
 
 }
 
@@ -62,11 +62,11 @@ std::int8_t RovApplication::Run() {
   if (!has_initialization_failed_) {
     this->ReportApplicationState(ara::exec::ApplicationState::kRunning);
 
-    GetLogger().LogInfo() << "rov_tx_manager application started";
+    log_.LogInfo() << "rov_tx_manager application started";
 
     while (!exit_requested_) {
       am_->wait();
-      GetLogger().LogDebug() << "Running in cycle " << am_->getCycle();
+      log_.LogDebug() << "Running in cycle " << am_->getCycle();
       ara::core::Future<services::ns_speedlimiter::proxy::methods::Meth_GetCapabilities::Output> min_speed_limit;
       /* Verify service has been found */
       if(si_speedlimiter_.IsServiceFound() && si_speedlimiter_.IsSubscribed()) {
@@ -94,7 +94,7 @@ std::int8_t RovApplication::Run() {
         cam_sensor_data.CamSensSoil_TSA_IconDisp_Rq_MPC_ST3 = true;
 
         si_suppfunctions_server_.Ev_CamSensSoil_MPC_ST3.Send(cam_sensor_data);
-        GetLogger().LogInfo() << "Ev_CamSensSoil_MPC_ST3 data sent ...";
+        log_.LogInfo() << "Ev_CamSensSoil_MPC_ST3 data sent ...";
       }
     }
 
