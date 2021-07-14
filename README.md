@@ -120,14 +120,16 @@ requires `--config=stripped`. This limitation will be removed in the future.
 
 ## Running
 
-### Running a virtual ECU with QEMU
+### Running aarch64 virtual ECU with DRIVE OS with QEMU
 
 This method is currently known to only work with the `build_env`. This is because it needs the NVIDIA DRIVE OS Linux
 files which come as part of the `build_env` container. If you would want to make this work without the
 `build_env`, you would have to make sure you have the correct DRIVE OS SDK dependencies placed at `/drive`.
 
 Our QEMU execution environment currently supports aarch64 executables which uses Drive OS Linux  as a base, which
-NVIDIA provides only for aarch64. Alternatively, x86_64 QEMU enviroment can be brought up for tasks that are not dependable
+NVIDIA provides only for aarch64.
+
+Alternatively, x86_64 QEMU enviroment can be brought up for tasks that are not dependable
 on Nvidia Drive OS and benifit for native virtualization and KVM accleration.
 
 The execution is currently done through a script, although this will be moved back to be done through bazel in the
@@ -156,6 +158,11 @@ important is `BOOT_ADAPTIVE_STACK_TO_FOREGROUND`. When it is set to true, this w
 the Adaptive AUTOSAR stack to the main tty as soon as systemd has finished booting the system. When it is set to false,
 this will cause the QEMU instance when finished bootin to drop to a login prompt and boot the Adaptive stack in the
 background. The username is `nvidia` and password `nvidia`.
+
+### Running x86_64 virtual ECU with KVM acceleration and QEMU
+
+Alternatively, x86_64 QEMU enviroment can be brought up for tasks that are not dependable on Nvidia Drive OS and benifit
+from native virtualization and KVM accleration.
 
 For x64_64 build -
 
