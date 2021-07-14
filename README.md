@@ -165,6 +165,27 @@ For x64_64 build -
 ```
 On first run, the script will download Ubuntu cloud image and then bazel x86_64 build for Adaptive stack is extracted into it.
 
+Once Image boots up, you can login to the image by below credentials -
+```
+ubuntu login: ubuntu
+Password: asdfqwer
+
+```
+
+Alternatively, you can also ssh into the image from host with same password by below command -
+
+```
+ssh -p 10022 ubuntu@localhost
+
+```
+
+Adaptive stack currently has to be started manually by below comamnd -
+```
+sudo ip link set lo multicast on
+sudo ip route add ff01::0/16 dev lo
+sudo /sbin/amsr_vector_fs_em_executionmanager -a /opt -m /etc/machine_exec_config.json
+```
+
 ### Connecting to remote DLT
 
 All of the applications apart from the `log-daemon` are configured to output remote DLT. The connection is available
