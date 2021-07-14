@@ -18,7 +18,7 @@ RUN curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.d
     # Needed for kernel building
     flex bison libssl-dev \
     # Needed for QEMU execution
-    qemu-system-arm libguestfs-tools qemu-efi \
+    qemu-system-arm libguestfs-tools qemu-efi cloud-image-utils \
     # Install for sudo support
     sudo \
     # Needed for libguestfs to work

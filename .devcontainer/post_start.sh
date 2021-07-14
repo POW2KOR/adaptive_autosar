@@ -20,6 +20,10 @@ sudo chown -R $UID:$UID $HOME/.ssh
 sudo chown -R $UID:$UID /command_history
 sudo chown -R $UID:$UID /bazel_cache
 
+# We do a mknod for /dev/kvm/ to start sudo-less KVM acceleration with qemu
+sudo mknod /dev/kvm c 10 $(grep '\<kvm\>' /proc/misc | cut -f 1 -d' ')
+sudo chown dev:dev /dev/kvm
+
 printf "\nAll done 👌\n\n"
 printf "👉 Build with something like:\n\n"
 
