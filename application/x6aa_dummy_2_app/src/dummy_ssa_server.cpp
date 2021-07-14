@@ -24,9 +24,7 @@ using vac::container::operator""_sv;
  */
 DummySsaServer::DummySsaServer() : ApplicationBase("dummySsa")
 {
-    std::cerr << "--------------------------" << std::endl;
     log_.LogInfo() << "Dummy SSA server is initializing...";
-    std::cerr << "---------1321232-------------" << std::endl;
 
     // Set up the dummySsaServer sending data to config manager
     ara::core::InstanceSpecifier const dummySsaServerInstanceSpecifier{

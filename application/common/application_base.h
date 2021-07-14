@@ -120,8 +120,7 @@ class ApplicationBase {
   /*!
    * \brief Logger instance.
    */
-  //ara::log::Logger& GetLogger();
-  ara::log::Logger& log_{ara::log::CreateLogger("APP", name_)};
+  ara::log::Logger& log_;
 
   /*!
    * \brief ApplicationClient instance

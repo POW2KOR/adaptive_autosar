@@ -41,7 +41,7 @@ using vac::container::operator""_sv;
  * \brief Initialize application.
  */
 ApplicationBase::ApplicationBase(std::string name, int cycle_time)
-  : name_(name), cycle_time_(cycle_time),
+  : name_(name), log_(ara::log::CreateLogger("APP", name)), cycle_time_(cycle_time),
   am_(std::make_shared<ActivationManagerTimer>(std::chrono::milliseconds(cycle_time_))) {
   log_.LogInfo() << name_ << " is initializing...";
 
@@ -238,11 +238,5 @@ void ApplicationBase::ReportApplicationState(ara::exec::ApplicationState applica
 std::string ApplicationBase::getName(void) const {
   return name_;
 }
-
-// ara::log::Logger& ApplicationBase::GetLogger()
-// {
-//     ara::log::Logger& logger{ara::log::CreateLogger("APP", name_)};
-//     return logger;
-// }
 
 }  // namespace application
