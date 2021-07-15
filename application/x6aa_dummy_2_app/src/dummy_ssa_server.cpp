@@ -24,14 +24,14 @@ using vac::container::operator""_sv;
  */
 DummySsaServer::DummySsaServer() : ApplicationBase("dummySsa")
 {
-    GetLogger().LogInfo() << "Dummy SSA server is initializing...";
+    log_.LogInfo() << "Dummy SSA server is initializing...";
 
     // Set up the dummySsaServer sending data to config manager
     ara::core::InstanceSpecifier const dummySsaServerInstanceSpecifier{
         "X6AA_Dummy_SWC_2_Executable/X6AA_Dummy_SWC_2_ExecutableRootSwc/AdaptiveProvidedPortType90"_sv};
     dummySsaServer.emplace(dummySsaServerInstanceSpecifier);
     dummySsaServer->OfferService();
-    GetLogger().LogInfo() << "Dummy SSA server is offering services!!";
+    log_.LogInfo() << "Dummy SSA server is offering services!!";
 }
 
 /*!
@@ -57,13 +57,13 @@ std::int8_t DummySsaServer::Run()
     if (!has_initialization_failed_) {
         this->ReportApplicationState(ara::exec::ApplicationState::kRunning);
 
-        GetLogger().LogInfo() << "Dummy SSA server started";
+        log_.LogInfo() << "Dummy SSA server started";
 
         while (!exit_requested_) {
 
             std::this_thread::sleep_for(std::chrono::seconds(5));
             dummySsaServer->Ev_CalculationResult.Send(bodyStyleValues[count % BODY_STYLES_COUNT]);
-            GetLogger().LogInfo() << "Dummy SSA server has sent an event with body style value = "
+            log_.LogInfo() << "Dummy SSA server has sent an event with body style value = "
                            << bodyStyleValues[count % BODY_STYLES_COUNT];
             count++;
         }

@@ -35,11 +35,11 @@ DummySwc1Application::DummySwc1Application() : ApplicationBase("DummySWC1",1000)
    * consume vatiant coding data and if services are not found then this application
    * will endup with fatal error. This can be changed later on*/
   if (!vc_consumer_.FindService()) {
-    GetLogger().LogError() << "DummySWC1 could not find variant coding service, "
+    log_.LogError() << "DummySWC1 could not find variant coding service, "
                               "timeout occured:";
   }
   if (!vc_consumer_.SubscribeToEvents()) {
-    GetLogger().LogError()
+    log_.LogError()
       << "DummySWC1 could not find subscribe to variant coding events:";
   }
 }
@@ -55,12 +55,12 @@ std::int8_t DummySwc1Application::Run() {
   if (!has_initialization_failed_) {
     this->ReportApplicationState(ara::exec::ApplicationState::kRunning);
 
-    GetLogger().LogInfo() << "DummySWC1 application started";
+    log_.LogInfo() << "DummySWC1 application started";
 
 
     while (!exit_requested_) {
       am_->wait();
-      GetLogger().LogInfo() << "DummySWC1 Running, hearbeat:"
+      log_.LogInfo() << "DummySWC1 Running, hearbeat:"
                              << am_->getCycle();
     }
 
