@@ -113,6 +113,7 @@ printf "Booting...\n"
 # - host port 10022 to guest port 22 on IP 10.21.17.98 for SSH
 # - host port 13490 to guest port 49361 on IP 10.21.17.98 for remote DLT
 # - host port 10023 to guest port 23 on IP 10.21.17.98 for telnet
+# - host port 13400 to guest port 13400 on IP 169.254.17.7 for Socket Connection
 
 qemu-system-aarch64 \
 -nographic \
@@ -134,4 +135,4 @@ qemu-system-aarch64 \
 -device virtio-net-pci,netdev=net127 \
 -netdev user,id=net127,net=10.127.17.0/16 \
 -device virtio-net-pci,netdev=net254 \
--netdev user,id=net254,net=169.254.18.0/16
+-netdev user,id=net254,net=169.254.18.0/16,hostfwd=tcp::13400-169.254.17.7:13400
