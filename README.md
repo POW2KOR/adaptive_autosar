@@ -197,6 +197,8 @@ When running a virtual ECU inside QEMU, the QEMU configuration will forward the 
 host machine. Configure the [dlt-viewer](https://github.com/GENIVI/dlt-viewer) running on your host to connect to
 `127.0.0.1` port `13490` over TCP.
 
+More information on how to build `dlt-viewer` from source can be found [here](docs/setting_up_dlt_viewer.md)
+
 ## Miscellaneous
 
 You can use ssh to connect to the virtual ECU.
