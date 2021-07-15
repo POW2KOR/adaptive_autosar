@@ -179,7 +179,7 @@ return this
 
 def upload_artifacts(String target_path) {
     sh "tar czf ${target_path}.tar.gz bin_${target_path}/*"
-    if (env.BRANCH_NAME == 'feature/task_10938_upload_sw') {
+    if (env.BRANCH_NAME == 'release') {
         def uploadSpec = """
           {
           "files": [
