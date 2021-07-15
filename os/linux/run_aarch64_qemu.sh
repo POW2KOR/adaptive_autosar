@@ -106,6 +106,9 @@ virt-copy-in -a adaptive_overlay.ext4.qcow2 ../configs/enp0s5.network /etc/syste
 # Add the adaptive stack to the filesystem
 virt-tar-in -a adaptive_overlay.ext4.qcow2 $PATH_TO_ADAPTIVE_TAR /
 
+# Add ssh keys
+virt-copy-in -a adaptive_overlay.ext4.qcow2 ../configs/ssh/* /etc/ssh
+
 printf "Booting...\n"
 
 # The following command set up several virtual network interfaces for QEMU, but

@@ -1,41 +1,83 @@
-#Connecting over SSH to the QEMU virtual ECU"
+#Connecting over SSH to the QEMU virtual ECU
 
-## On Guest -
+The following steps shall be executed after launching of `./run_aarch64_qemu.sh` or `./run_x86_64_qemu.sh`
 
-Check below files needed for ssh exist.
+## On Host system
 
-```
-nvidia@tegra-ubuntu:/etc/ssh$ ll
-total 584
-drwxr-xr-x  2 root root   4096 Jun 18 10:58 ./
-drwxr-xr-x 75 root root   4096 Jun 18 10:29 ../
--rw-r--r--  1 root root 553122 Mar  4  2019 moduli
--rw-r--r--  1 root root   1580 Mar  4  2019 ssh_config
--rw-------  1 root root    227 Jun 18 10:58 ssh_host_ecdsa_key
--rw-r--r--  1 root root    179 Jun 18 10:58 ssh_host_ecdsa_key.pub
--rw-------  1 root root    411 Jun 18 10:58 ssh_host_ed25519_key
--rw-r--r--  1 root root     99 Jun 18 10:58 ssh_host_ed25519_key.pub
--rw-------  1 root root   1675 Jun 18 10:57 ssh_host_rsa_key
--rw-r--r--  1 root root    399 Jun 18 10:57 ssh_host_rsa_key.pub
--rw-r--r--  1 root root   3264 Mar  4  2019 sshd_config
-```
-
-Otherwise generate them via below commands -
-```
-ssh-keygen -t rsa -f /etc/ssh/ssh_host_rsa_key
-ssh-keygen -t ecdsa -f /etc/ssh/ssh_host_ecdsa_key
-ssh-keygen -t ed25519 -f /etc/ssh/ssh_host_ed25519_key
-```
-
-## On Host -
+### In case of `./run_aarch64_qemu.sh`
 ```
 saksinh@cmtcleu60844879:~/minerva_mpu_adaptive$ ssh -p 10022 nvidia@localhost
-nvidia@localhost's password:
-Welcome to Ubuntu 18.04.5 LTS (GNU/Linux 5.12.0-tegra aarch64)
+```
+Password: nvidia
 
+After you successfully log in in QEMU, you should see the following command line prompt:
+```
 nvidia@tegra-ubuntu:~$
 ```
-To transfer files between Host and Qemu VM instance, sshfs is recommended to create a shared directory.
+
+### In case of `./run_x86_64_qemu.sh`
+```
+saksinh@cmtcleu60844879:~/minerva_mpu_adaptive$ ssh -p 10022 ubuntu@localhost
+```
+Password: ubuntu
+
+After you successfully log in in QEMU, you should see the following command line prompt:
+```
+ubuntu@ubuntu:~$
+```
+
+
+If you are facing an issue of such type:
+```
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@    WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!     @
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+IT IS POSSIBLE THAT SOMEONE IS DOING SOMETHING NASTY!
+Someone could be eavesdropping on you right now (man-in-the-middle attack)!
+It is also possible that a host key has just been changed.
+The fingerprint for the ECDSA key sent by the remote host is
+SHA256:......
+Please contact your system administrator.
+Add correct host key in /lhome/username/.ssh/known_hosts to get rid of this message.
+Offending ECDSA key in /lhome/username/.ssh/known_hosts:4
+  remove with:
+  ssh-keygen -f "/lhome/username/.ssh/known_hosts" -R "[localhost]:10022"
+ECDSA host key for [localhost]:10022 has changed and you have requested strict checking.
+Host key verification failed.
+```
+
+then follow its suggestion and execute the command:
+```
+ssh-keygen -f $HOME"/.ssh/known_hosts" -R "[localhost]:10022"
+```
+
+And after that repeat the attempt to log in through SSH.
+
+
+## Transferring files between Host and Qemu VM
+
+On the **host system** create the directory, which will be used for sharing files
+```
+mkdir /tmp/guest
+```
+
+On the **guest system (in qemu)** create another directory, which will be used for sharing files
+```
+mkdir /tmp/host
+```
+
+On the **host system**:
+
+Use sshfs for mounting the directory. It might be required to install it: `sudo apt install sshfs`
 ```
 $ sshfs  -p 10022 nvidia@localhost:/tmp/host /tmp/guest
 ```
+
+Check that directory was successfully mounted
+```
+$ mount | grep nvidia
+nvidia@localhost:/tmp/host on /tmp/guest type fuse.sshfs (rw,nosuid,nodev,relatime,user_id=...,group_id=...)
+```
+
+Now you should be able to read and modify files that are located in `/tmp/host` in qemu via modifying files in
+`/tmp/guest` in host system.
