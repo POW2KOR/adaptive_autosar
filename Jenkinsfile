@@ -5,6 +5,7 @@ initGatekeeper()
 
 // timeout in minutes
 max_time = 60
+SW_VERSION = "latest_version"
 
 assign_node_labels()
 
