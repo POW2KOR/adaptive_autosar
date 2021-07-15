@@ -97,7 +97,7 @@ uint8_t Communication::InitiateSerivceReadDataByIdentifier(uint32_t& did)
     //Second Read is for the Resposnse from ECU
     size_t n = read(server_sock_fd, response_from_ecu.data(), response_from_ecu.size());
     if (response_from_ecu[index_for_response_code] == server_busy_response_code){
-        std::cerr << "Server is Bussy, Please Read again... \n";
+        std::cerr << "Server is Busy, Please Read again... \n";
 
         n = read(server_sock_fd, response_from_ecu.data(), response_from_ecu.size());
 
