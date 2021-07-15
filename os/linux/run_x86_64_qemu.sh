@@ -46,41 +46,40 @@ fi
 if [ ! -f "ubuntu.img" ]; then
     # Create a clean image with original image as backup like qemu-img create -f qcow2 -b clean-disk.qcow2 snapshot.qcow2
     qemu-img create -f qcow2 -b ubuntu-cloud.img ubuntu.img 20G
-
-    printf "Preparing filesystem...\n"
-
-    # Enable networking with systemd-networkd
-    guestfish -a ubuntu.img -i ln-sf /lib/systemd/system/systemd-networkd-wait-online.service /etc/systemd/system/network-online.target.wants/systemd-networkd-wait-online.service
-    guestfish -a ubuntu.img -i ln-sf /lib/systemd/system/systemd-networkd.socket /etc/systemd/system/sockets.target.wants/systemd-networkd.socket
-    guestfish -a ubuntu.img -i ln-sf /lib/systemd/system/systemd-networkd.service /etc/systemd/system/multi-user.target.wants/systemd-networkd.service
-    guestfish -a ubuntu.img -i ln-sf /lib/systemd/system/systemd-networkd.service /etc/systemd/system/dbus-org.freedesktop.network1.service
-
-    # Disable OEM setup for NVIDIA. We automate it.
-    guestfish -a ubuntu.img -i ln-sf /lib/systemd/system/multi-user.target /lib/systemd/system/default.target
-
-    # Install systemd service for adaptive-stack
-    SERVICE_PATHS_TO_COPY="../x86_64_configs/services/adaptive-stack.service ../x86_64_configs/services/enable-ipv6-loopback.service"
-
-    if [ "$BOOT_ADAPTIVE_STACK_TO_FOREGROUND" = true ] ; then
-        # If we boot to foreground, we also copy the drop-in configuration
-        SERVICE_PATHS_TO_COPY="${SERVICE_PATHS_TO_COPY} ../x86_64_configs/services/adaptive-stack.service.d"
-    fi
-
-    virt-copy-in -a ubuntu.img $SERVICE_PATHS_TO_COPY /lib/systemd/system/
-
-    guestfish -a ubuntu.img -i ln-sf /lib/systemd/system/adaptive-stack.service /etc/systemd/system/multi-user.target.wants/adaptive-stack.service
-    guestfish -a ubuntu.img -i ln-sf /lib/systemd/system/enable-ipv6-loopback.service /etc/systemd/system/network-online.target.wants/enable-ipv6-loopback.service
-
-    # Configure the network interfaces
-    virt-copy-in -a ubuntu.img ../x86_64_configs/enp0s3.network /etc/systemd/network/
-    virt-copy-in -a ubuntu.img ../x86_64_configs/enp0s4.network /etc/systemd/network/
-    virt-copy-in -a ubuntu.img ../x86_64_configs/enp0s5.network /etc/systemd/network/
-    virt-copy-in -a ubuntu.img ../x86_64_configs/enp0s6.network /etc/systemd/network/
-    virt-copy-in -a ubuntu.img ../x86_64_configs/enp0s7.network /etc/systemd/network/
-
-    # Add the adaptive stack to the filesystem
-    virt-tar-in -a ubuntu.img $PATH_TO_ADAPTIVE_TAR /
 fi
+
+printf "Preparing filesystem...\n"
+
+# Enable networking with systemd-networkd
+guestfish -a ubuntu.img -i ln-sf /lib/systemd/system/systemd-networkd-wait-online.service /etc/systemd/system/network-online.target.wants/systemd-networkd-wait-online.service
+guestfish -a ubuntu.img -i ln-sf /lib/systemd/system/systemd-networkd.socket /etc/systemd/system/sockets.target.wants/systemd-networkd.socket
+guestfish -a ubuntu.img -i ln-sf /lib/systemd/system/systemd-networkd.service /etc/systemd/system/multi-user.target.wants/systemd-networkd.service
+guestfish -a ubuntu.img -i ln-sf /lib/systemd/system/systemd-networkd.service /etc/systemd/system/dbus-org.freedesktop.network1.service
+
+guestfish -a ubuntu.img -i ln-sf /lib/systemd/system/multi-user.target /lib/systemd/system/default.target
+
+# Install systemd service for adaptive-stack
+SERVICE_PATHS_TO_COPY="../x86_64_configs/services/adaptive-stack.service ../x86_64_configs/services/enable-ipv6-loopback.service"
+
+if [ "$BOOT_ADAPTIVE_STACK_TO_FOREGROUND" = true ] ; then
+    # If we boot to foreground, we also copy the drop-in configuration
+    SERVICE_PATHS_TO_COPY="${SERVICE_PATHS_TO_COPY} ../x86_64_configs/services/adaptive-stack.service.d"
+fi
+
+virt-copy-in -a ubuntu.img $SERVICE_PATHS_TO_COPY /lib/systemd/system/
+
+guestfish -a ubuntu.img -i ln-sf /lib/systemd/system/adaptive-stack.service /etc/systemd/system/multi-user.target.wants/adaptive-stack.service
+guestfish -a ubuntu.img -i ln-sf /lib/systemd/system/enable-ipv6-loopback.service /etc/systemd/system/network-online.target.wants/enable-ipv6-loopback.service
+
+# Configure the network interfaces
+virt-copy-in -a ubuntu.img ../x86_64_configs/enp0s3.network /etc/systemd/network/
+virt-copy-in -a ubuntu.img ../x86_64_configs/enp0s4.network /etc/systemd/network/
+virt-copy-in -a ubuntu.img ../x86_64_configs/enp0s5.network /etc/systemd/network/
+virt-copy-in -a ubuntu.img ../x86_64_configs/enp0s6.network /etc/systemd/network/
+virt-copy-in -a ubuntu.img ../x86_64_configs/enp0s7.network /etc/systemd/network/
+
+# Add the adaptive stack to the filesystem
+virt-tar-in -a ubuntu.img $PATH_TO_ADAPTIVE_TAR /
 
 printf "Booting...\n"
 
