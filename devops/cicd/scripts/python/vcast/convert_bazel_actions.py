@@ -6,8 +6,8 @@ import json
 import itertools
 from typing import List, Dict, Optional
 
-from vcast.utils import setup_logging
-from vcast.utils import write_list_to_text
+from .utils import setup_logging
+from .utils import write_list_to_text
 
 
 def _make_parser() -> argparse.ArgumentParser:
@@ -26,6 +26,11 @@ def _make_parser() -> argparse.ArgumentParser:
         help="Bazel execution directory",
         type=str,
         required=True,
+    )
+    parser.add_argument(
+        "--output_file",
+        help="Path to output file with Vcast build commands",
+        type=str,
     )
     parser.add_argument(
         "--compiler",
@@ -80,8 +85,13 @@ def main() -> Optional[int]:
     vcast_commands = get_vcast_commands(args.aquery_file, args.exec_dir)
     logging.info(f"vcast_commands: {vcast_commands}")
 
-    out_filename = get_commands_filename(args.aquery_file)
-    write_list_to_text(out_filename, vcast_commands)
+    out_filename = (
+        args.output_file
+        if args.output_file
+        else get_commands_filename(args.aquery_file)
+    )
+    write_list_to_text(out_filename, vcast_commands, end_char="\n")
+    logging.info(f"Wrote vcast put commands to {out_filename}")
 
 
 if __name__ == "__main__":

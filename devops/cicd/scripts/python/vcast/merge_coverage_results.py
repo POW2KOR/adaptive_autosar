@@ -5,8 +5,8 @@ from pathlib import Path
 from typing import List, Optional
 import re
 
-from vcast.utils import setup_logging
-from vcast.utils import write_list_to_text
+from .utils import setup_logging
+from .utils import write_list_to_text
 
 
 def _make_parser() -> argparse.ArgumentParser:
@@ -56,9 +56,9 @@ def main() -> Optional[int]:
     """Creates a file with aggregated Vcast coverage results from Bazel test logs"""
     setup_logging()
     args = _make_parser().parse_args()
-    merged_coverage_lines = get_coverage_lines(args.test_logs)
+    merged_coverage_lines = get_merged_coverage(args.test_logs)
     logging.info(f"merged_coverage_lines {merged_coverage_lines}")
-    write_list_to_text(merged_coverage_lines)
+    write_list_to_text(args.output_file, merged_coverage_lines)
 
 
 if __name__ == "__main__":

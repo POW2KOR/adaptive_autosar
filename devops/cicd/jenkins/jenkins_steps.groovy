@@ -146,6 +146,35 @@ def compile_aarch64_linux_linaro(lib_name) {
 }
 return this
 
+def test_x86_64_linux_ubuntu(lib_name) {
+    return ['x86_64_linux_ubuntu': {
+      node(env.NODE_LINUX_CPU) {
+        timeout(time: max_time, unit: 'MINUTES') {
+            init_git()
+            collect_deps()
+            // TODO move docker and ssh agent boilerplate into library function
+            docker.withRegistry(env.registryUrl, env.registryCredentials) {
+                withEnv(['DOCKER_BUILDKIT=1']) {
+                    def builderImg = docker.build(imgNameVer, '-f ./devops/docker/Dockerfile.build_env  --build-arg BUILDKIT_INLINE_CACHE=1 .')
+                    builderImg.inside("-u 0:0 --entrypoint='' ${env.diskCache} ${remoteUpload}") {
+                        sshagent([env.sshJenkinsCredentials]) {
+                            sh """
+                            . devops/cicd/scripts/bash/helper_functions.sh
+                            test_x86_64_linux_ubuntu
+                            """
+                        }
+                        //TODO: Don't invoke Docker with 0:0 but fix the permissions properly than doing this hack
+                        //This will explode as soon as issues during the build arise as files will be left as root and undeletable
+                        sh "chown -R ${userId}:${groupId} ."
+                    }
+                }
+            }
+            lib_depot_utilities.pack_lib(lib_name, STASH_LIB_X86_64_LINUX_UBUNTU)
+        }
+      }
+    }]
+}
+
 def deploy_docker() {
     return ['DOCKER_MPU': {
     if (env.BRANCH_NAME == 'master') {

@@ -1,12 +1,25 @@
 import os
+import sys
+
 import pytest
-from vcast import merge_coverage_results
+
+from devops.cicd.scripts.python.vcast import merge_coverage_results
+from common import tests_folder, read_lines
 
 
 @pytest.fixture
-def tests_folder():
-    folder_path, _ = os.path.split(__file__)
-    return folder_path
+def expected_testinss(tests_folder):
+    testinss_file = os.path.join(tests_folder, "resources/TESTINSS.DAT")
+    with open(testinss_file, "r") as f:
+        expected_testinss = f.readlines()
+    return [line.strip() for line in expected_testinss]
+
+
+@pytest.fixture
+def out_testinss_path(tests_folder):
+    out_test_instrumented = os.path.join(tests_folder, "resources/OUT_TESTINSS.DAT")
+    yield out_test_instrumented
+    os.remove(out_test_instrumented)
 
 
 def test_is_vcast_coverage():
@@ -36,3 +49,25 @@ def test_get_merged_coverage(tests_folder):
     cov_results = merge_coverage_results.get_merged_coverage(test_logs_path)
     num_expected_vcast_logs = 17
     assert len(cov_results) == num_expected_vcast_logs
+
+
+def test_main(monkeypatch, tests_folder, out_testinss_path, expected_testinss):
+    """Tests the main method of the module"""
+    with monkeypatch.context() as m:
+        m.setattr(
+            sys,
+            "argv",
+            [
+                "",
+                "--test_logs",
+                os.path.join(tests_folder, "resources"),
+                "--output_file",
+                out_testinss_path,
+            ],
+        )
+        merge_coverage_results.main()
+        assert expected_testinss == read_lines(out_testinss_path)
+
+
+if __name__ == "__main__":
+    raise SystemExit(pytest.main([__file__]))  # For Bazel

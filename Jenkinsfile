@@ -31,6 +31,7 @@ lib_depot_utilities.main_wrapper(
     ])
 
     lib_depot_utilities.parallel_stage('Tests', [
+        lib_jenkins_steps.test_x86_64_linux_ubuntu('x86_64_linux_ubuntu'),
     ])
 
      lib_depot_utilities.parallel_stage('Deploy', [
