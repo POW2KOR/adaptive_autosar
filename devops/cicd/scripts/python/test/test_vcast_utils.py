@@ -1,6 +1,7 @@
 import os
 import pytest
-from vcast import utils
+
+from devops.cicd.scripts.python.vcast import utils
 
 
 @pytest.fixture
@@ -47,3 +48,7 @@ def test_write_list_to_text_with_char(target_file_out, vcast_commands):
     assert written_commands[0] == f"{vcast_commands[0]}{append_char}"
     assert written_commands[1] == f"{vcast_commands[1]}{append_char}"
     assert written_commands[2] == f"{vcast_commands[2]}{append_char}"
+
+
+if __name__ == "__main__":
+    raise SystemExit(pytest.main([__file__]))  # For Bazel

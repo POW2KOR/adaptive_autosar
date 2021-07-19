@@ -3,8 +3,8 @@ import sys
 
 import pytest
 
-from vcast import merge_coverage_results
-from .common import tests_folder, read_lines
+from devops.cicd.scripts.python.vcast import merge_coverage_results
+from common import tests_folder, read_lines
 
 
 @pytest.fixture
@@ -67,3 +67,7 @@ def test_main(monkeypatch, tests_folder, out_testinss_path, expected_testinss):
         )
         merge_coverage_results.main()
         assert expected_testinss == read_lines(out_testinss_path)
+
+
+if __name__ == "__main__":
+    raise SystemExit(pytest.main([__file__]))  # For Bazel

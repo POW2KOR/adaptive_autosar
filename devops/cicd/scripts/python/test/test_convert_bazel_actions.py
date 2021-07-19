@@ -3,8 +3,8 @@ import sys
 
 import pytest
 
-from vcast import convert_bazel_actions
-from .common import tests_folder, read_lines
+from devops.cicd.scripts.python.vcast import convert_bazel_actions
+from common import tests_folder, read_lines
 
 
 @pytest.fixture
@@ -72,3 +72,7 @@ def test_main(monkeypatch, actions_path, bazel_workspace, expected_cmd, out_cmd_
         )
         convert_bazel_actions.main()
         assert expected_cmd == read_lines(out_cmd_path)
+
+
+if __name__ == "__main__":
+    raise SystemExit(pytest.main([__file__]))  # For Bazel

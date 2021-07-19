@@ -5,8 +5,8 @@ from pathlib import Path
 from typing import List, Optional
 import re
 
-from vcast.utils import setup_logging
-from vcast.utils import write_list_to_text
+from .utils import setup_logging
+from .utils import write_list_to_text
 
 
 def _make_parser() -> argparse.ArgumentParser:

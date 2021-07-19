@@ -6,8 +6,8 @@ import json
 import itertools
 from typing import List, Dict, Optional
 
-from vcast.utils import setup_logging
-from vcast.utils import write_list_to_text
+from .utils import setup_logging
+from .utils import write_list_to_text
 
 
 def _make_parser() -> argparse.ArgumentParser:
