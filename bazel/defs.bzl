@@ -353,6 +353,7 @@ def minerva_aa_bsw_module(
         name,
         srcs_filegroup,
         cache_entries = None,
+        defines = None,
         out_binaries = None,
         out_static_libs = None,
         deps = None,
@@ -375,6 +376,9 @@ def minerva_aa_bsw_module(
         cache_entries: Optional dictionary containing CMake cache entry
             definitions to use for this module. The macro overrides some of
             these cache entry definitions by itself.
+
+        defines: Optional compilation definitions to be used for the
+            compilation of this library but also to its dependents.
 
         out_binaries: Optional names of the resulting binaries.
 
@@ -408,6 +412,16 @@ def minerva_aa_bsw_module(
 
     if not out_include_dirs:
         out_include_dirs = []
+
+    if not defines:
+        defines = []
+
+    env_vars = {
+        "CXXFLAGS": "",
+    }
+
+    for define in defines:
+        env_vars["CXXFLAGS"] = env_vars["CXXFLAGS"] + " -D{}".format(define)
 
     # CMAKE_TRY_COMPILE_TARGET_TYPE set to STATIC_LIBRARY is needed to make
     # aarch64 builds work, I do not know exactly why using this option affects
@@ -635,6 +649,7 @@ def minerva_aa_bsw_module(
         out_static_libs = out_static_libs,
         visibility = ["//visibility:public"],
         deps = deps,
+        defines = defines,
         env = select({
             "//:aarch64": {
                 # This enables QNX building to work, and is harmless in non-QNX building
@@ -647,6 +662,7 @@ def minerva_aa_bsw_module(
                 "QNX_HOST": "$$EXT_BUILD_ROOT$$/external/x86_64_qnx_compiler/qnx_host",
             },
         }),
+        env_vars = env_vars,
         out_binaries = out_binaries,
         out_bin_dir = out_bin_dir,
         out_include_dirs = out_include_dirs,
