@@ -493,6 +493,9 @@ minerva_aa_bsw_module(
 
 minerva_aa_bsw_module(
     name = "amsr_vector_fs_logutility",
+    defines = [
+        "AMSR_LOGUTI_IS_AMSR_LOGGING",
+    ],
     out_static_libs = [
         "liblog-utility.a",
     ],
