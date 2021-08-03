@@ -105,7 +105,7 @@ new_git_repository(
     name = "amsr_xavier",  # bazel will create under its own cache folder in the external folder package with the specified name(e.g. external/amsr_xavier)
     build_file = "@//bsw:amsr_xavier.BUILD",
     commit = "f950c89d4edf138add8bdee80c58085cfc9900e4", #patched_for_integration_vMB-BLuP-1.1.5.1
-    remote = "ssh://git@git.swf.daimler.com:7999/autosarbas/mb-base-layer-ap3-projekthaus/ap3-baselayer/amsr_xavier.git",
+    remote = "ssh://git@git.swf.daimler.com:7999/autosarbas/mbos_aa/mirrors/amsr_xavier.git",
     shallow_since = "1626781203 +0200",
 )
 
@@ -119,7 +119,7 @@ new_git_repository(
     name = "sda_xavier",  # bazel will create under its own cache folder in the external folder package with the specified name(e.g. external/sda_xavier)
     build_file = "@//application/sda:sda_xavier.BUILD",
     commit = "0ef3edea01c312b634bff177851d216ae15c18bf",    #mbos/patched_for_integration_vMB-BLuP-1.1.5.0
-    remote = "ssh://git@git.swf.daimler.com:7999/autosarbas/mb-base-layer-ap3-projekthaus/ap3-baselayer/sda_xavier.git",
+    remote = "ssh://git@git.swf.daimler.com:7999/autosarbas/mbos_aa/mirrors/sda_xavier.git",
     shallow_since = "1625125727 +0200",
 )
 
