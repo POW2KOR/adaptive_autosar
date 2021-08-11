@@ -15,10 +15,6 @@ pkg_tar(
     deps =
         append_and_select(
             {
-                "//:mt_present": [
-                    "//application/idc6mt:package",
-                    "//application/stub_application:package",
-                ],
                 "//conditions:default": [],
             },
             [
