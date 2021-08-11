@@ -116,6 +116,8 @@ If you want to generate a package for software update build the
 `//deployment/minerva_mpu_adaptive:filesystem_update_package` target. For now, generating a software update package
 requires `--config=stripped`. This limitation will be removed in the future.
 
+If you want to generate a package with only basic configuration, build the
+`//deployment/apricot_adaptive:filesystem_tar --config=<CONFIGURATION>`.
 ## Running
 
 ### Running a virtual ECU with QEMU

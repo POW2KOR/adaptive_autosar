@@ -2,6 +2,13 @@
 
 set -e
 
+# Deployment (minerva_mpu_adaptive or apricot_adaptive
+if [ $# -eq 0 ]; then
+    DEPLOYMENT="minerva_mpu_adaptive"
+else 
+    DEPLOYMENT=$1
+fi
+
 # If this flag is set to true the adaptive stack will bind directly to the main
 # tty. If set to false, it will boot in the background.
 # Currently, setting this to true is broken for x86_64 virtual Image and works only for aarch64.
@@ -9,7 +16,14 @@ BOOT_ADAPTIVE_STACK_TO_FOREGROUND=false
 
 # Path to tar to include at the root of the filesystem, usually to the adaptive
 # stack tar.
-PATH_TO_ADAPTIVE_TAR="../../../bazel-bin/deployment/minerva_mpu_adaptive/filesystem_tar.tar"
+PATH_TO_ADAPTIVE_TAR="../../../bazel-bin/deployment/$DEPLOYMENT/filesystem_tar.tar"
+
+if [ ! -f $PATH_TO_ADAPTIVE_TAR ]; then
+    echo "File $PATH_TO_ADAPTIVE_TAR does not exist. Exiting."
+    exit 0
+fi
+
+echo "$DEPLOYMENT"
 
 # Extra space to add on the disk. Should be big enough to fit the unpacked tar
 # from above.

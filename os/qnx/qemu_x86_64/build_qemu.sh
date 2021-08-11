@@ -5,11 +5,24 @@ set -eux
 # Change to the script directory
 cd "$(dirname "$0")"
 
+# Deployment (minerva_mpu_adaptive or apricot_adaptive
+if [ $# -eq 0 ]; then
+    DEPLOYMENT="minerva_mpu_adaptive"
+else 
+    DEPLOYMENT=$1
+fi
+
 # Output folder
 OUTPUT_DIR=runtime
 
 # Relative path to adaptive tar package
-ADAPTIVE_TAR=../../../bazel-bin/minerva_mpu_adaptive_filesystem.tar
+ADAPTIVE_TAR=../../../bazel-bin/deployment/$DEPLOYMENT/filesystem_tar.tar
+
+if [ ! -f $ADAPTIVE_TAR ]; then
+    echo "File $ADAPTIVE_TAR does not exist. Exiting."
+    exit 0
+fi
+
 # Folder to untar the adaptive package
 ADAPTIVE_ROOT=adaptive
 
