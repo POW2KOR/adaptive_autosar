@@ -1,4 +1,4 @@
-load("//:bazel/defs.bzl", "append_and_select", "minerva_aa_update_package_rule")
+load("//:bazel/defs.bzl", "minerva_aa_update_package_rule")
 load(":package.bzl", "SW_PARTNUMBER", "VERSION")
 load("@rules_pkg//:pkg.bzl", "pkg_deb", "pkg_tar")
 
@@ -13,21 +13,12 @@ pkg_tar(
         "//deployment/apricot_adaptive:network_setup.sh": "/usr/share/apricot/network_setup.sh",
     },
     deps =
-        append_and_select(
-            {
-                "//:mt_present": [
-                    "//application/idc6mt:package",
-                    "//application/stub_application:package",
-                ],
-                "//conditions:default": [],
-            },
             [
                 "//application/amsr_vector_fs_em_executionmanager:package",
                 "//application/someipd_posix:package",
                 "//application/amsr_vector_fs_log_daemon:package",
                 "//os/linux:package",
             ],
-        ),
 )
 
 pkg_deb(
