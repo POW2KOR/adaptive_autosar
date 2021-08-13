@@ -23,4 +23,4 @@ sudo chown dev:dev /dev/kvm
 printf "\nAll done 👌\n\n"
 printf "👉 Build with something like:\n\n"
 
-printf "bazel build //deployment/minerva_mpu_adaptive:filesystem_tar --config=x86_64_linux\n\n"
+printf "bazel build //deployment/apricot_adaptive:filesystem_tar --config=x86_64_linux\n\n"

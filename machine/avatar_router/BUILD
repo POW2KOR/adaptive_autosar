@@ -1,4 +1,4 @@
-load("@minerva_mpu_adaptive//:bazel/defs.bzl", "minerva_aa_codegen_rule")
+load("@apricot_adaptive//:bazel/defs.bzl", "minerva_aa_codegen_rule")
 
 package(default_visibility = ["//visibility:public"])
 

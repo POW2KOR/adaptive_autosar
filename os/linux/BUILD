@@ -8,5 +8,5 @@ pkg_tar(
         "configs/services/**/*",
     ]),
     mode = "0644",
-    package_dir = "/usr/share/minerva",
+    package_dir = "/usr/share/apricot",
 )

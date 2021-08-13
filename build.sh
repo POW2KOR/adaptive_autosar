@@ -13,14 +13,12 @@ function create_qemu_x86_64_qnx(){
 function build(){
    TARGET=$1
    echo "Building for $TARGET.."
-   bazel build //:minerva_mpu_adaptive_filesystem --config=$TARGET
    bazel build //deployment/apricot_adaptive:filesystem_tar --config=$TARGET
 
    if [ ${TARGET} = "x86_64_qnx" ]; then
       create_qemu_x86_64_qnx
    fi
 
-   cp bazel-bin/deployment/minerva_mpu_adaptive/filesystem_tar.tar artifacts/minerva_mpu_adaptive_filesystem_$TARGET.tar
    cp bazel-bin/deployment/apricot_adaptive/filesystem_tar.tar artifacts/apricot_adaptive_filesystem_$TARGET.tar
 }
 

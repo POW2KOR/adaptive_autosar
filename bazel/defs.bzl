@@ -678,7 +678,7 @@ def minerva_aa_update_package_rule(
         version,
         sw_part_number):
     """
-    A macro to create update packages for the Minerva update strategy.
+    A macro to create update packages for the Apricot update strategy.
 
     This macro creates targets to generate the NVIDIA Drive Update package and
     then wrap this up in an AMSR update package for the Adaptive AUTOSAR SWUC.

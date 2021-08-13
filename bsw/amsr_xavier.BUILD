@@ -1,4 +1,4 @@
-load("@minerva_mpu_adaptive//:bazel/defs.bzl", "minerva_aa_codegen_declare")
+load("@apricot_adaptive//:bazel/defs.bzl", "minerva_aa_codegen_declare")
 
 # Model extensions
 
@@ -360,18 +360,18 @@ cc_library(
     strip_include_prefix = "BSW/amsr-vector-fs-diagnosticmanager/app/diagnostic_manager_daemon_impl/include",
     visibility = ["//visibility:public"],
     deps = [
-        "@minerva_mpu_adaptive//bsw:amsr_vector_fs_applicationbase",
-        "@minerva_mpu_adaptive//bsw:amsr_vector_fs_diagnosticrpc",
-        "@minerva_mpu_adaptive//bsw:amsr_vector_fs_diagnosticrpccombinding",
-        "@minerva_mpu_adaptive//bsw:amsr_vector_fs_diagnosticutility",
-        "@minerva_mpu_adaptive//bsw:amsr_vector_fs_libiostream",
-        "@minerva_mpu_adaptive//bsw:amsr_vector_fs_libosabstraction",
-        "@minerva_mpu_adaptive//bsw:amsr_vector_fs_libvac",
-        "@minerva_mpu_adaptive//bsw:amsr_vector_fs_log_api",
-        "@minerva_mpu_adaptive//bsw:amsr_vector_fs_logutility",
-        "@minerva_mpu_adaptive//bsw:amsr_vector_fs_per_libpersistency",
-        "@minerva_mpu_adaptive//bsw:amsr_vector_fs_thread",
-        "@minerva_mpu_adaptive//bsw:amsr_vector_fs_udstransport",
+        "@apricot_adaptive//bsw:amsr_vector_fs_applicationbase",
+        "@apricot_adaptive//bsw:amsr_vector_fs_diagnosticrpc",
+        "@apricot_adaptive//bsw:amsr_vector_fs_diagnosticrpccombinding",
+        "@apricot_adaptive//bsw:amsr_vector_fs_diagnosticutility",
+        "@apricot_adaptive//bsw:amsr_vector_fs_libiostream",
+        "@apricot_adaptive//bsw:amsr_vector_fs_libosabstraction",
+        "@apricot_adaptive//bsw:amsr_vector_fs_libvac",
+        "@apricot_adaptive//bsw:amsr_vector_fs_log_api",
+        "@apricot_adaptive//bsw:amsr_vector_fs_logutility",
+        "@apricot_adaptive//bsw:amsr_vector_fs_per_libpersistency",
+        "@apricot_adaptive//bsw:amsr_vector_fs_thread",
+        "@apricot_adaptive//bsw:amsr_vector_fs_udstransport",
     ],
 )
 
@@ -545,18 +545,18 @@ cc_library(
     strip_include_prefix = "BSW/amsr-vector-fs-swupdateclient/lib/common/include",
     visibility = ["//visibility:public"],
     deps = [
-        "@minerva_mpu_adaptive//bsw:amsr_vector_fs_applicationbase",
-        "@minerva_mpu_adaptive//bsw:amsr_vector_fs_diagnosticrpc",
-        "@minerva_mpu_adaptive//bsw:amsr_vector_fs_diagnosticrpccombinding",
-        "@minerva_mpu_adaptive//bsw:amsr_vector_fs_diagnosticutility",
-        "@minerva_mpu_adaptive//bsw:amsr_vector_fs_libiostream",
-        "@minerva_mpu_adaptive//bsw:amsr_vector_fs_libosabstraction",
-        "@minerva_mpu_adaptive//bsw:amsr_vector_fs_libvac",
-        "@minerva_mpu_adaptive//bsw:amsr_vector_fs_log_api",
-        "@minerva_mpu_adaptive//bsw:amsr_vector_fs_logutility",
-        "@minerva_mpu_adaptive//bsw:amsr_vector_fs_per_libpersistency",
-        "@minerva_mpu_adaptive//bsw:amsr_vector_fs_thread",
-        "@minerva_mpu_adaptive//bsw:amsr_vector_fs_udstransport",
+        "@apricot_adaptive//bsw:amsr_vector_fs_applicationbase",
+        "@apricot_adaptive//bsw:amsr_vector_fs_diagnosticrpc",
+        "@apricot_adaptive//bsw:amsr_vector_fs_diagnosticrpccombinding",
+        "@apricot_adaptive//bsw:amsr_vector_fs_diagnosticutility",
+        "@apricot_adaptive//bsw:amsr_vector_fs_libiostream",
+        "@apricot_adaptive//bsw:amsr_vector_fs_libosabstraction",
+        "@apricot_adaptive//bsw:amsr_vector_fs_libvac",
+        "@apricot_adaptive//bsw:amsr_vector_fs_log_api",
+        "@apricot_adaptive//bsw:amsr_vector_fs_logutility",
+        "@apricot_adaptive//bsw:amsr_vector_fs_per_libpersistency",
+        "@apricot_adaptive//bsw:amsr_vector_fs_thread",
+        "@apricot_adaptive//bsw:amsr_vector_fs_udstransport",
     ],
 )
 
@@ -572,8 +572,8 @@ cc_library(
     visibility = ["//visibility:public"],
     deps = [
         ":amsr_swupdate_common",
-        "@minerva_mpu_adaptive//application/amsr_vector_fs_swupdateclient:modeldatatypes_hdrs_lib",
-        "@minerva_mpu_adaptive//application/amsr_vector_fs_swupdateclient:persistency_config_hdrs_lib",
+        "@apricot_adaptive//application/amsr_vector_fs_swupdateclient:modeldatatypes_hdrs_lib",
+        "@apricot_adaptive//application/amsr_vector_fs_swupdateclient:persistency_config_hdrs_lib",
     ],
 )
 
@@ -608,8 +608,8 @@ cc_library(
         ":amsr_swupdate_ucm_client",
         ":ara_diag_hdrs_lib",
         ":ara_diag_src_hdrs_lib",
-        "@minerva_mpu_adaptive//application/amsr_vector_fs_swupdateclient:diag_hdrs_lib",
-        "@minerva_mpu_adaptive//application/amsr_vector_fs_swupdateclient:socal_hdrs_lib",
+        "@apricot_adaptive//application/amsr_vector_fs_swupdateclient:diag_hdrs_lib",
+        "@apricot_adaptive//application/amsr_vector_fs_swupdateclient:socal_hdrs_lib",
     ],
 )
 
@@ -628,8 +628,8 @@ cc_library(
         "@drive//:drive_include_lib",
         "@drive//:libnvducc",
         "@drive//:libnvdulink",
-        "@minerva_mpu_adaptive//bsw:amsr_vector_fs_libosabstraction",
-        "@minerva_mpu_adaptive//bsw:amsr_vector_fs_libvac",
-        "@minerva_mpu_adaptive//bsw:amsr_vector_fs_log_api",
+        "@apricot_adaptive//bsw:amsr_vector_fs_libosabstraction",
+        "@apricot_adaptive//bsw:amsr_vector_fs_libvac",
+        "@apricot_adaptive//bsw:amsr_vector_fs_log_api",
     ],
 )

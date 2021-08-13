@@ -95,7 +95,7 @@ the BSW modules is "Release".
 To proceed with your build on host, change to your repository root directory and execute the following commands:
 
 ```
-bazel build //deployment/minerva_mpu_adaptive:filesystem_tar --config=<CONFIGURATION>
+bazel build //deployment/apricot_adaptive:filesystem_tar --config=<CONFIGURATION>
 ```
 
 where `<CONFIGURATION>` is the target toolchain configuration, e.g. (`x86_64_linux`, `aarch64_linux_ubuntu` or
@@ -113,7 +113,7 @@ these variables are not set, then Bazel will assume the following values:
 If you want to add the measurement techonology tools to the stack, call bazel with `--//:mt`.
 
 If you want to generate a package for software update build the
-`//deployment/minerva_mpu_adaptive:filesystem_update_package` target. For now, generating a software update package
+`//deployment/apicot_adaptive:filesystem_update_package` target. For now, generating a software update package
 requires `--config=stripped`. This limitation will be removed in the future.
 
 If you want to generate a package with only basic configuration, build the
@@ -264,7 +264,7 @@ We use a took called `pre-commit` for various static checks before creating a co
 after cloning the repository:
 
 ```
-cd minerva_mpu_adaptive
+cd adaptive_autosar
 pre-commit install
 ```
 

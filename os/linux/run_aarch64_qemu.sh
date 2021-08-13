@@ -2,9 +2,9 @@
 
 set -e
 
-# Deployment (minerva_mpu_adaptive or apricot_adaptive
+# Deployment (apricot_adaptive
 if [ $# -eq 0 ]; then
-    DEPLOYMENT="minerva_mpu_adaptive"
+    DEPLOYMENT="apricot_adaptive"
 else 
     DEPLOYMENT=$1
 fi
@@ -45,14 +45,14 @@ if [ ! -f "kernel-build/arch/arm64/boot/Image" ]; then
 
     tar xf linux-5.12.tar.xz
 
-    cp ../configs/minerva_qemu_defconfig linux-5.12/arch/arm64/configs
+    cp ../configs/apricot_qemu_defconfig linux-5.12/arch/arm64/configs
 
     export ARCH=arm64
     export CROSS_COMPILE=/drive/toolchains/gcc-linaro-7.3.1-2018.05-x86_64_aarch64-linux-gnu/bin/aarch64-linux-gnu-
     export LOCALVERSION="-tegra"
 
     mkdir kernel-build
-    make -C linux-5.12 O=${PWD}/kernel-build minerva_qemu_defconfig
+    make -C linux-5.12 O=${PWD}/kernel-build apricot_qemu_defconfig
 
     # Using up all the cores might lock up your machine
     CORES_FOR_LINUX_BUILD=$(expr `nproc` - 1)

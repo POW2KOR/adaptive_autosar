@@ -1,6 +1,6 @@
 load("@rules_pkg//:pkg.bzl", "pkg_tar")
-load("@minerva_mpu_adaptive//:bazel/defs.bzl", "minerva_aa_codegen_rule")
-load("@minerva_mpu_adaptive//:bazel/defs.bzl", "minerva_aa_bsw_module")
+load("@apricot_adaptive//:bazel/defs.bzl", "minerva_aa_codegen_rule")
+load("@apricot_adaptive//:bazel/defs.bzl", "minerva_aa_bsw_module")
 
 package(default_visibility = ["//visibility:public"])
 
@@ -516,7 +516,7 @@ cc_binary(
         "@amsr_xavier//:diag_rpc_com_binding_srcs_lib",
         "@amsr_xavier//:lib_doip_binding_hdrs_lib",
         "@amsr_xavier//:lib_doip_binding_src_hdrs_lib",
-        "@minerva_mpu_adaptive//application/diagnostic_manager_deamon_executable:socal_hdrs_lib",
+        "@apricot_adaptive//application/diagnostic_manager_deamon_executable:socal_hdrs_lib",
     ],
 )
 

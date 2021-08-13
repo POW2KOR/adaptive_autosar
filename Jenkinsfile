@@ -46,7 +46,7 @@ node("CloudYocto") {
     if (env.JOB_NAME.contains("component.adaptive-autosar.master.manual")) {
         stage("Publish Images") {
 
-            String package_to_release = "minerva_mpu_adaptive_filesystem_aarch64_qnx.tar"
+            String package_to_release = "apricot_adaptive_filesystem_aarch64_qnx.tar"
 
             if(env.RELEASE_LABEL != null && !env.RELEASE_LABEL.isEmpty()) {
                 // Copy the file archived by the QNX pipeline
