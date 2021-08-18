@@ -13,3 +13,10 @@ filegroup(
         "X6AA_IDC_M_P_STAR_35_Ecu_Extract_2021_17a0_AR44.arxml",
     ],
 )
+
+filegroup(
+    name = "civic_export_with_roller_bliner_rear_arxml",
+    srcs = [
+        "Civic_Export.arxml",
+    ],
+)

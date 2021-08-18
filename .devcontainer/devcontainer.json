@@ -21,7 +21,7 @@
     "type=bind,source=${localEnv:HOME}/.ssh/gsep,target=/host/.ssh/gsep",
     "type=bind,source=${localWorkspaceFolder}/.devcontainer/.bazelrc,target=/etc/bazel.bazelrc",
     "type=volume,source=mbos_adaptive_build_env_command_history,target=/command_history",
-    "type=volume,source=mbos_adaptive_build_env_bazel_cache,target=/bazel_cache"
+    "type=volume,source=mbos_adaptive_build_env_bazel_cache,target=/bazel_cache",
   ],
   "postStartCommand":
 	"/bin/bash ${containerWorkspaceFolder}/.devcontainer/post_start.sh ${localEnv:HOME}",

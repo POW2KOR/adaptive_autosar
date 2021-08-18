@@ -17,6 +17,7 @@ pkg_tar(
                 "//application/amsr_vector_fs_em_executionmanager:package",
                 "//application/someipd_posix:package",
                 "//application/amsr_vector_fs_log_daemon:package",
+                #"//application/avatar_router:package", @TODO: To be uncommented once we solve compilation issues
                 "//os/linux:package",
             ],
 )
