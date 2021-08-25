@@ -14,20 +14,20 @@ http_archive(
     name = "rules_cc",
     sha256 = "1d4dbbd1e1e9b57d40bb0ade51c9e882da7658d5bfbf22bbd15b68e7879d761f",
     strip_prefix = "rules_cc-8bd6cd75d03c01bb82561a96d9c1f9f7157b13d0",
-    url = "file:///usr/tools/bazel/rules_cc.zip",
+    url = "https://artifact.swf.daimler.com/apricot-bin-delivery/xpf/build-tools/rules_cc.zip",
 )
 
 http_archive(
     name = "rules_java",
     sha256 = "bc81f1ba47ef5cc68ad32225c3d0e70b8c6f6077663835438da8d5733f917598",
     strip_prefix = "rules_java-7cf3cefd652008d0a64a419c34c13bdca6c8f178",
-    url = "file:///usr/tools/bazel/rules_java.zip",
+    url = "https://artifact.swf.daimler.com/apricot-bin-delivery/xpf/build-tools/rules_java.zip",
 )
 
 http_archive(
     name = "rules_pkg",
     sha256 = "352c090cc3d3f9a6b4e676cf42a6047c16824959b438895a76c2989c6d7c246a",
-    url = "file:///usr/tools/bazel/rules_pkg-0.2.5.tar.gz",
+    url = "https://artifact.swf.daimler.com/apricot-bin-delivery/xpf/build-tools/rules_pkg-0.2.5.tar.gz",
 )
 
 load("@rules_pkg//:deps.bzl", "rules_pkg_dependencies")
@@ -37,7 +37,7 @@ rules_pkg_dependencies()
 http_archive(
     name = "remote_coverage_tools",
     sha256 = "cd14f1cb4559e4723e63b7e7b06d09fcc3bd7ba58d03f354cdff1439bd936a7d",
-    url = "file:///usr/tools/bazel/remote_coverage_tools.zip",
+    url = "https://artifact.swf.daimler.com/apricot-bin-delivery/xpf/build-tools/coverage_output_generator-v2.5.zip",
 )
 
 http_archive(
@@ -49,13 +49,13 @@ http_archive(
     ],
     sha256 = "44bfeb6566f74e4e6e36acc33ee166b428d31a6f01a4f1c14056dc7d0f68c9b6",
     strip_prefix = "rules_foreign_cc-eae19778d5fe8605f0f37332a712f05d4a17dc3b",
-    url = "file:///usr/tools/bazel/rules_foreign_cc.zip",
+    url = "https://artifact.swf.daimler.com/apricot-bin-delivery/xpf/build-tools/rules_foreign_cc.zip",
 )
 
 http_archive(
     name = "rules_python",
     sha256 = "b6d46438523a3ec0f3cead544190ee13223a52f6a6765a29eae7b7cc24cc83a0",
-    url = "file:///usr/tools/bazel/rules_python-0.1.0.tar.gz",
+    url = "https://artifact.swf.daimler.com/apricot-bin-delivery/xpf/build-tools/rules_python-0.1.0.tar.gz",
 )
 
 aarch64_linux_ubuntu_configure(
@@ -83,14 +83,14 @@ qnx_toolchain_configure(
 http_archive(
     name = "bazel_skylib",
     sha256 = "1c531376ac7e5a180e0237938a2536de0c54d93f5c278634818e0efc952dd56c",
-    url = "file:///usr/tools/bazel/bazel-skylib-1.0.3.tar.gz",
+    url = "https://artifact.swf.daimler.com/apricot-bin-delivery/xpf/build-tools/bazel-skylib-1.0.3.tar.gz",
 )
 
 http_archive(
     name = "google",
     sha256 = "aa20e0bfa275190c5dbfc64c4776c3a1cd0d1e5f8b7e48bf7f7f9a4297f5204e",
     strip_prefix = "googletest",
-    url = "file:///usr/tools/bazel/googletest.zip",
+    url = "https://artifact.swf.daimler.com/apricot-bin-delivery/xpf/build-tools/googletest.zip",
 )
 
 load("@rules_foreign_cc//foreign_cc:repositories.bzl", "rules_foreign_cc_dependencies")
