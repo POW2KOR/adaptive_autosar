@@ -1,4 +1,4 @@
-workspace(name = "minerva_mpu_adaptive")
+workspace(name = "apricot_adaptive")
 
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 load("//bazel/toolchains/aarch64_linux_ubuntu_compiler:aarch64_linux_ubuntu_configure.bzl", "aarch64_linux_ubuntu_configure")

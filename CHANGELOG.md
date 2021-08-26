@@ -16,6 +16,8 @@ run.
 should add `//application/common:application_base` to their `deps` and derive from the base class.
 * In `run_aarch64_qemu.sh`, `BOOT_INTO_ADAPTIVE_STACK` was changed into `BOOT_ADAPTIVE_STACK_TO_FOREGROUND`. When this
 is set to false, it will boot the stack in the background instead of not booting at all.
+* The `//deployment/minerva_mpu_adaptive:filesystem_tar` target and minerva related files are permanently removed.
+Only `//deployement/apricot_adaptive:filesystem_tar` target is available now.
 
 ### Deprecated
 

@@ -4,7 +4,7 @@ Description=Set the network configuration for the AUTOSAR Adaptive stack
 [Service]
 Type=oneshot
 RemainAfterExit=yes
-ExecStart=/usr/share/minerva/network_setup.sh -i eth0
+ExecStart=/usr/share/apricot/network_setup.sh -i eth0
 
 [Install]
 WantedBy=network-online.target

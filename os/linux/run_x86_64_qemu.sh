@@ -2,9 +2,9 @@
 
 set -e
 
-# Deployment (minerva_mpu_adaptive or apricot_adaptive
+# Deployment (apricot_adaptive)
 if [ $# -eq 0 ]; then
-    DEPLOYMENT="minerva_mpu_adaptive"
+    DEPLOYMENT="apricot_adaptive"
 else 
     DEPLOYMENT=$1
 fi
@@ -13,15 +13,6 @@ fi
 # tty. If set to false, it will boot in the background.
 # Currently, setting this to true is broken for x86_64 virtual Image and works only for aarch64.
 BOOT_ADAPTIVE_STACK_TO_FOREGROUND=false
-
-# Path to tar to include at the root of the filesystem, usually to the adaptive
-# stack tar.
-PATH_TO_ADAPTIVE_TAR="../../../bazel-bin/deployment/$DEPLOYMENT/filesystem_tar.tar"
-
-if [ ! -f $PATH_TO_ADAPTIVE_TAR ]; then
-    echo "File $PATH_TO_ADAPTIVE_TAR does not exist. Exiting."
-    exit 0
-fi
 
 echo "$DEPLOYMENT"
 
@@ -91,6 +82,15 @@ virt-copy-in -a ubuntu.img ../x86_64_configs/enp0s4.network /etc/systemd/network
 virt-copy-in -a ubuntu.img ../x86_64_configs/enp0s5.network /etc/systemd/network/
 virt-copy-in -a ubuntu.img ../x86_64_configs/enp0s6.network /etc/systemd/network/
 virt-copy-in -a ubuntu.img ../x86_64_configs/enp0s7.network /etc/systemd/network/
+
+# Path to tar to include at the root of the filesystem, usually to the adaptive
+# stack tar.
+PATH_TO_ADAPTIVE_TAR="../../../bazel-bin/deployment/$DEPLOYMENT/filesystem_tar.tar"
+
+if [ ! -f $PATH_TO_ADAPTIVE_TAR ]; then
+    echo "File $PATH_TO_ADAPTIVE_TAR does not exist. Exiting..."
+    exit 0
+fi
 
 # Add the adaptive stack to the filesystem
 virt-tar-in -a ubuntu.img $PATH_TO_ADAPTIVE_TAR /

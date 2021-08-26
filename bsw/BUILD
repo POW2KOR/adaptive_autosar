@@ -1,4 +1,4 @@
-load("@minerva_mpu_adaptive//:bazel/defs.bzl", "minerva_aa_bsw_module")
+load("@apricot_adaptive//:bazel/defs.bzl", "minerva_aa_bsw_module")
 
 package(default_visibility = ["//visibility:public"])
 

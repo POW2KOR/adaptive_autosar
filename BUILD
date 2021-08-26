@@ -46,23 +46,3 @@ config_setting(
         ":mt": "True",
     },
 )
-
-# Temporary targets kept around for backward compatibility
-
-genrule(
-    name = "minerva_mpu_adaptive_filesystem",
-    srcs = ["//deployment/minerva_mpu_adaptive:filesystem_tar"],
-    outs = ["minerva_mpu_adaptive_filesystem.tar"],
-    cmd = "cp $(location //deployment/minerva_mpu_adaptive:filesystem_tar) $@",
-    deprecation = "Please use the " +
-                  "//deployment/minerva_mpu_adaptive:filesystem_tar target instead.",
-)
-
-genrule(
-    name = "minerva_mpu_adaptive_deb",
-    srcs = ["//deployment/minerva_mpu_adaptive:filesystem_deb"],
-    outs = ["minerva_mpu_adaptive_deb.deb"],
-    cmd = "cp $(location //deployment/minerva_mpu_adaptive:filesystem_deb) $@",
-    deprecation = "Please use the " +
-                  "//deployment/minerva_mpu_adaptive:filesystem_deb target instead.",
-)

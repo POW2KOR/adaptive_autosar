@@ -86,8 +86,8 @@ docker run -it \
    --mount type=bind,source=$repo_root/.devcontainer/.bazelrc,target=/etc/bazel.bazelrc \
    --mount type=volume,source=mbos_adaptive_build_env_command_history,target=/command_history \
    --mount type=volume,source=mbos_adaptive_build_env_bazel_cache,target=/bazel_cache \
-   -v $repo_root:/workspaces/minerva_mpu_adaptive \
+   -v $repo_root:/workspaces/apricot_adaptive \
    -v /var/run/docker.sock:/var/run/docker.sock \
-   --workdir /workspaces/minerva_mpu_adaptive \
+   --workdir /workspaces/apricot_adaptive \
    -t minerva_mpu_build_env_image_with_uid_mapping:latest \
-   /bin/bash -c "/workspaces/minerva_mpu_adaptive/.devcontainer/post_start.sh $HOME; bash"
+   /bin/bash -c "/workspaces/apricot_adaptive/.devcontainer/post_start.sh $HOME; bash"

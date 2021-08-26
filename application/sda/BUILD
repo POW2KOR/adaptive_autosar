@@ -1,5 +1,5 @@
 load("@rules_pkg//:pkg.bzl", "pkg_tar")
-load("@minerva_mpu_adaptive//:bazel/defs.bzl", "minerva_aa_codegen_rule")
+load("@apricot_adaptive//:bazel/defs.bzl", "minerva_aa_codegen_rule")
 
 package(default_visibility = ["//visibility:public"])
 
@@ -559,16 +559,16 @@ cc_binary(
         "@amsr_xavier//:diag_deamon_rpc_src_hdrs_lib",
         "@amsr_xavier//:diag_rpc_com_binding_srcs_lib",
         "@amsr_xavier//:lib_doip_binding_src_hdrs_lib",
-        "@minerva_mpu_adaptive//application/diagnostic_manager_deamon_executable:socal_hdrs_lib",
-        "@minerva_mpu_adaptive//bsw:amsr_vector_fs_applicationbase",
-        "@minerva_mpu_adaptive//bsw:amsr_vector_fs_aradiag",
-        "@minerva_mpu_adaptive//bsw:amsr_vector_fs_diagnosticrpc",
-        "@minerva_mpu_adaptive//bsw:amsr_vector_fs_diagnosticrpccombinding",
-        "@minerva_mpu_adaptive//bsw:amsr_vector_fs_diagnosticutility",
-        "@minerva_mpu_adaptive//bsw:amsr_vector_fs_doipbinding",
-        "@minerva_mpu_adaptive//bsw:amsr_vector_fs_ipcbinding",
-        "@minerva_mpu_adaptive//bsw:amsr_vector_fs_per_libpersistency",
-        "@minerva_mpu_adaptive//bsw:amsr_vector_fs_someipbinding",
+        "@apricot_adaptive//application/diagnostic_manager_deamon_executable:socal_hdrs_lib",
+        "@apricot_adaptive//bsw:amsr_vector_fs_applicationbase",
+        "@apricot_adaptive//bsw:amsr_vector_fs_aradiag",
+        "@apricot_adaptive//bsw:amsr_vector_fs_diagnosticrpc",
+        "@apricot_adaptive//bsw:amsr_vector_fs_diagnosticrpccombinding",
+        "@apricot_adaptive//bsw:amsr_vector_fs_diagnosticutility",
+        "@apricot_adaptive//bsw:amsr_vector_fs_doipbinding",
+        "@apricot_adaptive//bsw:amsr_vector_fs_ipcbinding",
+        "@apricot_adaptive//bsw:amsr_vector_fs_per_libpersistency",
+        "@apricot_adaptive//bsw:amsr_vector_fs_someipbinding",
         "@sda_xavier//:sda_hdrs_lib",
         "@sda_xavier//:self_diagnostic_agent_hdrs1",
         "@sda_xavier//:self_diagnostic_agent_hdrs10",

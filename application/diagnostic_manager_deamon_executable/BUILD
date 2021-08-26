@@ -1,5 +1,5 @@
 load("@rules_pkg//:pkg.bzl", "pkg_tar")
-load("@minerva_mpu_adaptive//:bazel/defs.bzl", "minerva_aa_codegen_rule")
+load("@apricot_adaptive//:bazel/defs.bzl", "minerva_aa_codegen_rule")
 
 package(default_visibility = ["//visibility:public"])
 
@@ -52,7 +52,7 @@ filegroup(
 # files. So it throws some error and continue running. Than it create these
 # files with particular Header and body for each of them. So that in the
 # subsequent run it can use those files. Now As we run our stack from
-# minerva_filesystem.tar each time and the file getting generated are not being
+# apricot_filesystem.tar each time and the file getting generated are not being
 # saved as part of fie system, we will see these errors every time we run the
 # stack.
 
@@ -405,7 +405,7 @@ cc_binary(
         "@amsr_xavier//:diag_deamon_rpc_hdrs_lib",
         "@amsr_xavier//:diag_deamon_rpc_src_hdrs_lib",
         "@amsr_xavier//:lib_doip_binding_src_hdrs_lib",
-        "@minerva_mpu_adaptive//bsw:amsr_vector_fs_doipbinding",
+        "@apricot_adaptive//bsw:amsr_vector_fs_doipbinding",
     ],
 )
 

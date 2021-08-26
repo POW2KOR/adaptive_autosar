@@ -5,9 +5,9 @@ set -eux
 # Change to the script directory
 cd "$(dirname "$0")"
 
-# Deployment (minerva_mpu_adaptive or apricot_adaptive
+# Deployment (apricot_adaptive)
 if [ $# -eq 0 ]; then
-    DEPLOYMENT="minerva_mpu_adaptive"
+    DEPLOYMENT="apricot_adaptive"
 else 
     DEPLOYMENT=$1
 fi
