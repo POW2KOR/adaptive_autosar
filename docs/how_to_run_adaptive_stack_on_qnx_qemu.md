@@ -3,11 +3,11 @@
 There are two ways to run the adaptive stack locally on QNX Qemu:
 
 * [Setup to run adaptive stack locally with QNX license](#setup-to-run-adaptive-stack-locally-with-QNX-license)
-* [Setup to run adaptive stack locally without QNX license](#setup-to-run-adaptive-stack-locally-with-QNX-license)
+* [Setup to run adaptive stack locally without QNX license](#setup-to-run-adaptive-stack-locally-without-QNX-license)
 
 ## Setup to run adaptive stack locally with QNX license
 
-QNX license is required when builing and creating QNX image locally for running on QEMU execution environment.
+QNX license is required when building and creating QNX image locally for running on QEMU execution environment.
 
 ### Compiler Setup
 
