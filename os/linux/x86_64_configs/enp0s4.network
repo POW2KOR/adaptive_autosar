@@ -2,4 +2,5 @@
 Name=enp0s4
 
 [Network]
-Address=10.20.1.113/16
+Address=169.254.18.98/16
+Address=169.254.17.7/16
