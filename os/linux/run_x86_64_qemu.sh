@@ -118,7 +118,7 @@ qemu-system-x86_64 \
 -net nic,model=virtio \
 -net user \
 -device virtio-net-pci,netdev=net10 \
--netdev user,id=net10,net=10.10.1.0/16,hostfwd=tcp::13400-10.10.1.113:13400,hostfwd=udp::13400-10.10.1.113:13400 \
+-netdev user,id=net10,net=10.10.1.0/16 \
 -device virtio-net-pci,netdev=net127 \
 -netdev user,id=net127,net=10.127.1.0/16 \
 -device virtio-net-pci,netdev=net21 \
