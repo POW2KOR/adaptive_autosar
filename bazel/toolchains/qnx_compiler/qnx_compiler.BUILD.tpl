@@ -3,63 +3,63 @@ package(default_visibility = ["//visibility:public"])
 filegroup(
     name = "gcc",
     srcs = [
-        "qnx_host/usr/bin/%{TOOLCHAIN_PREFIX}%-nto-qnx7.0.0-gcc",
+        "qnx_host/usr/bin/%{TOOLCHAIN_PREFIX}%-nto-qnx7.1.0-gcc",
     ],
 )
 
 filegroup(
     name = "ar",
     srcs = [
-        "qnx_host/usr/bin/%{TOOLCHAIN_PREFIX}%-nto-qnx7.0.0-ar",
+        "qnx_host/usr/bin/%{TOOLCHAIN_PREFIX}%-nto-qnx7.1.0-ar",
     ],
 )
 
 filegroup(
     name = "ld",
     srcs = [
-        "qnx_host/usr/bin/%{TOOLCHAIN_PREFIX}%-nto-qnx7.0.0-ld",
+        "qnx_host/usr/bin/%{TOOLCHAIN_PREFIX}%-nto-qnx7.1.0-ld",
     ],
 )
 
 filegroup(
     name = "dwp",
     srcs = [
-        "qnx_host/usr/bin/%{TOOLCHAIN_PREFIX}%-nto-qnx7.0.0-dwp",
+        "qnx_host/usr/bin/%{TOOLCHAIN_PREFIX}%-nto-qnx7.1.0-dwp",
     ],
 )
 
 filegroup(
     name = "nm",
     srcs = [
-        "qnx_host/usr/bin/%{TOOLCHAIN_PREFIX}%-nto-qnx7.0.0-nm",
+        "qnx_host/usr/bin/%{TOOLCHAIN_PREFIX}%-nto-qnx7.1.0-nm",
     ],
 )
 
 filegroup(
     name = "objcopy",
     srcs = [
-        "qnx_host/usr/bin/%{TOOLCHAIN_PREFIX}%-nto-qnx7.0.0-objcopy",
+        "qnx_host/usr/bin/%{TOOLCHAIN_PREFIX}%-nto-qnx7.1.0-objcopy",
     ],
 )
 
 filegroup(
     name = "objdump",
     srcs = [
-        "qnx_host/usr/bin/%{TOOLCHAIN_PREFIX}%-nto-qnx7.0.0-objdump",
+        "qnx_host/usr/bin/%{TOOLCHAIN_PREFIX}%-nto-qnx7.1.0-objdump",
     ],
 )
 
 filegroup(
     name = "strip",
     srcs = [
-        "qnx_host/usr/bin/%{TOOLCHAIN_PREFIX}%-nto-qnx7.0.0-strip",
+        "qnx_host/usr/bin/%{TOOLCHAIN_PREFIX}%-nto-qnx7.1.0-strip",
     ],
 )
 
 filegroup(
     name = "as",
     srcs = [
-        "qnx_host/usr/bin/%{TOOLCHAIN_PREFIX}%-nto-qnx7.0.0-as",
+        "qnx_host/usr/bin/%{TOOLCHAIN_PREFIX}%-nto-qnx7.1.0-as",
     ],
 )
 
@@ -74,7 +74,7 @@ filegroup(
 filegroup(
     name = "dynamic_lib",
     srcs = glob(
-        ["qnx_host/usr/lib/gcc/%{TOOLCHAIN_PREFIX}%-nto-qnx7.0.0/5.4.0/**/*.so"],
+        ["qnx_host/usr/lib/gcc/%{TOOLCHAIN_PREFIX}%-nto-qnx7.1.0/8.3.0/**/*.so"],
         ["qnx_target/%{ARCH}%/lib/**/*.so"],
     ),
 )
@@ -82,7 +82,7 @@ filegroup(
 filegroup(
     name = "static_lib",
     srcs = glob(
-        ["qnx_host/usr/lib/gcc/%{TOOLCHAIN_PREFIX}%-nto-qnx7.0.0/5.4.0/**/*.a"],
+        ["qnx_host/usr/lib/gcc/%{TOOLCHAIN_PREFIX}%-nto-qnx7.1.0/8.3.0/**/*.a"],
         ["qnx_target/%{ARCH}%/lib/**/*.a"],
     ),
 )

@@ -24,9 +24,6 @@ node("CloudYocto") {
     env.PIP_MANIFEST_BRANCH = "master"
     env.PIP_MANIFEST_FILE="default.xml"
 
-    // Temporarily downgrading the SDP version
-    env.PIP_QNX_SDP_VERSION = "SDP700_EXP_Gen3_Patchset_HQX0_2_ES_5_1_20210211_Updated"
-
     // This enables checkout for the component
     // This must be specified unless you want to run with default manifest file
     env.PIP_COMPONENT_DIR = "adaptive_autosar"

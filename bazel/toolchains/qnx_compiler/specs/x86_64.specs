@@ -14,10 +14,10 @@
 
 *invoke_as:
 %{!fwpa*:   %{fcompare-debug=*|fdump-final-insns=*:%:compare-debug-dump-opt()}   %{!S:-o %|.s |
- %$QNX_HOST/usr/bin/x86_64-pc-nto-qnx7.0.0-as %(asm_options) %m.s %A }  }
+ %$QNX_HOST/usr/bin/x86_64-pc-nto-qnx7.1.0-as %(asm_options) %m.s %A }  }
 
 *cpp:
-%{!nostdinc: -isystem %$QNX_HOST/usr/lib/gcc/x86_64-pc-nto-qnx7.0.0/%v1.%v2.%v3/include -isysroot %$QNX_TARGET/} %(cpp_cpu)  %{posix:-D_POSIX_SOURCE} %{pthread:}
+%{!nostdinc: -isystem %$QNX_HOST/usr/lib/gcc/x86_64-pc-nto-qnx7.1.0/%v1.%v2.%v3/include -isysroot %$QNX_TARGET/} %(cpp_cpu)  %{posix:-D_POSIX_SOURCE} %{pthread:}
 
 *cpp_options:
 %(cpp_unique_options) %1 %{m*} %{std*&ansi&trigraphs} %{W*&pedantic*} %{w} %{f*} %{g*:%{!g0:%{g*} %{!fno-working-directory:-fworking-directory}}} %{O*} %{undef} %{save-temps*:-fpch-preprocess} %(ssp_default)
@@ -71,7 +71,7 @@ crtend.o%s   %{m32: %$QNX_TARGET/x86/lib/crtn.o%s}   %{!m32: %$QNX_TARGET/x86_64
 1
 
 *version:
-5.4.0
+8.3.0
 
 *multilib:
 . !m32 !fpic;32 m32 !fpic;pic !m32 fpic;32/pic m32 fpic;
