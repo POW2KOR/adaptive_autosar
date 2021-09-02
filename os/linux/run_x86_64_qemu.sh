@@ -80,8 +80,12 @@ guestfish -a ubuntu.img -i ln-sf /lib/systemd/system/enable-ipv6-loopback.servic
 virt-copy-in -a ubuntu.img ../x86_64_configs/enp0s3.network /etc/systemd/network/
 virt-copy-in -a ubuntu.img ../x86_64_configs/enp0s4.network /etc/systemd/network/
 virt-copy-in -a ubuntu.img ../x86_64_configs/enp0s5.network /etc/systemd/network/
-virt-copy-in -a ubuntu.img ../x86_64_configs/enp0s6.network /etc/systemd/network/
-virt-copy-in -a ubuntu.img ../x86_64_configs/enp0s7.network /etc/systemd/network/
+# vlan 10 config
+virt-copy-in -a ubuntu.img ../x86_64_configs/enp0s3.10.netdev /etc/systemd/network/
+virt-copy-in -a ubuntu.img ../x86_64_configs/enp0s3.10.network /etc/systemd/network/
+# vlan 127 config
+virt-copy-in -a ubuntu.img ../x86_64_configs/enp0s3.127.netdev /etc/systemd/network/
+virt-copy-in -a ubuntu.img ../x86_64_configs/enp0s3.127.network /etc/systemd/network/
 
 # Path to tar to include at the root of the filesystem, usually to the adaptive
 # stack tar.
@@ -103,4 +107,21 @@ printf "Booting...\n"
 # - host port 13490 to guest port 49361 on IP 10.21.17.98 for remote DLT
 # - host port 10023 to guest port 23 on IP 10.21.17.98 for telnet
 
-qemu-system-x86_64 -nographic -cpu host -machine accel=kvm,type=q35 -smp 4 -m 2G -drive if=virtio,format=qcow2,file=ubuntu.img -drive if=virtio,format=raw,file=user.img -net nic,model=virtio -net user -device virtio-net-pci,netdev=net1 -netdev user,id=net1,net=10.1.17.0/16 -device virtio-net-pci,netdev=net20 -netdev user,id=net20,net=10.20.17.0/16 -device virtio-net-pci,netdev=net21 -netdev user,id=net21,net=10.21.17.0/24,hostfwd=tcp::13490-10.21.17.98:49361,hostfwd=tcp::10022-10.21.17.98:22,hostfwd=tcp::10023-10.21.17.98:23 -device virtio-net-pci,netdev=net127 -netdev user,id=net127,net=10.127.17.0/16 -device virtio-net-pci,netdev=net254 -netdev user,id=net254,net=169.254.18.0/16
+qemu-system-x86_64 \
+-nographic \
+-cpu host \
+-machine accel=kvm,type=q35 \
+-smp 4 \
+-m 2G \
+-drive if=virtio,format=qcow2,file=ubuntu.img \
+-drive if=virtio,format=raw,file=user.img \
+-net nic,model=virtio \
+-net user \
+-device virtio-net-pci,netdev=net10 \
+-netdev user,id=net10,net=10.10.1.0/16 \
+-device virtio-net-pci,netdev=net127 \
+-netdev user,id=net127,net=10.127.1.0/16 \
+-device virtio-net-pci,netdev=net21 \
+-netdev user,id=net21,net=10.21.17.0/24,hostfwd=tcp::13490-10.21.17.98:49361,hostfwd=tcp::10022-10.21.17.98:22,hostfwd=tcp::10023-10.21.17.98:23 \
+-device virtio-net-pci,netdev=net254 \
+-netdev user,id=net254,net=169.254.18.0/16 
