@@ -1,5 +1,5 @@
-DEFAULT_QNX_TOOLCHAIN_TARGET_PATH = "/opt/qnx/qnx700/target/qnx7"
-DEFAULT_QNX_TOOLCHAIN_HOST_PATH = "/opt/qnx/qnx700/host/linux/x86_64"
+DEFAULT_QNX_TOOLCHAIN_TARGET_PATH = "/opt/qnx/qnx710/target/qnx7"
+DEFAULT_QNX_TOOLCHAIN_HOST_PATH = "/opt/qnx/qnx710/host/linux/x86_64"
 
 # This file describes the repository rule which creates our self-contained QNX
 # compiler Bazel repositories. This makes use of some generic template files

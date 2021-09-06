@@ -6,7 +6,7 @@
 
 [+script] .startup-script = {
 
-    procmgr_symlink ../../proc/boot/libc.so /usr/lib/ldqnx-64.so.2
+    procmgr_symlink /proc/boot/ldqnx-64.so.2 /usr/lib/ldqnx-64.so.2
 
     # slogger2 server
     display_msg "Starting slogger2 server ..."
@@ -17,18 +17,17 @@
     display_msg "Starting some common services..."
     pipe
     dumper
-    random -t
-    waitfor /dev/random
     mqueue
  
     #----------------------------------------------------------------------------------------------
     # Settings env for PCI server and starting PCI server
     #----------------------------------------------------------------------------------------------
-    PCI_HW_MODULE=/lib/dll/pci/pci_hw-Intel_x86_APL.so
+    PCI_HW_MODULE=/lib/dll/pci/pci_hw-Intel_x86.so
     PCI_BKWD_COMPAT_MODULE=/lib/dll/pci/pci_bkwd_compat.so
     PCI_SLOG_MODULE=/lib/dll/pci/pci_slog2.so
     PCI_DEBUG_MODULE=/lib/dll/pci/pci_debug2.so
     PCI_BASE_VERBOSITY=10
+    PCI_CAP_MODULE_DIR=/proc/boot
 
     display_msg "Starting PCI server..."
     pci-server --aspace-enable
@@ -39,6 +38,9 @@
     devb-eide blk cache=16M,auto=partition &
     waitfor /dev/hd1 5
     mount -t qnx6 /dev/hd1t177 /
+
+    random -t
+    waitfor /dev/random
   
     # Console and serial lines
     display_msg "Starting console driver..."
@@ -85,6 +87,10 @@
 # http://www.qnx.com/developers/docs/7.0.0/index.html#com.qnx.doc.neutrino.utilities/topic/m/mkifs.html#mkifs__optional
 [-optional]
 
+[uid=0 gid=0 perms=0444] qcrypto.conf={
+openssl tags=*
+}
+
 # Network startup script
 configs/network-start.sh
 
@@ -107,17 +113,20 @@ libm.so
 libz.so
 libsocket.so
 libsocket.so.3
-libasound.so.2
-
-# Programs require the runtime linker (ldqnx.so) to be at a fixed location
-[type=link] /usr/lib/ldqnx-64.so.2=/proc/boot/libc.so
+libasound.so.3
+ldqnx-64.so.2
+libsecpol.so.1
+libgcc_s.so.1
+libqcrypto.so.1.0
+libqh.so.1
+libregex.so.1
 
 # Added for HD support
 [type=link] /usr/lib/libcam.so.2=/proc/boot/libcam.so
 
 # PCI support
 libpci.so
-libpci.so.2.0
+libpci.so.2.3
 [-followlink search=${QNX_TARGET}/${PROCESSOR}] /lib/dll/pci/=lib/dll/pci
 
 # Curses library for terminal control tasks

@@ -40,7 +40,7 @@ function setup() {
 function create_bootfs() {
     mkifs boot.buildfile $OUTPUT_DIR/boot.ifs
     echo "[num_sectors=512K sector_size=512] /.boot/ifs=${PWD}/${OUTPUT_DIR}/boot.ifs" | mkqnx6fsimg - $OUTPUT_DIR/boot_disk.fs
-    diskimage -c boot.cfg -o $OUTPUT_DIR/boot_raw.raw -b ${QNX_TARGET}/x86/boot/sys/ipl-diskpc1-nomsg
+    diskimage -c boot.cfg -o $OUTPUT_DIR/boot_raw.raw -b ${QNX_TARGET}/x86_64/boot/sys/ipl-diskpc1-nomsg
     qemu-img convert -f raw -O qcow2 $OUTPUT_DIR/boot_raw.raw $OUTPUT_DIR/boot.qcow2
 }
 

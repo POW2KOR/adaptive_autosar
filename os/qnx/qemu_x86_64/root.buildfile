@@ -20,7 +20,6 @@
 [uid=0 gid=0 type=dir dperms=0755] /usr/lib/terminfo/q
 [uid=0 gid=0 type=dir dperms=0755] /usr/lib/terminfo/v
 [uid=0 gid=0 type=dir dperms=0755] /usr/lib/terminfo/x
-[uid=0 gid=0 type=dir dperms=0755] /usr/lib/python2.7
 [uid=0 gid=0 type=dir dperms=0755] /usr/libexec
 [uid=0 gid=0 type=dir dperms=0755] /usr/sbin
 [uid=0 gid=0 type=dir dperms=0755] /usr/share
@@ -48,7 +47,6 @@ bin/echo
 bin/ed
 bin/elvis
 bin/false
-bin/file
 bin/hostname
 bin/ln
 [perms=4755] bin/login
@@ -57,7 +55,6 @@ bin/mkdir
 bin/mount
 bin/mv
 bin/on
-bin/plainrsa_gen
 bin/pwd
 bin/rm
 bin/secpolmonitor
@@ -187,18 +184,18 @@ ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCzqRuGxQZiHtrkAp/hF4flG+oOfLS5mLjv1/7x9QLn
 }
 
 [prefix=lib]
-lib/libstdc++.so.6.0.21
-[type=link] libstdc++.so.6=libstdc++.so.6.0.21
+lib/libstdc++.so.6.0.25
+[type=link] libstdc++.so.6=libstdc++.so.6.0.25
 lib/libsocket.so.3
 [type=link] libsocket.so=libsocket.so.3
 lib/libtracelog.so.1
 [type=link] libtracelog.so=libtracelog.so.1
-lib/libsecpol.so.1
-[type=link] libsecpol.so=libsecpol.so.1
+lib/libcatalog.so.1
 
 [prefix=lib/dll]
 lib/dll/devnp-e1000.so
 lib/dll/devnp-virtio.so
+lib/dll/qcrypto-openssl.so
 
 [prefix=sbin]
 sbin/devc-pty
@@ -242,67 +239,40 @@ usr/bin/unzip
 usr/bin/zip
 usr/bin/mkfifo
 
-# Add python binaries
-usr/bin/python2.7
-[type=link] python2=python2.7
-[type=link] python=python2
-
 [prefix=usr/lib perms=0755]
-usr/lib/libcrypto.so.2
-[type=link] libcrypto.so=libcrypto.so.2
+usr/lib/libexpat.so.2
+[type=link] libexpat.so=libexpat.so.2
+
+usr/lib/libcrypto.so.2.1
+[type=link] libcrypto.so=libcrypto.so.2.1
 
 usr/lib/libc++.so.1.0
 [type=link] libc++.so.1=libc++.so.1.0
 [type=link] libc++.so=libc++.so.1
 
-[prefix=lib/dll]
-lib/dll/devnp-e1000.so
-[prefix=lib/dll]
-lib/dll/deva-ctrl-a2dp.so
-[prefix=lib/dll] 
-lib/dll/deva-ctrl-a2dp.so.sym
 [prefix=lib/dll]                  
 lib/dll/deva-ctrl-audiopci.so
-[prefix=lib/dll]                  
-lib/dll/deva-ctrl-audiopci.so.sym
 [prefix=lib/dll]
 lib/dll/deva-ctrl-intel_hda.so
-[prefix=lib/dll]                 
-lib/dll/deva-ctrl-intel_hda.so.sym
 [prefix=lib/dll]             
 lib/dll/deva-ctrl-usb.so
-[prefix=lib/dll]                      
-lib/dll/deva-ctrl-usb.so.sym
-[prefix=lib/dll]                  
-lib/dll/deva-ctrl-usb_btsco.so
-[prefix=lib/dll]
-lib/dll/deva-ctrl-usb_btsco.so.sym
-[prefix=lib/dll]
-lib/dll/deva-mixer-ac97.so.sym
 [prefix=lib/dll]
 lib/dll/deva-mixer-ak4531.so
 [prefix=lib/dll]
-lib/dll/deva-mixer-ak4531.so.sym
-[prefix=lib/dll]
-lib/dll/deva-mixer-ak4531.so.sym
-[prefix=lib/dll]
-lib/dll/deva-mixer-ak4531.so.sym
-[prefix=lib/dll]
 lib/dll/deva-mixer-hda.so
-[prefix=lib/dll]
-lib/dll/deva-mixer-hda.so.sym
 
-usr/lib/libicudata.so.58.1
-[type=link] libicudata.so.58=libicudata.so.58.1
-[type=link] libicudata.so=libicudata.so.58
 
-usr/lib/libicui18n.so.58.1
-[type=link] libicui18n.so.58=libicui18n.so.58.1
-[type=link] libicui18n.so=libicui18n.so.58
+usr/lib/libicudata.so.67.1
+[type=link] libicudata.so.67=libicudata.so.67.1
+[type=link] libicudata.so=libicudata.so.67
 
-usr/lib/libicuuc.so.58.1
-[type=link] libicuuc.so.58=libicuuc.so.58.1
-[type=link] libicuuc.so=libicuuc.so.58
+usr/lib/libicui18n.so.67.1
+[type=link] libicui18n.so.67=libicui18n.so.67.1
+[type=link] libicui18n.so=libicui18n.so.67
+
+usr/lib/libicuuc.so.67.1
+[type=link] libicuuc.so.67=libicuuc.so.67.1
+[type=link] libicuuc.so=libicuuc.so.67
 
 usr/lib/libpam.so.2
 [type=link] libpam.so=libpam.so.2
@@ -347,16 +317,8 @@ usr/lib/libxml2.so.2
 usr/lib/libiconv.so.1
 [type=link] libiconv.so=libiconv.so.1
 
-usr/lib/libssl.so.2
-[type=link] libssl.so=libssl.so.2
-
-usr/lib/libcrypto1_1.so.2.1
-[type=link] libcrypto1_1.so=libcrypto1_1.so.2.1
-
-/usr/lib/python2.7 = usr/lib/python2.7
-usr/lib/python2.7
-usr/lib/libpython2.7.so.1.0
-[type=link] libpython2.7.so=libpython2.7.so.1.0
+usr/lib/libssl.so.2.1
+[type=link] libssl.so=libssl.so.2.1
 
 [prefix=usr/libexec]
 usr/libexec/sftp-server
@@ -370,6 +332,7 @@ usr/sbin/qconn
 usr/sbin/random
 usr/sbin/sshd
 usr/sbin/tracelogger
+usr/sbin/plainrsa-gen
 
 [search=${QNX_TARGET}]
 
