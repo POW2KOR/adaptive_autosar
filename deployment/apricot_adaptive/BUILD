@@ -17,7 +17,7 @@ pkg_tar(
                 "//application/amsr_vector_fs_em_executionmanager:package",
                 "//application/someipd_posix:package",
                 "//application/amsr_vector_fs_log_daemon:package",
-                "//application/avatar_router:package",
+                "//application/InternalRouting_CIVIC_M_P_ST35_Executable:package",
                 "//os/linux:package",
             ],
 )

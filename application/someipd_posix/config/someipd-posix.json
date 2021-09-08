@@ -1,9 +1,6 @@
 {
     "applications": [
-      "/opt/X6AA_Cnfg_Mngr_Executable/etc/someip_config.json",
-      "/opt/TransmissionManager_ROVExecutable/etc/someip_config.json",
-      "/opt/SelfDiagnosticAgent_Executable/etc/someip_config.json",
-      "/opt/X6AA_Dummy_SWC_2_Executable/etc/someip_config.json"
+      "/opt/InternalRouting_CIVIC_M_P_ST35_Executable/etc/someip_config.json"
     ],
     "static_service_discovery" : {
     "enable": false,

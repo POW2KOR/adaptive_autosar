@@ -1,5 +1,5 @@
 load("@rules_pkg//:pkg.bzl", "pkg_tar")
-load("@minerva_mpu_adaptive//:bazel/defs.bzl", "minerva_aa_codegen_rule")
+load("@apricot_adaptive//:bazel/defs.bzl", "minerva_aa_codegen_rule")
 
 package(default_visibility = ["//visibility:public"])
 
@@ -128,6 +128,8 @@ minerva_aa_codegen_rule(
     outs_list_dict = {
         "someipbinding_config": [
             "InternalRouting_CIVIC_M_P_ST35_Executable/configuration/someip_config.json",
+        ],
+        "someipbinding_sd_config": [
             "InternalRouting_CIVIC_M_P_ST35_Executable/configuration/static_sd_config.json",
         ],
         "someipbinding_hdrs": [
@@ -363,8 +365,10 @@ pkg_tar(
         ":exec_config": "etc/exec_config.json",
         ":logging_config_json": "etc/logging_config.json",
         ":com_application_json": "etc/com_application.json",
-        ":app": "bin/avatar_router_2"
+        ":someipbinding_config": "etc/someip_config.json",
+        "someipbinding_sd_config": "etc/static_sd_config.json",
+        ":app": "bin/InternalRouting_CIVIC_M_P_ST35_Executable"
     },
     mode = "0755",
-    package_dir = "opt/avatar_router_2",
+    package_dir = "opt/InternalRouting_CIVIC_M_P_ST35_Executable",
 )

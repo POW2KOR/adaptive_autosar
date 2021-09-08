@@ -2,7 +2,7 @@
     "name": "AvatarRouter2",
     "description": "Entity which routes SOME/IP requests from RichOS to RoV",
     "dlt_id": "AR",
-    "log_mode": ["kConsole"],
+    "log_mode": ["kConsole", "kRemote"],
     "log_level": "kInfo",
     "log_dir_path": "./log",
     "ipc_port": 33,
