@@ -195,14 +195,13 @@ def _impl(ctx):
                                 "-specs=%{SPECS_PATH}%",                                
 
                                 "-nostdinc",
-                                #"-nostdinc++",
+                                "-nostdinc++",
 
+                                # C++ headers
+                                "-isystem%{TARGET_PATH}%/usr/include/c++/v1",
                                 # C headers
                                 "-isystem%{TARGET_PATH}%/usr/include",
                                 "-isystem%{HOST_PATH}%/usr/lib/gcc/%{TOOLCHAIN_PREFIX}%-nto-qnx7.1.0/8.3.0/include",
-                                
-                                # C++ headers
-                                "-isystem%{TARGET_PATH}%/usr/include/c++/v1"
                             ],
                         ),
                     ]),
