@@ -23,3 +23,9 @@ ifconfig vlan127 vlan 127 vlanif wm0
 ifconfig vlan127 10.127.1.90 netmask 255.255.0.0 up
 ifconfig vlan127 239.127.0.2 netmask 255.255.0.0 alias
 
+# Create vlan210 interfaces
+ifconfig vlan210 create
+ifconfig vlan210 vlan 210 vlanif wm0
+ifconfig vlan210 10.210.220.3 netmask 255.255.0.0 up
+ifconfig vlan210 10.210.220.2 netmask 255.255.0.0 alias
+
