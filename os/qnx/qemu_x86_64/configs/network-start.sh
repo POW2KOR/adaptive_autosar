@@ -14,7 +14,7 @@ ifconfig wm1 ip4csum tcp4csum udp4csum tcp6csum-tx udp6csum-tx tso4
 # Create vlan10 interfaces
 ifconfig vlan10 create
 ifconfig vlan10 vlan 10 vlanif wm0
-ifconfig vlan10 10.10.1.113 netmask 255.255.0.0 up
+ifconfig vlan10 10.10.1.90 netmask 255.255.0.0 up
 ifconfig vlan10 239.10.0.2 netmask 255.255.0.0 alias
 
 # Create vlan127 interfaces
