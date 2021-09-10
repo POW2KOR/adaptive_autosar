@@ -21,6 +21,11 @@ filegroup(
     srcs = ["configs/com_application.json"],
 )
 
+filegroup(
+    name = "exec_config_json",
+    srcs = ["configs/exec_config.json"],
+)
+
 genr_ignore_patterns = [
     "SelfDiagnosticAgent_Executable.*",
     "DiagnosticManagerDeamon_Executable.*",
@@ -328,8 +333,10 @@ cc_binary(
         "main.cpp",
         "application.h",
         "application.cpp",
-        "roller_blinder_rear_ctrl.h",
-        "roller_blinder_rear_ctrl.cpp",
+        "roller_blinder_rear_provider.h",
+        "roller_blinder_rear_provider.cpp",
+        "roller_blinder_rear_consumer.h",
+        "roller_blinder_rear_consumer.cpp",
         ":applicationbase_init_deinit_srcs",
         ":socal_scrs",
         ":someipbinding_srcs",
@@ -362,7 +369,10 @@ cc_binary(
 pkg_tar(
     name = "package",
     files = {
-        ":exec_config": "etc/exec_config.json",
+        # currently we are using the static exec_config
+        # and not the enerated ones as the Startup states
+        # are missing
+        ":exec_config_json": "etc/exec_config.json",
         ":logging_config_json": "etc/logging_config.json",
         ":com_application_json": "etc/com_application.json",
         ":someipbinding_config": "etc/someip_config.json",

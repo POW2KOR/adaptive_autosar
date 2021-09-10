@@ -1,7 +1,7 @@
 {
-    "name": "AvatarRouter2",
+    "name": "CIVIC_M_P_ST35",
     "description": "Entity which routes SOME/IP requests from RichOS to RoV",
-    "dlt_id": "AR",
+    "dlt_id": "I3",
     "log_mode": ["kConsole", "kRemote"],
     "log_level": "kInfo",
     "log_dir_path": "./log",

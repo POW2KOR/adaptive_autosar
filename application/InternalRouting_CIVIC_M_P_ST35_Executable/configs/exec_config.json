@@ -1,0 +1,45 @@
+
+{
+  "category" : "APPLICATION_LEVEL",
+  "name" : "InternalRouting_CIVIC_M_P_ST35_Executable",
+  "isAdaptiveApplication" : 1,
+  "processes" : [
+    {
+      "name" : "InternalRouting_CIVIC_M_P_ST35_Process",
+      "shortNamePath" : "/ApplicationDeployment/Processes/InternalRouting_CIVIC_M_P_ST35_Process",
+      "startupConfigs" : [
+        {
+          "shortNamePath" : "/Machine/StartupConfigSets/startupConfig/STARTUP_CONFIG_DEFAULT",
+          "schedulingPolicy" : "SCHEDULING-POLICY-ROUND-ROBIN",
+          "schedulingPriority" : 20,
+          "options" : [
+            "-c",
+            "./etc/application.json"
+          ],
+          "executionDependency" : {
+          },
+          "functionGroups" : [
+            {
+              "name" : "MachineState",
+              "states" : [
+                "Running",
+                "Shutdown",
+                "Restart",
+                "Startup"
+              ]
+            }
+          ],
+          "cores" : {
+            "shallRunOn" : [
+              0
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "generatorVersion" : {
+    "name" : "amsr_em_exec_config",
+    "commitId" : "9c34164fb29785d2ce0abf9f0787b677b4e5c28d"
+  }
+}

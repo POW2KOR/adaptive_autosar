@@ -1,4 +1,4 @@
-#include "roller_blinder_rear_ctrl.h"
+#include "roller_blinder_rear_provider.h"
 
 /* C++ system includes */
 #include <memory>
@@ -14,7 +14,7 @@ using vac::container::operator""_sv;
 ara::core::InstanceSpecifier const RollerBlinderRearProvider::rb_rear_instance_specifier_{
         "InternalRouting_CIVIC_M_P_ST35_Executable/"
         "InternalRouting_CIVIC_M_P_ST35_ExecutableRootSwc/"
-        "R_RollerBlindRear_UI_Ctrl_HU_Service_ST3"_sv};
+        "P_RollerBlindRear_UI_Ctrl_HU_Service_ST3"_sv};
 
 RollerBlinderRearProvider::RollerBlinderRearProvider() : ::services::ns_rollerblindrear_ui_ctrl_hu_service_st3::skeleton
   ::RollerBlindRear_UI_Ctrl_HU_Service_ST3Skeleton(rb_rear_instance_specifier_) {

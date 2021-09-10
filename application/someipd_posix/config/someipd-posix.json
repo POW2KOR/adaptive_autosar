@@ -7,27 +7,31 @@
     "provided_service_instances": [],
     "endpoints" : [
       {
-        "address" : "10.20.1.113",
+        "address" : "10.10.1.113",
         "udp_port" : 40000,
         "required_service_instances" : [
           {
-            "service_id" : 640,
+            "service_id" : 4234,
             "instance_id" : 10,
             "major_version" : 1,
             "minor_version" : 0,
             "required_signal_serialized_pdus" : [
               {
-                "pdu_id" : 41975809,
-                "event_id" : 32769
+                "pdu_id" : 277512192,
+                "event_id" : 32768
               }
             ]
           },
           {
-            "service_id" : 45180,
-            "instance_id" : 10,
+            "service_id" : 5250,
+            "instance_id" : 1,
             "major_version" : 1,
             "minor_version" : 0,
             "required_signal_serialized_pdus" : [
+              {
+                "pdu_id" : 344096768,
+                "event_id" : 32768
+              }
             ]
           }
         ]

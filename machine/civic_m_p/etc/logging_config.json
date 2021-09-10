@@ -1,0 +1,11 @@
+{
+  "name" : "VExc",
+  "description" : "The Adaptive AUTOSAR Execution Manager",
+  "dlt_id": "VExc",
+  "log_mode" : ["kConsole", "kRemote"],
+  "log_level" : "kInfo",
+  "log_dir_path": "./log",
+  "ipc_port": 33,
+  "reconnection_retry_offset": 0,
+  "msg_buf_size": 1000
+}

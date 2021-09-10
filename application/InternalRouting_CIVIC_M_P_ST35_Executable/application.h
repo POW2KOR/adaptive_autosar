@@ -28,7 +28,8 @@
  *********************************************************************************************************************/
 #include "application/common/application_base.h"
 
-#include "roller_blinder_rear_ctrl.h"
+#include "roller_blinder_rear_provider.h"
+#include "roller_blinder_rear_consumer.h"
 
 /*!
  * \brief Namespace for the example application.
@@ -59,9 +60,14 @@ class Application : public ApplicationBase {
 
  private:
    /*!
-   * \brief Rear Roller Blinder service instance
+   * \brief Rear Roller Blinder service instance on vlan10
    */
    i3::services::common::RollerBlinderRearProvider roller_blinder_service_provider_;
+
+   /*!
+   * \brief Rear Roller Blinder service instance on vlan210
+   */
+   i3::services::common::RollerBlinderRearConsumer roller_blinder_service_consumer_;
 
   /*!
    * \brief sunroof service instance

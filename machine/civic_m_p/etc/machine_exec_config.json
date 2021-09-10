@@ -1,0 +1,44 @@
+{
+    "machine": {
+        "resourceGroups": [
+          {
+            "name": "QM"
+          },
+          {
+            "name": "ASIL"
+          }
+        ],
+        "functionGroups": [
+            {
+                "name": "MachineState",
+                "states": [
+                    "Startup",
+                    "Shutdown",
+                    "Restart",
+                    "Running",
+                    "SafeState",
+                    "Off"
+                ]
+            },
+            {
+                "name": "group1",
+                "states": [
+                    "Starting",
+                    "Stopping",
+                    "Off"
+                ]
+            },
+            {
+                "name" : "phm_example_app_group",
+                "states" : [
+                  "Run",
+                  "ContinueRun",
+                  "Restart",
+                  "StopSupervision",
+                  "BehaviorB",
+                  "Stop"
+                ]
+              }
+        ]
+    }
+}

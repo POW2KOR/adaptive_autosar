@@ -73,7 +73,7 @@ int main() {
   ara::core::Result<void> init_result{ara::core::Initialize()};
 
   if (!init_result.HasValue()) {
-    char const* msg{" avatar_router ara::core::Initialize() failed."};
+    char const* msg{" CIVIC_M_P_ST35 ara::core::Initialize() failed."};
     std::cerr << msg << "\nResult contains: " << init_result.Error().Message() << ", "
               << init_result.Error().UserMessage()
               << "\n";
@@ -87,7 +87,7 @@ int main() {
     ara::core::Result<void> deinit_result{ara::core::Deinitialize()};
 
     if (!deinit_result.HasValue()) {
-      char const* msg{"avatar_router ara::core::Deinitialize() failed."};
+      char const* msg{"CIVIC_M_P_ST35 ara::core::Deinitialize() failed."};
       std::cerr << msg << "\nResult contains: " << deinit_result.Error().Message() << ", "
                 << deinit_result.Error().UserMessage()
                 << "\n";

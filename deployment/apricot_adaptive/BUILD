@@ -7,7 +7,7 @@ package(default_visibility = ["//visibility:public"])
 pkg_tar(
     name = "filesystem_tar",
     files = {
-        "//machine/idc6_m_p1_xavier:machine_exec_config": "/etc/machine_exec_config.json",
+        "//machine/civic_m_p:i3_machine_exec_config": "/etc/machine_exec_config.json",
         "//deployment/apricot_adaptive:post_install.sh": "/usr/share/apricot/post_install.sh",
         "//deployment/apricot_adaptive:pre_removal.sh": "/usr/share/apricot/pre_removal.sh",
         "//deployment/apricot_adaptive:network_setup.sh": "/usr/share/apricot/network_setup.sh",

@@ -30,16 +30,25 @@ namespace application {
 /*!
  * \brief Initialize application.
  */
-Application::Application() : ApplicationBase("avatar_router_2") {
+Application::Application() : ApplicationBase("CIVIC_M_P_ST35") {
 
-  /* Offer Roller Blinder Rear service */
+  /* Offer Roller Blinder Rear service on vlan10*/
   roller_blinder_service_provider_.OfferService();
   log_.LogInfo() << "Roller Blinder Rear service Offered.";
+
+  /* Find Roller Blinder service on vlan210*/
+  roller_blinder_service_consumer_.FindService();
+  log_.LogInfo() << "find service Roller Blinder invoked.";
+  roller_blinder_service_consumer_.SubscribeToEvents();
+
 }
 
 Application::~Application() {
   /* Stop offered service */
   roller_blinder_service_provider_.StopOfferService();
+
+  /* Unsubscribe from service events */
+  roller_blinder_service_consumer_.UnsubscribeFromEvents();
 }
 
 std::int8_t Application::Run() {
@@ -49,24 +58,35 @@ std::int8_t Application::Run() {
   ::DataTypes::TypeRef::c02_Idle_Opn_Cls_SNA data;
 
   if (!has_initialization_failed_) {
+    // @TODO : This log will be deleted, Just kept for debugging
+    std::cerr << "bazinga Before application state running " << std::endl;
+
     this->ReportApplicationState(ara::exec::ApplicationState::kRunning);
 
-    log_.LogInfo() << "avater_router application started";
+    log_.LogInfo() << "CIVIC_M_P_ST35 application started";
 
     while (!exit_requested_) {
       am_->wait();
+      std::cerr << "bazinga in while loop of application" << std::endl;
       log_.LogDebug() << "Running in cycle " << am_->getCycle();
 
        if (++counter % 10 == 0) {
 
-         data = 10;
+        //Read the data stored 
+        // @TODO : This operation has to be atomic. We have to revisit 
+        // this implementation which will depend on frequency of read
+        // and write. But for now It should be ok till tested
+        data = roller_blinder_service_consumer_.data_;
+        
           roller_blinder_service_provider_.RB_R_Rq_HU_ST3.Send(data);
-          log_.LogInfo() << "ECU_Stat_CIVIC_M_P_Service_ST3 data sent ...";
+          log_.LogInfo() << "RB_R_Rq_HU_ST3 data sent ...";
        }
     }
   }else {
     ret = EXIT_FAILURE;
   }
+  // @TODO : This log will be deleted, Just kept for debugging
+  std::cerr << "bazinga Before application state terminating " << std::endl;
 
   this->ReportApplicationState(ara::exec::ApplicationState::kTerminating);
 

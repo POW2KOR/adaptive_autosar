@@ -1,6 +1,6 @@
 
-#ifndef ROLLER_BLINDER_REAR_CTRL_H_
-#define ROLLER_BLINDER_REAR_CTRL_H_
+#ifndef ROLLER_BLINDER_REAR_PROVIDER_H_
+#define ROLLER_BLINDER_REAR_PROVIDER_H_
 
 #include <ara/log/logging.h>
 #include <thread>
@@ -40,4 +40,4 @@ namespace common {
 }  // namespace services
 }  // namespace i3
 
-#endif  // ROLLER_BLINDER_REAR_CTRL_H_
+#endif  // ROLLER_BLINDER_REAR_PROVIDER_H_
