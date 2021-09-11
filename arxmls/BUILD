@@ -17,6 +17,6 @@ filegroup(
 filegroup(
     name = "civic_export_with_roller_bliner_rear_arxml",
     srcs = [
-        "Civic_Export_patched_all_vector_no_errors.arxml",
+        "CivicRolle_Blinder_final_with_datatype.arxml",
     ],
 )

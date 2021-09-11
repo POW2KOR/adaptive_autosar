@@ -45,7 +45,7 @@ pkg_tar(
         ":exec_config": "etc/exec_config.json",
         ":logging_config": "etc/logging_config.json",
         ":someip_config": "etc/someipd-posix.json",
-        "//application/x6aa_config_manager:static_sd_config": "etc/static_sd_config.json",
+        "//application/InternalRouting_CIVIC_M_P_ST35_Executable:someipbinding_sd_config": "etc/static_sd_config.json",
     },
     mode = "0755",
     package_dir = "opt/someipd_posix",

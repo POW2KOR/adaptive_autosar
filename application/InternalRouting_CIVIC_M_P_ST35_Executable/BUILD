@@ -168,6 +168,12 @@ minerva_aa_codegen_rule(
             "InternalRouting_CIVIC_M_P_ST35_Executable/include/amsr/someip_binding_transformation_layer/internal/services/ns_rollerblindrear_ui_ctrl_hu_service_st3_210/RollerBlindRear_UI_Ctrl_HU_Service_ST3_210_proxy_someip_event_manager.h",
             "InternalRouting_CIVIC_M_P_ST35_Executable/include/amsr/someip_binding_transformation_layer/internal/services/ns_rollerblindrear_ui_ctrl_hu_service_st3_210/RollerBlindRear_UI_Ctrl_HU_Service_ST3_210_proxy_someip_methods.h",
             "InternalRouting_CIVIC_M_P_ST35_Executable/include/amsr/someip_binding_transformation_layer/internal/services/ns_rollerblindrear_ui_ctrl_hu_service_st3_210/RollerBlindRear_UI_Ctrl_HU_Service_ST3_210_someip_proxy_factory.h",
+            "InternalRouting_CIVIC_M_P_ST35_Executable/include/amsr/someip_binding_transformation_layer/internal/PSI_4234_TSSR_UI_Ctrl_Rq_Service_ST3_10/REC_TSSR_Sw_Stat_Pr5_ST3_7y1dtnin6c6u002o0wilpj2zj/serializer_REC_TSSR_Sw_Stat_Pr5_ST3_7y1dtnin6c6u002o0wilpj2zj_6.h",
+            "InternalRouting_CIVIC_M_P_ST35_Executable/include/amsr/someip_binding_transformation_layer/internal/services/ns_tssr_ui_ctrl_rq_service_st3_210/TSSR_UI_Ctrl_Rq_Service_ST3_210_skeleton_someip_binding.h",
+            "InternalRouting_CIVIC_M_P_ST35_Executable/include/amsr/someip_binding_transformation_layer/internal/services/ns_tssr_ui_ctrl_rq_service_st3_210/TSSR_UI_Ctrl_Rq_Service_ST3_210_skeleton_someip_binding_init.h",
+            "InternalRouting_CIVIC_M_P_ST35_Executable/include/amsr/someip_binding_transformation_layer/internal/services/ns_tssr_ui_ctrl_rq_service_st3_210/TSSR_UI_Ctrl_Rq_Service_ST3_210_skeleton_someip_event_manager.h",
+            "InternalRouting_CIVIC_M_P_ST35_Executable/include/amsr/someip_binding_transformation_layer/internal/services/ns_tssr_ui_ctrl_rq_service_st3_210/TSSR_UI_Ctrl_Rq_Service_ST3_210_skeleton_someip_methods.h",
+            "InternalRouting_CIVIC_M_P_ST35_Executable/include/amsr/someip_binding_transformation_layer/internal/services/ns_tssr_ui_ctrl_rq_service_st3_210/TSSR_UI_Ctrl_Rq_Service_ST3_210_someip_skeleton_factory.h",
         ],
         "someipbinding_srcs": [
             "InternalRouting_CIVIC_M_P_ST35_Executable/src/amsr/someip_binding_transformation_layer/internal/DataTypes/REC_ECU_Stat_CIVIC_M_P_ST3/serializer_REC_ECU_Stat_CIVIC_M_P_ST3_3.cpp",
@@ -191,6 +197,10 @@ minerva_aa_codegen_rule(
             "InternalRouting_CIVIC_M_P_ST35_Executable/src/amsr/someip_binding_transformation_layer/internal/services/ns_rollerblindrear_ui_ctrl_hu_service_st3_210/RollerBlindRear_UI_Ctrl_HU_Service_ST3_210_proxy_someip_binding.cpp",
             "InternalRouting_CIVIC_M_P_ST35_Executable/src/amsr/someip_binding_transformation_layer/internal/services/ns_rollerblindrear_ui_ctrl_hu_service_st3_210/RollerBlindRear_UI_Ctrl_HU_Service_ST3_210_proxy_someip_binding_init.cpp",
             "InternalRouting_CIVIC_M_P_ST35_Executable/src/amsr/someip_binding_transformation_layer/internal/services/ns_rollerblindrear_ui_ctrl_hu_service_st3_210/RollerBlindRear_UI_Ctrl_HU_Service_ST3_210_proxy_someip_event_manager.cpp",
+            "InternalRouting_CIVIC_M_P_ST35_Executable/src/amsr/someip_binding_transformation_layer/internal/PSI_4234_TSSR_UI_Ctrl_Rq_Service_ST3_10/REC_TSSR_Sw_Stat_Pr5_ST3_7y1dtnin6c6u002o0wilpj2zj/serializer_REC_TSSR_Sw_Stat_Pr5_ST3_7y1dtnin6c6u002o0wilpj2zj_6.cpp",
+            "InternalRouting_CIVIC_M_P_ST35_Executable/src/amsr/someip_binding_transformation_layer/internal/services/ns_tssr_ui_ctrl_rq_service_st3_210/TSSR_UI_Ctrl_Rq_Service_ST3_210_skeleton_someip_binding.cpp",
+            "InternalRouting_CIVIC_M_P_ST35_Executable/src/amsr/someip_binding_transformation_layer/internal/services/ns_tssr_ui_ctrl_rq_service_st3_210/TSSR_UI_Ctrl_Rq_Service_ST3_210_skeleton_someip_binding_init.cpp",
+            "InternalRouting_CIVIC_M_P_ST35_Executable/src/amsr/someip_binding_transformation_layer/internal/services/ns_tssr_ui_ctrl_rq_service_st3_210/TSSR_UI_Ctrl_Rq_Service_ST3_210_skeleton_someip_event_manager.cpp",
         ],
     },
 )
@@ -214,6 +224,9 @@ minerva_aa_codegen_rule(
             "InternalRouting_CIVIC_M_P_ST35_Executable/include/amsr/someip_protocol/internal/datatype_deserialization/PSI_5250_WiperWasher_UI_Ctrl_Wpr_Service_ST3_0/REC_WprWashSw_Stat_Pr5_ST3_en7lekos3iwo0omdqk2zxsfat/deserializer_REC_WprWashSw_Stat_Pr5_ST3_en7lekos3iwo0omdqk2zxsfat.h",
             "InternalRouting_CIVIC_M_P_ST35_Executable/include/amsr/someip_protocol/internal/datatype_serialization/DataTypes/REC_ECU_Stat_CIVIC_M_P_ST3/serializer_REC_ECU_Stat_CIVIC_M_P_ST3.h",
             "InternalRouting_CIVIC_M_P_ST35_Executable/include/amsr/someip_protocol/internal/dataprototype_deserialization/services_ns_rollerblindrear_ui_ctrl_hu_service_st3_210/events/deserializer_RB_R_Rq_HU_ST3.h",
+            "InternalRouting_CIVIC_M_P_ST35_Executable/include/amsr/someip_protocol/internal/dataprototype_serialization/services_ns_tssr_ui_ctrl_rq_service_st3_210/events/serializer_TSSR_UI_Ctrl_Rq_ST3.h",
+            "InternalRouting_CIVIC_M_P_ST35_Executable/include/amsr/someip_protocol/internal/datatype_serialization/PSI_4234_TSSR_UI_Ctrl_Rq_Service_ST3_10/REC_TSSR_Sw_Stat_Pr5_ST3_7y1dtnin6c6u002o0wilpj2zj/serializer_REC_TSSR_Sw_Stat_Pr5_ST3_7y1dtnin6c6u002o0wilpj2zj.h",
+
         ],
         "someipprotocol_srcs": [
             "InternalRouting_CIVIC_M_P_ST35_Executable/src/amsr/someip_protocol/internal/dataprototype_serialization/services_ns_rollerblindrear_ui_ctrl_hu_service_st3/events/serializer_RB_R_Rq_HU_ST3.cpp",
@@ -221,6 +234,7 @@ minerva_aa_codegen_rule(
             "InternalRouting_CIVIC_M_P_ST35_Executable/src/amsr/someip_protocol/internal/dataprototype_deserialization/services_ns_wiperwasher_ui_ctrl_wpr_service_st3/events/deserializer_WprWashSw_Stat_ST3.cpp",
             "InternalRouting_CIVIC_M_P_ST35_Executable/src/amsr/someip_protocol/internal/dataprototype_serialization/services_ns_ecu_stat_civic_m_p_service_st3/events/serializer_ECU_Stat_CIVIC_M_P_Service_ST3.cpp",
             "InternalRouting_CIVIC_M_P_ST35_Executable/src/amsr/someip_protocol/internal/dataprototype_deserialization/services_ns_rollerblindrear_ui_ctrl_hu_service_st3_210/events/deserializer_RB_R_Rq_HU_ST3.cpp",
+            "InternalRouting_CIVIC_M_P_ST35_Executable/src/amsr/someip_protocol/internal/dataprototype_serialization/services_ns_tssr_ui_ctrl_rq_service_st3_210/events/serializer_TSSR_UI_Ctrl_Rq_ST3.cpp",
         ]
     },
 )
@@ -247,6 +261,8 @@ minerva_aa_codegen_rule(
             "InternalRouting_CIVIC_M_P_ST35_Executable/src/services/ns_wiperwasher_ui_ctrl_wpr_service_st3/wiperwasher_ui_ctrl_wpr_service_st3_proxy.cpp",
             "InternalRouting_CIVIC_M_P_ST35_Executable/src/services/ns_rollerblindrear_ui_ctrl_hu_service_st3_210/rollerblindrear_ui_ctrl_hu_service_st3_210.cpp",
             "InternalRouting_CIVIC_M_P_ST35_Executable/src/services/ns_rollerblindrear_ui_ctrl_hu_service_st3_210/rollerblindrear_ui_ctrl_hu_service_st3_210_proxy.cpp",
+            "InternalRouting_CIVIC_M_P_ST35_Executable/src/services/ns_tssr_ui_ctrl_rq_service_st3_210/tssr_ui_ctrl_rq_service_st3_210.cpp",
+            "InternalRouting_CIVIC_M_P_ST35_Executable/src/services/ns_tssr_ui_ctrl_rq_service_st3_210/tssr_ui_ctrl_rq_service_st3_210_skeleton.cpp",
         ],
         "socal_hdrs": [
             "InternalRouting_CIVIC_M_P_ST35_Executable/include/services/ns_ecu_stat_civic_m_p_service_st3/ECU_Stat_CIVIC_M_P_Service_ST3.h",
@@ -277,6 +293,11 @@ minerva_aa_codegen_rule(
             "InternalRouting_CIVIC_M_P_ST35_Executable/include/services/ns_rollerblindrear_ui_ctrl_hu_service_st3_210/RollerBlindRear_UI_Ctrl_HU_Service_ST3_210_types.h",
             "InternalRouting_CIVIC_M_P_ST35_Executable/include/services/ns_rollerblindrear_ui_ctrl_hu_service_st3_210/rollerblindrear_ui_ctrl_hu_service_st3_210_common.h",
             "InternalRouting_CIVIC_M_P_ST35_Executable/include/services/ns_rollerblindrear_ui_ctrl_hu_service_st3_210/rollerblindrear_ui_ctrl_hu_service_st3_210_proxy.h",
+            "InternalRouting_CIVIC_M_P_ST35_Executable/include/services/ns_tssr_ui_ctrl_rq_service_st3_210/TSSR_UI_Ctrl_Rq_Service_ST3_210.h",
+            "InternalRouting_CIVIC_M_P_ST35_Executable/include/services/ns_tssr_ui_ctrl_rq_service_st3_210/TSSR_UI_Ctrl_Rq_Service_ST3_210_skeleton_impl_interface.h",
+            "InternalRouting_CIVIC_M_P_ST35_Executable/include/services/ns_tssr_ui_ctrl_rq_service_st3_210/TSSR_UI_Ctrl_Rq_Service_ST3_210_types.h",
+            "InternalRouting_CIVIC_M_P_ST35_Executable/include/services/ns_tssr_ui_ctrl_rq_service_st3_210/tssr_ui_ctrl_rq_service_st3_210_common.h",
+            "InternalRouting_CIVIC_M_P_ST35_Executable/include/services/ns_tssr_ui_ctrl_rq_service_st3_210/tssr_ui_ctrl_rq_service_st3_210_skeleton.h",
         ],
     },
 )
