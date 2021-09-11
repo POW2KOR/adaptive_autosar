@@ -86,9 +86,9 @@ virt-copy-in -a ubuntu.img ../x86_64_configs/enp0s3.10.network /etc/systemd/netw
 # vlan 127 config
 virt-copy-in -a ubuntu.img ../x86_64_configs/enp0s3.127.netdev /etc/systemd/network/
 virt-copy-in -a ubuntu.img ../x86_64_configs/enp0s3.127.network /etc/systemd/network/
-# vlan 210 config
-virt-copy-in -a ubuntu.img ../x86_64_configs/enp0s3.210.netdev /etc/systemd/network/
-virt-copy-in -a ubuntu.img ../x86_64_configs/enp0s3.210.network /etc/systemd/network/
+# vlan 21 config
+virt-copy-in -a ubuntu.img ../x86_64_configs/enp0s3.21.netdev /etc/systemd/network/
+virt-copy-in -a ubuntu.img ../x86_64_configs/enp0s3.21.network /etc/systemd/network/
 
 # Path to tar to include at the root of the filesystem, usually to the adaptive
 # stack tar.
@@ -120,13 +120,4 @@ qemu-system-x86_64 \
 -drive if=virtio,format=raw,file=user.img \
 -net nic,model=virtio \
 -net user \
--device virtio-net-pci,netdev=net10 \
--netdev user,id=net10,net=10.10.1.0/16 \
--device virtio-net-pci,netdev=net127 \
--netdev user,id=net127,net=10.127.1.0/16 \
--device virtio-net-pci,netdev=net21 \
--netdev user,id=net21,net=10.21.17.0/24,hostfwd=tcp::13490-10.21.17.98:49361,hostfwd=tcp::10022-10.21.17.98:22,hostfwd=tcp::10023-10.21.17.98:23 \
--device virtio-net-pci,netdev=net254 \
--netdev user,id=net254,net=169.254.18.0/16 \
--device virtio-net-pci,netdev=net210 \
--netdev user,id=net210,net=10.210.220.0/16
+-net nic, -net tap,ifname=tap5,script=no,downscript=no

@@ -2,9 +2,8 @@
 Name=enp0s3
 
 [Network]
-Address=10.10.1.0/16
-Address=10.127.1.0/16
-Address=10.210.220.0/16
+Address=172.16.10.107/16
 VLAN=enp0s3.10
 VLAN=enp0s3.127
 VLAN=enp0s3.210
+VLAN=enp0s3.21
