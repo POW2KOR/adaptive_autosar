@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Start networking manager with e1000 driver
+# Start networking manager with virtio driver
 io-pkt-v6-hc -dvirtio
 
 if_up -p vt0
