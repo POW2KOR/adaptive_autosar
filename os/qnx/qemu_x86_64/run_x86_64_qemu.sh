@@ -41,9 +41,8 @@ function start_qemu() {
     ${KVM} \
     -drive format=qcow2,file=${PATH_TO_BOOT_IMAGE} \
     -drive format=qcow2,file=${PATH_TO_ROOT_IMAGE} \
-    -device e1000,netdev=net21 \
-    -netdev user,id=net21,net=10.21.17.0/24,hostfwd=tcp::13490-10.21.17.98:49361,hostfwd=tcp::10022-10.21.17.98:22,hostfwd=tcp::10023-10.21.17.98:23 \
-    -nographic
+    -net nic, -net user,hostfwd=tcp::13490-10.21.17.98:49361,hostfwd=tcp::10022-10.21.17.98:22,hostfwd=tcp::10023-10.21.17.98:23 \
+    -nographic 
 }
 
 precheck
