@@ -37,9 +37,9 @@ Application::Application() : ApplicationBase("CIVIC_M_P_ST35") {
   log_.LogInfo() << "Roller Blinder Rear service Offered.";
 
   /* Find Roller Blinder service on vlan210*/
-  ///roller_blinder_service_consumer_.FindService();
-  ///log_.LogInfo() << "find service Roller Blinder invoked.";
-  ///roller_blinder_service_consumer_.SubscribeToEvents();
+  roller_blinder_service_consumer_.CheckAndStopFindService();
+  log_.LogInfo() << "find service Roller Blinder invoked.";
+  roller_blinder_service_consumer_.SubscribeToEvents();
 
 }
 
@@ -48,7 +48,7 @@ Application::~Application() {
   roller_blinder_service_provider_.StopOfferService();
 
   /* Unsubscribe from service events */
-  //roller_blinder_service_consumer_.UnsubscribeFromEvents();
+  roller_blinder_service_consumer_.UnsubscribeFromEvents();
 }
 
 std::int8_t Application::Run() {
@@ -58,8 +58,6 @@ std::int8_t Application::Run() {
   ::DataTypes::TypeRef::c02_Idle_Opn_Cls_SNA data;
 
   if (!has_initialization_failed_) {
-    // @TODO : This log will be deleted, Just kept for debugging
-    std::cerr << "bazinga Before application state running " << std::endl;
 
     this->ReportApplicationState(ara::exec::ApplicationState::kRunning);
 
@@ -69,24 +67,35 @@ std::int8_t Application::Run() {
       am_->wait();
       log_.LogDebug() << "Running in cycle " << am_->getCycle();
 
-       if (++counter % 10 == 0) {
+      /* Verify service has been found */
+      if(roller_blinder_service_consumer_.IsServiceFound() && roller_blinder_service_consumer_.IsSubscribed()) {
+          data = roller_blinder_service_consumer_.data_;
+      }else {
+        /* Keep searching for service without blocking the application */
+        if(!roller_blinder_service_consumer_.IsServiceFound()) {
+          roller_blinder_service_consumer_.CheckAndStopFindService();
+        }
+        /* Subscribe to SI SpeedLimiter events */
+        if(!roller_blinder_service_consumer_.IsSubscribed()) {
+          roller_blinder_service_consumer_.SubscribeToEvents();
+        }
+      }
 
-        //Read the data stored 
-        // @TODO : This operation has to be atomic. We have to revisit 
-        // this implementation which will depend on frequency of read
-        // and write. But for now It should be ok till tested
-        //data = roller_blinder_service_consumer_.data_;
-        data = 10;
-        
-          roller_blinder_service_provider_.RB_R_Rq_HU_ST3.Send(data);
-          log_.LogInfo() << "RB_R_Rq_HU_ST3 data sent ...";
-       }
+    if (++counter % 10 == 0){
+
+      //Read the data stored 
+      // @TODO : This operation has to be atomic. We have to revisit 
+      // this implementation which will depend on frequency of read
+      // and write. But for now It should be ok till tested
+      data = roller_blinder_service_consumer_.data_;
+      
+      roller_blinder_service_provider_.RB_R_Rq_HU_ST3.Send(data);
+      log_.LogInfo() << "RB_R_Rq_HU_ST3 data sent ...";
+      }
     }
   }else {
     ret = EXIT_FAILURE;
   }
-  // @TODO : This log will be deleted, Just kept for debugging
-  std::cerr << "bazinga Before application state terminating " << std::endl;
 
   this->ReportApplicationState(ara::exec::ApplicationState::kTerminating);
 

@@ -128,6 +128,7 @@ else
     if [ $INTERFACE = "scale" ]; then
         sudo ip addr add 10.20.1.110/16 dev ${IF_SHORT_ALIAS}.20
         sudo ip addr add 10.20.1.111/16 dev ${IF_SHORT_ALIAS}.20
+        sudo ip addr add 10.210.220.2/16 dev ${IF_SHORT_ALIAS}.20
     fi
     echo "${IF_SHORT_ALIAS}.20" >> $NETWORK_FILE
 
@@ -139,7 +140,25 @@ else
     sudo ip link add link $INTERFACE name ${IF_SHORT_ALIAS}.127 type vlan id 127
     sudo ip link set up ${IF_SHORT_ALIAS}.127
     sudo ip addr add 10.127.17.98/16 dev ${IF_SHORT_ALIAS}.127
+    sudo ip addr add 10.127.1.90/16 dev ${IF_SHORT_ALIAS}.127
     echo "${IF_SHORT_ALIAS}.127" >> $NETWORK_FILE
+
+    sudo ip link add link $INTERFACE name ${IF_SHORT_ALIAS}.10 type vlan id 10
+    sudo ip link set up ${IF_SHORT_ALIAS}.10
+    sudo ip addr add 10.10.1.90/16 dev ${IF_SHORT_ALIAS}.10
+    #sudo ip addr add 10.10.1.113/16 dev ${IF_SHORT_ALIAS}.10
+    sudo ip addr add 239.10.0.2/16 dev ${IF_SHORT_ALIAS}.10
+    echo "${IF_SHORT_ALIAS}.19" >> $NETWORK_FILE
+    if [ $INTERFACE = "scale" ]; then
+        sudo ip addr add 10.10.1.90/16 dev ${IF_SHORT_ALIAS}.10
+    fi
+
+    sudo ip link add link $INTERFACE name ${IF_SHORT_ALIAS}.210 type vlan id 210
+    sudo ip link set up ${IF_SHORT_ALIAS}.210
+    sudo ip addr add 10.210.220.3/16 dev ${IF_SHORT_ALIAS}.210
+    sudo ip addr add 10.210.220.2/16 dev ${IF_SHORT_ALIAS}.210
+    sudo ip addr add 239.210.224.245/16 dev ${IF_SHORT_ALIAS}.210
+    echo "${IF_SHORT_ALIAS}.210" >> $NETWORK_FILE
 
     if [ $INTERFACE_CREATED -eq 1 ]; then
         echo "$INTERFACE" >> $NETWORK_FILE
@@ -162,5 +181,7 @@ else
         sudo firewall-cmd --zone=trusted --add-interface=${IF_SHORT_ALIAS}.20
         sudo firewall-cmd --zone=trusted --add-interface=${IF_SHORT_ALIAS}.21
         sudo firewall-cmd --zone=trusted --add-interface=${IF_SHORT_ALIAS}.127
+        sudo firewall-cmd --zone=trusted --add-interface=${IF_SHORT_ALIAS}.10
+        sudo firewall-cmd --zone=trusted --add-interface=${IF_SHORT_ALIAS}.210
     fi
 fi

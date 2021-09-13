@@ -27,31 +27,42 @@ namespace common {
      */
     ~RollerBlinderRearConsumer();
 
-    /*****************************************************************************
-    * \brief Find RollerBlinderRear Service
-    *
-    * This method is blocking until the first service provider is discovered.
-    *
-    * \retval  true   Success
-    * \retval  false  Failure
-    ******************************************************************************/
-    static bool FindService();
+    /*!
+     * \brief Check if rollerBlinder_rear service has been found.
+     *
+     * This method will stop the FindService if this has been found.
+     *
+     * \return  true   when success, false otherwise.
+     */
+    bool CheckAndStopFindService();
 
-    /*****************************************************************************
-    * \brief Subscribe to service events and register handler for events.
-    *
-    * \retval  true   Success
-    * \retval  false  Failure
-    ******************************************************************************/
+    /*!
+     * \brief Subscribe to service events and register handler for events.
+     *
+     * \return  true   when success, false otherwise.
+     */
     static bool SubscribeToEvents();
 
-    /*****************************************************************************
-    * \brief Unsubscribe from service events.
-    *
-    * \retval  true   Success
-    * \retval  false  Failure
-    ******************************************************************************/
+    /*!
+     * \brief Unsubscribe from service events.
+     *
+     * \return  true   when success, false otherwise.
+     */
     static bool UnsubscribeFromEvents();
+
+    /*!
+     * \brief Get if the service has been found.
+     *
+     * \return true when service found, false otherwise.
+     */
+    static bool IsServiceFound();
+
+    /*!
+     * \brief Get if it subscribed successfully to the service.
+     *
+     * \return true when subscribed, false otherwise.
+     */
+    static bool IsSubscribed();
 
     /** Variable to store the Data read **/
     static ::DataTypes::TypeRef::c02_Idle_Opn_Cls_SNA data_;
@@ -80,6 +91,11 @@ namespace common {
      * \brief Flag that events have been subsribed.
      */
     static std::atomic<bool> rb_rear_events_subscribed_;
+
+    /*!
+     * \brief Find service handler instance.
+     */
+    ara::com::FindServiceHandle find_service_handle_;
 };
 
 }  // namespace common

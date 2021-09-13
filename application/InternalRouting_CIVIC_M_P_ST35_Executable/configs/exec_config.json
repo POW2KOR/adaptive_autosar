@@ -24,8 +24,7 @@
               "states" : [
                 "Running",
                 "Shutdown",
-                "Restart",
-                "Startup"
+                "Restart"
               ]
             }
           ],
