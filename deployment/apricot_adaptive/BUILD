@@ -18,6 +18,7 @@ pkg_tar(
                 "//application/someipd_posix:package",
                 "//application/amsr_vector_fs_log_daemon:package",
                 "//application/InternalRouting_CIVIC_M_P_ST35_Executable:package",
+                "//application/x6aa_em_state_client_app:package",
                 "//os/linux:package",
             ],
 )

@@ -37,9 +37,9 @@ Application::Application() : ApplicationBase("CIVIC_M_P_ST35") {
   log_.LogInfo() << "Roller Blinder Rear service Offered.";
 
   /* Find Roller Blinder service on vlan210*/
-  roller_blinder_service_consumer_.FindService();
-  log_.LogInfo() << "find service Roller Blinder invoked.";
-  roller_blinder_service_consumer_.SubscribeToEvents();
+  ///roller_blinder_service_consumer_.FindService();
+  ///log_.LogInfo() << "find service Roller Blinder invoked.";
+  ///roller_blinder_service_consumer_.SubscribeToEvents();
 
 }
 
@@ -48,7 +48,7 @@ Application::~Application() {
   roller_blinder_service_provider_.StopOfferService();
 
   /* Unsubscribe from service events */
-  roller_blinder_service_consumer_.UnsubscribeFromEvents();
+  //roller_blinder_service_consumer_.UnsubscribeFromEvents();
 }
 
 std::int8_t Application::Run() {
@@ -67,7 +67,6 @@ std::int8_t Application::Run() {
 
     while (!exit_requested_) {
       am_->wait();
-      std::cerr << "bazinga in while loop of application" << std::endl;
       log_.LogDebug() << "Running in cycle " << am_->getCycle();
 
        if (++counter % 10 == 0) {
@@ -76,7 +75,8 @@ std::int8_t Application::Run() {
         // @TODO : This operation has to be atomic. We have to revisit 
         // this implementation which will depend on frequency of read
         // and write. But for now It should be ok till tested
-        data = roller_blinder_service_consumer_.data_;
+        //data = roller_blinder_service_consumer_.data_;
+        data = 10;
         
           roller_blinder_service_provider_.RB_R_Rq_HU_ST3.Send(data);
           log_.LogInfo() << "RB_R_Rq_HU_ST3 data sent ...";

@@ -7,7 +7,7 @@
     "provided_service_instances": [],
     "endpoints" : [
       {
-        "address" : "10.10.1.113",
+        "address" : "10.10.1.90",
         "udp_port" : 40000,
         "required_service_instances" : [
           {
@@ -30,6 +30,24 @@
             "required_signal_serialized_pdus" : [
               {
                 "pdu_id" : 344096768,
+                "event_id" : 32768
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "address" : "10.210.220.2",
+        "udp_port" : 60478,
+        "required_service_instances" : [
+          {
+            "service_id" : 3092,
+            "instance_id" : 10,
+            "major_version" : 1,
+            "minor_version" : 0,
+            "required_signal_serialized_pdus" : [
+              {
+                "pdu_id" : 202670080,
                 "event_id" : 32768
               }
             ]
