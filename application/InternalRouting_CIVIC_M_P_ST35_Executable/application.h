@@ -31,6 +31,8 @@
 #include "roller_blinder_rear_provider.h"
 #include "roller_blinder_rear_consumer.h"
 
+#include "sunroof_roller_ctrl.h"
+
 /*!
  * \brief Namespace for the example application.
  */
@@ -72,6 +74,7 @@ class Application : public ApplicationBase {
   /*!
    * \brief sunroof service instance
    */
+  i3::services::common::SunroofRollerConsumer sunroof_roller_service_app_proxy_;
   
 };
 

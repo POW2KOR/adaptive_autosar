@@ -358,6 +358,8 @@ cc_binary(
         "roller_blinder_rear_provider.cpp",
         "roller_blinder_rear_consumer.h",
         "roller_blinder_rear_consumer.cpp",
+        "sunroof_roller_ctrl.h",
+        "sunroof_roller_ctrl.cpp",
         ":applicationbase_init_deinit_srcs",
         ":socal_scrs",
         ":someipbinding_srcs",

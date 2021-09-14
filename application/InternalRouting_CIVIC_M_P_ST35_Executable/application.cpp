@@ -41,6 +41,11 @@ Application::Application() : ApplicationBase("CIVIC_M_P_ST35") {
   log_.LogInfo() << "find service Roller Blinder invoked.";
   roller_blinder_service_consumer_.SubscribeToEvents();
 
+  /* Find Sunroof Service on vlan10 */
+  sunroof_roller_service_app_proxy_.CheckAndStopFindService();
+  log_.LogInfo() << "find service Sunroof Roller invoked.";
+  sunroof_roller_service_app_proxy_.SubscribeToEvents();
+
 }
 
 Application::~Application() {
@@ -49,6 +54,7 @@ Application::~Application() {
 
   /* Unsubscribe from service events */
   roller_blinder_service_consumer_.UnsubscribeFromEvents();
+  sunroof_roller_service_app_proxy_.UnsubscribeFromEvents();
 }
 
 std::int8_t Application::Run() {
@@ -67,7 +73,7 @@ std::int8_t Application::Run() {
       am_->wait();
       log_.LogDebug() << "Running in cycle " << am_->getCycle();
 
-      /* Verify service has been found */
+      /* Verify service has been found on vlan 210 for Roller Blinder Rear*/
       if(roller_blinder_service_consumer_.IsServiceFound() && roller_blinder_service_consumer_.IsSubscribed()) {
           data = roller_blinder_service_consumer_.data_;
       }else {
@@ -78,6 +84,20 @@ std::int8_t Application::Run() {
         /* Subscribe to SI SpeedLimiter events */
         if(!roller_blinder_service_consumer_.IsSubscribed()) {
           roller_blinder_service_consumer_.SubscribeToEvents();
+        }
+      }
+
+       /* Verify service has been found on vlan 10 for Sunroof roller*/
+      if(sunroof_roller_service_app_proxy_.IsServiceFound() && sunroof_roller_service_app_proxy_.IsSubscribed()) {
+          //data = sunroof_roller_service_app_proxy_.data_;
+      }else {
+        /* Keep searching for service without blocking the application */
+        if(!sunroof_roller_service_app_proxy_.IsServiceFound()) {
+          sunroof_roller_service_app_proxy_.CheckAndStopFindService();
+        }
+        /* Subscribe to SI SpeedLimiter events */
+        if(!sunroof_roller_service_app_proxy_.IsSubscribed()) {
+          sunroof_roller_service_app_proxy_.SubscribeToEvents();
         }
       }
 
