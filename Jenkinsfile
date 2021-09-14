@@ -30,11 +30,11 @@ node("CloudYocto") {
 
     env.PIP_DOCKERIMAGE="artifact.swf.daimler.com/apricot-docker/xpf/xpf_adaptive_build_image:latest"
 
-    env.PIP_BUILD_CMD = "./build.sh"
+    env.PIP_BUILD_CMD = "./build.sh all"
 
     // Archive
     env.PIP_ARCHIVE = "true"
-    env.PIP_ARCHIVE_IMAGE_FOLDERS = "artifacts/"
+    env.PIP_ARCHIVE_IMAGE_FOLDERS = "out/tar/"
 
     // Execute the generalised QNX pipeline
     execQnxPipeline()
@@ -60,3 +60,4 @@ node("CloudYocto") {
         }
     }
 }
+
