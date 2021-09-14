@@ -33,7 +33,7 @@ RollerBlinderRearConsumer::~RollerBlinderRearConsumer() {
 bool RollerBlinderRearConsumer::CheckAndStopFindService() {
   bool retval = false;
 
-  /* Check if SI_Speedlimiter service is found */
+  /* Check if Roller Blinder service is found */
   if (!rb_rear_service_instance_found_.load()) {
     static int counter = 0;
     if (++counter % 2 == 0) {
@@ -44,7 +44,7 @@ bool RollerBlinderRearConsumer::CheckAndStopFindService() {
     /* Stop searching for further services */
     ::services::ns_rollerblindrear_ui_ctrl_hu_service_st3_210::proxy::RollerBlindRear_UI_Ctrl_HU_Service_ST3_210Proxy::
     StopFindService(find_service_handle_);
-    GetLogger().LogInfo() << "Stopped searching for SI_Speedlimiter service";
+    GetLogger().LogInfo() << "Stopped searching for RB_Rear service";
     retval = true;
   }
 
@@ -110,7 +110,7 @@ bool RollerBlinderRearConsumer::IsServiceFound() {
 }
 
 bool RollerBlinderRearConsumer::IsSubscribed() {
-  return rb_rear_service_instance_found_.load();
+  return rb_rear_events_subscribed_.load();
 }
 
 ara::log::Logger &RollerBlinderRearConsumer::GetLogger() {
