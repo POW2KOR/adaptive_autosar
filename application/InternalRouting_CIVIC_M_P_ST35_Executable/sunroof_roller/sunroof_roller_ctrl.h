@@ -17,9 +17,11 @@ using sunroofDataType = ::PSI_4234_TSSR_UI_Ctrl_Rq_Service_ST3_10::REC_TSSR_Sw_S
                 ::REC_TSSR_Sw_Stat_Pr5_ST3_7y1dtnin6c6u002o0wilpj2zj;
 
 class SunroofRollerConsumer {
- public:
+public:
   SunroofRollerConsumer();
-  virtual ~SunroofRollerConsumer();
+
+  ~SunroofRollerConsumer();
+
   /*
    * \brief Check if Sunroof Roller service has been found.
    *
@@ -45,24 +47,25 @@ class SunroofRollerConsumer {
    */
   static bool UnsubscribeFromEvents();
 
-   /*!
-     * \brief Get if the service has been found.
-     *
-     * \return true when service found, false otherwise.
-     */
-    static bool IsServiceFound();
+  /*!
+   * \brief Get if the service has been found.
+   *
+   * \return true when service found, false otherwise.
+   */
+  static bool IsServiceFound();
 
-    /*!
-     * \brief Get if it subscribed successfully to the service.
-     *
-     * \return true when subscribed, false otherwise.
-     */
-    static bool IsSubscribed();
+  /*!
+   * \brief Get if it subscribed successfully to the service.
+   *
+   * \return true when subscribed, false otherwise.
+   */
+  static bool IsSubscribed();
 
   static void GetValues();
 
+  static sunroofDataType data_;
   
- private:
+private:
   static void
   FindServiceHandler(ara::com::ServiceHandleContainer<::services::
     ns_tssr_ui_ctrl_rq_service_st3::proxy::TSSR_UI_Ctrl_Rq_Service_ST3Proxy::HandleType> sunroof_roller_services);
@@ -74,8 +77,6 @@ class SunroofRollerConsumer {
   /** Pointer to the bound service */
   static std::shared_ptr<::services::ns_tssr_ui_ctrl_rq_service_st3::proxy::
   TSSR_UI_Ctrl_Rq_Service_ST3Proxy> sunroof_roller_service_proxy_;
-
-  static sunroofDataType data_;
 
   /*!
    * \brief Flag that a service has been found.

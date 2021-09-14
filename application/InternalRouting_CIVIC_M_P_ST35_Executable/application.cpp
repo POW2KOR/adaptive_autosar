@@ -46,11 +46,16 @@ Application::Application() : ApplicationBase("CIVIC_M_P_ST35") {
   log_.LogInfo() << "find service Sunroof Roller invoked.";
   sunroof_roller_service_app_proxy_.SubscribeToEvents();
 
+  /* Offer Sunroof Roller Service on Vlan210 */
+  sunroof_roller_provider_.OfferService();
+  log_.LogInfo() << "Sunroof Roller service Offered.";
+
 }
 
 Application::~Application() {
   /* Stop offered service */
   roller_blinder_service_provider_.StopOfferService();
+  sunroof_roller_provider_.StopOfferService();
 
   /* Unsubscribe from service events */
   roller_blinder_service_consumer_.UnsubscribeFromEvents();
@@ -62,6 +67,8 @@ std::int8_t Application::Run() {
   int counter = 0;
 
   ::DataTypes::TypeRef::c02_Idle_Opn_Cls_SNA data;
+
+  i3::services::common::sunroofDataType sunroof_data;
 
   if (!has_initialization_failed_) {
 
@@ -75,6 +82,7 @@ std::int8_t Application::Run() {
 
       /* Verify service has been found on vlan 210 for Roller Blinder Rear*/
       if(roller_blinder_service_consumer_.IsServiceFound() && roller_blinder_service_consumer_.IsSubscribed()) {
+          //Copying the values received to provided it later
           data = roller_blinder_service_consumer_.data_;
       }else {
         /* Keep searching for service without blocking the application */
@@ -89,7 +97,8 @@ std::int8_t Application::Run() {
 
        /* Verify service has been found on vlan 10 for Sunroof roller*/
       if(sunroof_roller_service_app_proxy_.IsServiceFound() && sunroof_roller_service_app_proxy_.IsSubscribed()) {
-          //data = sunroof_roller_service_app_proxy_.data_;
+          //Copying the values received to provided it later
+          sunroof_data = sunroof_roller_service_app_proxy_.data_;
       }else {
         /* Keep searching for service without blocking the application */
         if(!sunroof_roller_service_app_proxy_.IsServiceFound()) {
@@ -111,6 +120,10 @@ std::int8_t Application::Run() {
       
       roller_blinder_service_provider_.RB_R_Rq_HU_ST3.Send(data);
       log_.LogInfo() << "RB_R_Rq_HU_ST3 data sent ...";
+
+      sunroof_roller_provider_.TSSR_UI_Ctrl_Rq_ST3.Send(sunroof_data);
+      log_.LogInfo() << "TSSR_UI_Ctrl_Rq_ST3 data sent ...";
+
       }
     }
   }else {

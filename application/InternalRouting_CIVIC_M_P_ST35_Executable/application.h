@@ -28,10 +28,11 @@
  *********************************************************************************************************************/
 #include "application/common/application_base.h"
 
-#include "roller_blinder_rear_provider.h"
-#include "roller_blinder_rear_consumer.h"
+#include "roller_blinder_rear/roller_blinder_rear_provider.h"
+#include "roller_blinder_rear/roller_blinder_rear_consumer.h"
 
-#include "sunroof_roller_ctrl.h"
+#include "sunroof_roller/sunroof_roller_ctrl.h"
+#include "sunroof_roller/sunroof_roller_provider.h"
 
 /*!
  * \brief Namespace for the example application.
@@ -75,6 +76,11 @@ class Application : public ApplicationBase {
    * \brief sunroof service instance
    */
   i3::services::common::SunroofRollerConsumer sunroof_roller_service_app_proxy_;
+
+  /*!
+   * \brief sunroof roller provider instance
+   */
+  i3::services::common::SunroofRollerProvider sunroof_roller_provider_;
   
 };
 
