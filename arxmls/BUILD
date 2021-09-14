@@ -15,8 +15,8 @@ filegroup(
 )
 
 filegroup(
-    name = "civic_export_with_roller_bliner_rear_arxml",
+    name = "Gen20x_Civic_i3_ECU_Extract_patched_for_vlan210_arxml",
     srcs = [
-        "CivicRolle_Blinder_final_with_datatype.arxml",
+        "Gen20x_Civic_i3_ECU_Extract_patched_for_vlan210.arxml",
     ],
 )
