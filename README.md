@@ -162,16 +162,18 @@ background. The username is `nvidia` and password `nvidia`.
 Alternatively, x86_64 QEMU enviroment can be brought up for tasks that are not dependable on Nvidia Drive OS and benifit
 from native virtualization and KVM accleration.
 
-For x64_64 build -
-```
+#### For x64_64 linux build -
+
+```bash
 cd os/linux # Important!
 ./run_x86_64_qemu.sh
-
 ```
+
 On first run, the script will download Ubuntu cloud image and then bazel x86_64 build for Adaptive stack is extracted into it.
 
 Once Image boots up, you can login to the image by below credentials -
-```
+
+```bash
 ubuntu login: ubuntu
 Password: ubuntu
 
@@ -179,24 +181,38 @@ Password: ubuntu
 
 Alternatively, you can also ssh into the image from host with same password by below command -
 
-```
-ssh -p 10022 ubuntu@localhost
-
+```bash
+ssh ubuntu@10.21.17.98
 ```
 
 Adaptive stack is started in the background, check with below command -
-```
+
+```bash
 sudo systemctl status adaptive-stack.service
 ```
+
+#### For x64_64 Qnx build -
+
+```bash
+cd os/qnx/qemu_x86_64/ # Important!
+./run_x86_64_qemu.sh
+```
+
+Once the image boots up, you can also ssh into the image from host by below command -
+
+```bash
+ssh root@10.21.17.98
+```
+
 
 ### Connecting to remote DLT
 
 All of the applications apart from the `log-daemon` are configured to output remote DLT. The connection is available
 over TCP at IP address `10.21.17.98` and port `49361`.
 
-When running a virtual ECU inside QEMU, the QEMU configuration will forward the remote DLT port to port `13490` on the
+When running a virtual ECU inside QEMU, the QEMU configuration is using tap interface to route on same DLT port `49361` on the
 host machine. Configure the [dlt-viewer](https://github.com/GENIVI/dlt-viewer) running on your host to connect to
-`127.0.0.1` port `13490` over TCP.
+`10.21.17.98` port `49361` over TCP.
 
 ## Releasing
 

@@ -2,8 +2,8 @@
 
 There are two ways to run the adaptive stack locally on QNX Qemu:
 
-* [Setup to run adaptive stack locally with QNX license](#setup-to-run-adaptive-stack-locally-with-QNX-license)
-* [Setup to run adaptive stack locally without QNX license](#setup-to-run-adaptive-stack-locally-without-QNX-license)
+* [Setup to run adaptive stack locally with QNX license](#setup-to-run-adaptive-stack-locally-with-qnx-license)
+* [Setup to run adaptive stack locally without QNX license](#setup-to-run-adaptive-stack-locally-without-qnx-license)
 
 ## Setup to run adaptive stack locally with QNX license
 
@@ -15,14 +15,15 @@ The steps below will install QNX compiler toolchain in devcontainer to build for
 
 1. Download QNX Software Center-Linux Hosts from myQNX account and install it in the host machine.
 
-2. Download [QNX_SDP](https://artifact.swf.daimler.com/webapp/#/artifacts/browse/tree/General/apricotbscqal/tools/sdp/7.0.0/SDP700_EXP_Gen3_Patchset_HQX0_2_ES_5_1_20210211_Updated.tar.gz)
-   from artifactory and extract it under `/home` directory
+2. Download [QNX_SDP_7_1](https://artifact.swf.daimler.com/webapp/#/artifacts/browse/tree/General/apricotbscqal/tools/sdp/7.1.0/SDP710_EXP_Gen4_HQX_SDP710_HYP22_Patchset_20210219_UPD0713.tgz) from artifactory and extract it under `/home` directory
+
+   Link to [QNX_SDP_7_0](https://artifact.swf.daimler.com/webapp/#/artifacts/browse/tree/General/apricotbscqal/tools/sdp/7.0.0/SDP700_EXP_Gen3_Patchset_HQX0_2_ES_5_1_20210211_Updated.tar.gz) just in case if needed.
 
 3. Open Apricot Adaptive Autosar repository and add the below lines in `.devcontainer/devcontainer.json` file under section `mounts`:
 
 ```json
     "type=bind,source=${localEnv:HOME}/.qnx,target=/home/dev/.qnx",
-    "type=bind,source=${localEnv:HOME}/SDP700_EXP_Gen3_Patchset_HQX0_2_ES_5_1_20210211_Updated,target=/home/dev/qnx700"
+    "type=bind,source=${localEnv:HOME}/SDP710_EXP_Gen4_HQX_SDP710_HYP22_Patchset_20210219_UPD0713,target=/home/dev/qnx700"
 ```
 
 The final `devcontainer.json` file will look like below :-
@@ -37,7 +38,7 @@ The final `devcontainer.json` file will look like below :-
     "type=volume,source=mbos_adaptive_build_env_bazel_cache,target=/bazel_cache",
     # Below two lines are to be added :-
     "type=bind,source=${localEnv:HOME}/.qnx,target=/home/dev/.qnx",
-    "type=bind,source=${localEnv:HOME}/SDP700_EXP_Gen3_Patchset_HQX0_2_ES_5_1_20210211_Updated,target=/home/dev/qnx700"
+    "type=bind,source=${localEnv:HOME}/SDP710_EXP_Gen4_HQX_SDP710_HYP22_Patchset_20210219_UPD0713,target=/home/dev/qnx700"
   ],
 ```
 
@@ -76,7 +77,7 @@ license check failed
 Execute below command to solve this problem:
 
 ```bash
- export LM_LICENSE_FILE=27057@sedcagse1190.emea.bg.corpintra.net`
+ export LM_LICENSE_FILE=27057@sedcagse1190.emea.bg.corpintra.net
 ```
 
 ### Bazel Build
