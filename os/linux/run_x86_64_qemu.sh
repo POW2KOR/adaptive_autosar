@@ -89,6 +89,9 @@ virt-copy-in -a ubuntu.img ../x86_64_configs/enp0s3.127.network /etc/systemd/net
 # vlan 21 config
 virt-copy-in -a ubuntu.img ../x86_64_configs/enp0s3.21.netdev /etc/systemd/network/
 virt-copy-in -a ubuntu.img ../x86_64_configs/enp0s3.21.network /etc/systemd/network/
+# vlan 210 config
+virt-copy-in -a ubuntu.img ../x86_64_configs/enp0s3.210.netdev /etc/systemd/network/
+virt-copy-in -a ubuntu.img ../x86_64_configs/enp0s3.210.network /etc/systemd/network/
 
 # Path to tar to include at the root of the filesystem, usually to the adaptive
 # stack tar.
