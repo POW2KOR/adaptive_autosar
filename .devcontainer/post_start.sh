@@ -63,6 +63,10 @@ ip link show \
     | awk -F ':' 'NR>1{print $2}' \
     | cut -d "@" -f1
 
+# Activate QNX license inside the container. This license server is for developers only.
+printf "Setting up the QNX license manager path\n"
+echo "export LM_LICENSE_FILE=27057@sedcagse1190.emea.bg.corpintra.net" >> $HOME/.bashrc
+
 printf "\nAll done 👌\n\n"
 printf "👉 Build with something like:\n\n"
 
